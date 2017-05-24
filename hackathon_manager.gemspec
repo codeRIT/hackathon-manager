@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = HackathonManager::VERSION
   s.authors     = ["Stuart Olivera"]
   s.email       = ["stuart@stuartolivera.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of HackathonManager."
-  s.description = "TODO: Description of HackathonManager."
+  s.homepage    = "https://github.com/sman591/hackathon_manager"
+  s.summary     = "Full-featured application for managing hackathon logistics"
+  s.description = "Full-featured application for managing hackathon logistics"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
