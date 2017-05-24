@@ -1,0 +1,40 @@
+- pages = ['About', 'Gallery', 'Schedule', 'FAQ', 'Sponsors']
+
+%nav.desktop
+  .logo
+    %a{ href: '#' }
+      / = image_tag 'brickhack.png', { class: 'wow rotate-in', alt: 'BrickHack' }
+  .nav-links
+    - pages.each do |page|
+      %a{ href: "##{page.downcase}" }= page
+
+    - if current_user
+      - if current_user.admin
+        = link_to 'Manage', manage_dashboard_index_path, class: 'button button-outline'
+      - else
+        = link_to 'My Account', questionnaires_path, class: 'button button-outline'
+    - else
+      - text = Rails.configuration.hackathon['registration_is_open'] ? 'Register' : 'Sign In' # TODO: Sign Up / Sign In
+      = link_to text, new_user_registration_path, class: 'button button-outline'
+
+-# mobile nav
+%nav.mobile
+  %i.fa.fa-bars.mob-nav-header#hamburger-menu
+  %h2.mob-nav-header{ style: 'font-size: 24px; text-align: left; color: white; padding:0; margin: 0; position: relative; top: -5px; font-weight: 300' } BrickHack
+
+  #mobile-nav
+    .nav-links
+      %a.active{ href: '#' } BrickHack
+
+      - pages.each do |page|
+        %a{ href: "##{page.downcase}" }= page
+
+      - if current_user
+        - if current_user.admin
+          = link_to 'Manage', manage_dashboard_index_path, class: 'button button-outline'
+        - else
+          = link_to 'My Account', questionnaires_path, class: 'mobile'
+      - else
+        - text = Rails.configuration.hackathon['registration_is_open'] ? 'Sign Up / Sign In' : 'Sign In'
+        = link_to text, new_user_registration_path, class: 'mobile'
+
