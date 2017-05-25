@@ -64,6 +64,11 @@ def sample_file(filename = "sample_pdf.pdf")
   File.new("test/fixtures/#{filename}")
 end
 
+# Clean up Paperclip uploads generated during tests
+Minitest.after_run do
+  FileUtils.rm_rf(Dir["#{Rails.root}/public/system/"])
+end
+
 class ActiveSupport::TestCase
   extend StripAttributes::Matchers
   include ValidAttribute::Method

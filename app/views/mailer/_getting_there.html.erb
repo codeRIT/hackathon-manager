@@ -8,5 +8,7 @@
 <p><%= link_to ENV['CARPOOL_LINK'], ENV['CARPOOL_LINK'] %></p>
 <p>For those driving, you can put <em>1 Lomb Memorial Drive, Rochester, NY 14623</em> into your GPS. This will take you to the main RIT entrance, which will include a roundabout. Take the third exit off the roundabout and park in either lot to your left or right.</p>
 <p><em>Unfortunately we are unable to provide travel reimbursements due to university policy.</em></p>
-<p><%= link_to image_tag('brickhack-parking.png', width: '400px').html_safe, image_url('brickhack-parking.png') %></p>
-<p><%= link_to 'Full-size Image &raquo;'.html_safe, image_url('brickhack-parking.png') %></p>
+<% if asset_available? 'brickhack-parking.png' %>
+  <p><%= link_to image_tag('brickhack-parking.png', width: '400px').html_safe, image_url('brickhack-parking.png') %></p>
+  <p><%= link_to 'Full-size Image &raquo;'.html_safe, image_url('brickhack-parking.png') %></p>
+<% end %>

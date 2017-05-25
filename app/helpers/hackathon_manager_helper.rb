@@ -24,4 +24,13 @@ module HackathonManagerHelper
                                        hard_wrap: true)
     markdown.render(text).html_safe
   end
+
+  # https://github.com/rails/sprockets-rails/issues/298#issuecomment-168927471
+  def asset_available?(logical_path)
+    if Rails.configuration.assets.compile
+      Rails.application.precompiled_assets.include? logical_path
+    else
+      Rails.application.assets_manifest.assets[logical_path].present?
+    end
+  end
 end

@@ -21,4 +21,10 @@ group :test do
   gem 'factory_girl_rails'
   gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
+  gem 'dotenv-rails'
+end
+
+group :tools do
+  gem 'guard'
+  gem 'guard-minitest'
 end
