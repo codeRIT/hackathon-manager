@@ -77,6 +77,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     ajax-datatables-rails (0.4.0)
       railties (>= 4.0)
+    ansi (1.5.0)
     arel (8.0.0)
     aws-sdk (2.9.23)
       aws-sdk-resources (= 2.9.23)
@@ -96,6 +97,8 @@ GEM
     climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
+    codeclimate-test-reporter (0.6.0)
+      simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -113,15 +116,17 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    dotenv (2.2.1)
-    dotenv-rails (2.2.1)
-      dotenv (= 2.2.1)
-      railties (>= 3.2, < 5.2)
+    docile (1.1.5)
     errbase (0.0.3)
     erubi (1.6.0)
     erubis (2.7.0)
     excon (0.55.0)
     execjs (2.7.0)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.7.0.2)
@@ -180,6 +185,14 @@ GEM
     mimemagic (0.3.2)
     mini_portile2 (2.1.0)
     minitest (5.10.2)
+    minitest-rails (3.0.0)
+      minitest (~> 5.8)
+      railties (~> 5.0)
+    minitest-reporters (1.1.14)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -229,6 +242,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.1.1)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.2)
+      actionpack (~> 5.x, >= 5.0.1)
+      actionview (~> 5.x, >= 5.0.1)
+      activesupport (~> 5.x)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -252,6 +269,7 @@ GEM
     roadie-rails (1.2.1)
       railties (>= 3.0, < 5.2)
       roadie (~> 3.1)
+    ruby-progressbar (1.8.1)
     ruby_parser (3.9.0)
       sexp_processor (~> 4.1)
     safely_block (0.2.0)
@@ -265,6 +283,12 @@ GEM
       tilt (>= 1.1, < 3)
     selectize-rails (0.12.4)
     sexp_processor (4.9.0)
+    shoulda (3.5.0)
+      shoulda-context (~> 1.0, >= 1.0.1)
+      shoulda-matchers (>= 1.4.1, < 3.0)
+    shoulda-context (1.2.2)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     sidekiq (5.0.0)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -276,6 +300,11 @@ GEM
     simple_spark (1.0.5)
       excon (>= 0.16.0, < 1.0)
       json (>= 1.7.7, < 2.0)
+    simplecov (0.14.1)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.1)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -295,6 +324,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    valid_attribute (2.0.0)
     validate_url (1.0.2)
       activemodel (>= 3.0.0)
       addressable
@@ -308,8 +338,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  dotenv-rails
+  codeclimate-test-reporter (~> 0.6.0)
+  factory_girl_rails
   hackathon_manager!
+  minitest-rails
+  minitest-reporters
+  rails-controller-testing
+  shoulda
+  valid_attribute
 
 BUNDLED WITH
    1.15.0
