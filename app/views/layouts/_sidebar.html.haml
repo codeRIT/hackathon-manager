@@ -2,9 +2,10 @@
   %span#sidebar-toggle
     %i.fa.fa-navicon
   .pusher
-    #logo-cta
-      %a{ href: "/" }
-        / = image_tag 'brickhack.png', id: "logo", alt: "BrickHack", title: "BrickHack"
+    - if Rails.configuration.hackathon['logo_asset']
+      #logo-cta
+        = link_to root_path do
+          = image_tag Rails.configuration.hackathon['logo_asset'], id: "logo", alt: "BrickHack", title: "BrickHack"
     - if user_signed_in?
       %div
         - if current_user.admin?
