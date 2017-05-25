@@ -260,5 +260,6 @@ Devise.setup do |config|
   # Devise
   Rails.application.config.to_prepare do
     Devise::Mailer.layout "mailer"
+    Devise::SessionsController.layout "hackathon_manager"
   end
 end

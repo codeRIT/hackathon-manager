@@ -4,6 +4,8 @@ class RsvpsController < ApplicationController
   before_action :find_questionnaire
   before_action :require_accepted_questionnaire
 
+  layout 'hackathon_manager'
+
   def logged_in
     authenticate_user!
   end
