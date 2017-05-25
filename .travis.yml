@@ -2,12 +2,14 @@ language: ruby
 cache: bundler
 sudo: false
 before_script:
-  - mysql -e 'create database myapp_test;'
+  - rm test/dummy/config/database.yml
+  - cp test/dummy/config/database.travis.yml test/dummy/config/database.yml
+  - mysql -e 'create database dummy_test;'
   - mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
 script:
-- bin/rails db:migrate db:test:prepare
+- bin/rails db:migrate
 - RUN_COVERAGE=travis bin/rails test
-- bin/rails coverage:report
+- bin/rails app:coverage:report
 addons:
   code_climate:
     repo_token: 702251f0d6eb1f569078a27c4ae3366b1e48c4c6d7e4dd3ae0ca3583fd2bc8db
