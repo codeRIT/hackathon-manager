@@ -1,4 +1,5 @@
-# HackathonManager
+# HackathonManager [![Build Status](https://travis-ci.org/codeRIT/hackathon_manager.svg?branch=master)](https://travis-ci.org/codeRIT/hackathon_manager)
+
 Short description and motivation.
 
 ## Usage
