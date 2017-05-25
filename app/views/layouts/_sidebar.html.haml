@@ -16,26 +16,6 @@
         = btn_link_to "Login", new_user_session_path
       %div
         = btn_link_to "Register", new_user_registration_path
-    %nav
-      %ul.nav-list
-        %li
-          %a.nav-link{ href:"/#home" } HOME
-        %li
-          %a.nav-link{ href:"/#about" } ABOUT
-        %li
-          %a.nav-link{ href:"/#faq" } FAQ
-        %li
-          %a.nav-link{ href:"/#schedule" } SCHEDULE
-        %li
-          %a.nav-link{ href:"/#sponsors" } SPONSORS
-      .social-list
-        %a.sm-link{ href:"https://www.facebook.com/brickhackrit", target: '_blank' }
-          %span.fa.fa-facebook
-        %a.sm-link{ href:"https://twitter.com/brickhackrit", target: '_blank' }
-          %span.fa.fa-twitter
     - if user_signed_in?
       %div
         = btn_link_to "Sign Out", destroy_user_session_path, method: :delete
-  %footer.footer
-    Student run by
-    %a.coderit-logo{ href:"http://coderit.org", target:'_blank' } CodeRIT
