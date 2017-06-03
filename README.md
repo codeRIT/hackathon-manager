@@ -1,11 +1,42 @@
 # HackathonManager [![Build Status](https://travis-ci.org/codeRIT/hackathon_manager.svg?branch=master)](https://travis-ci.org/codeRIT/hackathon_manager) [![Code Climate](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/gpa.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager) [![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager/coverage) [![security](https://hakiri.io/github/codeRIT/hackathon_manager/master.svg)](https://hakiri.io/github/codeRIT/hackathon_manager/master)
 
-Short description and motivation.
+***Still a work in progress! Instructions below are incomplete.** Check out [WiCHacks](https://github.com/sman591/wichacks) for an implementation example.*
+
+Originally developed for [BrickHack](https://github.com/codeRIT/brickhack.io), this is a Ruby on Rails "plugin" that adds typical hackathon management features to any existing Ruby on Rails application.
+
+* **Hacker applications:** Users sign up/in using [MyMLH](https://my.mlh.io/), which includes standard hackathon application info. This pre-fills the BrickHack application, so hackers don't have to duplicate information!
+* **Acceptance, RSVPs**: Manage applications & coordinate acceptance/waitlist/denials
+* **Bus Lists:** Coordinate bus sign-ups during the RSVP process while communicating important information to riders & captains
+* **Email communication**: Ensure hackers get consistent, timely information throughout their application process, while enabling the organizing team to communicate important information at any time.
+* **Statistics & Visualization:** Surface key information about the application base, distribution of applicants, progress towards attendance, etc.
 
 ## Usage
-How to use my plugin.
+
+HackathonManager uses a variety of third-party services & Ruby gems:
+
+* [Devise](https://github.com/plataformatec/devise) + [MyMLH](https://my.mlh.io/) (authentication & attendee identity)
+* [Sidekiq](https://github.com/mperham/sidekiq) (background jobs)
+* [Sparkpost](https://www.sparkpost.com/) (email)
+* [Paperclip](https://github.com/thoughtbot/paperclip) + [Amazon S3](https://aws.amazon.com/s3/) (resume storage)
+* [Chartkick](http://chartkick.com/) (management charts)
+
+Steps to get the basic flow working:
+
+1. Add an "apply" or "register" button on your hackathon homepage. This button directs the user through a sign up/login flow to collect their information.
+```erb
+<%= link_to 'Click here to apply!'.html_safe, questionnaires_path %>
+```
+
+2. Once you have at least one user in the system, you can promote them to an admin to access the management interface. Open up a console session with `bin/rails console`:
+```ruby
+>> User.last.update_attribute(:admin, true)
+=> true
+```
+
+3. You can then access the management interface from `http://your-site/manage`
 
 ## Installation
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -17,13 +48,38 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
+Now, add our database migrations:
 ```bash
-$ gem install hackathon_manager
+$ bin/rails railties:install:migrations
+```
+
+And finally, create the file `config/hackathon.yml`:
+
+```yaml
+defaults: &defaults
+  registration_is_open: true
+  event_is_over: false
+  last_day_to_apply: <%= Date.new(2017, 2, 11) %>
+  auto_late_waitlist: false
+  logo_asset: logo.png
+
+development:
+  <<: *defaults
+
+test: &test
+  <<: *defaults
+  last_day_to_apply: <%= 2.months.from_now %>
+
+production:
+  <<: *defaults
+
+staging:
+  <<: *defaults
 ```
 
 ## Contributing
-Contribution directions go here.
+
+GitHub issues and pull requests welcome!
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
