@@ -26,5 +26,7 @@
 
     %p
       = btn_link_to '<span class="fa fa-pencil icon-space-r"></span> Edit Application'.html_safe, edit_questionnaires_path
+      - if !@questionnaire.user.provider
+        = btn_link_to '<span class="fa fa-user icon-space-r"></span> Edit Account'.html_safe, edit_user_registration_path
     %p
       Unhappy? #{link_to "Revoke my application", user_registration_path, data: { confirm: "Are you sure? Your account and application will be permanently erased." }, method: :delete}

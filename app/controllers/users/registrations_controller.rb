@@ -16,12 +16,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    redirect_to questionnaires_path
+    super
   end
 
   # PUT /resource
   def update
-    redirect_to questionnaires_path
+    super
   end
 
   # DELETE /resource

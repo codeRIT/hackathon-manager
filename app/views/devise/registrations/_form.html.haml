@@ -1,8 +1,16 @@
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   .form-actions
     .center
-      = btn_link_to "Sign Up with My MLH &raquo;".html_safe, user_mlh_omniauth_authorize_path
+      = btn_link_to "Sign Up using My MLH &raquo;".html_safe, user_mlh_omniauth_authorize_path
+      %p
+        %em or create an account:
+  .form-inputs
+    = f.input :email, required: true, autofocus: true
+    = f.input :password, required: true
+    = f.input :password_confirmation, required: true, label:"Confirm"
+  .form-actions
+    .center
+      = f.button :submit, "Sign up"
     %p.center
       Already applied?
-      %br
-      = btn_link_to "Sign In &raquo;".html_safe, user_mlh_omniauth_authorize_path
+      = link_to "Sign In".html_safe, new_user_session_path

@@ -28,6 +28,7 @@ class QuestionnairesController < ApplicationController
     @questionnaire = Questionnaire.new
 
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
+      @skip_my_mlh_fields = true
       @questionnaire.tap do |q|
         q.first_name = session["devise.provider_data"]["info"]["first_name"]
         q.last_name = session["devise.provider_data"]["info"]["last_name"]

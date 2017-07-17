@@ -1,4 +1,4 @@
-%div{class:"form-container wizard#{action_name == "new" ? " wizard-skip-valid" : ""}"}
+%div{class:"form-container wizard#{@skip_my_mlh_fields ? " wizard-skip-valid" : ""}"}
   = simple_form_for @questionnaire, url: url_for(controller: "questionnaires", action: "update"), html: { "data-validate" => "form" } do |f|
 
     - if f.error_notification.present?

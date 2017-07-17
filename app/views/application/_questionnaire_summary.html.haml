@@ -15,7 +15,8 @@
   = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "My school (#{@questionnaire.school.full_name})"
 
 %fieldset
-  %legend Provided by My MLH
+  - if @questionnaire.user.provider == 'mlh'
+    %legend Provided by My MLH
   %p
     %b First name:
     = @questionnaire.first_name
