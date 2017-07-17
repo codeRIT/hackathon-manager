@@ -1,6 +1,6 @@
 - title "Application"
-%div{class:'form-success'}
-  %div{class:'success_message'}
+.form-success
+  .success_message
     %p#notice= notice
     - if @questionnaire.can_rsvp?
       - if @questionnaire.did_rsvp?
@@ -19,7 +19,7 @@
       - else
         %p Thanks for applying!
 
-  %div{class:'participant_info'}
+  .participant_info
     %p Below is a copy of your application.
 
     = render partial: 'questionnaire_summary'

@@ -1,4 +1,4 @@
-%div{class:'form-container'}
+.form-container
   = simple_form_for @questionnaire, url: url_for(action: @questionnaire.new_record? ? "create" : "update", controller: "questionnaires"), html: { "data-validate" => "form" } do |f|
 
     - if f.error_notification.present?
@@ -53,5 +53,5 @@
         %a{href:"/assets/BrickHack_ReleaseAgreement.pdf", target:"_blank"} BrickHack Agreement
       = f.input :agreement_accepted, as: :formatted_boolean, label: "I accept the BrickHack Agreement", input_html: { "data-validate" => "presence" }
 
-    %div{class:'center'}
+    .center
       = f.button :submit, value: ( @questionnaire.new_record? ? 'Create' : 'Save' )

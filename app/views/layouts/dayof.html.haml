@@ -6,7 +6,7 @@
     = stylesheet_link_tag "application", :media => "all"
     = csrf_meta_tags
   %body
-    %div{class:'day-of'}
+    .day-of
       = yield
     = javascript_include_tag "application"
     = javascript_include_tag "vendor/owl.carousel.min.js"

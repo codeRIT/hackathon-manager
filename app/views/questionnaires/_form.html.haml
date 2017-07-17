@@ -65,6 +65,6 @@
             I agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
         = f.input :data_sharing_accepted, as: :formatted_boolean, label: "I accept the MLH data sharing notice", input_html: { "data-validate" => "presence" }
 
-      %div{class:'center'}
+      .center
         %button.button{ type: "button", "data-wizard" => "previous" } Previous
         = f.button :submit, value: ( @questionnaire.new_record? ? 'Apply' : 'Save' )

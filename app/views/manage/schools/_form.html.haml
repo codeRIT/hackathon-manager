@@ -1,4 +1,4 @@
-%div{class:'form-container'}
+.form-container
   = simple_form_for @school, url: url_for(action: @school.new_record? ? "create" : "update", controller: "schools"), html: { "data-validate" => "form" } do |f|
 
     - if f.error_notification.present?
@@ -12,5 +12,5 @@
       = f.input :state
       = f.association :bus_list, include_blank: "(none)"
 
-    %div{class:'center'}
+    .center
       = f.button :submit, value: ( @school.new_record? ? 'Create' : 'Save' )
