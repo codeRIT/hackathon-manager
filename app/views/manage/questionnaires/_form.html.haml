@@ -11,6 +11,7 @@
     .form-inputs
       %fieldset
         %legend Provided by My MLH
+        %br
         = f.input :first_name, placeholder: "Joe", input_html: { "data-validate" => "presence" }, label: "First Name", autofocus: true
         = f.input :last_name, placeholder: "Smith", input_html: { "data-validate" => "presence" }, label: "Last Name"
         = f.input :email, placeholder: "joe@example.com", input_html: { "data-validate" => "presence email", value: @questionnaire.user.try(:email) }, required: true
@@ -26,6 +27,7 @@
         = f.input :special_needs, placeholder: "Any special needs or requests (optional)", label: "Special needs"
 
     .form-inputs
+      %br
       = f.input :experience, as: :select, collection: Questionnaire::POSSIBLE_EXPERIENCES.invert, include_blank: "(select one...)", label: "Experience", input_html: { "data-validate" => "presence" }
       = f.input :interest, as: :select, collection: Questionnaire::POSSIBLE_INTERESTS.invert, include_blank: "(select one...)", label: "Interest", input_html: { "data-validate" => "presence" }
 
