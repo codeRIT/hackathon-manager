@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hackathon_manager (0.1.0)
+    hackathon_manager (0.2.0)
       ajax-datatables-rails (~> 0.4.0)
       aws-sdk
       blazer
@@ -390,4 +390,4 @@ DEPENDENCIES
   valid_attribute
 
 BUNDLED WITH
-   1.15.0
+   1.15.3
