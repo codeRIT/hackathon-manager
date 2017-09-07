@@ -77,6 +77,12 @@ staging:
   <<: *defaults
 ```
 
+## Deployment
+
+Deployment to Heroku and Dokku is supported out of the box, though anything that operates on Heroku's buildpacks should work too.
+
+See [BrickHack's production setup](https://github.com/codeRIT/brickhack.io/wiki/Production-Environment-Setup) for detailed notes.
+
 ## Contributing
 
 GitHub issues and pull requests welcome!
