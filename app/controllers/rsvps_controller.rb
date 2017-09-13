@@ -39,6 +39,8 @@ class RsvpsController < ApplicationController
   end
 
   # PUT /rsvp
+  # rubocop:disable CyclomaticComplexity
+  # rubocop:disable PerceivedComplexity
   def update
     unless @questionnaire.update_attributes(params.require(:questionnaire).permit(:agreement_accepted, :phone))
       flash[:notice] = @questionnaire.errors.full_messages.join(", ")

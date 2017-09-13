@@ -25,6 +25,7 @@ class BulkMessageWorker
     recipients
   end
 
+  # rubocop:disable CyclomaticComplexity
   def recipients_query(type)
     case type
     when "all"
