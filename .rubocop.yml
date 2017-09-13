@@ -1,56 +1,15 @@
+inherit_from:
+  - .rubocop-shared.yml
+
 AllCops:
   Exclude:
     - db/schema.rb
     - vendor/**/*
     - bin/**/*
-
-Bundler/OrderedGems:
-  Enabled: false
-
-Documentation:
-  Enabled: false
-
-Lint/AmbiguousRegexpLiteral:
-  Enabled: false
-
-Metrics/AbcSize:
-  Enabled: false
+    - test/dummy/db/schema.rb
 
 Metrics/BlockLength:
-  Enabled: false
-
-Metrics/ClassLength:
-  Enabled: false
-
-Metrics/LineLength:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-Style/CyclomaticComplexity:
-  Enabled: false
-
-Style/StringLiterals:
-  Enabled: false
-
-Style/EmptyMethod:
-  EnforcedStyle: expanded
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/NumericLiterals:
-  Enabled: false
-
-Style/RegexpLiteral:
-  Enabled: false
-
-Style/SpaceInsideBrackets:
-  Enabled: false
-
-Style/WordArray:
-  Enabled: false
+  Exclude:
+    - test/**/*
+    - config/routes.rb
+    - hackathon_manager.gemspec
