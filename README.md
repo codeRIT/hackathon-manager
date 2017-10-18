@@ -53,29 +53,7 @@ Now, add our database migrations:
 $ bin/rails railties:install:migrations
 ```
 
-And finally, create the file `config/hackathon.yml`:
-
-```yaml
-defaults: &defaults
-  registration_is_open: true
-  event_is_over: false
-  last_day_to_apply: <%= Date.new(2017, 2, 11) %>
-  auto_late_waitlist: false
-  logo_asset: logo.png
-
-development:
-  <<: *defaults
-
-test: &test
-  <<: *defaults
-  last_day_to_apply: <%= 2.months.from_now %>
-
-production:
-  <<: *defaults
-
-staging:
-  <<: *defaults
-```
+And finally, create the a `config/hackathon.yml` with the contents from [test/dummy/config/hackathon.yml](test/dummy/config/hackathon.yml). Be sure to make any necessary customizations!
 
 ### Customization
 
