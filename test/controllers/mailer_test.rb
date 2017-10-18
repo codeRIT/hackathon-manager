@@ -50,12 +50,9 @@ class MailerTest < ActionMailer::TestCase
     end
 
     should "deliver email to questionnaire" do
-      email = Mailer.denied_email(@questionnaire.id).deliver_now
-
-      assert_equal [@questionnaire.email],    email.to
-      assert_equal "Your application status", email.subject
-
-      assert_match "Dear ",                   email.encoded
+      assert_raise 'Denied email template not implemented' do
+        Mailer.denied_email(@questionnaire.id).deliver_now
+      end
     end
   end
 
