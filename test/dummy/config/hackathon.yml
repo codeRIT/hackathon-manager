@@ -8,6 +8,7 @@ defaults: &defaults
   # Configure content
   name: HackFoo
   # logo_asset: foo.png
+  email_from: '"HackFoo" <noreply@example.com>'
 development:
   <<: *defaults
 

@@ -2,7 +2,7 @@ class Mailer < ApplicationMailer
   include Roadie::Rails::Automatic
   add_template_helper(HackathonManagerHelper)
 
-  default from: '"BrickHack" <noreply@coderit.org>'
+  default from: Rails.configuration.hackathon['email_from']
 
   def application_confirmation_email(questionnaire_id)
     @questionnaire = Questionnaire.find(questionnaire_id)
