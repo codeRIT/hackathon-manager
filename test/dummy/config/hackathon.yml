@@ -9,6 +9,8 @@ defaults: &defaults
   name: HackFoo
   # logo_asset: foo.png
   email_from: '"HackFoo" <noreply@example.com>'
+  default_page_title: BrickHack 3 - Feb 11-12, 2017
+
 development:
   <<: *defaults
 

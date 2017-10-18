@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title= yield(:title) || "BrickHack 3 - Feb 11-12, 2017"
+    %title= yield(:title) || Rails.configuration.hackathon['default_page_title']
     = stylesheet_link_tag "hackathon_manager/manage", media: "all"
     = csrf_meta_tags
 
