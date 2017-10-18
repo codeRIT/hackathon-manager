@@ -101,13 +101,30 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "not update status for invalid questionnaire" do
-      [:accept, :deny].each do |status|
+    context "not update status for invalid questionnaire" do
+      setup do
         @questionnaire.update_attribute(:agreement_accepted, false)
         @questionnaire.update_attribute(:acc_status, "accepted")
-        get status
-        assert_match /error/, flash[:notice]
-        assert_equal "accepted", @questionnaire.reload.acc_status
+      end
+
+      [:accept, :deny].each do |status|
+        context "attempting #{status}" do
+          should "include error message" do
+            get status
+            assert_match /was an error/, flash[:notice]
+          end
+
+          should "not change acceptance status" do
+            get status
+            assert_equal "accepted", @questionnaire.reload.acc_status
+          end
+
+          should "include hackathon name in notice" do
+            Rails.configuration.hackathon['name'] = 'Foo Bar'
+            get status
+            assert_match /Foo Bar Agreement/, flash[:notice]
+          end
+        end
       end
     end
 

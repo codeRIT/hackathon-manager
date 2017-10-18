@@ -1,6 +1,6 @@
 module HackathonManagerHelper
   def title(page_title)
-    content_for(:title) { page_title + " - BrickHack" }
+    content_for(:title) { page_title + " - #{Rails.configuration.hackathon['name']}" }
     page_title
   end
 

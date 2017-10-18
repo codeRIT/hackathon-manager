@@ -52,7 +52,13 @@
         = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Where are you traveling from?", placeholder: "New York City"
       %hr
       %div
-        = f.input :agreement_accepted, as: :formatted_boolean, label: "I accept the BrickHack Agreement", input_html: { "data-validate" => "presence" }
+        %p
+          %small
+            Please read the
+            = link_to asset_url(Rails.configuration.hackathon['agreement_pdf_asset']), target: '_blank' do
+              #{Rails.configuration.hackathon['name']} Agreement
+              %span.fa.fa-external-link.icon-space-l-half
+        = f.input :agreement_accepted, as: :formatted_boolean, label: "I accept the #{Rails.configuration.hackathon['name']} Agreement", input_html: { "data-validate" => "presence" }
         %p
           %small
             Please read the

@@ -5,7 +5,7 @@
     - if Rails.configuration.hackathon['logo_asset']
       #logo-cta
         = link_to root_path do
-          = image_tag Rails.configuration.hackathon['logo_asset'], id: "logo", alt: "BrickHack", title: "BrickHack"
+          = image_tag Rails.configuration.hackathon['logo_asset'], id: 'logo', alt: "#{Rails.configuration.hackathon['name']} logo", title: Rails.configuration.hackathon['name']
     - if user_signed_in?
       %div
         - if current_user.admin?

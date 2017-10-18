@@ -1,8 +1,16 @@
 defaults: &defaults
+  # Logic config
   registration_is_open: true
   event_is_over: false
   last_day_to_apply: <%= Date.new(2017, 2, 11) %>
   auto_late_waitlist: true
+
+  # Content config
+  name: HackFoo
+  # logo_asset: foo.png (optional)
+  agreement_pdf_asset: agreement.pdf
+  email_from: '"HackFoo" <noreply@example.com>'
+  default_page_title: HackFoo - Jan 1-2, 2017
 
 development:
   <<: *defaults

@@ -2,7 +2,7 @@
   .container
     - title "Edit Application"
     .form-container
-      %h1.section-title Edit BrickHack Application
+      %h1.section-title Edit #{Rails.configuration.hackathon['name']} Application
 
     = render 'form'
 
