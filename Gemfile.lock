@@ -18,7 +18,7 @@ PATH
       jquery-ui-sass-rails
       mysql2
       omniauth-mlh
-      paperclip (~> 5.0.0)
+      paperclip (~> 5.1.0)
       rails (~> 5.1.1)
       redcarpet
       roadie-rails
@@ -672,7 +672,7 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paperclip (5.0.0)
+    paperclip (5.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
