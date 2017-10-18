@@ -1,6 +1,6 @@
 %section.section.manage
   - title "RSVP"
-  %h1.section-title= "RSVP for #{Rails.configuration.hackathon['name']}"
+  %h1.section-title RSVP for #{Rails.configuration.hackathon['name']}
   .form-container
     #disclaimer
       - if flash[:notice]
@@ -9,16 +9,14 @@
         %br
       - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
         .fa.fa-check
-        Congratulations! You're all set to attend
-        = "#{Rails.configuration.hackathon['name']}!"
+        Congratulations! You're all set to attend #{Rails.configuration.hackathon['name']}.
         %br
         %br
         Expect an email closer to February 11th with additional logistics & travel info.
       - elsif @questionnaire.acc_status == "rsvp_denied"
         Sorry to hear you won't be with us this year.
       - else
-        You've been accepted to
-        = "#{Rails.configuration.hackathon['name']}!"
+        You've been accepted to #{Rails.configuration.hackathon['name']}!
         Will you be attending?
     = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
       .form-inputs

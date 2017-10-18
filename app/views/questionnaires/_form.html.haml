@@ -56,7 +56,7 @@
           %small
             Please read the
             = link_to asset_url(Rails.configuration.hackathon['agreement_pdf_asset']), target: '_blank' do
-              = "#{Rails.configuration.hackathon['name']} Agreement"
+              #{Rails.configuration.hackathon['name']} Agreement
               %span.fa.fa-external-link.icon-space-l-half
         = f.input :agreement_accepted, as: :formatted_boolean, label: "I accept the #{Rails.configuration.hackathon['name']} Agreement", input_html: { "data-validate" => "presence" }
         %p
