@@ -1,11 +1,11 @@
 defaults: &defaults
-  # Configure logic
+  # Logic config
   registration_is_open: true
   event_is_over: false
   last_day_to_apply: <%= Date.new(2017, 2, 11) %>
   auto_late_waitlist: true
 
-  # Configure content
+  # Content config
   name: HackFoo
   # logo_asset: foo.png (optional)
   agreement_pdf_asset: agreement.pdf
