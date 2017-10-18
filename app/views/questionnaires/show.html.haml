@@ -5,7 +5,8 @@
     - if @questionnaire.can_rsvp?
       - if @questionnaire.did_rsvp?
         %p
-          Below is a copy of your information for BrickHack.
+          Below is a copy of your information for
+          = "#{Rails.configuration.hackathon['name']}."
           = link_to "Back to RSVP page &raquo;".html_safe, rsvp_path
       - else
         %p

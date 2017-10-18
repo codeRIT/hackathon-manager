@@ -22,7 +22,7 @@ class RsvpsController < ApplicationController
     if @questionnaire.save
       Mailer.delay.rsvp_confirmation_email(@questionnaire.id)
     else
-      flash[:notice] = "There was an error submitting your response, please check over your application and try again. Did you accept the BrickHack Agreement?"
+      flash[:notice] = rsvp_error_notice
     end
     redirect_to rsvp_path
   end
@@ -33,7 +33,7 @@ class RsvpsController < ApplicationController
     @questionnaire.acc_status_author_id = current_user.id
     @questionnaire.acc_status_date = Time.now
     unless @questionnaire.save
-      flash[:notice] = "There was an error submitting your response, please check over your application and try again. Did you accept the BrickHack Agreement?"
+      flash[:notice] = rsvp_error_notice
     end
     redirect_to rsvp_path
   end
@@ -83,6 +83,11 @@ class RsvpsController < ApplicationController
   end
 
   private
+
+  def rsvp_error_notice
+    hackathon_name = Rails.configuration.hackathon['name']
+    "There was an error submitting your response, please check over your application and try again. Did you accept the #{hackathon_name} Agreement?"
+  end
 
   def find_questionnaire
     @questionnaire = current_user.questionnaire

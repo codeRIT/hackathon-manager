@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title= yield(:title) || "Manage - BrickHack"
+    %title= yield(:title) || "Manage - #{Rails.configuration.hackathon['name']}"
     = stylesheet_link_tag "hackathon_manager/manage", :media => "all"
     = csrf_meta_tags
 
@@ -11,7 +11,7 @@
     = render "layouts/shared_footer"
     #main
       #manageNav
-        %p BrickHack Manager
+        %p= "#{Rails.configuration.hackathon['name']} Manager"
         = link_to "Dashboard", manage_root_path
         = link_to "Questionnaires", manage_questionnaires_path
         = link_to "Admins", manage_admins_path
