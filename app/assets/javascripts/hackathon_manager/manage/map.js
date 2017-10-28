@@ -22,7 +22,7 @@ $.fn.initMap = function() {
       .attr("height", height);
 
   queue()
-      .defer(d3.json, "/assets/hackathon_manager/us.json")
+      .defer(d3.json, "/hackathon_manager/us.json")
       .defer(d3.tsv, "/manage/dashboard/map_data.tsv", function(d) { appsById.set(d.id, +d.apps); })
       .await(ready);
 
