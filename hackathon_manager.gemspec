@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'httparty'
 
   s.add_dependency 'paperclip', '~> 5.1.0'
-  s.add_dependency 'aws-sdk'
+  s.add_dependency 'aws-sdk', '~> 2.0'
 
   s.add_dependency 'haml-rails'
   s.add_dependency 'simple_form'
