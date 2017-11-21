@@ -1,5 +1,10 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+## 0.3.3 - 2017-11-21
+
+* Relax some dependency specs
+* Remove unnecessary MLH badge style
+
 ## 0.3.2 - 2017-11-16
 
 * Restrict aws-sdk gem to 2.x for proper Paperclip support
