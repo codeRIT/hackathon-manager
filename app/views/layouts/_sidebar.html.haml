@@ -6,17 +6,20 @@
       #logo-cta
         = link_to root_path do
           = image_tag Rails.configuration.hackathon['logo_asset'], id: 'logo', alt: "#{Rails.configuration.hackathon['name']} logo", title: Rails.configuration.hackathon['name']
-    - if user_signed_in?
-      %div
-        - if current_user.admin?
-          = btn_link_to "Manage", manage_root_path
+    %nav
+      %ul.nav-list
+        %li
+          = link_to "Home", root_path, class: 'nav-link'
+        - if user_signed_in?
+          %li
+            - if current_user.admin?
+              = link_to "Manage", manage_root_path, class: 'nav-link'
+            - else
+              = link_to "My Account", new_questionnaires_path, class: 'nav-link'
+          %li
+            = link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'nav-link'
         - else
-          = btn_link_to "Review", new_questionnaires_path
-    - else
-      %div
-        = btn_link_to "Sign In", new_user_session_path
-      %div
-        = btn_link_to "Sign Up", new_user_registration_path
-    - if user_signed_in?
-      %div
-        = btn_link_to "Sign Out", destroy_user_session_path, method: :delete
+          %li
+            = link_to "Sign In", new_user_session_path, class: 'nav-link'
+          %li
+            = link_to "Sign Up", new_user_registration_path, class: 'nav-link'
