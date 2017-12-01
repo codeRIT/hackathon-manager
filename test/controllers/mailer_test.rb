@@ -98,7 +98,7 @@ class MailerTest < ActionMailer::TestCase
 
       assert_equal ["test@example.com"],     email.to
       assert_equal "Incomplete Application", email.subject
-      assert_match %r{brickhack.io\/apply},  email.encoded
+      assert_match %r{hackathon_manager.example.com\/apply}, email.encoded
     end
   end
 

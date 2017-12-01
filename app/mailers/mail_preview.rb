@@ -2,7 +2,7 @@ if defined?(ActionMailer::Preview)
   class MailPreview < ActionMailer::Preview
     def application_confirmation_email
       questionnaire = Questionnaire.first
-      Mailer.application_confirmation_email(questionnaire)
+      Mailer.application_confirmation_email(questionnaire.id)
     end
 
     def rsvp_confirmation_email
