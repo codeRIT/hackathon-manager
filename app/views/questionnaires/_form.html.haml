@@ -9,11 +9,9 @@
         %p= flash[:notice]
 
     .wizard-stage.wizard-current
-      #disclaimer
-        %ul
-          %li Applicants must be 18 years of age by February 11th
-          %li RIT students must still apply
-          %li International applicants are welcome
+      - if Rails.configuration.hackathon['disclaimer']
+        #disclaimer
+          = markdown(Rails.configuration.hackathon['disclaimer'])
 
       .form-inputs
         = f.input :first_name, placeholder: "Joe", input_html: { "data-validate" => "presence" }, autofocus: true

@@ -12,6 +12,9 @@ defaults: &defaults
   email_from: '"HackFoo" <noreply@example.com>'
   default_page_title: HackFoo - Jan 1-2, 2017
 
+  # disclaimer: |
+  #   Message that shows up before signing up & applying. Supports markdown.
+
 development:
   <<: *defaults
 

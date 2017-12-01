@@ -3,14 +3,13 @@
     .form-container.signup
       %h1.section-title Sign Up
 
-      #disclaimer
-        - unless Rails.configuration.hackathon['registration_is_open']
-          .center
-            %strong Registration is now closed. Thanks to everyone who applied!
-          %br
-        %ul
-          %li Applicants must be 18 years of age by February 11th
-          %li RIT students must still apply
-          %li International applicants are welcome
+      - if Rails.configuration.hackathon['registration_is_open'] || Rails.configuration.hackathon['disclaimer']
+        #disclaimer
+          - unless Rails.configuration.hackathon['registration_is_open']
+            .center
+              %strong Registration is now closed. Thanks to everyone who applied!
+            %br
+          - if Rails.configuration.hackathon['disclaimer']
+            = markdown(Rails.configuration.hackathon['disclaimer'])
 
       = render 'form'
