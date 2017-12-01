@@ -10,7 +10,8 @@ require 'csv'
 
 puts "Seeding school list..."
 
-csv_text = File.read('db/schools.csv')
+csv_file = File.join(File.dirname(__FILE__), 'schools.csv')
+csv_text = File.read(csv_file)
 csv = CSV.parse(csv_text, headers: true)
 csv.each do |row|
   School.create(row.to_hash)

@@ -77,3 +77,4 @@ The gem is available as open source under the terms of the [MIT License](http://
 # IMPORTANT
 
 * Set a `root to:` (root path)
+* Add `HackathonManager::Engine.load_seed` to your app's `db/seeds.rb`, then run `rails db:seed`
