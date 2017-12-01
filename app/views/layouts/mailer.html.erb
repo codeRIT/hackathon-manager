@@ -18,32 +18,6 @@
     <div id="main-content">
       <%= yield %>
     </div>
-
-    <!--footer-->
-    <div class="email-footer">
-      <table border="0" >
-        <tr>
-          <td>
-            <span>
-              <%= link_to Rails.configuration.hackathon['name'], 'https://brickhack.io' %>
-            </span>
-            <span>
-              <%= link_to 'Facebook', 'https://www.facebook.com/brickhackrit' %>
-            </span>
-            <span>
-              <%= link_to 'Twitter', 'https://twitter.com/brickhackrit' %>
-            </span>
-          </td>
-          <td>
-            <span>
-              <%= link_to 'http://coderit.org', class: 'nodecor' do %>
-                Student run by <img class="coderit-logo" src="<%= image_url('coderit_logo.png') %>" />
-              <% end %>
-            </span>
-          </td>
-        </tr>
-      </table>
-    </div>
   </div>
 
 </body>
