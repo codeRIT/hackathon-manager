@@ -15,7 +15,10 @@
           = link_to "RSVP NOW &raquo;".html_safe, rsvp_path
     - else
       - if Rails.configuration.hackathon['registration_is_open']
-        %p Thanks for applying! You will be notified of your acceptance via email.
+        - if Rails.configuration.hackathon['thanks_for_applying']
+          = markdown(Rails.configuration.hackathon['thanks_for_applying'])
+        - else
+          %p Thanks for applying! You will be notified of your acceptance via email.
       - else
         %p Thanks for applying!
 

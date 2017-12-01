@@ -13,7 +13,9 @@ defaults: &defaults
   default_page_title: HackFoo - Jan 1-2, 2017
 
   # disclaimer: |
-  #   Message that shows up before signing up & applying. Supports markdown.
+  #   Message that appears before signing up & applying. Supports markdown.
+  # thanks_for_applying: |
+  #   Message that appears after completing an application. Supports markdown.
 
 development:
   <<: *defaults
