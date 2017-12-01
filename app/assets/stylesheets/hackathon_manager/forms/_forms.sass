@@ -95,7 +95,7 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
 // just selects
 select
   @include appearance (none)
-  background: url(image_path("/assets/arrow_down.svg")), $white_pure
+  background: asset-url("hackathon_manager/arrow_down.svg"), $white_pure
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
@@ -110,13 +110,13 @@ select
   &:last-child
     margin-right: 0
   &:hover
-    background: url(image_path("/assets/arrow_down_hover.svg")), $white_pure
+    background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
     background-repeat: no-repeat
     background-position: right
     background-size: auto 100%
   &:focus
     border-color: lighten($black, 10%)
-    background: url(image_path("/assets/arrow_down_hover.svg")), $white_pure
+    background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
     background-repeat: no-repeat
     background-position: right
     background-size: auto 100%
