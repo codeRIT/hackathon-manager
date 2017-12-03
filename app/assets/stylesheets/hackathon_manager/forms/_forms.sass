@@ -42,29 +42,21 @@ hr
   color: $grey
   .error
     background: $red
-    //bottom: 1px
     color: $white
-    display: table
     font-size: 0.74rem
-    left: 100%
-    margin-left: 5px
     padding: 8px
-    position: absolute
 
-div.input
+.input
   display: flex
-  flex-direction: row
-  flex-wrap: nowrap
+  flex-flow: column nowrap
   margin-bottom: 15px
   position: relative
   text-align: left
 
 label
   font-weight: $font-reg
-  margin-right: 10px
-  min-width: 160px
-  padding-top: 3px
-  padding-right: 10px
+  padding-top: 5px
+  padding-bottom: 8px
   text-align: left
 
 // all form input types
@@ -73,19 +65,19 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
   font-family: $font-body-family
   font-weight: $font-bold
   font-size: 100%
+  border: 1px solid $grey-light
+  margin-bottom: 5px
+  outline: none
+  padding: 8px 12px
   &:focus
     color: $black
     color: $primary
 
 // just inputs
 input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], textarea
-  border: 1px solid $white
-  background: $white
-  outline: none
-  padding: 4px 8px
+  background: $white_pure
   @include transition (200ms, all, ease-in-out, 0)
   width: 100%
-  margin-bottom: 5px
   &:focus
     background: $white_pure
     border-color: lighten($black, 10%)
@@ -93,13 +85,10 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
 // just selects
 select
   @include appearance (none)
-  background: asset-url("hackathon_manager/arrow_down.svg"), $white_pure
+  background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
-  border: 1px solid $white
-  outline: none
-  padding: 5px 30px 5px 8px
   @include transition (200ms, border, ease-in-out, 0)
   width: 100%
   font-size: 100%
@@ -108,13 +97,13 @@ select
   &:last-child
     margin-right: 0
   &:hover
-    background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
+    background: asset-url("hackathon_manager/arrow_down.svg"), $white_pure
     background-repeat: no-repeat
     background-position: right
     background-size: auto 100%
   &:focus
     border-color: lighten($black, 10%)
-    background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
+    background: asset-url("hackathon_manager/arrow_down.svg"), $white_pure
     background-repeat: no-repeat
     background-position: right
     background-size: auto 100%
@@ -160,10 +149,6 @@ input[type=submit]
       background: $primary
       color: $white
 
-@media screen and (max-width: 950px)
-  .simple_form .error
-    position: initial
-
 @media screen and (max-width: 680px)
   #disclaimer, .alert
     max-width: none
@@ -180,7 +165,6 @@ input[type=submit]
 
   select
     margin-right: 0
-    margin-bottom: 5px
     &.date:nth-child(3)
       max-width: none
     &.date:nth-child(4)
@@ -203,13 +187,6 @@ input[type=submit]
       display: block
       margin-top: 5px
       margin-left: 2px
-
-  .simple_form .error
-    display: block
-    left: 0
-    margin: 0
-    padding-left: 8px
-    position: relative
 
 // form wizard
 .wizard-stage

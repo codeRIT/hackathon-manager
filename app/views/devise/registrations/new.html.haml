@@ -1,7 +1,9 @@
 %section.section
   .container
     .form-container.signup
-      %h1.section-title Sign Up
+      %h1.section-title
+        Register for
+        %span.emphasized= Rails.configuration.hackathon['name']
 
       - if Rails.configuration.hackathon['registration_is_open'] || Rails.configuration.hackathon['disclaimer']
         #disclaimer

@@ -6,7 +6,7 @@ body, html
   min-height: 250px
 
 body
-  background: $white-grey
+  background: $white_pure
   color: $grey-med
   font-family: $font-body-family
   font-size: 16px
@@ -41,10 +41,6 @@ a
   &:hover
     color: lighten($secondary, 10%)
 
-p > a
-  font-weight: 300
-  text-decoration: underline
-
 a.underline
   text-decoration: underline
 
@@ -55,11 +51,13 @@ a.underline
   position: relative
 
 .section-title
-  color: $primary
+  color: $grey-med
   font-size: 2.200rem
   text-align: center
   &.white
     color: $white
+  .emphasized
+    color: $grey-dark
 
 .container
   margin: 0 auto

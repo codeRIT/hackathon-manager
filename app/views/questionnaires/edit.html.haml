@@ -2,9 +2,11 @@
   .container
     - title "Edit Application"
     .form-container
-      %h1.section-title Edit #{Rails.configuration.hackathon['name']} Application
+      %h1.section-title
+        Edit
+        %span.emphasized Application
 
     = render 'form'
 
     - if @questionnaire.valid?
-      %p{class:"cancel_btn_wrap"}= link_to 'Cancel', questionnaires_path
+      %p.cancel_btn_wrap= link_to 'Cancel', questionnaires_path

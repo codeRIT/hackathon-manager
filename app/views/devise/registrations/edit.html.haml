@@ -1,6 +1,8 @@
 %section.section
   .container
-    %h1.section-title Edit Account
+    %h1.section-title
+      Edit
+      %span.emphasized Account
     .form-container
       = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
         = f.error_notification

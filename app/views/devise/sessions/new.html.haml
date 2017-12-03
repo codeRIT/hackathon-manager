@@ -1,7 +1,9 @@
 .section
   .container
     .form-container.login
-      %h1.section-title Sign In
+      %h1.section-title
+        Sign in to
+        %span.emphasized= Rails.configuration.hackathon['name']
       - if notice
         .form-success
           .success_message

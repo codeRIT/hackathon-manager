@@ -8,9 +8,8 @@
     = f.input :email, required: true, autofocus: true
     = f.input :password, required: true
     = f.input :password_confirmation, required: true, label:"Confirm"
-  .form-actions
-    .center
-      = f.button :submit, "Sign up"
-    %p.center
-      Already applied?
-      = link_to "Sign In".html_safe, new_user_session_path
+  .form-actions.right
+    = f.button :submit, "Register"
+    %p.session-link
+      Have an account?
+      = link_to "Sign in!".html_safe, new_user_session_path
