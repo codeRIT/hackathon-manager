@@ -9,4 +9,6 @@
     = render 'form'
 
     - if @questionnaire.valid?
-      %p.cancel_btn_wrap= link_to 'Cancel', questionnaires_path
+      .right
+        %p.session-link
+          = link_to 'Cancel', questionnaires_path

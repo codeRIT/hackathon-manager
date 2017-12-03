@@ -1,9 +1,14 @@
+$form-spacing-horizontal: 9px
+
 #disclaimer, .alert
-  background: $black
-  color: $white_pure
-  margin: 0 auto 50px auto
-  padding: 20px 25px
+  background: $white_pure
+  color: $grey-dark
+  margin: 5px auto 55px auto
+  padding: 18px 35px
   line-height: 1.4
+  border: 1px solid $grey-dark
+  border-radius: 3px
+  box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
 
 fieldset
   margin-top: 25px
@@ -20,47 +25,74 @@ fieldset
 
 hr
   border: none
-  border-top: 1px solid $primary
-  margin: 40px 25px 35px
+  border-top: 2px solid $grey-light
+  margin: 50px 0 45px
+  width: 80px
 
 .alert
   background: $red
 
 .form-container, .cancel_btn_wrap
   margin: 0 auto
-  max-width: 640px
-  padding-right: 100px
-  padding-left: 40px
+  max-width: 690px
+  padding-left: 5px
+  padding-right: 5px
 
 // custom styles
 .form-container.login, .form-container.signup
-  max-width: 530px
+  max-width: 400px
   padding: 30px
   .btn
     margin-bottom: 30px
+
 .simple_form
   color: $grey
   .error
     background: $red
     color: $white
     font-size: 0.74rem
-    padding: 8px
+    padding: 6px 9px
+    flex: 1 1 auto
+  abbr
+    text-decoration: none
+    position: absolute
+    margin-left: -16px
+    color: $grey-light
+
+.form-inputs
+  display: flex
+  flex-flow: row wrap
+  justify-content: stretch
+  margin-left: -1 * $form-spacing-horizontal
+  margin-right: -1 * $form-spacing-horizontal
 
 .input
+  flex: 1 1 600px
   display: flex
-  flex-flow: column nowrap
+  flex-flow: row wrap
+  margin-left: $form-spacing-horizontal
+  margin-right: $form-spacing-horizontal
   margin-bottom: 15px
   position: relative
   text-align: left
+  align-items: flex-start
+  align-content: flex-start
+
+.input--half
+  flex-basis: 220px
 
 label
+  display: block
+  width: 100%
+  flex-shrink: 0
   font-weight: $font-reg
   padding-top: 5px
   padding-bottom: 8px
   text-align: left
 
 // all form input types
-input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], textarea, select
+input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], textarea, select
+  background: $white_pure
   color: $grey-dark
   font-family: $font-body-family
   font-weight: $font-bold
@@ -69,17 +101,11 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
   margin-bottom: 5px
   outline: none
   padding: 8px 12px
+  width: 100%
+  @include transition (200ms, all, ease-in-out, 0)
   &:focus
     color: $black
     color: $primary
-
-// just inputs
-input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], textarea
-  background: $white_pure
-  @include transition (200ms, all, ease-in-out, 0)
-  width: 100%
-  &:focus
-    background: $white_pure
     border-color: lighten($black, 10%)
 
 // just selects
@@ -90,34 +116,36 @@ select
   background-position: right
   background-size: auto 100%
   @include transition (200ms, border, ease-in-out, 0)
-  width: 100%
   font-size: 100%
-  margin-right: 5px
   border-radius: 0
-  &:last-child
-    margin-right: 0
   &:hover
-    background: asset-url("hackathon_manager/arrow_down.svg"), $white_pure
-    background-repeat: no-repeat
-    background-position: right
-    background-size: auto 100%
+    background-image: asset-url("hackathon_manager/arrow_down.svg")
   &:focus
-    border-color: lighten($black, 10%)
-    background: asset-url("hackathon_manager/arrow_down.svg"), $white_pure
-    background-repeat: no-repeat
-    background-position: right
-    background-size: auto 100%
-  option
-    background: $white_pure
-    padding: 3px auto
+    background-image: asset-url("hackathon_manager/arrow_down.svg")
+  &.date:nth-child(2)
+    flex: 3 0 120px
+    margin-right: 2 * $form-spacing-horizontal
   &.date:nth-child(3)
-    max-width: 70px
+    flex: 1 1 65px
+    margin-right: 2 * $form-spacing-horizontal
   &.date:nth-child(4)
-    max-width: 90px
+    flex: 1 1 85px
 
 // checkbox
 input[type=checkbox]
-  margin-top: 9px
+  @include appearance (none)
+  width: 22px
+  height: 22px
+  padding: 0
+  &:checked
+    background: $secondary
+
+// radio
+.radio
+  min-width: 170px
+
+input[type=radio]
+  margin-right: 10px
 
 //Submit
 input[type=submit]
@@ -127,12 +155,17 @@ input[type=submit]
 .cancel_btn_wrap
   text-align: center
 
-//Resume Upload
+// Resume Upload
 .participant_resume
   margin-top: 20px
 
 .field_with_errors
   color: $red !important
+
+.hint
+  color: $grey-light
+  font-style: italic
+  width: 100%
 
 
 // jquery ui override
@@ -151,42 +184,7 @@ input[type=submit]
 
 @media screen and (max-width: 680px)
   #disclaimer, .alert
-    max-width: none
-    margin: 0 25px 25px 25px
-    ul
-      margin: 0
-      padding: 0
-
-  .form-container
-    padding: 0 5px
-
-  div.input
-    display: block
-
-  select
-    margin-right: 0
-    &.date:nth-child(3)
-      max-width: none
-    &.date:nth-child(4)
-      max-width: none
-
-  label
-    display: block
-    font-size: 1.115rem
-    margin-bottom: 5px
-    margin-top: 15px
-    text-align: left
-
-  input[type=text], input[type=email], input[type=date], input[type="url"], input[type=password], textarea, select, option
-    font-size: 1.115rem
-    padding: 12px 15px
-    width: 100%
-
-  .participant_resume
-    .hint
-      display: block
-      margin-top: 5px
-      margin-left: 2px
+    margin-bottom: 30px
 
 // form wizard
 .wizard-stage
@@ -217,3 +215,12 @@ input[type=submit]
   width: 150%
   height: 75%
   background: inherit
+
+.formatted_boolean
+  flex-flow: row wrap
+  label
+    width: 310px
+  @media (max-width: 680px)
+    align-items: center
+    label
+      width: 220px
