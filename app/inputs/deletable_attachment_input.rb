@@ -4,7 +4,7 @@ class DeletableAttachmentInput < SimpleForm::Inputs::FileInput
     out = ''
     out << @builder.file_field(attribute_name, merged_input_options)
     if object.send("#{attribute_name}?")
-      out << @builder.input("delete_#{attribute_name}", as: :boolean, label: "Remove?")
+      out << @builder.input("delete_#{attribute_name}", as: :boolean, label: "Remove?", wrapper_html: { class: 'deletable_attachment_input' })
     end
     out.html_safe
   end

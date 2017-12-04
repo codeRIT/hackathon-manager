@@ -1,4 +1,5 @@
 $form-spacing-horizontal: 9px
+$form-input-border-color: lighten($grey-light, 10%)
 
 #disclaimer, .alert
   background: $white_pure
@@ -11,7 +12,7 @@ $form-spacing-horizontal: 9px
   box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
 
 fieldset
-  margin-top: 25px
+  margin: 25px 0 0
   border: 1px solid #aaa
   padding: 0.25em 1.5em 0.5em
   outline: none
@@ -25,8 +26,8 @@ fieldset
 
 hr
   border: none
-  border-top: 2px solid $grey-light
-  margin: 50px 0 45px
+  border-top: 1px solid $form-input-border-color
+  margin: 35px 0 40px
   width: 80px
 
 .alert
@@ -58,6 +59,7 @@ hr
     position: absolute
     margin-left: -16px
     color: $grey-light
+    align-self: flex-start
 
 .form-inputs
   display: flex
@@ -82,7 +84,8 @@ hr
   flex-basis: 220px
 
 label
-  display: block
+  display: flex
+  align-items: center
   width: 100%
   flex-shrink: 0
   font-weight: $font-light
@@ -97,10 +100,10 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
   font-family: $font-body-family
   font-weight: $font-reg
   font-size: 100%
-  border: 1px solid $grey-light
+  border: 1px solid $form-input-border-color
   margin-bottom: 5px
   outline: none
-  padding: 8px 12px
+  padding: 9px 14px
   width: 100%
   @include transition (200ms, all, ease-in-out, 0)
   @include placeholder-color($grey-light)
@@ -138,6 +141,9 @@ input[type=checkbox]
   width: 22px
   height: 22px
   padding: 0
+  margin: 0
+  &:hover
+    background: $grey-light
   &:checked
     background: $secondary
 
@@ -167,6 +173,13 @@ input[type=submit]
   color: $grey-light
   font-style: italic
   width: 100%
+
+.supporting-text
+  color: $grey-light
+  line-height: 1.5
+  margin-left: $form-spacing-horizontal
+  margin-right: $form-spacing-horizontal
+  margin-bottom: 3px
 
 
 // jquery ui override
@@ -220,8 +233,28 @@ input[type=submit]
 .formatted_boolean
   flex-flow: row wrap
   label
-    width: 310px
+    flex: 1
+    max-width: 310px
+    padding-right: 10px
   @media (max-width: 680px)
     align-items: center
     label
       width: 220px
+
+.deletable_attachment
+  justify-content: space-between
+  input[type=file]
+    flex: 1
+    min-width: 200px
+    max-width: 450px
+
+.deletable_attachment_input
+  margin: 0
+  flex: 1
+  max-width: fit-content
+  label
+    justify-content: flex-end
+    @media (max-width: 500px)
+      justify-content: flex-start
+  input[type=checkbox]
+    margin-right: 10px
