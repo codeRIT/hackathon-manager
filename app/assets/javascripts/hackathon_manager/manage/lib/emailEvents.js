@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $('.email-events').each(function() {
     var events_container = this;
 

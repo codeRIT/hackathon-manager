@@ -1,8 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function() {
   var $sidebar = $('.sidebar');
 
   if ( $sidebar.hasClass('home') ) {
-    $('.nav-link, .scroll-to').on('click', function (e) {
+    $('.nav-link, .scroll-to').on('click', function(e) {
       e.preventDefault();
       $('.active').removeClass('active');
       $(e.currentTarget).addClass('active');

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $.fn.validate = function(option) {
     var previous_invalid_inputs = [];
 

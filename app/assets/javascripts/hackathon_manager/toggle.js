@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $.fn.toggleDetails = function() {
     var toggle = function() {
       $('.details').slideUp();

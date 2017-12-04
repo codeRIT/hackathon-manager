@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $.fn.wizard = function() {
     var form = this;
 

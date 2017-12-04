@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $('[name="questionnaire[travel_not_from_school]"]').on('change', function() {
     var $location = $('[name="questionnaire[travel_location]"]');
     if (this.value === "true") {
