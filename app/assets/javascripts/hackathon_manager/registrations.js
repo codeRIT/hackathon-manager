@@ -1,5 +1,4 @@
-$(document).ready(function () {
-
+$(document).ready(function() {
   $('[data-school-picker]').autocomplete({
     source: function( request, response ) {
       $.ajax({
@@ -22,5 +21,4 @@ $(document).ready(function () {
     delay: 100,
     autoFocus: true
   });
-
 });

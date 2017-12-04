@@ -10,7 +10,7 @@
 //= require chartkick
 //= require_directory ./lib
 
-$(document).ready(function () {
+$(document).ready(function() {
   $('.selectize').selectize();
   $('select[data-bulk-row-edit]').bulkRowEdit();
   $().bulkRowSelect();
