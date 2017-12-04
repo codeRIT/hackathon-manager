@@ -85,7 +85,7 @@ label
   display: block
   width: 100%
   flex-shrink: 0
-  font-weight: $font-reg
+  font-weight: $font-light
   padding-top: 5px
   padding-bottom: 8px
   text-align: left
@@ -95,7 +95,7 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
   background: $white_pure
   color: $grey-dark
   font-family: $font-body-family
-  font-weight: $font-bold
+  font-weight: $font-reg
   font-size: 100%
   border: 1px solid $grey-light
   margin-bottom: 5px
@@ -103,6 +103,7 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
   padding: 8px 12px
   width: 100%
   @include transition (200ms, all, ease-in-out, 0)
+  @include placeholder-color($grey-light)
   &:focus
     color: $black
     color: $primary
