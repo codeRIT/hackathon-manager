@@ -60,7 +60,7 @@ $(document).ready(function() {
           }
         }
       });
-      if (invalid_inputs.length > 0 && $(invalid_inputs).not(previous_invalid_inputs).length == 0 && $(previous_invalid_inputs).not(invalid_inputs).length == 0) {
+      if (invalid_inputs.length > 0 && $(invalid_inputs).not(previous_invalid_inputs).length === 0 && $(previous_invalid_inputs).not(invalid_inputs).length === 0) {
         $(this).find('[data-validate]').each(function() {
           $(this).parent().find('.error').fadeOut(50).fadeIn(100);
         });

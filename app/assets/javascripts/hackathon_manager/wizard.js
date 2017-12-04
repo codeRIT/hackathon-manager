@@ -11,7 +11,7 @@ $(document).ready(function() {
       } else {
         $newStage.find(":input").first().focus();
       }
-    }
+    };
 
     var nextStage = function() {
       if (!$(form).find('.wizard-current').validate('now')) {
