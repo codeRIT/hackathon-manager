@@ -4,11 +4,11 @@
     %title= yield(:title) || Rails.configuration.hackathon['default_page_title']
     %meta{ charset: "utf-8" }
     %meta{ name:"viewport", content: "width=device-width, initial-scale=1" }
-    = stylesheet_link_tag "hackathon_manager/manage", media: "all"
+    = stylesheet_link_tag "hackathon_manager/core", media: "all"
     = csrf_meta_tags
 
   %body
     = render "layouts/sidebar"
     #main
       = yield
-    = javascript_include_tag "hackathon_manager/manage/application"
+    = javascript_include_tag "hackathon_manager/application"

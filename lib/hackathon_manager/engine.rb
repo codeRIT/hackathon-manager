@@ -7,6 +7,7 @@ module HackathonManager
     initializer "hackathon_manager.assets.precompile" do |app|
       app.config.assets.precompile += %w[
         hackathon_manager/manage.css
+        hackathon_manager/core.css
         hackathon_manager/home.css
         hackathon_manager/vendor/*.js
         hackathon_manager/vendor/*.css

@@ -36,6 +36,15 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    '%i': '[]'
+    '%I': '[]'
+    '%r': '{}'
+    '%w': '[]'
+    '%W': '[]'
+
 Style/IfUnlessModifier:
   Enabled: false
 
