@@ -1,6 +1,7 @@
 %section.section.manage
   - title "RSVP"
-  %h1.section-title RSVP for #{Rails.configuration.hackathon['name']}
+  .form-container
+    %h1.section-title RSVP for #{Rails.configuration.hackathon['name']}
   .form-container
     #disclaimer
       - if flash[:notice]

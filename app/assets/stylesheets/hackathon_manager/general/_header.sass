@@ -1,0 +1,42 @@
+$account-nav-spacing-horiz: 20px
+$account-nav-padding-vert: 15px
+
+.header
+  // TODO
+
+.account-nav
+  border-bottom: 1px solid $grey-light
+  width: 100%
+  display: flex
+  flex-flow: row nowrap
+  justify-content: center
+
+.account-nav__wrapper
+  width: 100%
+  max-width: 690px
+  padding: 0 5px
+
+.account-nav__links
+  display: flex
+  flex-flow: row nowrap
+  margin-left: -1 * $account-nav-spacing-horiz
+  margin-right: -1 * $account-nav-spacing-horiz
+  @media (max-width: 480px)
+    justify-content: center
+
+.account-nav__link
+  display: flex
+  padding: $account-nav-padding-vert 2px $account-nav-padding-vert
+  margin-left: $account-nav-spacing-horiz
+  margin-right: $account-nav-spacing-horiz
+  text-transform: uppercase
+  font-weight: $font-bold
+  color: #888
+  @media (max-width: 480px)
+    margin-left: 10px
+    margin-right: 10px
+
+.account-nav__link--active
+  border-bottom: 3px solid $grey-dark
+  padding-bottom: $account-nav-padding-vert - 1px
+  margin-bottom: -2px
