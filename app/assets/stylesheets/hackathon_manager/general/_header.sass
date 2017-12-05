@@ -2,7 +2,30 @@ $account-nav-spacing-horiz: 20px
 $account-nav-padding-vert: 15px
 
 .header
-  // TODO
+  width: 100%
+  height: 80px
+  display: flex
+  flex-flow: row nowrap
+  justify-content: center
+  background: $grey-dark
+
+.header__wrapper
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-between
+
+.header-logo__image
+  height: 70px
+  width: auto
+  margin: 5px 0
+
+.header-nav
+  display: flex
+  align-items: center
+  .button
+    margin-right: 10px
+    &:last-child
+      margin-right: 0
 
 .account-nav
   border-bottom: 1px solid $grey-light
@@ -15,6 +38,7 @@ $account-nav-padding-vert: 15px
   width: 100%
   max-width: 670px
   padding: 0 5px
+  overflow: hidden
 
 .account-nav__links
   display: flex
@@ -38,5 +62,5 @@ $account-nav-padding-vert: 15px
 
 .account-nav__link--active
   border-bottom: 3px solid $grey-dark
-  padding-bottom: $account-nav-padding-vert - 1px
-  margin-bottom: -2px
+  padding-bottom: $account-nav-padding-vert - 2px
+  margin-bottom: -1px
