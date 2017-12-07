@@ -1,13 +1,13 @@
 .button, input[type=submit]
-  background: $white_pure
-  border: 1px solid $secondary
+  background: $button--background
+  border: 1px solid $button--border
   cursor: pointer
   display: inline-block
   padding: 0.6em 1.2em !important
   font-size: 15px
   border-radius: 0
   text-transform: uppercase
-  color: $secondary
+  color: $button--text
   font-weight: 600 !important
   text-align: center
   text-decoration: none
@@ -22,10 +22,11 @@
     min-width: initial
     padding: 3px 5px
   &:hover, &:focus
-    background: lighten($secondary, 15%)
     @include box-shadow(inset 0 0 10px 3px lighten($secondary, 5%))
-    color: $white_pure
-    outline-color: $secondary
+    background: $button--background--hover
+    border-color: $button--border--hover
+    color: $button--text--hover
+    outline-color: $button--background--hover
   &:disabled
     color: lighten($secondary, 40%)
     background: transparent

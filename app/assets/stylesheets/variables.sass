@@ -47,6 +47,37 @@ $sidebar-width: 200px !default
 $breakpoint-tablet: 1000px !default
 
 /*
+ * Headings
+ */
+$section-title--text: #5d5c77
+$section-title--text--emphasized: $primary
+
+/*
+ * Buttons
+ */
+$button--background: $primary !default
+$button--border: $primary !default
+$button--text: $white_pure !default
+
+$button--background--hover: lighten($primary, 15%) !default
+$button--border--hover: lighten($primary, 15%) !default
+$button--text--hover: $white_pure !default
+
+/*
+ * Forms
+ */
+$input--border-color: #d1d3d4 !default
+$input--background: $white_pure !default
+$input--text: $grey-dark !default
+$input--text--placeholder: #d1d3d4 !default
+$input--hint: #d1d3d4 !default
+$input--required-star: #bcbec0 !default
+
+$input--border-color--focus: darken($input--border-color, 25%) !default
+$input--background--focus: $input--background !default
+$input--text--focus: $primary !default
+
+/*
  * Allow for overridden variables.
  * To use, place a custom `variable-overrides.sass` in your own app, at:
  * /app/assets/stylesheets/variable-overrides.sass

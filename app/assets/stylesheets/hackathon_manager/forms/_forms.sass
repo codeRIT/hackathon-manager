@@ -1,5 +1,4 @@
 $form-spacing-horizontal: 9px
-$form-input-border-color: lighten($grey-light, 10%)
 
 #disclaimer, .alert
   background: $white_pure
@@ -26,7 +25,7 @@ fieldset
 
 hr
   border: none
-  border-top: 1px solid $form-input-border-color
+  border-top: 1px solid $input--border-color
   margin: 35px 0 40px
   width: 80px
 
@@ -57,7 +56,7 @@ hr
     text-decoration: none
     position: absolute
     margin-left: -16px
-    color: $grey-light
+    color: $input--required-star
     align-self: flex-start
 
 .form-inputs
@@ -94,27 +93,27 @@ label
 
 // all form input types
 input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], textarea, select
-  background: $white_pure
-  color: $grey-dark
+  background: $input--background
+  color: $input--text
   font-family: $font-body-family
   font-weight: $font-reg
   font-size: 100%
-  border: 1px solid $form-input-border-color
+  border: 1px solid $input--border-color
   margin-bottom: 5px
   outline: none
   padding: 9px 14px
   width: 100%
   @include transition (200ms, all, ease-in-out, 0)
-  @include placeholder-color($grey-light)
+  @include placeholder-color($input--text--placeholder)
   &:focus
-    color: $black
-    color: $primary
-    border-color: lighten($black, 10%)
+    color: $input--text--focus
+    background-color: $input--background--focus
+    border-color: $input--border-color--focus
 
 // just selects
 select
   @include appearance (none)
-  background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
+  background: asset-url("hackathon_manager/arrow_down_hover.svg"), $input--background
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
@@ -169,12 +168,12 @@ input[type=submit]
   color: $red !important
 
 .hint
-  color: $grey-light
+  color: $input--hint
   font-style: italic
   width: 100%
 
 .supporting-text
-  color: $grey-light
+  color: $input--hint
   line-height: 1.5
   margin-left: $form-spacing-horizontal
   margin-right: $form-spacing-horizontal
@@ -183,9 +182,9 @@ input[type=submit]
 
 // jquery ui override
 .ui-autocomplete
-  background: $white_pure
-  border: 1px solid lighten($black, 10%)
-  color: $primary
+  background: $input--background--focus
+  border: 1px solid $input--border-color--focus
+  color: $input--text--focus
   list-style: none
   padding: 0
   .ui-menu-item a
