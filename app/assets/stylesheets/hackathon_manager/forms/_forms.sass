@@ -105,12 +105,14 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
   outline: none
   padding: 9px 14px
   width: 100%
-  @include transition(150ms, border, ease-out, 0ms)
+  @include transition(150ms, border-color, ease-out, 0ms)
   @include placeholder-color($input--text--placeholder)
   &:focus
     color: $input--text--focus
     background-color: $input--background--focus
     border-color: $input--border-color--focus
+    border-width: 2px
+    padding: 8px 13px
 
 // just selects
 select
@@ -119,7 +121,6 @@ select
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
-  @include transition(150ms, border, ease-out, 0ms)
   font-size: 100%
   border-radius: 0
   &:hover
@@ -140,7 +141,7 @@ input[type=checkbox]
   @include appearance (none)
   width: 22px
   height: 22px
-  padding: 0
+  padding: 1px
   margin: 0
   &::after
     // Begin FontAwesome's .fa class
@@ -163,6 +164,8 @@ input[type=checkbox]
   &:checked
     &::after
       opacity: 1
+  &:focus
+    padding: 0
 
 // radio
 .radio
