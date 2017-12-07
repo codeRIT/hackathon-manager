@@ -142,10 +142,27 @@ input[type=checkbox]
   height: 22px
   padding: 0
   margin: 0
+  &::after
+    // Begin FontAwesome's .fa class
+    font: normal normal normal 14px/1 FontAwesome
+    text-rendering: auto
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    // end .fa
+    content: ""
+    color: $primary
+    font-size: 25px
+    margin-left: 2px
+    margin-top: -4px
+    display: block
+    opacity: 0
   &:hover
-    background: $grey-light
+    background: #eee
+    &::after
+      opacity: 0.3
   &:checked
-    background: $secondary
+    &::after
+      opacity: 1
 
 // radio
 .radio
