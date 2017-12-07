@@ -1,12 +1,12 @@
 $form-spacing-horizontal: 9px
 
 #disclaimer, .alert
-  background: $white_pure
-  color: $grey-dark
+  background: $alert--background
+  color: $alert--text
   margin: 5px auto 55px auto
   padding: 18px 35px
   line-height: 1.4
-  border: 1px solid $grey-dark
+  border: 1px solid $alert--border
   border-radius: 3px
   box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
 
@@ -30,7 +30,9 @@ hr
   width: 80px
 
 .alert
-  background: $red
+  color: $alert--text--error
+  background: $alert--background--error
+  border-color: $alert--border--error
 
 .form-container, .cancel_btn_wrap
   margin: 0 auto
@@ -47,8 +49,8 @@ hr
 .simple_form
   color: $grey
   .error
-    background: $red
-    color: $white
+    background: $input--error--background
+    color: $input--error--text
     font-size: 0.74rem
     padding: 6px 9px
     flex: 1 1 100%
