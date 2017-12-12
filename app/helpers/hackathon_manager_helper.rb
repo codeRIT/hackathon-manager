@@ -26,6 +26,13 @@ module HackathonManagerHelper
     markdown.render(text).html_safe
   end
 
+  def active_link_to(name = nil, options = nil, html_options = nil, &block)
+    if current_page?(options)
+      html_options[:class] = html_options[:class] + ' ' + html_options[:active_class]
+    end
+    link_to(name, options, html_options, &block)
+  end
+
   # https://github.com/rails/sprockets-rails/issues/298#issuecomment-168927471
   def asset_available?(logical_path)
     if Rails.configuration.assets.compile

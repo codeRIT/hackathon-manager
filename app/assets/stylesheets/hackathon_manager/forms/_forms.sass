@@ -1,12 +1,20 @@
+$form-spacing-horizontal: 9px
+
 #disclaimer, .alert
-  background: $black
-  color: $white_pure
-  margin: 0 auto 50px auto
-  padding: 20px 25px
+  background: $alert--background
+  color: $alert--text
+  margin: 5px auto 55px auto
+  padding: 18px 35px
   line-height: 1.4
+  border: 1px solid $alert--border
+  border-radius: 3px
+  box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
+
+  .section-title
+    margin: 12px 0 5px
 
 fieldset
-  margin-top: 25px
+  margin: 25px 0 0
   border: 1px solid #aaa
   padding: 0.25em 1.5em 0.5em
   outline: none
@@ -20,115 +28,154 @@ fieldset
 
 hr
   border: none
-  border-top: 1px solid $primary
-  margin: 40px 25px 35px
+  border-top: 1px solid $input--border-color
+  margin: 35px 0 40px
+  width: 80px
 
 .alert
-  background: $red
+  color: $alert--text--error
+  background: $alert--background--error
+  border-color: $alert--border--error
 
 .form-container, .cancel_btn_wrap
   margin: 0 auto
-  max-width: 640px
-  padding-right: 100px
-  padding-left: 40px
+  max-width: 670px
+  padding-left: 5px
+  padding-right: 5px
 
 // custom styles
 .form-container.login, .form-container.signup
-  max-width: 530px
-  padding: 30px
+  max-width: 360px
   .btn
     margin-bottom: 30px
+
 .simple_form
   color: $grey
   .error
-    background: $red
-    //bottom: 1px
-    color: $white
-    display: table
+    background: $input--error--background
+    color: $input--error--text
     font-size: 0.74rem
-    left: 100%
-    margin-left: 5px
-    padding: 8px
+    padding: 6px 9px
+    flex: 1 1 100%
+  abbr
+    text-decoration: none
     position: absolute
+    margin-left: -16px
+    color: $input--required-star
+    align-self: flex-start
 
-div.input
+.form-inputs
   display: flex
-  flex-direction: row
-  flex-wrap: nowrap
+  flex-flow: row wrap
+  justify-content: stretch
+  margin-left: -1 * $form-spacing-horizontal
+  margin-right: -1 * $form-spacing-horizontal
+
+.input
+  flex: 1 1 600px
+  display: flex
+  flex-flow: row wrap
+  margin-left: $form-spacing-horizontal
+  margin-right: $form-spacing-horizontal
   margin-bottom: 15px
   position: relative
   text-align: left
+  align-items: flex-start
+  align-content: flex-start
+
+.input--half
+  flex-basis: 220px
 
 label
-  font-weight: $font-reg
-  margin-right: 10px
-  min-width: 160px
-  padding-top: 3px
-  padding-right: 10px
+  display: flex
+  align-items: center
+  width: 100%
+  flex-shrink: 0
+  font-weight: $font-light
+  padding-top: 5px
+  padding-bottom: 8px
   text-align: left
 
 // all form input types
-input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], textarea, select
-  color: $grey-dark
+input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], textarea, select
+  background: $input--background
+  color: $input--text
   font-family: $font-body-family
-  font-weight: $font-bold
+  font-weight: $font-reg
   font-size: 100%
-  &:focus
-    color: $black
-    color: $primary
-
-// just inputs
-input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], textarea
-  border: 1px solid $white
-  background: $white
-  outline: none
-  padding: 4px 8px
-  @include transition (200ms, all, ease-in-out, 0)
-  width: 100%
+  border: 1px solid $input--border-color
   margin-bottom: 5px
+  outline: none
+  padding: 9px 14px
+  width: 100%
+  @include transition(150ms, border-color, ease-out, 0ms)
+  @include placeholder-color($input--text--placeholder)
   &:focus
-    background: $white_pure
-    border-color: lighten($black, 10%)
+    color: $input--text--focus
+    background-color: $input--background--focus
+    border-color: $input--border-color--focus
+    border-width: 2px
+    padding: 8px 13px
 
 // just selects
 select
   @include appearance (none)
-  background: asset-url("hackathon_manager/arrow_down.svg"), $white_pure
+  background: asset-url("hackathon_manager/arrow_down_hover.svg"), $input--background
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
-  border: 1px solid $white
-  outline: none
-  padding: 5px 30px 5px 8px
-  @include transition (200ms, border, ease-in-out, 0)
-  width: 100%
   font-size: 100%
-  margin-right: 5px
   border-radius: 0
-  &:last-child
-    margin-right: 0
   &:hover
-    background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
-    background-repeat: no-repeat
-    background-position: right
-    background-size: auto 100%
+    background-image: asset-url("hackathon_manager/arrow_down.svg")
   &:focus
-    border-color: lighten($black, 10%)
-    background: asset-url("hackathon_manager/arrow_down_hover.svg"), $white_pure
-    background-repeat: no-repeat
-    background-position: right
-    background-size: auto 100%
-  option
-    background: $white_pure
-    padding: 3px auto
+    background-image: asset-url("hackathon_manager/arrow_down.svg")
+  &.date:nth-child(2)
+    flex: 3 0 120px
+    margin-right: 2 * $form-spacing-horizontal
   &.date:nth-child(3)
-    max-width: 70px
+    flex: 1 1 65px
+    margin-right: 2 * $form-spacing-horizontal
   &.date:nth-child(4)
-    max-width: 90px
+    flex: 1 1 85px
 
 // checkbox
 input[type=checkbox]
-  margin-top: 9px
+  @include appearance (none)
+  width: 22px
+  height: 22px
+  padding: 1px
+  margin: 0
+  &::after
+    // Begin FontAwesome's .fa class
+    font: normal normal normal 14px/1 FontAwesome
+    text-rendering: auto
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    // end .fa
+    content: ""
+    color: $primary
+    font-size: 25px
+    margin-left: 2px
+    margin-top: -4px
+    display: block
+    opacity: 0
+  &:hover
+    background: #eee
+    &::after
+      opacity: 0.3
+  &:checked
+    &::after
+      opacity: 1
+  &:focus
+    padding: 0
+
+// radio
+.radio
+  min-width: 170px
+
+input[type=radio]
+  margin-right: 10px
 
 //Submit
 input[type=submit]
@@ -138,19 +185,31 @@ input[type=submit]
 .cancel_btn_wrap
   text-align: center
 
-//Resume Upload
+// Resume Upload
 .participant_resume
   margin-top: 20px
 
 .field_with_errors
   color: $red !important
 
+.hint
+  color: $input--hint
+  font-style: italic
+  width: 100%
+
+.supporting-text
+  color: $input--hint
+  line-height: 1.5
+  margin-left: $form-spacing-horizontal
+  margin-right: $form-spacing-horizontal
+  margin-bottom: 3px
+
 
 // jquery ui override
 .ui-autocomplete
-  background: $white_pure
-  border: 1px solid lighten($black, 10%)
-  color: $primary
+  background: $input--background--focus
+  border: 1px solid $input--border-color--focus
+  color: $input--text--focus
   list-style: none
   padding: 0
   .ui-menu-item a
@@ -160,56 +219,9 @@ input[type=submit]
       background: $primary
       color: $white
 
-@media screen and (max-width: 950px)
-  .simple_form .error
-    position: initial
-
 @media screen and (max-width: 680px)
   #disclaimer, .alert
-    max-width: none
-    margin: 0 25px 25px 25px
-    ul
-      margin: 0
-      padding: 0
-
-  .form-container
-    padding: 0 5px
-
-  div.input
-    display: block
-
-  select
-    margin-right: 0
-    margin-bottom: 5px
-    &.date:nth-child(3)
-      max-width: none
-    &.date:nth-child(4)
-      max-width: none
-
-  label
-    display: block
-    font-size: 1.115rem
-    margin-bottom: 5px
-    margin-top: 15px
-    text-align: left
-
-  input[type=text], input[type=email], input[type=date], input[type="url"], input[type=password], textarea, select, option
-    font-size: 1.115rem
-    padding: 12px 15px
-    width: 100%
-
-  .participant_resume
-    .hint
-      display: block
-      margin-top: 5px
-      margin-left: 2px
-
-  .simple_form .error
-    display: block
-    left: 0
-    margin: 0
-    padding-left: 8px
-    position: relative
+    margin-bottom: 30px
 
 // form wizard
 .wizard-stage
@@ -240,3 +252,32 @@ input[type=submit]
   width: 150%
   height: 75%
   background: inherit
+
+.formatted_boolean
+  flex-flow: row wrap
+  align-items: center
+  label
+    flex: 1
+    max-width: 310px
+    padding-right: 10px
+  @media (max-width: 680px)
+    label
+      width: 220px
+
+.deletable_attachment
+  justify-content: space-between
+  input[type=file]
+    flex: 1
+    min-width: 200px
+    max-width: 450px
+
+.deletable_attachment_input
+  margin: 0
+  flex: 1
+  max-width: fit-content
+  label
+    justify-content: flex-end
+    @media (max-width: 500px)
+      justify-content: flex-start
+  input[type=checkbox]
+    margin-right: 10px
