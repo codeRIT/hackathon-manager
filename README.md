@@ -57,6 +57,7 @@ And finally, create the a `config/hackathon.yml` with the contents from [test/du
 
 ### Customization
 
+* **Content**: Various constants are configured in your own app's `config/hackathon.yml`. Example configs: [dummy]([test/dummy/config/hackathon.yml](test/dummy/config/hackathon.yml)), [brickhack](https://github.com/codeRIT/brickhack.io/blob/develop/config/hackathon.yml).
 * **Emails**: The default email templates are located at [`/app/views/mailer`](https://github.com/codeRIT/brickhack.io/tree/develop/app/views/mailer). You can override these templates by copying the specific template(s) to the same `/app/views/mailer` in your Rails app and making the changes you need.
 * **Styling**: The style for management, application, and RSVP pages can be customized by modifying your Rails app's `/app/assets/stylesheets/variable-overrides.sass` file. You can see the defaults in the hackathon_manager [`varaibles.sass`](https://github.com/codeRIT/hackathon_manager/blob/master/app/assets/stylesheets/variables.sass). The style for all other pages is controlled by your own stylesheets - hackathon_manager does not control those.
 
