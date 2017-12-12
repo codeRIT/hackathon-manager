@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'codeRIT <noreply@coderit.org>'
+  default from: Rails.configuration.hackathon['email_from']
   layout 'mailer'
 end
