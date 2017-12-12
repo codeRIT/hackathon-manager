@@ -17,7 +17,7 @@ defaults: &defaults
   # thanks_for_applying: |
   #   Message that appears after completing an application. Supports markdown.
   # bus_captain_notes: |
-  #   Message that appers on the bus captain's bust list page. Supports markdown.
+  #   Message that appers on the bus captain's bus list page. Supports markdown.
 
 development:
   <<: *defaults
