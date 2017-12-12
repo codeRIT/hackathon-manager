@@ -42,10 +42,10 @@ $account-nav-padding-vert: 15px
 
 .account-nav__links
   display: flex
-  flex-flow: row nowrap
+  flex-flow: row wrap
   margin-left: -1 * $account-nav-spacing-horiz
   margin-right: -1 * $account-nav-spacing-horiz
-  @media (max-width: 480px)
+  @media (max-width: 700px)
     justify-content: center
 
 .account-nav__link
@@ -56,7 +56,7 @@ $account-nav-padding-vert: 15px
   text-transform: uppercase
   font-weight: $font-bold
   color: $account-nav--text
-  @media (max-width: 480px)
+  @media (max-width: 700px)
     margin-left: 10px
     margin-right: 10px
 
