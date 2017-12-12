@@ -1,15 +1,13 @@
-%section.section
-  .container
-    - title "Edit Application"
-    .form-container
-      %h1.section-title
-        Edit
-        %span.emphasized Application
+- title "Edit Application"
+.form-container
+  %h1.section-title
+    Edit
+    %span.emphasized Application
 
-    = render 'form'
+= render 'form'
 
-    - if @questionnaire.valid?
-      .form-container
-        .right
-          %p.session-link
-            = link_to 'Cancel', questionnaires_path
+- if @questionnaire.valid?
+  .form-container
+    .right
+      %p.session-link
+        = link_to 'Cancel', questionnaires_path

@@ -1,17 +1,15 @@
-%section.section
-  .container
-    .form-container.signup
-      %h1.section-title.center
-        Register for
-        %span.emphasized= Rails.configuration.hackathon['name']
+.form-container.signup
+  %h1.section-title.center
+    Register for
+    %span.emphasized= Rails.configuration.hackathon['name']
 
-      - if Rails.configuration.hackathon['registration_is_open'] || Rails.configuration.hackathon['disclaimer']
-        #disclaimer
-          - unless Rails.configuration.hackathon['registration_is_open']
-            .center
-              %strong Registration is now closed. Thanks to everyone who applied!
-            %br
-          - if Rails.configuration.hackathon['disclaimer']
-            = markdown(Rails.configuration.hackathon['disclaimer'])
+  - if Rails.configuration.hackathon['registration_is_open'] || Rails.configuration.hackathon['disclaimer']
+    #disclaimer
+      - unless Rails.configuration.hackathon['registration_is_open']
+        .center
+          %strong Registration is now closed. Thanks to everyone who applied!
+        %br
+      - if Rails.configuration.hackathon['disclaimer']
+        = markdown(Rails.configuration.hackathon['disclaimer'])
 
-      = render 'form'
+  = render 'form'

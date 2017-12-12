@@ -1,9 +1,7 @@
-%section.section
-  .container
-    - title "Apply"
-    .form-container
-      %h1.section-title
-        Apply for
-        %span.emphasized= Rails.configuration.hackathon['name']
+- title "Apply"
+.form-container
+  %h1.section-title
+    Apply for
+    %span.emphasized= Rails.configuration.hackathon['name']
 
-    = render 'form'
+= render 'form'
