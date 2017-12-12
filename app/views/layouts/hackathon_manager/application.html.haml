@@ -8,9 +8,9 @@
     = csrf_meta_tags
 
   %body
-    = render "layouts/header"
+    = render "layouts/hackathon_manager/header"
     #main
       = yield
-    = render "layouts/footer"
+    = render "layouts/hackathon_manager/footer"
     = javascript_include_tag "hackathon_manager/application"
-    = render "layouts/shared_footer"
+    = render "layouts/hackathon_manager/shared_footer"
