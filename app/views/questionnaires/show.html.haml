@@ -21,15 +21,17 @@
           %p Thanks for applying! You will be notified of your acceptance via email.
       - else
         %p Thanks for applying!
+%section.section.manage
+  .form-container
+    %h1.section-title.section-title--actions
+      %span
+        Review your
+        %span.emphasized Application
+      = btn_link_to 'Edit', edit_questionnaires_path, class: 'section-title__action'
 
-  .participant_info
-    %p Below is a copy of your application.
+    .participant_info
+      = render partial: 'questionnaire_summary'
 
-    = render partial: 'questionnaire_summary'
-
-    %p
-      = btn_link_to '<span class="fa fa-pencil icon-space-r"></span> Edit Application'.html_safe, edit_questionnaires_path
-      - if !@questionnaire.user.provider
-        = btn_link_to '<span class="fa fa-user icon-space-r"></span> Edit Account'.html_safe, edit_user_registration_path
-    %p
+    %br
+    %p.session-link.right
       Unhappy? #{link_to "Revoke my application", user_registration_path, data: { confirm: "Are you sure? Your account and application will be permanently erased." }, method: :delete}
