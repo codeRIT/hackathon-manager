@@ -1,27 +1,45 @@
 - title "Application"
-.form-success
-  .success_message
-    %p#notice= notice
-    - if @questionnaire.can_rsvp?
-      - if @questionnaire.did_rsvp?
-        %p
-          Below is a copy of your information for #{Rails.configuration.hackathon['name']}.
-          = link_to "Back to RSVP page &raquo;".html_safe, rsvp_path
+%section.section
+  .form-container
+    - if flash[:notice]
+      #disclaimer
+        %p#notice= flash[:notice]
+
+    #disclaimer
+      %h1.section-title
+        Application
+        %span.emphasized Status
+      - if @questionnaire.blank?
+        %strong AWAITING APPLICATION
       - else
-        %p
-          You have not RSVP'd yet!
-          %br
-          %br
-          = link_to "RSVP NOW &raquo;".html_safe, rsvp_path
-    - else
-      - if Rails.configuration.hackathon['registration_is_open']
-        - if Rails.configuration.hackathon['thanks_for_applying']
-          = markdown(Rails.configuration.hackathon['thanks_for_applying'])
+        %strong= @questionnaire.verbal_status.upcase
+        - if @questionnaire.can_rsvp?
+          - if @questionnaire.did_rsvp?
+            - if @questionnaire.acc_status == "rsvp_confirmed"
+              %p
+                Congratulations! You're all set to attend #{Rails.configuration.hackathon['name']}!
+              %p
+                Expect an email closer to February 11th with additional logistics & travel info.
+                %br
+                %br
+            %p.center
+              = btn_link_to "Change RSVP", rsvp_path
+          - else
+            %p
+              Please RSVP so we know if you're attending!
+              %br
+              %br
+            %p.center
+              = btn_link_to "RSVP NOW &raquo;".html_safe, rsvp_path
         - else
-          %p Thanks for applying! You will be notified of your acceptance via email.
-      - else
-        %p Thanks for applying!
-%section.section.manage
+          - if Rails.configuration.hackathon['registration_is_open']
+            - if Rails.configuration.hackathon['thanks_for_applying']
+              = markdown(Rails.configuration.hackathon['thanks_for_applying'])
+            - else
+              %p Thanks for applying! You will be notified of your acceptance via email.
+          - else
+            %p Thanks for applying!
+
   .form-container
     %h1.section-title.section-title--actions
       %span

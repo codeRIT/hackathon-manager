@@ -145,6 +145,20 @@ class Questionnaire < ApplicationRecord
     SlackInviteWorker.perform_async(id)
   end
 
+  def verbal_status
+    if acc_status == "rsvp_denied"
+      "Not Attending"
+    elsif acc_status == "rsvp_confirmed"
+      "Accepted & Attending"
+    elsif acc_status == "accepted"
+      "Accepted, Awaiting RSVP"
+    elsif ["pending", "waitlist", "late_waitlist"].include? acc_status
+      "Pending Review"
+    elsif acc_status == "denied"
+      "Denied"
+    end
+  end
+
   private
 
   def consolidate_school_names

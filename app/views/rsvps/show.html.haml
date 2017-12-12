@@ -1,63 +1,70 @@
 %section.section.manage
   - title "RSVP"
   .form-container
-    %h1.section-title RSVP for #{Rails.configuration.hackathon['name']}
-  .form-container
     #disclaimer
-      - if flash[:notice]
-        = flash[:notice]
-        %br
-        %br
+      %h1.section-title
+        RSVP
+        %span.emphasized Preferences
       - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
-        .fa.fa-check
-        Congratulations! You're all set to attend #{Rails.configuration.hackathon['name']}.
+        %strong
+          - if @questionnaire.riding_bus
+            ALL SET TO ATTEND & RIDE THE BUS!
+          - else
+            ALL SET TO ATTEND!
         %br
         %br
         Expect an email closer to February 11th with additional logistics & travel info.
-      - elsif @questionnaire.acc_status == "rsvp_denied"
-        Sorry to hear you won't be with us this year.
       - else
-        You've been accepted to #{Rails.configuration.hackathon['name']}!
-        Will you be attending?
-    = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
-      .form-inputs
-        = f.input :acc_status, as: :radio_buttons, collection: { " Attending" => "rsvp_confirmed", " Not Attending" => "rsvp_denied" }, label: "RSVP Status:"
+        %strong= current_user.questionnaire.verbal_status.upcase
+        - if @questionnaire.acc_status == "rsvp_denied"
+          %p Sorry to hear you won't be with us this year.
+        - else
+          %p You've been accepted to #{Rails.configuration.hackathon['name']}!
+          %p Will you be attending?
+
+      %hr
+
+      - if flash[:notice]
+        .alert
+          = flash[:notice]
+
+      = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
+        .form-inputs
+          = f.input :acc_status, as: :radio_buttons, collection: { " Attending!" => "rsvp_confirmed", " Not Attending." => "rsvp_denied" }, label: "Attendance:", required: true
+
+          .hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
+            = f.input :phone, input_html: { "data-validate" => "presence" }, label: "Please verify your phone number:"
 
         .hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
-          = f.input :phone, input_html: { "data-validate" => "presence" }, label: "Verify Phone #:"
+          - if @questionnaire.eligible_for_a_bus?
+            - if !@questionnaire.riding_bus && @questionnaire.bus_list.full?
+              #disclaimer
+                Aw, shucks. Your school is eligible for a bus, but all the seats are currently taken.
+            - else
+              %p
+                - if @questionnaire.riding_bus && @questionnaire.acc_status != "rsvp_denied"
+                  .fa.fa-check
+                  You're all set to ride the bus.
+                  - if @questionnaire.bus_list.full?
+                    %br
+                    %br
+                    .fa.fa-warning
+                    Your bus is currently full. If you are no longer riding, please update your status so someone else may use it.
+                - else
+                  Good news: your school is eligible for a bus! Will you be riding?
+              .form-inputs
+                = f.input :riding_bus, as: :radio_buttons, collection: { " Yes!" => true, " No thank you." => false }, label: "Riding the bus:", hint: "You MUST sign up here if you wish to ride the bus! IDs will be checked at boarding."
+                - if @questionnaire.bus_list.needs_bus_captain
+                  = f.input :bus_captain_interest, as: :radio_buttons, collection: { " Yes!" => true, " No thank you." => false }, label: "We're also looking for bus captains from your school. Are you interested?"
 
-      .hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
-        - if @questionnaire.eligible_for_a_bus?
-          - if !@questionnaire.riding_bus && @questionnaire.bus_list.full?
-            #disclaimer
-              Aw, shucks. Your school is eligible for a bus, but all the seats are currently taken.
           - else
-            #disclaimer
-              - if @questionnaire.riding_bus && @questionnaire.acc_status != "rsvp_denied"
-                .fa.fa-check
-                You're all set to ride the bus.
-                - if @questionnaire.bus_list.full?
-                  %br
-                  %br
-                  .fa.fa-warning
-                  Your bus is currently full. If you are no longer riding, please update your status so someone else may use it.
-              - else
-                Good news! Your school is eligible for a bus! Will you be riding?
+            = f.input :riding_bus, as: :hidden, value: false
 
-            = f.input :riding_bus, as: :radio_buttons, collection: { " Yes!" => true, " No thank you" => false }, label: "Riding the bus:"
-            %p You MUST sign up here if you wish to ride the bus! IDs will be checked at boarding.
-            - if @questionnaire.bus_list.needs_bus_captain
-              %p We're also looking for bus captains from your school. Are you interested?
-              = f.input :bus_captain_interest, as: :radio_buttons, collection: { " Yes!" => true, " No thank you" => false }, label: "Bus capain interest:"
+        .right
+          = f.button :submit, value: "Update"
+          %br
+          - if @questionnaire.eligible_for_a_bus? && @questionnaire.is_bus_captain?
+            %p= link_to "Manage Bus List &raquo;".html_safe, bus_list_path
 
-            = render partial: 'bus_list_info', locals: { bus_list: @questionnaire.bus_list }
-
-        - else
-          = f.input :riding_bus, as: :hidden, value: false
-
-      .center
-        = btn_link_to "Edit Application", edit_questionnaires_path
-        = f.button :submit, value: "Update"
-        %br
-        - if @questionnaire.eligible_for_a_bus? && @questionnaire.is_bus_captain?
-          %p= link_to "Manage Bus List &raquo;".html_safe, bus_list_path
+    - if @questionnaire.eligible_for_a_bus?
+      = render partial: 'bus_list_info', locals: { bus_list: @questionnaire.bus_list }
