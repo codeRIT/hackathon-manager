@@ -28,7 +28,7 @@ $account-nav-padding-vert: 15px
       margin-right: 0
 
 .account-nav
-  border-bottom: 1px solid $grey-light
+  border-bottom: 1px solid $account-nav--border-color
   width: 100%
   display: flex
   flex-flow: row nowrap
@@ -55,12 +55,13 @@ $account-nav-padding-vert: 15px
   margin-right: $account-nav-spacing-horiz
   text-transform: uppercase
   font-weight: $font-bold
-  color: #888
+  color: $account-nav--text
   @media (max-width: 480px)
     margin-left: 10px
     margin-right: 10px
 
 .account-nav__link--active
-  border-bottom: 3px solid $grey-dark
-  padding-bottom: $account-nav-padding-vert - 2px
+  color: $account-nav--text--active
+  border-bottom: 4px solid $account-nav--border-color--active
+  padding-bottom: $account-nav-padding-vert - 3px
   margin-bottom: -1px
