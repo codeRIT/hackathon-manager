@@ -8,7 +8,6 @@
   %body
     = render "layouts/sidebar"
     = javascript_include_tag "hackathon_manager/manage/application"
-    = render "layouts/shared_footer"
     #main
       #manageNav
         %p #{Rails.configuration.hackathon['name']} Manager
@@ -24,3 +23,4 @@
           = link_to "Sidekiq", sidekiq_web_path
           = link_to "Blazer", blazer_path
       = yield
+    = render "layouts/shared_footer"
