@@ -1,5 +1,9 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+## 0.4.4 - 2017-12-12
+
+* Remove unused `config/initializers/static_data.rb`
+
 ## 0.4.3 - 2017-12-12
 
 * Add config for bus captain notes ([#53](https://github.com/codeRIT/hackathon_manager/pull/53))
