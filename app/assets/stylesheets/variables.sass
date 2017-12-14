@@ -1,6 +1,22 @@
 // TODO: automatically generate a /app/assets/stylesheets/variable-overrides.sass
 // so people know they can override them, and provide instructions to modify this file.
 
+/*
+ * Allow for overridden variables.
+ * To use, place a custom `variable-overrides.sass` in your own app, at:
+ * /app/assets/stylesheets/variable-overrides.sass
+ * with any of the variables below.
+ */
+@import variable-overrides
+
+/*
+ * hackathon_manager variables
+ *
+ * All variables defined below should have the !default flag at the end of
+ * the value. This ensures that if the variable is set in variable-overrides,
+ * the default value here won't be used.
+ */
+
 $orange     : #f58625 !default
 $black      : #201e1f !default
 $grey       : #4d4d4d !default
@@ -33,5 +49,3 @@ $sidebar-width: 200px !default
 
 // media
 $breakpoint-tablet: 1000px !default
-
-@import variable-overrides
