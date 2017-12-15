@@ -1,5 +1,12 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+## 0.5.0 - 2017-12-14
+
+* Complete redesign of account pages ([#51](https://github.com/codeRIT/hackathon_manager/pull/53))
+* Move many CSS constants to easily-configurable variables
+* Add missing page titles (`<title>`)
+* Make raw page titles available via `content_for :page_title`
+
 ## 0.4.4 - 2017-12-12
 
 * Remove unused `config/initializers/static_data.rb`
