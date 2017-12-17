@@ -12,7 +12,7 @@ var setupHighcharts = function() {
        }
     },
     chart: {
-      backgroundColor: "#f0f0f0"
+      backgroundColor: "#ffffff"
     },
     tooltip: {
       shared: true
