@@ -145,7 +145,7 @@ input[type=checkbox]
   width: 22px
   height: 22px
   padding: 1px
-  margin: 0
+  margin: 0 10px 0 0
   &::after
     // Begin FontAwesome's .fa class
     font: normal normal normal 14px/1 FontAwesome
@@ -260,6 +260,8 @@ input[type=submit]
     flex: 1
     max-width: 310px
     padding-right: 10px
+  input[type=checkbox]
+    margin-right: 0
   @media (max-width: 680px)
     label
       width: 220px
@@ -279,5 +281,3 @@ input[type=submit]
     justify-content: flex-end
     @media (max-width: 500px)
       justify-content: flex-start
-  input[type=checkbox]
-    margin-right: 10px
