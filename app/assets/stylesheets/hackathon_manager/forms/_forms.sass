@@ -10,6 +10,10 @@ $form-spacing-horizontal: 9px
   border-radius: 3px
   box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
 
+  @media screen and (max-width: 400px)
+    margin: -10px -10px 35px -10px
+    padding: 13px 29px
+
   .section-title
     margin: 12px 0 5px
 
@@ -18,6 +22,10 @@ fieldset
   border: 1px solid #aaa
   padding: 0.25em 1.5em 0.5em
   outline: none
+
+  @media screen and (max-width: 400px)
+    margin-left: -10px
+    margin-right: -10px
 
   legend
     background: $black
@@ -218,10 +226,6 @@ input[type=submit]
     &:hover, &.ui-state-focus
       background: $primary
       color: $white
-
-@media screen and (max-width: 680px)
-  #disclaimer, .alert
-    margin-bottom: 30px
 
 // form wizard
 .wizard-stage
