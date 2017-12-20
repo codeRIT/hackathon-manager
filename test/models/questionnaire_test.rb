@@ -11,6 +11,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should strip_attribute :dietary_restrictions
   should strip_attribute :special_needs
   should strip_attribute :travel_location
+  should strip_attribute :why_attend
 
   should validate_presence_of :first_name
   should validate_presence_of :last_name
@@ -22,6 +23,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should validate_presence_of :level_of_study
   should validate_presence_of :major
   should validate_presence_of :gender
+  should validate_presence_of :why_attend
   should_not validate_presence_of :dietary_restrictions
   should_not validate_presence_of :special_needs
   should_not validate_presence_of :resume

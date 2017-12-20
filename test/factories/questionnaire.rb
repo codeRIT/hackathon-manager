@@ -18,6 +18,7 @@ FactoryGirl.define do
     gender                "Male"
     major                 "Computer Science"
     level_of_study        "University (Undergraduate)"
+    why_attend            "This sounds cool"
 
     association :user
   end
