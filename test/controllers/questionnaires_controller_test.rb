@@ -99,6 +99,22 @@ class QuestionnairesControllerTest < ActionController::TestCase
         end
       end
     end
+
+    context "disabled fields are enabled" do
+      should "display why_attend field" do
+        get :new
+        assert_select '#questionnaire_why_attend', 1
+      end
+    end
+
+    context "disabled fields are disabled" do
+      should "not display why_attend field when disabled" do
+        HackathonManager.stub :field_enabled?, false do
+          get :new
+        end
+        assert_select '#questionnaire_why_attend', 0
+      end
+    end
   end
 
   context "while authenticated with a completed questionnaire" do
