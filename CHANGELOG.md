@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+## 0.5.4 - 2017-12-22
+
+* Include test factories with gem
+
+To use, `require "hackathon_manager/factories"` in your `test_helper.rb` or `spec_helper.rb`
+
 ## 0.5.3 - 2017-12-22
 
 **Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
