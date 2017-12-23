@@ -1,3 +1,7 @@
+- if HackathonManager.field_enabled?(:why_attend)
+  %p
+    %b Why #{Rails.configuration.hackathon['name']}?
+  %p= @questionnaire.why_attend
 %p
   %b Experience:
   = Questionnaire::POSSIBLE_EXPERIENCES[@questionnaire.experience]

@@ -12,6 +12,8 @@ defaults: &defaults
   email_from: '"HackFoo" <noreply@example.com>'
   default_page_title: HackFoo - Jan 1-2, 2017
 
+  # disabled_fields:
+  #   - why_attend
   # disclaimer: |
   #   Message that appears before signing up & applying. Supports markdown.
   # thanks_for_applying: |

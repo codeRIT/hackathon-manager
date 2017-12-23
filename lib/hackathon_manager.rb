@@ -12,4 +12,9 @@ module HackathonManager
 
     app.config.hackathon = hackathon
   end
+
+  def self.field_enabled?(field)
+    disabled_fields = Rails.configuration.hackathon['disabled_fields'] || []
+    !disabled_fields.include?(field.to_s)
+  end
 end
