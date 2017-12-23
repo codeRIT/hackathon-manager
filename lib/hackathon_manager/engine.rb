@@ -32,6 +32,10 @@ module HackathonManager
       app.middleware.insert_before(::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public")
     end
 
+    initializer 'hackathon_manager.factories', after: 'factory_bot.set_factory_paths' do
+      FactoryBot.definition_file_paths << File.expand_path('../../../test/factories', __FILE__) if defined?(FactoryBot)
+    end
+
     ActionController::Base.class_eval do
       # Tell Devise where to redirect the user once they sign in
       def after_sign_in_path_for(resource)
