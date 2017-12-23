@@ -96,14 +96,16 @@ h1.center,h2.center,h3.center,h4.center,h5.center,h6.center,p.center
   text-align: center
 
 .button
-  background: $secondary
+  background: $button--background
+  border: 1px solid $button--border
   display: inline-block
-  padding: 0.8em 1.5em
+  padding: 0.6em 1.3em
   font-size: 15px
-  border-radius: 30px
   text-transform: uppercase
   letter-spacing: 0.07em
-  color: white
+  color: $button--text
   font-weight: 600
   margin: 12px 5px
   text-decoration: none
+  box-shadow: 0 2px 15px rgba($button--background, 0.3)
+  border-radius: 3px
