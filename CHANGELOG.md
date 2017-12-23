@@ -8,8 +8,6 @@
 
 * Include test factories with gem
 
-To use, `require "hackathon_manager/factories"` in your `test_helper.rb` or `spec_helper.rb`
-
 ## 0.5.3 - 2017-12-22
 
 **Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
