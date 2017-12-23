@@ -1,5 +1,12 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+## 0.5.3 - 2017-12-22
+
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
+* Add "Why attend?" question to questionnaire ([#56](https://github.com/codeRIT/hackathon_manager/pull/56))
+* Style improvement to checkbox inputs
+
 ## 0.5.2 - 2017-12-18
 
 * Minor style and layout improvements
