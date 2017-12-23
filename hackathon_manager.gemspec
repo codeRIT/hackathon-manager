@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = 'Full-featured application for managing hackathon logistics'
   s.license     = 'MIT'
 
-  s.files = Dir['{app,config,db,lib,public}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
+  s.files = Dir['{app,config,db,lib,public,test/factories}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   s.add_dependency 'rails', '~> 5.1'
 
