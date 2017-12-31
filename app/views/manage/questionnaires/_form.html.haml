@@ -4,10 +4,6 @@
     - if f.error_notification.present?
       = f.error_notification
 
-    - if flash[:notice]
-      #disclaimer
-        %p= flash[:notice]
-
     .form-inputs
       %fieldset
         - if @questionnaire&.user&.provider == 'mlh'

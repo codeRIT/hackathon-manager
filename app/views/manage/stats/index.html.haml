@@ -1,9 +1,6 @@
 %section.section.manage
   %h1.section-title= title "Statistics & Info"
 
-  - if flash[:notice]
-    #disclaimer= flash[:notice]
-
   .container.container-full
     %h4.dashboard-container-title Dietary Restrictions & Special Needs
     %table.stats.datatable.row-border.stripe.hover.order-column{ "data-source" => dietary_special_needs_manage_stats_path(format: :json) }
