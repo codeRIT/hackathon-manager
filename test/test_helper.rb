@@ -49,9 +49,9 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.fixtures :all
 end
 
-# Load factories from the engine
-FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
-FactoryBot.find_definitions
+# Factories are already imported through a Rails Engine initializer - don't re-import them here
+# FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
+# FactoryBot.find_definitions
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
