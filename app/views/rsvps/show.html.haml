@@ -23,10 +23,6 @@
 
     %hr
 
-    - if flash[:notice]
-      .alert
-        = flash[:notice]
-
     = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
       .form-inputs
         = f.input :acc_status, as: :radio_buttons, collection: { " Attending!" => "rsvp_confirmed", " Not Attending." => "rsvp_denied" }, label: "Attendance:", required: true
