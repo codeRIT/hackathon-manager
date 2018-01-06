@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.5.7 - 2018-01-06
+
+* Use consistent flash support on all pages ([#59](https://github.com/codeRIT/hackathon_manager/pull/59))
+* Improve email layout with respect to mobile clients ([#60](https://github.com/codeRIT/hackathon_manager/pull/60))
+* Add configuration overview to manage backend ([#61](https://github.com/codeRIT/hackathon_manager/pull/61))
+
 # 0.5.6 - 2017-12-23
 
 * Update button style in emails
