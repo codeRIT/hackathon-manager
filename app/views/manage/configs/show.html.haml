@@ -12,6 +12,9 @@
     %p
       %b Slack Sign Up URL:
       %pre= ENV['SLACK_SIGNUP_URL'] || '[No value]'
+    %p
+      %b AWS S3 Bucket for Resumes:
+      %pre= ENV['AWS_BUCKET'] || '[No value]'
 
   %fieldset
     %legend Hackathon Manager Config
