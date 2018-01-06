@@ -9,11 +9,13 @@ body
   font-weight: $font-light
   text-align: center
   margin: 0
+  padding: 0
 body *
   font-family: 'Open Sans', sans-serif
 
 html
   margin: 0
+  padding: 0
 
 ul
   list-style: none
@@ -35,12 +37,20 @@ table
 #content
   max-width: 800px
   width: 100%
-  margin: 56px auto
+  margin: 30px auto
   background: white
+  @media (max-width: 800px)
+    margin: 0 auto
 
 #main-content
   background: white
-  padding: 20px 48px 64px
+  padding: 20px 40px 64px
+  @media (max-width: 800px)
+    padding-left: 35px
+    padding-right: 35px
+  @media (max-width: 500px)
+    padding-left: 20px
+    padding-right: 20px
 
 
 .banner
@@ -57,18 +67,17 @@ table
 .email-footer td span a
   color: white
 
-h1
-  line-height: 1.27
-
 h1, h2
+  line-height: 1.27
   font-weight: $font-light
   text-transform: uppercase
-  font-size: 36px
+  font-size: 30px
   color: $primary
+  margin: 30px 0 30px
 
 h3
   font-weight: 600
-  font-size: 24px
+  font-size: 20px
   text-transform: uppercase
   color: #fc401c
 
@@ -88,6 +97,9 @@ p
 
 strong
   font-weight: 600
+
+img
+  max-width: 100%
 
 div.center
   margin: 0 auto
