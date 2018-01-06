@@ -68,6 +68,8 @@ Rails.application.routes.draw do
       post :alt_travel, on: :collection
       post :mlh_info, on: :collection
     end
+    resource :config do
+    end
   end
 
   resource :bus_list
