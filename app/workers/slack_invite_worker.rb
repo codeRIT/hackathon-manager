@@ -24,7 +24,7 @@ class SlackInviteWorker
   private
 
   def query_api(method, params = '')
-    response = HTTParty.post("https://brickhack3.slack.com/api/#{method}?token=#{ENV['SLACK_API_TOKEN']}#{params}")
+    response = HTTParty.post("https://#{ENV['SLACK_SUBDOMAIN']}.slack.com/api/#{method}?token=#{ENV['SLACK_API_TOKEN']}#{params}")
     json = JSON.parse(response.body, symbolize_names: true)
     raise "Could not read Slack response" unless json
     json
