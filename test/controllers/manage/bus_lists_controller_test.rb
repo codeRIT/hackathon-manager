@@ -51,16 +51,18 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_bus_lists#toggle_bus_captain" do
       questionnaire = create(:questionnaire)
-      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      end
       assert_equal false, questionnaire.reload.is_bus_captain
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
     should "not allow access to manage_bus_lists#send_update_email" do
-      patch :send_update_email, params: { id: @bus_list }
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :send_update_email, params: { id: @bus_list }
+      end
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
@@ -117,16 +119,18 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_bus_lists#toggle_bus_captain" do
       questionnaire = create(:questionnaire)
-      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      end
       assert_equal false, questionnaire.reload.is_bus_captain
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
       assert_response :redirect
       assert_redirected_to root_path
     end
 
     should "not allow access to manage_bus_lists#send_update_email" do
-      patch :send_update_email, params: { id: @bus_list }
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :send_update_email, params: { id: @bus_list }
+      end
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -181,16 +185,18 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_bus_lists#toggle_bus_captain" do
       questionnaire = create(:questionnaire)
-      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      end
       assert_equal false, questionnaire.reload.is_bus_captain
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
       assert_response :redirect
       assert_redirected_to manage_bus_lists_path
     end
 
     should "not allow access to manage_bus_lists#send_update_email" do
-      patch :send_update_email, params: { id: @bus_list }
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :send_update_email, params: { id: @bus_list }
+      end
       assert_response :redirect
       assert_redirected_to manage_bus_lists_path
     end
@@ -256,25 +262,28 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "make questionnaire a bus captain" do
       questionnaire = create(:questionnaire)
-      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      end
       assert_equal true, questionnaire.reload.is_bus_captain
-      assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size
       assert_response :redirect
       assert_redirected_to manage_bus_list_path(@bus_list)
     end
 
     should "remove questionnaire from being a bus captain" do
       questionnaire = create(:questionnaire)
-      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '0' }
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '0' }
+      end
       assert_equal false, questionnaire.reload.is_bus_captain
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
       assert_response :redirect
       assert_redirected_to manage_bus_list_path(@bus_list)
     end
 
     should "send email upon manage_bus_lists#send_update_email" do
-      patch :send_update_email, params: { id: @bus_list }
-      assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        patch :send_update_email, params: { id: @bus_list }
+      end
       assert_response :redirect
       assert_redirected_to manage_bus_list_path(@bus_list)
     end

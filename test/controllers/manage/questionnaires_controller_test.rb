@@ -447,22 +447,24 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "fail manage_questionnaires#bulk_apply when missing action" do
-      patch :bulk_apply, params: { bulk_ids: [@questionnaire.id] }
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :bulk_apply, params: { bulk_ids: [@questionnaire.id] }
+      end
       assert_response 400
     end
 
     should "fail manage_questionnaires#bulk_apply when missing ids" do
-      patch :bulk_apply, params: { id: @questionnaire }
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :bulk_apply, params: { id: @questionnaire }
+      end
       assert_response 400
     end
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
       should "send notification emails appropriately for #{status} bulk_apply" do
-        assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size, "no emails should be sent prior"
-        patch :bulk_apply, params: { bulk_action: status, bulk_ids: [@questionnaire.id] }
-        assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size, "questionnaire should be notified"
+        assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+          patch :bulk_apply, params: { bulk_action: status, bulk_ids: [@questionnaire.id] }
+        end
       end
     end
 
@@ -495,16 +497,17 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "fail manage_questionnaires#update_acc_status when missing status" do
-      patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "" } }
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "" } }
+      end
       assert_response :redirect
     end
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
       should "send notification emails appropriately for #{status} update_acc_status" do
-        assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size, "no emails should be sent prior"
-        patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: status } }
-        assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size, "questionnaire should be notified"
+        assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+          patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: status } }
+        end
       end
     end
 

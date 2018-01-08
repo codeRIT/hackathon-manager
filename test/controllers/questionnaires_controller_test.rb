@@ -93,9 +93,9 @@ class QuestionnairesControllerTest < ActionController::TestCase
         end
 
         should "send confirmation email to questionnaire" do
-          assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size, "no emails should be queued prior to questionnaire creation"
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend } }
-          assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size, "should email confirmation to questionnaire"
+          assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+            post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend } }
+          end
         end
       end
     end
