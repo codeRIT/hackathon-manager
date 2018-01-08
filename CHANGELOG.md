@@ -1,5 +1,14 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.5.8 - 2018-01-08
+
+* Support html in `flash[:notice]`
+* Don't send application reminder email to admins
+* Queue incomplete reminder email more reliably
+* Add support for variable slack subdomain
+* Enable Devise :timeoutable for user
+* Fix unexpected mail job errors
+
 # 0.5.7 - 2018-01-06
 
 * Use consistent flash support on all pages ([#59](https://github.com/codeRIT/hackathon_manager/pull/59))
