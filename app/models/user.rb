@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_one :questionnaire
 
+  after_create :queue_reminder_email
+
   def active_for_authentication?
     true
   end

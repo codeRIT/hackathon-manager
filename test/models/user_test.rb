@@ -86,4 +86,10 @@ class UserTest < ActiveSupport::TestCase
       assert_equal 2, User.without_questionnaire.count
     end
   end
+
+  should "queue reminder email" do
+    assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+      create(:user)
+    end
+  end
 end
