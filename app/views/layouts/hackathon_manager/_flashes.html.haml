@@ -3,4 +3,4 @@
     .container
       .form-container
         %span.fa.fa-info-circle.flashes__icon
-        = flash[:notice]
+        = flash[:notice].html_safe
