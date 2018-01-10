@@ -6,7 +6,11 @@
       = f.input :name
       = f.input :subject, hint: "All emails are from <pre>#{html_escape(Rails.configuration.hackathon['email_from'])}</pre>".html_safe
       = f.input :template, as: :select, collection: Message::POSSIBLE_TEMPLATES.map { |x| [x.titleize, x] }, include_blank: false
-      = f.input :recipients, as: :select, collection: Message::POSSIBLE_RECIPIENTS.invert, input_html: { class: "selectize", multiple: true }
+      - if @message.status == "drafted"
+        = f.input :recipients, as: :select, collection: Message::POSSIBLE_RECIPIENTS.invert, input_html: { class: "selectize", multiple: true }, hint: "Sent manually, in bulk"
+      - else
+        = f.input :recipients, as: :select, collection: Message::POSSIBLE_RECIPIENTS.invert, input_html: { class: "selectize", multiple: true }, hint: "Cannot be edited once a message has been delivered", disabled: true
+      = f.input :trigger, as: :select, collection: Message::POSSIBLE_TRIGGERS.invert, include_blank: "(no automatic trigger)", hint: "Sent automatically, to an individual applicant"
       = f.input :body, input_html: { rows: 10 }, hint: "Supports markdown and HTML"
 
     .form-actions

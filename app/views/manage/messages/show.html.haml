@@ -14,34 +14,47 @@
     = @message.template.titleize
   %p
     %b Recipients:
-    = @message.recipients_list
+    = @message.recipients_list.presence || "(none)"
     %br
     %small
-      %em #{recipient_count} currently match this query.
+      %em Sent manually, in bulk
+    - if @message.recipients.present?
+      %br
+      %small
+        %em #{recipient_count} currently match this query
+  %p
+    %b Trigger:
+    = Message::POSSIBLE_TRIGGERS[@message.trigger] || "(no automatic trigger)"
+    %br
+    %small
+      %em Sent automatically, to an individual applicant
   %p
     %b Preview:
     = link_to "Open full preview &raquo;".html_safe, preview_manage_message_path
 
   %iframe.email-preview{src: preview_manage_message_path(@message)}
 
-  %p
-    %b
-      Status:
-      = @message.status.titleize
-  %p
-    %b Queued At:
-    = @message.queued_at || "(n/a)"
-  %p
-    %b Started At:
-    = @message.started_at || "(n/a)"
-  %p
-    %b Delivered At:
-    = @message.delivered_at || "(n/a)"
+  - if @message.recipients_list.present?
+    %fieldset
+      %legend Bulk delivery details
+      %p
+        %b
+          Status:
+          = @message.status.titleize
+      %p
+        %b Queued At:
+        = @message.queued_at || "(n/a)"
+      %p
+        %b Started At:
+        = @message.started_at || "(n/a)"
+      %p
+        %b Delivered At:
+        = @message.delivered_at || "(n/a)"
 
   %hr
 
   - unless current_user.admin_limited_access
-    - if @message.status == "drafted"
+    - if @message.status == "drafted" && @message.recipients_list.present?
       = btn_link_to 'Deliver', deliver_manage_message_path(@message), method: :patch, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be sent to #{recipient_count}." }
       \|
     - if @message.can_edit?

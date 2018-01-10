@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  validates_presence_of :name, :subject, :recipients, :template
+  validates_presence_of :name, :subject, :template
   validates_presence_of :body, if: :using_default_template?
 
   strip_attributes
@@ -36,6 +36,17 @@ class Message < ApplicationRecord
     "school-toronto"                   => "Confirmed or accepted: Toronto",
     "school-umd-collegepark"           => "Confirmed or accepted: UMD College Park"
   }.freeze
+
+  POSSIBLE_TRIGGERS = {
+    "questionnaire.pending"        => "Questionnaire Status: Pending Review",
+    "questionnaire.accepted"       => "Questionnaire Status: Accepted",
+    "questionnaire.waitlist"       => "Questionnaire Status: Waitlisted",
+    "questionnaire.denied"         => "Questionnaire Status: Denied",
+    "questionnaire.late_waitlist"  => "Questionnaire Status: Waitlisted, Late",
+    "questionnaire.rsvp_confirmed" => "Questionnaire Status: RSVP Confirmed",
+    "questionnaire.rsvp_denied"    => "Questionnaire Status: RSVP Denied"
+  }.freeze
+
   serialize :recipients, Array
 
   validates_inclusion_of :template, in: POSSIBLE_TEMPLATES
@@ -68,10 +79,15 @@ class Message < ApplicationRecord
   end
 
   def can_edit?
-    status == "drafted"
+    status == "drafted" || trigger.present?
   end
 
   def using_default_template?
     template == "default"
+  end
+
+  def self.queue_for_trigger(trigger, user_id)
+    messages_to_queue = Message.where(trigger: trigger)
+    messages_to_queue.map { |message| Mailer.delay.bulk_message_email(message.id, user_id) }
   end
 end

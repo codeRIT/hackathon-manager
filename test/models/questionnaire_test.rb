@@ -283,4 +283,37 @@ class QuestionnaireTest < ActiveSupport::TestCase
       assert_equal 0, bad_school.reload.questionnaire_count
     end
   end
+
+  context "#queue_triggered_email" do
+    should "send triggered email for accepted status" do
+      questionnaire = create(:questionnaire, acc_status: 'pending')
+      create(:message, trigger: "questionnaire.accepted")
+      # Two messages that shouldn't be triggered
+      create(:message, trigger: "questionnaire.pending")
+      create(:message, trigger: "questionnaire.waitlist")
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        questionnaire.update_attribute(:acc_status, 'accepted')
+      end
+    end
+
+    should "not send triggered email for same acceptance status" do
+      questionnaire = create(:questionnaire, acc_status: 'accepted')
+      create(:message, trigger: "questionnaire.accepted")
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        questionnaire.update_attribute(:acc_status, 'accepted')
+      end
+    end
+
+    should "send triggered email for other statuses" do
+      questionnaire = create(:questionnaire, acc_status: 'rsvp_denied')
+      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status|
+        create(:message, trigger: "questionnaire.#{acc_status}")
+      end
+      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status|
+        assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+          questionnaire.update_attribute(:acc_status, acc_status)
+        end
+      end
+    end
+  end
 end

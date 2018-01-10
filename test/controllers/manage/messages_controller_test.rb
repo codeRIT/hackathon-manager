@@ -249,7 +249,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "create a new message" do
-      post :create, params: { message: { name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example" } }
+      post :create, params: { message: { name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "foo" } }
       assert_response :redirect
       assert_redirected_to manage_message_path(assigns(:message))
     end
@@ -265,7 +265,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "update message" do
-      patch :update, params: { id: @message, message: { name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example" } }
+      patch :update, params: { id: @message, message: { name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "bar" } }
       assert_redirected_to manage_message_path(assigns(:message))
     end
 
