@@ -105,7 +105,7 @@ label
   text-align: left
 
 // all form input types
-input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], textarea, select
+input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], input[type=radio], textarea, select
   background: $input--background
   color: $input--text
   font-family: $font-body-family
@@ -179,6 +179,28 @@ input[type=checkbox]
 // radio
 .radio
   min-width: 170px
+
+// checkbox
+input[type=radio]
+  @include appearance(none)
+  width: 22px
+  height: 22px
+  padding: 1px
+  margin: 0 10px 0 0
+  @include border-radius(50%)
+  &:hover
+    background: #eee
+  &:checked
+    &::after
+      content: ""
+      background: $primary
+      display: block
+      width: 100%
+      height: 100%
+      transform: scale(0.8)
+      @include border-radius(50%)
+  &:focus
+    padding: 0
 
 input[type=radio]
   margin-right: 10px
