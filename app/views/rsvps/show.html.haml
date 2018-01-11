@@ -10,9 +10,9 @@
           ALL SET TO ATTEND & RIDE THE BUS!
         - else
           ALL SET TO ATTEND!
-      %br
-      %br
-      Expect an email closer to February 11th with additional logistics & travel info.
+      - if Rails.configuration.hackathon['thanks_for_rsvp']
+        %br
+        = markdown(Rails.configuration.hackathon['thanks_for_rsvp'])
     - else
       %strong= current_user.questionnaire.verbal_status.upcase
       - if @questionnaire.acc_status == "rsvp_denied"

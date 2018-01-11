@@ -18,6 +18,8 @@ defaults: &defaults
   #   Message that appears before signing up & applying. Supports markdown.
   # thanks_for_applying: |
   #   Message that appears after completing an application. Supports markdown.
+  # thanks_for_rsvp: |
+  #   Message that appears after RSVP'ing as attending. Supports markdown.
   # bus_captain_notes: |
   #   Message that appers on the bus captain's bus list page. Supports markdown.
 

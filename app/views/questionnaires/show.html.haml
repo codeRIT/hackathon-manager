@@ -13,10 +13,8 @@
           - if @questionnaire.acc_status == "rsvp_confirmed"
             %p
               Congratulations! You're all set to attend #{Rails.configuration.hackathon['name']}!
-            %p
-              Expect an email closer to February 11th with additional logistics & travel info.
-              %br
-              %br
+          - if Rails.configuration.hackathon['thanks_for_rsvp']
+            = markdown(Rails.configuration.hackathon['thanks_for_rsvp'])
           %p.center
             = btn_link_to "Change RSVP", rsvp_path
         - else
