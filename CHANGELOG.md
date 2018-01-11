@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.5.9 - 2018-01-10
+
+* Provide config for post-RSVP confirmation message
+* Make why_attend question optional
+* Match radio inputs to form styles
+
 # 0.5.8 - 2018-01-08
 
 * Support html in `flash[:notice]`
