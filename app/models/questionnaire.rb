@@ -11,9 +11,9 @@ class Questionnaire < ApplicationRecord
   validates_presence_of :code_of_conduct_accepted, message: "Must accept"
   validates_presence_of :data_sharing_accepted, message: "Must accept"
 
-  if HackathonManager.field_enabled?(:why_attend)
-    validates_presence_of :why_attend
-  end
+  # if HackathonManager.field_enabled?(:why_attend)
+  #   validates_presence_of :why_attend
+  # end
 
   has_attached_file :resume
   validates_attachment_content_type :resume, content_type: %w[application/pdf], message: "Invalid file type"
