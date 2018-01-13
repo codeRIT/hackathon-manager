@@ -1,5 +1,16 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.5.10 - 2018-01-13
+
+**Note:** Be sure to migrate environment variable `INVITE_TO_SLACK_WHEN_ACCEPTED` to `INVITE_TO_SLACK_UPON_RSVP` if in use.
+
+* Give visual feedback to RSVP updates
+* Display recipient count on message overview page
+* Don't send Slack invite until user has RSVP'd
+* Fix query for non-checked-in, accepted or RSVP’d recipients
+* Fix display of denied status
+* Fix duplicate display of notice banners
+
 # 0.5.9 - 2018-01-10
 
 * Provide config for post-RSVP confirmation message
