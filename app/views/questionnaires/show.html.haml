@@ -24,6 +24,8 @@
             %br
           %p.center
             = btn_link_to "RSVP NOW &raquo;".html_safe, rsvp_path
+      - elsif @questionnaire.acc_status == "denied"
+        %p
       - else
         - if Rails.configuration.hackathon['registration_is_open']
           - if Rails.configuration.hackathon['thanks_for_applying']
