@@ -18,6 +18,7 @@ class Message < ApplicationRecord
     "rsvp-denied"                      => "RSVP Denied Attendees",
     "checked-in"                       => "Checked-In Attendees",
     "non-checked-in"                   => "Non-Checked-In, Accepted & RSVP'd Applications",
+    "non-checked-in-excluding"         => "Non-Checked-In Applications, Excluding Accepted & RSVP'd",
     "bus-list-cornell-bing"            => "Bus List: Cornell + Binghamton (Confirmed)",
     "bus-list-buffalo"                 => "Bus List: Buffalo (Confirmed)",
     "bus-list-albany"                  => "Bus List: Albany (Confirmed)",

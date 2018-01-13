@@ -50,6 +50,8 @@ class BulkMessageWorker
       Questionnaire.where("checked_in_at IS NOT NULL").pluck(:user_id)
     when "non-checked-in"
       Questionnaire.where("(acc_status = 'accepted' OR acc_status = 'accepted' OR acc_status = 'rsvp_denied') AND checked_in_at IS NULL").pluck(:user_id)
+    when "non-checked-in-excluding"
+      Questionnaire.where("acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied' AND checked_in_at IS NULL").pluck(:user_id)
     when "bus-list-cornell-bing"
       BusList.find(1).passengers.pluck(:user_id)
     when "bus-list-buffalo"
