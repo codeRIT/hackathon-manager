@@ -20,6 +20,8 @@ class RsvpsController < ApplicationController
     @questionnaire.acc_status_author_id = current_user.id
     @questionnaire.acc_status_date = Time.now
     if @questionnaire.save
+      flash[:notice] = "Thank you for confirming your attendance! "
+      flash[:notice] += @questionnaire.eligible_for_a_bus? ? "See below for additional bus information." : "You're all set to attend."
       Mailer.delay.rsvp_confirmation_email(@questionnaire.id)
     else
       flash[:notice] = rsvp_error_notice
@@ -35,6 +37,7 @@ class RsvpsController < ApplicationController
     unless @questionnaire.save
       flash[:notice] = rsvp_error_notice
     end
+    flash[:notice] = "Your RSVP has been updated." if flash[:notice].blank?
     redirect_to rsvp_path
   end
 
@@ -78,6 +81,8 @@ class RsvpsController < ApplicationController
     end
 
     Mailer.delay.rsvp_confirmation_email(@questionnaire.id) if acc_status_changed && @questionnaire.acc_status == "rsvp_confirmed"
+
+    flash[:notice] = "Your RSVP has been updated." if flash[:notice].blank?
 
     redirect_to rsvp_path
   end
