@@ -6,7 +6,7 @@ class BulkMessageWorker
     return unless message.present? && message.status == "queued"
     message.update_attribute(:started_at, Time.now)
 
-    recipients = build_recipients(message.recipients)
+    recipients = self.class.build_recipients(message.recipients)
 
     recipients.each do |recipient|
       Mailer.delay.bulk_message_email(message.id, recipient)
@@ -15,9 +15,7 @@ class BulkMessageWorker
     message.update_attribute(:delivered_at, Time.now)
   end
 
-  private
-
-  def build_recipients(recipient_types)
+  def self.build_recipients(recipient_types)
     recipients = Set.new
     recipient_types.each do |type|
       recipients += recipients_query(type)
@@ -26,7 +24,7 @@ class BulkMessageWorker
   end
 
   # rubocop:disable CyclomaticComplexity
-  def recipients_query(type)
+  def self.recipients_query(type)
     case type
     when "all"
       User.where(admin: false).pluck(:id)
