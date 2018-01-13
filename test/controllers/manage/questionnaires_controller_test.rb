@@ -468,28 +468,24 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
-    ["accepted", "rsvp_confirmed"].each do |status|
-      should "not send slack invite emails for #{status} bulk_apply if not enabled" do
-        ENV['INVITE_TO_SLACK_WHEN_ACCEPTED'] = 'false'
-        assert_difference('SlackInviteWorker.jobs.size', 0) do
-          patch :bulk_apply, params: { bulk_action: status, bulk_ids: [@questionnaire.id] }
-        end
+    should "not send slack invite emails for rsvp_confirmed bulk_apply if not enabled" do
+      ENV['INVITE_TO_SLACK_UPON_RSVP'] = 'false'
+      assert_difference('SlackInviteWorker.jobs.size', 0) do
+        patch :bulk_apply, params: { bulk_action: "rsvp_confirmed", bulk_ids: [@questionnaire.id] }
       end
     end
 
-    ["accepted", "rsvp_confirmed"].each do |status|
-      should "send slack invite emails for #{status} bulk_apply" do
-        ENV['INVITE_TO_SLACK_WHEN_ACCEPTED'] = 'true'
-        assert_difference('SlackInviteWorker.jobs.size', 1) do
-          patch :bulk_apply, params: { bulk_action: status, bulk_ids: [@questionnaire.id] }
-        end
+    should "send slack invite emails for rsvp_confirmed bulk_apply" do
+      ENV['INVITE_TO_SLACK_UPON_RSVP'] = 'true'
+      assert_difference('SlackInviteWorker.jobs.size', 1) do
+        patch :bulk_apply, params: { bulk_action: "rsvp_confirmed", bulk_ids: [@questionnaire.id] }
       end
     end
 
-    non_accepted_statuses = Questionnaire::POSSIBLE_ACC_STATUS.keys - ["accepted", "rsvp_confirmed"]
+    non_accepted_statuses = Questionnaire::POSSIBLE_ACC_STATUS.keys - ["rsvp_confirmed"]
     non_accepted_statuses.each do |status|
       should "not send slack invite emails for #{status} bulk_apply" do
-        ENV['INVITE_TO_SLACK_WHEN_ACCEPTED'] = 'true'
+        ENV['INVITE_TO_SLACK_UPON_RSVP'] = 'true'
         assert_difference('SlackInviteWorker.jobs.size', 0) do
           patch :bulk_apply, params: { bulk_action: status, bulk_ids: [@questionnaire.id] }
         end
@@ -511,28 +507,24 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
-    ["accepted", "rsvp_confirmed"].each do |status|
-      should "not send slack invite emails for #{status} update_acc_status if not enabled" do
-        ENV['INVITE_TO_SLACK_WHEN_ACCEPTED'] = 'false'
-        assert_difference('SlackInviteWorker.jobs.size', 0) do
-          patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: status } }
-        end
+    should "not send slack invite emails for rsvp_confirmed update_acc_status if not enabled" do
+      ENV['INVITE_TO_SLACK_UPON_RSVP'] = 'false'
+      assert_difference('SlackInviteWorker.jobs.size', 0) do
+        patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "rsvp_confirmed" } }
       end
     end
 
-    ["accepted", "rsvp_confirmed"].each do |status|
-      should "send slack invite emails for #{status} update_acc_status" do
-        ENV['INVITE_TO_SLACK_WHEN_ACCEPTED'] = 'true'
-        assert_difference('SlackInviteWorker.jobs.size', 1) do
-          patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: status } }
-        end
+    should "send slack invite emails for rsvp_confirmed update_acc_status" do
+      ENV['INVITE_TO_SLACK_UPON_RSVP'] = 'true'
+      assert_difference('SlackInviteWorker.jobs.size', 1) do
+        patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "rsvp_confirmed" } }
       end
     end
 
-    non_accepted_statuses = Questionnaire::POSSIBLE_ACC_STATUS.keys - ["accepted", "rsvp_confirmed"]
+    non_accepted_statuses = Questionnaire::POSSIBLE_ACC_STATUS.keys - ["rsvp_confirmed"]
     non_accepted_statuses.each do |status|
       should "not send slack invite emails for #{status} update_acc_status" do
-        ENV['INVITE_TO_SLACK_WHEN_ACCEPTED'] = 'true'
+        ENV['INVITE_TO_SLACK_UPON_RSVP'] = 'true'
         assert_difference('SlackInviteWorker.jobs.size', 0) do
           patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: status } }
         end

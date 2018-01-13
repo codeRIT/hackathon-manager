@@ -167,6 +167,6 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     Mailer.delay.rsvp_confirmation_email(questionnaire.id) if new_status == "rsvp_confirmed"
     Mailer.delay.denied_email(questionnaire.id) if new_status == "denied"
 
-    questionnaire.invite_to_slack if ENV['INVITE_TO_SLACK_WHEN_ACCEPTED'] == 'true' && ['accepted', 'rsvp_confirmed'].include?(new_status)
+    questionnaire.invite_to_slack if ENV['INVITE_TO_SLACK_UPON_RSVP'] == 'true' && new_status == 'rsvp_confirmed'
   end
 end
