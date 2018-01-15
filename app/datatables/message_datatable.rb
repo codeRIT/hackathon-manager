@@ -20,7 +20,7 @@ class MessageDatatable < AjaxDatatablesRails::Base
         id: record.id,
         name: record.name,
         subject: record.subject,
-        trigger: record.trigger,
+        trigger: Message::POSSIBLE_TRIGGERS[record.trigger],
         status: record.status.titleize,
         delivered_at: record.delivered_at.present? ? record.delivered_at.strftime("%B %d, %Y at %I:%M %p") : ''
       }

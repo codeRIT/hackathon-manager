@@ -1,0 +1,27 @@
+%h3.no-margin Triggered Email Overview
+%p
+  Recipient updates that match a given event will be sent the corresponding email(s) automatically.
+  %br
+  For example, when a user moves from the "Accepted" to "RSVP Confirmed" state, the user will be sent an email for the "RSVP Confirmed" event.
+%p Hard-coded emails are those managed in the source code repository, and cannot be disabled.
+
+%table.table
+  %thead
+    %tr
+      %th Trigger Event
+      %th Hard-coded Email
+      %th Triggered Emails
+  %tbody
+    - Message::POSSIBLE_TRIGGERS.keys.each do |trigger|
+      %tr
+        %td= Message::POSSIBLE_TRIGGERS[trigger]
+        - messages = Message.where(trigger: trigger).all
+        %td
+          = ['questionnaire.pending', 'questionnaire.accepted', 'questionnaire.denied', 'questionnaire.rsvp_confirmed'].include?(trigger) ? '<strong>Yes</strong>'.html_safe : 'No'
+        %td
+          - if messages.present?
+            %ul.no-margin
+              - messages.each do |message|
+                %li= link_to(message.name, manage_message_path(message))
+          - else
+            None
