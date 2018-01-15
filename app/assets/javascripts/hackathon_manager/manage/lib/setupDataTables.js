@@ -72,7 +72,8 @@ var setupDataTables = function() {
       { orderable: true, data: 'id'},
       { orderable: true, data: 'name'},
       { orderable: true, data: 'subject'},
-      { orderable: false, data: 'status'}
+      { orderable: false, data: 'status'},
+      { orderable: true, data: 'delivered_at'}
     ]
   });
 

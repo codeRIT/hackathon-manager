@@ -5,7 +5,8 @@ class MessageDatatable < AjaxDatatablesRails::Base
     @view_columns ||= {
       id: { source: "Message.id" },
       name: { source: "Message.name" },
-      subject: { source: "Message.subject" }
+      subject: { source: "Message.subject" },
+      delivered_at: { source: "Message.delivered_at", searchable: false }
     }
   end
 
@@ -18,7 +19,8 @@ class MessageDatatable < AjaxDatatablesRails::Base
         id: record.id,
         name: record.name,
         subject: record.subject,
-        status: record.status.titleize
+        status: record.status.titleize,
+        delivered_at: record.delivered_at.present? ? record.delivered_at.strftime("%B %d, %Y at %I:%M %p") : ''
       }
     end
   end
