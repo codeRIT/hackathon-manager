@@ -14,7 +14,11 @@ $(document).ready(function() {
         switch (types[i]) {
           case 'presence':
             if (!value || $.trim(value).length < 1) {
-              notify(this, "Missing Information");
+              if ($(this).parent().text().includes("I accept")) {
+                notify(this, "Please read & accept");
+              } else {
+                notify(this, "Missing Information");
+              }
               success = false;
             }
           break;

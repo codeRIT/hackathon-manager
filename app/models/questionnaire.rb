@@ -7,9 +7,9 @@ class Questionnaire < ApplicationRecord
 
   validates_presence_of :first_name, :last_name, :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
   validates_presence_of :gender, :major, :level_of_study
-  validates_presence_of :agreement_accepted, message: "Must accept"
-  validates_presence_of :code_of_conduct_accepted, message: "Must accept"
-  validates_presence_of :data_sharing_accepted, message: "Must accept"
+  validates_presence_of :agreement_accepted, message: "Please read & accept"
+  validates_presence_of :code_of_conduct_accepted, message: "Please read & accept"
+  validates_presence_of :data_sharing_accepted, message: "Please read & accept"
 
   # if HackathonManager.field_enabled?(:why_attend)
   #   validates_presence_of :why_attend
