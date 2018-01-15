@@ -8,7 +8,7 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
       last_name: { source: 'Questionnaire.last_name' },
       email: { source: 'User.email' },
       admin: { source: 'User.admin', cond: :eq, searchable: false },
-      acc_status: { source: 'Questionnaire.acc_status', searchable: false },
+      acc_status: { source: 'Questionnaire.acc_status', searchable: true },
       checked_in: { source: 'Questionnaire.checked_in_at', searchable: false },
       school: { source: 'School.name' }
     }
