@@ -1,5 +1,14 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.5.11 - 2018-01-15
+
+* Consolidate display of email events
+* Make acceptance status searchable in questionnaire table
+* Improve error message for agreement checkboxes
+* Improve descriptin of how Slack invitations work
+* Add delivery date to message table
+* Set default questionnaire_count on schools
+
 # 0.5.10 - 2018-01-13
 
 **Note:** Be sure to migrate environment variable `INVITE_TO_SLACK_WHEN_ACCEPTED` to `INVITE_TO_SLACK_UPON_RSVP` if in use.
