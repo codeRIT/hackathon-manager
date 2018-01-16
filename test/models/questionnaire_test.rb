@@ -304,6 +304,14 @@ class QuestionnaireTest < ActiveSupport::TestCase
       end
     end
 
+    should "not send triggered email different changed value" do
+      questionnaire = create(:questionnaire, acc_status: 'accepted')
+      create(:message, trigger: "questionnaire.accepted")
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+        questionnaire.update_attribute(:first_name, 'foo bar baz')
+      end
+    end
+
     should "send triggered email for other statuses" do
       questionnaire = create(:questionnaire, acc_status: 'rsvp_denied')
       Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status|
@@ -313,6 +321,13 @@ class QuestionnaireTest < ActiveSupport::TestCase
         assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
           questionnaire.update_attribute(:acc_status, acc_status)
         end
+      end
+    end
+
+    should "send triggered email on creation" do
+      create(:message, trigger: "questionnaire.pending")
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 2 do
+        create(:questionnaire, acc_status: 'pending')
       end
     end
   end

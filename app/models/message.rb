@@ -38,7 +38,7 @@ class Message < ApplicationRecord
   }.freeze
 
   POSSIBLE_TRIGGERS = {
-    "questionnaire.pending"        => "Questionnaire Status: Pending Review",
+    "questionnaire.pending"        => "Questionnaire Status: Pending Review (new application)",
     "questionnaire.accepted"       => "Questionnaire Status: Accepted",
     "questionnaire.waitlist"       => "Questionnaire Status: Waitlisted",
     "questionnaire.denied"         => "Questionnaire Status: Denied",

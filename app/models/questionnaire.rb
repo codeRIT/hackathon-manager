@@ -2,7 +2,8 @@ class Questionnaire < ApplicationRecord
   include ActiveModel::Dirty
 
   before_validation :consolidate_school_names
-  after_save :queue_triggered_email
+  after_create :queue_triggered_email_create
+  after_update :queue_triggered_email_update
   after_save :update_school_questionnaire_count
   after_destroy :update_school_questionnaire_count
 
@@ -183,7 +184,11 @@ class Questionnaire < ApplicationRecord
     end
   end
 
-  def queue_triggered_email
+  def queue_triggered_email_update
     Message.queue_for_trigger("questionnaire.#{acc_status}", id) if saved_change_to_acc_status?
+  end
+
+  def queue_triggered_email_create
+    Message.queue_for_trigger("questionnaire.#{acc_status}", id)
   end
 end
