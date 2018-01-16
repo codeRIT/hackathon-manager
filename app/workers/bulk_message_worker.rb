@@ -18,13 +18,13 @@ class BulkMessageWorker
   def self.build_recipients(recipient_types)
     recipients = Set.new
     recipient_types.each do |type|
-      recipients += recipients_query(type)
+      recipients += user_ids(type)
     end
     recipients
   end
 
   # rubocop:disable CyclomaticComplexity
-  def self.recipients_query(type)
+  def self.user_ids(type)
     case type
     when "all"
       User.where(admin: false).pluck(:id)
@@ -50,41 +50,32 @@ class BulkMessageWorker
       Questionnaire.where("(acc_status = 'accepted' OR acc_status = 'rsvp_confirmed' OR acc_status = 'rsvp_denied') AND checked_in_at IS NULL").pluck(:user_id)
     when "non-checked-in-excluding"
       Questionnaire.where("acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied' AND checked_in_at IS NULL").pluck(:user_id)
-    when "bus-list-cornell-bing"
-      BusList.find(1).passengers.pluck(:user_id)
-    when "bus-list-buffalo"
-      BusList.find(2).passengers.pluck(:user_id)
-    when "bus-list-albany"
-      BusList.find(3).passengers.pluck(:user_id)
-    when "bus-list-cornell-bing-eligible"
-      Questionnaire.joins(:school).where("(schools.bus_list_id = 1 AND riding_bus != 1) AND (acc_status = 'accepted' OR acc_status = 'rsvp_confirmed')").pluck(:user_id)
-    when "bus-list-buffalo-eligible"
-      Questionnaire.joins(:school).where("(schools.bus_list_id = 2 AND riding_bus != 1) AND (acc_status = 'accepted' OR acc_status = 'rsvp_confirmed')").pluck(:user_id)
-    when "bus-list-albany-eligible"
-      Questionnaire.joins(:school).where("(schools.bus_list_id = 3 AND riding_bus != 1) AND (acc_status = 'accepted' OR acc_status = 'rsvp_confirmed')").pluck(:user_id)
-    when "bus-list-cornell-bing-applied"
-      Questionnaire.joins(:school).where("(schools.bus_list_id = 1) AND (acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied')").pluck(:user_id)
-    when "bus-list-buffalo-applied"
-      Questionnaire.joins(:school).where("(schools.bus_list_id = 2) AND (acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied')").pluck(:user_id)
-    when "bus-list-albany-applied"
-      Questionnaire.joins(:school).where("(schools.bus_list_id = 3) AND (acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied')").pluck(:user_id)
-    when "school-rit"
-      Questionnaire.where("school_id = 2304 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
-    when "school-cornell"
-      Questionnaire.where("school_id = 2164 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
-    when "school-binghamton"
-      Questionnaire.where("school_id = 5526 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
-    when "school-buffalo"
-      Questionnaire.where("school_id = 2345 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
-    when "school-waterloo"
-      Questionnaire.where("school_id = 5580 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
-    when "school-toronto"
-      Questionnaire.where("school_id = 5539 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
-    when "school-umd-collegepark"
-      Questionnaire.where("school_id = 5543 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
+    when /(.*)::(\d*)/
+      user_ids_from_query(type)
     else
-      raise "Unknown recipient type: \"#{type}\""
+      raise "Unknown recipient type: #{type.inspect}"
     end
   end
   # rubocop:enable CyclomaticComplexity
+
+  def self.user_ids_from_query(type)
+    # Parse the query
+    # See app/models/message_recipient_query.rb for how this works
+    recipient_query = MessageRecipientQuery.parse(type)
+    model = recipient_query.model
+
+    # Build the recipients query
+    case recipient_query.type
+    when "bus-list"
+      model.passengers.pluck(:user_id)
+    when "bus-list--eligible"
+      Questionnaire.joins(:school).where("schools.bus_list_id = ? AND riding_bus != 1 AND (acc_status = 'accepted' OR acc_status = 'rsvp_confirmed')", model.id).pluck(:user_id)
+    when "bus-list--applied"
+      Questionnaire.joins(:school).where("schools.bus_list_id = ? AND (acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied')", model.id).pluck(:user_id)
+    when "school"
+      Questionnaire.where("school_id = ? AND (acc_status = 'rsvp_confirmed' OR acc_status = 'accepted')", model.id).pluck(:user_id)
+    else
+      raise "Unknown recipient query type: #{recipient_query.type.inspect} (in message recipient query: #{type.inspect}"
+    end
+  end
 end

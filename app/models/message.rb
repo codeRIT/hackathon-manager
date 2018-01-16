@@ -6,7 +6,7 @@ class Message < ApplicationRecord
 
   POSSIBLE_TEMPLATES = ["default"].freeze
 
-  POSSIBLE_RECIPIENTS = {
+  POSSIBLE_SIMPLE_RECIPIENTS = {
     "all"                              => "Everyone",
     "incomplete"                       => "Incomplete Applications",
     "complete"                         => "Complete Applications",
@@ -19,22 +19,6 @@ class Message < ApplicationRecord
     "checked-in"                       => "Checked-In Attendees",
     "non-checked-in"                   => "Non-Checked-In, Accepted & RSVP'd Applications",
     "non-checked-in-excluding"         => "Non-Checked-In Applications, Excluding Accepted & RSVP'd",
-    "bus-list-cornell-bing"            => "Bus List: Cornell + Binghamton (Confirmed)",
-    "bus-list-buffalo"                 => "Bus List: Buffalo (Confirmed)",
-    "bus-list-albany"                  => "Bus List: Albany (Confirmed)",
-    "bus-list-cornell-bing-eligible"   => "Bus List: Cornell + Binghamton (eligible, not signed up)",
-    "bus-list-buffalo-eligible"        => "Bus List: Buffalo (eligible, not signed up)",
-    "bus-list-albany-eligible"         => "Bus List: Albany (eligible, not signed up)",
-    "bus-list-cornell-bing-applied"    => "Bus List: Cornell + Binghamton (applied/not accepted)",
-    "bus-list-buffalo-applied"         => "Bus List: Buffalo (applied/not accepted)",
-    "bus-list-albany-applied"          => "Bus List: Albany (applied/not accepted)",
-    "school-rit"                       => "Confirmed or accepted: RIT",
-    "school-cornell"                   => "Confirmed or accepted: Cornell",
-    "school-binghamton"                => "Confirmed or accepted: Binghamton",
-    "school-buffalo"                   => "Confirmed or accepted: Buffalo",
-    "school-waterloo"                  => "Confirmed or accepted: Waterloo",
-    "school-toronto"                   => "Confirmed or accepted: Toronto",
-    "school-umd-collegepark"           => "Confirmed or accepted: UMD College Park"
   }.freeze
 
   POSSIBLE_TRIGGERS = {
@@ -56,7 +40,16 @@ class Message < ApplicationRecord
   end
 
   def recipients_list
-    recipients.map { |r| POSSIBLE_RECIPIENTS[r] }.join(', ')
+    labels = recipients.map do |r|
+      if POSSIBLE_SIMPLE_RECIPIENTS.include?(r)
+        POSSIBLE_SIMPLE_RECIPIENTS[r]
+      elsif r =~ /(.*)::(\d*)/
+        MessageRecipientQuery.friendly_name(r)
+      else
+        "(unknown)"
+      end
+    end
+    labels.join(', ')
   end
 
   def delivered?
@@ -84,6 +77,32 @@ class Message < ApplicationRecord
 
   def using_default_template?
     template == "default"
+  end
+
+  def self.possible_recipients
+    # Produce an array like:
+    # ["School: My University", "school::123"]
+    option = ->(query, model) { [MessageRecipientQuery.friendly_name(query, model), query] }
+    bus_list_recipients = BusList.select(:id, :name).map do |bus_list|
+      [
+        option.call("bus-list::#{bus_list.id}", bus_list),
+        option.call("bus-list--eligible::#{bus_list.id}", bus_list),
+        option.call("bus-list--applied::#{bus_list.id}", bus_list)
+      ]
+    end
+    bus_list_recipients.flatten!(1) # Required since we have multiple options for each bus list
+
+    school_recipients = School.select(:id, :name).map do |school|
+      option.call("school::#{school.id}", school)
+    end
+    # No flatten needed here since each map returns a single option
+
+    # Combine all recipients. push(*recipients) is the most efficient,
+    # as it doesn't create a new array each time (concat() does)
+    recipients = POSSIBLE_SIMPLE_RECIPIENTS.invert.to_a
+    recipients.push(*bus_list_recipients)
+    recipients.push(*school_recipients)
+    recipients
   end
 
   def self.queue_for_trigger(trigger, user_id)
