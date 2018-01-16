@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220042158) do
+ActiveRecord::Schema.define(version: 20180116022530) do
 
   create_table "blazer_audits", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 20171220042158) do
     t.string "state"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "questionnaire_count"
+    t.integer "questionnaire_count", default: 0
     t.integer "bus_list_id"
   end
 
