@@ -5,12 +5,14 @@ class MessageTest < ActiveSupport::TestCase
   should strip_attribute :subject
   should strip_attribute :template
   should strip_attribute :body
+  should strip_attribute :trigger
 
   should validate_presence_of :name
   should validate_presence_of :subject
-  should validate_presence_of :recipients
   should validate_presence_of :template
   should validate_presence_of :body
+  should_not validate_presence_of :recipients
+  should_not validate_presence_of :trigger
 
   should allow_value("default").for(:template)
   should_not allow_value("foo").for(:template)
@@ -84,6 +86,11 @@ class MessageTest < ActiveSupport::TestCase
       assert_equal false, message.can_edit?
       message = build(:message, queued_at: 1.hour.ago, started_at: 1.hour.ago)
       assert_equal false, message.can_edit?
+      message = build(:message, queued_at: 1.hour.ago, started_at: 1.hour.ago, delivered_at: 1.hour.ago)
+      assert_equal false, message.can_edit?
+    end
+
+    should "return true if message has been delivered but has a trigger" do
       message = build(:message, queued_at: 1.hour.ago, started_at: 1.hour.ago, delivered_at: 1.hour.ago)
       assert_equal false, message.can_edit?
     end

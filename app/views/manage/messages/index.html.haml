@@ -8,11 +8,16 @@
         %th ID
         %th Name
         %th Subject
-        %th Status
-        %th Delivered
+        %th Trigger
+        %th Bulk Status
+        %th Bulk Delivered
     %tbody
 
   %br
 
   - unless current_user.admin_limited_access
-    = btn_link_to 'New Message', new_manage_message_path
+    %p= btn_link_to 'New Message', new_manage_message_path
+
+  %br
+
+  = render 'triggered_email_summary'

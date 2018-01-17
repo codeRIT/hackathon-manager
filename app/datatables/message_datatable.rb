@@ -6,6 +6,7 @@ class MessageDatatable < AjaxDatatablesRails::Base
       id: { source: "Message.id" },
       name: { source: "Message.name" },
       subject: { source: "Message.subject" },
+      trigger: { source: "Message.trigger" },
       delivered_at: { source: "Message.delivered_at", searchable: false }
     }
   end
@@ -19,6 +20,7 @@ class MessageDatatable < AjaxDatatablesRails::Base
         id: record.id,
         name: record.name,
         subject: record.subject,
+        trigger: Message::POSSIBLE_TRIGGERS[record.trigger],
         status: record.status.titleize,
         delivered_at: record.delivered_at.present? ? record.delivered_at.strftime("%B %d, %Y at %I:%M %p") : ''
       }

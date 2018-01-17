@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20180116022530) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "template", default: "default"
+    t.string "trigger"
   end
 
   create_table "questionnaires", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
