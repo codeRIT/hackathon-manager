@@ -82,6 +82,8 @@ class BulkMessageWorker
       Questionnaire.where("school_id = 5539 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
     when "school-umd-collegepark"
       Questionnaire.where("school_id = 5543 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
+    else
+      raise "Unknown recipient query: \"#{type}\""
     end
   end
 end
