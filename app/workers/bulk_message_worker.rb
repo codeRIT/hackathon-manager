@@ -83,7 +83,8 @@ class BulkMessageWorker
     when "school-umd-collegepark"
       Questionnaire.where("school_id = 5543 AND (acc_status = \"rsvp_confirmed\" OR acc_status = \"accepted\")").pluck(:user_id)
     else
-      raise "Unknown recipient query: \"#{type}\""
+      raise "Unknown recipient type: \"#{type}\""
     end
   end
+  # rubocop:enable CyclomaticComplexity
 end
