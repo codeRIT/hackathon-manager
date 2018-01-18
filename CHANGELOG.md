@@ -5,6 +5,7 @@
 **Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
 
 * **Major refactor to bulk email messaging**
+* Feature: Automatically send emails upon triggered events
 * Feature: Support message recipients from any school and bus list
 * Feature: Display what acceptance statuses cause automatic emails
 * Fix: Raise error upon reaching unknown recipient query
