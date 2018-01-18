@@ -2,6 +2,8 @@
 
 # 0.5.11 - 2018-01-15
 
+**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+
 * Consolidate display of email events
 * Make acceptance status searchable in questionnaire table
 * Improve error message for agreement checkboxes
