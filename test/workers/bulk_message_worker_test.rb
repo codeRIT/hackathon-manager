@@ -30,11 +30,66 @@ class BulkMessageWorkerTest < ActiveSupport::TestCase
     end
   end
 
+  should "support query recipients and simple recipients" do
+    create(:school, name: "My University", id: 492)
+    create_list(:questionnaire, 4, school_id: 492, acc_status: 'accepted')
+    create_list(:questionnaire, 4, school_id: 492, acc_status: 'rsvp_confirmed')
+    create_list(:questionnaire, 4, school_id: 492, acc_status: 'denied') # Decoy
+    create_list(:user, 4)
+    message = create(:message, recipients: ['incomplete', 'school::492'], queued_at: Time.now)
+    assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 12 do
+      Sidekiq::Testing.fake! do
+        worker = BulkMessageWorker.new
+        worker.perform(message.id)
+      end
+    end
+  end
+
   should "raise exception if message uses an unknown recipient type" do
     message = create(:message, recipients: ['incomplete', 'all', 'not-valid'], queued_at: Time.now)
     exception = assert_raises(Exception) do
       BulkMessageWorker.perform_async(message.id)
     end
     assert_match /recipient type/, exception.message
+  end
+
+  context "recipient queries" do
+    setup do
+      bus_list = create(:bus_list, name: "Bus Foo", id: 186)
+      school = create(:school, name: "My University", bus_list: bus_list)
+      create(:questionnaire, school: school, acc_status: 'pending')
+      create(:questionnaire, school: school, acc_status: 'waitlist')
+      create(:questionnaire, school: school, acc_status: 'accepted')
+      create(:questionnaire, school: school, acc_status: 'rsvp_confirmed', riding_bus: true)
+      create(:questionnaire, school: school, acc_status: 'rsvp_denied')
+      create_list(:user, 4)
+    end
+
+    should "support bus-list::ID" do
+      message = create(:message, recipients: ['bus-list::186'], queued_at: Time.now)
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        Sidekiq::Testing.fake! do
+          BulkMessageWorker.new.perform(message.id)
+        end
+      end
+    end
+
+    should "support bus-list--eligible::ID" do
+      message = create(:message, recipients: ['bus-list--eligible::186'], queued_at: Time.now)
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        Sidekiq::Testing.fake! do
+          BulkMessageWorker.new.perform(message.id)
+        end
+      end
+    end
+
+    should "support bus-list--applied::ID" do
+      message = create(:message, recipients: ['bus-list--applied::186'], queued_at: Time.now)
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 2 do
+        Sidekiq::Testing.fake! do
+          BulkMessageWorker.new.perform(message.id)
+        end
+      end
+    end
   end
 end
