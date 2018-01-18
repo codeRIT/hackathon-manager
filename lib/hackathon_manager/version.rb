@@ -1,3 +1,3 @@
 module HackathonManager
-  VERSION = '0.5.11'.freeze
+  VERSION = '0.6.0'.freeze
 end

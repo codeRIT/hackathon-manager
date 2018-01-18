@@ -1,5 +1,14 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.6.0 - 2018-01-17
+
+**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+
+* **Major refactor to bulk email messaging**
+* Feature: Support message recipients from any school and bus list
+* Feature: Display what acceptance statuses cause automatic emails
+* Fix: Raise error upon reaching unknown recipient query
+
 # 0.5.11 - 2018-01-15
 
 **Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
