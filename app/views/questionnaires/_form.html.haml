@@ -13,7 +13,7 @@
         = f.input :first_name, input_html: { "data-validate" => "presence" }, autofocus: true, wrapper_html: { class: 'input--half' }
         = f.input :last_name, input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :phone, label: "Phone number", input_html: { "data-validate" => "presence" }
-        = f.input :date_of_birth, start_year: Date.today.year - 18, end_year: Date.today.year - 90, order: [:month, :day, :year], input_html: { "data-validate" => "presence" }
+        = f.input :date_of_birth, start_year: Date.today.year - 5, end_year: Date.today.year - 90, order: [:month, :day, :year], input_html: { "data-validate" => "presence" }
 
         = f.input :school_id, as: :school_selection, input_html: { "data-validate" => "presence" }
         = f.input :level_of_study, input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
