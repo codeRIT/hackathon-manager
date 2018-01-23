@@ -1,5 +1,16 @@
 %section.section.manage
   .container.container-half
+    - if @questionnaire.minor?
+      #disclaimer
+        %p
+          %strong
+            %span.fa.fa-exclamation-triangle.icon-space-r
+            Applicant is a minor
+        %p
+          Will be
+          = format_age(@questionnaire.age_at_time_of_event)
+          old.
+
     = render partial: 'questionnaire_summary'
 
     %p

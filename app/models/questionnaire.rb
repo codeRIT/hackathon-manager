@@ -123,6 +123,14 @@ class Questionnaire < ApplicationRecord
     Fips.where(city: school.city, state: school.state).first
   end
 
+  def age_at_time_of_event
+    (Rails.configuration.hackathon['event_start_date'] - date_of_birth).to_i * 1.day
+  end
+
+  def minor?
+    age_at_time_of_event < 18.years
+  end
+
   def can_rsvp?
     ["accepted", "rsvp_confirmed", "rsvp_denied"].include? acc_status
   end

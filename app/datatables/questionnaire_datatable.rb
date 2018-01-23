@@ -21,6 +21,7 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
       {
         bulk: current_user.admin_limited_access ? '' : "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe,
         link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(record)),
+        note: record.minor? ? '<div class="center"><i class="fa fa-exclamation-triangle icon-space-r"></i> Minor</div>'.html_safe : '',
         id: record.id,
         first_name: record.first_name,
         last_name: record.last_name,

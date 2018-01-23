@@ -38,11 +38,12 @@ var setupDataTables = function() {
   };
 
   window.questionnairesDataTable = setupDataTable($('.datatable.questionnaires'), {
-    order      : [2, 'desc'],
+    order      : [3, 'desc'],
     scrollX    : false,
     columns    : [
       { orderable : false, data: 'bulk' },
       { orderable : false, data: 'link' },
+      { orderable : false, data: 'note' },
       { orderable: true, data: 'id' },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
