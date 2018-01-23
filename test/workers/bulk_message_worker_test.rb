@@ -91,5 +91,13 @@ class BulkMessageWorkerTest < ActiveSupport::TestCase
         end
       end
     end
+
+    should "raise exception if model ID does not exist" do
+      message = create(:message, recipients: ['bus-list--applied::9999'], queued_at: Time.now)
+      exception = assert_raises(Exception) do
+        BulkMessageWorker.perform_async(message.id)
+      end
+      assert_match /Could not find Bus List/, exception.message
+    end
   end
 end

@@ -1,4 +1,7 @@
 class MessageRecipientQuery
+  class ModelIdNotFound < StandardError
+  end
+
   attr_accessor :query
   attr_accessor :type
   attr_accessor :id
@@ -31,7 +34,7 @@ class MessageRecipientQuery
     else
       raise "Unknown recipient query type: #{type.inspect} (in message recipient query: #{query.inspect}"
     end
-    raise "Could not find #{model_name} with ID #{id.inspect} (in message recipient query: #{query.inspect}" if model.blank?
+    raise MessageRecipientQuery::ModelIdNotFound, "Could not find #{model_name} with ID #{id.inspect} (in message recipient query: #{query.inspect})" if model.blank?
 
     MessageRecipientQuery.new(
       query,
@@ -42,8 +45,12 @@ class MessageRecipientQuery
   end
 
   def self.friendly_name(query, model = nil)
-    recipient_query = parse(query, model)
-    model = recipient_query.model
+    begin
+      recipient_query = parse(query, model)
+      model = recipient_query.model
+    rescue MessageRecipientQuery::ModelIdNotFound
+      return "[invalid recipient]"
+    end
 
     case recipient_query.type
     when "bus-list"

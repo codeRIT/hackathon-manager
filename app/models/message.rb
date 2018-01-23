@@ -75,11 +75,15 @@ class Message < ApplicationRecord
     status == "drafted" || trigger.present?
   end
 
+  def can_queue?
+    status == "drafted" && recipients_list.present?
+  end
+
   def using_default_template?
     template == "default"
   end
 
-  def self.possible_recipients
+  def possible_recipients
     # Produce an array like:
     # ["School: My University", "school::123"]
     option = ->(query, model) { [MessageRecipientQuery.friendly_name(query, model), query] }
@@ -102,6 +106,14 @@ class Message < ApplicationRecord
     recipients = POSSIBLE_SIMPLE_RECIPIENTS.invert.to_a
     recipients.push(*bus_list_recipients)
     recipients.push(*school_recipients)
+
+    # Add current recipients if not included
+    self.recipients.each do |recipient|
+      if recipients.none? { |recipient_pair| recipient_pair[1] == recipient }
+        recipients.push([recipient, recipient])
+      end
+    end
+
     recipients
   end
 

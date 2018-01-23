@@ -259,6 +259,12 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
+    should "render manage_messages#show even if recipient is no longer valid" do
+      message = create(:message, recipients: ['bus-list--applied::9999'])
+      get :show, params: { id: message }
+      assert_response :success
+    end
+
     should "allow access to manage_messages#edit" do
       get :edit, params: { id: @message }
       assert_response :success

@@ -1,7 +1,11 @@
 %section.section.manage
   %h1.section-title= title "Message"
 
-  - recipient_count = pluralize(BulkMessageWorker.build_recipients(@message.recipients).count, "recipient")
+  :ruby
+    begin
+      recipient_count = pluralize(BulkMessageWorker.build_recipients(@message.recipients).count, "recipient")
+    rescue => recipient_error
+    end
 
   %p
     %b Name:
@@ -21,7 +25,12 @@
     - if @message.recipients.present?
       %br
       %small
-        %em #{recipient_count} currently match this query
+        - if recipient_error.present?
+          %strong{style: 'color: red;'} Error parsing recipients:
+          = recipient_error
+          %br To resolve this, edit & remove the offending recipient.
+        - else
+          %em #{recipient_count} currently match this query
   %p
     %b Trigger:
     = Message::POSSIBLE_TRIGGERS[@message.trigger] || "(no automatic trigger)"
@@ -54,9 +63,15 @@
   %hr
 
   - unless current_user.admin_limited_access
-    - if @message.status == "drafted" && @message.recipients_list.present?
-      = btn_link_to 'Deliver', deliver_manage_message_path(@message), method: :patch, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be sent to #{recipient_count}." }
-      \|
+    - if @message.can_queue?
+      - if recipient_error.present?
+        %button.button{disabled: 'disabled'} Deliver
+        %small Cannot deliver when there is a recipient error; see error above.
+        %br
+        %br
+      - else
+        = btn_link_to 'Deliver', deliver_manage_message_path(@message), method: :patch, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be sent to #{recipient_count}." }
+        \|
     - if @message.can_edit?
       = link_to 'Edit', edit_manage_message_path(@message)
       \|
