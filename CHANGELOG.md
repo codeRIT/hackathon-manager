@@ -1,5 +1,13 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.6.1 - 2018-01-22
+
+**Note:** Be sure to add `event_start_date` to hackathon.yml
+
+* Feature: Display notice for applicants under 18 years old
+* Fix: Allow entry of birth dates up to 5 years ago
+* Fix: Support viewing of messages with invalid recipients
+
 # 0.6.0 - 2018-01-17
 
 **Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
