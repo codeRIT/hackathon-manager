@@ -7,10 +7,14 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
       first_name: { source: 'Questionnaire.first_name' },
       last_name: { source: 'Questionnaire.last_name' },
       email: { source: 'User.email' },
+      phone: { source: 'Questionnaire.phone' },
+      gender: { source: 'Questionnaire.gender' },
+      date_of_birth: { source: 'Questionnaire.date_of_birth', searchable: false },
       admin: { source: 'User.admin', cond: :eq, searchable: false },
       acc_status: { source: 'Questionnaire.acc_status', searchable: true },
       checked_in: { source: 'Questionnaire.checked_in_at', searchable: false },
-      school: { source: 'School.name' }
+      school: { source: 'School.name' },
+      created_at: { source: 'Questionnaire.created_at', searchable: false }
     }
   end
 
@@ -26,9 +30,13 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
         first_name: record.first_name,
         last_name: record.last_name,
         email: record.email,
+        phone: record.phone,
+        gender: record.gender,
+        date_of_birth: record.date_of_birth_formatted,
         acc_status: "<span class=\"acc-status-#{record.acc_status}\">#{record.acc_status.titleize}</span>".html_safe,
         checked_in: record.checked_in? ? '<span class="acc-status-accepted">Yes</span>'.html_safe : 'No',
-        school: link_to(record.school.name, manage_school_path(record.school))
+        school: link_to(record.school.name, manage_school_path(record.school)),
+        created_at: record.created_at.present? ? record.created_at.strftime("%B %d, %Y at %I:%M %p") : ''
       }
     end
   end

@@ -16,12 +16,23 @@ var setupDataTables = function() {
       ],
       buttons: [
         'pageLength',
+        'colvis',
         {
           extend: 'collection',
           text: 'Export',
           buttons: [
-            'csvHtml5',
-            'pdfHtml5'
+            {
+              extend: 'csv',
+              exportOptions: {
+                columns: ':visible'
+              }
+            },
+            {
+              extend: 'pdfHtml5',
+              exportOptions: {
+                columns: ':visible'
+              }
+            },
           ]
         }
       ]
@@ -48,9 +59,13 @@ var setupDataTables = function() {
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
+      { orderable: true, data: 'phone', visible: false },
+      { orderable: true, data: 'gender', visible: false },
+      { orderable: true, data: 'date_of_birth', visible: false },
       { orderable: true, data: 'acc_status' },
       { orderable: true, data: 'checked_in' },
-      { orderable: true, data: 'school' }
+      { orderable: true, data: 'school' },
+      { orderable: true, data: 'created_at', visible: false }
     ]
   });
 

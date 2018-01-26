@@ -2,6 +2,7 @@
 //= require_directory .
 //= require ../vendor/jquery.dataTables.min
 //= require ../vendor/dataTables.buttons.min
+//= require ../vendor/buttons.colVis.min
 //= require ../vendor/buttons.html5.min
 //= require ../vendor/pdfmake.min
 //= require ../vendor/vfs_fonts
