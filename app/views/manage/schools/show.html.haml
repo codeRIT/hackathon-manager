@@ -1,21 +1,42 @@
-%section.section{ style: "padding-left: 20px; padding-right: 20px" }
-  %h1.section-title= title "School"
+%section.section.manage
+  %h1.section-title= title @school.name
 
-  %p
-    %b Name:
-    = @school.name
-  %p
-    %b Address:
-    = @school.address || "(not provided)"
-  %p
-    %b City:
-    = @school.city || "(not provided)"
-  %p
-    %b State:
-    = @school.state || "(not provided)"
-  %p
-    %b Bus List:
-    = @school.bus_list ? link_to(@school.bus_list.name, manage_bus_list_path(@school.bus_list)) : '(not assigned)'
+  .container.container-half
+    %p
+      %b Name:
+      = @school.name
+    %p
+      %b Address:
+      = @school.address || "(not provided)"
+    %p
+      %b City:
+      = @school.city || "(not provided)"
+    %p
+      %b State:
+      = @school.state || "(not provided)"
+    %p
+      %b Bus List:
+      = @school.bus_list ? link_to(@school.bus_list.name, manage_bus_list_path(@school.bus_list)) : '(not assigned)'
+
+  .container.container-half
+    %p
+      %strong Duplicate Names
+    %p If someone attempts to apply using a name below, they'll automatically be converted to this school.
+    %table.table
+      %thead
+        %tr
+          %th School Name
+          %th Date Created
+      %tbody
+        - dupes = SchoolNameDuplicate.where(school_id: @school.id)
+        - dupes.each do |dupe|
+          %tr
+            %td= dupe.name
+            %td= dupe.created_at
+        - if dupes.blank?
+          %tr
+            %td{colspan: 2}
+              %em No duplicate names exist for this school.
 
   %hr
 
@@ -30,7 +51,7 @@
   %hr
 
   %p
-    %strong Questionnaires:
+    %strong Questionnaires
   %table.table
     %thead
       %tr
