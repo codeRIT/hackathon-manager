@@ -4,24 +4,25 @@
     - if f.error_notification.present?
       = f.error_notification
 
-    .form-inputs
-      %fieldset
-        - if @questionnaire&.user&.provider == 'mlh'
-          %legend Provided by My MLH
-        %br
-        = f.input :first_name, placeholder: "Joe", input_html: { "data-validate" => "presence" }, label: "First Name", autofocus: true
-        = f.input :last_name, placeholder: "Smith", input_html: { "data-validate" => "presence" }, label: "Last Name"
-        = f.input :email, placeholder: "joe@example.com", input_html: { "data-validate" => "presence email", value: @questionnaire.user.try(:email) }, required: true
-        = f.input :phone, placeholder: "(123) 456-7890", input_html: { "data-validate" => "presence" }
-        = f.input :date_of_birth, start_year: Date.today.year - 18, end_year: Date.today.year - 90, order: [:month, :day, :year], input_html: { "data-validate" => "presence" }
+    %fieldset
+      - if @questionnaire&.user&.provider == 'mlh'
+        %legend Provided by My MLH
+      %br
+      = f.input :first_name, placeholder: "Joe", input_html: { "data-validate" => "presence" }, label: "First Name", autofocus: true
+      = f.input :last_name, placeholder: "Smith", input_html: { "data-validate" => "presence" }, label: "Last Name"
+      = f.input :email, placeholder: "joe@example.com", input_html: { "data-validate" => "presence email", value: @questionnaire.user.try(:email) }, required: true
+      = f.input :phone, placeholder: "(123) 456-7890", input_html: { "data-validate" => "presence" }
+      = f.input :date_of_birth, start_year: Date.today.year - 18, end_year: Date.today.year - 90, order: [:month, :day, :year], input_html: { "data-validate" => "presence" }
 
-        = f.input :school_id, as: :school_selection, placeholder: "My University", input_html: { "data-validate" => "presence" }
-        = f.input :level_of_study, placeholder: "University (Undergraduate)", input_html: { "data-validate" => "presence" }
-        = f.input :major, placeholder: "Major", input_html: { "data-validate" => "presence" }
-        = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
-        = f.input :gender, placeholder: "Female, Male, Non-Binary, Prefer not to say, other", input_html: { "data-validate" => "presence" }
-        = f.input :dietary_restrictions, placeholder: "Allergies, medical assistance, etc. (optional)", label: "Health Restrictions"
-        = f.input :special_needs, placeholder: "Any special needs or requests (optional)", label: "Special needs"
+      = f.input :school_id, as: :school_selection, placeholder: "My University", input_html: { "data-validate" => "presence" }
+      = f.input :level_of_study, placeholder: "University (Undergraduate)", input_html: { "data-validate" => "presence" }
+      = f.input :major, placeholder: "Major", input_html: { "data-validate" => "presence" }
+      = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
+      = f.input :gender, placeholder: "Female, Male, Non-Binary, Prefer not to say, other", input_html: { "data-validate" => "presence" }
+      = f.input :dietary_restrictions, placeholder: "Allergies, medical assistance, etc. (optional)", label: "Health Restrictions"
+      = f.input :special_needs, placeholder: "Any special needs or requests (optional)", label: "Special needs"
+
+    %br
 
     .form-inputs
       %br
@@ -36,24 +37,41 @@
       = f.input :portfolio_url, label: "Portfolio Link", placeholder:"http://mywebsite.com"
       = f.input :vcs_url, label: "GitHub/BitBucket", placeholder:"https://github.com/coderit"
 
+      = f.input :can_share_info, as: :formatted_boolean, label: "Share resume with employers?"
+
+      %hr
+
       - travel_state = !@questionnaire.new_record? && @questionnaire.travel_not_from_school
       = f.input :travel_not_from_school, as: :formatted_boolean, label: "I will not be traveling from my school"
       = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Travel Location"
-
-      = f.input :can_share_info, as: :formatted_boolean, label: "Share resume with employers?"
 
       = f.input :riding_bus, as: :formatted_boolean, label: "Riding Bus", disabled: !@questionnaire.eligible_for_a_bus?
       = f.input :is_bus_captain, as: :formatted_boolean, label: "Is Bus Captain", disabled: !@questionnaire.eligible_for_a_bus?
       - if !@questionnaire.eligible_for_a_bus?
         %p (school not eligible for bus)
 
-      %p
-        %small
-          Please read the
-          = link_to asset_url(Rails.configuration.hackathon['agreement_pdf_asset']), target: '_blank' do
-            #{Rails.configuration.hackathon['name']} Agreement
-            %span.fa.fa-external-link.icon-space-l-half
-      = f.input :agreement_accepted, as: :formatted_boolean, label: "I accept the #{Rails.configuration.hackathon['name']} Agreement", input_html: { "data-validate" => "presence" }
+    %hr
+
+    .form-inputs
+      .supporting-text
+        Please read the
+        = link_to asset_url(Rails.configuration.hackathon['agreement_pdf_asset']), target: '_blank' do
+          #{Rails.configuration.hackathon['name']} Agreement
+          %span.fa.fa-external-link.icon-space-l-half
+      = f.input :agreement_accepted, as: :formatted_boolean, label: "I accept the #{Rails.configuration.hackathon['name']} agreement.", input_html: { "data-validate" => "presence" }
+
+      .supporting-text
+        Please read the
+        %a{ href:"http://static.mlh.io/docs/mlh-code-of-conduct.pdf", target: "_blank" }
+          MLH Code of Conduct
+          %span.fa.fa-external-link.icon-space-l-half
+      = f.input :code_of_conduct_accepted, as: :formatted_boolean, label: "I accept the MLH Code of Conduct.", input_html: { "data-validate" => "presence" }
+
+      .supporting-text
+        I agree to the terms of both the
+        <a href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions" target="_blank">MLH Contest Terms</a> and Conditions and the
+        <a href="https://mlh.io/privacy" target="_blank">MLH Privacy Policy</a>. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
+      = f.input :data_sharing_accepted, as: :formatted_boolean, label: "I accept the MLH policies.", input_html: { "data-validate" => "presence" }
 
     .center
       = f.button :submit, value: ( @questionnaire.new_record? ? 'Create' : 'Save' )
