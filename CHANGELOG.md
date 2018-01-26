@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.6.2 - 2018-01-25
+
+* Feature: Notice when updating individual acceptance status
+* Feature: Add school name to MLH info
+* Fix: Fix sending of triggered emails to correct recipient
+
 # 0.6.1 - 2018-01-22
 
 **Note:** Be sure to add `event_start_date` to hackathon.yml
