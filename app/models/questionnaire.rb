@@ -197,10 +197,10 @@ class Questionnaire < ApplicationRecord
   end
 
   def queue_triggered_email_update
-    Message.queue_for_trigger("questionnaire.#{acc_status}", id) if saved_change_to_acc_status?
+    Message.queue_for_trigger("questionnaire.#{acc_status}", user_id) if saved_change_to_acc_status?
   end
 
   def queue_triggered_email_create
-    Message.queue_for_trigger("questionnaire.#{acc_status}", id)
+    Message.queue_for_trigger("questionnaire.#{acc_status}", user_id)
   end
 end
