@@ -109,7 +109,9 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     @questionnaire.acc_status_author_id = current_user.id
     @questionnaire.acc_status_date = Time.now
 
-    unless @questionnaire.save(validate: false)
+    if @questionnaire.save(validate: false)
+      flash[:notice] = "Updated acceptance status to \"#{Questionnaire::POSSIBLE_ACC_STATUS[new_status]}\""
+    else
       flash[:notice] = "Failed to update acceptance status"
     end
 
