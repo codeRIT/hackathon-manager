@@ -1,5 +1,14 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.6.3 - 2018-01-26
+
+**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+
+* Feature: Allow bus captains to mark who boards a bus
+* Feature: Add optional columns to questionnaire datatable
+* Feature: Show duplicate name mappings on school detail page
+* Fix: Fix admin form for questionnaires
+
 # 0.6.2 - 2018-01-25
 
 * Feature: Notice when updating individual acceptance status
