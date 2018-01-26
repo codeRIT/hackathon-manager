@@ -134,6 +134,20 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
   end
 
+  context "#school_name" do
+    should "return nil if no school set" do
+      questionnaire = create(:questionnaire)
+      questionnaire.update_attribute(:school_id, nil)
+      assert_nil questionnaire.school_name
+    end
+
+    should "return the current school's name" do
+      school = create(:school, name: "My University")
+      questionnaire = create(:questionnaire, school_id: school.id)
+      assert_equal "My University", questionnaire.school_name
+    end
+  end
+
   context "#full_name" do
     should "concatenate first and last name" do
       questionnaire = create(:questionnaire, first_name: "Foo", last_name: "Bar")

@@ -52,13 +52,16 @@ class Manage::StatsController < Manage::ApplicationController
 
   def mlh_info
     data = Rails.cache.fetch(cache_key_for_questionnaires("mlh_info")) do
-      attributes = [:first_name,
-                    :last_name,
-                    :email,
-                    :phone]
-      select_attributes = Array.new(attributes) << :user_id
-      data = Questionnaire.select(select_attributes)
-      to_json_array(data, attributes)
+      attributes = [
+        :first_name,
+        :last_name,
+        :email,
+        :phone
+      ]
+      select_attributes = Array.new(attributes) << [:user_id, :school_id]
+      json_attribute = Array.new(attributes) << :school_name
+      data = Questionnaire.joins(:school).select(select_attributes)
+      to_json_array(data, json_attribute)
     end
     render json: { data: data }
   end

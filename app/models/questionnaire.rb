@@ -93,6 +93,10 @@ class Questionnaire < ApplicationRecord
     School.find(school_id) if school_id
   end
 
+  def school_name
+    school.name if school_id
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
