@@ -27,6 +27,7 @@
   %table.table
     %thead
       %tr
+        %th Boarded bus?
         %th First Name
         %th Last Name
         %th Email
@@ -36,6 +37,8 @@
     %tbody
       - @bus_list.passengers.each do |p|
         %tr
+          %td
+            %input{type: 'checkbox', checked: p.boarded_bus?, data: { "boarded-bus": true, action: boarded_bus_bus_list_path, id: p.id } }
           %td= p.first_name
           %td= p.last_name
           %td= p.email

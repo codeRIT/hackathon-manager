@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     get :deny, on: :collection
   end
 
+  resource :bus_list do
+    patch :boarded_bus, on: :collection
+  end
+
   namespace :manage do
     root to: "dashboard#index"
     resources :dashboard do
@@ -71,6 +75,4 @@ Rails.application.routes.draw do
     resource :config do
     end
   end
-
-  resource :bus_list
 end

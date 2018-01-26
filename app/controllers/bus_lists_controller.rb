@@ -15,6 +15,29 @@ class BusListsController < ApplicationController
   def show
   end
 
+  # PATCH /bus_list/boarded_bus
+  def boarded_bus
+    boarded_bus = params[:questionnaire][:boarded_bus].to_s
+    questionnaire = Questionnaire.find_by_id(params[:questionnaire][:id])
+
+    if !['true', 'false'].include?(boarded_bus) || questionnaire.blank? || !questionnaire.eligible_for_a_bus?
+      head :bad_request
+      return
+    end
+
+    if questionnaire.bus_list.id != @bus_list.id
+      head :bad_request
+      return
+    end
+
+    if boarded_bus == 'true'
+      questionnaire.update_attribute(:boarded_bus_at, Time.now)
+    else
+      questionnaire.update_attribute(:boarded_bus_at, nil)
+    end
+    head :ok
+  end
+
   private
 
   def find_questionnaire

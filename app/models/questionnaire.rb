@@ -118,6 +118,10 @@ class Questionnaire < ApplicationRecord
     checked_in_at.present?
   end
 
+  def boarded_bus?
+    boarded_bus_at.present?
+  end
+
   def checked_in_by
     return unless checked_in_by_id.present?
     User.find(checked_in_by_id)

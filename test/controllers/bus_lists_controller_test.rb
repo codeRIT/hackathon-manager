@@ -11,6 +11,11 @@ class BusListsControllerTest < ActionController::TestCase
       get :show
       assert_redirected_to new_user_session_path
     end
+
+    should "redirect to sign in page on bus_list#boarded_bus" do
+      patch :boarded_bus
+      assert_redirected_to new_user_session_path
+    end
   end
 
   context "while authenticated without a questionnaire" do
@@ -24,6 +29,11 @@ class BusListsControllerTest < ActionController::TestCase
       get :show
       assert_redirected_to root_path
     end
+
+    should "redirect to root page on bus_list#boarded_bus" do
+      patch :boarded_bus
+      assert_redirected_to root_path
+    end
   end
 
   context "while authenticated with a questionnaire but no bus list" do
@@ -35,6 +45,11 @@ class BusListsControllerTest < ActionController::TestCase
 
     should "redirect to root page on bus_list#show" do
       get :show
+      assert_redirected_to root_path
+    end
+
+    should "redirect to root page on bus_list#boarded_bus" do
+      patch :boarded_bus
       assert_redirected_to root_path
     end
   end
@@ -54,13 +69,43 @@ class BusListsControllerTest < ActionController::TestCase
         get :show
         assert_redirected_to root_path
       end
+
+      should "redirect to root page on bus_list#boarded_bus" do
+        patch :boarded_bus
+        assert_redirected_to root_path
+      end
     end
 
     context "and is bus captain" do
-      should "redirect to root page on bus_list#show" do
+      setup do
         @questionnaire.update_attribute(:is_bus_captain, true)
+      end
+
+      should "render bus_list#show" do
         get :show
         assert_response :success
+      end
+
+      should "allow bus_list#boarded_bus - checking in self" do
+        patch :boarded_bus, params: { questionnaire: { id: @questionnaire.id, boarded_bus: true } }
+        assert_response :success
+        assert_not_nil @questionnaire.reload.boarded_bus_at
+      end
+
+      should "allow bus_list#boarded_bus - checking out self" do
+        @questionnaire.update_attribute(:boarded_bus_at, Time.now)
+        patch :boarded_bus, params: { questionnaire: { id: @questionnaire.id, boarded_bus: false } }
+        assert_response :success
+        assert_nil @questionnaire.reload.boarded_bus_at
+      end
+
+      should "not allow bus_list#boarded_bus for questionnaire not riding this bus" do
+        bus_list = create(:bus_list, name: "A random bus list")
+        school = create(:school, name: "Yet Another School", bus_list_id: bus_list.id)
+        questionnaire = create(:questionnaire, school_id: school.id, riding_bus: true)
+        patch :boarded_bus, params: { questionnaire: { id: questionnaire.id, boarded_bus: true } }
+        assert_response :bad_request
+        assert_nil questionnaire.reload.boarded_bus_at
       end
     end
   end

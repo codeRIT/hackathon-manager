@@ -37,6 +37,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should_not validate_presence_of :can_share_info
   should_not validate_presence_of :travel_not_from_school
   should_not validate_presence_of :travel_location
+  should_not validate_presence_of :boarded_bus_at
 
   should allow_value("first").for(:experience)
   should allow_value("experienced").for(:experience)
