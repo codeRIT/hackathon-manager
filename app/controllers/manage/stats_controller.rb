@@ -25,9 +25,11 @@ class Manage::StatsController < Manage::ApplicationController
                     :email,
                     :vcs_url,
                     :portfolio_url]
-      select_attributes = Array.new(attributes) << :user_id
-      data = Questionnaire.where("can_share_info = '1' AND acc_status = 'rsvp_confirmed'").select(select_attributes)
-      to_json_array(data, attributes)
+      select_attributes = Array.new(attributes) << [:user_id, :school_id, :resume_file_name]
+      json_attribute = Array.new(attributes) << :school_name
+      data = Questionnaire.where("can_share_info = '1' AND checked_in_at != 0").select(select_attributes)
+      json = to_json_array(data, json_attribute)
+      json.map.with_index { |item, index| item.insert(5, data[index].resume? ? data[index].resume.url : '') }
     end
     render json: { data: data }
   end
