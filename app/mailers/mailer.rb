@@ -81,5 +81,10 @@ class Mailer < ApplicationMailer
       subject: subject,
       sparkpost_data: sparkpost_data
     )
+  rescue SparkPostRails::DeliveryException => e
+    error_code_to_not_retry = [
+      "1902" # Generation rejection
+    ]
+    raise e unless e.blank? || error_code_to_not_retry.include?(e.service_code)
   end
 end
