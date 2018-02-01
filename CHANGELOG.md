@@ -1,5 +1,10 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.6.5 - 2018-01-31
+
+* Improvement: Set transactional SparkPost option on select emails
+* Fix: Don't retry SparkPost generation rejections
+
 # 0.6.4 - 2018-01-30
 
 * Improvement: Include resume & school name in sponsor info export
