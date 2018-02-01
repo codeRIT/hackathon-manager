@@ -7,13 +7,13 @@ class Mailer < ApplicationMailer
   def application_confirmation_email(questionnaire_id)
     @questionnaire = Questionnaire.find_by_id(questionnaire_id)
     return unless @questionnaire.present? && @questionnaire.user.present?
-    mail_questionnaire("Application Received")
+    mail_questionnaire("Application Received", transactional: true)
   end
 
   def rsvp_confirmation_email(questionnaire_id)
     @questionnaire = Questionnaire.find_by_id(questionnaire_id)
     return unless @questionnaire.present? && @questionnaire.user.present?
-    mail_questionnaire("RSVP Confirmation")
+    mail_questionnaire("RSVP Confirmation", transactional: true)
   end
 
   def accepted_email(questionnaire_id)
@@ -75,10 +75,11 @@ class Mailer < ApplicationMailer
     "\"#{name}\" <#{email}>"
   end
 
-  def mail_questionnaire(subject)
+  def mail_questionnaire(subject, sparkpost_data = {})
     mail(
       to: pretty_email(@questionnaire.full_name, @questionnaire.user.email),
-      subject: subject
+      subject: subject,
+      sparkpost_data: sparkpost_data
     )
   end
 end
