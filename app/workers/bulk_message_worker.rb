@@ -74,6 +74,11 @@ class BulkMessageWorker
       Questionnaire.joins(:school).where("schools.bus_list_id = ? AND (acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied')", model.id).pluck(:user_id)
     when "school"
       Questionnaire.where("school_id = ? AND (acc_status = 'rsvp_confirmed' OR acc_status = 'accepted')", model.id).pluck(:user_id)
+    when "blazer"
+      result = Blazer::RunStatement.new.perform(Blazer.data_sources[model.data_source], model.statement)
+      user_id_column = result.columns.index("user_id")
+      raise "Blazer query is missing required \"user_id\" column" unless user_id_column.present?
+      result.rows.map { |row| row[user_id_column] }
     else
       raise "Unknown recipient query type: #{recipient_query.type.inspect} (in message recipient query: #{type.inspect}"
     end

@@ -101,11 +101,17 @@ class Message < ApplicationRecord
     end
     # No flatten needed here since each map returns a single option
 
+    blazer_recipients = Blazer::Query.select(:id, :name).map do |query|
+      option.call("blazer::#{query.id}", query)
+    end
+    # No flatten needed here since each map returns a single option
+
     # Combine all recipients. push(*recipients) is the most efficient,
     # as it doesn't create a new array each time (concat() does)
     recipients = POSSIBLE_SIMPLE_RECIPIENTS.invert.to_a
     recipients.push(*bus_list_recipients)
     recipients.push(*school_recipients)
+    recipients.push(*blazer_recipients)
 
     # Add current recipients if not included
     self.recipients.each do |recipient|

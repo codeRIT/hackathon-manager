@@ -31,6 +31,9 @@ class MessageRecipientQuery
     when "school"
       model ||= School.find_by_id(id)
       model_name = "School"
+    when "blazer"
+      model ||= Blazer::Query.find_by_id(id)
+      model_name = "Blazer Query"
     else
       raise "Unknown recipient query type: #{type.inspect} (in message recipient query: #{query.inspect}"
     end
@@ -61,6 +64,8 @@ class MessageRecipientQuery
       "Bus List: #{model.name} (applied/not accepted)"
     when "school"
       "Confirmed or Accepted: #{model.name}"
+    when "blazer"
+      "Blazer Query: #{model.name}"
     else
       raise "Unknown recipient query type: #{recipient_query.type.inspect} (in message recipient query: #{r.inspect}"
     end
