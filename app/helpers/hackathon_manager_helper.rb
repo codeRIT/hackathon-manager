@@ -41,4 +41,8 @@ module HackathonManagerHelper
       Rails.application.assets_manifest.assets[logical_path].present?
     end
   end
+
+  def collection_or_text(model_value, collection)
+    model_value.blank? || collection.include?(model_value) ? collection : nil
+  end
 end

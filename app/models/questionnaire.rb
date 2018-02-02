@@ -67,6 +67,30 @@ class Questionnaire < ApplicationRecord
     "rsvp_denied"    => "RSVP Denied"
   }.freeze
 
+  # From My MLH's dropdown list.
+  # Should *not* validate against this list in case My MLH changes their options,
+  # as this would cause errors until a manual gem update
+  POSSIBLE_GENDERS = [
+    "Female",
+    "Male",
+    "Non-Binary",
+    "I prefer not to say",
+    "Other"
+  ].freeze
+
+  # From My MLH's dropdown list.
+  # Should *not* validate against this list in case My MLH changes their options,
+  # as this would cause errors until a manual gem update
+  POSSIBLE_LEVELS_OF_STUDY = [
+    "Elementary / Middle School / Primary School",
+    "High School / Secondary School",
+    "University (Undergraduate)",
+    "University (Master's / Doctoral)",
+    "Vocational / Code School",
+    "Not Currently a Student",
+    "Other"
+  ].freeze
+
   validates_inclusion_of :experience, in: POSSIBLE_EXPERIENCES
   validates_inclusion_of :interest, in: POSSIBLE_INTERESTS
   # validates_inclusion_of :school_id, :in => School.select(:id)
