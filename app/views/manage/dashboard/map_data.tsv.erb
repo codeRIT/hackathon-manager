@@ -4,34 +4,27 @@
 counties = {}
 amount = 1
 @schools.each do |school|
-
-  require 'net/http'
-
   if school.fips_code.blank?
-
     next if school.city.blank? || school.state.blank?
 
-    url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{CGI.escape(school.city)}+#{CGI.escape(school.state)}&sensor=true"
-    resp = Net::HTTP.get_response(URI.parse(url)) # get_response takes an URI object
-    results = JSON.parse(resp.body)["results"][0]
-
+    resp = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{CGI.escape(school.city)}+#{CGI.escape(school.state)}&sensor=true")
+    results = resp.parsed_response["results"][0]
     if results.blank?
       redo
     end
 
     lat = results["geometry"]["location"]["lat"]
     lng = results["geometry"]["location"]["lng"]
-
     next if lat.blank? || lng.blank?
 
-    url = "http://data.fcc.gov/api/block/find?format=json&latitude=#{lat}&longitude=#{lng}&showall=true"
-    resp = Net::HTTP.get_response(URI.parse(url)) # get_response takes an URI object
-    fips = JSON.parse(resp.body)["County"]["FIPS"]
+    resp = HTTParty.get("https://geo.fcc.gov/api/census/area?lat=#{lat}&lon=#{lng}&format=json")
+    results = resp.parsed_response["results"]
+    next if results.blank?
 
+    fips = results[0]["county_fips"]
     next if fips.blank?
 
     Fips.create(fips_code: fips, city: school.city, state: school.state)
-
   else
     fips = school.fips_code.fips_code
   end
