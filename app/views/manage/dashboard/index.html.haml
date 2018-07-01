@@ -9,23 +9,26 @@
 = javascript_include_tag "hackathon_manager/vendor/queue.v1.min.js"
 = javascript_include_tag "hackathon_manager/vendor/topojson.v1.min.js"
 
-%section.section.manage
-  %h1.section-title= title "Dashboard"
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+  %h1.h2= title "Dashboard"
 
-  .container.container-full
+.row
+  .col
     #map
     :javascript
       $('#map').initMap();
 
-  .container.container-half{ style: "width: 59%" }
-    %h4.dashboard-container-title  Today's Activity
+.row
+  .col-7
+    %h5.dashboard-container-title  Today's Activity
     = area_chart todays_activity_data_manage_dashboard_index_path, colors: [blue, green, red, grey]
-  .container.container-half{ style: "width: 39%" }
-    %h4.dashboard-container-title Today's Stats
+  .col
+    %h5.dashboard-container-title Today's Stats
     = pie_chart todays_stats_data_manage_dashboard_index_path, colors: [blue, green, red, grey]
 
-  .container.container-full
-    %h4.dashboard-container-title Confirmation Activity
+.row
+  .col
+    %h5.dashboard-container-title Confirmation Activity
     .graph-overlay.double-metrics
       %h3= Questionnaire.where("checked_in_at != 0").count
       %p total checked in
@@ -33,29 +36,36 @@
       %p total confirmed
     = area_chart confirmation_activity_data_manage_dashboard_index_path, colors: [green, red], library: { legend: { enabled: false } }
 
-  .container.container-full
-    %h4.dashboard-container-title Application Activity
+.row
+  .col
+    %h5.dashboard-container-title Application Activity
     .graph-overlay
       %h3= Questionnaire.count
       %p total applications
     = area_chart application_activity_data_manage_dashboard_index_path, colors: [blue, orange, grey], library: { legend: { enabled: false } }
 
-  .container.container-half
-    %h4.dashboard-container-title User Distribution
+.row
+  .col
+    %h5.dashboard-container-title User Distribution
     = pie_chart user_distribution_data_manage_dashboard_index_path, colors: [grey, blue, orange]
-  .container.container-half
-    %h4.dashboard-container-title Application Distribution
+  .col
+    %h5.dashboard-container-title Application Distribution
     = pie_chart application_distribution_data_manage_dashboard_index_path, colors: [colors[:pending], colors[:accepted], colors[:waitlisted], colors[:denied], colors[:late_waitlist], colors[:rsvp_confirmed], colors[:rsvp_denied]]
 
-  .container.container-full
-    %h4.dashboard-container-title Schools (Confirmed)
+.row
+  .col
+    %h5.dashboard-container-title Schools (Confirmed)
     %ul
       = bar_chart schools_confirmed_data_manage_dashboard_index_path, height: "600px", stacked: true, colors: [blue, orange]
-    %h4.dashboard-container-title Schools (Applied)
+
+.row
+  .col
+    %h5.dashboard-container-title Schools (Applied)
     %ul
       = bar_chart schools_applied_data_manage_dashboard_index_path, height: "600px", stacked: true, colors: [colors[:rsvp_confirmed], colors[:accepted], colors[:waitlist], colors[:late_waitlist], colors[:rsvp_denied], colors[:denied], colors[:pending]], library: { legend: { enabled: false } }
     - if School.where("questionnaire_count >= 1 AND questionnaire_count < 5").count > 0
-      %button{ onclick: "$('#least-applied-schools').toggle()" }= "List schools with < 5 applicants"
+      %p
+        %button.btn.btn-light{ onclick: "$('#least-applied-schools').toggle()" }= "List schools with < 5 applicants"
       %ul#least-applied-schools{ style: "display: none" }
         - School.where("questionnaire_count >= 1 AND questionnaire_count < 5").select([:name, :questionnaire_count]).order("questionnaire_count DESC").each do |school|
           %li= "#{school.questionnaire_count} - #{school.name}"

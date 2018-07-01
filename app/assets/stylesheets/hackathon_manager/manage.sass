@@ -1,50 +1,69 @@
-@import core
+@import bootstrap
+@import dashboard
+
+$grey-dark: #555
+$grey-med: #999
+
+// external dependencies
+@import font-awesome
 @import dataTables/jquery.dataTables
 @import datatables/buttons.dataTables.min
 @import selectize
 @import selectize.default
 
-.manage
-  padding-left: 20px
-  padding-right: 20px
-  padding-top: 50px
+.icon-space-r
+  margin-right: 0.5em
 
-  .container-half, .container-full
-    max-width: none
-    @media (max-width: 600px)
-      padding-left: 0
-      padding-right: 0
-  .container-half
-    display: inline-block
-    width: 49.6% // weird issue with percentaces
-    vertical-align: top
-    @media (max-width: 600px)
-      width: 100%
-  .container-full
-    display: inline-block
-    width: 100%
-    vertical-align: top
-    margin: 0
+.icon-space-l
+  margin-left: 0.5em
 
-#manageNav
-  z-index: 1
-  width: 100%
-  background: $black
-  color: $white
-  padding: 16px 20px 6px
-  p, a
-    margin: 0 5px 10px
-  p
-    color: $primary
-    display: inline-block
-    margin-top: 0
-    &:first-child
-      margin-right: 10px
-  a
-    color: $white
-    display: inline-block
-    &:hover
-      color: darken($grey-light, 5%)
+.icon-space-r-half
+  margin-right: 0.25em
+
+.icon-space-l-half
+  margin-left: 0.25em
+
+// .manage
+//   padding-left: 20px
+//   padding-right: 20px
+//   padding-top: 50px
+
+//   .container-half, .container-full
+//     max-width: none
+//     @media (max-width: 600px)
+//       padding-left: 0
+//       padding-right: 0
+//   .container-half
+//     display: inline-block
+//     width: 49.6% // weird issue with percentaces
+//     vertical-align: top
+//     @media (max-width: 600px)
+//       width: 100%
+//   .container-full
+//     display: inline-block
+//     width: 100%
+//     vertical-align: top
+//     margin: 0
+
+// #manageNav
+//   z-index: 1
+//   width: 100%
+//   background: $black
+//   color: $white
+//   padding: 16px 20px 6px
+//   p, a
+//     margin: 0 5px 10px
+//   p
+//     color: $primary
+//     display: inline-block
+//     margin-top: 0
+//     &:first-child
+//       margin-right: 10px
+//   a
+//     color: $white
+//     display: inline-block
+//     &:hover
+//       color: darken($grey-light, 5%)
 
 .land
   fill: #dadada
@@ -69,11 +88,10 @@
   text-align: center
 
 .dashboard-container-title
-  color: $grey-dark
-  border-bottom: 5px solid $primary
+  border-bottom: 3px solid #e5e5e5
   padding: 9px 12px
-  font-size: 17px
-  color: lighten($grey-dark, 10%)
+  margin-top: 12px
+  margin-bottom: 8px
 
 .graph-overlay
   text-align: center
