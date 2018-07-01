@@ -100,7 +100,7 @@ class Questionnaire < ApplicationRecord
   belongs_to :user
 
   def email
-    user.email
+    user&.email
   end
 
   def portfolio_url=(value)

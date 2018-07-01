@@ -177,6 +177,11 @@ class QuestionnaireTest < ActiveSupport::TestCase
       questionnaire.user.email = "joe.smith@example.com"
       assert_equal "joe.smith@example.com", questionnaire.email
     end
+
+    should "return nil without a user" do
+      questionnaire = create(:questionnaire, user: nil)
+      assert_nil questionnaire.email
+    end
   end
 
   context "#acc_status_author" do
