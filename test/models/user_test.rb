@@ -51,7 +51,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   context "queue_reminder_email" do
-    before do
+    setup do
       ActionMailer::Base.deliveries = []
       Sidekiq::Extensions::DelayedMailer.jobs.clear
     end

@@ -17,7 +17,6 @@ if ["manual", "travis"].include?(ENV["RUN_COVERAGE"])
 end
 
 require "rails/test_help"
-require "minitest/rails"
 require "strip_attributes/matchers"
 require "minitest/reporters"
 require "valid_attribute"

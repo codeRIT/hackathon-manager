@@ -219,9 +219,6 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    minitest-rails (3.0.0)
-      minitest (~> 5.8)
-      railties (~> 5.0)
     minitest-reporters (1.3.0)
       ansi
       builder
@@ -397,7 +394,6 @@ DEPENDENCIES
   guard
   guard-minitest
   hackathon_manager!
-  minitest-rails
   minitest-reporters
   rails-controller-testing
   shoulda

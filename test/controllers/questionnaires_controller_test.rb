@@ -1,11 +1,7 @@
 require 'test_helper'
+require 'minitest/mock'
 
 class QuestionnairesControllerTest < ActionController::TestCase
-  before do
-    ActionMailer::Base.deliveries = []
-    Sidekiq::Extensions::DelayedMailer.jobs.clear
-  end
-
   setup do
     @school = create(:school, name: "Another School")
     @questionnaire = create(:questionnaire, school_id: @school.id)

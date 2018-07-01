@@ -1,11 +1,6 @@
 require 'test_helper'
 
 class Manage::BusListsControllerTest < ActionController::TestCase
-  before do
-    ActionMailer::Base.deliveries = []
-    Sidekiq::Extensions::DelayedMailer.jobs.clear
-  end
-
   setup do
     @bus_list = create(:bus_list)
     questionnaire = create(:questionnaire, riding_bus: true, acc_status: 'rsvp_confirmed')

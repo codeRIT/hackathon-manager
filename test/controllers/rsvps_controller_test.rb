@@ -1,11 +1,6 @@
 require 'test_helper'
 
 class RsvpsControllerTest < ActionController::TestCase
-  before do
-    ActionMailer::Base.deliveries = []
-    Sidekiq::Extensions::DelayedMailer.jobs.clear
-  end
-
   setup do
     @school = create(:school, name: "Another School")
     @questionnaire = create(:questionnaire, school_id: @school.id)
@@ -91,6 +86,9 @@ class RsvpsControllerTest < ActionController::TestCase
 
   context "while authenticated with an accepted questionnaire" do
     setup do
+      ActionMailer::Base.deliveries = []
+      Sidekiq::Extensions::DelayedMailer.jobs.clear
+
       @request.env["devise.mapping"] = Devise.mappings[:admin]
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")

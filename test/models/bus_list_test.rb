@@ -10,7 +10,7 @@ class BusListTest < ActiveSupport::TestCase
   should have_many :schools
 
   context "#passengers" do
-    before do
+    setup do
       @bus_list = create(:bus_list)
       @school = create(:school, bus_list_id: @bus_list.id)
     end
@@ -45,7 +45,7 @@ class BusListTest < ActiveSupport::TestCase
   end
 
   context "#checked_in_passengers" do
-    before do
+    setup do
       @bus_list = create(:bus_list)
       @school = create(:school, bus_list_id: @bus_list.id)
     end
@@ -63,7 +63,7 @@ class BusListTest < ActiveSupport::TestCase
   end
 
   context "#captians" do
-    before do
+    setup do
       @bus_list = create(:bus_list)
       @school = create(:school, bus_list_id: @bus_list.id)
     end

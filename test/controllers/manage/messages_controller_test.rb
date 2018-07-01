@@ -1,12 +1,6 @@
 require 'test_helper'
 
 class Manage::MessagesControllerTest < ActionController::TestCase
-  before do
-    ActionMailer::Base.deliveries = []
-    Sidekiq::Extensions::DelayedMailer.jobs.clear
-    Sidekiq::Worker.clear_all
-  end
-
   setup do
     @message = create(:message)
   end
@@ -60,8 +54,9 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "not deliver message" do
-      patch :deliver, params: { id: @message }
-      assert_equal 0, BulkMessageWorker.jobs.size, "should not trigger messages worker"
+      assert_difference('BulkMessageWorker.jobs.size', 0) do
+        patch :deliver, params: { id: @message }
+      end
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
@@ -137,8 +132,9 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "not deliver message" do
-      patch :deliver, params: { id: @message }
-      assert_equal 0, BulkMessageWorker.jobs.size, "should not trigger messages worker"
+      assert_difference('BulkMessageWorker.jobs.size', 0) do
+        patch :deliver, params: { id: @message }
+      end
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -211,8 +207,9 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "not deliver message" do
-      patch :deliver, params: { id: @message }
-      assert_equal 0, BulkMessageWorker.jobs.size, "should not trigger messages worker"
+      assert_difference('BulkMessageWorker.jobs.size', 0) do
+        patch :deliver, params: { id: @message }
+      end
       assert_response :redirect
       assert_redirected_to manage_messages_path
     end
@@ -276,9 +273,9 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "deliver message" do
-      assert_equal 0, BulkMessageWorker.jobs.size, "worker should not be running prior to delivery"
-      patch :deliver, params: { id: @message }
-      assert_equal 1, BulkMessageWorker.jobs.size, "should trigger messages worker"
+      assert_difference('BulkMessageWorker.jobs.size', 1) do
+        patch :deliver, params: { id: @message }
+      end
       assert_match /queued/, flash[:notice]
       assert_redirected_to manage_message_path(assigns(:message))
     end

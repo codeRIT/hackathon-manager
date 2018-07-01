@@ -1,12 +1,6 @@
 require 'test_helper'
 
 class Manage::QuestionnairesControllerTest < ActionController::TestCase
-  before do
-    ActionMailer::Base.deliveries = []
-    Sidekiq::Extensions::DelayedMailer.jobs.clear
-    SlackInviteWorker.jobs.clear
-  end
-
   setup do
     @questionnaire = create(:questionnaire)
   end
