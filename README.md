@@ -1,4 +1,10 @@
-# HackathonManager [![Build Status](https://travis-ci.org/codeRIT/hackathon_manager.svg?branch=master)](https://travis-ci.org/codeRIT/hackathon_manager) [![Code Climate](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/gpa.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager) [![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager/coverage) [![security](https://hakiri.io/github/codeRIT/hackathon_manager/master.svg)](https://hakiri.io/github/codeRIT/hackathon_manager/master)
+# HackathonManager
+
+[![Gem](https://img.shields.io/gem/v/hackathon_manager.svg)](https://rubygems.org/gems/hackathon_manager/)
+[![Build Status](https://travis-ci.org/codeRIT/hackathon_manager.svg?branch=master)](https://travis-ci.org/codeRIT/hackathon_manager)
+[![Code Climate](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/gpa.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager)
+[![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager/coverage)
+[![security](https://hakiri.io/github/codeRIT/hackathon_manager/master.svg)](https://hakiri.io/github/codeRIT/hackathon_manager/master)
 
 ***Still a work in progress! Instructions below are incomplete.** Check out [WiCHacks](https://github.com/sman591/wichacks) for an implementation example.*
 
