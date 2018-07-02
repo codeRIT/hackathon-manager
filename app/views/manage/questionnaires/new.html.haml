@@ -1,8 +1,3 @@
-%section.section.manage
-  %h1.section-title= title "New Questionnaire"
+= render "layouts/manage/page_title", title: "New Questionnaire"
 
-  = render 'form'
-
-  .form-container
-    .center
-      = link_to 'Back', manage_questionnaires_path
+= render "form"

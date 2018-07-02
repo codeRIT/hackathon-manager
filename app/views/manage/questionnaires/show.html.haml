@@ -1,15 +1,22 @@
-%section.section.manage
-  .container.container-half
+= render "layouts/manage/page_title", title: @questionnaire.full_name, subtitle: "Questionnaire" do
+  .btn-group
+    - unless current_user.admin_limited_access
+      = link_to 'Edit', edit_manage_questionnaire_path(@questionnaire), class: 'btn btn-sm btn-outline-secondary'
+      = link_to 'Convert to Admin', convert_to_admin_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.full_name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Invite to Slack', invite_to_slack_manage_questionnaire_path(@questionnaire), method: :patch, class: 'btn btn-sm btn-outline-secondary'
+
+.row
+  .col-md-6
     - if @questionnaire.minor?
-      #disclaimer
+      .alert.alert-warning
         %p
           %strong
-            %span.fa.fa-exclamation-triangle.icon-space-r
+            %span.fa.fa-exclamation-triangle.icon-space-r-half
             Applicant is a minor
-        %p
+        %p.mb-0
           Will be
           = format_age(@questionnaire.age_at_time_of_event)
-          old.
+          old at the start of the event.
 
     = render partial: 'questionnaire_summary'
 
@@ -17,17 +24,7 @@
       %b Accepted Agreement:
       = @questionnaire.agreement_accepted ? "Yes" : "<span style='color: red'><strong>NO</strong></span>".html_safe
 
-  .container.container-half
-    - unless current_user.admin_limited_access
-      = link_to 'Edit', edit_manage_questionnaire_path(@questionnaire)
-      \|
-      = link_to 'Convert to Admin', convert_to_admin_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.full_name}\" will be permanently erased. This action is irreversible." }
-      \|
-    = link_to 'Invite to Slack', invite_to_slack_manage_questionnaire_path(@questionnaire), method: :patch
-    \|
-    = link_to 'Back', manage_questionnaires_path
-    %hr
-
+  .col-md-6
     %p
       %b Acceptance Status:
       %span{class: "acc-status-#{@questionnaire.acc_status}"}
