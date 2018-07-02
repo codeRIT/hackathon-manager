@@ -1,9 +1,5 @@
-.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-  %h1.h2= title "Questionnaires"
-  - unless current_user.admin_limited_access?
-    .btn-toolbar.mb-2.mb-md-0
-      .btn-group.mr-2
-        = link_to 'New Questionnaire', new_manage_questionnaire_path, class: 'btn btn-sm btn-outline-secondary'
+= render "layouts/manage/page_title", title: "Questionnaires" do
+  = link_to "New Questionnaire", new_manage_questionnaire_path, class: "btn btn-sm btn-outline-secondary"
 
 %div
   - if ENV['INVITE_TO_SLACK_UPON_RSVP']

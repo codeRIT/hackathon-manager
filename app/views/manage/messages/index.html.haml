@@ -1,6 +1,7 @@
-%section.section.manage
-  %h1.section-title= title "Listing Messages"
+= render "layouts/manage/page_title", title: "Messages" do
+  = link_to "New Message", new_manage_message_path, class: "btn btn-sm btn-outline-secondary"
 
+%div
   %table.messages.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_messages_path(format: :json) }
     %thead
       %tr
@@ -13,11 +14,6 @@
         %th Bulk Delivered
     %tbody
 
-  %br
-
-  - unless current_user.admin_limited_access
-    %p= btn_link_to 'New Message', new_manage_message_path
-
-  %br
+  %hr
 
   = render 'triggered_email_summary'
