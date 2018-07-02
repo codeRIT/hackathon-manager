@@ -26,11 +26,27 @@ module HackathonManagerHelper
     markdown.render(text).html_safe
   end
 
+  # Same as link_to, but adds a special active class whenever the link matches
+  # the current page.
+  # Only  https://github.com/rails/rails/blob/master/actionview/lib/action_view/helpers/url_helper.rb
   def active_link_to(name = nil, options = nil, html_options = nil, &block)
-    if current_page?(options)
-      html_options[:class] = html_options[:class] + ' ' + html_options[:active_class]
+    html_options, options, name = options, name, block if block_given?
+    options ||= {}
+
+    html_options = convert_options_to_data_attributes(options, html_options)
+
+    url = url_for(options)
+    html_options["href".freeze] ||= url
+
+    # Begin custom
+    if current_page?(url)
+      active_class = html_options.delete('active_class') || 'active'
+      existing_class = html_options['class'] || ''
+      html_options['class'] = existing_class + ' ' + active_class
     end
-    link_to(name, options, html_options, &block)
+    # End custom
+
+    content_tag("a".freeze, name || url, html_options, &block)
   end
 
   # https://github.com/rails/sprockets-rails/issues/298#issuecomment-168927471
