@@ -18,11 +18,18 @@ $.extend( $.fn.dataTable.defaults, {
     [ '10', '25', '50', '100', 'all' ]
   ],
   buttons: [
-    'pageLength',
-    'colvis',
+    {
+      extend: 'pageLength',
+      className: 'btn btn-sm btn-outline-secondary buttons-collection dropdown-toggle',
+    },
+    {
+      extend: 'colvis',
+      className: 'btn btn-sm btn-outline-secondary buttons-collection dropdown-toggle',
+    },
     {
       extend: 'collection',
       text: 'Export',
+      className: 'btn btn-sm btn-outline-secondary buttons-collection dropdown-toggle',
       buttons: [
         {
           extend: 'csv',

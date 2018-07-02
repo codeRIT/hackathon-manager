@@ -10,7 +10,7 @@ var setupDataTables = function() {
       { orderable: true, data: 'id' },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email' },
+      { orderable: true, data: 'email', visible: false },
       { orderable: true, data: 'phone', visible: false },
       { orderable: true, data: 'gender', visible: false },
       { orderable: true, data: 'date_of_birth', visible: false },
