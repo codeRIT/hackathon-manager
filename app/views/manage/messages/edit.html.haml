@@ -1,11 +1,4 @@
-%section.section.manage
-  .form-container
-    %h1.section-title= title "Editing Message"
+= render "layouts/manage/page_title", title: "Edit Message", subtitle: @message.name do
+  = link_to 'Cancel', manage_message_path(@message), class: 'btn btn-sm btn-outline-secondary'
 
-  = render 'form'
-
-  .form-container
-    .center
-      = link_to 'Show', manage_message_path(@message)
-      \|
-      = link_to 'Back', manage_messages_path
+= render 'form'
