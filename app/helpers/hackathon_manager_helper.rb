@@ -39,7 +39,10 @@ module HackathonManagerHelper
     html_options["href".freeze] ||= url
 
     # Begin custom
-    if current_page?(url)
+    active_children = html_options.delete('active_children')
+    active_children = true if active_children.nil?
+    current_url = request.env['PATH_INFO']
+    if current_page?(url) || (active_children && current_url.include?(url))
       active_class = html_options.delete('active_class') || 'active'
       existing_class = html_options['class'] || ''
       html_options['class'] = existing_class + ' ' + active_class
