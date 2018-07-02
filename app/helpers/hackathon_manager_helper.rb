@@ -61,4 +61,35 @@ module HackathonManagerHelper
   def collection_or_text(model_value, collection)
     model_value.blank? || collection.include?(model_value) ? collection : nil
   end
+
+  def acc_status_class(acc_status)
+    case acc_status
+    when "denied"
+      "danger"
+    when "accepted"
+      "success"
+    when "waitlist"
+      "info"
+    when "late_waitlist"
+      "secondary"
+    when "pending"
+      "secondary"
+    when "rsvp_denied"
+      "danger"
+    when "rsvp_confirmed"
+      "success"
+    end
+  end
+
+  def display_datetime(datetime, opts = {})
+    formatted = ""
+    if Time.now - datetime < 5.hours
+      formatted << "#{time_ago_in_words(datetime, include_seconds: true)} ago"
+    else
+      format = datetime.year == Time.now.year ? "%b %-d at %I:%M %P" : "%b %-d, %Y at %I:%M %P"
+      formatted << "on " if opts[:in_sentence]
+      formatted << datetime.strftime(format)
+    end
+    "<span title=\"#{datetime}\">#{formatted}</span>".html_safe
+  end
 end

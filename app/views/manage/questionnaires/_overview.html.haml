@@ -1,0 +1,123 @@
+- not_provided = "<span class=\"text-muted\">Not provided</span>".html_safe.freeze
+
+.row
+  .col-md-6
+    - if @questionnaire.minor?
+      .alert.alert-warning
+        %p.mb-1
+          %strong
+            %span.fa.fa-exclamation-triangle.icon-space-r-half
+            Applicant is a minor
+        %p.mb-0
+          Will be
+          = format_age(@questionnaire.age_at_time_of_event)
+          old at the start of the event.
+
+    .card.mb-3
+      .card-header Personal Information
+      .card-body
+        .row
+          %dt.col-md-4 First name
+          %dd.col-md-8= @questionnaire.first_name
+          %dt.col-md-4 Last name
+          %dd.col-md-8= @questionnaire.last_name
+          %dt.col-md-4 Email
+          %dd.col-md-8= @questionnaire.email
+          %dt.col-md-4 Phone
+          %dd.col-md-8= @questionnaire.phone
+          %dt.col-md-4 Date of birth
+          %dd.col-md-8= @questionnaire.date_of_birth_formatted
+          %dt.col-md-4 Gender
+          %dd.col-md-8= @questionnaire.gender
+          %dt.col-md-4 Shirt size
+          %dd.col-md-8= @questionnaire.shirt_size
+
+    .card.mb-3
+      .card-header Compliance
+      .card-body.px-0.py-0
+        %ul.list-group.list-group-flush
+          - if @questionnaire.agreement_accepted
+            %li.list-group-item
+              .text-success
+                %span.fa.fa-check.fa-fw.icon-space-r
+                Event Agreement
+          - else
+            %li.list-group-item.list-group-item-danger
+              %span.fa.fa-close.fa-fw.icon-space-r
+              Event Agreement
+          - if @questionnaire.code_of_conduct_accepted
+            %li.list-group-item
+              .text-success
+                %span.fa.fa-check.fa-fw.icon-space-r
+                MLH Code of Conduct
+          - else
+            %li.list-group-item.list-group-item-danger
+              %span.fa.fa-close.fa-fw.icon-space-r
+              MLH Code of Conduct
+          - if @questionnaire.data_sharing_accepted
+            %li.list-group-item
+              .text-success
+                %span.fa.fa-check.fa-fw.icon-space-r
+                MLH Data Sharing
+          - else
+            %li.list-group-item.list-group-item-danger
+              %span.fa.fa-close.fa-fw.icon-space-r
+              MLH Data Sharing
+          - if !@questionnaire.minor?
+            %li.list-group-item
+              .text-success
+                %span.fa.fa-check.fa-fw.icon-space-r
+                18 years or older
+          - else
+            %li.list-group-item.list-group-item-warning
+              %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
+              18 years or older
+
+  .col-md-6
+    .card.mb-3
+      .card-header Special notices
+      .card-body
+        .row
+          %dt.col-md-4 Dietary restrictions
+          %dd.col-md-8= @questionnaire.dietary_restrictions || "<span class=\"text-muted\">(none)</span>".html_safe
+          %dt.col-md-4 Special needs
+          %dd.col-md-8= @questionnaire.special_needs || "<span class=\"text-muted\">(none)</span>".html_safe
+          %dt.col-md-4 Traveling from
+          %dd.col-md-8
+            = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "<span class=\"text-muted\">My school</span>".html_safe
+
+    .card.mb-3
+      .card-header Resume
+      .card-body
+        .row
+          - if HackathonManager.field_enabled?(:why_attend)
+            %dt.col-md-4 Why #{Rails.configuration.hackathon['name']}?
+            %dd.col-md-8
+              = @questionnaire.why_attend.presence || not_provided
+          %dt.col-md-4 Experience
+          %dd.col-md-8
+            = Questionnaire::POSSIBLE_EXPERIENCES[@questionnaire.experience]
+          %dt.col-md-4 Portfolio
+          %dd.col-md-8
+            = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank') : not_provided
+          %dt.col-md-4 GitHub/BitBucket
+          %dd.col-md-8
+            = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : not_provided
+          %dt.col-md-4 Resume
+          %dd.col-md-8
+            = @questionnaire.resume? ? link_to("Download &raquo;".html_safe, @questionnaire.resume.url) : not_provided
+
+    .card.mb-3
+      .card-header Education
+      .card-body
+        .row
+          %dt.col-md-4 School
+          %dd.col-md-8
+            - school = @questionnaire.school
+            = link_to school.name, manage_school_path(school)
+            - if school.full_location.present?
+              %div.small.text-muted= school.full_location
+          %dt.col-md-4 Major
+          %dd.col-md-8= @questionnaire.major
+          %dt.col-md-4 Level of study
+          %dd.col-md-8= @questionnaire.level_of_study

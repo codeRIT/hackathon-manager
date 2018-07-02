@@ -1,5 +1,7 @@
 //= require_directory ../
 //= require_directory .
+//= require popper
+//= require bootstrap
 //= require ../vendor/datatables.min
 //= require selectize
 //= require highcharts
