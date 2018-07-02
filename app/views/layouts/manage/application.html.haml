@@ -59,14 +59,16 @@
                     Config
                     .nav-item-description View configuration
                 %li.nav-item
-                  = active_link_to sidekiq_web_path, class: "nav-link" do
+                  = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half
                     Sidekiq
+                    %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description Monitor background jobs
                 %li.nav-item
-                  = active_link_to blazer_path, class: "nav-link" do
+                  = active_link_to blazer_path, target: '_blank', class: "nav-link" do
                     .fa.fa-terminal.fa-fw.icon-space-r-half
                     Blazer
+                    %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description Run custom SQL queries
         %main.col-md-9.ml-sm-auto.col-lg-10.px-4{role: "main"}
           = render "layouts/manage/flashes"
