@@ -14,7 +14,6 @@ PATH
       haml-rails
       highcharts-rails (~> 4.2)
       httparty
-      jquery-datatables-rails (~> 3.4)
       jquery-rails
       jquery-ui-sass-rails
       mysql2
@@ -195,11 +194,6 @@ GEM
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
-    jquery-datatables-rails (3.4.0)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)

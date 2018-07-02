@@ -1,54 +1,6 @@
 var setupDataTables = function() {
 
-  var defaultDataTableOptions = function() {
-    return {
-      dom: 'Bfrtip',
-      processing : true,
-      serverSide : true,
-      ajax       : {
-        url   : $(this).data('source'),
-        type  : "POST"
-      },
-      pagingType : 'full_numbers',
-      lengthMenu: [
-        [ 10, 25, 50, 100, -1 ],
-        [ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
-      ],
-      buttons: [
-        'pageLength',
-        'colvis',
-        {
-          extend: 'collection',
-          text: 'Export',
-          buttons: [
-            {
-              extend: 'csv',
-              exportOptions: {
-                columns: ':visible'
-              }
-            },
-            {
-              extend: 'pdfHtml5',
-              exportOptions: {
-                columns: ':visible'
-              }
-            },
-          ]
-        }
-      ]
-    }
-  };
-
-  var setupDataTable = function($table, options) {
-    var lastTable;
-    $table.each(function() {
-      lastTable = $(this).DataTable($.extend(defaultDataTableOptions.call(this), options));
-    });
-
-    return lastTable;
-  };
-
-  window.questionnairesDataTable = setupDataTable($('.datatable.questionnaires'), {
+  window.questionnairesDataTable = $('.datatable.questionnaires').DataTable({
     order      : [3, 'desc'],
     scrollX    : false,
     columns    : [
@@ -69,7 +21,7 @@ var setupDataTables = function() {
     ]
   });
 
-  setupDataTable($('.datatable.users'), {
+  $('.datatable.users').DataTable({
     order      : [1, 'asc'],
     scrollX    : false,
     columns    : [
@@ -80,7 +32,7 @@ var setupDataTables = function() {
     ]
   });
 
-  setupDataTable($('.datatable.messages'), {
+  $('.datatable.messages').DataTable({
     order      : [1, 'desc'],
     scrollX    : false,
     columns    : [
@@ -94,7 +46,7 @@ var setupDataTables = function() {
     ]
   });
 
-  setupDataTable($('.datatable.schools'), {
+  $('.datatable.schools').DataTable({
     order      : [5, 'desc'],
     scrollX    : false,
     columns    : [
@@ -108,7 +60,7 @@ var setupDataTables = function() {
     ]
   });
 
-  setupDataTable($('.datatable.stats'), {
+  $('.datatable.stats').DataTable({
     scrollX    : false,
     processing : false,
     serverSide : false

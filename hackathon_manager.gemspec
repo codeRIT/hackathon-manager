@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-sass-rails'
-  s.add_dependency 'jquery-datatables-rails', '~> 3.4'
   s.add_dependency 'selectize-rails'
   s.add_dependency 'highcharts-rails', '~> 4.2'
   s.add_dependency 'uglifier', '~> 3.0'
