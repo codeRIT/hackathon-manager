@@ -26,7 +26,10 @@
           %dt.col-md-4 Phone
           %dd.col-md-8= @questionnaire.phone
           %dt.col-md-4 Date of birth
-          %dd.col-md-8= @questionnaire.date_of_birth_formatted
+          %dd.col-md-8
+            = @questionnaire.date_of_birth_formatted
+            %span.badge.badge-pill.badge-dark{"data-container" => "body", "data-toggle" => "popover", "data-placement" => "right", "data-content" => "Age at time of event", "data-trigger" => "hover"}
+              = @questionnaire.age_at_time_of_event / 1.year
           %dt.col-md-4 Gender
           %dd.col-md-8= @questionnaire.gender
           %dt.col-md-4 Shirt size

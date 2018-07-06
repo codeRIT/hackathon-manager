@@ -15,4 +15,5 @@ $(document).ready(function() {
   $('body').chartkickAutoReload();
   setupDataTables();
   setupHighcharts();
+  $('[data-toggle="popover"]').popover();
 });
