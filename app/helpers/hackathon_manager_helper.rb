@@ -95,4 +95,10 @@ module HackathonManagerHelper
     end
     "<span title=\"#{datetime}\">#{formatted}</span>".html_safe
   end
+
+  def google_maps_link(*args)
+    query = args.reject(&:blank?).join('+')
+    query = URI.escape(query)
+    "https://www.google.com/maps/search/?api=1&query=#{query}"
+  end
 end

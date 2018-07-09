@@ -49,7 +49,7 @@ class Message < ApplicationRecord
         "(unknown)"
       end
     end
-    labels.join(', ')
+    labels
   end
 
   def delivered?

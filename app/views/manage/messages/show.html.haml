@@ -4,7 +4,7 @@
   rescue => recipient_error
   end
 
-= render "layouts/manage/page_title", title: "Message", subtitle: @message.name do
+= render "layouts/manage/page_title", title: @message.name, subtitle: "Message" do
   .btn-group
     - if @message.can_queue?
       - if recipient_error.present?
@@ -18,56 +18,63 @@
       = link_to 'Delete', manage_message_path(@message), method: :delete, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
     = link_to 'Duplicate', duplicate_manage_message_path(@message), method: :patch, class: 'btn btn-sm btn-outline-secondary'
 
-%div
-  %p
-    %b Name:
-    = @message.name
-  %p
-    %b Subject:
-    = @message.subject
-  %p
-    %b Template:
-    = @message.template.titleize
-  %p
-    %b Recipients:
-    = @message.recipients_list.presence || "(none)"
-    %br
-    %small
-      %em Sent manually, in bulk
-    - if @message.recipients.present?
-      %br
+.row
+  .col-lg-6
+    %dl.row
+      %dt.col-md-3 Name
+      %dd.col-md-9= @message.name
+      %dt.col-md-3 Subject
+      %dd.col-md-9= @message.subject
+      %dt.col-md-3 Template
+      %dd.col-md-9= @message.template.titleize
+  .col-lg-6
+    %p.mb-1
+      %b Recipients
       %small
+        %em Sent manually, in bulk
+    %ul.pl-4.mb-1
+      - @message.recipients_list.each do |recipient|
+        %li= recipient
+    - if @message.recipients.blank?
+      %p.text-muted (none)
+    - if @message.recipients.present?
+      %p.small
         - if recipient_error.present?
           %strong{style: 'color: red;'} Error parsing recipients:
           = recipient_error
           %br To resolve this, edit & remove the offending recipient.
         - else
           %em #{recipient_count} currently match this query
-  %p
-    %b Trigger:
-    = Message::POSSIBLE_TRIGGERS[@message.trigger] || "(no automatic trigger)"
-    %br
-    %small
-      %em Sent automatically, to an individual applicant
+    %p.mb-1
+      %b Trigger
+      %small
+        %em Sent automatically, to an individual applicant
+    %p
+      = Message::POSSIBLE_TRIGGERS[@message.trigger] || "(no automatic trigger)"
+
+%div
   %p
     %b Preview:
-    = link_to "Open full preview &raquo;".html_safe, preview_manage_message_path
+    = link_to preview_manage_message_path, target: '_blank' do
+      Open full preview
+      %span.fa.fa-external-link.icon-space-l-half
 
   %iframe.email-preview{src: preview_manage_message_path(@message)}
 
   - if @message.recipients_list.present?
-    %fieldset
-      %legend Bulk delivery details
-      %p
-        %b
-          Status:
-          = @message.status.titleize
-      %p
-        %b Queued At:
-        = @message.queued_at || "(n/a)"
-      %p
-        %b Started At:
-        = @message.started_at || "(n/a)"
-      %p
-        %b Delivered At:
-        = @message.delivered_at || "(n/a)"
+    .card.mt-3.mb-3
+      .card-body
+        %h5.card-title Bulk delivery details
+        %p.card-text
+          %b
+            Status:
+            = @message.status.titleize
+        %p.card-text
+          %b Queued At:
+          = @message.queued_at || "(n/a)"
+        %p.card-text
+          %b Started At:
+          = @message.started_at || "(n/a)"
+        %p.card-text
+          %b Delivered At:
+          = @message.delivered_at || "(n/a)"

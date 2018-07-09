@@ -5,26 +5,33 @@
 
 .row
   .col-md-6
-    %h4.pb-1 Details
-    %p
-      %b Name:
-      = @school.name
-    %p
-      %b Address:
-      = @school.address || "(not provided)"
-    %p
-      %b City:
-      = @school.city || "(not provided)"
-    %p
-      %b State:
-      = @school.state || "(not provided)"
-    %p
-      %b Bus List:
-      = @school.bus_list ? link_to(@school.bus_list.name, manage_bus_list_path(@school.bus_list)) : '(not assigned)'
+    %h4.border-bottom.pb-2.mb-3 Details
+    %dl.row
+      %dt.col-md-4 Name
+      %dd.col-md-8
+        = @school.name
+        %br
+        %small
+          = link_to google_maps_link(@school.name), target: '_blank' do
+            Search in Google Maps
+            %span.fa.fa-external-link.icon-space-l-half
+      %dt.col-md-4 Address
+      %dd.col-md-8
+        - if @school.address.present?
+          = @school.address
+          %br
+        = @school.full_location
+        %br
+        %small
+          - link = google_maps_link(@school.address, @school.city, @school.state)
+          = link_to link, target: '_blank' do
+            Search in Google Maps
+            %span.fa.fa-external-link.icon-space-l-half
+      %dt.col-md-4 Bus List
+      %dd.col-md-8= @school.bus_list ? link_to(@school.bus_list.name, manage_bus_list_path(@school.bus_list)) : '(not assigned)'
 
   .col-md-6
-    %h4.pb-1 Duplicate Names
-    %p If someone attempts to apply using a name below, they'll automatically be converted to this school.
+    %h4.pb-0 Duplicate Names
     %table.table.table-striped
       %thead
         %tr
@@ -35,15 +42,18 @@
         - dupes.each do |dupe|
           %tr
             %td= dupe.name
-            %td= dupe.created_at
+            %td= display_datetime(dupe.created_at)
         - if dupes.blank?
           %tr
             %td{colspan: 2}
               %em No duplicate names exist for this school.
+    %p.small.text-muted
+      %span.fa.fa-info-circle.icon-space-l.icon-space-r-half
+      If someone attempts to apply using a name above, they'll automatically be converted to this school.
 
 .row.mt-2
   .col
-    %h4.pb-2 Questionnaires
+    %h4.pb-0 Questionnaires
     %table.table
       %caption= "#{@school.questionnaires.count} total"
       %thead

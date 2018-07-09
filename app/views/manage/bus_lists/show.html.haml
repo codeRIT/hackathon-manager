@@ -1,28 +1,37 @@
-= render "layouts/manage/page_title", title: "Message", subtitle: @bus_list.name do
+= render "layouts/manage/page_title", title: @bus_list.name, subtitle: "Bus List" do
   .btn-group
     = link_to 'Edit', edit_manage_bus_list_path(@bus_list), class: 'btn btn-sm btn-outline-secondary'
     = link_to 'Send Email Update', send_update_email_manage_bus_list_path(@bus_list), method: :patch, data: { confirm: "Are you sure? All passengers for \"#{@bus_list.name}\" will be emailed the current bus notes." }, class: 'btn btn-sm btn-outline-secondary'
 
 .row
   .col-lg-6
-    %h4 Details
-    %p
-      %b Name:
-      = @bus_list.name
-    %p
-      %b Capacity:
-      = @bus_list.capacity
-    %p
-      %b Needs bus captain:
-      = @bus_list.needs_bus_captain ? "Yes" : "No"
-    %p
-      %b Schools:
-      %ul
-        - @bus_list.schools.each do |school|
-          %li= link_to(school.name, manage_school_path(school))
+    %h4.border-bottom.pb-2.mb-3 Details
+    %dl.row
+      %dt.col-md-5 Name
+      %dd.col-md-7= @bus_list.name
+      %dt.col-md-5 Capacity
+      %dd.col-md-7= @bus_list.capacity
+      %dt.col-md-5 Needs bus captain?
+      %dd.col-md-7= @bus_list.needs_bus_captain ? "Yes" : "No"
+    %h4.border-bottom.pb-2.mb-3 Schools
+    %ul
+      - @bus_list.schools.each do |school|
+        %li.pb-2
+          = link_to(school.name, manage_school_path(school))
+          %br
+          %small.text-muted
+            - accepted = school.questionnaires.where(acc_status: 'accepted').count
+            - no_bus = school.questionnaires.where(acc_status: 'rsvp_confirmed', riding_bus: false).count
+            = "#{accepted} yet to RSVP, #{no_bus} attending but not using bus"
 
   .col-lg-6
-    = render partial: 'bus_list_info', locals: { bus_list: @bus_list }
+    %h4.border-bottom.pb-2.mb-3 Bus Notes
+    .card.mb-2
+      .card-body
+        = render partial: 'bus_list_info', locals: { bus_list: @bus_list }
+    %p.small.text-muted
+      %span.fa.fa-info-circle.icon-space-l.icon-space-r-half
+      These notes are provided to applicants, and included in email updates.
 
 .row.mt-2
   .col
@@ -62,8 +71,7 @@
                   = link_to "Make Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: 'Are you sure? This will send a confirmation email to the bus captain.' }
 
     - if @bus_list.needs_bus_captain
-      %p
-        %strong Possible Bus Captains:
+      %h4.mt-4.pb-2 Possible Bus Captains
       %table.table
         %thead
           %tr
