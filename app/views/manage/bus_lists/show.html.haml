@@ -52,12 +52,12 @@
             %td= p.email
             %td= phone_link_to p.phone
             %td= link_to p.school.name, manage_school_path(p.school)
-            %td= p.boarded_bus? ? '<span class="acc-status-accepted">Yes</span>'.html_safe : 'No'
-            %td= p.checked_in? ? '<span class="acc-status-accepted">Yes</span>'.html_safe : 'No'
+            %td= p.boarded_bus? ? '<span class="text-success">Yes</span>'.html_safe : 'No'
+            %td= p.checked_in? ? '<span class="text-success">Yes</span>'.html_safe : 'No'
             - unless current_user.admin_limited_access
               %td
                 - if p.is_bus_captain?
-                  = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post'
+                  = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post', class: 'text-danger'
                 - else
                   = link_to "Make Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: 'Are you sure? This will send a confirmation email to the bus captain.' }
 
@@ -87,7 +87,7 @@
               - unless current_user.admin_limited_access
                 %td
                   - if p.is_bus_captain?
-                    = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post'
+                    = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post', class: 'text-danger'
                   - else
                     = link_to "Make Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: 'Are you sure? This will send a confirmation email to the bus captain.' }
 

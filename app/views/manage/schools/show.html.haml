@@ -61,5 +61,5 @@
             %td= q.first_name
             %td= q.last_name
             %td= q.email
-            %td= "<span class=\"acc-status-#{q.acc_status}\">#{Questionnaire::POSSIBLE_ACC_STATUS[q.acc_status]}</span>".html_safe
+            %td= "<span class=\"text-#{acc_status_class(q.acc_status)}\">#{Questionnaire::POSSIBLE_ACC_STATUS[q.acc_status]}</span>".html_safe
             %td= q.checked_in? ? "Yes" : "No"
