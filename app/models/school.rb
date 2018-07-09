@@ -11,7 +11,7 @@ class School < ApplicationRecord
   def full_name
     out = ""
     out << name
-    if full_location
+    if full_location.present?
       out << " in "
       out << full_location
     end
