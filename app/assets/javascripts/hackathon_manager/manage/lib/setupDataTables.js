@@ -7,7 +7,7 @@ var setupDataTables = function() {
       { orderable : false, data: 'bulk' },
       { orderable : false, data: 'link' },
       { orderable : false, data: 'note' },
-      { orderable: true, data: 'id' },
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email', visible: false },
@@ -25,19 +25,17 @@ var setupDataTables = function() {
     order      : [1, 'asc'],
     scrollX    : false,
     columns    : [
-      { orderable: false, data: 'link' },
-      { orderable: true, data: 'id' },
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'email' },
       { orderable: true, data: 'admin_limited_access' }
     ]
   });
 
   $('.datatable.messages').DataTable({
-    order      : [1, 'desc'],
+    order      : [0, 'desc'],
     scrollX    : false,
     columns    : [
-      { orderable: false, data: 'link'},
-      { orderable: true, data: 'id'},
+      { orderable: true, data: 'id', visible: false},
       { orderable: true, data: 'name'},
       { orderable: true, data: 'subject'},
       { orderable: true, data: 'trigger'},
@@ -47,11 +45,10 @@ var setupDataTables = function() {
   });
 
   $('.datatable.schools').DataTable({
-    order      : [5, 'desc'],
+    order      : [4, 'desc'],
     scrollX    : false,
     columns    : [
-      { orderable: false, data: 'link' },
-      { orderable: true, data: 'id' },
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'name' },
       { orderable: true, data: 'city' },
       { orderable: true, data: 'state' },

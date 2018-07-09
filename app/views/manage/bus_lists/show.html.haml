@@ -1,6 +1,7 @@
 = render "layouts/manage/page_title", title: @bus_list.name, subtitle: "Bus List" do
   .btn-group
     = link_to 'Edit', edit_manage_bus_list_path(@bus_list), class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Delete', manage_bus_list_path(@bus_list), method: :delete, data: { confirm: "Are you sure? The bus list \"#{@bus_list.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
     = link_to 'Send Email Update', send_update_email_manage_bus_list_path(@bus_list), method: :patch, data: { confirm: "Are you sure? All passengers for \"#{@bus_list.name}\" will be emailed the current bus notes." }, class: 'btn btn-sm btn-outline-secondary'
 
 .row

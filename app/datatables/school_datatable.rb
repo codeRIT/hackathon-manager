@@ -16,9 +16,8 @@ class SchoolDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_school_path(record)),
         id: record.id,
-        name: record.name,
+        name: link_to(record.name, manage_school_path(record)),
         city: record.city,
         state: record.state,
         questionnaire_count: record.questionnaire_count,

@@ -16,9 +16,8 @@ class MessageDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_message_path(record)),
         id: record.id,
-        name: record.name,
+        name: link_to(record.name, manage_message_path(record)),
         subject: record.subject,
         trigger: Message::POSSIBLE_TRIGGERS[record.trigger],
         status: record.status.titleize,
