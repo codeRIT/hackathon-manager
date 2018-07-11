@@ -26,9 +26,9 @@ class MessageDatatable < AjaxDatatablesRails::Base
     end
   end
 
-  # rubocop:disable Style/AccessorMethodName
+  # rubocop:disable Naming/AccessorMethodName
   def get_raw_records
     Message.unscoped
   end
-  # rubocop:enable Style/AccessorMethodName
+  # rubocop:enable Naming/AccessorMethodName
 end

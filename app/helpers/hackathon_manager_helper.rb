@@ -30,8 +30,11 @@ module HackathonManagerHelper
   # the current page.
   # Only  https://github.com/rails/rails/blob/master/actionview/lib/action_view/helpers/url_helper.rb
   def active_link_to(name = nil, options = nil, html_options = nil, &block)
+    # this is from Rails source - ignore rubocop
+    # rubocop:disable Style/ParallelAssignment
     html_options, options, name = options, name, block if block_given?
     options ||= {}
+    # rubocop:enable Style/ParallelAssignment
 
     html_options = convert_options_to_data_attributes(options, html_options)
 
@@ -98,7 +101,7 @@ module HackathonManagerHelper
 
   def google_maps_link(*args)
     query = args.reject(&:blank?).join('+')
-    query = URI.escape(query)
+    query = CGI.escape(query)
     "https://www.google.com/maps/search/?api=1&query=#{query}"
   end
 end

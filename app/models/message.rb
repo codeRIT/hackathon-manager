@@ -18,7 +18,7 @@ class Message < ApplicationRecord
     "rsvp-denied"                      => "RSVP Denied Attendees",
     "checked-in"                       => "Checked-In Attendees",
     "non-checked-in"                   => "Non-Checked-In, Accepted & RSVP'd Applications",
-    "non-checked-in-excluding"         => "Non-Checked-In Applications, Excluding Accepted & RSVP'd",
+    "non-checked-in-excluding"         => "Non-Checked-In Applications, Excluding Accepted & RSVP'd"
   }.freeze
 
   POSSIBLE_TRIGGERS = {
@@ -43,7 +43,7 @@ class Message < ApplicationRecord
     labels = recipients.map do |r|
       if POSSIBLE_SIMPLE_RECIPIENTS.include?(r)
         POSSIBLE_SIMPLE_RECIPIENTS[r]
-      elsif r =~ /(.*)::(\d*)/
+      elsif r.match? /(.*)::(\d*)/
         MessageRecipientQuery.friendly_name(r)
       else
         "(unknown)"
