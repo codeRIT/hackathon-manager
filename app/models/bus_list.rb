@@ -1,5 +1,5 @@
 class BusList < ApplicationRecord
-  validates_presence_of :name
+  validates_presence_of :name, :capacity
   validates_uniqueness_of :name
 
   has_many :schools

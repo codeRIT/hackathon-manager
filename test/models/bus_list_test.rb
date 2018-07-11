@@ -5,6 +5,7 @@ class BusListTest < ActiveSupport::TestCase
   should strip_attribute :notes
 
   should validate_presence_of :name
+  should validate_presence_of :capacity
   should validate_uniqueness_of :name
 
   should have_many :schools
