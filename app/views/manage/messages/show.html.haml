@@ -48,9 +48,9 @@
     %p.mb-1
       %b Trigger
       %small
-        %em Sent automatically, to an individual applicant
+        %em Sent automatically, to an applicant once they match this criteria
     %p
-      = Message::POSSIBLE_TRIGGERS[@message.trigger] || "(no automatic trigger)"
+      = Message::POSSIBLE_TRIGGERS[@message.trigger] || "<span class=\"text-muted\">(no automatic trigger)</span>".html_safe
 
 %div
   %p
