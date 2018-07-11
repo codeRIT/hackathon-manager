@@ -17,7 +17,7 @@ var setupDataTables = function() {
       { orderable: true, data: 'acc_status' },
       { orderable: true, data: 'checked_in' },
       { orderable: true, data: 'school' },
-      { orderable: true, data: 'created_at', visible: false }
+      { orderable: true, data: 'created_at' }
     ]
   });
 
