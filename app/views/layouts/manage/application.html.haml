@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title= yield(:title).presence || "Manage – #{Rails.configuration.hackathon['name']}"
+    %title= yield(:title).presence || "#{Rails.configuration.hackathon['name']} Manager"
     %meta{ content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport" }/
 
     - if Rails.configuration.hackathon['favicon_asset'].present?
