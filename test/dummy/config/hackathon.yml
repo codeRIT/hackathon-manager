@@ -9,6 +9,7 @@ defaults: &defaults
   # Content config
   name: HackFoo
   # logo_asset: foo.png (optional)
+  # favicon_asset: foo.ico (optional)
   agreement_pdf_asset: agreement.pdf
   email_from: '"HackFoo" <noreply@example.com>'
   default_page_title: HackFoo - Jan 1-2, 2017
