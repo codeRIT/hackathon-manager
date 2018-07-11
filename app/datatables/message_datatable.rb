@@ -30,4 +30,5 @@ class MessageDatatable < AjaxDatatablesRails::Base
   def get_raw_records
     Message.unscoped
   end
+  # rubocop:enable Style/AccessorMethodName
 end

@@ -30,4 +30,5 @@ class SchoolDatatable < AjaxDatatablesRails::Base
   def get_raw_records
     School.all
   end
+  # rubocop:enable Style/AccessorMethodName
 end

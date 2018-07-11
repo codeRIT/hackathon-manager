@@ -45,4 +45,5 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
   def get_raw_records
     Questionnaire.includes(:user, :school).references(:user, :school)
   end
+  # rubocop:enable Style/AccessorMethodName
 end
