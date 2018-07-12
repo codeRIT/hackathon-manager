@@ -404,6 +404,7 @@ DEPENDENCIES
   guard-minitest
   hackathon_manager!
   minitest-reporters
+  pry
   rails-controller-testing
   shoulda
   valid_attribute
