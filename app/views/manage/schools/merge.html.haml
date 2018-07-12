@@ -4,7 +4,7 @@
 
 %div
   .form-container
-    = simple_form_for @school, url: url_for(action: "perform_merge", controller: "schools"), html: { "data-validate" => "form" } do |f|
+    = bs_vertical_simple_form @school, url: url_for(action: "perform_merge", controller: "schools"), html: { "data-validate" => "form" } do |f|
 
       %p#disclaimer
         %strong WARNING! This is an irreversible action!
@@ -27,4 +27,4 @@
         school name to this new school.
 
       .center
-        = f.button :submit, value: 'Merge'
+        = f.button :submit, value: 'Merge', class: 'btn-primary'

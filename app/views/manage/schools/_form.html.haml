@@ -1,5 +1,5 @@
 .form-container
-  = simple_form_for @school, url: url_for(action: @school.new_record? ? "create" : "update", controller: "schools"), html: { "data-validate" => "form" } do |f|
+  = bs_horizontal_simple_form_for @school, url: url_for(action: @school.new_record? ? "create" : "update", controller: "schools"), html: { "data-validate" => "form" } do |f|
 
     - if f.error_notification.present?
       #disclaimer
@@ -13,4 +13,4 @@
       = f.association :bus_list, include_blank: "(none)"
 
     .center
-      = f.button :submit, value: ( @school.new_record? ? 'Create' : 'Save' )
+      = f.button :submit, value: ( @school.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'

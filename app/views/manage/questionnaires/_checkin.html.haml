@@ -9,9 +9,9 @@
             = @questionnaire.acc_status_author_id ? @questionnaire.acc_status_author.email : "(no author)"
             = @questionnaire.acc_status_date ? display_datetime(@questionnaire.acc_status_date, in_sentence: true) : "(no date)"
         - unless current_user.admin_limited_access?
-          = simple_form_for @questionnaire, url: url_for(action: "update_acc_status", controller: "questionnaires") do |f|
+          = bs_vertical_simple_form @questionnaire, url: url_for(action: "update_acc_status", controller: "questionnaires") do |f|
             = f.input :acc_status, as: :select, collection: Questionnaire::POSSIBLE_ACC_STATUS.invert, include_blank: false, label: "Acceptance Status:", hint: "Updating this status may trigger an automatic email to the applicant - see #{link_to('messages', manage_messages_path(anchor: 'triggered-email-overview'))} for details.".html_safe
-            = f.button :submit, value: "Update Status"
+            = f.button :submit, value: "Update Status", class: 'btn-primary'
   .col-md-6
     .card.mb-3
       .card-body
@@ -28,12 +28,12 @@
             %br
             %span.text-danger
               Note: This applicant has not been accepted.
-        = simple_form_for @questionnaire, url: url_for(action: "check_in", controller: "questionnaires", method: :put), html: { "data-validate" => "form" } do |f|
+        = bs_horizontal_simple_form_for @questionnaire, url: url_for(action: "check_in", controller: "questionnaires", method: :put), html: { "data-validate" => "form" } do |f|
           - if !@questionnaire.checked_in?
             = f.input :phone, input_html: { "data-validate" => "presence" }
-            = f.input :email, placeholder: "joe@example.com", input_html: { "data-validate" => "presence email", value: @questionnaire.user.try(:email) }, required: true
+            = f.input :email, input_html: { "data-validate" => "presence email", value: @questionnaire.user.try(:email) }, required: true
           = hidden_field_tag("check_in", !@questionnaire.checked_in?)
-          = f.button :submit, value: ( @questionnaire.checked_in? ? "Remove check-in" : "Check In" )
+          = f.button :submit, value: ( @questionnaire.checked_in? ? "Remove check-in" : "Check In" ), class: 'btn-primary'
           - if !@questionnaire.checked_in?
             %p.card-text
               %small

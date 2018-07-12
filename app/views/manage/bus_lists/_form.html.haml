@@ -1,15 +1,12 @@
 .form-container
-  = simple_form_for(@bus_list, url: url_for(action: @bus_list.new_record? ? "create" : "update", controller: "bus_lists")) do |f|
+  = bs_horizontal_simple_form_for(@bus_list, url: url_for(action: @bus_list.new_record? ? "create" : "update", controller: "bus_lists")) do |f|
     = f.error_notification
 
     .form-inputs
       = f.input :name
       = f.input :capacity
       = f.input :needs_bus_captain
-      = f.input :notes, input_html: { rows: 10 }
-      %p
-        %small
-          %em Notes support Markdown and HTML.
+      = f.input :notes, input_html: { rows: 15 }
 
     .form-actions
-      = f.button :submit
+      = f.button :submit, class: 'btn-primary'
