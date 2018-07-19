@@ -8,7 +8,7 @@ $.extend( $.fn.dataTable.defaults, {
     type  : "POST"
   },
   initComplete: function(settings, json) {
-    const table = settings.oInstance.api();
+    var table = settings.oInstance.api();
     table.buttons().container().appendTo( $('.col-md-6', table.table().container()).first() );
   },
   pagingType : 'full_numbers',
@@ -77,6 +77,6 @@ $(document).on('turbolinks:before-cache', function() {
   if (dataTable !== null) {
     dataTable.clear();
     dataTable.destroy();
-    return dataTable = null;
+    return dataTable == null;
   }
 });

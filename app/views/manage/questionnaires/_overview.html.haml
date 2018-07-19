@@ -119,7 +119,7 @@
             - school = @questionnaire.school
             = link_to school.name, manage_school_path(school)
             - if school.full_location.present?
-              %div.small.text-muted= school.full_location
+              .small.text-muted= school.full_location
           %dt.col-md-4 Major
           %dd.col-md-8= @questionnaire.major
           %dt.col-md-4 Level of study

@@ -23,7 +23,7 @@
           %small.text-muted
             - accepted = school.questionnaires.where(acc_status: 'accepted').count
             - no_bus = school.questionnaires.where(acc_status: 'rsvp_confirmed', riding_bus: false).count
-            = "#{accepted} yet to RSVP, #{no_bus} attending but not using bus"
+            #{accepted} yet to RSVP, #{no_bus} attending but not using bus
 
   .col-lg-6
     %h4.border-bottom.pb-2.mb-3 Bus Notes
@@ -38,7 +38,7 @@
   .col
     %h4.pb-2
       Passengers
-      %small.text-muted= "(#{@bus_list.passengers.count} total, #{@bus_list.checked_in_passengers.count} checked in)"
+      %small.text-muted (#{@bus_list.passengers.count} total, #{@bus_list.checked_in_passengers.count} checked in)
 
     %table.table
       %thead

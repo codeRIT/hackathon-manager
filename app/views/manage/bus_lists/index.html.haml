@@ -14,6 +14,6 @@
       - @bus_lists.each do |bus_list|
         %tr
           %td= link_to(bus_list.name, manage_bus_list_path(bus_list))
-          %td= "#{bus_list.passengers.count} / #{bus_list.capacity}"
+          %td #{bus_list.passengers.count} / #{bus_list.capacity}
           %td= bus_list.needs_bus_captain ? "<strong class=\"text-danger\">Yes</strong>".html_safe : "No"
           %td= bus_list.schools.count
