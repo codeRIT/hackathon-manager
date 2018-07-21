@@ -1,11 +1,8 @@
 //= require_directory ../
 //= require_directory .
-//= require ../vendor/jquery.dataTables.min
-//= require ../vendor/dataTables.buttons.min
-//= require ../vendor/buttons.colVis.min
-//= require ../vendor/buttons.html5.min
-//= require ../vendor/pdfmake.min
-//= require ../vendor/vfs_fonts
+//= require popper
+//= require bootstrap
+//= require ../vendor/datatables.min
 //= require selectize
 //= require highcharts
 //= require chartkick
@@ -18,4 +15,5 @@ $(document).ready(function() {
   $('body').chartkickAutoReload();
   setupDataTables();
   setupHighcharts();
+  $('[data-toggle="popover"]').popover();
 });

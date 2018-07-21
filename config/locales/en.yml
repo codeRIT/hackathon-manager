@@ -1,0 +1,73 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  simple_form:
+    hints:
+      bus_list:
+        capacity: Sign-ups will be disabled once this limit is reached. To disable, set to 1000.
+        needs_bus_captain: |
+          Allows applicants to indicate their interest in being a bus captain when they RSVP.<br />
+          If many people have already RSVP'd, consider sending a message out to this bus list asking for interest as well.
+        notes: Notes are shared with applicants. Supports Markdown and HTML.
+      user:
+        admin_limited_access: Limited access prevents the admin from adding, modifying, or deleting any records. Modifications through the check-in process are allowed.
+    placeholders:
+      bus_list:
+        notes: |
+          Notes help communicate bus plans to attendees. Example below:
+
+          **Pickup locations:**
+
+          7:00am - **New University**, 123 Main St, City, State, zip
+
+          8:30am - **Other University**, Engineering Building, some verbal description.
+
+          Busses depart My School at 5:00pm on Sunday.
+
+          **Questions?**
+
+          Contact [travel@example.com](mailto:travel@example.com)
+      questionnaire:
+        first_name: Joe
+        last_name: Smith
+        email: joe@example.com
+        phone: (123) 456-7890
+        school_id: My University
+        level_of_study: University (Undergraduate)
+        major: Major
+        gender: Female, Male, Non-Binary, Prefer not to say, other
+        dietary_restrictions: Allergies, medical assistance, etc.
+        special_needs: Any special needs or requests
+        portfolio_url: https://mywebsite.com
+        vcs_url: https://github.com/coderit
+      user:
+        email: joe@example.com

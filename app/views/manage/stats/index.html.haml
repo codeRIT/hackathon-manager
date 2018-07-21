@@ -1,9 +1,9 @@
-%section.section.manage
-  %h1.section-title= title "Statistics & Info"
+= render "layouts/manage/page_title", title: "Statistics & Info"
 
-  .container.container-full
-    %h4.dashboard-container-title Dietary Restrictions & Special Needs
-    %table.stats.datatable.row-border.stripe.hover.order-column{ "data-source" => dietary_special_needs_manage_stats_path(format: :json) }
+.row
+  .col
+    %h5.dashboard-container-title Dietary Restrictions & Special Needs
+    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => dietary_special_needs_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name
@@ -15,9 +15,10 @@
           %th Special Needs
       %tbody
 
-  .container.container-full
-    %h4.dashboard-container-title Attendees Not Traveling From Their School
-    %table.stats.datatable.row-border.stripe.hover.order-column{ "data-source" => alt_travel_manage_stats_path(format: :json) }
+.row
+  .col
+    %h5.dashboard-container-title Attendees Not Traveling From Their School
+    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => alt_travel_manage_stats_path(format: :json) }
       %thead
         %tr
           %th Link
@@ -28,9 +29,10 @@
           %th Acc Status
       %tbody
 
-  .container.container-full
-    %h4.dashboard-container-title Attendee Info for Sponsors
-    %table.stats.datatable.row-border.stripe.hover.order-column{ "data-source" => sponsor_info_manage_stats_path(format: :json) }
+.row
+  .col
+    %h5.dashboard-container-title Attendee Info for Sponsors
+    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => sponsor_info_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name
@@ -42,9 +44,10 @@
           %th Resume Link
       %tbody
 
-  .container.container-full
-    %h4.dashboard-container-title MLH Info
-    %table.stats.datatable.row-border.stripe.hover.order-column{ "data-source" => mlh_info_manage_stats_path(format: :json) }
+.row
+  .col
+    %h5.dashboard-container-title MLH Info
+    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name

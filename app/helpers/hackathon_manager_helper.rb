@@ -1,7 +1,7 @@
 module HackathonManagerHelper
   def title(page_title)
     content_for(:page_title) { page_title }
-    content_for(:title) { page_title + " - #{Rails.configuration.hackathon['name']}" }
+    content_for(:title) { page_title }
     page_title
   end
 
@@ -26,11 +26,33 @@ module HackathonManagerHelper
     markdown.render(text).html_safe
   end
 
+  # Same as link_to, but adds a special active class whenever the link matches
+  # the current page.
+  # Only  https://github.com/rails/rails/blob/master/actionview/lib/action_view/helpers/url_helper.rb
   def active_link_to(name = nil, options = nil, html_options = nil, &block)
-    if current_page?(options)
-      html_options[:class] = html_options[:class] + ' ' + html_options[:active_class]
+    # this is from Rails source - ignore rubocop
+    # rubocop:disable Style/ParallelAssignment
+    html_options, options, name = options, name, block if block_given?
+    options ||= {}
+    # rubocop:enable Style/ParallelAssignment
+
+    html_options = convert_options_to_data_attributes(options, html_options)
+
+    url = url_for(options)
+    html_options["href".freeze] ||= url
+
+    # Begin custom
+    active_children = html_options.delete('active_children')
+    active_children = true if active_children.nil?
+    current_url = request.env['PATH_INFO']
+    if current_page?(url) || (active_children && current_url.include?(url))
+      active_class = html_options.delete('active_class') || 'active'
+      existing_class = html_options['class'] || ''
+      html_options['class'] = existing_class + ' ' + active_class
     end
-    link_to(name, options, html_options, &block)
+    # End custom
+
+    content_tag("a".freeze, name || url, html_options, &block)
   end
 
   # https://github.com/rails/sprockets-rails/issues/298#issuecomment-168927471
@@ -44,5 +66,42 @@ module HackathonManagerHelper
 
   def collection_or_text(model_value, collection)
     model_value.blank? || collection.include?(model_value) ? collection : nil
+  end
+
+  def acc_status_class(acc_status)
+    case acc_status
+    when "denied"
+      "danger"
+    when "accepted"
+      "success"
+    when "waitlist"
+      "info"
+    when "late_waitlist"
+      "secondary"
+    when "pending"
+      "secondary"
+    when "rsvp_denied"
+      "danger"
+    when "rsvp_confirmed"
+      "success"
+    end
+  end
+
+  def display_datetime(datetime, opts = {})
+    formatted = ""
+    if Time.now - datetime < 5.hours
+      formatted << "#{time_ago_in_words(datetime, include_seconds: true)} ago"
+    else
+      format = datetime.year == Time.now.year ? "%b %-d at %I:%M %P" : "%b %-d, %Y at %I:%M %P"
+      formatted << "on " if opts[:in_sentence]
+      formatted << datetime.strftime(format)
+    end
+    "<span title=\"#{datetime}\">#{formatted}</span>".html_safe
+  end
+
+  def google_maps_link(*args)
+    query = args.reject(&:blank?).join('+')
+    query = CGI.escape(query)
+    "https://www.google.com/maps/search/?api=1&query=#{query}"
   end
 end

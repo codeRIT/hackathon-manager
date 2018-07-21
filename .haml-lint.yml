@@ -28,6 +28,9 @@ linters:
   ImplicitDiv:
     enabled: true
 
+  InstanceVariables:
+    enabled: false
+
   LeadingCommentSpace:
     enabled: true
 
@@ -53,8 +56,9 @@ linters:
     enabled: true
 
   SpaceInsideHashAttributes:
-    enabled: true
-    style: space
+    enabled: false
+    # enabled: true
+    # style: space
 
   TagName:
     enabled: true
@@ -67,3 +71,6 @@ linters:
 
   UnnecessaryStringOutput:
     enabled: true
+
+  ViewLength:
+    max: 200

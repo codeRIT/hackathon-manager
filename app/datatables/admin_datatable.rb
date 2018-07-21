@@ -14,16 +14,16 @@ class AdminDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_admin_path(record)),
         id: record.id,
-        email: record.email,
+        email: link_to(record.email, manage_admin_path(record)),
         admin_limited_access: record.admin_limited_access ? 'Limited Access' : 'Full Access'
       }
     end
   end
 
-  # rubocop:disable Style/AccessorMethodName
+  # rubocop:disable Naming/AccessorMethodName
   def get_raw_records
     User.where(admin: true)
   end
+  # rubocop:enable Naming/AccessorMethodName
 end

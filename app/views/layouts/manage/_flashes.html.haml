@@ -1,0 +1,4 @@
+- if flash[:notice].present?
+  .alert.alert-info.mt-3
+    %span.fa.fa-info-circle.icon-space-r-half
+    = flash[:notice].html_safe

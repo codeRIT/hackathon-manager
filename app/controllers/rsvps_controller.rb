@@ -86,6 +86,8 @@ class RsvpsController < ApplicationController
 
     redirect_to rsvp_path
   end
+  # rubocop:enable CyclomaticComplexity
+  # rubocop:enable PerceivedComplexity
 
   private
 

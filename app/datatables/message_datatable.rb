@@ -1,5 +1,5 @@
 class MessageDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :link_to, :manage_message_path
+  def_delegators :@view, :link_to, :manage_message_path, :display_datetime
 
   def view_columns
     @view_columns ||= {
@@ -16,19 +16,19 @@ class MessageDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_message_path(record)),
         id: record.id,
-        name: record.name,
+        name: link_to(record.name, manage_message_path(record)),
         subject: record.subject,
         trigger: Message::POSSIBLE_TRIGGERS[record.trigger],
         status: record.status.titleize,
-        delivered_at: record.delivered_at.present? ? record.delivered_at.strftime("%B %d, %Y at %I:%M %p") : ''
+        delivered_at: record.delivered_at.present? ? display_datetime(record.delivered_at) : ''
       }
     end
   end
 
-  # rubocop:disable Style/AccessorMethodName
+  # rubocop:disable Naming/AccessorMethodName
   def get_raw_records
     Message.unscoped
   end
+  # rubocop:enable Naming/AccessorMethodName
 end

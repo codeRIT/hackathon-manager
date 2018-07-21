@@ -1,5 +1,5 @@
 class QuestionnaireDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :link_to, :manage_questionnaire_path, :manage_school_path, :current_user
+  def_delegators :@view, :link_to, :manage_questionnaire_path, :manage_school_path, :current_user, :acc_status_class, :display_datetime
 
   def view_columns
     @view_columns ||= {
@@ -33,16 +33,17 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
         phone: record.phone,
         gender: record.gender,
         date_of_birth: record.date_of_birth_formatted,
-        acc_status: "<span class=\"acc-status-#{record.acc_status}\">#{record.acc_status.titleize}</span>".html_safe,
-        checked_in: record.checked_in? ? '<span class="acc-status-accepted">Yes</span>'.html_safe : 'No',
+        acc_status: "<span class=\"text-#{acc_status_class(record.acc_status)}\">#{record.acc_status.titleize}</span>".html_safe,
+        checked_in: record.checked_in? ? '<span class="text-success">Yes</span>'.html_safe : 'No',
         school: link_to(record.school.name, manage_school_path(record.school)),
-        created_at: record.created_at.present? ? record.created_at.strftime("%B %d, %Y at %I:%M %p") : ''
+        created_at: record.created_at.present? ? display_datetime(record.created_at) : ''
       }
     end
   end
 
-  # rubocop:disable Style/AccessorMethodName
+  # rubocop:disable Naming/AccessorMethodName
   def get_raw_records
     Questionnaire.includes(:user, :school).references(:user, :school)
   end
+  # rubocop:enable Naming/AccessorMethodName
 end

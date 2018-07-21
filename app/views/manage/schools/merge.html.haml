@@ -1,8 +1,10 @@
-%section.section.manage
-  %h1.section-title= title "Merge School"
+= render "layouts/manage/page_title", title: "Merge School", subtitle: @school.name do
+  .btn-group
+    = link_to 'Cancel', manage_school_path(@school), class: 'btn btn-sm btn-outline-secondary'
 
+%div
   .form-container
-    = simple_form_for @school, url: url_for(action: "perform_merge", controller: "schools"), html: { "data-validate" => "form" } do |f|
+    = bs_vertical_simple_form @school, url: url_for(action: "perform_merge", controller: "schools"), html: { "data-validate" => "form" } do |f|
 
       %p#disclaimer
         %strong WARNING! This is an irreversible action!
@@ -25,8 +27,4 @@
         school name to this new school.
 
       .center
-        = f.button :submit, value: 'Merge'
-
-  .form-container
-    .center
-      = link_to 'Back', manage_school_path(@school)
+        = f.button :submit, value: 'Merge', class: 'btn-primary'

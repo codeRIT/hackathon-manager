@@ -1,8 +1,7 @@
-%section.section.manage
-  %h1.section-title= title "New Admin"
+= render "layouts/manage/page_title", title: "New Admin"
 
-  = render 'form'
+= render 'form'
 
-  .form-container
-    .center
-      = link_to 'Back', manage_admins_path
+.form-container
+  .center
+    = link_to 'Back', manage_admins_path

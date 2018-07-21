@@ -1,59 +1,45 @@
-%section.section.manage
-  %h1.section-title= title "Bus List"
+= render "layouts/manage/page_title", title: @bus_list.name, subtitle: "Bus List" do
+  .btn-group
+    = link_to 'Edit', edit_manage_bus_list_path(@bus_list), class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Delete', manage_bus_list_path(@bus_list), method: :delete, data: { confirm: "Are you sure? The bus list \"#{@bus_list.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Send Email Update', send_update_email_manage_bus_list_path(@bus_list), method: :patch, data: { confirm: "Are you sure? All passengers for \"#{@bus_list.name}\" will be emailed the current bus notes." }, class: 'btn btn-sm btn-outline-secondary'
 
-  %p
-    %b Name:
-    = @bus_list.name
-  %p
-    %b Capacity:
-    = @bus_list.capacity
-  %p
-    %b Needs bus captain:
-    = @bus_list.needs_bus_captain ? "Yes" : "No"
-  %p
-    %b Schools:
+.row
+  .col-lg-6
+    %h4.border-bottom.pb-2.mb-3 Details
+    %dl.row
+      %dt.col-md-5 Name
+      %dd.col-md-7= @bus_list.name
+      %dt.col-md-5 Capacity
+      %dd.col-md-7= @bus_list.capacity
+      %dt.col-md-5 Needs bus captain?
+      %dd.col-md-7= @bus_list.needs_bus_captain ? "Yes" : "No"
+    %h4.border-bottom.pb-2.mb-3 Schools
     %ul
       - @bus_list.schools.each do |school|
-        %li= link_to(school.name, manage_school_path(school))
+        %li.pb-2
+          = link_to(school.name, manage_school_path(school))
+          %br
+          %small.text-muted
+            - accepted = school.questionnaires.where(acc_status: 'accepted').count
+            - no_bus = school.questionnaires.where(acc_status: 'rsvp_confirmed', riding_bus: false).count
+            #{accepted} yet to RSVP, #{no_bus} attending but not using bus
 
-  = render partial: 'bus_list_info', locals: { bus_list: @bus_list }
+  .col-lg-6
+    %h4.border-bottom.pb-2.mb-3 Bus Notes
+    .card.mb-2
+      .card-body
+        = render partial: 'bus_list_info', locals: { bus_list: @bus_list }
+    %p.small.text-muted
+      %span.fa.fa-info-circle.icon-space-l.icon-space-r-half
+      These notes are provided to applicants, and included in email updates.
 
-  %p
-    %strong Passengers:
-    = "(#{@bus_list.passengers.count} total, #{@bus_list.checked_in_passengers.count} checked in)"
-  %table.table
-    %thead
-      %tr
-        %th
-        %th First Name
-        %th Last Name
-        %th Email
-        %th Phone Number
-        %th School
-        %th Boarded bus?
-        %th Checked in?
-        - unless current_user.admin_limited_access
-          %th Actions
-    %tbody
-      - @bus_list.passengers.each do |p|
-        %tr
-          %td= link_to '<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(p)
-          %td= p.first_name
-          %td= p.last_name
-          %td= p.email
-          %td= phone_link_to p.phone
-          %td= link_to p.school.name, manage_school_path(p.school)
-          %td= p.boarded_bus? ? '<span class="acc-status-accepted">Yes</span>'.html_safe : 'No'
-          %td= p.checked_in? ? '<span class="acc-status-accepted">Yes</span>'.html_safe : 'No'
-          - unless current_user.admin_limited_access
-            %td
-              - if p.is_bus_captain?
-                = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post'
-              - else
-                = link_to "Make Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: 'Are you sure? This will send a confirmation email to the bus captain.' }
-  - if @bus_list.needs_bus_captain
-    %p
-      %strong Possible Bus Captains:
+.row.mt-2
+  .col
+    %h4.pb-2
+      Passengers
+      %small.text-muted (#{@bus_list.passengers.count} total, #{@bus_list.checked_in_passengers.count} checked in)
+
     %table.table
       %thead
         %tr
@@ -63,10 +49,11 @@
           %th Email
           %th Phone Number
           %th School
-          - unless current_user.admin_limited_access
-            %th Actions
+          %th Boarded bus?
+          %th Checked in?
+          %th Bus Captain
       %tbody
-        - @bus_list.passengers.select { |q| q.bus_captain_interest }.each do |p|
+        - @bus_list.passengers.each do |p|
           %tr
             %td= link_to '<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(p)
             %td= p.first_name
@@ -74,20 +61,45 @@
             %td= p.email
             %td= phone_link_to p.phone
             %td= link_to p.school.name, manage_school_path(p.school)
-            - unless current_user.admin_limited_access
+            %td= p.boarded_bus? ? '<span class="text-success">Yes</span>'.html_safe : 'No'
+            %td= p.checked_in? ? '<span class="text-success">Yes</span>'.html_safe : 'No'
+            - if current_user.admin_limited_access
+              %td= p.is_bus_captain? ? "Yes" : "No"
+            - else
               %td
                 - if p.is_bus_captain?
-                  = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post'
+                  = link_to "Remove", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post', class: 'text-danger'
                 - else
-                  = link_to "Make Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: 'Are you sure? This will send a confirmation email to the bus captain.' }
+                  = link_to "Promote", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: "Are you sure you want to make #{p.full_name} a bus captain? They will receive a confirmation email." }
 
-  = render partial: 'bus_list_stats', locals: { bus_list: @bus_list }
+    - if @bus_list.needs_bus_captain
+      %h4.mt-4.pb-2 Possible Bus Captains
+      %table.table
+        %thead
+          %tr
+            %th
+            %th First Name
+            %th Last Name
+            %th Email
+            %th Phone Number
+            %th School
+            - unless current_user.admin_limited_access
+              %th Actions
+        %tbody
+          - @bus_list.passengers.select { |q| q.bus_captain_interest }.each do |p|
+            %tr
+              %td= link_to '<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(p)
+              %td= p.first_name
+              %td= p.last_name
+              %td= p.email
+              %td= phone_link_to p.phone
+              %td= link_to p.school.name, manage_school_path(p.school)
+              - unless current_user.admin_limited_access
+                %td
+                  - if p.is_bus_captain?
+                    = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post', class: 'text-danger'
+                  - else
+                    = link_to "Make Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: 'Are you sure? This will send a confirmation email to the bus captain.' }
 
-  %hr
-
-  - unless current_user.admin_limited_access?
-    = link_to 'Edit', edit_manage_bus_list_path(@bus_list)
-    \|
-    = link_to 'Send Email Update', send_update_email_manage_bus_list_path(@bus_list), method: :patch, data: { confirm: "Are you sure? All passengers for \"#{@bus_list.name}\" will be emailed the current bus notes." }
-    \|
-  = link_to 'Back', manage_bus_lists_path
+    .alert.alert-info
+      = render partial: 'bus_list_stats', locals: { bus_list: @bus_list }

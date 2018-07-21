@@ -1,5 +1,5 @@
 .form-container
-  = simple_form_for @user, url: url_for(action: @user.new_record? ? "create" : "update", controller: "admins"), html: { "data-validate" => "form" } do |f|
+  = bs_horizontal_simple_form_for @user, url: url_for(action: @user.new_record? ? "create" : "update", controller: "admins"), html: { "data-validate" => "form" } do |f|
 
     - if @user.new_record?
       %p
@@ -10,9 +10,8 @@
         = f.error_notification
 
     .form-inputs
-      = f.input :email, placeholder: "joe@example.com", input_html: { "data-validate" => "presence" }, required: true
-      = f.input :admin_limited_access, as: :formatted_boolean, label: "Limited Access"
-      %p Limited access prevents the admin from adding, modifying, or deleting any records. Modifications through the check-in process are allowed.
+      = f.input :email, input_html: { "data-validate" => "presence" }, required: true
+      = f.input :admin_limited_access, label: "Limited Access"
 
     .center
-      = f.button :submit, value: ( @user.new_record? ? 'Create' : 'Save' )
+      = f.button :submit, value: ( @user.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'

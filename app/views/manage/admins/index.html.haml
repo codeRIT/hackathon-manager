@@ -1,15 +1,11 @@
-%section.section.manage
-  %h1.section-title= title "Listing Admins"
+= render "layouts/manage/page_title", title: "Admins" do
+  = link_to "New Admin", new_manage_admin_path, class: "btn btn-sm btn-outline-secondary"
 
-  %table.users.datatable.row-border.stripe.hover.order-column{ "data-source" => datatable_manage_admins_path(format: :json) }
+%div
+  %table.users.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_admins_path(format: :json) }
     %thead
       %tr
-        %th
         %th ID
         %th Email
         %th Access Level
     %tbody
-
-  - unless current_user.admin_limited_access
-    %br
-    = btn_link_to 'New Admin', new_manage_admin_path

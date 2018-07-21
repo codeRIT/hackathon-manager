@@ -1,15 +1,13 @@
-%section.section.manage
-  %h1.section-title= title "Edit Admin"
+= render "layouts/manage/page_title", title: @user.email do
+  - unless current_user.admin_limited_access
+    .btn-group
+      = link_to 'Edit', edit_manage_admin_path(@user), class: 'btn btn-sm btn-outline-secondary'
+      = link_to 'Delete', manage_admin_path(@user), method: :delete, data: { confirm: "Are you sure? #{@user.email} will be permanently deleted. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
 
-  .form-container
-    %p
-      %b Email Address:
-      = @user.email
-    %p
-      %b Access Level:
-      = @user.admin_limited_access ? "Limited Access" : "Full Access"
-
-    - unless current_user.admin_limited_access
-      = link_to 'Edit', edit_manage_admin_path(@user)
-      \|
-    = link_to 'Back', manage_admins_path
+%div
+  %p
+    %b Email address:
+    = @user.email
+  %p
+    %b Access level:
+    = @user.admin_limited_access ? "Limited Access" : "Full Access"

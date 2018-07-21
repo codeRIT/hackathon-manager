@@ -12,6 +12,7 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+gem 'pry', group: [:development, :test]
 
 group :test do
   gem 'shoulda'

@@ -11,12 +11,18 @@ class School < ApplicationRecord
   def full_name
     out = ""
     out << name
-    if city.present? || state.present?
+    if full_location.present?
       out << " in "
-      out << city if city.present?
-      out << ", " if city.present? && state.present?
-      out << state if state.present?
+      out << full_location
     end
+    out
+  end
+
+  def full_location
+    out = ""
+    out << city if city.present?
+    out << ", " if city.present? && state.present?
+    out << state if state.present?
     out
   end
 

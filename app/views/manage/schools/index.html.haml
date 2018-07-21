@@ -1,10 +1,10 @@
-%section.section.manage
-  %h1.section-title= title "Listing Schools"
+= render "layouts/manage/page_title", title: "Schools" do
+  = link_to "New School", new_manage_school_path, class: "btn btn-sm btn-outline-secondary"
 
-  %table.schools.datatable.row-border.stripe.hover.order-column{ "data-source" => datatable_manage_schools_path(format: :json) }
+%div
+  %table.schools.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_schools_path(format: :json) }
     %thead
       %tr
-        %th
         %th ID
         %th Name
         %th City
@@ -12,7 +12,3 @@
         %th Count
         %th Bus List
     %tbody
-
-  - unless current_user.admin_limited_access
-    %br
-    = btn_link_to 'New School', new_manage_school_path

@@ -1,29 +1,33 @@
-%section.section.manage
-  %h1.section-title= title "Hackathon Configuration"
+= render "layouts/manage/page_title", title: "Hackathon Configuration"
 
-  %fieldset
-    %legend Environment Variables
-    %p
-      %em
-        Environment variables are configured on the production server.
-    %p
-      %b Carpool Link:
-      %pre= ENV['CARPOOL_LINK'] || '[No value]'
-    %p
-      %b Slack Sign Up URL:
-      %pre= ENV['SLACK_SIGNUP_URL'] || '[No value]'
-    %p
-      %b AWS S3 Bucket for Resumes:
-      %pre= ENV['AWS_BUCKET'] || '[No value]'
+.row
+  .col-lg-6
+    .card
+      .card-body
+        %h5.card-title Hackathon Manager Config
+        %h6.card-subtitle.mb-2.text-muted
+          Hackathon Manager configuration can be changed in the source code at
+          %code config/hackathon.yml
+          \.
+        %hr
+        - Rails.configuration.hackathon.keys.each do |key|
+          %p
+            %b #{key}:
+            %pre= Rails.configuration.hackathon[key]
 
-  %fieldset
-    %legend Hackathon Manager Config
-    %p
-      %em
-        Hackathon Manager configuration can be changed in the source code at
-        %code config/hackathon.yml
-        \.
-    - Rails.configuration.hackathon.keys.each do |key|
-      %p
-        %b #{key}:
-        %pre= Rails.configuration.hackathon[key]
+  .col-lg-6
+    .card
+      .card-body
+        %h5.card-title Environment Variables
+        %h6.card-subtitle.mb-2.text-muted
+          Environment variables are configured on the production server.
+        %hr
+        %p
+          %b Carpool Link:
+          %pre= ENV['CARPOOL_LINK'] || '[No value]'
+        %p
+          %b Slack Sign Up URL:
+          %pre= ENV['SLACK_SIGNUP_URL'] || '[No value]'
+        %p
+          %b AWS S3 Bucket for Resumes:
+          %pre= ENV['AWS_BUCKET'] || '[No value]'

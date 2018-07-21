@@ -20,18 +20,18 @@ class MessageTest < ActiveSupport::TestCase
   context "recipients_list" do
     should "return human-readable list of basic recipients" do
       message = build(:message, recipients: ['all', 'incomplete'])
-      assert_equal "Everyone, Incomplete Applications", message.recipients_list
+      assert_equal ["Everyone", "Incomplete Applications"], message.recipients_list
     end
 
     should "return human-readable list of querying recipients" do
       create(:school, id: 567, name: 'My School')
       message = build(:message, recipients: ['accepted', 'school::567'])
-      assert_equal "Accepted Applications, Confirmed or Accepted: My School", message.recipients_list
+      assert_equal ["Accepted Applications", "Confirmed or Accepted: My School"], message.recipients_list
     end
 
     should "return unknown for invalid recipients" do
       message = build(:message, recipients: ['all', 'foo', 'incomplete'])
-      assert_equal "Everyone, (unknown), Incomplete Applications", message.recipients_list
+      assert_equal ["Everyone", "(unknown)", "Incomplete Applications"], message.recipients_list
     end
   end
 
