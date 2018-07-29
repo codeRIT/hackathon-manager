@@ -1,5 +1,16 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.7.0 - 2018-07-29
+
+**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+
+* Feature: New management UI based on Bootstrap (public UI remains the same)
+* Improvement: Support omniauth lookup by email instead of UID
+* Improvement: Update gems & Ruby support
+* Fix: Require bus list capacity to be set
+* Fix: FIPS code fetching
+* Fix: Remove email column from questionnaires table
+
 # 0.6.6 - 2018-02-02
 
 * Feature: Send email to recipients from Blazer query
