@@ -2,7 +2,7 @@
 
 # 0.7.0 - 2018-07-29
 
-**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
 
 * Feature: New management UI based on Bootstrap (public UI remains the same)
 * Improvement: Support omniauth lookup by email instead of UID
@@ -27,7 +27,7 @@
 
 # 0.6.3 - 2018-01-26
 
-**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
 
 * Feature: Allow bus captains to mark who boards a bus
 * Feature: Add optional columns to questionnaire datatable
@@ -50,7 +50,7 @@
 
 # 0.6.0 - 2018-01-17
 
-**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
 
 * **Major refactor to bulk email messaging**
 * Feature: Automatically send emails upon triggered events
@@ -60,7 +60,7 @@
 
 # 0.5.11 - 2018-01-15
 
-**Note:** Be sure to run rails `railties:install:migrations` and `rails db:migrate` after upgrading.
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
 
 * Consolidate display of email events
 * Make acceptance status searchable in questionnaire table
