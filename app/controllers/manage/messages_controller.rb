@@ -55,6 +55,13 @@ class Manage::MessagesController < Manage::ApplicationController
     render html: email.body.raw_source.html_safe
   end
 
+  def live_preview
+    body = params[:body] || ''
+    message = Message.new(body: body)
+    email = Mailer.bulk_message_email(nil, current_user.id, message)
+    render html: email.body.raw_source.html_safe
+  end
+
   def duplicate
     new_message = @message.dup
     new_message.update_attributes(

@@ -28,8 +28,8 @@ class Mailer < ApplicationMailer
     mail_questionnaire("Your application status")
   end
 
-  def bulk_message_email(message_id, user_id)
-    @message = Message.find_by_id(message_id)
+  def bulk_message_email(message_id, user_id, message = nil)
+    @message = message || Message.find_by_id(message_id)
     @user    = User.find_by_id(user_id)
     return if @user.blank? || @message.blank?
     mail(

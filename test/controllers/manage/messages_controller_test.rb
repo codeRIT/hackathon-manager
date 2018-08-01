@@ -67,6 +67,12 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
+    should "not allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :redirect
+      assert_redirected_to new_user_session_path
+    end
+
     should "not allow access to manage_messages#duplicate" do
       assert_difference('Message.count', 0) do
         patch :duplicate, params: { id: @message }
@@ -145,6 +151,12 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
+    should "not allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :redirect
+      assert_redirected_to root_path
+    end
+
     should "not allow access to manage_messages#duplicate" do
       assert_difference('Message.count', 0) do
         patch :duplicate, params: { id: @message }
@@ -217,6 +229,12 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     should "allow access to manage_messages#preview" do
       get :preview, params: { id: @message }
       assert_response :success
+    end
+
+    should "not allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
     end
 
     should "not allow access to manage_messages#duplicate" do
@@ -304,6 +322,16 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "allow access to manage_messages#preview" do
       get :preview, params: { id: @message }
+      assert_response :success
+    end
+
+    should "allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :success
+    end
+
+    should "not error with unset body on manage_messages#live_preview" do
+      get :live_preview
       assert_response :success
     end
 

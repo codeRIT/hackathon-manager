@@ -16,4 +16,5 @@ $(document).ready(function() {
   setupDataTables();
   setupHighcharts();
   $('[data-toggle="popover"]').popover();
+  $('[data-message-live-preview="textarea"]').messageLivePreview();
 });
