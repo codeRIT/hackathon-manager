@@ -4,9 +4,9 @@ var setupDataTables = function() {
     order      : [3, 'desc'],
     scrollX    : false,
     columns    : [
-      { orderable : false, data: 'bulk' },
-      { orderable : false, data: 'link' },
-      { orderable : false, data: 'note' },
+      { orderable: false, data: 'bulk' },
+      { orderable: false, data: 'link' },
+      { orderable: false, data: 'note' },
       { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
@@ -17,7 +17,9 @@ var setupDataTables = function() {
       { orderable: true, data: 'acc_status' },
       { orderable: true, data: 'checked_in' },
       { orderable: true, data: 'school' },
-      { orderable: true, data: 'created_at' }
+      { orderable: true, data: 'created_at' },
+      { orderable: true, data: 'dietary_restrictions', visible: false },
+      { orderable: true, data: 'special_needs', visible: false },
     ]
   });
 
