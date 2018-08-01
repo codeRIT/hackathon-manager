@@ -2,15 +2,16 @@
   = link_to "New Message", new_manage_message_path, class: "btn btn-sm btn-outline-secondary"
 
 %div
-  %table.messages.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_messages_path(format: :json) }
+  %table.bulk-messages.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_messages_path(format: :json) }
     %thead
       %tr
         %th ID
         %th Name
         %th Subject
-        %th Trigger
-        %th Bulk Status
-        %th Bulk Delivered
+        %th Status
+        %th Created
+        %th Last modified
+        %th Delivered
     %tbody
 
   %hr

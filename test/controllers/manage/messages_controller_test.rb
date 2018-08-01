@@ -264,7 +264,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "create a new message" do
-      post :create, params: { message: { name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "foo" } }
+      post :create, params: { message: { type: 'bulk', name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "foo" } }
       assert_response :redirect
       assert_redirected_to manage_message_path(assigns(:message))
     end
@@ -290,11 +290,20 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to manage_message_path(assigns(:message))
     end
 
-    should "deliver message" do
+    should "deliver a bulk message" do
       assert_difference('BulkMessageWorker.jobs.size', 1) do
         patch :deliver, params: { id: @message }
       end
       assert_match /queued/, flash[:notice]
+      assert_redirected_to manage_message_path(assigns(:message))
+    end
+
+    should "not deliver an automated message" do
+      @message.update_attribute(:type, 'automated')
+      assert_difference('BulkMessageWorker.jobs.size', 0) do
+        patch :deliver, params: { id: @message }
+      end
+      assert_match /Automated/, flash[:notice]
       assert_redirected_to manage_message_path(assigns(:message))
     end
 

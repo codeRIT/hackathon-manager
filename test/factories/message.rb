@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :message do
+    type         "bulk"
     name         "Message Name"
     subject      "Message Subject"
     recipients   ["all"]

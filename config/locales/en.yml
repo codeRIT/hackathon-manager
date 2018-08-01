@@ -40,6 +40,9 @@ en:
         notes: Notes are shared with applicants. Supports Markdown and HTML.
       user:
         admin_limited_access: Limited access prevents the admin from adding, modifying, or deleting any records. Modifications through the check-in process are allowed.
+      message:
+        type: Bulk emails are sent once, manually. Automated emails are sent upon a desired trigger/event.
+        trigger: Sent automatically when a new or updated applicant matches this criteria. Does not send to anyone already matching this criteria.
     placeholders:
       bus_list:
         notes: |

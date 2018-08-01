@@ -1,4 +1,4 @@
-%h3.pb-2#triggered-email-overview Triggered Email Overview
+%h3.pb-2#triggered-email-overview Automated Messages
 
 %table.table.table-striped
   %caption
@@ -10,16 +10,16 @@
       %li Hard-coded emails are those managed in the source code repository, and cannot be disabled.
   %thead
     %tr
-      %th Trigger Event
+      %th Automation Event
       %th Hard-coded Email
-      %th Triggered Emails
+      %th Automated Emails
   %tbody
     - Message::POSSIBLE_TRIGGERS.keys.each do |trigger|
       %tr
         %td= Message::POSSIBLE_TRIGGERS[trigger]
-        - messages = Message.where(trigger: trigger).all
+        - messages = Message.automated.where(trigger: trigger).all
         %td
-          = ['questionnaire.pending', 'questionnaire.accepted', 'questionnaire.denied', 'questionnaire.rsvp_confirmed'].include?(trigger) ? '<strong class="text-success">Yes</strong>'.html_safe : 'No'
+          = ['questionnaire.pending', 'questionnaire.accepted', 'questionnaire.denied', 'questionnaire.rsvp_confirmed'].include?(trigger) ? '<strong class="text-info">Hard-coded</strong>'.html_safe : 'No'
         %td
           - if messages.present?
             %ul.list-unstyled.mb-0
@@ -27,3 +27,14 @@
                 %li= link_to(message.name, manage_message_path(message))
           - else
             None
+    %tr
+      %td Disabled
+      %td N/A
+      %td
+        - messages = Message.automated.where(trigger: nil).all
+        - if messages.present?
+          %ul.list-unstyled.mb-0
+            - messages.each do |message|
+              %li= link_to(message.name, manage_message_path(message))
+        - else
+          None

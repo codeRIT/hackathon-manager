@@ -3,14 +3,15 @@
     = f.error_notification
 
     .form-inputs
+      = f.input :type, as: :select, collection: Message::POSSIBLE_TYPES.map { |x| [x.titleize, x] }, include_blank: false
       = f.input :name
       = f.input :subject, hint: "All emails are from <pre class=\"d-inline\">#{html_escape(Rails.configuration.hackathon['email_from'])}</pre>".html_safe
       = f.input :template, as: :select, collection: Message::POSSIBLE_TEMPLATES.map { |x| [x.titleize, x] }, include_blank: false
       - if @message.status == "drafted"
-        = f.input :recipients, as: :select, collection: @message.possible_recipients, input_html: { class: "selectize", multiple: true,  }, hint: "Sent manually, in bulk", placeholder: "Type to search by school or type..."
+        = f.input :recipients, as: :select, collection: @message.possible_recipients, input_html: { class: "selectize", multiple: true,  }, placeholder: "Type to search by school or type..."
       - else
         = f.input :recipients, as: :select, collection: @message.possible_recipients, input_html: { class: "selectize", multiple: true }, hint: "Cannot be edited once a message has been delivered", disabled: true
-      = f.input :trigger, as: :select, collection: Message::POSSIBLE_TRIGGERS.invert, include_blank: "(no automatic trigger)", hint: "Sent automatically, to an individual applicant"
+      = f.input :trigger, as: :select, collection: Message::POSSIBLE_TRIGGERS.invert, include_blank: "(disabled)"
       %br
 
     .row

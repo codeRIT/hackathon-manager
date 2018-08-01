@@ -8,7 +8,7 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def datatable
-    render json: MessageDatatable.new(view_context)
+    render json: BulkMessageDatatable.new(view_context)
   end
 
   def show
@@ -40,6 +40,10 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def deliver
+    if @message.automated?
+      flash[:notice] = "Automated messages cannot be manually delivered. Only bulk messages can."
+      return redirect_to manage_message_path(@message)
+    end
     if @message.status != "drafted"
       flash[:notice] = "Message cannot be re-delivered"
       return redirect_to manage_messages_path
@@ -78,7 +82,7 @@ class Manage::MessagesController < Manage::ApplicationController
 
   def message_params
     params.require(:message).permit(
-      :name, :subject, :template, :body, :trigger, recipients: []
+      :type, :name, :subject, :template, :body, :trigger, recipients: []
     )
   end
 

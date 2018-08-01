@@ -28,29 +28,29 @@
       %dt.col-md-3 Template
       %dd.col-md-9= @message.template.titleize
   .col-lg-6
-    %p.mb-1
-      %b Recipients
-      %small
-        %em Sent manually, in bulk
-    %ul.pl-4.mb-1
-      - @message.recipients_list.each do |recipient|
-        %li= recipient
-    - if @message.recipients.blank?
-      %p.text-muted (none)
-    - if @message.recipients.present?
-      %p.small
-        - if recipient_error.present?
-          %strong{style: 'color: red;'} Error parsing recipients:
-          = recipient_error
-          %br To resolve this, edit & remove the offending recipient.
-        - else
-          %em #{recipient_count} currently match this query
-    %p.mb-1
-      %b Trigger
-      %small
-        %em Sent automatically, to an applicant once they match this criteria
-    %p
-      = Message::POSSIBLE_TRIGGERS[@message.trigger] || "<span class=\"text-muted\">(no automatic trigger)</span>".html_safe
+    - if @message.bulk?
+      %p.mb-1
+        %b Recipients
+      %ul.pl-4.mb-1
+        - @message.recipients_list.each do |recipient|
+          %li= recipient
+      - if @message.recipients.blank?
+        %p.text-muted (none)
+      - if @message.recipients.present?
+        %p.small
+          - if recipient_error.present?
+            %strong{style: 'color: red;'} Error parsing recipients:
+            = recipient_error
+            %br To resolve this, edit & remove the offending recipient.
+          - else
+            %em #{recipient_count} currently match this query
+    - if @message.automated?
+      %p.mb-1
+        %b Trigger
+        %small
+          %em Sent automatically to an applicant upon meeting this criteria
+      %p
+        = Message::POSSIBLE_TRIGGERS[@message.trigger] || "<span class=\"text-muted\">(disabled)</span>".html_safe
 
 %div
   %p
@@ -61,7 +61,7 @@
 
   %iframe.email-preview{src: preview_manage_message_path(@message)}
 
-  - if @message.recipients_list.present?
+  - if @message.bulk?
     .card.mt-3.mb-3
       .card-body
         %h5.card-title Bulk delivery details
