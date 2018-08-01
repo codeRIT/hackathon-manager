@@ -4,30 +4,6 @@ class Mailer < ApplicationMailer
 
   default from: Rails.configuration.hackathon['email_from']
 
-  def application_confirmation_email(questionnaire_id)
-    @questionnaire = Questionnaire.find_by_id(questionnaire_id)
-    return unless @questionnaire.present? && @questionnaire.user.present?
-    mail_questionnaire("Application Received", transactional: true)
-  end
-
-  def rsvp_confirmation_email(questionnaire_id)
-    @questionnaire = Questionnaire.find_by_id(questionnaire_id)
-    return unless @questionnaire.present? && @questionnaire.user.present?
-    mail_questionnaire("RSVP Confirmation", transactional: true)
-  end
-
-  def accepted_email(questionnaire_id)
-    @questionnaire = Questionnaire.find_by_id(questionnaire_id)
-    return unless @questionnaire.present? && @questionnaire.user.present?
-    mail_questionnaire("You've been accepted!")
-  end
-
-  def denied_email(questionnaire_id)
-    @questionnaire = Questionnaire.find_by_id(questionnaire_id)
-    return unless @questionnaire.present? && @questionnaire.user.present?
-    mail_questionnaire("Your application status")
-  end
-
   def bulk_message_email(message_id, user_id, message = nil)
     @message = message || Message.find_by_id(message_id)
     @user    = User.find_by_id(user_id)

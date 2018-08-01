@@ -19,7 +19,7 @@
         %td= Message::POSSIBLE_TRIGGERS[trigger]
         - messages = Message.automated.where(trigger: trigger).all
         %td
-          = ['questionnaire.pending', 'questionnaire.accepted', 'questionnaire.denied', 'questionnaire.rsvp_confirmed'].include?(trigger) ? '<strong class="text-info">Hard-coded</strong>'.html_safe : 'No'
+          = ['questionnaire.pending'].include?(trigger) ? '<strong class="text-info">Hard-coded</strong>'.html_safe : 'No'
         %td
           - if messages.present?
             %ul.list-unstyled.mb-0
