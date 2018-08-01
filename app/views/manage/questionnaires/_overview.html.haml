@@ -82,9 +82,19 @@
       .card-body
         .row
           %dt.col-md-4 Dietary restrictions
-          %dd.col-md-8= @questionnaire.dietary_restrictions || "<span class=\"text-muted\">(none)</span>".html_safe
+          %dd.col-md-8
+            - if @questionnaire.dietary_restrictions.present?
+              %span.fa.fa-exclamation-triangle.text-warning.icon-space-r-half
+              = @questionnaire.dietary_restrictions
+            - else
+              %span.text-muted (none)
           %dt.col-md-4 Special needs
-          %dd.col-md-8= @questionnaire.special_needs || "<span class=\"text-muted\">(none)</span>".html_safe
+          %dd.col-md-8
+            - if @questionnaire.special_needs.present?
+              %span.fa.fa-exclamation-triangle.text-warning.icon-space-r-half
+              = @questionnaire.special_needs
+            - else
+              %span.text-muted (none)
           %dt.col-md-4 Traveling from
           %dd.col-md-8
             = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "<span class=\"text-muted\">My school</span>".html_safe
