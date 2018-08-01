@@ -3,6 +3,7 @@
 $.extend( $.fn.dataTable.defaults, {
   processing : true,
   serverSide : true,
+  scrollX    : false,
   ajax       : {
     url   : $(this).data('source'),
     type  : "POST"

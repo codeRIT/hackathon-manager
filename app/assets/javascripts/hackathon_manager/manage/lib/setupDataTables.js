@@ -2,7 +2,6 @@ var setupDataTables = function() {
 
   window.questionnairesDataTable = $('.datatable.questionnaires').DataTable({
     order      : [3, 'desc'],
-    scrollX    : false,
     columns    : [
       { orderable: false, data: 'bulk' },
       { orderable: false, data: 'link' },
@@ -25,7 +24,6 @@ var setupDataTables = function() {
 
   $('.datatable.users').DataTable({
     order      : [1, 'asc'],
-    scrollX    : false,
     columns    : [
       { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'email' },
@@ -35,7 +33,6 @@ var setupDataTables = function() {
 
   $('.datatable.messages').DataTable({
     order      : [0, 'desc'],
-    scrollX    : false,
     columns    : [
       { orderable: true, data: 'id', visible: false},
       { orderable: true, data: 'name'},
@@ -48,7 +45,6 @@ var setupDataTables = function() {
 
   $('.datatable.schools').DataTable({
     order      : [4, 'desc'],
-    scrollX    : false,
     columns    : [
       { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'name' },
@@ -60,7 +56,6 @@ var setupDataTables = function() {
   });
 
   $('.datatable.stats').DataTable({
-    scrollX    : false,
     processing : false,
     serverSide : false
   });
