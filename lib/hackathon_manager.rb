@@ -5,9 +5,9 @@ module HackathonManager
     hackathon = app.config_for(:hackathon)
 
     # Applications without a specified config.time_zone will parse
-    # this as a string instead of a DateTime
+    # this as a string instead of a Time
     if hackathon['last_day_to_apply'].is_a?(String)
-      hackathon['last_day_to_apply'] = DateTime.parse(hackathon['last_day_to_apply'])
+      hackathon['last_day_to_apply'] = Time.parse(hackathon['last_day_to_apply'])
     end
 
     app.config.hackathon = hackathon
