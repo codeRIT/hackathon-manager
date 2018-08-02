@@ -14,6 +14,9 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 gem 'pry', group: [:development, :test]
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
 group :test do
   gem 'shoulda'
   gem 'minitest-reporters'
