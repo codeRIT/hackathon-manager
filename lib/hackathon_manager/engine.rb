@@ -33,7 +33,7 @@ module HackathonManager
     end
 
     initializer 'hackathon_manager.factories', after: 'factory_bot.set_factory_paths' do
-      FactoryBot.definition_file_paths << File.expand_path('../../../test/factories', __FILE__) if defined?(FactoryBot)
+      FactoryBot.definition_file_paths << File.expand_path('../../test/factories', __dir__) if defined?(FactoryBot)
     end
 
     ActionController::Base.class_eval do
