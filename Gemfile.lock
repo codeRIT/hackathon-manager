@@ -343,12 +343,12 @@ GEM
     selectize-rails (0.12.5)
     sexp_processor (4.11.0)
     shellany (0.0.1)
-    shoulda (3.6.0)
+    shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
-      shoulda-matchers (~> 3.0)
+      shoulda-matchers (>= 1.4.1, < 3.0)
     shoulda-context (1.2.2)
-    shoulda-matchers (3.1.2)
-      activesupport (>= 4.0.0)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     sidekiq (5.2.2)
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
@@ -409,7 +409,8 @@ DEPENDENCIES
   minitest-reporters
   pry
   rails-controller-testing
-  shoulda
+  shoulda (~> 3.5)
+  shoulda-matchers (~> 2.0)
   valid_attribute
 
 BUNDLED WITH

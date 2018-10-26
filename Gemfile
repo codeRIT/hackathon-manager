@@ -18,7 +18,8 @@ gem 'pry', group: [:development, :test]
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :test do
-  gem 'shoulda'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
