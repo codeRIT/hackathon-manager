@@ -23,6 +23,7 @@ require "valid_attribute"
 require "factory_bot_rails"
 require "sidekiq/testing"
 require "paperclip/matchers"
+require "webmock/minitest"
 
 if defined?(RUBY_ENGINE) && RUBY_ENGINE == "ruby" && RUBY_VERSION >= "1.9"
   module Kernel

@@ -3,6 +3,8 @@
 <%
 counties = {}
 amount = 1
+redo_count = 0
+redo_limit = 10
 @schools.each do |school|
   if school.fips_code.blank?
     next if school.city.blank? || school.state.blank?
@@ -10,8 +12,13 @@ amount = 1
     resp = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{CGI.escape(school.city)}+#{CGI.escape(school.state)}&sensor=true")
     results = resp.parsed_response["results"][0]
     if results.blank?
+      if redo_count >= redo_limit
+        raise 'Exceeded maximum number of retries: No results from Google Maps API.'
+      end
+      redo_count += 1
       redo
     end
+    redo_count = 0
 
     lat = results["geometry"]["location"]["lat"]
     lng = results["geometry"]["location"]["lng"]

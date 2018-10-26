@@ -26,6 +26,7 @@ group :test do
   gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
   gem 'dotenv-rails'
+  gem 'webmock', '~> 3.4'
 end
 
 group :tools do
