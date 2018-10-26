@@ -13,9 +13,9 @@
   %body
     = javascript_include_tag "hackathon_manager/manage/application"
 
-    %nav.navbar.navbar-dark.fixed-top.bg-dark.flex-md-nowrap.p-0.shadow
-      %a.navbar-brand.col-sm-3.col-md-2.mr-0{href: "#"} #{Rails.configuration.hackathon['name']} Manager
-      %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
+    %nav.navbar.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
+      %a.navbar-brand.col-xs-6.col-sm-3.col-md-2.mr-0{href: manage_root_path} #{Rails.configuration.hackathon['name']} Manager
+      / %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
       %ul.navbar-nav.px-3
         %li.nav-item.text-nowrap
           = link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link"
@@ -74,7 +74,7 @@
                     Blazer
                     %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description Run custom SQL queries
-        %main.col-md-9.ml-sm-auto.col-lg-10.px-4{role: "main"}
+        %main.col-md-10.ml-sm-auto.px-4{role: "main"}
           = render "layouts/manage/flashes"
           = yield
 

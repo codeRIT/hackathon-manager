@@ -35,6 +35,9 @@ body {
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .sidebar .nav-link .fa {
@@ -62,6 +65,7 @@ body {
   margin-left: 26px;
   color: #999;
   line-height: 1.2;
+  white-space: normal;
 }
 
 /*
@@ -82,6 +86,8 @@ body {
   font-size: 1rem;
   background-color: rgba(0, 0, 0, .25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .navbar .form-control {

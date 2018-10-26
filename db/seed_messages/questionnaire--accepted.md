@@ -1,5 +1,7 @@
-<h2>Congratulations <%= @questionnaire.first_name %>, you're in!</h2>
-<p>You have been accepted to attend <%= Rails.configuration.hackathon['name'] %>! Please RSVP:</p>
+## Congratulations <%= @questionnaire.first_name %>, you're in!
+
+You have been accepted to attend <%= Rails.configuration.hackathon['name'] %>! **Please RSVP:**
+
 <p>
   <a href="https://brickhack.io/rsvp/accept" class="button" target="_blank">Yes, I will Attend &raquo;</a>
   <a href="https://brickhack.io/rsvp/deny" class="button" target="_blank">No, I Can't Attend &raquo;</a>

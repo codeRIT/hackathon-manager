@@ -7,7 +7,7 @@
       %tr
         %th Name
         %th Capacity
-        %th Needs Captain?
+        %th Needs bus captain?
         %th Schools
 
     %tbody
@@ -15,5 +15,5 @@
         %tr
           %td= link_to(bus_list.name, manage_bus_list_path(bus_list))
           %td #{bus_list.passengers.count} / #{bus_list.capacity}
-          %td= bus_list.needs_bus_captain ? "<strong class=\"text-danger\">Yes</strong>".html_safe : "No"
+          %td= bus_list.needs_bus_captain ? "<strong class=\"text-danger\">Needs bus captain</strong>".html_safe : "No"
           %td= bus_list.schools.count

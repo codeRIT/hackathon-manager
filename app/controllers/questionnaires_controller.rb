@@ -70,7 +70,6 @@ class QuestionnairesController < ApplicationController
       if @questionnaire.save
         current_user.questionnaire = @questionnaire
         @questionnaire.update_attribute(:acc_status, default_acc_status)
-        Mailer.delay.application_confirmation_email(@questionnaire.id)
         format.html { redirect_to questionnaires_path }
         format.json { render json: @questionnaire, status: :created, location: @questionnaire }
       else

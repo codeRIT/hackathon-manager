@@ -127,6 +127,7 @@ class RsvpsControllerTest < ActionController::TestCase
     end
 
     should "update the questionnaire status to accepted" do
+      create(:message, type: 'automated', trigger: 'questionnaire.rsvp_confirmed')
       get :accept
       assert_equal "rsvp_confirmed", @questionnaire.reload.acc_status
       assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size, "should email confirmation to questionnaire"
@@ -147,6 +148,7 @@ class RsvpsControllerTest < ActionController::TestCase
     end
 
     should "not allow riding a bus if school does not have bus list" do
+      create(:message, type: 'automated', trigger: 'questionnaire.rsvp_confirmed')
       patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", riding_bus: "true" } }
       assert_equal "rsvp_confirmed", @questionnaire.reload.acc_status
       assert_equal false, @questionnaire.reload.riding_bus
@@ -167,6 +169,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
     should "not send email if updating info after confirming" do
       @questionnaire.update_attribute(:acc_status, "rsvp_confirmed")
+      create(:message, type: 'automated', trigger: 'questionnaire.rsvp_confirmed')
       patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", riding_bus: "true" } }
       assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size, "no emails should be sent"
     end

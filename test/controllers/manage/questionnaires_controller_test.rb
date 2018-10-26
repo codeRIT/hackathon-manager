@@ -456,6 +456,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
       should "send notification emails appropriately for #{status} bulk_apply" do
+        create(:message, type: 'automated', trigger: "questionnaire.#{status}")
         assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
           patch :bulk_apply, params: { bulk_action: status, bulk_ids: [@questionnaire.id] }
         end
@@ -495,6 +496,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
       should "send notification emails appropriately for #{status} update_acc_status" do
+        create(:message, type: 'automated', trigger: "questionnaire.#{status}")
         assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
           patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: status } }
         end

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class MessageTest < ActiveSupport::TestCase
+  should strip_attribute :type
   should strip_attribute :name
   should strip_attribute :subject
   should strip_attribute :template
@@ -16,6 +17,34 @@ class MessageTest < ActiveSupport::TestCase
 
   should allow_value("default").for(:template)
   should_not allow_value("foo").for(:template)
+
+  should allow_value("bulk").for(:type)
+  should allow_value("automated").for(:type)
+  should_not allow_value("foo").for(:type)
+
+  context "bulk?" do
+    should "return true for a bulk email" do
+      message = build(:message, type: "bulk")
+      assert_equal true, message.bulk?
+    end
+
+    should "return false for an automated email" do
+      message = build(:message, type: "automated")
+      assert_equal false, message.bulk?
+    end
+  end
+
+  context "automated?" do
+    should "return false for a bulk email" do
+      message = build(:message, type: "bulk")
+      assert_equal false, message.automated?
+    end
+
+    should "return true for an automated email" do
+      message = build(:message, type: "automated")
+      assert_equal true, message.automated?
+    end
+  end
 
   context "recipients_list" do
     should "return human-readable list of basic recipients" do
@@ -90,6 +119,11 @@ class MessageTest < ActiveSupport::TestCase
     should "return delivered if not queued or delivered" do
       message = build(:message, queued_at: 1.hour.ago, started_at: 1.hour.ago, delivered_at: 1.hour.ago)
       assert_equal "delivered", message.status
+    end
+
+    should "return automated if automated type" do
+      message = build(:message, type: 'automated', queued_at: 1.hour.ago, started_at: 1.hour.ago, delivered_at: 1.hour.ago)
+      assert_equal "automated", message.status
     end
   end
 

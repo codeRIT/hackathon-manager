@@ -8,7 +8,7 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def datatable
-    render json: MessageDatatable.new(view_context)
+    render json: BulkMessageDatatable.new(view_context)
   end
 
   def show
@@ -40,6 +40,10 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def deliver
+    if @message.automated?
+      flash[:notice] = "Automated messages cannot be manually delivered. Only bulk messages can."
+      return redirect_to manage_message_path(@message)
+    end
     if @message.status != "drafted"
       flash[:notice] = "Message cannot be re-delivered"
       return redirect_to manage_messages_path
@@ -52,6 +56,13 @@ class Manage::MessagesController < Manage::ApplicationController
 
   def preview
     email = Mailer.bulk_message_email(@message.id, current_user.id)
+    render html: email.body.raw_source.html_safe
+  end
+
+  def live_preview
+    body = params[:body] || ''
+    message = Message.new(body: body)
+    email = Mailer.bulk_message_email(nil, current_user.id, message)
     render html: email.body.raw_source.html_safe
   end
 
@@ -71,7 +82,7 @@ class Manage::MessagesController < Manage::ApplicationController
 
   def message_params
     params.require(:message).permit(
-      :name, :subject, :template, :body, :trigger, recipients: []
+      :type, :name, :subject, :template, :body, :trigger, recipients: []
     )
   end
 

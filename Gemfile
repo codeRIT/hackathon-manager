@@ -18,13 +18,15 @@ gem 'pry', group: [:development, :test]
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :test do
-  gem 'shoulda'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
   gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
   gem 'dotenv-rails'
+  gem 'webmock', '~> 3.4'
 end
 
 group :tools do

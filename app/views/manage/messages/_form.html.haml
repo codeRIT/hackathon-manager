@@ -3,15 +3,24 @@
     = f.error_notification
 
     .form-inputs
+      = f.input :type, as: :select, collection: Message::POSSIBLE_TYPES.map { |x| [x.titleize, x] }, include_blank: false
+      = f.input :trigger, as: :select, collection: Message::POSSIBLE_TRIGGERS.invert, include_blank: "(disabled)"
       = f.input :name
       = f.input :subject, hint: "All emails are from <pre class=\"d-inline\">#{html_escape(Rails.configuration.hackathon['email_from'])}</pre>".html_safe
       = f.input :template, as: :select, collection: Message::POSSIBLE_TEMPLATES.map { |x| [x.titleize, x] }, include_blank: false
       - if @message.status == "drafted"
-        = f.input :recipients, as: :select, collection: @message.possible_recipients, input_html: { class: "selectize", multiple: true,  }, hint: "Sent manually, in bulk", placeholder: "Type to search by school or type..."
+        = f.input :recipients, as: :select, collection: @message.possible_recipients, input_html: { class: "selectize", multiple: true,  }, placeholder: "Type to search by school or type..."
       - else
         = f.input :recipients, as: :select, collection: @message.possible_recipients, input_html: { class: "selectize", multiple: true }, hint: "Cannot be edited once a message has been delivered", disabled: true
-      = f.input :trigger, as: :select, collection: Message::POSSIBLE_TRIGGERS.invert, include_blank: "(no automatic trigger)", hint: "Sent automatically, to an individual applicant"
-      = f.input :body, input_html: { rows: 10 }, hint: "Supports markdown and HTML"
+      %br
 
-    .form-actions
+    .row
+      .col-lg-6.mb-3
+        %h5.mb-3 Body
+        = f.input :body, input_html: { rows: 23, 'data-message-live-preview' => 'textarea', class: 'text-monospace', style: 'font-size: 14px' }, hint: "Supports markdown and HTML", label: false, wrapper: :bootstrap_inline_form
+      .col-lg-6.mb-3
+        %h5.mb-3 Preview
+        %iframe.email-preview{src: live_preview_manage_messages_path(body: @message.body), 'data-message-live-preview' => 'iframe', 'data-message-live-preview-base-src' => live_preview_manage_messages_path}
+
+    .form-actions.mb-3
       = f.button :submit, class: 'btn-primary'

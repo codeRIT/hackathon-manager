@@ -1,4 +1,4 @@
-class MessageDatatable < AjaxDatatablesRails::Base
+class BulkMessageDatatable < AjaxDatatablesRails::Base
   def_delegators :@view, :link_to, :manage_message_path, :display_datetime
 
   def view_columns
@@ -6,7 +6,8 @@ class MessageDatatable < AjaxDatatablesRails::Base
       id: { source: "Message.id" },
       name: { source: "Message.name" },
       subject: { source: "Message.subject" },
-      trigger: { source: "Message.trigger" },
+      created_at: { source: "Message.created_at", searchable: false },
+      updated_at: { source: "Message.updated_at", searchable: false },
       delivered_at: { source: "Message.delivered_at", searchable: false }
     }
   end
@@ -19,8 +20,9 @@ class MessageDatatable < AjaxDatatablesRails::Base
         id: record.id,
         name: link_to(record.name, manage_message_path(record)),
         subject: record.subject,
-        trigger: Message::POSSIBLE_TRIGGERS[record.trigger],
         status: record.status.titleize,
+        created_at: display_datetime(record.created_at),
+        updated_at: record.updated_at.present? ? display_datetime(record.updated_at) : '',
         delivered_at: record.delivered_at.present? ? display_datetime(record.delivered_at) : ''
       }
     end
@@ -28,7 +30,7 @@ class MessageDatatable < AjaxDatatablesRails::Base
 
   # rubocop:disable Naming/AccessorMethodName
   def get_raw_records
-    Message.unscoped
+    Message.where(type: 'bulk')
   end
   # rubocop:enable Naming/AccessorMethodName
 end

@@ -67,6 +67,12 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
+    should "not allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :redirect
+      assert_redirected_to new_user_session_path
+    end
+
     should "not allow access to manage_messages#duplicate" do
       assert_difference('Message.count', 0) do
         patch :duplicate, params: { id: @message }
@@ -145,6 +151,12 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
+    should "not allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :redirect
+      assert_redirected_to root_path
+    end
+
     should "not allow access to manage_messages#duplicate" do
       assert_difference('Message.count', 0) do
         patch :duplicate, params: { id: @message }
@@ -219,6 +231,12 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
+    should "not allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
     should "not allow access to manage_messages#duplicate" do
       assert_difference('Message.count', 0) do
         patch :duplicate, params: { id: @message }
@@ -246,7 +264,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "create a new message" do
-      post :create, params: { message: { name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "foo" } }
+      post :create, params: { message: { type: 'bulk', name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "foo" } }
       assert_response :redirect
       assert_redirected_to manage_message_path(assigns(:message))
     end
@@ -272,11 +290,20 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to manage_message_path(assigns(:message))
     end
 
-    should "deliver message" do
+    should "deliver a bulk message" do
       assert_difference('BulkMessageWorker.jobs.size', 1) do
         patch :deliver, params: { id: @message }
       end
       assert_match /queued/, flash[:notice]
+      assert_redirected_to manage_message_path(assigns(:message))
+    end
+
+    should "not deliver an automated message" do
+      @message.update_attribute(:type, 'automated')
+      assert_difference('BulkMessageWorker.jobs.size', 0) do
+        patch :deliver, params: { id: @message }
+      end
+      assert_match /Automated/, flash[:notice]
       assert_redirected_to manage_message_path(assigns(:message))
     end
 
@@ -304,6 +331,16 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "allow access to manage_messages#preview" do
       get :preview, params: { id: @message }
+      assert_response :success
+    end
+
+    should "allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: 'foo bar' }
+      assert_response :success
+    end
+
+    should "not error with unset body on manage_messages#live_preview" do
+      get :live_preview
       assert_response :success
     end
 

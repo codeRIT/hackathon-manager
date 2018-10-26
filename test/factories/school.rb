@@ -7,9 +7,9 @@ FactoryBot.define do
     sequence :name do |n|
       "University of Rails #{n}"
     end
-    address "123 Fake Street"
-    city    "Rochester"
-    state   "NY"
-    questionnaire_count 0
+    address { "123 Fake Street" }
+    city    { "Rochester" }
+    state   { "NY" }
+    questionnaire_count { 0 }
   end
 end

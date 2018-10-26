@@ -165,10 +165,6 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def process_acc_status_notifications(questionnaire, new_status)
-    Mailer.delay.accepted_email(questionnaire.id) if new_status == "accepted"
-    Mailer.delay.rsvp_confirmation_email(questionnaire.id) if new_status == "rsvp_confirmed"
-    Mailer.delay.denied_email(questionnaire.id) if new_status == "denied"
-
     questionnaire.invite_to_slack if ENV['INVITE_TO_SLACK_UPON_RSVP'] == 'true' && new_status == 'rsvp_confirmed'
   end
 end

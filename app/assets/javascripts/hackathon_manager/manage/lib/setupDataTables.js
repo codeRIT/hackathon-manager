@@ -2,11 +2,10 @@ var setupDataTables = function() {
 
   window.questionnairesDataTable = $('.datatable.questionnaires').DataTable({
     order      : [3, 'desc'],
-    scrollX    : false,
     columns    : [
-      { orderable : false, data: 'bulk' },
-      { orderable : false, data: 'link' },
-      { orderable : false, data: 'note' },
+      { orderable: false, data: 'bulk' },
+      { orderable: false, data: 'link' },
+      { orderable: false, data: 'note' },
       { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
@@ -17,13 +16,14 @@ var setupDataTables = function() {
       { orderable: true, data: 'acc_status' },
       { orderable: true, data: 'checked_in' },
       { orderable: true, data: 'school' },
-      { orderable: true, data: 'created_at' }
+      { orderable: true, data: 'created_at' },
+      { orderable: true, data: 'dietary_restrictions', visible: false },
+      { orderable: true, data: 'special_needs', visible: false },
     ]
   });
 
   $('.datatable.users').DataTable({
     order      : [1, 'asc'],
-    scrollX    : false,
     columns    : [
       { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'email' },
@@ -31,22 +31,21 @@ var setupDataTables = function() {
     ]
   });
 
-  $('.datatable.messages').DataTable({
-    order      : [0, 'desc'],
-    scrollX    : false,
+  $('.datatable.bulk-messages').DataTable({
+    order      : [4, 'desc'],
     columns    : [
       { orderable: true, data: 'id', visible: false},
       { orderable: true, data: 'name'},
       { orderable: true, data: 'subject'},
-      { orderable: true, data: 'trigger'},
       { orderable: false, data: 'status'},
+      { orderable: true, data: 'created_at'},
+      { orderable: true, data: 'updated_at', visible: false},
       { orderable: true, data: 'delivered_at'}
     ]
   });
 
   $('.datatable.schools').DataTable({
     order      : [4, 'desc'],
-    scrollX    : false,
     columns    : [
       { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'name' },
@@ -58,7 +57,6 @@ var setupDataTables = function() {
   });
 
   $('.datatable.stats').DataTable({
-    scrollX    : false,
     processing : false,
     serverSide : false
   });

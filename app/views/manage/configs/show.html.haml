@@ -1,7 +1,7 @@
 = render "layouts/manage/page_title", title: "Hackathon Configuration"
 
 .row
-  .col-lg-6
+  .col-lg-6.mb-3
     .card
       .card-body
         %h5.card-title Hackathon Manager Config
@@ -15,7 +15,7 @@
             %b #{key}:
             %pre= Rails.configuration.hackathon[key]
 
-  .col-lg-6
+  .col-lg-6.mb-3
     .card
       .card-body
         %h5.card-title Environment Variables

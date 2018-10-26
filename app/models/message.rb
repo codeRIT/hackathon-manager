@@ -6,6 +6,8 @@ class Message < ApplicationRecord
 
   POSSIBLE_TEMPLATES = ["default"].freeze
 
+  POSSIBLE_TYPES = ["bulk", "automated"].freeze
+
   POSSIBLE_SIMPLE_RECIPIENTS = {
     "all"                              => "Everyone",
     "incomplete"                       => "Incomplete Applications",
@@ -34,6 +36,7 @@ class Message < ApplicationRecord
   serialize :recipients, Array
 
   validates_inclusion_of :template, in: POSSIBLE_TEMPLATES
+  validates_inclusion_of :type, in: POSSIBLE_TYPES
 
   def recipients=(values)
     values.present? ? super(values.reject(&:blank?)) : super(values)
@@ -52,6 +55,14 @@ class Message < ApplicationRecord
     labels
   end
 
+  def bulk?
+    type == "bulk"
+  end
+
+  def automated?
+    type == "automated"
+  end
+
   def delivered?
     delivered_at.present?
   end
@@ -65,6 +76,7 @@ class Message < ApplicationRecord
   end
 
   def status
+    return "automated" if automated?
     return "delivered" if delivered?
     return "started" if started?
     return "queued" if queued?
@@ -72,7 +84,7 @@ class Message < ApplicationRecord
   end
 
   def can_edit?
-    status == "drafted" || trigger.present?
+    automated? || status == "drafted"
   end
 
   def can_queue?
@@ -126,5 +138,17 @@ class Message < ApplicationRecord
   def self.queue_for_trigger(trigger, user_id)
     messages_to_queue = Message.where(trigger: trigger)
     messages_to_queue.map { |message| Mailer.delay.bulk_message_email(message.id, user_id) }
+  end
+
+  def self.bulk
+    where(type: 'bulk')
+  end
+
+  def self.automated
+    where(type: 'automated')
+  end
+
+  def self.inheritance_column
+    "class_type"
   end
 end

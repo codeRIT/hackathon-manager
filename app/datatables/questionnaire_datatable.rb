@@ -14,7 +14,9 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
       acc_status: { source: 'Questionnaire.acc_status', searchable: true },
       checked_in: { source: 'Questionnaire.checked_in_at', searchable: false },
       school: { source: 'School.name' },
-      created_at: { source: 'Questionnaire.created_at', searchable: false }
+      created_at: { source: 'Questionnaire.created_at', searchable: false },
+      dietary_restrictions: { source: 'Questionnaire.dietary_restrictions', searchable: true },
+      special_needs: { source: 'Questionnaire.special_needs', searchable: true }
     }
   end
 
@@ -36,7 +38,9 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
         acc_status: "<span class=\"text-#{acc_status_class(record.acc_status)}\">#{record.acc_status.titleize}</span>".html_safe,
         checked_in: record.checked_in? ? '<span class="text-success">Yes</span>'.html_safe : 'No',
         school: link_to(record.school.name, manage_school_path(record.school)),
-        created_at: record.created_at.present? ? display_datetime(record.created_at) : ''
+        created_at: record.created_at.present? ? display_datetime(record.created_at) : '',
+        dietary_restrictions: record.dietary_restrictions,
+        special_needs: record.special_needs
       }
     end
   end
