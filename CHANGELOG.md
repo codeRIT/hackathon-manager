@@ -1,5 +1,29 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.8.0 - 2018-10-25
+
+**Critical Breaking Change**
+
+Old templates in `app/views/mailers` **must** be manually migrated into the new management UI. The existing automated emails will no longer function.
+
+For each of these templates, create a new "Automated" message at `https://your-website.com/manage/messages`, set the appropriate trigger event, and copy their content over. Be sure to convert any Ruby/ERB code to static HTML as it is no longer supported.
+
+* app/views/mailer/application_confirmation_email.html.erb
+* app/views/mailer/denied_email.html.erb
+* app/views/mailer/rsvp_confirmation_email.html.erb
+* app/views/mailer/accepted_email.html.erb
+
+Release notes:
+
+* Feature: Consolidated most automated emails into the management UI
+* Feature: Show side-by-side preview of message when editing
+* Feature: Provide real default email template ([leemunroe/responsive-html-email-template](https://github.com/leemunroe/responsive-html-email-template))
+* Improvement: Cleaned up how automated & bulk emails are explained in the UI
+* Improvement: Improve nav & layout for mobile
+* Improvement: Better flag applicants w/dietary or special needs
+* Improvement: Add dietary & special needs to questionnaires table
+* Maintenance: Upgrade to Ruby 2.5.2, update gems
+
 # 0.7.1 - 2018-07-29
 
 * Fix: Support Rails 5.1+ migrations
