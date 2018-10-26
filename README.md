@@ -6,7 +6,7 @@
 [![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager/coverage)
 [![security](https://hakiri.io/github/codeRIT/hackathon_manager/master.svg)](https://hakiri.io/github/codeRIT/hackathon_manager/master)
 
-***Still a work in progress! Instructions below are incomplete.** Check out [WiCHacks](https://github.com/sman591/wichacks) for an implementation example.*
+***Still a work in progress! Instructions below are incomplete.** Check out [WiCHacks](https://github.com/Women-in-Computing-at-RIT/wichacks.io) or [BrickHack](https://github.com/codeRIT/brickhack.io) for an implementation example.*
 
 Originally developed for [BrickHack](https://github.com/codeRIT/brickhack.io), this is a Ruby on Rails "plugin" that adds typical hackathon management features to any existing Ruby on Rails application.
 
