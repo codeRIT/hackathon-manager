@@ -11,15 +11,12 @@
   %thead
     %tr
       %th Automation Event
-      %th Hard-coded Email
-      %th Automated Emails
+      %th Message(s)
   %tbody
     - Message::POSSIBLE_TRIGGERS.keys.each do |trigger|
       %tr
         %td= Message::POSSIBLE_TRIGGERS[trigger]
         - messages = Message.automated.where(trigger: trigger).all
-        %td
-          = ['questionnaire.pending'].include?(trigger) ? '<strong class="text-info">Hard-coded</strong>'.html_safe : 'No'
         %td
           - if messages.present?
             %ul.list-unstyled.mb-0
@@ -29,7 +26,6 @@
             None
     %tr
       %td Disabled
-      %td N/A
       %td
         - messages = Message.automated.where(trigger: nil).all
         - if messages.present?
