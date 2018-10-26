@@ -15,6 +15,8 @@ For each of these templates, create a new "Automated" message at `https://your-w
 
 Release notes:
 
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
 * Feature: Consolidated most automated emails into the management UI
 * Feature: Show side-by-side preview of message when editing
 * Feature: Provide real default email template ([leemunroe/responsive-html-email-template](https://github.com/leemunroe/responsive-html-email-template))
