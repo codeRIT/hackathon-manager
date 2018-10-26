@@ -4,7 +4,7 @@ FactoryBot.define do
     sequence :name do |n|
       "Bus List #{n}"
     end
-    capacity 50
-    notes    "Notes!"
+    capacity { 50 }
+    notes    { "Notes!" }
   end
 end
