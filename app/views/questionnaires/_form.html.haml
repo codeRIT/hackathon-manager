@@ -51,20 +51,21 @@
           = link_to asset_url(Rails.configuration.hackathon['agreement_pdf_asset']), target: '_blank' do
             #{Rails.configuration.hackathon['name']} Agreement
             %span.fa.fa-external-link.icon-space-l-half
-        = f.input :agreement_accepted, as: :formatted_boolean, label: "I accept the #{Rails.configuration.hackathon['name']} agreement.", input_html: { "data-validate" => "presence" }
+        = f.input :agreement_accepted, as: :formatted_boolean, label: "I read & accept the #{Rails.configuration.hackathon['name']} agreement.", input_html: { "data-validate" => "presence" }
 
         .supporting-text
           Please read the
           %a{ href:"http://static.mlh.io/docs/mlh-code-of-conduct.pdf", target: "_blank" }
             MLH Code of Conduct
             %span.fa.fa-external-link.icon-space-l-half
-        = f.input :code_of_conduct_accepted, as: :formatted_boolean, label: "I accept the MLH Code of Conduct.", input_html: { "data-validate" => "presence" }
+        = f.input :code_of_conduct_accepted, as: :formatted_boolean, label: "I read & accept the MLH Code of Conduct.", input_html: { "data-validate" => "presence" }
 
         .supporting-text
-          I agree to the terms of both the
-          <a href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions" target="_blank">MLH Contest Terms</a> and Conditions and the
-          <a href="https://mlh.io/privacy" target="_blank">MLH Privacy Policy</a>. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
-        = f.input :data_sharing_accepted, as: :formatted_boolean, label: "I accept the MLH policies.", input_html: { "data-validate" => "presence" }
+          I authorize you to share certain application/registration information for event administration, ranking, MLH administration, pre and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the
+          <a href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions" target="_blank">MLH Contest Terms and Conditions</a>
+          and the
+          <a href="https://mlh.io/privacy" target="_blank">MLH Privacy Policy</a>.
+        = f.input :data_sharing_accepted, as: :formatted_boolean, label: "I read & accept the MLH policies.", input_html: { "data-validate" => "presence" }
 
       .right
         %button.button{ type: "button", "data-wizard" => "previous" } Previous
