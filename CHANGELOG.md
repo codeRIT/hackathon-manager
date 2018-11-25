@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.9.0 - 2018-11-25
+
+* Feature: Add graduation year, race/ethnicity questions to questionnaire
+* Improvement: Increase email preview & textarea heights
+* Improvement: Bold titles in admin tables for better readability
+
 # 0.8.2 - 2018-11-25
 
 * Improvement: Update MLH policy disclaimer

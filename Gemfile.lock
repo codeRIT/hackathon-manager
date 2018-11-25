@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hackathon_manager (0.8.2)
+    hackathon_manager (0.9.0)
       ajax-datatables-rails (~> 0.4.0)
       aws-sdk-s3
       blazer
