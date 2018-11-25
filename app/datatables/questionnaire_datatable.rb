@@ -1,5 +1,5 @@
 class QuestionnaireDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :link_to, :manage_questionnaire_path, :manage_school_path, :current_user, :acc_status_class, :display_datetime
+  def_delegators :@view, :link_to, :manage_questionnaire_path, :manage_school_path, :current_user, :acc_status_class, :display_datetime, :bold
 
   def view_columns
     @view_columns ||= {
@@ -29,8 +29,8 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
         link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(record)),
         note: record.minor? ? '<div class="center"><i class="fa fa-exclamation-triangle icon-space-r"></i> Minor</div>'.html_safe : '',
         id: record.id,
-        first_name: record.first_name,
-        last_name: record.last_name,
+        first_name: bold(record.first_name),
+        last_name: bold(record.last_name),
         email: record.email,
         phone: record.phone,
         gender: record.gender,

@@ -21,7 +21,8 @@
           - if messages.present?
             %ul.list-unstyled.mb-0
               - messages.each do |message|
-                %li= link_to(message.name, manage_message_path(message))
+                %li
+                  %strong= link_to(message.name, manage_message_path(message))
           - else
             None
     %tr
@@ -31,6 +32,7 @@
         - if messages.present?
           %ul.list-unstyled.mb-0
             - messages.each do |message|
-              %li= link_to(message.name, manage_message_path(message))
+              %li
+                %strong= link_to(message.name, manage_message_path(message))
         - else
           None

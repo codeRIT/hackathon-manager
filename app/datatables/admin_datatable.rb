@@ -1,5 +1,5 @@
 class AdminDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :link_to, :manage_admin_path
+  def_delegators :@view, :link_to, :manage_admin_path, :bold
 
   def view_columns
     @view_columns ||= {
@@ -15,7 +15,7 @@ class AdminDatatable < AjaxDatatablesRails::Base
     records.map do |record|
       {
         id: record.id,
-        email: link_to(record.email, manage_admin_path(record)),
+        email: link_to(bold(record.email), manage_admin_path(record)),
         admin_limited_access: record.admin_limited_access ? 'Limited Access' : 'Full Access'
       }
     end

@@ -26,6 +26,10 @@ module HackathonManagerHelper
     markdown.render(text).html_safe
   end
 
+  def bold(value)
+    "<strong>#{h(value)}</strong>".html_safe
+  end
+
   # Same as link_to, but adds a special active class whenever the link matches
   # the current page.
   # Only  https://github.com/rails/rails/blob/master/actionview/lib/action_view/helpers/url_helper.rb
