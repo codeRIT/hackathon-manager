@@ -1,5 +1,9 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.8.2 - 2018-11-25
+
+* Improvement: Update MLH policy disclaimer
+
 # 0.8.1 - 2018-10-26
 
 * Fix: Default mailer template
