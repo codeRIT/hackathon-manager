@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  self.inheritance_column = nil # To enable using "type" field
+
   validates_presence_of :name, :subject, :template
   validates_presence_of :body, if: :using_default_template?
 
