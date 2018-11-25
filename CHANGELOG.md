@@ -2,6 +2,8 @@
 
 # 0.9.0 - 2018-11-25
 
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
 * Feature: Add graduation year, race/ethnicity questions to questionnaire
 * Improvement: Increase email preview & textarea heights
 * Improvement: Bold titles in admin tables for better readability
