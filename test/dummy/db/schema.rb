@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_01_144544) do
+ActiveRecord::Schema.define(version: 2018_11_25_213158) do
 
   create_table "blazer_audits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -138,6 +138,8 @@ ActiveRecord::Schema.define(version: 2018_08_01_144544) do
     t.string "interest"
     t.text "why_attend"
     t.datetime "boarded_bus_at"
+    t.integer "graduation_year"
+    t.string "race_ethnicity"
     t.index ["user_id"], name: "index_questionnaires_on_user_id"
   end
 

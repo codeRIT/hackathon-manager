@@ -8,7 +8,7 @@ class Questionnaire < ApplicationRecord
   after_destroy :update_school_questionnaire_count
 
   validates_presence_of :first_name, :last_name, :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
-  validates_presence_of :gender, :major, :level_of_study
+  validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity
   validates_presence_of :agreement_accepted, message: "Please read & accept"
   validates_presence_of :code_of_conduct_accepted, message: "Please read & accept"
   validates_presence_of :data_sharing_accepted, message: "Please read & accept"
@@ -66,6 +66,18 @@ class Questionnaire < ApplicationRecord
     "rsvp_confirmed" => "RSVP Confirmed",
     "rsvp_denied"    => "RSVP Denied"
   }.freeze
+
+  POSSIBLE_GRAD_YEARS = (Date.today.year - 3...Date.today.year + 7).to_a.freeze
+
+  POSSIBLE_RACE_ETHNICITIES = [
+    "American Indian or Alaskan Native",
+    "Asian / Pacific Islander",
+    "Black or African American",
+    "Hispanic",
+    "White / Caucasian",
+    "Multiple ethnicities / Other",
+    "Prefer not to answer"
+  ].freeze
 
   # From My MLH's dropdown list.
   # Should *not* validate against this list in case My MLH changes their options,

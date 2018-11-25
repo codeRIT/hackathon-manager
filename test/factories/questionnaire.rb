@@ -18,6 +18,8 @@ FactoryBot.define do
     gender                { "Male" }
     major                 { "Computer Science" }
     level_of_study        { "University (Undergraduate)" }
+    graduation_year       { Date.today.year }
+    race_ethnicity        { "Other" }
     why_attend            { "This sounds cool" }
 
     association :user

@@ -23,6 +23,8 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should validate_presence_of :level_of_study
   should validate_presence_of :major
   should validate_presence_of :gender
+  should validate_presence_of :graduation_year
+  should validate_presence_of :race_ethnicity
   should_not validate_presence_of :why_attend
   should_not validate_presence_of :dietary_restrictions
   should_not validate_presence_of :special_needs
