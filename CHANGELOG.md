@@ -1,5 +1,9 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.9.2 - 2018-11-26
+
+* Fix: Left-align text in emails instead of justify
+
 # 0.9.1 - 2018-11-25
 
 * Fix: Send application confirmation email to new applicants
