@@ -61,14 +61,14 @@ class QuestionnairesController < ApplicationController
   # POST /apply
   # POST /apply.json
   def create
-    if current_user.questionnaire.present?
+    if current_user.reload.questionnaire.present?
       return redirect_to questionnaires_path, notice: 'Application already exists.'
     end
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
+    @questionnaire.user_id = current_user.id
 
     respond_to do |format|
       if @questionnaire.save
-        current_user.questionnaire = @questionnaire
         @questionnaire.update_attribute(:acc_status, default_acc_status)
         format.html { redirect_to questionnaires_path }
         format.json { render json: @questionnaire, status: :created, location: @questionnaire }
