@@ -9,6 +9,7 @@ PATH
       chartkick (~> 2.1)
       coffee-rails
       devise (~> 4.2)
+      doorkeeper (~> 5.0)
       font-awesome-rails (~> 4.0)
       groupdate
       haml-rails
@@ -139,6 +140,8 @@ GEM
       responders
       warden (~> 1.2.3)
     docile (1.3.1)
+    doorkeeper (5.0.2)
+      railties (>= 4.2)
     dotenv (2.5.0)
     dotenv-rails (2.5.0)
       dotenv (= 2.5.0)
