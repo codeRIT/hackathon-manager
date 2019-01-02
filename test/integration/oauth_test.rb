@@ -14,13 +14,26 @@ class OauthTest < ActionDispatch::IntegrationTest
     end
   end
 
+  context "access with invalid API key" do
+    setup do
+      @token = create(:access_token, application: @application, resource_owner_id: @user.id)
+      @application.destroy
+    end
+
+    should "return data for questionnaire" do
+      get questionnaires_path, headers: auth_headers(@token.token)
+      assert_response :redirect
+      assert_redirected_to new_user_session_url
+    end
+  end
+
   context "access with API key" do
     setup do
       @token = create(:access_token, application: @application, resource_owner_id: @user.id)
     end
 
     should "return data for questionnaire" do
-      get questionnaires_path, headers: auth_headers
+      get questionnaires_path, headers: auth_headers(@token.token)
       assert_response :success
     end
   end
@@ -33,10 +46,10 @@ class OauthTest < ActionDispatch::IntegrationTest
     }
   end
 
-  def auth_headers
+  def auth_headers(token)
     {
       content_type: 'application/json',
-      authorization: "Bearer #{@token.token}"
+      authorization: "Bearer #{token}"
     }
   end
 end
