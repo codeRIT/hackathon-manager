@@ -74,6 +74,12 @@
                     Blazer
                     %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description Run custom SQL queries
+                %li.nav-item
+                  = active_link_to oauth_applications_path, target: '_blank', class: "nav-link" do
+                    .fa.fa-unlock.fa-fw.icon-space-r-half
+                    Doorkeeper
+                    %span.fa.fa-external-link.icon-space-l-half
+                    .nav-item-description OAuth2 provider management
         %main.col-md-10.ml-sm-auto.px-4{role: "main"}
           = render "layouts/manage/flashes"
           = yield
