@@ -29,14 +29,14 @@ class OauthTest < ActionDispatch::IntegrationTest
 
   def json_headers
     {
-      content_type: 'application/json',
+      content_type: 'application/json'
     }
   end
 
   def auth_headers
     {
       content_type: 'application/json',
-      authorization: "Bearer #{@token.token}",
+      authorization: "Bearer #{@token.token}"
     }
   end
 end
