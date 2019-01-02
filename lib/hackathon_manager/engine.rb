@@ -1,5 +1,14 @@
+def require_name(dependency_name)
+  case dependency_name
+  when 'devise-doorkeeper'
+    'devise/doorkeeper'
+  else
+    dependency_name
+  end
+end
+
 Gem.loaded_specs['hackathon_manager'].dependencies.each do |d|
-  require d.name
+  require require_name(d.name)
 end
 
 module HackathonManager
@@ -33,7 +42,11 @@ module HackathonManager
     end
 
     initializer 'hackathon_manager.factories', after: 'factory_bot.set_factory_paths' do
-      FactoryBot.definition_file_paths << File.expand_path('../../test/factories', __dir__) if defined?(FactoryBot)
+      if defined?(FactoryBot)
+        FactoryBot.definition_file_paths << File.expand_path('../../test/factories', __dir__)
+        # doorkeeper_dir = Gem::Specification.find_by_name('doorkeeper').gem_dir
+        # FactoryBot.definition_file_paths << File.join(doorkeeper_dir, 'spec/factories')
+      end
     end
 
     ActionController::Base.class_eval do

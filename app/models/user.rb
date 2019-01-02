@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:mlh]
+         :doorkeeper, :omniauthable, omniauth_providers: [:mlh]
 
   has_one :questionnaire
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant",

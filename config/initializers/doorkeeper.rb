@@ -1,14 +1,16 @@
 Doorkeeper.configure do
+  # Enable easy devise integration
+  Devise::Doorkeeper.configure_doorkeeper(self)
+
   # Change the ORM that doorkeeper will use (needs plugins)
   orm :active_record
 
   # This block will be called to check whether the resource owner is authenticated or not.
-  resource_owner_authenticator do
-    # Put your resource owner authentication logic here.
-    # Example implementation:
-    #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
-    current_user || warden.authenticate!(scope: :user)
-  end
+  # resource_owner_authenticator do
+  #   # Put your resource owner authentication logic here.
+  #   # Example implementation:
+  #   #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
+  # end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
   # file then you need to declare this block in order to restrict access to the web interface for
@@ -176,8 +178,8 @@ Doorkeeper.configure do
   # before enabling:
   #   http://tools.ietf.org/html/rfc6819#section-4.4.2
   #   http://tools.ietf.org/html/rfc6819#section-4.4.3
-  #
-  # grant_flows %w[authorization_code client_credentials]
+
+  grant_flows %w[authorization_code client_credentials implicit]
 
   # Hook into the strategies' request & response life-cycle in case your
   # application needs advanced customization or logging:

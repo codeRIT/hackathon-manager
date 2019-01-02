@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise', '~> 4.2'
   s.add_dependency 'omniauth-mlh', '~> 0.1'
   s.add_dependency 'doorkeeper', '~> 5.0'
+  s.add_dependency 'devise-doorkeeper'
 
   s.add_dependency 'httparty'
 
