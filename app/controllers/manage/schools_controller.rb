@@ -1,9 +1,10 @@
 class Manage::SchoolsController < Manage::ApplicationController
   before_action :find_school, only: [:show, :edit, :update, :destroy, :merge, :perform_merge]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
+    respond_with(:manage, School.all)
   end
 
   def datatable

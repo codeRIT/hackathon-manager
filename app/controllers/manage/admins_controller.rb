@@ -1,9 +1,10 @@
 class Manage::AdminsController < Manage::ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
+    respond_with(:manage, User.where(admin: true))
   end
 
   def datatable

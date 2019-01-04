@@ -1,7 +1,7 @@
 class Manage::BusListsController < Manage::ApplicationController
   before_action :set_bus_list, only: [:show, :edit, :update, :destroy, :toggle_bus_captain, :send_update_email]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @bus_lists = BusList.all

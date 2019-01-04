@@ -1,7 +1,10 @@
 class Manage::ConfigsController < Manage::ApplicationController
   before_action :limit_access_admin
 
+  respond_to :html, :json
+
   def show
+    respond_with(Rails.configuration.hackathon)
   end
 
   private

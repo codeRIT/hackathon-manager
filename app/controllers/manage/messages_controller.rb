@@ -2,9 +2,10 @@ class Manage::MessagesController < Manage::ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy, :deliver, :preview, :duplicate]
   before_action :check_message_access, only: [:edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
+    respond_with(:manage, Message.all)
   end
 
   def datatable

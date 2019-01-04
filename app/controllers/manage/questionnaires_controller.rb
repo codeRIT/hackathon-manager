@@ -3,9 +3,10 @@ class Manage::QuestionnairesController < Manage::ApplicationController
 
   before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events, :invite_to_slack]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
+    respond_with(:manage, Questionnaire.all)
   end
 
   def datatable
