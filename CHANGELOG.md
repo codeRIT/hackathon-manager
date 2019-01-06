@@ -1,5 +1,15 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.10.2 - 2019-01-06
+
+* Fix: Redirect after merging two schools
+* Feature: Add mobile nav
+* Improvement: Add GUI for editing message body markdown w/fullscreen support
+* Improvement: Make key information stand out in messages table
+* Improvement: Re-order 18-year-old compliance check to top of list
+* Improvement: Better dashboard chart logic for incomplete data states
+* Improvement: Separate "MLH Info" table into two "applied" and "checked in" tables
+
 # 0.10.1 - 2019-01-04
 
 * Improvement: Add support for JSON APIs on management controllers
