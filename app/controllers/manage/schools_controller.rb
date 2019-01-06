@@ -71,7 +71,7 @@ class Manage::SchoolsController < Manage::ApplicationController
       flash[:notice] = "*** Old school NOT deleted: #{@school.questionnaire_count} questionnaires still associated!\n"
     end
 
-    redirect_to manage_schools_path(new_school)
+    redirect_to manage_school_path(new_school)
   end
 
   private
