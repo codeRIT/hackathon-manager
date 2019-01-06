@@ -6,7 +6,7 @@
       = f.input :name
       = f.input :capacity
       = f.input :needs_bus_captain
-      = f.input :notes, input_html: { rows: 15 }
+      = f.input :notes, input_html: { rows: 15, 'data-simple-mde' => '1' }
 
     .form-actions
       = f.button :submit, class: 'btn-primary'
