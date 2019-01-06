@@ -46,13 +46,24 @@
 
 .row
   .col
-    %h5.dashboard-container-title MLH Info
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_manage_stats_path(format: :json) }
+    %h5.dashboard-container-title MLH Info (applied)
+    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_applied_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name
           %th Last name
           %th Email
-          %th Phone Number
+          %th School Name
+      %tbody
+
+.row
+  .col
+    %h5.dashboard-container-title MLH Info (checked in)
+    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_checked_in_manage_stats_path(format: :json) }
+      %thead
+        %tr
+          %th First name
+          %th Last name
+          %th Email
           %th School Name
       %tbody

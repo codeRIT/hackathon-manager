@@ -82,12 +82,11 @@ class Manage::StatsController < Manage::ApplicationController
     render json: { data: data }
   end
 
-  def mlh_info
-    data = Rails.cache.fetch(cache_key_for_questionnaires("mlh_info")) do
+  def mlh_info_applied
+    data = Rails.cache.fetch(cache_key_for_questionnaires("mlh_info_applied")) do
       select_attributes = [
         :first_name,
         :last_name,
-        :phone,
         :user_id,
         :school_id
       ]
@@ -95,7 +94,6 @@ class Manage::StatsController < Manage::ApplicationController
         :first_name,
         :last_name,
         :email,
-        :phone,
         :school_name
       ]
       data = Questionnaire.joins(:school).select(select_attributes)
@@ -103,6 +101,27 @@ class Manage::StatsController < Manage::ApplicationController
     end
     render json: { data: data }
   end
+
+  def mlh_info_checked_in
+    data = Rails.cache.fetch(cache_key_for_questionnaires("mlh_info_checked_in")) do
+      select_attributes = [
+        :first_name,
+        :last_name,
+        :user_id,
+        :school_id
+      ]
+      json_attributes = [
+        :first_name,
+        :last_name,
+        :email,
+        :school_name
+      ]
+      data = Questionnaire.joins(:school).select(select_attributes).where('checked_in_at > 0')
+      to_json_array(data, json_attributes)
+    end
+    render json: { data: data }
+  end
+
 
   private
 

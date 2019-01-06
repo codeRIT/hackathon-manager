@@ -72,7 +72,8 @@ Rails.application.routes.draw do
       post :dietary_special_needs, on: :collection
       post :sponsor_info, on: :collection
       post :alt_travel, on: :collection
-      post :mlh_info, on: :collection
+      post :mlh_info_applied, on: :collection
+      post :mlh_info_checked_in, on: :collection
     end
     resource :config do
     end
