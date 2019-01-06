@@ -16,6 +16,8 @@
     %nav.navbar.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
       %a.navbar-brand.col-xs-6.col-sm-3.col-md-2.mr-0{href: manage_root_path} #{Rails.configuration.hackathon['name']} Manager
       / %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
+      %span.navbar-brand.navbar-mobile-toggle.mr-0.pl-3.pr-3{onclick: 'toggleMobileNav()'}
+        .fa.fa-bars.fa-fw.icon-space-r-half
       %ul.navbar-nav.px-3
         %li.nav-item.text-nowrap
           = link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link"
