@@ -147,8 +147,11 @@ $grey-med: #999
  */
 
 .navbar-mobile-toggle
+  display: none
   overflow: visible
   transition: all 150ms ease-out
+  @media (max-width: 768px)
+    display: inherit
 
 .navbar-mobile-toggle--active
   color: black !important
