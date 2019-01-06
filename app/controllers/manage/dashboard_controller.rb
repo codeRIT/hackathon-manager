@@ -71,7 +71,11 @@ class Manage::DashboardController < Manage::ApplicationController
     }
     # Temporary fix
     # result = Questionnaire.joins(:school).group(:acc_status, "schools.name").where("schools.questionnaire_count >= 5").order("schools.questionnaire_count DESC").order("schools.name ASC").count
-    result = Questionnaire.joins(:school).group(:acc_status, "schools.name", "schools.questionnaire_count").order("schools.questionnaire_count DESC").where("schools.questionnaire_count >= 5").count
+    query = Questionnaire.joins(:school).group(:acc_status, "schools.name", "schools.questionnaire_count").order("schools.questionnaire_count DESC")
+    if School.where("questionnaire_count >= 5").count > 0
+      query = query.where("schools.questionnaire_count >= 5")
+    end
+    result = query.count
     result.each do |group, count|
       counted_schools[group[0]][group[1]] = count
     end
