@@ -39,6 +39,15 @@
       .card-header Compliance
       .card-body.px-0.py-0
         %ul.list-group.list-group-flush
+          - if !@questionnaire.minor?
+            %li.list-group-item
+              .text-success
+                %span.fa.fa-check.fa-fw.icon-space-r
+                18 years or older
+          - else
+            %li.list-group-item.list-group-item-warning
+              %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
+              18 years or older
           - if @questionnaire.agreement_accepted
             %li.list-group-item
               .text-success
@@ -66,15 +75,6 @@
             %li.list-group-item.list-group-item-danger
               %span.fa.fa-close.fa-fw.icon-space-r
               MLH Data Sharing
-          - if !@questionnaire.minor?
-            %li.list-group-item
-              .text-success
-                %span.fa.fa-check.fa-fw.icon-space-r
-                18 years or older
-          - else
-            %li.list-group-item.list-group-item-warning
-              %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
-              18 years or older
 
   .col-md-6
     .card.mb-3
