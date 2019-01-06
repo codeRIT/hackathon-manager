@@ -67,6 +67,6 @@ class Manage::StatsControllerTest < ActionController::TestCase
   private
 
   def paths
-    [:dietary_special_needs, :sponsor_info, :alt_travel, :mlh_info]
+    [:dietary_special_needs, :sponsor_info, :alt_travel, :mlh_info_applied, :mlh_info_checked_in]
   end
 end
