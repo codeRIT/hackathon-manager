@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  band_id: MyString
+  trackable_tag: one
+  user: one
+
+two:
+  band_id: MyString
+  trackable_tag: two
+  user: two

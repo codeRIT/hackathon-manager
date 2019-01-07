@@ -1,0 +1,19 @@
+= form_for @trackable_event do |f|
+  - if @trackable_event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@trackable_event.errors.count, "error")} prohibited this trackable_event from being saved:"
+      %ul
+        - @trackable_event.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :band_id
+    = f.text_field :band_id
+  .field
+    = f.label :trackable_tag
+    = f.text_field :trackable_tag
+  .field
+    = f.label :user
+    = f.text_field :user
+  .actions
+    = f.submit 'Save'

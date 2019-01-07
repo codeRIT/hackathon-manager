@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Band:
+  = @trackable_event.band_id
+%p
+  %b Trackable tag:
+  = @trackable_event.trackable_tag
+%p
+  %b User:
+  = @trackable_event.user
+
+= link_to 'Edit', edit_trackable_event_path(@trackable_event)
+\|
+= link_to 'Back', trackable_events_path

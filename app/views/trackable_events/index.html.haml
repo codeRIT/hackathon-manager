@@ -1,0 +1,25 @@
+%h1 Listing trackable_events
+
+%table
+  %thead
+    %tr
+      %th Band
+      %th Trackable tag
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @trackable_events.each do |trackable_event|
+      %tr
+        %td= trackable_event.band_id
+        %td= trackable_event.trackable_tag
+        %td= trackable_event.user
+        %td= link_to 'Show', trackable_event
+        %td= link_to 'Edit', edit_trackable_event_path(trackable_event)
+        %td= link_to 'Destroy', trackable_event, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Trackable event', new_trackable_event_path
