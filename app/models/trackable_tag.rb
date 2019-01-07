@@ -1,0 +1,2 @@
+class TrackableTag < ApplicationRecord
+end

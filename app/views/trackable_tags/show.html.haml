@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @trackable_tag.name
+
+= link_to 'Edit', edit_trackable_tag_path(@trackable_tag)
+\|
+= link_to 'Back', trackable_tags_path
