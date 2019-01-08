@@ -55,6 +55,10 @@
                 = active_link_to manage_stats_path, class: "nav-link" do
                   .fa.fa-table.fa-fw.icon-space-r-half
                   Stats
+              %li.nav-item
+                = active_link_to manage_trackable_tags_path, class: "nav-link" do
+                  .fa.fa-tag.fa-fw.icon-space-r-half
+                  Trackable Tags
             - unless current_user.admin_limited_access?
               %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
                 %span Advanced
