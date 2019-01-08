@@ -1,8 +1,6 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
-  resources :trackable_events
-  resources :trackable_tags
   require 'sidekiq/web'
 
   devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
@@ -79,5 +77,7 @@ Rails.application.routes.draw do
     end
     resource :config do
     end
+    resources :trackable_events
+    resources :trackable_tags
   end
 end

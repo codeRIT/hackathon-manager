@@ -1,4 +1,4 @@
-= form_for @trackable_event do |f|
+= bs_horizontal_simple_form_for @trackable_event, url: url_for(action: @trackable_event.new_record? ? "create" : "update", controller: "trackable_events"), html: { "data-validate" => "form" } do |f|
   - if @trackable_event.errors.any?
     #error_explanation
       %h2= "#{pluralize(@trackable_event.errors.count, "error")} prohibited this trackable_event from being saved:"

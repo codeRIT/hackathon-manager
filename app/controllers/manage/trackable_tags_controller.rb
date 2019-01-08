@@ -1,4 +1,4 @@
-class TrackableTagsController < ApplicationController
+class Manage::TrackableTagsController < Manage::ApplicationController
   before_action :set_trackable_tag, only: [:show, :edit, :update, :destroy]
 
   # GET /trackable_tags
@@ -24,7 +24,7 @@ class TrackableTagsController < ApplicationController
     @trackable_tag = TrackableTag.new(trackable_tag_params)
 
     if @trackable_tag.save
-      redirect_to @trackable_tag, notice: 'Trackable tag was successfully created.'
+      redirect_to manage_trackable_tag_path(@trackable_tag), notice: 'Trackable tag was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class TrackableTagsController < ApplicationController
   # PATCH/PUT /trackable_tags/1
   def update
     if @trackable_tag.update(trackable_tag_params)
-      redirect_to @trackable_tag, notice: 'Trackable tag was successfully updated.'
+      redirect_to manage_trackable_tag_path(@trackable_tag), notice: 'Trackable tag was successfully updated.'
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class TrackableTagsController < ApplicationController
   # DELETE /trackable_tags/1
   def destroy
     @trackable_tag.destroy
-    redirect_to trackable_tags_url, notice: 'Trackable tag was successfully destroyed.'
+    redirect_to manage_trackable_tags_url, notice: 'Trackable tag was successfully destroyed.'
   end
 
   private

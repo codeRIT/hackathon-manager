@@ -1,0 +1,21 @@
+%h1 Listing trackable_tags
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th
+      %th
+      %th
+
+  %tbody
+    - @trackable_tags.each do |trackable_tag|
+      %tr
+        %td= trackable_tag.name
+        %td= link_to 'Show', manage_trackable_tag_path(trackable_tag)
+        %td= link_to 'Edit', edit_manage_trackable_tag_path(trackable_tag)
+        %td= link_to 'Destroy', manage_trackable_tag_path(trackable_tag), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Trackable tag', new_manage_trackable_tag_path
