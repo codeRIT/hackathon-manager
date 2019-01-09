@@ -54,13 +54,14 @@ class Manage::TrackableTagsController < Manage::ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_trackable_tag
-      @trackable_tag = TrackableTag.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def trackable_tag_params
-      params.require(:trackable_tag).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_trackable_tag
+    @trackable_tag = TrackableTag.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def trackable_tag_params
+    params.require(:trackable_tag).permit(:name)
+  end
 end

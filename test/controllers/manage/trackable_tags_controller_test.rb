@@ -151,7 +151,6 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
 
   # update
   def test_update_success
-    old_name = @trackable_tag.name
     new_name = build(:trackable_tag).name
     patch :update, params: { id: @trackable_tag.id, trackable_tag: { name: new_name } }
     assert_equal new_name, @trackable_tag.reload.name

@@ -4,10 +4,6 @@ class TrackableTag < ApplicationRecord
   strip_attributes
   has_many :trackable_events
 
-  def has_events?
-    trackable_events.any?
-  end
-
   def sorted_events
     trackable_events.order(created_at: :desc)
   end

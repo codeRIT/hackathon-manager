@@ -62,25 +62,24 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_trackable_event
-      @trackable_event = TrackableEvent.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def trackable_event_params
-      params.require(:trackable_event).permit(:band_id, :trackable_tag_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_trackable_event
+    @trackable_event = TrackableEvent.find(params[:id])
+  end
 
-    # Permit limited-access admins (overrides Manage::ApplicationController#limit_admin_access)
-    def limit_admin_access
-    end
+  # Only allow a trusted parameter "white list" through.
+  def trackable_event_params
+    params.require(:trackable_event).permit(:band_id, :trackable_tag_id)
+  end
 
-    # If the admin is limited, scope changes only to those they created
-    def scope_limited_admin_access
-      return if !current_user.admin_limited_access || @trackable_event.blank? || @trackable_event.user.blank?
-      if @trackable_event.user != current_user
-        redirect_to manage_trackable_events_path, notice: 'You may not view events you did not create.'
-      end
-    end
+  # Permit limited-access admins (overrides Manage::ApplicationController#limit_admin_access)
+  def limit_admin_access
+  end
+
+  # If the admin is limited, scope changes only to those they created
+  def scope_limited_admin_access
+    return if !current_user.admin_limited_access || @trackable_event.blank? || @trackable_event.user.blank?
+    redirect_to manage_trackable_events_path, notice: 'You may not view events you did not create.' if @trackable_event.user != current_user
+  end
 end

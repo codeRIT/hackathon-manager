@@ -14,7 +14,7 @@
       %tr
         %td= link_to trackable_tag.name, manage_trackable_tag_path(trackable_tag)
         %td= pluralize(trackable_tag.trackable_events.count, "event")
-        %td= trackable_tag.has_events? ? display_datetime(trackable_tag.sorted_events.first.created_at) : ''
+        %td= trackable_tag.trackable_events.any? ? display_datetime(trackable_tag.sorted_events.first.created_at) : ''
         %td= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: trackable_tag.id)
 
 %br
