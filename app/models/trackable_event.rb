@@ -1,5 +1,5 @@
 class TrackableEvent < ApplicationRecord
-  validates_presence_of :band_id
+  validates_presence_of :band_id, :trackable_tag, :user
 
   strip_attributes
 
