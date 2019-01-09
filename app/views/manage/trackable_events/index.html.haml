@@ -1,0 +1,29 @@
+= render "layouts/manage/page_title", title: "Trackable Events"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Band
+      %th Trackable tag
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @trackable_events.each do |trackable_event|
+      %tr
+        %td= trackable_event.band_id
+        %td= trackable_event.trackable_tag.name
+        %td= trackable_event.user.email
+        %td= link_to 'Show', manage_trackable_event_path(trackable_event)
+        - unless current_user.admin_limited_access && current_user != trackable_event.user
+          %td= link_to 'Edit', edit_manage_trackable_event_path(trackable_event)
+          %td= link_to 'Destroy', manage_trackable_event_path(trackable_event), method: :delete, data: { confirm: 'Are you sure?' }
+        - else
+          %td
+          %td
+
+%br
+
+= link_to 'New Trackable event', new_manage_trackable_event_path

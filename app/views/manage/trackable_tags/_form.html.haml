@@ -1,0 +1,9 @@
+.form-container
+  = bs_horizontal_simple_form_for @trackable_tag, url: url_for(action: @trackable_tag.new_record? ? "create" : "update", controller: "trackable_tags"), html: { "data-validate" => "form" } do |f|
+    = f.error_notification
+
+    .form-inputs
+      = f.input :name
+
+    .form-actions
+      = f.button :submit, class: 'btn-primary'

@@ -77,5 +77,7 @@ Rails.application.routes.draw do
     end
     resource :config do
     end
+    resources :trackable_events
+    resources :trackable_tags
   end
 end
