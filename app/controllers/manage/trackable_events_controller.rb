@@ -2,19 +2,24 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   before_action :set_trackable_event, only: [:show, :edit, :update, :destroy]
   before_action :scope_limited_admin_access, only: [:edit, :update, :destroy]
 
+  respond_to :html, :json
+
   # GET /manage/trackable_events
   def index
-    @trackable_events = current_user.admin_limited_access ? TrackableEvent.where(user: current_user) : TrackableEvent.all
+    @trackable_events = TrackableEvent.all
+    respond_with(:manage, @trackable_events)
   end
 
   # GET /manage/trackable_events/1
   def show
+    respond_with(:manage, @trackable_event)
   end
 
   # GET /manage/trackable_events/new
   def new
     trackable_tag_id = params[:trackable_tag_id]
     @trackable_event = TrackableEvent.new(trackable_tag_id: trackable_tag_id)
+    respond_with(:manage, @trackable_event)
   end
 
   # GET /manage/trackable_events/1/edit
@@ -26,7 +31,10 @@ class Manage::TrackableEventsController < Manage::ApplicationController
     @trackable_event = TrackableEvent.new(trackable_event_params.merge(user_id: current_user.id))
 
     if @trackable_event.save
-      redirect_to manage_trackable_tag_path(@trackable_event.trackable_tag), notice: 'Trackable event was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to manage_trackable_tag_path(@trackable_event.trackable_tag), notice: 'Trackable event was successfully created.' }
+        format.json { render json: @trackable_event }
+      end
     else
       render :new
     end
@@ -35,7 +43,10 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # PATCH/PUT /manage/trackable_events/1
   def update
     if @trackable_event.update(trackable_event_params)
-      redirect_to manage_trackable_tag_path(@trackable_event.trackable_tag), notice: 'Trackable event was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to manage_trackable_tag_path(@trackable_event.trackable_tag), notice: 'Trackable event was successfully updated.' }
+        format.json { render json: @trackable_event }
+      end
     else
       render :edit
     end
@@ -44,7 +55,10 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # DELETE /manage/trackable_events/1
   def destroy
     @trackable_event.destroy
-    redirect_to manage_trackable_tag_url(@trackable_event.trackable_tag), notice: 'Trackable event was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to manage_trackable_tag_url(@trackable_event.trackable_tag), notice: 'Trackable event was successfully destroyed.' }
+      format.json { render json: @trackable_event }
+    end
   end
 
   private
