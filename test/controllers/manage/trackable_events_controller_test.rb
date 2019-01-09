@@ -164,7 +164,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       post :create, params: { trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
     end
 
-    assert_redirected_to manage_trackable_event_url(TrackableEvent.last)
+    assert_redirected_to manage_trackable_tag_url(TrackableEvent.last.trackable_tag)
     assert_equal @user.id, TrackableEvent.last.user_id
   end
 
@@ -201,7 +201,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
   # update
   def test_update_success
     patch :update, params: { id: @trackable_event.id, trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
-    assert_redirected_to manage_trackable_event_url(@trackable_event)
+    assert_redirected_to manage_trackable_tag_url(@trackable_event.trackable_tag)
   end
 
   def test_update_failure
@@ -215,7 +215,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       delete :destroy, params: { id: @trackable_event.id }
     end
 
-    assert_redirected_to manage_trackable_events_url
+    assert_redirected_to manage_trackable_tag_url(@trackable_event.trackable_tag)
   end
 
   def test_destroy_failure

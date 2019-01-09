@@ -6,3 +6,26 @@
 %p
   %b Name:
   = @trackable_tag.name
+
+%p
+  %b= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: @trackable_tag.id)
+
+= area_chart @trackable_tag.trackable_events.group_by_minute(:created_at).count
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Date
+      %th Band
+      %th Entered by
+      %th
+
+  %tbody
+    - @trackable_tag.sorted_events.each do |trackable_event|
+      %tr
+        %td= display_datetime(trackable_event.created_at)
+        %td= trackable_event.band_id
+        %td= trackable_event.user.email
+        %td
+          - unless current_user.admin_limited_access && current_user != trackable_event.user
+            = link_to 'Edit', edit_manage_trackable_event_path(trackable_event)

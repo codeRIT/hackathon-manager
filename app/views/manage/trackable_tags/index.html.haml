@@ -5,18 +5,16 @@
   %thead
     %tr
       %th Name
-      %th
-      - unless current_user.admin_limited_access
-        %th
-        %th
+      %th Events
+      %th Last event
+      %th Add event
 
   %tbody
     - @trackable_tags.each do |trackable_tag|
       %tr
-        %td= trackable_tag.name
-        %td= link_to 'Show', manage_trackable_tag_path(trackable_tag)
-        - unless current_user.admin_limited_access
-          %td= link_to 'Edit', edit_manage_trackable_tag_path(trackable_tag)
-          %td= link_to 'Destroy', manage_trackable_tag_path(trackable_tag), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to trackable_tag.name, manage_trackable_tag_path(trackable_tag)
+        %td= pluralize(trackable_tag.trackable_events.count, "event")
+        %td= trackable_tag.has_events? ? display_datetime(trackable_tag.sorted_events.first.created_at) : ''
+        %td= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: trackable_tag.id)
 
 %br

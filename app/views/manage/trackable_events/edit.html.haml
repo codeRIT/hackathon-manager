@@ -7,3 +7,5 @@
 = link_to 'Show', manage_trackable_event_path(@trackable_event)
 \|
 = link_to 'Back', manage_trackable_events_path
+\|
+= link_to 'Destroy', manage_trackable_event_path(@trackable_event), method: :delete, data: { confirm: 'Are you sure?' }

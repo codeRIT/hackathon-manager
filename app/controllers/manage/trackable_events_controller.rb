@@ -13,7 +13,8 @@ class Manage::TrackableEventsController < Manage::ApplicationController
 
   # GET /manage/trackable_events/new
   def new
-    @trackable_event = TrackableEvent.new
+    trackable_tag_id = params[:trackable_tag_id]
+    @trackable_event = TrackableEvent.new(trackable_tag_id: trackable_tag_id)
   end
 
   # GET /manage/trackable_events/1/edit
@@ -25,7 +26,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
     @trackable_event = TrackableEvent.new(trackable_event_params.merge(user_id: current_user.id))
 
     if @trackable_event.save
-      redirect_to manage_trackable_event_path(@trackable_event), notice: 'Trackable event was successfully created.'
+      redirect_to manage_trackable_tag_path(@trackable_event.trackable_tag), notice: 'Trackable event was successfully created.'
     else
       render :new
     end
@@ -34,7 +35,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # PATCH/PUT /manage/trackable_events/1
   def update
     if @trackable_event.update(trackable_event_params)
-      redirect_to manage_trackable_event_path(@trackable_event), notice: 'Trackable event was successfully updated.'
+      redirect_to manage_trackable_tag_path(@trackable_event.trackable_tag), notice: 'Trackable event was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +44,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # DELETE /manage/trackable_events/1
   def destroy
     @trackable_event.destroy
-    redirect_to manage_trackable_events_url, notice: 'Trackable event was successfully destroyed.'
+    redirect_to manage_trackable_tag_url(@trackable_event.trackable_tag), notice: 'Trackable event was successfully destroyed.'
   end
 
   private
