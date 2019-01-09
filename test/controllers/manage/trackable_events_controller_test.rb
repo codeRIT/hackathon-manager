@@ -136,6 +136,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
 
   private
 
+  # index
   def test_index_success
     get :index
     assert_response :success
@@ -146,6 +147,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  # new
   def test_new_success
     get :new
     assert_response :success
@@ -156,6 +158,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  # create
   def test_create_success
     assert_difference('TrackableEvent.count') do
       post :create, params: { trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
@@ -173,6 +176,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  # show
   def test_show_success
     get :show, params: { id: @trackable_event.id }
     assert_response :success
@@ -183,6 +187,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  # edit
   def test_edit_success
     get :edit, params: { id: @trackable_event.id }
     assert_response :success
@@ -193,6 +198,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  # update
   def test_update_success
     patch :update, params: { id: @trackable_event.id, trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
     assert_redirected_to manage_trackable_event_url(@trackable_event)
@@ -203,6 +209,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  # destroy
   def test_destroy_success
     assert_difference('TrackableEvent.count', -1) do
       delete :destroy, params: { id: @trackable_event.id }
