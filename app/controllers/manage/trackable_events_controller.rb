@@ -1,25 +1,25 @@
 class Manage::TrackableEventsController < Manage::ApplicationController
   before_action :set_trackable_event, only: [:show, :edit, :update, :destroy]
 
-  # GET /trackable_events
+  # GET /manage/trackable_events
   def index
     @trackable_events = TrackableEvent.all
   end
 
-  # GET /trackable_events/1
+  # GET /manage/trackable_events/1
   def show
   end
 
-  # GET /trackable_events/new
+  # GET /manage/trackable_events/new
   def new
     @trackable_event = TrackableEvent.new
   end
 
-  # GET /trackable_events/1/edit
+  # GET /manage/trackable_events/1/edit
   def edit
   end
 
-  # POST /trackable_events
+  # POST /manage/trackable_events
   def create
     @trackable_event = TrackableEvent.new(trackable_event_params)
 
@@ -30,7 +30,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
     end
   end
 
-  # PATCH/PUT /trackable_events/1
+  # PATCH/PUT /manage/trackable_events/1
   def update
     if @trackable_event.update(trackable_event_params)
       redirect_to manage_trackable_event_path(@trackable_event), notice: 'Trackable event was successfully updated.'
@@ -39,7 +39,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
     end
   end
 
-  # DELETE /trackable_events/1
+  # DELETE /manage/trackable_events/1
   def destroy
     @trackable_event.destroy
     redirect_to manage_trackable_events_url, notice: 'Trackable event was successfully destroyed.'

@@ -1,25 +1,25 @@
 class Manage::TrackableTagsController < Manage::ApplicationController
   before_action :set_trackable_tag, only: [:show, :edit, :update, :destroy]
 
-  # GET /trackable_tags
+  # GET /manage/trackable_tags
   def index
     @trackable_tags = TrackableTag.all
   end
 
-  # GET /trackable_tags/1
+  # GET /manage/trackable_tags/1
   def show
   end
 
-  # GET /trackable_tags/new
+  # GET /manage/trackable_tags/new
   def new
     @trackable_tag = TrackableTag.new
   end
 
-  # GET /trackable_tags/1/edit
+  # GET /manage/trackable_tags/1/edit
   def edit
   end
 
-  # POST /trackable_tags
+  # POST /manage/trackable_tags
   def create
     @trackable_tag = TrackableTag.new(trackable_tag_params)
 
@@ -30,7 +30,7 @@ class Manage::TrackableTagsController < Manage::ApplicationController
     end
   end
 
-  # PATCH/PUT /trackable_tags/1
+  # PATCH/PUT /manage/trackable_tags/1
   def update
     if @trackable_tag.update(trackable_tag_params)
       redirect_to manage_trackable_tag_path(@trackable_tag), notice: 'Trackable tag was successfully updated.'
@@ -39,7 +39,7 @@ class Manage::TrackableTagsController < Manage::ApplicationController
     end
   end
 
-  # DELETE /trackable_tags/1
+  # DELETE /manage/trackable_tags/1
   def destroy
     @trackable_tag.destroy
     redirect_to manage_trackable_tags_url, notice: 'Trackable tag was successfully destroyed.'
