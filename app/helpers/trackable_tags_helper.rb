@@ -1,2 +1,0 @@
-module TrackableTagsHelper
-end
