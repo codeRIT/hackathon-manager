@@ -1,6 +1,8 @@
-%h1 Editing trackable_event
+= render "layouts/manage/page_title", title: "Edit Trackable Event", subtitle: @trackable_event.id
 
 = render 'form'
+
+%br
 
 = link_to 'Show', manage_trackable_event_path(@trackable_event)
 \|

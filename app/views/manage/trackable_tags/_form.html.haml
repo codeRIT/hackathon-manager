@@ -1,13 +1,9 @@
-= bs_horizontal_simple_form_for @trackable_tag, url: url_for(action: @trackable_tag.new_record? ? "create" : "update", controller: "trackable_tags"), html: { "data-validate" => "form" } do |f|
-  - if @trackable_tag.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@trackable_tag.errors.count, "error")} prohibited this trackable_tag from being saved:"
-      %ul
-        - @trackable_tag.errors.full_messages.each do |message|
-          %li= message
+.form-container
+  = bs_horizontal_simple_form_for @trackable_tag, url: url_for(action: @trackable_tag.new_record? ? "create" : "update", controller: "trackable_tags"), html: { "data-validate" => "form" } do |f|
+    = f.error_notification
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit 'Save'
+    .form-inputs
+      = f.input :name
+
+    .form-actions
+      = f.button :submit, class: 'btn-primary'

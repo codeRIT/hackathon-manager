@@ -1,7 +1,4 @@
-%h1 Editing trackable_tag
+= render "layouts/manage/page_title", title: "Edit Trackable Tag", subtitle: @trackable_tag.name do
+  = link_to 'Cancel', manage_trackable_tag_path(@trackable_tag), class: 'btn btn-sm btn-outline-secondary'
 
 = render 'form'
-
-= link_to 'Show', manage_trackable_tag_path(@trackable_tag)
-\|
-= link_to 'Back', manage_trackable_tags_path

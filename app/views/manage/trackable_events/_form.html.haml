@@ -1,19 +1,14 @@
-= bs_horizontal_simple_form_for @trackable_event, url: url_for(action: @trackable_event.new_record? ? "create" : "update", controller: "trackable_events"), html: { "data-validate" => "form" } do |f|
-  - if @trackable_event.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@trackable_event.errors.count, "error")} prohibited this trackable_event from being saved:"
-      %ul
-        - @trackable_event.errors.full_messages.each do |message|
-          %li= message
+.form-container
+  = bs_horizontal_simple_form_for @trackable_event, url: url_for(action: @trackable_event.new_record? ? "create" : "update", controller: "trackable_events"), html: { "data-validate" => "form" } do |f|
+    = f.error_notification
 
-  .field
-    = f.label :band_id
-    = f.text_field :band_id
-  .field
-    = f.label :trackable_tag
-    = f.text_field :trackable_tag
-  .field
-    = f.label :user
-    = f.text_field :user
-  .actions
-    = f.submit 'Save'
+    .form-inputs
+      = f.input :band_id
+      = f.input :trackable_tag_id, collection: TrackableTag.all, required: true
+      %p
+        User:
+        = current_user.email
+        (current user, this can't be changed)
+
+    .form-actions
+      = f.button :submit, class: 'btn-primary'

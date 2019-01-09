@@ -1,14 +1,14 @@
-%p#notice= notice
+= render "layouts/manage/page_title", title: "Trackable Event", subtitle: @trackable_event.id
 
 %p
   %b Band:
   = @trackable_event.band_id
 %p
   %b Trackable tag:
-  = @trackable_event.trackable_tag
+  = link_to @trackable_event.trackable_tag.name, manage_trackable_tag_path(@trackable_event.trackable_tag)
 %p
   %b User:
-  = @trackable_event.user
+  = link_to @trackable_event.user.email, manage_admin_path(@trackable_event.user)
 
 = link_to 'Edit', edit_manage_trackable_event_path(@trackable_event)
 \|
