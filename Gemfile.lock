@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hackathon_manager (0.10.3)
+    hackathon_manager (0.11.0)
       ajax-datatables-rails (~> 0.4.0)
       aws-sdk-s3
       blazer
@@ -88,7 +88,7 @@ GEM
     autoprefixer-rails (9.4.4)
       execjs
     aws-eventstream (1.0.1)
-    aws-partitions (1.128.0)
+    aws-partitions (1.129.0)
     aws-sdk-core (3.44.2)
       aws-eventstream (~> 1.0)
       aws-partitions (~> 1.0)
@@ -103,7 +103,7 @@ GEM
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
-    blazer (2.0.0)
+    blazer (2.0.1)
       activerecord (>= 4.2)
       chartkick
       railties (>= 4.2)
@@ -362,8 +362,9 @@ GEM
     shoulda-context (1.2.2)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
-    sidekiq (5.2.3)
+    sidekiq (5.2.5)
       connection_pool (~> 2.2, >= 2.2.2)
+      rack (>= 1.5.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
     simple_form (4.1.0)

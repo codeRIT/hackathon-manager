@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.11.0 - 2019-01-09
+
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
+* Feature: Trackable tags + events! Coupled with the JSON API and a mobile app, this makes it easy to collect RFID tagging over time.
+
 # 0.10.2 - 2019-01-06
 
 * Fix: Redirect after merging two schools
