@@ -32,21 +32,6 @@ class MailerTest < ActionMailer::TestCase
     end
   end
 
-  context "upon slack invite email" do
-    setup do
-      @questionnaire = create(:questionnaire)
-      @questionnaire.user.update_attribute(:email, "test@example.com")
-    end
-
-    should "deliver invite email" do
-      email = Mailer.slack_invite_email(@questionnaire.id).deliver_now
-
-      assert_equal ["test@example.com"], email.to
-      assert_equal "Slack Invite!", email.subject
-      assert_match %r{slack.com\/shared_invite}, email.encoded
-    end
-  end
-
   context "upon scheduled bus update email" do
     setup do
       @bus_list = create(:bus_list)

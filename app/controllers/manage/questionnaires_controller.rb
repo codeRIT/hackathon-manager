@@ -1,7 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events, :invite_to_slack]
+  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events]
 
   respond_to :html, :json
 
@@ -70,7 +70,6 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       end
       @questionnaire.update_attribute(:checked_in_at, Time.now)
       @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
-      @questionnaire.invite_to_slack
       flash[:notice] = "Checked in #{@questionnaire.full_name}."
     elsif params[:check_in] == "false"
       @questionnaire.update_attribute(:checked_in_at, nil)
@@ -116,8 +115,6 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       flash[:notice] = "Failed to update acceptance status"
     end
 
-    process_acc_status_notifications(@questionnaire, new_status)
-
     redirect_to manage_questionnaire_path(@questionnaire)
   end
 
@@ -132,15 +129,9 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       q.acc_status = action
       q.acc_status_author_id = current_user.id
       q.acc_status_date = Time.now
-      q.save(validate: false) && process_acc_status_notifications(q, action)
+      q.save(validate: false)
     end
     head :ok
-  end
-
-  def invite_to_slack
-    @questionnaire.invite_to_slack
-    flash[:notice] = 'Slack invite has been queued for delivery'
-    redirect_to manage_questionnaire_path @questionnaire
   end
 
   def message_events
@@ -164,9 +155,5 @@ class Manage::QuestionnairesController < Manage::ApplicationController
 
   def set_questionnaire
     @questionnaire = ::Questionnaire.find(params[:id])
-  end
-
-  def process_acc_status_notifications(questionnaire, new_status)
-    questionnaire.invite_to_slack if ENV['INVITE_TO_SLACK_UPON_RSVP'] == 'true' && new_status == 'rsvp_confirmed'
   end
 end

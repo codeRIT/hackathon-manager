@@ -2,13 +2,6 @@
   = link_to "New Questionnaire", new_manage_questionnaire_path, class: "btn btn-sm btn-outline-secondary"
 
 %div
-  - if ENV['INVITE_TO_SLACK_UPON_RSVP']
-    %p.small
-      %strong.text-info
-        %span.fa.fa-info-circle.icon-space-r-half
-        Slack auto-invite enabled.
-      %span.text-muted Invites will automatically be sent upon RSVP confirmation.
-
   %table.questionnaires.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_questionnaires_path(format: :json) }
     %thead
       %tr

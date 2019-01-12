@@ -31,12 +31,6 @@ class Mailer < ApplicationMailer
     mail_questionnaire("You're a bus captain!")
   end
 
-  def slack_invite_email(questionnaire_id)
-    @questionnaire = Questionnaire.find_by_id(questionnaire_id)
-    return if @questionnaire.blank?
-    mail_questionnaire("Slack Invite!")
-  end
-
   def bus_list_update_email(questionnaire_id)
     @questionnaire = Questionnaire.find_by_id(questionnaire_id)
     @bus_list = @questionnaire.bus_list

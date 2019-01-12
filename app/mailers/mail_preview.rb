@@ -14,10 +14,6 @@ if defined?(ActionMailer::Preview)
       Mailer.bus_captain_confirmation_email(buslist.id, buslist.captains.first.id)
     end
 
-    def slack_invite_email
-      Mailer.slack_invite_email(Questionnaire.first.id)
-    end
-
     def bus_list_update_email
       Mailer.bus_list_update_email(BusList.first.passengers.first.id)
     end

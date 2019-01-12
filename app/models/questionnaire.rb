@@ -199,10 +199,6 @@ class Questionnaire < ApplicationRecord
     simple_spark.message_events.search(recipients: email)
   end
 
-  def invite_to_slack
-    SlackInviteWorker.perform_async(id)
-  end
-
   def verbal_status
     if acc_status == "rsvp_denied"
       "Not Attending"

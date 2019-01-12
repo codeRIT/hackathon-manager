@@ -47,7 +47,6 @@ Rails.application.routes.draw do
       patch :update_acc_status, on: :member
       patch :bulk_apply, on: :collection
       get :message_events, on: :member
-      patch :invite_to_slack, on: :member
     end
     resources :admins do
       post :datatable, on: :collection
