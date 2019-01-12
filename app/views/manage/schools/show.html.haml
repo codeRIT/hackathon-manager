@@ -2,6 +2,13 @@
   .btn-group
     = link_to 'Edit', edit_manage_school_path(@school), class: 'btn btn-sm btn-outline-secondary'
     = link_to 'Merge', merge_manage_school_path(@school), class: 'btn btn-sm btn-outline-secondary'
+    .btn-group{role: "group"}
+      %button.btn.btn-sm.btn-outline-secondary.dropdown-toggle#title-actions{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
+        .fa.fa-envelope-o.pr-1
+        Send email
+      .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "title-actions"}
+        = link_to 'Create message (confirmed or accepted applicants)', new_manage_message_path(type: 'bulk', recipients: ["school::#{@school.id}"]), class: 'dropdown-item'
+
 
 .row
   .col-md-6

@@ -57,11 +57,11 @@ class MessageRecipientQuery
 
     case recipient_query.type
     when "bus-list"
-      "Bus List: #{model.name} (signed up for bus)"
+      "Bus List: #{model.name} (signed up passengers)"
     when "bus-list--eligible"
       "Bus List: #{model.name} (eligible, not signed up for bus)"
     when "bus-list--applied"
-      "Bus List: #{model.name} (applied/not accepted)"
+      "Bus List: #{model.name} (applied/not yet accepted)"
     when "school"
       "Confirmed or Accepted: #{model.name}"
     when "blazer"

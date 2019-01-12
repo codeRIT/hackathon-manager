@@ -17,7 +17,9 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def new
-    @message = Message.new
+    type = params[:type]
+    recipients = params[:recipients]
+    @message = Message.new(type: type, recipients: recipients)
     respond_with(:manage, @message)
   end
 
