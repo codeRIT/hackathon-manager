@@ -7,6 +7,11 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # GET /manage/trackable_events
   def index
     @trackable_events = TrackableEvent.all
+    @params = {}
+    if params[:trackable_event]
+      @params = params.require(:trackable_event).permit(:user_id, :band_id).reject{|_, v| v.blank?}
+      @trackable_events = @trackable_events.where(@params)
+    end
     respond_with(:manage, @trackable_events)
   end
 

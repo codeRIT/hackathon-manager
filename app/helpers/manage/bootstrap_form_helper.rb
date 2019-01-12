@@ -1,6 +1,6 @@
 module Manage
   module BootstrapFormHelper
-    def bs_vertical_simple_form(path, options, &block)
+    def bs_vertical_simple_form(path, options = {}, &block)
       bootstrap_options = {
         wrapper: :bootstrap_vertical_form,
         wrapper_mappings: {
@@ -20,7 +20,7 @@ module Manage
       end
     end
 
-    def bs_horizontal_simple_form_for(path, options, &block)
+    def bs_horizontal_simple_form_for(path, options = {}, &block)
       bootstrap_options = {
         wrapper: :bootstrap_horizontal_form,
         wrapper_mappings: {
