@@ -1,5 +1,12 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.11.1 - 2019-01-13
+
+* Improvement: Add buttons to quickly build bus list, school messages
+* Improvement: Filter events list by user or band ID
+* Cleanup: Remove "invite to slack" feature
+* Cleanup: Remove carpool link env variable
+
 # 0.11.0 - 2019-01-09
 
 **Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
