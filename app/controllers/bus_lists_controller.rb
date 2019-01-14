@@ -20,7 +20,7 @@ class BusListsController < ApplicationController
     boarded_bus = params[:questionnaire][:boarded_bus].to_s
     questionnaire = Questionnaire.find_by_id(params[:questionnaire][:id])
 
-    if !['true', 'false'].include?(boarded_bus) || questionnaire.blank? || !questionnaire.eligible_for_a_bus?
+    if !['true', 'false'].include?(boarded_bus) || questionnaire.blank?
       head :bad_request
       return
     end

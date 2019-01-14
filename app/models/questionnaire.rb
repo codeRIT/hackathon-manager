@@ -28,6 +28,7 @@ class Questionnaire < ApplicationRecord
   validates_format_of :vcs_url, with: %r{((github.com\/\w+\/?)|(bitbucket.org\/\w+\/?))}, allow_blank: true, message: "Must be a GitHub or BitBucket url"
 
   belongs_to :school
+  belongs_to :bus_list, optional: true
 
   strip_attributes
 
@@ -181,15 +182,6 @@ class Questionnaire < ApplicationRecord
 
   def did_rsvp?
     ['rsvp_confirmed', 'rsvp_denied'].include? acc_status
-  end
-
-  def eligible_for_a_bus?
-    school.present? && school.bus_list_id?
-  end
-
-  def bus_list
-    return unless eligible_for_a_bus?
-    school.bus_list
   end
 
   def message_events

@@ -6,7 +6,6 @@ class School < ApplicationRecord
   strip_attributes
 
   has_many :questionnaires
-  belongs_to :bus_list, optional: true
 
   def full_name
     out = ""
@@ -24,11 +23,6 @@ class School < ApplicationRecord
     out << ", " if city.present? && state.present?
     out << state if state.present?
     out
-  end
-
-  def bus_list
-    return unless bus_list_id
-    BusList.find(bus_list_id)
   end
 
   def fips_code

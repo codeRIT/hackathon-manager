@@ -56,12 +56,11 @@ class BulkMessageWorkerTest < ActiveSupport::TestCase
   context "recipient queries" do
     setup do
       bus_list = create(:bus_list, name: "Bus Foo", id: 186)
-      school = create(:school, name: "My University", bus_list: bus_list)
-      create(:questionnaire, school: school, acc_status: 'pending')
-      create(:questionnaire, school: school, acc_status: 'waitlist')
-      create(:questionnaire, school: school, acc_status: 'accepted')
-      create(:questionnaire, school: school, acc_status: 'rsvp_confirmed', riding_bus: true)
-      create(:questionnaire, school: school, acc_status: 'rsvp_denied')
+      create(:questionnaire, acc_status: 'pending')
+      create(:questionnaire, acc_status: 'waitlist')
+      create(:questionnaire, acc_status: 'accepted')
+      create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: bus_list.id)
+      create(:questionnaire, acc_status: 'rsvp_denied')
       create_list(:user, 4)
     end
 
@@ -74,26 +73,8 @@ class BulkMessageWorkerTest < ActiveSupport::TestCase
       end
     end
 
-    should "support bus-list--eligible::ID" do
-      message = create(:message, recipients: ['bus-list--eligible::186'], queued_at: Time.now)
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
-        Sidekiq::Testing.fake! do
-          BulkMessageWorker.new.perform(message.id)
-        end
-      end
-    end
-
-    should "support bus-list--applied::ID" do
-      message = create(:message, recipients: ['bus-list--applied::186'], queued_at: Time.now)
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 2 do
-        Sidekiq::Testing.fake! do
-          BulkMessageWorker.new.perform(message.id)
-        end
-      end
-    end
-
     should "raise exception if model ID does not exist" do
-      message = create(:message, recipients: ['bus-list--applied::9999'], queued_at: Time.now)
+      message = create(:message, recipients: ['bus-list::9999'], queued_at: Time.now)
       exception = assert_raises(Exception) do
         BulkMessageWorker.perform_async(message.id)
       end

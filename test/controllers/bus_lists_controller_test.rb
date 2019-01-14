@@ -2,8 +2,7 @@ require 'test_helper'
 
 class BusListsControllerTest < ActionController::TestCase
   setup do
-    @school = create(:school, name: "Another School")
-    @questionnaire = create(:questionnaire, school_id: @school.id)
+    @questionnaire = create(:questionnaire)
   end
 
   context "while not authenticated" do
@@ -59,9 +58,8 @@ class BusListsControllerTest < ActionController::TestCase
       @request.env["devise.mapping"] = Devise.mappings[:admin]
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")
-      @questionnaire.update_attribute(:riding_bus, true)
       @bus_list = create(:bus_list)
-      @school.update_attribute(:bus_list_id, @bus_list.id)
+      @questionnaire.update_attribute(:bus_list_id, @bus_list.id)
     end
 
     context "but is not bus captain" do
@@ -101,8 +99,7 @@ class BusListsControllerTest < ActionController::TestCase
 
       should "not allow bus_list#boarded_bus for questionnaire not riding this bus" do
         bus_list = create(:bus_list, name: "A random bus list")
-        school = create(:school, name: "Yet Another School", bus_list_id: bus_list.id)
-        questionnaire = create(:questionnaire, school_id: school.id, riding_bus: true)
+        questionnaire = create(:questionnaire, bus_list_id: bus_list.id)
         patch :boarded_bus, params: { questionnaire: { id: questionnaire.id, boarded_bus: true } }
         assert_response :bad_request
         assert_nil questionnaire.reload.boarded_bus_at

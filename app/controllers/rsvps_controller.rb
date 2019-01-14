@@ -20,8 +20,8 @@ class RsvpsController < ApplicationController
     @questionnaire.acc_status_author_id = current_user.id
     @questionnaire.acc_status_date = Time.now
     if @questionnaire.save
-      flash[:notice] = "Thank you for confirming your attendance! "
-      flash[:notice] += @questionnaire.eligible_for_a_bus? ? "See below for additional bus information." : "You're all set to attend."
+      flash[:notice] = "Thank you for confirming your attendance! You're all set to attend."
+      flash[:notice] += " See below for additional bus information." if BusList.any?
     else
       flash[:notice] = rsvp_error_notice
     end
@@ -59,15 +59,14 @@ class RsvpsController < ApplicationController
     @questionnaire.acc_status_date = Time.now if @questionnaire.acc_status != params[:questionnaire][:acc_status]
     @questionnaire.acc_status = params[:questionnaire][:acc_status]
     @questionnaire.acc_status_author_id = current_user.id
-    if !@questionnaire.riding_bus && params[:questionnaire][:riding_bus] == "true" && @questionnaire.bus_list && @questionnaire.bus_list.full?
-      flash[:notice] = "Sorry, your bus is full! You may need to arrange other plans for transportation."
-      @questionnaire.riding_bus = false
-      @questionnaire.bus_captain_interest = false
-    elsif !@questionnaire.eligible_for_a_bus?
-      @questionnaire.riding_bus = false
-      @questionnaire.bus_captain_interest = false
+
+    bus_list_id = params[:questionnaire][:bus_list_id].presence
+    is_joining_bus = !@questionnaire.bus_list_id && bus_list_id
+    bus_list = bus_list_id && BusList.find(bus_list_id)
+    if is_joining_bus && bus_list.full?
+      flash[:notice] = "Sorry, that bus is full! You may need to arrange other plans for transportation."
     else
-      @questionnaire.riding_bus = params[:questionnaire][:riding_bus]
+      @questionnaire.bus_list_id = bus_list_id
       @questionnaire.bus_captain_interest = params[:questionnaire][:bus_captain_interest]
     end
 
@@ -78,6 +77,7 @@ class RsvpsController < ApplicationController
     end
 
     flash[:notice] = "Your RSVP has been updated." if flash[:notice].blank?
+    flash[:notice] += " See below for additional bus information!" if @questionnaire.bus_list_id?
 
     redirect_to rsvp_path
   end

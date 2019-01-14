@@ -68,10 +68,6 @@ class BulkMessageWorker
     case recipient_query.type
     when "bus-list"
       model.passengers.pluck(:user_id)
-    when "bus-list--eligible"
-      Questionnaire.joins(:school).where("schools.bus_list_id = ? AND riding_bus != 1 AND (acc_status = 'accepted' OR acc_status = 'rsvp_confirmed')", model.id).pluck(:user_id)
-    when "bus-list--applied"
-      Questionnaire.joins(:school).where("schools.bus_list_id = ? AND (acc_status != 'accepted' AND acc_status != 'rsvp_confirmed' AND acc_status != 'rsvp_denied')", model.id).pluck(:user_id)
     when "school"
       Questionnaire.where("school_id = ? AND (acc_status = 'rsvp_confirmed' OR acc_status = 'accepted')", model.id).pluck(:user_id)
     when "blazer"

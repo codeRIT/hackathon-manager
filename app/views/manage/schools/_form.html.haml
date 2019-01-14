@@ -10,7 +10,6 @@
       = f.input :address
       = f.input :city
       = f.input :state
-      = f.association :bus_list, include_blank: "(none)"
 
     .center
       = f.button :submit, value: ( @school.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'

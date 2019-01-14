@@ -1,65 +1,72 @@
 - title "RSVP"
-.form-container
-  #disclaimer
-    %h1.section-title
-      RSVP
-      %span.emphasized Preferences
-    - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
-      %strong
-        - if @questionnaire.riding_bus
-          ALL SET TO ATTEND & RIDE THE BUS!
+= simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
+  .form-container
+    #disclaimer
+      %h1.section-title
+        RSVP
+        %span.emphasized Preferences
+      - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
+        %strong ALL SET TO ATTEND!
+        - if Rails.configuration.hackathon['thanks_for_rsvp']
+          %br
+          = markdown(Rails.configuration.hackathon['thanks_for_rsvp'])
         - else
-          ALL SET TO ATTEND!
-      - if Rails.configuration.hackathon['thanks_for_rsvp']
-        %br
-        = markdown(Rails.configuration.hackathon['thanks_for_rsvp'])
-    - else
-      %strong= current_user.questionnaire.verbal_status.upcase
-      - if @questionnaire.acc_status == "rsvp_denied"
-        %p Sorry to hear you won't be with us this year.
+          %br
+          %br
       - else
-        %p You've been accepted to #{Rails.configuration.hackathon['name']}!
-        %p Will you be attending?
+        %strong= current_user.questionnaire.verbal_status.upcase
+        - if @questionnaire.acc_status == "rsvp_denied"
+          %p Sorry to hear you won't be with us this year.
+        - else
+          %p You've been accepted to #{Rails.configuration.hackathon['name']}!
+          %p Will you be attending?
 
-    %hr
-
-    = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
       .form-inputs
         = f.input :acc_status, as: :radio_buttons, collection: { " Attending!" => "rsvp_confirmed", " Not Attending." => "rsvp_denied" }, label: "Attendance:", required: true
 
         .hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
           = f.input :phone, input_html: { "data-validate" => "presence" }, label: "Please verify your phone number:"
 
-      .hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
-        - if @questionnaire.eligible_for_a_bus?
-          - if !@questionnaire.riding_bus && @questionnaire.bus_list.full?
-            #disclaimer
-              Aw, shucks. Your school is eligible for a bus, but all the seats are currently taken.
-          - else
-            %p
-              - if @questionnaire.riding_bus && @questionnaire.acc_status != "rsvp_denied"
-                .fa.fa-check
-                You're all set to ride the bus.
-                - if @questionnaire.bus_list.full?
-                  %br
-                  %br
-                  .fa.fa-warning
-                  Your bus is currently full. If you are no longer riding, please update your status so someone else may use it.
-              - else
-                Good news: your school is eligible for a bus! Will you be riding?
-            .form-inputs
-              = f.input :riding_bus, as: :radio_buttons, collection: { " Yes!" => true, " No thank you." => false }, label: "Riding the bus:", hint: "You MUST sign up here if you wish to ride the bus! IDs will be checked at boarding."
-              - if @questionnaire.bus_list.needs_bus_captain
-                = f.input :bus_captain_interest, as: :radio_buttons, collection: { " Yes!" => true, " No thank you." => false }, label: "We're also looking for bus captains from your school. Are you interested?"
+      = f.button :submit, value: "Update"
 
-        - else
-          = f.input :riding_bus, as: :hidden, value: false
+  - if BusList.any?
+    .form-container.hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
+      #disclaimer
+        %h1.section-title
+          Bus
+          %span.emphasized Sign-up
+        - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
+          %strong
+            - if @questionnaire.bus_list_id
+              ALL SET TO RIDE THE BUS!
+            - else
+              NOT RIDING BUS
 
-      .right
+        %br
+        %br
+
+        %p
+          We are providing free, sponsored busses. Will you be riding?
+          %br
+          %em
+            %strong You must sign up here if you want to ride.
+
+        .form-inputs
+          - bus_list_options = ([OpenStruct.new({ name: 'Not riding a sponsored bus', id: '' })] + BusList.all.to_a)
+          = f.association :bus_list, as: :radio_buttons, collection: bus_list_options, label_method: :name, value_method: :id, label: false, wrapper_html: { class: 'radio_buttons_vertical' }
+          - if BusList.where(needs_bus_captain: true).any?
+            = f.input :bus_captain_interest, as: :radio_buttons, collection: { " Yes!" => true, " No thank you." => false }, label: "Would you be interested in being a bus captain?"
+        %p
+          %small Busses will pick up the morning of, arriving in time for opening ceremony. They will depart shortly after closing ceremony, dropping off to the same pick-up locations.
+        %p
+          %small If you sign up for a bus not stopping at your school, you are responsible for transportation to & from a pick-up location.
+
         = f.button :submit, value: "Update"
         %br
-        - if @questionnaire.eligible_for_a_bus? && @questionnaire.is_bus_captain?
-          %p= link_to "Manage Bus List &raquo;".html_safe, bus_list_path
+        - if @questionnaire.bus_list_id && @questionnaire.is_bus_captain?
+          %p= link_to "Bus Captain Dashboard &raquo;".html_safe, bus_list_path
 
-  - if @questionnaire.eligible_for_a_bus?
-    = render partial: 'bus_list_info', locals: { bus_list: @questionnaire.bus_list }
+        - if @questionnaire.bus_list_id
+          = render partial: 'bus_list_info', locals: { bus_list: @questionnaire.bus_list }
+  - else
+    = f.input :bus_list_id, as: :hidden, value: ''

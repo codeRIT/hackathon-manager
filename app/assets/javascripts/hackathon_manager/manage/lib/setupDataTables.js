@@ -51,8 +51,7 @@ var setupDataTables = function() {
       { orderable: true, data: 'name' },
       { orderable: true, data: 'city' },
       { orderable: true, data: 'state' },
-      { orderable: true, data: 'questionnaire_count' },
-      { orderable: false, data: 'bus_list' }
+      { orderable: true, data: 'questionnaire_count' }
     ]
   });
 

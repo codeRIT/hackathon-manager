@@ -30,7 +30,7 @@
           %br
           %small.text-muted
             - accepted = school.questionnaires.where(acc_status: 'accepted').count
-            - no_bus = school.questionnaires.where(acc_status: 'rsvp_confirmed', riding_bus: false).count
+            - no_bus = school.questionnaires.where(acc_status: 'rsvp_confirmed', bus_list_id: nil).count
             #{accepted} yet to RSVP, #{no_bus} attending but not using bus
 
   .col-lg-6

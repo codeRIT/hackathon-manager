@@ -275,7 +275,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "render manage_messages#show even if recipient is no longer valid" do
-      message = create(:message, recipients: ['bus-list--applied::9999'])
+      message = create(:message, recipients: ['bus-list::9999'])
       get :show, params: { id: message }
       assert_response :success
     end

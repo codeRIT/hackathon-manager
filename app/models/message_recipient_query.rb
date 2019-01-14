@@ -25,7 +25,7 @@ class MessageRecipientQuery
     # Find the backing database model, ensuring the given ID exists for that model.
     model_name = nil
     case type
-    when "bus-list", "bus-list--applied", "bus-list--eligible"
+    when "bus-list"
       model ||= BusList.find_by_id(id)
       model_name = "Bus List"
     when "school"
@@ -58,10 +58,6 @@ class MessageRecipientQuery
     case recipient_query.type
     when "bus-list"
       "Bus List: #{model.name} (signed up passengers)"
-    when "bus-list--eligible"
-      "Bus List: #{model.name} (eligible, not signed up for bus)"
-    when "bus-list--applied"
-      "Bus List: #{model.name} (applied/not yet accepted)"
     when "school"
       "Confirmed or Accepted: #{model.name}"
     when "blazer"
