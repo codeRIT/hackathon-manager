@@ -15,4 +15,11 @@ class Manage::ApplicationController < ApplicationController
   def json_request?
     request.format.json?
   end
+
+  def response_view_or_errors(view, model)
+    respond_to do |format|
+      format.html { render(view) }
+      format.json { render json: { errors: model.errors.full_messages } }
+    end
+  end
 end

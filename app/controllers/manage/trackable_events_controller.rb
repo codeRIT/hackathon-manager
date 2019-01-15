@@ -41,7 +41,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
         format.json { render json: @trackable_event }
       end
     else
-      render :new
+      response_view_or_errors :new, @trackable_event
     end
   end
 
@@ -53,7 +53,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
         format.json { render json: @trackable_event }
       end
     else
-      render :edit
+      response_view_or_errors :edit, @trackable_event
     end
   end
 

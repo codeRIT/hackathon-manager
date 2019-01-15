@@ -32,7 +32,7 @@ class Manage::TrackableTagsController < Manage::ApplicationController
       flash[:notice] = 'Trackable tag was successfully created.'
       respond_with(:manage, @trackable_tag)
     else
-      render :new
+      response_view_or_errors :new, @trackable_tag
     end
   end
 
@@ -42,7 +42,7 @@ class Manage::TrackableTagsController < Manage::ApplicationController
       flash[:notice] = 'Trackable tag was successfully updated.'
       respond_with(:manage, @trackable_tag)
     else
-      render :edit
+      response_view_or_errors :edit, @trackable_tag
     end
   end
 
