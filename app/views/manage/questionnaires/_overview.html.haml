@@ -95,6 +95,20 @@
               = @questionnaire.special_needs
             - else
               %span.text-muted (none)
+          %dt.col-md-4 Bus list
+          %dd.col-md-8
+            - if @questionnaire.bus_list_id?
+              = link_to @questionnaire.bus_list.name, manage_bus_list_path(@questionnaire.bus_list_id)
+            - else
+              %span.text-muted (none)
+          %dt.col-md-4 Bus captain
+          %dd.col-md-8
+            - if @questionnaire.is_bus_captain?
+              %strong.text-danger Is bus captain
+            - elsif @questionnaire.bus_captain_interest?
+              %strong.text-success Interested in being a captain
+            - else
+              %span.text-muted No
           %dt.col-md-4 Traveling from
           %dd.col-md-8
             = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "<span class=\"text-muted\">My school</span>".html_safe
