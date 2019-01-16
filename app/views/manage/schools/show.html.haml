@@ -34,8 +34,6 @@
           = link_to link, target: '_blank' do
             Search in Google Maps
             %span.fa.fa-external-link.icon-space-l-half
-      %dt.col-md-4 Bus List
-      %dd.col-md-8= @school.bus_list ? link_to(@school.bus_list.name, manage_bus_list_path(@school.bus_list)) : '(not assigned)'
 
   .col-md-6
     %h4.pb-0 Duplicate Names

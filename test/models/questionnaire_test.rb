@@ -2,6 +2,7 @@ require 'test_helper'
 
 class QuestionnaireTest < ActiveSupport::TestCase
   should belong_to :school
+  should belong_to :bus_list
 
   should strip_attribute :first_name
   should strip_attribute :last_name
@@ -35,7 +36,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should_not validate_presence_of :acc_status
   should_not validate_presence_of :acc_status_author_id
   should_not validate_presence_of :acc_status_date
-  should_not validate_presence_of :riding_bus
   should_not validate_presence_of :can_share_info
   should_not validate_presence_of :travel_not_from_school
   should_not validate_presence_of :travel_location
@@ -256,35 +256,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
         questionnaire.acc_status = status
         assert !questionnaire.did_rsvp?
       end
-    end
-  end
-
-  context "#eligible_for_a_bus?" do
-    should "return false if no school set" do
-      questionnaire = create(:questionnaire)
-      questionnaire.update_attribute(:school_id, nil)
-      assert_equal false, questionnaire.eligible_for_a_bus?
-    end
-
-    should "return false if school does not have bus" do
-      questionnaire = create(:questionnaire)
-      questionnaire.school.update_attribute(:bus_list_id, nil)
-      assert_equal false, questionnaire.eligible_for_a_bus?
-    end
-
-    should "return true if school has a bus" do
-      questionnaire = create(:questionnaire)
-      bus_list = create(:bus_list)
-      questionnaire.school.update_attribute(:bus_list_id, bus_list.id)
-      assert_equal true, questionnaire.eligible_for_a_bus?
-    end
-
-    should "return true even if bus is full" do
-      questionnaire = create(:questionnaire)
-      bus_list = create(:bus_list, capacity: 0)
-      questionnaire.school.update_attribute(:bus_list_id, bus_list.id)
-      assert_equal true, bus_list.full?
-      assert_equal true, questionnaire.eligible_for_a_bus?
     end
   end
 

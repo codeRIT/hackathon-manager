@@ -46,7 +46,7 @@ class Manage::DashboardController < Manage::ApplicationController
 
   def schools_confirmed_data
     schools = Questionnaire.joins(:school).group('schools.name').where("acc_status = 'rsvp_confirmed'").order("schools.name ASC").count
-    schools_riding = Questionnaire.joins(:school).group('schools.name').where("acc_status = 'rsvp_confirmed' AND riding_bus AND schools.bus_list_id").count
+    schools_riding = Questionnaire.joins(:school).group('schools.name').where("acc_status = 'rsvp_confirmed' AND bus_list_id").count
     schools = schools.map do |name, count|
       bus_count_row = schools_riding.select { |school_bus_name, _| school_bus_name == name }
       bus_count = bus_count_row ? bus_count_row[name] || 0 : 0

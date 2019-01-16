@@ -48,10 +48,8 @@
       = f.input :travel_not_from_school, label: "I will not be traveling from my school"
       = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Travel Location"
 
-      = f.input :riding_bus, label: "Riding Bus", disabled: !@questionnaire.eligible_for_a_bus?
-      = f.input :is_bus_captain, label: "Is Bus Captain", disabled: !@questionnaire.eligible_for_a_bus?
-      - if !@questionnaire.eligible_for_a_bus?
-        %p (school not eligible for bus)
+      = f.input :bus_list_id, label: "Bus list"
+      = f.input :is_bus_captain, label: "Is Bus Captain"
 
     %hr
 

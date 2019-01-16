@@ -1,5 +1,5 @@
 class SchoolDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :link_to, :manage_school_path, :manage_bus_list_path, :bold
+  def_delegators :@view, :link_to, :manage_school_path, :bold
 
   def view_columns
     @view_columns ||= {
@@ -20,8 +20,7 @@ class SchoolDatatable < AjaxDatatablesRails::Base
         name: link_to(bold(record.name), manage_school_path(record)),
         city: record.city,
         state: record.state,
-        questionnaire_count: record.questionnaire_count,
-        bus_list: record.bus_list ? link_to(record.bus_list.name, manage_bus_list_path(record.bus_list)) : ''
+        questionnaire_count: record.questionnaire_count
       }
     end
   end

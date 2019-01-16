@@ -2,7 +2,7 @@ class BusList < ApplicationRecord
   validates_presence_of :name, :capacity
   validates_uniqueness_of :name
 
-  has_many :schools
+  has_many :questionnaires
 
   strip_attributes
 
@@ -11,7 +11,11 @@ class BusList < ApplicationRecord
   end
 
   def passengers
-    Questionnaire.joins(:school).where("schools.bus_list_id = '#{id}' AND acc_status = 'rsvp_confirmed' AND riding_bus = true").order("schools.name ASC, last_name ASC")
+    questionnaires.where("acc_status = 'rsvp_confirmed'").order("last_name ASC")
+  end
+
+  def schools
+    passengers.joins(:school).map(&:school).uniq
   end
 
   def checked_in_passengers

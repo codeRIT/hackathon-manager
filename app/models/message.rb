@@ -103,9 +103,7 @@ class Message < ApplicationRecord
     option = ->(query, model) { [MessageRecipientQuery.friendly_name(query, model), query] }
     bus_list_recipients = BusList.select(:id, :name).map do |bus_list|
       [
-        option.call("bus-list::#{bus_list.id}", bus_list),
-        option.call("bus-list--eligible::#{bus_list.id}", bus_list),
-        option.call("bus-list--applied::#{bus_list.id}", bus_list)
+        option.call("bus-list::#{bus_list.id}", bus_list)
       ]
     end
     bus_list_recipients.flatten!(1) # Required since we have multiple options for each bus list

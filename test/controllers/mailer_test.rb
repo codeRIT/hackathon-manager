@@ -35,8 +35,7 @@ class MailerTest < ActionMailer::TestCase
   context "upon scheduled bus update email" do
     setup do
       @bus_list = create(:bus_list)
-      @questionnaire = create(:questionnaire, acc_status: 'rsvp_confirmed', riding_bus: true)
-      @questionnaire.school.update_attribute(:bus_list_id, @bus_list.id)
+      @questionnaire = create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
       @questionnaire.user.update_attribute(:email, "test@example.com")
     end
 

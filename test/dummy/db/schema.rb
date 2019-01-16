@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_233210) do
+ActiveRecord::Schema.define(version: 2019_01_13_231044) do
 
   create_table "blazer_audits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -184,6 +184,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_233210) do
     t.datetime "boarded_bus_at"
     t.integer "graduation_year"
     t.string "race_ethnicity"
+    t.integer "bus_list_id"
+    t.index ["bus_list_id"], name: "index_questionnaires_on_bus_list_id"
     t.index ["user_id"], name: "index_questionnaires_on_user_id"
   end
 
@@ -203,7 +205,6 @@ ActiveRecord::Schema.define(version: 2019_01_07_233210) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "questionnaire_count", default: 0
-    t.integer "bus_list_id"
   end
 
   create_table "trackable_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -249,6 +250,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_233210) do
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "questionnaires", "bus_lists"
   add_foreign_key "school_name_duplicates", "schools"
   add_foreign_key "trackable_events", "trackable_tags"
   add_foreign_key "trackable_events", "users"

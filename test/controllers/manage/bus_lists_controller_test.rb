@@ -3,8 +3,6 @@ require 'test_helper'
 class Manage::BusListsControllerTest < ActionController::TestCase
   setup do
     @bus_list = create(:bus_list)
-    questionnaire = create(:questionnaire, riding_bus: true, acc_status: 'rsvp_confirmed')
-    questionnaire.school.update_attribute(:bus_list_id, @bus_list.id)
   end
 
   context "while not authenticated" do
@@ -276,6 +274,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "send email upon manage_bus_lists#send_update_email" do
+      create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
       assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
         patch :send_update_email, params: { id: @bus_list }
       end
@@ -291,19 +290,12 @@ class Manage::BusListsControllerTest < ActionController::TestCase
         assert_redirected_to manage_bus_lists_path
       end
 
-      should "reset school's bus list association" do
-        school = create(:school, bus_list_id: @bus_list.id)
+      should "reset everyone's bus_list_id" do
+        questionnaire = create(:questionnaire, bus_list_id: @bus_list.id)
+        questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id)
         patch :destroy, params: { id: @bus_list }
-        assert_nil school.reload.bus_list_id
-      end
-
-      should "reset everyone's riding_bus status" do
-        school = create(:school, bus_list_id: @bus_list.id)
-        questionnaire = create(:questionnaire, school: school)
-        questionnaire2 = create(:questionnaire, school: school)
-        patch :destroy, params: { id: @bus_list }
-        assert_equal false, questionnaire.reload.riding_bus
-        assert_equal false, questionnaire2.reload.riding_bus
+        assert_equal false, questionnaire.reload.bus_list_id?
+        assert_equal false, questionnaire2.reload.bus_list_id?
       end
     end
   end
