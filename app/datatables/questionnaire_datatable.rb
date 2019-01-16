@@ -22,12 +22,21 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
 
   private
 
+  def note(record)
+    output = ''
+    output += '<i class="fa fa-exclamation-triangle icon-space-r"></i> <small>Minor</small>' if record.minor?
+    output += '<i class="fa fa-bus icon-space-r" title="Bus Captain"></i>' if record.bus_list_id?
+    output += '<small>Captain</small>' if record.is_bus_captain?
+    output = '<div class="center">' + output + '</div>' if output.present?
+    output.html_safe
+  end
+
   def data
     records.map do |record|
       {
         bulk: current_user.admin_limited_access ? '' : "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe,
         link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(record)),
-        note: record.minor? ? '<div class="center"><i class="fa fa-exclamation-triangle icon-space-r"></i> Minor</div>'.html_safe : '',
+        note: note(record),
         id: record.id,
         first_name: bold(record.first_name),
         last_name: bold(record.last_name),
