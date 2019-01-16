@@ -274,7 +274,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "send email upon manage_bus_lists#send_update_email" do
-      questionnaire = create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
+      create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
       assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
         patch :send_update_email, params: { id: @bus_list }
       end
