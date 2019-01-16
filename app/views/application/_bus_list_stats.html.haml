@@ -1,9 +1,20 @@
-%p
-  - accepted = Questionnaire.joins(:school).where("bus_list_id = '#{bus_list.id}' AND acc_status = 'accepted'").count
-  = pluralize(accepted, 'person has', 'people have')
-  been accepted but not yet RSVP'd.
+- passengers = Questionnaire.joins(:school).group('schools.name').where(acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id).order("schools.name ASC").count
+= pie_chart passengers
 
-%p
-  - accepted = Questionnaire.joins(:school).where("bus_list_id = '#{bus_list.id}' AND acc_status = 'rsvp_confirmed'").count
-  = pluralize(accepted, 'person has', 'people have')
-  RSVP'd as attending but didn't sign up for the bus.
+%br
+
+:ruby
+  school_ids = Questionnaire.where(acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id).distinct.pluck(:school_id)
+  schools = Questionnaire.joins(:school).group('schools.name').where(school_id: school_ids, acc_status: 'rsvp_confirmed').order("schools.name ASC").count
+  schools_riding = Questionnaire.joins(:school).group('schools.name').where(school_id: school_ids, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id).count
+  schools = schools.map do |name, count|
+    bus_count_row = schools_riding.select { |school_bus_name, _| school_bus_name == name }
+    bus_count = bus_count_row ? bus_count_row[name] || 0 : 0
+    count_without_bus = count - bus_count
+    [name, count_without_bus, bus_count]
+  end
+  data = [
+    { name: "Attending but not riding this bus", data: schools.sort_by { |_, no_bus, bus| [bus, no_bus] }.reverse },
+    { name: "Riding this bus", data: schools_riding }
+  ]
+= bar_chart data, stacked: true, height: '400px'

@@ -15,10 +15,10 @@
     = render "layouts/hackathon_manager/header"
     = render "layouts/hackathon_manager/account_nav"
     = render "layouts/hackathon_manager/flashes"
+    = javascript_include_tag "hackathon_manager/application"
     #main
       %section.section
         .container
           = yield
     = render "layouts/hackathon_manager/footer"
-    = javascript_include_tag "hackathon_manager/application"
     = render "layouts/hackathon_manager/shared_footer"

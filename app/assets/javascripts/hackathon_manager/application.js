@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
+//= require highcharts
+//= require chartkick
 //= require_directory .
 //= require ./vendor/simplemde.min.js

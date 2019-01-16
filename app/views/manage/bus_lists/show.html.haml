@@ -109,5 +109,8 @@
                   - else
                     = link_to "Make Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: 'Are you sure? This will send a confirmation email to the bus captain.' }
 
-    .alert.alert-info
-      = render partial: 'bus_list_stats', locals: { bus_list: @bus_list }
+.row.mt-2.mb-4
+  .col
+    %h4.border-bottom.pb-2.mb-4
+      Passenger Distribution
+    = render partial: 'bus_list_stats', locals: { bus_list: @bus_list }
