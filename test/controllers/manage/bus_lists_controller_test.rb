@@ -3,7 +3,6 @@ require 'test_helper'
 class Manage::BusListsControllerTest < ActionController::TestCase
   setup do
     @bus_list = create(:bus_list)
-    questionnaire = create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
   end
 
   context "while not authenticated" do
