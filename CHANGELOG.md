@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.12.0 - 2019-01-16
+
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
+* Improvement: Enable anyone to sign up for any bus
+
 # 0.11.2 - 2019-01-14
 
 * Improvement: Render JSON errors on validation failure
