@@ -1,5 +1,9 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.12.2 - 2019-01-16
+
+* Improvement: Show boarded bus count on bus list
+
 # 0.12.1 - 2019-01-16
 
 * Improvement: Note bus attendance + captain status in questionnaire table
