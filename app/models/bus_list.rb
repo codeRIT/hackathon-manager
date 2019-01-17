@@ -22,6 +22,10 @@ class BusList < ApplicationRecord
     passengers.select(&:checked_in?)
   end
 
+  def boarded_passengers
+    passengers.select(&:boarded_bus?)
+  end
+
   def captains
     passengers.where(is_bus_captain: true)
   end

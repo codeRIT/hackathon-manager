@@ -22,7 +22,9 @@
 
   %p
     %strong Passengers:
-    = "(#{@bus_list.passengers.count} total, #{@bus_list.checked_in_passengers.count} checked in)"
+    (#{@bus_list.passengers.count} total,
+    <span id="boarded-bus-count">#{@bus_list.boarded_passengers.count} boarded</span>,
+    #{@bus_list.checked_in_passengers.count} checked in)
 
   %table.table
     %thead

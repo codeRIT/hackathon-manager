@@ -101,6 +101,13 @@
               = link_to @questionnaire.bus_list.name, manage_bus_list_path(@questionnaire.bus_list_id)
             - else
               %span.text-muted (none)
+          - if @questionnaire.bus_list_id?
+            %dt.col-md-4 Boarded bus?
+            %dd.col-md-8
+              - if @questionnaire.boarded_bus?
+                Yes
+              - else
+                No
           %dt.col-md-4 Bus captain
           %dd.col-md-8
             - if @questionnaire.is_bus_captain?

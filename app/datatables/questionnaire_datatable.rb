@@ -25,7 +25,7 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
   def note(record)
     output = ''
     output += '<i class="fa fa-exclamation-triangle icon-space-r"></i> <small>Minor</small>' if record.minor?
-    output += '<i class="fa fa-bus icon-space-r" title="Bus Captain"></i>' if record.bus_list_id?
+    output += '<i class="fa fa-bus icon-space-r" title="Riding bus"></i>' if record.bus_list_id?
     output += '<small>Captain</small>' if record.is_bus_captain?
     output = '<div class="center">' + output + '</div>' if output.present?
     output.html_safe

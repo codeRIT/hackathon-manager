@@ -46,7 +46,7 @@
   .col
     %h4.pb-2
       Passengers
-      %small.text-muted (#{@bus_list.passengers.count} total, #{@bus_list.checked_in_passengers.count} checked in)
+      %small.text-muted (#{@bus_list.passengers.count} total, #{@bus_list.boarded_passengers.count} boarded, #{@bus_list.checked_in_passengers.count} checked in)
 
     %table.table
       %thead

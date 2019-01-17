@@ -43,6 +43,22 @@ class BusListTest < ActiveSupport::TestCase
     end
   end
 
+  context "#boarded_passengers" do
+    setup do
+      @bus_list = create(:bus_list)
+    end
+
+    should "return all boarded passengers" do
+      questionnaire1 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: nil)
+      questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now)
+      questionnaire3 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now)
+      assert_equal 2, @bus_list.boarded_passengers.count
+      allowed_ids = [questionnaire2, questionnaire3].map(&:id)
+      assert allowed_ids.include? @bus_list.boarded_passengers[0].id
+      assert allowed_ids.include? @bus_list.boarded_passengers[1].id
+    end
+  end
+
   context "#checked_in_passengers" do
     setup do
       @bus_list = create(:bus_list)
