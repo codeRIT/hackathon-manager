@@ -35,7 +35,7 @@ Steps to get the basic flow working:
 
 2. Once you have at least one user in the system, you can promote them to an admin to access the management interface. Open up a console session with `bin/rails console`:
 ```ruby
->> User.last.update_attribute(:admin, true)
+>> User.last.update_attribute(:role, :admin)
 => true
 ```
 

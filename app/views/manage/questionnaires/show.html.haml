@@ -9,14 +9,14 @@
         = render 'check_in_badge'
 
   .btn-group{role: "group"}
-    - unless current_user.admin_limited_access
+    - if current_user.admin?
       = link_to 'Edit', edit_manage_questionnaire_path(@questionnaire), class: 'btn btn-sm btn-outline-secondary'
-    - unless current_user.admin_limited_access
+    - if current_user.admin?
       .btn-group{role: "group"}
         %button.btn.btn-sm.btn-outline-secondary.dropdown-toggle#title-actions{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
           .fa.fa-cog
         .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "title-actions"}
-          = link_to 'Convert to Admin', convert_to_admin_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.full_name}\" will be permanently erased. This action is irreversible." }, class: 'dropdown-item'
+          = link_to 'Convert to Admin', convert_to_admin_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.full_name}\" will be permanently erased, and \"#{@questionnaire.email}\" will become an admin. This action is irreversible." }, class: 'dropdown-item'
 
 = render 'overview'
 

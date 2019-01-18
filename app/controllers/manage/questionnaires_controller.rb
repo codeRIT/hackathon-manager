@@ -86,7 +86,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   def convert_to_admin
     user = @questionnaire.user
     @questionnaire.destroy
-    user.update_attributes(admin: true, admin_limited_access: true)
+    user.update_attributes(role: :admin)
     redirect_to edit_manage_admin_path(user)
   end
 

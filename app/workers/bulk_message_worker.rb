@@ -27,9 +27,9 @@ class BulkMessageWorker
   def self.user_ids(type)
     case type
     when "all"
-      User.where(admin: false).pluck(:id)
+      User.non_admins.pluck(:id)
     when "incomplete"
-      User.where(admin: false).pluck(:id) - Questionnaire.pluck(:user_id)
+      User.non_admins.pluck(:id) - Questionnaire.pluck(:user_id)
     when "complete"
       Questionnaire.pluck(:user_id)
     when "accepted"

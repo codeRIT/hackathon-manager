@@ -39,7 +39,7 @@ en:
           If many people have already RSVP'd, consider sending a message out to this bus list asking for interest as well.
         notes: Notes are shared with applicants. Supports Markdown and HTML.
       user:
-        admin_limited_access: Limited access prevents the admin from adding, modifying, or deleting any records. Modifications through the check-in process are allowed.
+        role: Limited access prevents the admin from adding, modifying, or deleting any records; modifications through the check-in process are allowed. Event tracking limits to only event tracking.
       message:
         type: Bulk emails are sent once, manually. Automated emails are sent upon a desired trigger/event.
         name: A friendly name to recognize this email. Applicants won't see this.

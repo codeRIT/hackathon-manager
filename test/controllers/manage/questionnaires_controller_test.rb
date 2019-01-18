@@ -308,7 +308,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "convert questionnaire's user to an admin" do
       patch :convert_to_admin, params: { id: @questionnaire }
-      assert assigns(:questionnaire).user.admin
+      assert assigns(:questionnaire).user.admin?
       assert_nil assigns(:questionnaire).user.reload.questionnaire
       assert_redirected_to edit_manage_admin_path(assigns(:questionnaire).user)
     end

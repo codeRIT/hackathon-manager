@@ -27,5 +27,5 @@
         %td= trackable_event.band_id
         %td= trackable_event.user.email
         %td
-          - unless current_user.admin_limited_access && current_user != trackable_event.user
+          - if current_user.admin? || current_user == trackable_event.user
             = link_to 'Edit', edit_manage_trackable_event_path(trackable_event)

@@ -10,6 +10,6 @@ class Manage::ConfigsController < Manage::ApplicationController
   private
 
   def limit_access_admin
-    redirect_to manage_root_path if current_user.admin_limited_access
+    redirect_to manage_root_path unless current_user.admin?
   end
 end

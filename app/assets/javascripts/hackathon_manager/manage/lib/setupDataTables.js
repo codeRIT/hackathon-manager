@@ -27,7 +27,8 @@ var setupDataTables = function() {
     columns    : [
       { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'email' },
-      { orderable: true, data: 'admin_limited_access' }
+      { orderable: true, data: 'role' },
+      { orderable: true, data: 'created_at' }
     ]
   });
 

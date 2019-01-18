@@ -1,13 +1,17 @@
 = render "layouts/manage/page_title", title: @user.email do
-  - unless current_user.admin_limited_access
-    .btn-group
-      = link_to 'Edit', edit_manage_admin_path(@user), class: 'btn btn-sm btn-outline-secondary'
-      = link_to 'Delete', manage_admin_path(@user), method: :delete, data: { confirm: "Are you sure? #{@user.email} will be permanently deleted. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
+  .btn-group
+    = link_to 'Edit', edit_manage_admin_path(@user), class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Delete', manage_admin_path(@user), method: :delete, data: { confirm: "Are you sure? #{@user.email} will be permanently deleted. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
 
 %div
   %p
     %b Email address:
     = @user.email
+
   %p
-    %b Access level:
-    = @user.admin_limited_access ? "Limited Access" : "Full Access"
+    %b Role:
+    = @user.role.titleize
+
+  %p
+    %b Registered:
+    = display_datetime(@user.created_at)

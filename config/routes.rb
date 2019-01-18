@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   mount MailPreview => 'mail_view' if Rails.env.development?
 
-  authenticate :user, ->(u) { u.admin? && !u.admin_limited_access? } do
+  authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
     mount Blazer::Engine, at: "blazer"
   end
