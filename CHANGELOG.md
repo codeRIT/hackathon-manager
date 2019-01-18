@@ -1,5 +1,12 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.0 - 2019-01-18
+
+- Feature: Add "event tracking" role
+- Improvement: Filter TrackableEvents by trackable_event_id
+- Improvement: Add registered date to admin datatable
+- Improvement: Hide map until it's fixed
+
 # 0.12.2 - 2019-01-16
 
 - Improvement: Show boarded bus count on bus list
