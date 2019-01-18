@@ -9,8 +9,6 @@
       .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "title-actions"}
         = link_to 'Send Bus Notes Update', send_update_email_manage_bus_list_path(@bus_list), method: :patch, data: { confirm: "Are you sure? All passengers for \"#{@bus_list.name}\" will be immediatley emailed the current bus notes." }, class: 'dropdown-item'
         = link_to 'Create message (signed up passengers)', new_manage_message_path(type: 'bulk', recipients: ["bus-list::#{@bus_list.id}"]), class: 'dropdown-item'
-        = link_to 'Create message (eligible, not signed up)', new_manage_message_path(type: 'bulk', recipients: ["bus-list::#{@bus_list.id}"]), class: 'dropdown-item'
-        = link_to 'Create message (applied/not yet accepted)', new_manage_message_path(type: 'bulk', recipients: ["bus-list::#{@bus_list.id}"]), class: 'dropdown-item'
 
 .row
   .col-lg-6
