@@ -84,7 +84,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
 
   # If the admin is limited, scope changes only to those they created
   def scope_limited_admin_access
-    return if !current_user.admin_limited_access || @trackable_event.blank? || @trackable_event.user.blank?
+    return if current_user.admin? || @trackable_event.blank? || @trackable_event.user.blank?
     redirect_to manage_trackable_events_path, notice: 'You may not view events you did not create.' if @trackable_event.user != current_user
   end
 end

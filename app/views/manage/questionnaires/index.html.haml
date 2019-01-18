@@ -6,7 +6,7 @@
     %thead
       %tr
         %th
-          - unless current_user.admin_limited_access?
+          - if current_user.admin?
             %input{ type: "checkbox", name: "select_allc", value: "1", data: { bulk_row_select: "" } }
         %th
         %th

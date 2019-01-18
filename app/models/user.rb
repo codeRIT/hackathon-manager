@@ -13,6 +13,13 @@ class User < ApplicationRecord
 
   after_create :queue_reminder_email
 
+  enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
+  after_initialize :set_default_role, if: :new_record?
+
+  def set_default_role
+    self.role ||= :user
+  end
+
   def active_for_authentication?
     true
   end
@@ -56,7 +63,11 @@ class User < ApplicationRecord
     end
   end
 
+  def self.non_admins
+    User.where.not(role: :admin).where.not(role: :admin_limited_access)
+  end
+
   def self.without_questionnaire
-    User.left_outer_joins(:questionnaire).where(questionnaires: { id: nil }, admin: false)
+    non_admins.left_outer_joins(:questionnaire).where(questionnaires: { id: nil })
   end
 end

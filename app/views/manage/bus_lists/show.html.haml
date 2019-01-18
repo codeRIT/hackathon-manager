@@ -71,14 +71,14 @@
             %td= link_to p.school.name, manage_school_path(p.school)
             %td= p.boarded_bus? ? '<span class="text-success">Yes</span>'.html_safe : 'No'
             %td= p.checked_in? ? '<span class="text-success">Yes</span>'.html_safe : 'No'
-            - if current_user.admin_limited_access
-              %td= p.is_bus_captain? ? "Yes" : "No"
-            - else
+            - if current_user.admin?
               %td
                 - if p.is_bus_captain?
                   = link_to "Remove", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post', class: 'text-danger'
                 - else
                   = link_to "Promote", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '1'), method: 'post', data: { confirm: "Are you sure you want to make #{p.full_name} a bus captain? They will receive a confirmation email." }
+            - else
+              %td= p.is_bus_captain? ? "Yes" : "No"
 
     - if @bus_list.needs_bus_captain
       %h4.mt-4.pb-2 Possible Bus Captains
@@ -91,7 +91,7 @@
             %th Email
             %th Phone Number
             %th School
-            - unless current_user.admin_limited_access
+            - if current_user.admin?
               %th Actions
         %tbody
           - @bus_list.passengers.select { |q| q.bus_captain_interest }.each do |p|
@@ -102,7 +102,7 @@
               %td= p.email
               %td= phone_link_to p.phone
               %td= link_to p.school.name, manage_school_path(p.school)
-              - unless current_user.admin_limited_access
+              - if current_user.admin?
                 %td
                   - if p.is_bus_captain?
                     = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post', class: 'text-danger'

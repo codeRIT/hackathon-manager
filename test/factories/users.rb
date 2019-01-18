@@ -4,21 +4,20 @@ FactoryBot.define do
       "foo#{n}@example.com"
     end
     password { "password" }
+    role { :user }
 
     factory :admin do
       sequence :email do |n|
         "admin#{n}@example.com"
       end
-      admin { true }
-      admin_limited_access { false }
+      role { :admin }
     end
 
     factory :limited_access_admin do
       sequence :email do |n|
         "limited_admin#{n}@example.com"
       end
-      admin { true }
-      admin_limited_access { true }
+      role { :admin_limited_access }
     end
   end
 end

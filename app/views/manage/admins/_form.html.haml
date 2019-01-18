@@ -11,7 +11,7 @@
 
     .form-inputs
       = f.input :email, input_html: { "data-validate" => "presence" }, required: true
-      = f.input :admin_limited_access, label: "Limited Access"
+      = f.input :role, collection: User.roles.to_a.collect{|c| [c[0].titleize, c[0]]}, include_blank: false
 
     .center
       = f.button :submit, value: ( @user.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'

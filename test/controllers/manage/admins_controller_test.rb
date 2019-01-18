@@ -175,24 +175,24 @@ class Manage::AdminsControllerTest < ActionController::TestCase
     end
 
     should "create a new admin" do
-      post :create, params: { user: { email: "test@example.com" } }
+      post :create, params: { user: { email: "test@example.com", role: 'admin' } }
       assert_response :redirect
       assert_redirected_to manage_admins_path
-      assert assigns(:user).admin, "new user should be an admin"
+      assert assigns(:user).admin?, "new user should be an admin"
     end
 
     should "create a new limited access admin" do
-      post :create, params: { user: { email: "test@example.com", admin_limited_access: true } }
+      post :create, params: { user: { email: "test@example.com", role: 'admin_limited_access' } }
       assert_response :redirect
       assert_redirected_to manage_admins_path
-      assert assigns(:user).admin, "new user should be an admin"
-      assert assigns(:user).admin_limited_access, "new user should be a limited access admin"
+      assert !assigns(:user).admin?, "new user should not be an admin"
+      assert assigns(:user).admin_limited_access?, "new user should be a limited access admin"
     end
 
     should "not create an admin with duplicate emails" do
       create(:user, email: "existing@example.com")
       assert_difference('User.count', 0) do
-        post :create, params: { user: { email: "existing@example.com" } }
+        post :create, params: { user: { email: "existing@example.com", role: 'admin' } }
       end
     end
 

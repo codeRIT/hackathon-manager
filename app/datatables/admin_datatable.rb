@@ -5,7 +5,7 @@ class AdminDatatable < AjaxDatatablesRails::Base
     @view_columns ||= {
       id: { source: 'User.id' },
       email: { source: 'User.email' },
-      admin_limited_access: { source: 'User.admin_limited_access', searchable: false }
+      role: { source: 'User.role', searchable: false }
     }
   end
 
@@ -16,14 +16,14 @@ class AdminDatatable < AjaxDatatablesRails::Base
       {
         id: record.id,
         email: link_to(bold(record.email), manage_admin_path(record)),
-        admin_limited_access: record.admin_limited_access ? 'Limited Access' : 'Full Access'
+        role: record.role.titleize
       }
     end
   end
 
   # rubocop:disable Naming/AccessorMethodName
   def get_raw_records
-    User.where(admin: true)
+    User.where(role: [:admin, :admin_limited_access, :event_tracking])
   end
   # rubocop:enable Naming/AccessorMethodName
 end

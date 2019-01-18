@@ -4,7 +4,7 @@ class Manage::AdminsController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, User.where(admin: true))
+    respond_with(:manage, User.where(role: [:admin, :admin_limited_access, :event_tracking]))
   end
 
   def datatable
@@ -26,7 +26,6 @@ class Manage::AdminsController < Manage::ApplicationController
   def create
     @user = ::User.new(user_params.merge(password: Devise.friendly_token.first(10)))
     if @user.save
-      @user.update_attribute(:admin, true)
       @user.send_reset_password_instructions
     end
     respond_with(:manage, @user, location: manage_admins_path)
@@ -46,7 +45,7 @@ class Manage::AdminsController < Manage::ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :email, :password, :password_confirmation, :remember_me, :admin_limited_access
+      :email, :password, :password_confirmation, :remember_me, :role
     )
   end
 
