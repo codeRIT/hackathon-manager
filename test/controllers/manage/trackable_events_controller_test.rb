@@ -51,50 +51,57 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a limited access admin" do
-    setup do
-      @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
-      sign_in @user
-      @trackable_event.update_attribute(:user, @user)
-    end
+  limited_conditions = {
+    'event tracking user' => :event_tracking,
+    'limited access admin' => :admin_limited_access,
+  }
 
-    should "get index" do
-      test_index_success
-    end
+  limited_conditions.each do |condition_name, user_role|
+    context "while authenticated as a #{condition_name}" do
+      setup do
+        @user = create(:user, role: user_role)
+        @request.env["devise.mapping"] = Devise.mappings[:admin]
+        sign_in @user
+        @trackable_event.update_attribute(:user, @user)
+      end
 
-    should "get new" do
-      test_new_success
-    end
+      should "get index" do
+        test_index_success
+      end
 
-    should "create trackable_event" do
-      test_create_success
-    end
+      should "get new" do
+        test_new_success
+      end
 
-    should "show trackable_event" do
-      test_show_success
-    end
+      should "create trackable_event" do
+        test_create_success
+      end
 
-    should "get edit" do
-      test_edit_success
-    end
+      should "show trackable_event" do
+        test_show_success
+      end
 
-    should "update trackable_event" do
-      test_update_success
-    end
+      should "get edit" do
+        test_edit_success
+      end
 
-    should "not update trackable_event that doesn't belong to user" do
-      @trackable_event.update_attribute(:user, create(:user))
-      test_update_failure
-    end
+      should "update trackable_event" do
+        test_update_success
+      end
 
-    should "destroy trackable_event" do
-      test_destroy_success
-    end
+      should "not update trackable_event that doesn't belong to user" do
+        @trackable_event.update_attribute(:user, create(:user))
+        test_update_failure
+      end
 
-    should "not destroy trackable_event that doesn't belong to user" do
-      @trackable_event.update_attribute(:user, create(:user))
-      test_destroy_failure
+      should "destroy trackable_event" do
+        test_destroy_success
+      end
+
+      should "not destroy trackable_event that doesn't belong to user" do
+        @trackable_event.update_attribute(:user, create(:user))
+        test_destroy_failure
+      end
     end
   end
 

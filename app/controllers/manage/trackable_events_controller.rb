@@ -78,11 +78,16 @@ class Manage::TrackableEventsController < Manage::ApplicationController
     params.require(:trackable_event).permit(:band_id, :trackable_tag_id)
   end
 
+  # Permit everyone but regular users to access this controller
+  def require_admin_or_limited_admin
+    redirect_to root_path if current_user.try(:user?)
+  end
+
   # Permit limited-access admins (overrides Manage::ApplicationController#limit_admin_access)
   def limit_admin_access
   end
 
-  # If the admin is limited, scope changes only to those they created
+  # If the user isn't a full admin, scope changes only to those they created
   def scope_limited_admin_access
     return if current_user.admin? || @trackable_event.blank? || @trackable_event.user.blank?
     redirect_to manage_trackable_events_path, notice: 'You may not view events you did not create.' if @trackable_event.user != current_user
