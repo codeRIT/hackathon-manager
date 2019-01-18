@@ -34,7 +34,7 @@ class QuestionnaireDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        bulk: current_user.admin? ?  "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe : '',
+        bulk: current_user.admin? ? "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe : '',
         link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(record)),
         note: note(record),
         id: record.id,
