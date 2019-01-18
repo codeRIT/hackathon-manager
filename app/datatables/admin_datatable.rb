@@ -1,11 +1,12 @@
 class AdminDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :link_to, :manage_admin_path, :bold
+  def_delegators :@view, :link_to, :manage_admin_path, :bold, :display_datetime
 
   def view_columns
     @view_columns ||= {
       id: { source: 'User.id' },
       email: { source: 'User.email' },
-      role: { source: 'User.role', searchable: false }
+      role: { source: 'User.role', searchable: false },
+      created_at: { source: 'User.created_at', searchable: false }
     }
   end
 
@@ -16,7 +17,8 @@ class AdminDatatable < AjaxDatatablesRails::Base
       {
         id: record.id,
         email: link_to(bold(record.email), manage_admin_path(record)),
-        role: record.role.titleize
+        role: record.role.titleize,
+        created_at: display_datetime(record.created_at)
       }
     end
   end
