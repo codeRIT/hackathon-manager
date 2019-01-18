@@ -3,9 +3,11 @@
 = bs_horizontal_simple_form_for :trackable_event, method: 'get' do |f|
   .form-row
     .col-auto
-      = f.input :user_id, collection: User.where.not(role: :user), label_method: :email, value_method: :id, include_blank: '(show all)', required: false, selected: @params['user_id']
-    .col-auto
       = f.input :band_id, as: :string, required: false, input_html: { value: @params['band_id'] }, placeholder: '(show all)'
+    .col-auto
+      = f.input :trackable_tag_id, collection: TrackableTag.all, label_method: :name, value_method: :id, include_blank: '(show all)', required: false, selected: @params['trackable_tag_id']
+    .col-auto
+      = f.input :user_id, collection: User.where.not(role: :user), label_method: :email, value_method: :id, include_blank: '(show all)', required: false, selected: @params['user_id']
     .col-auto
       = f.button :submit, 'Filter', class: 'btn btn-primary'
 
