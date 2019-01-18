@@ -2,6 +2,8 @@
 
 # 0.13.0 - 2019-01-18
 
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
 - Feature: Add "event tracking" role
 - Improvement: Filter TrackableEvents by trackable_event_id
 - Improvement: Add registered date to admin datatable
