@@ -50,6 +50,49 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
     end
   end
 
+  limited_conditions = {
+    'event tracking user' => :event_tracking,
+    'limited access admin' => :admin_limited_access
+  }
+
+  limited_conditions.each do |condition_name, user_role|
+    context "while authenticated as a #{condition_name}" do
+      setup do
+        @user = create(:user, role: user_role)
+        @request.env["devise.mapping"] = Devise.mappings[:admin]
+        sign_in @user
+      end
+
+      should "get index" do
+        test_index_success
+      end
+
+      should "not get new" do
+        test_new_failure
+      end
+
+      should "not create trackable_tag" do
+        test_create_failure
+      end
+
+      should "show trackable_tag" do
+        test_show_success
+      end
+
+      should "not get edit" do
+        test_edit_failure
+      end
+
+      should "not update trackable_tag" do
+        test_update_failure
+      end
+
+      should "not destroy trackable_tag" do
+        test_destroy_failure
+      end
+    end
+  end
+
   context "while authenticated as an admin" do
     setup do
       @user = create(:admin)

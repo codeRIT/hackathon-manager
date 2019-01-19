@@ -1,4 +1,7 @@
 class Manage::TrackableTagsController < Manage::ApplicationController
+  skip_before_action :require_admin_or_limited_admin
+  before_action :require_admin_or_limited_admin_or_event_tracking
+
   before_action :set_trackable_tag, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json

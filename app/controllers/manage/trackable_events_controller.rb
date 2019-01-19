@@ -1,4 +1,7 @@
 class Manage::TrackableEventsController < Manage::ApplicationController
+  skip_before_action :require_admin_or_limited_admin
+  before_action :require_admin_or_limited_admin_or_event_tracking
+
   before_action :set_trackable_event, only: [:show, :edit, :update, :destroy]
   before_action :scope_limited_admin_access, only: [:edit, :update, :destroy]
 
@@ -78,13 +81,8 @@ class Manage::TrackableEventsController < Manage::ApplicationController
     params.require(:trackable_event).permit(:band_id, :trackable_tag_id)
   end
 
-  # Permit everyone but regular users to access this controller
-  def require_admin_or_limited_admin
-    redirect_to root_path if current_user.try(:user?)
-  end
-
-  # Permit limited-access admins (overrides Manage::ApplicationController#limit_admin_access)
-  def limit_admin_access
+  # Permit limited-access admins (overrides Manage::ApplicationController#limit_write_access_to_admins)
+  def limit_write_access_to_admins
   end
 
   # If the user isn't a full admin, scope changes only to those they created
