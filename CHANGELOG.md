@@ -1,5 +1,10 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.1 - 2019-01-22
+
+- Improvement: Enable event tracking users read access to trackable tags
+- Improvement: Enable event tracking users to view dashboard
+
 # 0.13.0 - 2019-01-18
 
 **Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
