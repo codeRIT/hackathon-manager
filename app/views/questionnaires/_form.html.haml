@@ -20,8 +20,8 @@
         = f.input :major, input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :gender, collection: collection_or_text(@questionnaire.gender, Questionnaire::POSSIBLE_GENDERS), include_blank: "(select one...)", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
-        = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }
-        = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }
+        = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+        = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
 
       .right
         %button.button{ type: "button", "data-wizard" => "next" } Next

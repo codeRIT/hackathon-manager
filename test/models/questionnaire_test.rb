@@ -41,6 +41,9 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should_not validate_presence_of :travel_location
   should_not validate_presence_of :boarded_bus_at
 
+  should validate_length_of(:dietary_restrictions).is_at_most(500)
+  should validate_length_of(:special_needs).is_at_most(500)
+
   should allow_value("first").for(:experience)
   should allow_value("experienced").for(:experience)
   should allow_value("expert").for(:experience)

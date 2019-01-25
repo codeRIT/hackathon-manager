@@ -13,6 +13,10 @@ class Questionnaire < ApplicationRecord
   validates_presence_of :code_of_conduct_accepted, message: "Please read & accept"
   validates_presence_of :data_sharing_accepted, message: "Please read & accept"
 
+  DIETARY_SPECIAL_NEEDS_MAX_LENGTH = 500
+  validates_length_of :dietary_restrictions, maximum: DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+  validates_length_of :special_needs, maximum: DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+
   # if HackathonManager.field_enabled?(:why_attend)
   #   validates_presence_of :why_attend
   # end
