@@ -19,7 +19,6 @@ $.fn.bulkRowEdit = function() {
     var number = ids.length;
     var questionnaires = number === 1 ? 'questionnaire' : 'questionnaires';
     var status = $('select[data-bulk-row-edit] option[value=' + action + ']').text();
-    debugger;
     var message = 'Are you sure? This will set ' + number + ' ' + questionnaires + ' to "' + status + '".\n\nThis may trigger an automatic email to each applicant depending on your automated messages.';
 
     if (!confirm(message)) {
