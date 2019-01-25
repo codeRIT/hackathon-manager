@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class QuestionnaireTest < ActiveSupport::TestCase
+  should belong_to :user
   should belong_to :school
   should belong_to :bus_list
+
+  should validate_uniqueness_of :user_id
 
   should strip_attribute :first_name
   should strip_attribute :last_name

@@ -275,15 +275,26 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
-    should "not create a questionnaire with invalid user" do
-      create(:user, email: "taken@example.com")
+    should "not create a duplicate questionnaire for a user" do
+      user = create(:user, email: "existing@example.com")
+      create(:questionnaire, user_id: user.id)
       assert_difference('User.count', 0) do
         assert_difference('Questionnaire.count', 0) do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "taken@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "existing@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
         end
       end
-      assert_match /Email has already been taken/, flash[:notice]
       assert_response :success
+    end
+
+    should "create a questionnaire with existing user" do
+      create(:user, email: "existing@example.com")
+      assert_difference('User.count', 0) do
+        assert_difference('Questionnaire.count', 1) do
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "existing@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
+        end
+      end
+      assert_equal "existing@example.com", assigns(:questionnaire).email
+      assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
     should "create school if doesn't exist in questionnaire" do

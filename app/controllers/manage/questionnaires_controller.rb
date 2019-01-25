@@ -31,7 +31,8 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     create_params = convert_school_name_to_id(create_params)
     @questionnaire = ::Questionnaire.new(create_params)
     if @questionnaire.valid?
-      user = User.new(email: email, password: Devise.friendly_token.first(10))
+      users = User.where(email: email)
+      user = users.count == 1 ? users.first : User.new(email: email, password: Devise.friendly_token.first(10))
       if user.save
         @questionnaire.user = user
         @questionnaire.save

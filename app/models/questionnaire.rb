@@ -7,6 +7,12 @@ class Questionnaire < ApplicationRecord
   after_save :update_school_questionnaire_count
   after_destroy :update_school_questionnaire_count
 
+  belongs_to :user
+  belongs_to :school
+  belongs_to :bus_list, optional: true
+
+  validates_uniqueness_of :user_id
+
   validates_presence_of :first_name, :last_name, :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
   validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity
   validates_presence_of :agreement_accepted, message: "Please read & accept"
@@ -30,9 +36,6 @@ class Questionnaire < ApplicationRecord
   validates :portfolio_url, url: { allow_blank: true }
   validates :vcs_url, url: { allow_blank: true }
   validates_format_of :vcs_url, with: %r{((github.com\/\w+\/?)|(bitbucket.org\/\w+\/?))}, allow_blank: true, message: "Must be a GitHub or BitBucket url"
-
-  belongs_to :school
-  belongs_to :bus_list, optional: true
 
   strip_attributes
 
@@ -113,8 +116,6 @@ class Questionnaire < ApplicationRecord
   # validates_inclusion_of :school_id, :in => School.select(:id)
   validates_inclusion_of :shirt_size, in: POSSIBLE_SHIRT_SIZES
   validates_inclusion_of :acc_status, in: POSSIBLE_ACC_STATUS
-
-  belongs_to :user
 
   def email
     user&.email
