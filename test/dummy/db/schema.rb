@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_204143) do
+ActiveRecord::Schema.define(version: 2019_01_25_021648) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_204143) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "shirt_size"
-    t.string "dietary_restrictions"
+    t.text "dietary_restrictions"
     t.boolean "international"
     t.string "portfolio_url"
     t.string "vcs_url"
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_204143) do
     t.string "phone"
     t.boolean "can_share_info", default: false
     t.boolean "code_of_conduct_accepted", default: false
-    t.string "special_needs"
+    t.text "special_needs"
     t.string "gender"
     t.string "major"
     t.boolean "travel_not_from_school", default: false
