@@ -2,6 +2,8 @@
 
 # 0.13.2 - 2019-01-24
 
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
 - Prompt for confirmation when applying bulk questionnaire action
 - Enable creating questionnaires for existing users, improve uniqueness validation
 - Set maximum character length on dietary & special needs inputs
