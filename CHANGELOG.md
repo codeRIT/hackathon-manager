@@ -1,5 +1,12 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.2 - 2019-01-24
+
+- Prompt for confirmation when applying bulk questionnaire action
+- Enable creating questionnaires for existing users, improve uniqueness validation
+- Set maximum character length on dietary & special needs inputs
+- Convert questionnaire dietary/special needs to text
+
 # 0.13.1 - 2019-01-22
 
 - Improvement: Enable event tracking users read access to trackable tags
