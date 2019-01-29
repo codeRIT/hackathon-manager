@@ -1,5 +1,9 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.3 - 2019-01-29
+
+- Improve stats display for schools on a bus list
+
 # 0.13.2 - 2019-01-24
 
 **Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
