@@ -27,9 +27,10 @@
           = link_to(school.name, manage_school_path(school))
           %br
           %small.text-muted
+            - riding = @bus_list.passengers.where(school_id: school.id).count
+            - no_bus = school.questionnaires.where(acc_status: 'rsvp_confirmed').count - riding
             - accepted = school.questionnaires.where(acc_status: 'accepted').count
-            - no_bus = school.questionnaires.where(acc_status: 'rsvp_confirmed', bus_list_id: nil).count
-            #{accepted} yet to RSVP, #{no_bus} attending but not using bus
+            #{riding} passengers, #{no_bus} attending but not riding bus, #{accepted} yet to RSVP
 
   .col-lg-6
     %h4.border-bottom.pb-2.mb-3 Bus Notes
