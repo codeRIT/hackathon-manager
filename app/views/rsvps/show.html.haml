@@ -55,7 +55,7 @@
           - bus_list_options = ([OpenStruct.new({ name: 'Not riding a sponsored bus', id: '' })] + BusList.all.to_a)
           = f.association :bus_list, as: :radio_buttons, collection: bus_list_options, label_method: :name, value_method: :id, label: false, wrapper_html: { class: 'radio_buttons_vertical' }
           - if BusList.where(needs_bus_captain: true).any?
-            = f.input :bus_captain_interest, as: :radio_buttons, collection: { " Yes!" => true, " No thank you." => false }, label: "Would you be interested in being a bus captain?"
+            = f.input :bus_captain_interest, as: :radio_buttons, collection: { " Yes!" => true, " No, thank you." => false }, label: "Would you be interested in being a bus captain?"
         %p
           %small Busses will pick up the morning of, arriving in time for opening ceremony. They will depart shortly after closing ceremony, dropping off to the same pick-up locations.
         %p
