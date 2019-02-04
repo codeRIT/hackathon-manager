@@ -57,6 +57,9 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def check_in
+    redirect_to_checkins = params[:redirect_to_checkins] || false
+    show_redirect_path = redirect_to_checkins ? manage_checkin_path(@questionnaire) : manage_questionnaire_path(@questionnaire)
+    index_redirect_path = redirect_to_checkins ? manage_checkins_path : manage_questionnaires_path
     if params[:check_in] == "true"
       if params[:questionnaire]
         q_params = params.require(:questionnaire).permit(:agreement_accepted, :phone, :can_share_info, :email)
@@ -66,7 +69,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       end
       unless @questionnaire.valid?
         flash[:notice] = @questionnaire.errors.full_messages.join(", ")
-        redirect_to manage_questionnaire_path @questionnaire
+        redirect_to show_redirect_path
         return
       end
       @questionnaire.update_attribute(:checked_in_at, Time.now)
@@ -78,10 +81,10 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       flash[:notice] = "#{@questionnaire.full_name} no longer checked in."
     else
       flash[:notice] = "No check-in action provided!"
-      redirect_to manage_questionnaire_path @questionnaire
+      redirect_to show_redirect_path
       return
     end
-    redirect_to manage_questionnaires_path
+    redirect_to index_redirect_path
   end
 
   def convert_to_admin

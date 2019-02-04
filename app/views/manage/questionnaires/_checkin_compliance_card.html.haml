@@ -1,0 +1,44 @@
+.card.mb-3
+  .card-header Check-in Compliance
+  .card-body.px-0.py-0
+    %ul.list-group.list-group-flush
+      - if ['rsvp_confirmed', 'accepted'].include?(@questionnaire.acc_status)
+        %li.list-group-item
+          .text-success
+            %span.fa.fa-check.fa-fw.icon-space-r
+            Has been accepted
+      - else
+        %li.list-group-item.list-group-item-danger
+          %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
+          Has not been accepted.
+          Status:
+          %strong= @questionnaire.verbal_status
+      - if 'rsvp_confirmed' == @questionnaire.acc_status
+        %li.list-group-item
+          .text-success
+            %span.fa.fa-check.fa-fw.icon-space-r
+            RSVP'd as attending
+      - else
+        %li.list-group-item.list-group-item-warning
+          %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
+          Did not RSVP as attending.
+          Status:
+          %strong= @questionnaire.verbal_status
+      - if !@questionnaire.minor?
+        %li.list-group-item
+          .text-success
+            %span.fa.fa-check.fa-fw.icon-space-r
+            18 years or older
+      - else
+        %li.list-group-item.list-group-item-warning
+          %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
+          18 years or older
+      - if @questionnaire.agreement_accepted && @questionnaire.code_of_conduct_accepted && @questionnaire.data_sharing_accepted
+        %li.list-group-item
+          .text-success
+            %span.fa.fa-check.fa-fw.icon-space-r
+            Event agreement, MLH Code of Conduct, and MLH Data Sharing
+      - else
+        %li.list-group-item.list-group-item-danger
+          %span.fa.fa-close.fa-fw.icon-space-r
+          One or more of the following was not accepted: Event agreement, MLH Code of Conduct, and/or MLH Data Sharing
