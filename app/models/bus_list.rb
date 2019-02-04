@@ -29,4 +29,8 @@ class BusList < ApplicationRecord
   def captains
     passengers.where(is_bus_captain: true)
   end
+
+  def name_maybe_full
+    full? ? "(full) #{name}" : name
+  end
 end

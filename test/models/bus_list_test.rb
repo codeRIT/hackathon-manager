@@ -111,4 +111,19 @@ class BusListTest < ActiveSupport::TestCase
       assert_equal questionnaire1.id, @bus_list.captains[0].id
     end
   end
+
+  context "#name_maybe_full" do
+    setup do
+      @bus_list = build(:bus_list, name: "Foo", capacity: 1)
+    end
+
+    should "return normal name for not-full bus" do
+      assert_equal "Foo", @bus_list.name_maybe_full
+    end
+
+    should "return (full) name for full bus" do
+      @bus_list.update_attribute(:capacity, 0)
+      assert_equal "(full) Foo", @bus_list.name_maybe_full
+    end
+  end
 end
