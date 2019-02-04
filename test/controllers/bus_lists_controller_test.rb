@@ -99,7 +99,7 @@ class BusListsControllerTest < ActionController::TestCase
 
       should "not allow bus_list#boarded_bus for questionnaire not riding this bus" do
         bus_list = create(:bus_list, name: "A random bus list")
-        questionnaire = create(:questionnaire, bus_list_id: bus_list.id)
+        questionnaire = create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: bus_list.id)
         patch :boarded_bus, params: { questionnaire: { id: questionnaire.id, boarded_bus: true } }
         assert_response :bad_request
         assert_nil questionnaire.reload.boarded_bus_at
