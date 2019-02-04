@@ -2,6 +2,7 @@ class Questionnaire < ApplicationRecord
   include ActiveModel::Dirty
 
   before_validation :consolidate_school_names
+  before_validation :clean_for_non_rsvp
   after_create :queue_triggered_email_create
   after_update :queue_triggered_email_update
   after_save :update_school_questionnaire_count
@@ -211,6 +212,14 @@ class Questionnaire < ApplicationRecord
   end
 
   private
+
+  def clean_for_non_rsvp
+    if acc_status != "rsvp_confirmed"
+      self.bus_list_id = nil
+      self.is_bus_captain = false
+      self.bus_captain_interest = false
+    end
+  end
 
   def consolidate_school_names
     return if school.blank?

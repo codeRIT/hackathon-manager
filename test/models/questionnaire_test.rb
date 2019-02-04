@@ -356,4 +356,14 @@ class QuestionnaireTest < ActiveSupport::TestCase
       end
     end
   end
+
+  should "clean up bus-related fields when changing RSVP" do
+    bus_list = create(:bus_list)
+    questionnaire = create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list: bus_list, is_bus_captain: true, bus_captain_interest: true)
+    questionnaire.acc_status = 'rsvp_denied'
+    questionnaire.save
+    assert_nil questionnaire.bus_list_id
+    assert_equal false, questionnaire.is_bus_captain
+    assert_equal false, questionnaire.bus_captain_interest
+  end
 end
