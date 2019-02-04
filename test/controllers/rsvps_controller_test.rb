@@ -154,7 +154,36 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_equal false, @questionnaire.reload.bus_list_id?
       assert_equal 0, bus_list.passengers.count
       assert_match /full/, flash[:notice]
+      assert_no_match /still signed up/, flash[:notice]
       assert_redirected_to rsvp_path
+    end
+
+    should "not allow switching to a full bus" do
+      bus_list1 = create(:bus_list, capacity: 1)
+      bus_list2 = create(:bus_list, capacity: 0)
+      # Initial sign up
+      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list1.id } }
+      assert_equal "rsvp_confirmed", @questionnaire.reload.acc_status
+      assert_equal 1, bus_list1.passengers.count
+      assert_equal 0, bus_list2.passengers.count
+      # Try to switch busses
+      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list2.id } }
+      assert_equal "rsvp_confirmed", @questionnaire.reload.acc_status
+      assert_equal 0, bus_list2.passengers.count, 'passenger should not be assigned to bus that is full'
+      assert_equal 1, bus_list1.passengers.count, 'passenger should stay on original bus'
+      assert_match /full/, flash[:notice]
+      assert_match /still signed up/, flash[:notice]
+      assert_redirected_to rsvp_path
+    end
+
+    should "not error if submitting while already on a full bus" do
+      bus_list = create(:bus_list, capacity: 1)
+      # Initial sign up
+      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list.id } }
+      assert_no_match /full/, flash[:notice], 'should not complain about bus being full'
+      # Submit again
+      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list.id } }
+      assert_no_match /full/, flash[:notice], 'should not complain about bus being full'
     end
 
     should "not send email if updating info after confirming" do

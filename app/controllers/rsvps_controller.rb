@@ -61,12 +61,16 @@ class RsvpsController < ApplicationController
     @questionnaire.acc_status_author_id = current_user.id
 
     bus_list_id = params[:questionnaire][:bus_list_id].presence
-    is_joining_bus = !@questionnaire.bus_list_id && bus_list_id
     bus_list = bus_list_id && BusList.find(bus_list_id)
+    is_joining_bus = @questionnaire.bus_list != bus_list
     if is_joining_bus && bus_list.full?
-      flash[:notice] = "Sorry, that bus is full! You may need to arrange other plans for transportation."
+      if @questionnaire.bus_list_id?
+        flash[:notice] = "Sorry, that bus is full. You are still signed up for the '#{@questionnaire.bus_list.name}' bus."
+      else
+        flash[:notice] = "Sorry, that bus is full. You may need to arrange other plans for transportation."
+      end
     else
-      @questionnaire.bus_list_id = bus_list_id
+      @questionnaire.bus_list = bus_list
       @questionnaire.bus_captain_interest = params[:questionnaire][:bus_captain_interest]
     end
 
