@@ -1,5 +1,12 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.4 - 2019-01-29
+
+- Fix: Improve bus list sign-up logic
+- Improvement: Label bus list as full on RSVP page when necessary
+- Improvement: Clean up questionnaires when they RSVP
+- Improvement: Enable OAuth refresh tokens
+
 # 0.13.3 - 2019-01-29
 
 - Improve stats display for schools on a bus list
