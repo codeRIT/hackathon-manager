@@ -60,7 +60,13 @@
           %th Checked in?
           %th Bus Captain
       %tbody
-        - @bus_list.passengers.each do |p|
+        - was_bus_captain = false
+        - @bus_list.passengers.reorder('is_bus_captain DESC, last_name ASC').each do |p|
+          - # Visual separator between captains and passengers
+          - if was_bus_captain && !p.is_bus_captain
+            %tr
+              %td{colspan: 9}
+          - was_bus_captain = p.is_bus_captain
           %tr
             %td= link_to '<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(p)
             %td= p.first_name
