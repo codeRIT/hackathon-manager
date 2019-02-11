@@ -1,5 +1,10 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.5 - 2019-02-11
+
+- Fix: Ability to get off a bus
+- Improvement: Sort bus captains to top of passenger list & visually separate them
+
 # 0.13.4 - 2019-01-29
 
 - Fix: Improve bus list sign-up logic
