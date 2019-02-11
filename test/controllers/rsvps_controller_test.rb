@@ -158,6 +158,15 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_redirected_to rsvp_path
     end
 
+    should "allow getting off a full bus" do
+      bus_list = create(:bus_list, capacity: 1)
+      assert_equal 0, bus_list.passengers.count
+      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list.id } }
+      assert_equal 1, bus_list.passengers.count
+      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: '' } }
+      assert_equal 0, bus_list.passengers.count
+    end
+
     should "not allow switching to a full bus" do
       bus_list1 = create(:bus_list, capacity: 1)
       bus_list2 = create(:bus_list, capacity: 0)
