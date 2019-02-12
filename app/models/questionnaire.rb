@@ -3,6 +3,7 @@ class Questionnaire < ApplicationRecord
 
   before_validation :consolidate_school_names
   before_validation :clean_for_non_rsvp
+  before_validation :clean_negative_special_needs
   after_create :queue_triggered_email_create
   after_update :queue_triggered_email_update
   after_save :update_school_questionnaire_count
@@ -221,6 +222,10 @@ class Questionnaire < ApplicationRecord
       self.is_bus_captain = false
       self.bus_captain_interest = false
     end
+  end
+
+  def clean_negative_special_needs
+    self.special_needs = nil if special_needs.present? && %w[none n/a].include?(special_needs.strip.downcase)
   end
 
   def consolidate_school_names

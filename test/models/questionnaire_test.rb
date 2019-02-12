@@ -205,6 +205,18 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
   end
 
+  context "#clean_negative_special_needs" do
+    should "return nil if special_needs field is None" do
+      questionnaire = create(:questionnaire, special_needs: "NoNE")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is n/a" do
+      questionnaire = create(:questionnaire, special_needs: "N/a")
+      assert_nil questionnaire.special_needs
+    end
+  end
+
   context "#minor?" do
     should "return true for 16 year old" do
       Rails.configuration.hackathon['event_start_date'] = Date.new(2020, 6, 12)
