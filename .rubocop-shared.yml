@@ -60,6 +60,9 @@ Style/IfUnlessModifier:
 Style/StringLiterals:
   Enabled: false
 
+TrailingCommaInHashLiteral:
+  Enabled: false
+
 Style/EmptyMethod:
   EnforcedStyle: expanded
 
