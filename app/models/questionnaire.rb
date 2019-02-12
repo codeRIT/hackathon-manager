@@ -204,8 +204,10 @@ class Questionnaire < ApplicationRecord
       "Accepted & Attending"
     elsif acc_status == "accepted"
       "Accepted, Awaiting RSVP"
-    elsif ["pending", "waitlist", "late_waitlist"].include? acc_status
+    elsif acc_status == "pending"
       "Pending Review"
+    elsif ["waitlist", "late_waitlist"].include? acc_status
+      "Waitlisted"
     elsif acc_status == "denied"
       "Denied"
     end

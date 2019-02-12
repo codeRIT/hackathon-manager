@@ -48,6 +48,9 @@ Rails.application.routes.draw do
       patch :bulk_apply, on: :collection
       get :message_events, on: :member
     end
+    resources :checkins do
+      post :datatable, on: :collection
+    end
     resources :admins do
       post :datatable, on: :collection
     end

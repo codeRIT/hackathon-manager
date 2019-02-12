@@ -24,7 +24,22 @@
   .col
     %h3.mt-3.pb-2.border-bottom.mb-3 Admissions
 
-= render 'checkin'
+.row
+  .col-md-6
+    .card.mb-3
+      .card-body
+        %h5.card-title.mb-1 Acceptance
+        %p.card-text
+          = render 'acc_status_badge'
+          %small
+            = @questionnaire.acc_status_author_id ? @questionnaire.acc_status_author.email : "(no author)"
+            = @questionnaire.acc_status_date ? display_datetime(@questionnaire.acc_status_date, in_sentence: true) : "(no date)"
+        - if current_user.admin?
+          = bs_vertical_simple_form @questionnaire, url: url_for(action: "update_acc_status", controller: "questionnaires") do |f|
+            = f.input :acc_status, as: :select, collection: Questionnaire::POSSIBLE_ACC_STATUS.invert, include_blank: false, label: "Acceptance Status:", hint: "Updating this status may trigger an automatic email to the applicant - see #{link_to('messages', manage_messages_path(anchor: 'triggered-email-overview'))} for details.".html_safe
+            = f.button :submit, value: "Update Status", class: 'btn-primary'
+  .col-md-6
+    = render 'checkin_card'
 
 .row
   .col

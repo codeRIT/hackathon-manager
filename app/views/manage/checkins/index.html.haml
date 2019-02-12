@@ -1,0 +1,12 @@
+= render "layouts/manage/page_title", title: "Check-in"
+
+%div
+  %table.checkins.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_checkins_path(format: :json) }
+    %thead
+      %tr
+        %th First name
+        %th Last name
+        %th About
+        %th In?
+        %th Actions
+    %tbody

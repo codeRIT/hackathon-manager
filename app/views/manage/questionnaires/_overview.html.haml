@@ -2,16 +2,7 @@
 
 .row
   .col-md-6
-    - if @questionnaire.minor?
-      .alert.alert-warning
-        %p.mb-1
-          %strong
-            %span.fa.fa-exclamation-triangle.icon-space-r-half
-            Applicant is a minor
-        %p.mb-0
-          Will be
-          = format_age(@questionnaire.age_at_time_of_event)
-          old at the start of the event.
+    = render 'top_alerts'
 
     .card.mb-3
       .card-header Personal Information
@@ -35,46 +26,7 @@
           %dt.col-md-4 Shirt size
           %dd.col-md-8= @questionnaire.shirt_size
 
-    .card.mb-3
-      .card-header Compliance
-      .card-body.px-0.py-0
-        %ul.list-group.list-group-flush
-          - if !@questionnaire.minor?
-            %li.list-group-item
-              .text-success
-                %span.fa.fa-check.fa-fw.icon-space-r
-                18 years or older
-          - else
-            %li.list-group-item.list-group-item-warning
-              %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
-              18 years or older
-          - if @questionnaire.agreement_accepted
-            %li.list-group-item
-              .text-success
-                %span.fa.fa-check.fa-fw.icon-space-r
-                Event Agreement
-          - else
-            %li.list-group-item.list-group-item-danger
-              %span.fa.fa-close.fa-fw.icon-space-r
-              Event Agreement
-          - if @questionnaire.code_of_conduct_accepted
-            %li.list-group-item
-              .text-success
-                %span.fa.fa-check.fa-fw.icon-space-r
-                MLH Code of Conduct
-          - else
-            %li.list-group-item.list-group-item-danger
-              %span.fa.fa-close.fa-fw.icon-space-r
-              MLH Code of Conduct
-          - if @questionnaire.data_sharing_accepted
-            %li.list-group-item
-              .text-success
-                %span.fa.fa-check.fa-fw.icon-space-r
-                MLH Data Sharing
-          - else
-            %li.list-group-item.list-group-item-danger
-              %span.fa.fa-close.fa-fw.icon-space-r
-              MLH Data Sharing
+    = render 'checkin_compliance_card'
 
   .col-md-6
     .card.mb-3

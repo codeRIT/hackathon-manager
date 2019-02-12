@@ -36,6 +36,10 @@
                   .fa.fa-inbox.fa-fw.icon-space-r-half
                   Questionnaires
               %li.nav-item
+                = active_link_to manage_checkins_path, class: "nav-link" do
+                  .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
+                  Check-in
+              %li.nav-item
                 = active_link_to manage_admins_path, class: "nav-link" do
                   .fa.fa-users.fa-fw.icon-space-r-half
                   Admins
