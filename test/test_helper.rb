@@ -39,6 +39,10 @@ if defined?(RUBY_ENGINE) && RUBY_ENGINE == "ruby" && RUBY_VERSION >= "1.9"
 end
 
 Minitest::Reporters.use!
+if ENV["RUN_COVERAGE"] == "travis"
+  Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new(color: true)]
+end
+
 FactoryBot.reload
 
 # Load fixtures from the engine
