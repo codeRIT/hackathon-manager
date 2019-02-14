@@ -2,6 +2,8 @@
 
 # 0.13.6 - 2019-02-13
 
+**Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
+
 - Feature: Add ability to block tag events with duplicate band IDs
 - Feature: Add checkins page
 
