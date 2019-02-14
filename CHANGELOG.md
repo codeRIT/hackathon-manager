@@ -1,5 +1,10 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.6 - 2019-02-13
+
+- Feature: Add ability to block tag events with duplicate band IDs
+- Feature: Add checkins page
+
 # 0.13.5 - 2019-02-11
 
 - Fix: Ability to get off a bus
