@@ -65,6 +65,6 @@ class Manage::TrackableTagsController < Manage::ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def trackable_tag_params
-    params.require(:trackable_tag).permit(:name)
+    params.require(:trackable_tag).permit(:name, :allow_duplicate_band_events)
   end
 end

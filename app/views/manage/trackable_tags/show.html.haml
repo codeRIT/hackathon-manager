@@ -8,6 +8,13 @@
   = @trackable_tag.name
 
 %p
+  %b Allow duplicate band IDs:
+  - if @trackable_tag.allow_duplicate_band_events
+    %span.text-success Allow duplicates
+  - else
+    %span.text-danger Block duplicates
+
+%p
   %b= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: @trackable_tag.id)
 
 = area_chart @trackable_tag.trackable_events.group_by_minute(:created_at).count
