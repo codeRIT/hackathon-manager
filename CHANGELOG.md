@@ -1,5 +1,9 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.8 - 2019-02-15
+
+- Fix: Delete trackable events when a tag is destroyed
+
 # 0.13.6 - 2019-02-13
 
 **Note:** Be sure to run `rails railties:install:migrations` and `rails db:migrate` after upgrading.
