@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get :map_data, on: :collection
       get :todays_activity_data, on: :collection
       get :todays_stats_data, on: :collection
+      get :checkin_activity_data, on: :collection
       get :confirmation_activity_data, on: :collection
       get :application_activity_data, on: :collection
       get :schools_confirmed_data, on: :collection

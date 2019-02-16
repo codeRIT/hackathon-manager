@@ -30,6 +30,10 @@ class Manage::DashboardController < Manage::ApplicationController
     }
   end
 
+  def checkin_activity_data
+    render json: activity_chart_data(["Checked In", "Boarded Bus"], "hour", 3.days.ago..Time.zone.now)
+  end
+
   def confirmation_activity_data
     where_filter = nil
     if params[:school_id]
@@ -122,6 +126,10 @@ class Manage::DashboardController < Manage::ApplicationController
         data = Questionnaire.where(acc_status: "rsvp_denied").send("group_by_#{group_type}", :acc_status_date, range: range)
       when "Non-Applied Users"
         data = User.without_questionnaire.send("group_by_#{group_type}", "users.created_at", range: range)
+      when "Checked In"
+        data = Questionnaire.where("checked_in_at > 0").send("group_by_#{group_type}", :checked_in_at, range: range)
+      when "Boarded Bus"
+        data = Questionnaire.where("boarded_bus_at > 0").send("group_by_#{group_type}", :boarded_bus_at, range: range)
       end
       data = data.where(where_filter) if where_filter && type != "Non-Applied Users"
       chart_data << { name: type, data: data.count }

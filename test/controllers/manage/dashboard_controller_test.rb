@@ -53,6 +53,7 @@ class Manage::DashboardControllerTest < ActionController::TestCase
       paths = [
         :todays_activity_data,
         :todays_stats_data,
+        :checkin_activity_data,
         :confirmation_activity_data,
         :application_activity_data,
         :schools_confirmed_data,
