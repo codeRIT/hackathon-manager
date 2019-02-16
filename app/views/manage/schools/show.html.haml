@@ -1,3 +1,9 @@
+- blue = "#4886C2"
+- green = "#7FEC8D"
+- red = "#E44646"
+- orange = "#F49C54"
+- grey = "#A6A6A6"
+
 = render "layouts/manage/page_title", title: @school.name, subtitle: "School" do
   .btn-group
     = link_to 'Edit', edit_manage_school_path(@school), class: 'btn btn-sm btn-outline-secondary'
@@ -56,9 +62,24 @@
       %span.fa.fa-info-circle.icon-space-l.icon-space-r-half
       If someone attempts to apply using a name above, they'll automatically be converted to this school.
 
+.row.mt-2.mb-4
+  .col-7
+    %h4.border-bottom.pb-2.mb-4 Today's Activity
+    = area_chart todays_activity_data_manage_dashboard_index_path(school_id: @school.id), colors: [blue, green, red, grey]
+  .col-5
+    %h4.border-bottom.pb-2.mb-4 Total Distribution
+    = pie_chart @school.questionnaires.group('acc_status').count
+
+.row.mt-2.mb-4
+  .col
+    %h4.border-bottom.pb-2.mb-4 Confirmation Activity
+    = area_chart confirmation_activity_data_manage_dashboard_index_path(school_id: @school.id), colors: [green, red], library: { legend: { enabled: false } }
+
 .row.mt-2
   .col
-    %h4.pb-0 Questionnaires
+    %h4.pb-0
+      Questionnaires
+      %small.text-muted (#{@school.questionnaires.count} total)
     %table.table
       %caption #{@school.questionnaires.count} total
       %thead

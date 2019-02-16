@@ -10,7 +10,14 @@ class Manage::DashboardController < Manage::ApplicationController
   end
 
   def todays_activity_data
-    render json: activity_chart_data(["Applications", "Confirmations", "Denials", "Non-Applied Users"], "hour", Time.zone.today.beginning_of_day..Time.zone.today.end_of_day)
+    where_filter = nil
+    types = ["Applications", "Confirmations", "Denials"]
+    if params[:school_id]
+      where_filter = { school_id: params[:school_id] }
+    else
+      types << "Non-Applied Users"
+    end
+    render json: activity_chart_data(types, "hour", Time.zone.today.beginning_of_day..Time.zone.today.end_of_day, where_filter)
   end
 
   def todays_stats_data
@@ -24,7 +31,11 @@ class Manage::DashboardController < Manage::ApplicationController
   end
 
   def confirmation_activity_data
-    render json: activity_chart_data(["Confirmations", "Denials"], "day", 3.week.ago..Time.zone.now)
+    where_filter = nil
+    if params[:school_id]
+      where_filter = { school_id: params[:school_id] }
+    end
+    render json: activity_chart_data(["Confirmations", "Denials"], "day", 3.week.ago..Time.zone.now, where_filter)
   end
 
   def application_activity_data
@@ -95,24 +106,25 @@ class Manage::DashboardController < Manage::ApplicationController
 
   private
 
-  def activity_chart_data(types, group_type, range)
+  def activity_chart_data(types, group_type, range, where_filter = nil)
     chart_data = []
     types.each do |type|
       case type
       when "Applications"
-        data = Questionnaire.send("group_by_#{group_type}", :created_at, range: range).count
+        data = Questionnaire.send("group_by_#{group_type}", :created_at, range: range)
       when "RIT Applications"
-        data = Questionnaire.where("school_id = \"2304\"").send("group_by_#{group_type}", :created_at, range: range).count
+        data = Questionnaire.where("school_id = \"2304\"").send("group_by_#{group_type}", :created_at, range: range)
       when "Non-RIT Applications"
-        data = Questionnaire.where("school_id != \"2304\"").send("group_by_#{group_type}", :created_at, range: range).count
+        data = Questionnaire.where("school_id != \"2304\"").send("group_by_#{group_type}", :created_at, range: range)
       when "Confirmations"
-        data = Questionnaire.where(acc_status: "rsvp_confirmed").send("group_by_#{group_type}", :acc_status_date, range: range).count
+        data = Questionnaire.where(acc_status: "rsvp_confirmed").send("group_by_#{group_type}", :acc_status_date, range: range)
       when "Denials"
-        data = Questionnaire.where(acc_status: "rsvp_denied").send("group_by_#{group_type}", :acc_status_date, range: range).count
+        data = Questionnaire.where(acc_status: "rsvp_denied").send("group_by_#{group_type}", :acc_status_date, range: range)
       when "Non-Applied Users"
-        data = User.without_questionnaire.send("group_by_#{group_type}", "users.created_at", range: range).count
+        data = User.without_questionnaire.send("group_by_#{group_type}", "users.created_at", range: range)
       end
-      chart_data << { name: type, data: data }
+      data = data.where(where_filter) if where_filter && type != "Non-Applied Users"
+      chart_data << { name: type, data: data.count }
     end
     chart_data
   end
