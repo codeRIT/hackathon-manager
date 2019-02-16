@@ -6,7 +6,8 @@
     %thead
       %tr
         %th Name
-        %th Capacity
+        %th Filled / Capacity
+        %th Boarded / Checked in
         %th Needs bus captain?
         %th Schools
 
@@ -16,5 +17,9 @@
           %td
             %strong= link_to(bus_list.name, manage_bus_list_path(bus_list))
           %td #{bus_list.passengers.count} / #{bus_list.capacity}
-          %td= bus_list.needs_bus_captain ? "<strong class=\"text-danger\">Needs bus captain</strong>".html_safe : "No"
+          %td #{bus_list.boarded_passengers.count} / #{bus_list.checked_in_passengers.count}
+          %td
+            = pluralize bus_list.captains.count, "captain"
+            &ndash;
+            = bus_list.needs_bus_captain ? "<strong class=\"text-danger\">Needs bus captain</strong>".html_safe : "No"
           %td= bus_list.schools.count
