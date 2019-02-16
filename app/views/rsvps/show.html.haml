@@ -6,7 +6,9 @@
         RSVP
         %span.emphasized Preferences
       - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
-        %strong ALL SET TO ATTEND!
+        %strong
+          %span.fa.fa-check.icon-space-r-half
+          YOU ARE ATTENDING!
         - if Rails.configuration.hackathon['thanks_for_rsvp']
           %br
           = markdown(Rails.configuration.hackathon['thanks_for_rsvp'])
@@ -14,7 +16,12 @@
           %br
           %br
       - else
-        %strong= current_user.questionnaire.verbal_status.upcase
+        %strong
+          - if @questionnaire.acc_status == "accepted"
+            %span.fa.fa-clock-o.icon-space-r-half
+          - elsif @questionnaire.acc_status == "rsvp_denied"
+            %span.fa.fa-close.icon-space-r-half
+          = current_user.questionnaire.verbal_status.upcase
         - if @questionnaire.acc_status == "rsvp_denied"
           %p Sorry to hear you won't be with us this year.
         - else
@@ -38,12 +45,12 @@
         - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
           %strong
             - if @questionnaire.bus_list_id
-              ALL SET TO RIDE THE BUS!
+              %span.fa.fa-check.icon-space-r-half
+              YOU ARE RIDING THE BUS
             - else
-              NOT RIDING BUS
-
-        %br
-        %br
+              %span.fa.fa-close.icon-space-r-half
+              YOU ARE NOT RIDING BUS
+          %br
 
         %p
           We are providing free, sponsored busses. Will you be riding?
