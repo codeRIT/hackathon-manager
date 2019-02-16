@@ -2,18 +2,12 @@
 
 .row
   .col-lg-6.mb-3
-    .card
-      .card-body
-        %h5.card-title Hackathon Manager Config
-        %h6.card-subtitle.mb-2.text-muted
-          Hackathon Manager configuration can be changed in the source code at
-          %code config/hackathon.yml
-          \.
-        %hr
-        - Rails.configuration.hackathon.keys.each do |key|
-          %p
-            %b #{key}:
-            %pre= Rails.configuration.hackathon[key]
+    - @config.each_key do |key|
+      %p
+        = link_to edit_manage_config_path(key), class: 'icon-space-r' do
+          %span.fa.fa-pencil
+        %b #{key}:
+        %pre= @config[key]
 
   .col-lg-6.mb-3
     .card

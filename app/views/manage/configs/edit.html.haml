@@ -1,0 +1,17 @@
+= render "layouts/manage/page_title", title: "Edit Configuration", subtitle: @config.var do
+  = link_to 'Cancel', manage_configs_path, class: 'btn btn-sm btn-outline-secondary'
+
+.form-container
+  = bs_horizontal_simple_form_for @config, url: manage_config_path(@config.var), method: 'patch', html: { "data-validate" => "form" } do |f|
+    = f.error_notification
+
+    .form-inputs
+      - if [true, false].include? @config.value
+        -# = f.input :value, label: @config.var, as: :boolean, 'yes', 'no'
+        = f.input :value, label: @config.var, as: :radio_buttons, :collection => [['true',true], ['false',false]], label_method: :first, value_method: :last, :prompt => 'Choose one...'
+      - else
+        = f.input :value, label: @config.var, input_html: { value: @config.value }
+
+    .form-actions
+      = f.button :submit, class: 'btn-primary', value: "Update #{@config.var}"
+
