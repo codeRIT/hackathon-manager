@@ -8,7 +8,7 @@ class Manage::TrackableTagsController < Manage::ApplicationController
 
   # GET /manage/trackable_tags
   def index
-    @trackable_tags = TrackableTag.all
+    @trackable_tags = TrackableTag.all.order("name ASC")
     respond_with(:manage, @trackable_tags)
   end
 
