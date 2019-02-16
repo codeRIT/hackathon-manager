@@ -1,5 +1,10 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.10 - 2019-02-15
+
+- Improvement: RSVP confirmation messages
+- Fix: Captains spelling
+
 # 0.13.9 - 2019-02-15
 
 - Improvement: Add charts to school page
