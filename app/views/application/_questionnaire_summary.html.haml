@@ -1,6 +1,6 @@
 - if HackathonManager.field_enabled?(:why_attend)
   %p
-    %b Why #{Rails.configuration.hackathon['name']}?
+    %b Why #{HackathonConfig['name']}?
   %p= @questionnaire.why_attend.presence || "(not provided)"
 %p
   %b Experience:

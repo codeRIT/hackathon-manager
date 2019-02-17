@@ -1,5 +1,4 @@
-defaults: &defaults
-  # Logic config
+defaults: &defaults # Logic config
   registration_is_open: true
   event_is_over: false
   last_day_to_apply: <%= Date.new(2017, 2, 11) %>
@@ -18,9 +17,9 @@ defaults: &defaults
   #   - why_attend
   # disclaimer: |
   #   Message that appears before signing up & applying. Supports markdown.
-  # thanks_for_applying: |
+  # thanks_for_applying_message: |
   #   Message that appears after completing an application. Supports markdown.
-  # thanks_for_rsvp: |
+  # thanks_for_rsvp_message: |
   #   Message that appears after RSVP'ing as attending. Supports markdown.
   # bus_captain_notes: |
   #   Message that appers on the bus captain's bus list page. Supports markdown.

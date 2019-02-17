@@ -5,9 +5,9 @@
       = f.error_notification
 
     .wizard-stage.wizard-current
-      - if Rails.configuration.hackathon['disclaimer']
+      - if HackathonConfig['disclaimer_message'].present?
         #disclaimer
-          = markdown(Rails.configuration.hackathon['disclaimer'])
+          = markdown(HackathonConfig['disclaimer_message'])
 
       .form-inputs
         = f.input :first_name, input_html: { "data-validate" => "presence" }, autofocus: true, wrapper_html: { class: 'input--half' }
@@ -29,7 +29,7 @@
     .wizard-stage
       .form-inputs
         - if HackathonManager.field_enabled?(:why_attend)
-          = f.input :why_attend, label: "Why #{Rails.configuration.hackathon['name']}?", placeholder: "In a sentence or two, why would you like to attend #{Rails.configuration.hackathon['name']}?", input_html: { rows: 3, maxlength: 280 }
+          = f.input :why_attend, label: "Why #{HackathonConfig['name']}?", placeholder: "In a sentence or two, why would you like to attend #{HackathonConfig['name']}?", input_html: { rows: 3, maxlength: 280 }
 
         = f.input :experience, as: :select, collection: Questionnaire::POSSIBLE_EXPERIENCES.invert, include_blank: "(select one...)", label: "Experience", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :interest, as: :select, collection: Questionnaire::POSSIBLE_INTERESTS.invert, include_blank: "(select one...)", label: "Interest", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
@@ -51,10 +51,10 @@
       .form-inputs
         .supporting-text
           Please read the
-          = link_to asset_url(Rails.configuration.hackathon['agreement_pdf_asset']), target: '_blank' do
-            #{Rails.configuration.hackathon['name']} Agreement
+          = link_to asset_url(HackathonConfig['agreement_pdf_asset']), target: '_blank' do
+            #{HackathonConfig['name']} Agreement
             %span.fa.fa-external-link.icon-space-l-half
-        = f.input :agreement_accepted, as: :formatted_boolean, label: "I read & accept the #{Rails.configuration.hackathon['name']} agreement.", input_html: { "data-validate" => "presence" }
+        = f.input :agreement_accepted, as: :formatted_boolean, label: "I read & accept the #{HackathonConfig['name']} agreement.", input_html: { "data-validate" => "presence" }
 
         .supporting-text
           Please read the

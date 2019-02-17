@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: Rails.configuration.hackathon['email_from']
+  default from: HackathonConfig['email_from']
   layout 'mailer'
 end

@@ -64,10 +64,10 @@
           .card-body
             .supporting-text
               Please read the
-              = link_to asset_url(Rails.configuration.hackathon['agreement_pdf_asset']), target: '_blank' do
-                #{Rails.configuration.hackathon['name']} Agreement
+              = link_to asset_url(HackathonConfig['agreement_pdf_asset']), target: '_blank' do
+                #{HackathonConfig['name']} Agreement
                 %span.fa.fa-external-link.icon-space-l-half
-            = f.input :agreement_accepted, label: "I accept the #{Rails.configuration.hackathon['name']} agreement.", input_html: { "data-validate" => "presence" }
+            = f.input :agreement_accepted, label: "I accept the #{HackathonConfig['name']} agreement.", input_html: { "data-validate" => "presence" }
 
             .supporting-text
               Please read the

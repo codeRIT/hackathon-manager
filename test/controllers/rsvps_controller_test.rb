@@ -118,7 +118,7 @@ class RsvpsControllerTest < ActionController::TestCase
           end
 
           should "include hackathon name in notice" do
-            Rails.configuration.hackathon['name'] = 'Foo Bar'
+            HackathonConfig['name'] = 'Foo Bar'
             get status
             assert_match /Foo Bar Agreement/, flash[:notice]
           end

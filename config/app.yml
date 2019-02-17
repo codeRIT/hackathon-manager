@@ -10,17 +10,17 @@ defaults: &defaults
 
   # Content config
   name: HackFoo
-  logo_asset: "" # (optional)
-  favicon_asset: "" # (optional)
+  logo_asset: ""
+  favicon_asset: ""
   agreement_pdf_asset: agreement.pdf
-  email_from: '"HackFoo" <noreply@example.com>'
+  email_from: '"HackFoo" <hello@example.com>'
   default_page_title: HackFoo - Jan 1-2, 2017
 
-  disabled_fields: "" # (optional) why_attend,foo_bar
-  disclaimer: "" # Message that appears before signing up & applying. Supports markdown.
-  thanks_for_applying: "" # Message that appears after completing an application. Supports markdown.
-  thanks_for_rsvp: "" # Message that appears after RSVP'ing as attending. Supports markdown.
-  bus_captain_notes: "" # Message that appers on the bus captain's bus list page. Supports markdown.
+  disabled_fields: ""
+  disclaimer_message: ""
+  thanks_for_applying_message: ""
+  thanks_for_rsvp_message: ""
+  bus_captain_notes: ""
 
 development:
   <<: *defaults

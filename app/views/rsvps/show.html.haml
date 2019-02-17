@@ -9,9 +9,9 @@
         %strong
           %span.fa.fa-check.icon-space-r-half
           YOU ARE ATTENDING!
-        - if Rails.configuration.hackathon['thanks_for_rsvp']
+        - if HackathonConfig['thanks_for_rsvp_message'].present?
           %br
-          = markdown(Rails.configuration.hackathon['thanks_for_rsvp'])
+          = markdown(HackathonConfig['thanks_for_rsvp_message'])
         - else
           %br
           %br
@@ -25,7 +25,7 @@
         - if @questionnaire.acc_status == "rsvp_denied"
           %p Sorry to hear you won't be with us this year.
         - else
-          %p You've been accepted to #{Rails.configuration.hackathon['name']}!
+          %p You've been accepted to #{HackathonConfig['name']}!
           %p Will you be attending?
 
       .form-inputs

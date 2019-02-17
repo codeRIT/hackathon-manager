@@ -2,7 +2,7 @@ class Mailer < ApplicationMailer
   include Roadie::Rails::Automatic
   add_template_helper(HackathonManagerHelper)
 
-  default from: Rails.configuration.hackathon['email_from']
+  default from: HackathonConfig['email_from']
 
   def bulk_message_email(message_id, user_id, message = nil)
     @message = message || Message.find_by_id(message_id)
@@ -16,7 +16,7 @@ class Mailer < ApplicationMailer
 
   def incomplete_reminder_email(user_id)
     @user = User.find_by_id(user_id)
-    return if @user.blank? || @user.admin? || @user.questionnaire || Time.now.to_date > Rails.configuration.hackathon['last_day_to_apply']
+    return if @user.blank? || @user.admin? || @user.questionnaire || Time.now.to_date > HackathonConfig['last_day_to_apply']
     mail(
       to: @user.email,
       subject: "Incomplete Application"
