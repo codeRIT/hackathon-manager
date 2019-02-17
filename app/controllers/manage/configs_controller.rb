@@ -13,7 +13,8 @@ class Manage::ConfigsController < Manage::ApplicationController
   end
 
   def update
-    value = params[:hackathon_config][:value]
+    key = @config.var.to_sym
+    value = params[:hackathon_config][key]
     value = true if value == 'true'
     value = false if value == 'false'
     if @config.value != value
