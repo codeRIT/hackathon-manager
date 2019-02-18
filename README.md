@@ -25,6 +25,7 @@ HackathonManager uses a variety of third-party services & Ruby gems:
 * [Sparkpost](https://www.sparkpost.com/) (email)
 * [Paperclip](https://github.com/thoughtbot/paperclip) + [Amazon S3](https://aws.amazon.com/s3/) (resume storage)
 * [Chartkick](http://chartkick.com/) (management charts)
+* [Blazer](https://github.com/ankane/blazer) (custom SQL queries & analytics)
 
 Steps to get the basic flow working:
 
