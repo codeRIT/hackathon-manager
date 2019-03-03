@@ -79,9 +79,8 @@
   .col
     %h4.pb-0
       Questionnaires
-      %small.text-muted (#{@school.questionnaires.count} total)
+      %small.text-muted (#{@school.questionnaires.count} total, #{@school.questionnaires.count { |q| q.checked_in? }} checked in)
     %table.table
-      %caption #{@school.questionnaires.count} total
       %thead
         %tr
           %th
