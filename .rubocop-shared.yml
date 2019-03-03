@@ -52,13 +52,7 @@ Style/GuardClause:
   Enabled: false
 
 Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    default: ()
-    '%i': '[]'
-    '%I': '[]'
-    '%r': '{}'
-    '%w': '[]'
-    '%W': '[]'
+  Enabled: false
 
 Style/IfUnlessModifier:
   Enabled: false
