@@ -187,7 +187,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
 
     should "return nil without a user" do
-      questionnaire = create(:questionnaire, user: nil)
+      questionnaire = build(:questionnaire, user: nil)
       assert_nil questionnaire.email
     end
   end

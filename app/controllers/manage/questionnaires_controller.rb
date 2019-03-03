@@ -31,11 +31,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     create_params = convert_school_name_to_id(create_params)
     create_params = convert_boarded_bus_param(create_params)
     @questionnaire = ::Questionnaire.new(create_params)
+    users = User.where(email: email)
+    user = users.count == 1 ? users.first : User.new(email: email, password: Devise.friendly_token.first(10))
+    @questionnaire.user = user
     if @questionnaire.valid?
-      users = User.where(email: email)
-      user = users.count == 1 ? users.first : User.new(email: email, password: Devise.friendly_token.first(10))
       if user.save
-        @questionnaire.user = user
         @questionnaire.save
       else
         flash[:notice] = user.errors.full_messages.join(", ")
