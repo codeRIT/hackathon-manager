@@ -13,8 +13,7 @@
             &nbsp;
             %small
               %code #{key}
-          %p
-            %small.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
+          %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
           - if @config[key] == ''
             %p.mb-0
               %em
