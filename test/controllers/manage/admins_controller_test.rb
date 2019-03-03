@@ -196,7 +196,7 @@ class Manage::AdminsControllerTest < ActionController::TestCase
       end
     end
 
-    should "not allow access to manage_admins#new" do
+    should "allow access to manage_admins#new" do
       get :new, params: { id: @user }
       assert_response :success
     end
