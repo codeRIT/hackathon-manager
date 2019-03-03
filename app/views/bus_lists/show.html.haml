@@ -11,8 +11,8 @@
     %strong= rsvp_url
     to do so.
 
-  - if Rails.configuration.hackathon['bus_captain_notes']
-    = markdown(Rails.configuration.hackathon['bus_captain_notes'])
+  - if HackathonConfig['bus_captain_notes'].present?
+    = markdown(HackathonConfig['bus_captain_notes'])
 
   %p
     %b Bus List Name:

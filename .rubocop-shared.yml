@@ -36,6 +36,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Enabled: false
 
+Naming/AccessorMethodName:
+  Enabled: false
+
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -45,14 +48,11 @@ Style/ConditionalAssignment:
 Style/Documentation:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    default: ()
-    '%i': '[]'
-    '%I': '[]'
-    '%r': '{}'
-    '%w': '[]'
-    '%W': '[]'
+  Enabled: false
 
 Style/IfUnlessModifier:
   Enabled: false

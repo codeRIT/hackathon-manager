@@ -4,7 +4,7 @@
 
 Hey <%= @questionnaire.first_name %>,
 
-We've received your application to <%= Rails.configuration.hackathon['name'] %>!
+We've received your application to <%= HackathonConfig['name'] %>!
 
 If needed, you can edit your information by clicking the button below.
 

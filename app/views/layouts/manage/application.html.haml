@@ -1,11 +1,11 @@
 !!! 5
 %html
   %head
-    %title= yield(:title).presence || "#{Rails.configuration.hackathon['name']} Manager"
+    %title= yield(:title).presence || "#{HackathonConfig['name']} Manager"
     %meta{ content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport" }/
 
-    - if Rails.configuration.hackathon['favicon_asset'].present?
-      %link{ href: image_url(Rails.configuration.hackathon['favicon_asset']), rel: "shortcut icon" }
+    - if HackathonConfig['favicon_asset'].present?
+      %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
 
     = stylesheet_link_tag "hackathon_manager/manage", :media => "all"
     = csrf_meta_tags
@@ -14,7 +14,7 @@
     = javascript_include_tag "hackathon_manager/manage/application"
 
     %nav.navbar.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
-      %a.navbar-brand.col-xs-6.col-sm-3.col-md-2.mr-0{href: manage_root_path} #{Rails.configuration.hackathon['name']} Manager
+      %a.navbar-brand.col-xs-6.col-sm-3.col-md-2.mr-0{href: manage_root_path} #{HackathonConfig['name']} Manager
       / %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
       %span.navbar-brand.navbar-mobile-toggle.mr-0.pl-3.pr-3{onclick: 'toggleMobileNav()'}
         .fa.fa-bars.fa-fw.icon-space-r-half
@@ -68,10 +68,10 @@
                 %span Advanced
               %ul.nav.flex-column.mb-2
                 %li.nav-item
-                  = active_link_to manage_config_path, class: "nav-link" do
+                  = active_link_to manage_configs_path, class: "nav-link" do
                     .fa.fa-wrench.fa-fw.icon-space-r-half
                     Config
-                    .nav-item-description View configuration
+                    .nav-item-description Manage configuration
                 %li.nav-item
                   = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half

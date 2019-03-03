@@ -78,8 +78,7 @@ Rails.application.routes.draw do
       post :mlh_info_applied, on: :collection
       post :mlh_info_checked_in, on: :collection
     end
-    resource :config do
-    end
+    resources :configs
     resources :trackable_events
     resources :trackable_tags
   end

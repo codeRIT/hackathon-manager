@@ -1,0 +1,34 @@
+= render "layouts/manage/page_title", title: "Hackathon Configuration"
+
+.row
+  .col-lg-6.mb-3
+    - @config.each_key do |key|
+      .card.mb-3
+        .card-body
+          %p.mb-1
+            = link_to edit_manage_config_path(key), class: 'icon-space-r' do
+              %span.fa.fa-pencil
+            %b
+              = t("simple_form.labels.hackathon_config.#{key}")
+            &nbsp;
+            %small
+              %code= key
+          %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
+          - if @config[key] == ''
+            %p.mb-0
+              %em
+                %small
+                  &mdash; Not set &mdash;
+          - else
+            %pre.mb-0= @config[key]
+
+  .col-lg-6.mb-3
+    .card
+      .card-body
+        %h5.card-title Environment Variables
+        %h6.card-subtitle.mb-2.text-muted
+          Environment variables are configured on the production server.
+        %hr
+        %p
+          %b AWS S3 Bucket for Resumes:
+          %pre= ENV['AWS_BUCKET'] || '[No value]'

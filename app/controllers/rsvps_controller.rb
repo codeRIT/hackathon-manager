@@ -91,7 +91,7 @@ class RsvpsController < ApplicationController
   private
 
   def rsvp_error_notice
-    hackathon_name = Rails.configuration.hackathon['name']
+    hackathon_name = HackathonConfig['name']
     "There was an error submitting your response, please check over your application and try again. Did you accept the #{hackathon_name} Agreement?"
   end
 

@@ -24,18 +24,6 @@ module HackathonManager
       ]
     end
 
-    # Watch hackathon.yml for changes & reload
-    initializer "hackathon_manager.watch_hackathon_config", after: :load_config_initializers do |app|
-      hackathon_config_reloader = app.config.file_watcher.new(['config/hackathon.yml']) do
-        HackathonManager.reload_config(app)
-      end
-
-      app.reloaders << hackathon_config_reloader
-
-      # Reload renderers in dev when files change
-      app.config.to_prepare { hackathon_config_reloader.execute_if_updated }
-    end
-
     # Initializer to combine this engines static assets with the static assets of the hosting site.
     initializer "static assets" do |app|
       app.middleware.insert_before(::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public")
@@ -55,7 +43,7 @@ module HackathonManager
         stored_location = stored_location_for(resource)
         if stored_location
           stored_location
-        elsif current_user.admin?
+        elsif current_user.admin? || current_user.admin_limited_access?
           manage_root_path
         elsif current_user.questionnaire.nil?
           new_questionnaires_path

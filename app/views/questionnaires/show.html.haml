@@ -12,9 +12,9 @@
         - if @questionnaire.did_rsvp?
           - if @questionnaire.acc_status == "rsvp_confirmed"
             %p
-              Congratulations! You're all set to attend #{Rails.configuration.hackathon['name']}!
-          - if Rails.configuration.hackathon['thanks_for_rsvp']
-            = markdown(Rails.configuration.hackathon['thanks_for_rsvp'])
+              Congratulations! You're all set to attend #{HackathonConfig['name']}!
+          - if HackathonConfig['thanks_for_rsvp_message'].present?
+            = markdown(HackathonConfig['thanks_for_rsvp_message'])
           %p.center
             = btn_link_to "Change RSVP", rsvp_path
         - else
@@ -27,9 +27,9 @@
       - elsif @questionnaire.acc_status == "denied"
         %p
       - else
-        - if Rails.configuration.hackathon['registration_is_open']
-          - if Rails.configuration.hackathon['thanks_for_applying']
-            = markdown(Rails.configuration.hackathon['thanks_for_applying'])
+        - if HackathonConfig['registration_is_open']
+          - if HackathonConfig['thanks_for_applying_message'].present?
+            = markdown(HackathonConfig['thanks_for_applying_message'])
           - else
             %p Thanks for applying! You will be notified of your acceptance via email.
         - else

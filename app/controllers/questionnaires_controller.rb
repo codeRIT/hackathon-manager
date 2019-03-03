@@ -139,7 +139,7 @@ class QuestionnairesController < ApplicationController
   end
 
   def default_acc_status
-    return "late_waitlist" if Rails.configuration.hackathon['auto_late_waitlist']
+    return "late_waitlist" if HackathonConfig['auto_late_waitlist']
     "pending"
   end
 end

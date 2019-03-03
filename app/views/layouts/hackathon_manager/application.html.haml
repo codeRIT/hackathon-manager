@@ -1,12 +1,12 @@
 !!! 5
 %html
   %head
-    %title= yield(:title) || Rails.configuration.hackathon['default_page_title']
+    %title= yield(:title) || HackathonConfig['default_page_title']
     %meta{ charset: "utf-8" }
     %meta{ name:"viewport", content: "width=device-width, initial-scale=1" }
 
-    - if Rails.configuration.hackathon['favicon_asset'].present?
-      %link{ href: image_url(Rails.configuration.hackathon['favicon_asset']), rel: "shortcut icon" }
+    - if HackathonConfig['favicon_asset'].present?
+      %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
 
     = stylesheet_link_tag "hackathon_manager/core", media: "all"
     = csrf_meta_tags
