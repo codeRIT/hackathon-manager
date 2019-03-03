@@ -12,7 +12,7 @@
               = t("simple_form.labels.hackathon_config.#{key}")
             &nbsp;
             %small
-              %code #{key}
+              %code= key
           %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
           - if @config[key] == ''
             %p.mb-0
