@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hackathon_manager (0.13.11)
+    hackathon_manager (0.13.12)
       ajax-datatables-rails (~> 0.4.0)
       aws-sdk-s3
       blazer
@@ -85,11 +85,11 @@ GEM
       railties (>= 4.0)
     ansi (1.5.0)
     arel (9.0.0)
-    autoprefixer-rails (9.4.7)
+    autoprefixer-rails (9.4.9)
       execjs
     aws-eventstream (1.0.1)
-    aws-partitions (1.139.0)
-    aws-sdk-core (3.46.1)
+    aws-partitions (1.141.0)
+    aws-sdk-core (3.46.2)
       aws-eventstream (~> 1.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
@@ -187,12 +187,12 @@ GEM
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
-    haml-rails (1.0.0)
-      actionpack (>= 4.0.1)
-      activesupport (>= 4.0.1)
+    haml-rails (2.0.0)
+      actionpack (>= 5.1)
+      activesupport (>= 5.1)
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
-      railties (>= 4.0.1)
+      railties (>= 5.1)
     hashdiff (0.3.8)
     hashie (3.6.0)
     highcharts-rails (4.2.7)
@@ -385,9 +385,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    strip_attributes (1.8.1)
+    strip_attributes (1.9.0)
       activemodel (>= 3.0, < 7.0)
-    temple (0.8.0)
+    temple (0.8.1)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     test-unit (3.3.0)
@@ -400,9 +400,8 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     valid_attribute (2.0.0)
-    validate_url (1.0.2)
+    validate_url (1.0.4)
       activemodel (>= 3.0.0)
-      addressable
     warden (1.2.8)
       rack (>= 2.0.6)
     webmock (3.5.1)

@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.13.12 - 2019-03-03
+
+- Improvement: Reformat manage questionnaire form
+- Improvement: Add boarded_bus param to manage questionnaire form
+- Improvement: Add checked in count to school detail page
+
 # 0.13.11 - 2019-02-16
 
 - Improvement: Show check-in & boarded numbers on bus list page
