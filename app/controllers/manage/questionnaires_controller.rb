@@ -29,6 +29,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     create_params = questionnaire_params
     email = create_params.delete(:email)
     create_params = convert_school_name_to_id(create_params)
+    create_params = convert_boarded_bus_param(create_params)
     @questionnaire = ::Questionnaire.new(create_params)
     if @questionnaire.valid?
       users = User.where(email: email)
@@ -52,6 +53,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     email = update_params.delete(:email)
     @questionnaire.user.update_attributes(email: email) if email.present?
     update_params = convert_school_name_to_id(update_params)
+    update_params = convert_boarded_bus_param(update_params, @questionnaire)
     @questionnaire.update_attributes(update_params)
     respond_with(:manage, @questionnaire)
   end
@@ -153,8 +155,15 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       :phone, :can_share_info, :code_of_conduct_accepted,
       :travel_not_from_school, :travel_location, :data_sharing_accepted,
       :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
-      :bus_list_id, :is_bus_captain
+      :bus_list_id, :is_bus_captain, :boarded_bus
     )
+  end
+
+  def convert_boarded_bus_param(values, questionnaire = nil)
+    boarded_bus = values.delete(:boarded_bus)
+    current_value = questionnaire&.boarded_bus_at
+    values[:boarded_bus_at] = boarded_bus == '1' ? (current_value || Time.now) : nil
+    values
   end
 
   def set_questionnaire

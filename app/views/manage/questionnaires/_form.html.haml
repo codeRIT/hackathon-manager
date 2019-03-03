@@ -55,6 +55,7 @@
             = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Travel Location"
 
             = f.association :bus_list, label: "Bus list", include_blank: 'Not travelling on a sponsored bus'
+            = f.input :boarded_bus, as: :boolean, label: "Boarded bus", input_html: { checked: @questionnaire.boarded_bus_at.present? }
             = f.input :is_bus_captain, label: "Is Bus Captain"
 
       .col-xl-6
