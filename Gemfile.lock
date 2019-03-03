@@ -14,7 +14,7 @@ PATH
       font-awesome-rails (~> 4.0)
       groupdate
       haml-rails
-      highcharts-rails (~> 4.2)
+      highcharts-rails (~> 6.0)
       httparty
       jquery-rails
       jquery-ui-sass-rails
@@ -195,7 +195,7 @@ GEM
       railties (>= 5.1)
     hashdiff (0.3.8)
     hashie (3.6.0)
-    highcharts-rails (4.2.7)
+    highcharts-rails (6.0.3)
       railties (>= 3.1)
     html2haml (2.2.0)
       erubis (~> 2.7.0)

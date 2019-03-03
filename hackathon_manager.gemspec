@@ -55,7 +55,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-sass-rails'
   s.add_dependency 'selectize-rails'
-  s.add_dependency 'highcharts-rails', '~> 4.2'
+  s.add_dependency 'highcharts-rails', '~> 6.0'
   s.add_dependency 'uglifier', '~> 3.0'
   s.add_dependency 'bootstrap', '~> 4.3.1'
 
