@@ -21,16 +21,16 @@ $.extend( $.fn.dataTable.defaults, {
   buttons: [
     {
       extend: 'pageLength',
-      className: 'btn btn-sm btn-outline-secondary buttons-collection dropdown-toggle',
+      className: 'btn-sm',
     },
     {
       extend: 'colvis',
-      className: 'btn btn-sm btn-outline-secondary buttons-collection dropdown-toggle',
+      className: 'btn-sm',
     },
     {
       extend: 'collection',
       text: 'Export',
-      className: 'btn btn-sm btn-outline-secondary buttons-collection dropdown-toggle',
+      className: 'btn-sm',
       buttons: [
         {
           extend: 'csv',
