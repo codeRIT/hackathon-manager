@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'simple_form'
   s.add_dependency 'ajax-datatables-rails', '~> 0.4.0' # Does NOT follow semver
   s.add_dependency 'roadie-rails'
-  s.add_dependency 'chartkick', '~> 2.1'
+  s.add_dependency 'chartkick', '~> 3.0'
   s.add_dependency 'groupdate'
   s.add_dependency 'font-awesome-rails', '~> 4.0' # needed for icon helpers
 

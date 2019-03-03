@@ -4,8 +4,6 @@
 //= require bootstrap
 //= require ../vendor/datatables.min
 //= require selectize
-//= require highcharts
-//= require chartkick
 //= require_directory ./lib
 
 $(document).ready(function() {
