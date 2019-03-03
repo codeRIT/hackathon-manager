@@ -207,25 +207,25 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
   context "#minor?" do
     should "return true for 16 year old" do
-      HackathonConfig['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2004, 1, 1))
       assert questionnaire.minor?
     end
 
     should "return true for 17 year, 12 month, 30 day old" do
-      HackathonConfig['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2002, 6, 13))
       assert_equal true, questionnaire.minor?
     end
 
     should "return false for 18 year old" do
-      HackathonConfig['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2002, 6, 12))
       assert_equal false, questionnaire.minor?
     end
 
     should "return false for 20 year old" do
-      HackathonConfig['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2000, 1, 1))
       assert_equal false, questionnaire.minor?
     end

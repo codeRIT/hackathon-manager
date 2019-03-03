@@ -175,7 +175,7 @@ class Questionnaire < ApplicationRecord
   end
 
   def age_at_time_of_event
-    (HackathonConfig['event_start_date'] - date_of_birth).to_i * 1.day
+    (Date.parse(HackathonConfig['event_start_date']) - date_of_birth).to_i * 1.day
   end
 
   def minor?
