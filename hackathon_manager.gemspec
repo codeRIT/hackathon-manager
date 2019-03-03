@@ -57,7 +57,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'selectize-rails'
   s.add_dependency 'highcharts-rails', '~> 4.2'
   s.add_dependency 'uglifier', '~> 3.0'
-  s.add_dependency 'bootstrap', '~> 4.1.1'
+  s.add_dependency 'bootstrap', '~> 4.3.1'
 
   s.add_dependency 'blazer'
 
