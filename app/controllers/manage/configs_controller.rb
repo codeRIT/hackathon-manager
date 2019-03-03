@@ -20,9 +20,9 @@ class Manage::ConfigsController < Manage::ApplicationController
     if @config.value != value
       @config.value = value
       @config.save
-      redirect_to manage_configs_path, notice: 'Config has updated.'
+      redirect_to manage_configs_path, notice: "Config \"#{key}\" has been updated."
     else
-      redirect_to manage_configs_path
+      redirect_to manage_configs_path, notice: "Config \"#{key}\" was not changed"
     end
   end
 
@@ -37,9 +37,7 @@ class Manage::ConfigsController < Manage::ApplicationController
     end
   end
 
-  private
-
   def limit_access_admin
-    redirect_to manage_root_path unless current_user.admin?
+    redirect_to root_path unless current_user.admin?
   end
 end
