@@ -11,6 +11,8 @@ class User < ApplicationRecord
                            foreign_key: :resource_owner_id,
                            dependent: :delete_all # or :destroy if you need callbacks
 
+  validates_uniqueness_of :email
+
   after_create :queue_reminder_email
 
   enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
