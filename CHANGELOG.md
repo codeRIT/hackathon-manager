@@ -1,5 +1,11 @@
 **Please note 0.x releases are development releases and there will be breaking changes until we hit 1.0. For more information, see [semver](http://semver.org/#how-should-i-deal-with-revisions-in-the-0yz-initial-development-phase).**
 
+# 0.14.0 - 2019-03-03
+
+**Breaking change:** Be sure to manually migrate existing configuration from `hackathon.yml` to the config UI at `https://your-app.com/manage/configs`
+
+- Feature: Move configuration from `hackathon.yml` to web UI
+
 # 0.13.12 - 2019-03-03
 
 - Improvement: Reformat manage questionnaire form
