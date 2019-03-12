@@ -331,6 +331,9 @@
         <td>&nbsp;</td>
         <td class="container">
           <div class="content">
+            <% if HackathonConfig['email_banner_asset'].present? %>
+              <%= image_tag HackathonConfig['email_banner_asset'], class: 'banner' %>
+            <% end %>
 
             <!-- START CENTERED WHITE CONTAINER -->
             <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>

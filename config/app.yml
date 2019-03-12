@@ -12,6 +12,7 @@ defaults: &defaults
   name: HackFoo
   logo_asset: ""
   favicon_asset: ""
+  email_banner_asset: ""
   agreement_pdf_asset: agreement.pdf
   email_from: '"HackFoo" <hello@example.com>'
   default_page_title: HackFoo - Jan 1-2, 2017
