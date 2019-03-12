@@ -52,9 +52,9 @@ en:
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
 
         name: Your hackathon's name
-        logo_asset: Optional logo asset made available in your Rails app's app/assets/images/ folder
-        favicon_asset: Optional favicon asset made available in your Rails app's app/assets/images/ folder
-        agreement_pdf_asset: Your hackathon's agreement (e.g. school activity release form), made available in your Rails app's app/assets/images/ folder
+        logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)
+        favicon_asset: Optional favicon asset (should be a full https:// URL to a .ico file)
+        agreement_pdf_asset: Your hackathon's agreement (e.g. school activity release form, should be a full https:// URL to a web page or .pdf file)
         email_from: '"From" email address for all emails sent through the website (e.g. BrickHack &lt;hello@example.com&gt;)'
         default_page_title: Default &lt;title&gt; for all pages (e.g. HackFoo - Jan 1-2, 2017)
 
