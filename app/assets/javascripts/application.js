@@ -13,4 +13,11 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
+//= require jquery
+//= require jquery_ujs
+//= require jquery.ui.autocomplete
+//= require highcharts
+//= require chartkick
+//= require_directory .
+//= require_directory ./channels
+//= require ./vendor/simplemde.min.js

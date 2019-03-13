@@ -3,6 +3,7 @@ require 'test_helper'
 class Manage::QuestionnairesControllerTest < ActionController::TestCase
   setup do
     @questionnaire = create(:questionnaire)
+    stub_request(:get, /api.sparkpost.com.*/).to_return(status: 200, body: "", headers: {})
   end
 
   context "while not authenticated" do

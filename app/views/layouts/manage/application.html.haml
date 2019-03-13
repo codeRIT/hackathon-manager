@@ -7,11 +7,11 @@
     - if HackathonConfig['favicon_asset'].present?
       %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
 
-    = stylesheet_link_tag "hackathon_manager/manage", :media => "all"
+    = stylesheet_link_tag "manage", :media => "all"
     = csrf_meta_tags
 
   %body
-    = javascript_include_tag "hackathon_manager/manage/application"
+    = javascript_include_tag "manage/application"
 
     %nav.navbar.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
       %a.navbar-brand.col-xs-6.col-sm-3.col-md-2.mr-0{href: manage_root_path} #{HackathonConfig['name']} Manager
@@ -94,4 +94,4 @@
           = render "layouts/manage/flashes"
           = yield
 
-    = render "layouts/hackathon_manager/shared_footer"
+    = render "layouts/shared_footer"

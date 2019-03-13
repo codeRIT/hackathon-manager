@@ -40,6 +40,10 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # Required for Devise
+  config.action_mailer.default_url_options = { host: 'example.com', protocol: 'http' }
+  config.action_mailer.asset_host = 'http://example.com'
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

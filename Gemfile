@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.1'
+# Use Ruby version defined in .ruby-version
+ruby IO.read(File.expand_path('.ruby-version', __dir__)).chomp
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
@@ -21,9 +22,9 @@ gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -36,12 +37,66 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Authentication
+gem 'devise', '~> 4.2'
+gem 'omniauth-mlh', '~> 0.1'
+gem 'doorkeeper', '~> 5.0'
+gem 'devise-doorkeeper'
+
+# User uploads
+gem 'paperclip', '~> 6.0'
+gem 'aws-sdk-s3'
+
+# Templating utilities
+gem 'haml-rails'
+gem 'simple_form'
+gem 'ajax-datatables-rails', '~> 0.4.0' # Does NOT follow semver
+gem 'roadie-rails'
+gem 'chartkick', '~> 3.0'
+gem 'groupdate'
+gem 'font-awesome-rails', '~> 4.0' # needed for icon helpers
+
+# Assets
+gem 'sprockets'
+gem 'jquery-rails'
+gem 'jquery-ui-sass-rails'
+gem 'selectize-rails'
+gem 'highcharts-rails', '~> 6.0'
+gem 'bootstrap', '~> 4.3.1'
+
+# Markdown parsing
+gem 'redcarpet'
+
+# Model validation
+gem 'strip_attributes'
+gem 'validate_url'
+
+# Background job processing
+gem 'sidekiq', '< 6'
+
+# Misc support gems
+gem 'rails-settings-cached', '~> 0.7.2'
+gem 'blazer'
+gem 'simple_spark'
+gem 'httparty'
+gem 'rollbar', '~> 2.8'
+gem 'skylight'
+gem 'rubyzip', '>= 1.0.0'
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'dotenv-rails'
 end
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'simplecov', require: false
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -51,6 +106,16 @@ group :development do
 end
 
 group :test do
+  gem 'test-unit', '~> 3.0'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
+  gem 'minitest-reporters'
+  gem 'valid_attribute'
+  gem 'factory_bot_rails'
+  gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
+  gem 'rails-controller-testing' # Rails 4 fallback
+  gem 'webmock', '~> 3.4'
+
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
@@ -59,4 +124,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

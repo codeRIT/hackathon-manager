@@ -128,16 +128,16 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
 // just selects
 select
   @include appearance (none)
-  background: asset-url("hackathon_manager/arrow_down_hover.svg"), $input--background
+  background: asset-url("arrow_down_hover.svg"), $input--background
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
   font-size: 100%
   border-radius: 0
   &:hover
-    background-image: asset-url("hackathon_manager/arrow_down.svg")
+    background-image: asset-url("arrow_down.svg")
   &:focus
-    background-image: asset-url("hackathon_manager/arrow_down.svg")
+    background-image: asset-url("arrow_down.svg")
   &.date:nth-child(2)
     flex: 3 0 120px
     margin-right: 2 * $form-spacing-horizontal

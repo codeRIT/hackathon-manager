@@ -8,17 +8,19 @@
     - if HackathonConfig['favicon_asset'].present?
       %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
 
-    = stylesheet_link_tag "hackathon_manager/core", media: "all"
     = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': 'reload'
 
   %body
-    = render "layouts/hackathon_manager/header"
-    = render "layouts/hackathon_manager/account_nav"
-    = render "layouts/hackathon_manager/flashes"
-    = javascript_include_tag "hackathon_manager/application"
+    = render "layouts/header"
+    = render "layouts/account_nav"
+    = render "layouts/flashes"
+    = javascript_include_tag "application", 'data-turbolinks-track': 'reload'
     #main
       %section.section
         .container
           = yield
-    = render "layouts/hackathon_manager/footer"
-    = render "layouts/hackathon_manager/shared_footer"
+    = render "layouts/footer"
+    = render "layouts/shared_footer"
