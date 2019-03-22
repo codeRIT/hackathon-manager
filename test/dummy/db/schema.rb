@@ -163,21 +163,6 @@ ActiveRecord::Schema.define(version: 2019_02_16_203450) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "participants", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "city"
-    t.string "state"
-    t.string "year"
-    t.date "birthday"
-    t.string "experience"
-    t.string "interest"
-    t.string "school_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "questionnaires", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -196,7 +181,6 @@ ActiveRecord::Schema.define(version: 2019_02_16_203450) do
     t.string "acc_status", default: "pending"
     t.integer "acc_status_author_id"
     t.datetime "acc_status_date"
-    t.boolean "riding_bus", default: false
     t.boolean "bus_captain_interest", default: false
     t.boolean "is_bus_captain", default: false
     t.integer "checked_in_by_id"
