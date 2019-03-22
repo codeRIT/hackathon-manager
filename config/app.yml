@@ -4,8 +4,8 @@ defaults: &defaults
   # Logic config
   registration_is_open: true
   event_is_over: false
-  last_day_to_apply: <%= Date.new(2000, 1, 1) %>
-  event_start_date: <%= Date.new(2000, 1, 1) %>
+  last_day_to_apply: "<%= Date.new(2000, 1, 1).to_s %>"
+  event_start_date: "<%= Date.new(2000, 1, 1).to_s %>"
   auto_late_waitlist: false
 
   # Content config
@@ -28,7 +28,7 @@ development:
 
 test:
   <<: *defaults
-  last_day_to_apply: <%= 2.months.from_now %>
+  last_day_to_apply: "<%= 2.months.from_now.to_date.to_s %>"
 
 production:
   <<: *defaults
