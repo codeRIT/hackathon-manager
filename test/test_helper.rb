@@ -1,6 +1,4 @@
 ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rails/test_help'
 
 if ["manual", "travis"].include?(ENV["RUN_COVERAGE"])
   require 'simplecov'
@@ -14,6 +12,10 @@ if ["manual", "travis"].include?(ENV["RUN_COVERAGE"])
     SimpleCov.start 'rails'
   end
 end
+
+# This must be AFTER SimpleCov is required, or it won't work
+require_relative '../config/environment'
+require 'rails/test_help'
 
 require "strip_attributes/matchers"
 require "minitest/reporters"
