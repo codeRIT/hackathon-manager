@@ -28,8 +28,6 @@ if ENV["RUN_COVERAGE"] == "travis"
   Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new(color: true)]
 end
 
-# FactoryBot.reload
-
 def sample_file(filename = "sample_pdf.pdf")
   File.new("test/fixtures/#{filename}")
 end
