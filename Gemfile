@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Use Ruby version defined in .ruby-version
-ruby IO.read(File.expand_path('.ruby-version', __dir__)).chomp
+ruby '>= 2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
