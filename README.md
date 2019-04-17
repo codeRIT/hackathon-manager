@@ -45,6 +45,8 @@ Be sure to review all of these before going live!
 
 Deployment to Heroku and Dokku is supported out of the box, though anything that operates on Heroku's buildpacks should work too.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 TODO: re-write deployment here
 
 ~See [BrickHack's production setup](https://github.com/codeRIT/brickhack.io/wiki/Production-Environment-Setup) for detailed notes.~
