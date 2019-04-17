@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   var $sidebar = $('.sidebar');
 
   if ( $sidebar.hasClass('home') ) {

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   $('[data-school-picker]').autocomplete({
     source: function( request, response ) {
       $.ajax({

@@ -12,15 +12,15 @@
     = csp_meta_tag
 
     = stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': 'reload'
+    = javascript_include_tag "application", 'data-turbolinks-track': 'reload'
+    %link{ href:'//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700', rel: 'stylesheet', type: 'text/css' }
 
   %body
     = render "layouts/header"
     = render "layouts/account_nav"
     = render "layouts/flashes"
-    = javascript_include_tag "application", 'data-turbolinks-track': 'reload'
     #main
       %section.section
         .container
           = yield
     = render "layouts/footer"
-    = render "layouts/shared_footer"

@@ -6,7 +6,7 @@
 //= require selectize
 //= require_directory ./lib
 
-$(document).ready(function() {
+function applicationReady() {
   $(".selectize").selectize();
   $("select[data-bulk-row-edit]").bulkRowEdit();
   $().bulkRowSelect();
@@ -16,4 +16,6 @@ $(document).ready(function() {
   $('[data-toggle="popover"]').popover();
   $('[data-message-live-preview="textarea"]').messageLivePreview();
   setupSimpleMde();
-});
+}
+
+document.addEventListener("turbolinks:load", applicationReady);

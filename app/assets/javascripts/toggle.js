@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   $.fn.toggleDetails = function() {
     var toggle = function() {
       $('.details').slideUp();
