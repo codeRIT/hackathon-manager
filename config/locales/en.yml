@@ -30,6 +30,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  devise:
+    registrations: Welcome! Your account has been created.
   simple_form:
     hints:
       bus_list:
