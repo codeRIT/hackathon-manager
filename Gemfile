@@ -48,7 +48,7 @@ gem 'paperclip', '~> 6.0'
 gem 'aws-sdk-s3'
 
 # Templating utilities
-gem 'haml-rails'
+gem 'haml-rails', '~> 1.0'
 gem 'simple_form'
 gem 'ajax-datatables-rails', '~> 0.4.0' # Does NOT follow semver
 gem 'roadie-rails'
