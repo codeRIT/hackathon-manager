@@ -2,7 +2,7 @@ class Mailer < ApplicationMailer
   include Roadie::Rails::Automatic
   add_template_helper(HackathonManagerHelper)
 
-  default from: HackathonConfig['email_from']
+  default from: -> { HackathonConfig['email_from'] }
 
   def bulk_message_email(message_id, user_id, message = nil)
     @message = message || Message.find_by_id(message_id)

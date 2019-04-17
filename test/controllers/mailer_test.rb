@@ -47,4 +47,17 @@ class MailerTest < ActionMailer::TestCase
       assert_match %r{example.com\/rsvp}, email.encoded
     end
   end
+
+  context "with customized HackathonConfig" do
+    setup do
+      @user = create(:user, email: "test@example.com")
+      HackathonConfig['email_from'] = 'This is a test <test@custom.example.com>'
+    end
+
+    should "use customized email_from" do
+      email = Mailer.incomplete_reminder_email(@user.id).deliver_now
+
+      assert_equal ["test@custom.example.com"], email.from
+    end
+  end
 end
