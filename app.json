@@ -18,6 +18,11 @@
       "generator": "secret",
       "required": true
     },
+    "SECRET_KEY_BASE": {
+      "description": "A randomly-generated secret key for verifying the integrity of signed cookies.",
+      "generator": "secret",
+      "required": true
+    },
     "MLH_KEY": {
       "description": "MyMLH Application ID from https://my.mlh.io/oauth/applications",
       "required": false
