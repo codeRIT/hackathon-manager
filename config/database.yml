@@ -48,6 +48,4 @@ test:
 #
 production:
   <<: *default
-  database: hackathon_manager_production
-  username: hackathon_manager
-  password: <%= ENV['HACKATHON_MANAGER_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL']&.sub("mysql://", "mysql2://") %>
