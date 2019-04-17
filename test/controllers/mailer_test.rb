@@ -44,7 +44,7 @@ class MailerTest < ActionMailer::TestCase
 
       assert_equal ["test@example.com"], email.to
       assert_equal "Bus Update", email.subject
-      assert_match %r{hackathon_manager.example.com\/rsvp}, email.encoded
+      assert_match %r{example.com\/rsvp}, email.encoded
     end
   end
 end
