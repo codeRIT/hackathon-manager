@@ -20,11 +20,11 @@
     },
     "MLH_KEY": {
       "description": "MyMLH Application ID from https://my.mlh.io/oauth/applications",
-      "required": true
+      "required": false
     },
     "MLH_SECRET": {
       "description": "MyMLH Secret from https://my.mlh.io/oauth/applications",
-      "required": true
+      "required": false
     },
     "AWS_BUCKET": {
       "description": "S3 bucket to store resumes in",
@@ -49,6 +49,10 @@
     },
     "SPARKPOST_API_KEY": {
       "description": "Sparkpost API key for sending email",
+      "required": false
+    },
+    "SPARKPOST_CAMPAIGN_ID": {
+      "description": "Sparkpost campaign ID for sending email (e.g. the name of your hackathon)",
       "required": false
     }
   },
