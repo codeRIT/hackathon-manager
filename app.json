@@ -59,6 +59,10 @@
     "SPARKPOST_CAMPAIGN_ID": {
       "description": "Sparkpost campaign ID for sending email (e.g. the name of your hackathon)",
       "required": false
+    },
+    "HM_DOMAIN_NAME": {
+      "description": "Domain name hosting the website (e.g. apply.example.com)",
+      "required": true
     }
   },
   "addons": [

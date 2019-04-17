@@ -91,4 +91,26 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  ### Custom config below this line ###
+
+  # Send email through Sparkpost API
+  config.action_mailer.delivery_method = :sparkpost
+
+  # Required for email messages
+  mailer_url_host = ENV["HM_DOMAIN_NAME"]
+  mailer_url_protocol = ENV["HM_PROTOCOL"].presence || 'https'
+  config.action_mailer.default_url_options = { host: mailer_url_host, protocol: mailer_url_protocol }
+  config.action_mailer.asset_host = "#{mailer_url_protocol}://#{mailer_url_host}"
+
+  # Paperclip
+  config.paperclip_defaults = {
+    storage: :s3,
+    bucket: ENV['AWS_BUCKET'],
+    s3_credentials: {
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    s3_region: ENV['AWS_REGION']
+  }
 end
