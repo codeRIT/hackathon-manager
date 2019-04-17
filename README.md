@@ -53,6 +53,49 @@ TODO: re-write deployment here
 
 GitHub issues and pull requests welcome!
 
+## Development
+
+Pre-requisite: Have a functioning, local Ruby + MySQL development environment. [See this guide for pointers.](https://gorails.com/setup)
+
+1. Clone the repo
+
+```bash
+$ git clone git@github.com:codeRIT/hackathon_manager
+$ cd hackathon_manager
+```
+
+2. Install dependencies
+
+```bash
+$ bundle install
+```
+
+3. Setup databse
+
+```bash
+$ bin/rails db:setup
+```
+
+4. Start up the server
+
+```bash
+$ bin/rails s  # short for bin/rails server
+```
+
+4. Visit http://localhost:3000/apply, create an account, and complete an application
+
+5. In another bash window, promote your user to an admin
+
+```bash
+$ cd hackathon_manager
+$ bin/rails c  # short for bin/rails console
+# Wait for the console to start...
+Loading development environment (Rails 5.1.1)
+irb(main):001:0> User.last.update_attribute(:role, :admin)
+```
+
+6. Visit http://localhost:3000/manage and set up the hackathon as needed
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
