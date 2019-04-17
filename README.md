@@ -49,7 +49,7 @@ Deployment to Heroku and Dokku is supported out of the box, though anything that
 
 TODO: re-write deployment here
 
-~See [BrickHack's production setup](https://github.com/codeRIT/brickhack.io/wiki/Production-Environment-Setup) for detailed notes.~
+~See [BrickHack's production setup](https://github.com/codeRIT/brickhack.io/wiki/Production-Deployment) for detailed notes.~
 
 ## Contributing
 
