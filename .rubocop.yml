@@ -16,4 +16,3 @@ Metrics/BlockLength:
   Exclude:
     - test/**/*
     - config/routes.rb
-    - hackathon_manager.gemspec
