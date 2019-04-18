@@ -53,7 +53,8 @@ Be sure to review all of these before going live!
 HackathonManager supports two platforms out of the box:
 
 - [Heroku](https://www.heroku.com) — Easiest & quickest way that requires little server knowledge, however isn't cheap (free tier not recommended)
-- [Dokku](http://dokku.viewdocs.io/dokku/) — A free alternative to Heroku, runs on your own virtual machine.
+- [Dokku](http://dokku.viewdocs.io/dokku/) — A free alternative to Heroku, runs on your own virtual machine
+- _Coming soon: OKD/OpenShift — "Enterprise Kubernetes for Developers" packaged with a useful management UI + tooling_
 
 HackathonManager can also be deployed the same as any other Rails app, however this is **not** natively supported and will require you to fork this repo to integrate code changes.
 
