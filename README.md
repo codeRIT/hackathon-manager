@@ -56,13 +56,11 @@ HackathonManager supports two platforms out of the box:
 - [Dokku](http://dokku.viewdocs.io/dokku/) — A free alternative to Heroku, runs on your own virtual machine
 - _Coming soon: OKD/OpenShift — "Enterprise Kubernetes for Developers" packaged with a useful management UI + tooling_
 
+See the guides [on the Wiki](https://github.com/codeRIT/hackathon_manager/wiki).
+
 HackathonManager can also be deployed the same as any other Rails app, however this is **not** natively supported and will require you to fork this repo to integrate code changes.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-TODO: re-write deployment here
-
-~See [BrickHack's production setup](https://github.com/codeRIT/brickhack.io/wiki/Production-Deployment) for detailed notes.~
 
 ## Contributing
 
