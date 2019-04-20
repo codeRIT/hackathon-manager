@@ -109,6 +109,14 @@ irb(main):001:0> User.last.update_attribute(:role, :admin)
 
 6. Visit http://localhost:3000/manage and set up the hackathon as needed
 
+### Development Utilities
+
+- **Mail View** - Email templates can be previewed at http://localhost:3000/rails/mailers
+- **Mail Catcher** - When active, emails will be captured by MailCatcher instead of slipping into a black hole (no emails are ever sent in development). Visit [mailcatcher.me](http://mailcatcher.me/) and follow instructions under "How" to get setup.
+- **Guard** - Automatically runs tests based on the files you edit. `bundle exec guard`
+- **Coverage** - Test coverage can be manually generated via the `bin/rails coverage:run` command. Results are then made available in the `coverage/` directory.
+- **Sidekiq** - Run background jobs (such as emails) and view active & completed jobs. Sidekiq is automatically started with Docker - a dashboard is available at http://localhost:3000/sidekiq (_also available in production_).
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
