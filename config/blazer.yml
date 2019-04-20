@@ -2,7 +2,7 @@
 
 data_sources:
   main:
-    url: <%= ENV["BLAZER_DATABASE_URL"]&.sub("mysql://", "mysql2://") %>
+    url: <%= (ENV["BLAZER_DATABASE_URL"].presence || ENV["DATABASE_URL"].presence)&.sub("mysql://", "mysql2://") %>
 
     # statement timeout, in seconds
     # none by default
