@@ -23,7 +23,7 @@
             %pre.mb-0= @config[key]
 
   .col-lg-6.mb-3
-    .card
+    .card.mb-3
       .card-body
         %h5.card-title Environment Variables
         %h6.card-subtitle.mb-2.text-muted
@@ -32,3 +32,37 @@
         %p
           %b AWS S3 Bucket for Resumes:
           %pre= ENV['AWS_BUCKET'] || '[No value]'
+        %p
+          %b AWS S3 Region:
+          %pre= ENV['AWS_REGION'] || '[No value]'
+        %p
+          %b AWS S3 Access Key ID:
+          %pre= ENV['AWS_ACCESS_KEY_ID'] || '[No value]'
+        %p
+          %b AWS S3 Secret Access Key:
+          %em= ENV['AWS_SECRET_ACCESS_KEY'].present? ? 'Set' : 'Not set'
+        %hr
+        %p
+          %b Domain Name:
+          %pre= ENV['HM_DOMAIN_NAME'] || '[No value]'
+        %p
+          %b Domain Protocol:
+          %pre= ENV['HM_DOMAIN_PROTOCOL'] || 'https'
+        %hr
+        %p
+          %b Sparkpost API Key:
+          %em= ENV['SPARKPOST_API_KEY'].present? ? 'Set' : 'Not set'
+        %p
+          %b Sparkpost Campaign ID:
+          %pre= ENV['SPARKPOST_CAMPAIGN_ID'] || '[No value]'
+        %hr
+        %p
+          %b My MLH Application ID
+          %pre= ENV['MLH_KEY'] || '[No value]'
+        %p
+          %b My MLH Secret
+          %em= ENV['MLH_KEY'].present? ? 'Set' : 'Not set'
+        %hr
+        %p
+          %b Rollbar Access Token:
+          %em= ENV['ROLLBAR_ACCESS_TOKEN'].present? ? 'Set' : 'Not set'
