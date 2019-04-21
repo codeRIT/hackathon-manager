@@ -358,6 +358,19 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_select "h3", "This is a title"
     end
 
+    should "render template variables in manage_messages#preview" do
+      @message.update_attribute(:body, '### Hello, {{first_name}}!')
+      get :preview, params: { id: @message }
+      assert_response :success
+      assert_select "h3", "Hello, John!"
+    end
+
+    should "render template variables in manage_messages#live_preview" do
+      get :live_preview, params: { body: '### {{first_name}} {{last_name}}' }
+      assert_response :success
+      assert_select "h3", "John Smith"
+    end
+
     context "manage_messages#duplicate" do
       should "duplicate message" do
         assert_difference('Message.count', 1) do

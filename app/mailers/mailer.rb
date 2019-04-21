@@ -4,9 +4,10 @@ class Mailer < ApplicationMailer
 
   default from: -> { HackathonConfig['email_from'] }
 
-  def bulk_message_email(message_id, user_id, message = nil)
-    @message = message || Message.find_by_id(message_id)
-    @user    = User.find_by_id(user_id)
+  def bulk_message_email(message_id, user_id, message = nil, use_examples = false)
+    @message      = message || Message.find_by_id(message_id)
+    @user         = User.find_by_id(user_id)
+    @use_examples = use_examples
     return if @user.blank? || @message.blank?
     mail(
       to: pretty_email(@user.full_name, @user.email),

@@ -1,0 +1,22 @@
+%h3.mt-5.pb-2#triggered-email-overview Templating
+
+%p
+  Message bodies can make use of template variables to help personalize and streamline emails.
+  Templating is powered by <a target="_blank" href="https://mustache.github.io/mustache.5.html">mustache</a>.
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Variable
+      %th About
+      %th Example
+  %tbody
+    - example = MessageTemplate.new(nil, true)
+    - MessageTemplate.variables.each do |variable, config|
+      %tr
+        %td
+          %pre {{#{variable}}}
+        %td
+          %span= config["description"]
+        %td
+          %pre= example.send(variable)
