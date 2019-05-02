@@ -22,6 +22,35 @@ class MessageTest < ActiveSupport::TestCase
   should allow_value("automated").for(:type)
   should_not allow_value("foo").for(:type)
 
+  should "validate body template parsing" do
+    message = build(:message, body: "this body has invalid syntax {{foo")
+    assert_equal false, message.valid?
+    assert_match /failed to parse/, message.errors[:body][0]
+  end
+
+  should "allow valid body template variables" do
+    message = build(:message, body: "this body has invalid syntax {{foo_bar}}")
+    assert_equal true, message.valid?
+  end
+
+  context "parsed_body" do
+    should "parse template variables with examples" do
+      message = build(:message, body: "Hello, {{first_name}}!")
+      assert_equal "Hello, John!", message.parsed_body({}, true)
+    end
+
+    should "parse template variables with real values" do
+      questionnaire = create(:questionnaire, first_name: 'Richard')
+      message = build(:message, body: "Hello, {{first_name}}!")
+      assert_equal "Hello, Richard!", message.parsed_body(user_id: questionnaire.user_id)
+    end
+
+    should "ignore unknown variables" do
+      message = build(:message, body: "Hello {{foo}} World")
+      assert_equal "Hello  World", message.parsed_body({})
+    end
+  end
+
   context "bulk?" do
     should "return true for a bulk email" do
       message = build(:message, type: "bulk")

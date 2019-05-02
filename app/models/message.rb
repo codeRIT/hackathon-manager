@@ -4,6 +4,8 @@ class Message < ApplicationRecord
   validates_presence_of :name, :subject, :template
   validates_presence_of :body, if: :using_default_template?
 
+  validate :body_successfully_parses
+
   strip_attributes
 
   POSSIBLE_TEMPLATES = ["default"].freeze
@@ -39,6 +41,29 @@ class Message < ApplicationRecord
 
   validates_inclusion_of :template, in: POSSIBLE_TEMPLATES
   validates_inclusion_of :type, in: POSSIBLE_TYPES
+
+  def parsed_body(context, use_examples = false)
+    return body if body.blank?
+
+    message_template = MessageTemplate.new(context, use_examples)
+    message_template.template = body
+    message_template.render
+  end
+
+  def valid_body?
+    begin
+      parsed_body(nil, true)
+    rescue Mustache::Parser::SyntaxError
+      return false
+    end
+    true
+  end
+
+  def body_successfully_parses
+    unless valid_body?
+      errors.add(:body, 'failed to parse template variables')
+    end
+  end
 
   def recipients=(values)
     values.present? ? super(values.reject(&:blank?)) : super(values)

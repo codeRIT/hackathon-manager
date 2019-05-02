@@ -28,6 +28,8 @@ gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'mustache', '~> 1.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
