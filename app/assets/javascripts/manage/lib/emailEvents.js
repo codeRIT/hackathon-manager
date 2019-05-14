@@ -1,4 +1,4 @@
-$(document).ready(function() {
+var setupEmailEvents = function() {
   $('.email-events').each(function() {
     var events_container = this;
 
@@ -38,4 +38,4 @@ $(document).ready(function() {
         $(events_container).html('<em>An error ocurred. Please try again later.</em>');
       });
   });
-});
+}

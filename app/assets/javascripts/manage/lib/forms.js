@@ -1,4 +1,4 @@
-$(document).ready(function() {
+var setupManageForms = function() {
   var disable = function($element) {
     $element.hide();
     $element.find('input').prop('disabled', true);
@@ -31,4 +31,4 @@ $(document).ready(function() {
   $('[name="message[type]"]').on('change', function() {
     updateMessageForm();
   });
-});
+}

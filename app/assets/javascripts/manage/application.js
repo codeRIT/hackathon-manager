@@ -16,6 +16,8 @@ function applicationReady() {
   $('[data-toggle="popover"]').popover();
   $('[data-message-live-preview="textarea"]').messageLivePreview();
   setupSimpleMde();
+  setupEmailEvents();
+  setupManageForms();
 }
 
 document.addEventListener("turbolinks:load", applicationReady);
