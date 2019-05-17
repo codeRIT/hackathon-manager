@@ -188,4 +188,21 @@ class MessageTest < ActiveSupport::TestCase
       assert !message.using_default_template?
     end
   end
+
+  context "for_trigger" do
+    should "return automated messages matching a given trigger" do
+      create(:message, trigger: "questionnaire.pending", subject: "Pending 1")
+      create(:message, trigger: "questionnaire.pending", subject: "Pending 2")
+      create(:message, trigger: "questionnaire.accepted", subject: "Accepted")
+      assert_equal 2, Message.for_trigger("questionnaire.pending").count
+      assert_equal 1, Message.for_trigger("questionnaire.accepted").count
+      assert_equal 0, Message.for_trigger("questionnaire.denied").count
+    end
+
+    should "raise exception for unknown triggers" do
+      assert_raise ArgumentError, "Unknowna trigger: foo" do
+        Message.for_trigger("foo")
+      end
+    end
+  end
 end

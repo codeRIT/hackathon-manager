@@ -14,14 +14,20 @@ subject_mapping = {
   "questionnaire.pending" => "Application Received",
   "questionnaire.accepted" => "You've been accepted!",
   "questionnaire.denied" => "Your application status",
-  "questionnaire.rsvp_confirmed" => "RSVP Confirmation"
+  "questionnaire.rsvp_confirmed" => "RSVP Confirmation",
+  "user.24hr_incomplete_application" => "Incomplete application",
+  "bus_list.new_captain_confirmation" => "You're a bus captain!",
+  "bus_list.update_notes" => "Bus Update"
 }
 
 name_mapping = {
   "questionnaire.pending" => "Application Received",
   "questionnaire.accepted" => "Accepted email",
   "questionnaire.denied" => "Denied email",
-  "questionnaire.rsvp_confirmed" => "RSVP confirmed email"
+  "questionnaire.rsvp_confirmed" => "RSVP confirmed email",
+  "user.24hr_incomplete_application" => "Incomplete application (24-hour reminder)",
+  "bus_list.new_captain_confirmation" => "New bus captain confirmation",
+  "bus_list.update_notes" => "Bus list update"
 }
 
 path = File.join(File.dirname(__FILE__), 'seed_messages/*.md')
