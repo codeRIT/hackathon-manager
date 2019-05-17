@@ -4,18 +4,5 @@ if defined?(ActionMailer::Preview)
       message = Message.first
       Mailer.bulk_message_email(message, User.first.id)
     end
-
-    def incomplete_reminder_email
-      Mailer.incomplete_reminder_email(User.without_questionnaire.first.id)
-    end
-
-    def bus_captain_confirmation_email
-      buslist = BusList.first
-      Mailer.bus_captain_confirmation_email(buslist.id, buslist.captains.first.id)
-    end
-
-    def bus_list_update_email
-      Mailer.bus_list_update_email(BusList.first.passengers.first.id)
-    end
   end
 end

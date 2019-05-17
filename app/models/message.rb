@@ -13,28 +13,31 @@ class Message < ApplicationRecord
   POSSIBLE_TYPES = ["bulk", "automated"].freeze
 
   POSSIBLE_SIMPLE_RECIPIENTS = {
-    "all"                              => "Everyone",
-    "incomplete"                       => "Incomplete Applications",
-    "complete"                         => "Complete Applications",
-    "accepted"                         => "Accepted Applications",
-    "denied"                           => "Denied Applications",
-    "waitlisted"                       => "Waitlisted Applications",
-    "late-waitlisted"                  => "Late, Waitlisted Applications",
-    "rsvp-confirmed"                   => "RSVP Confirmed Attendees",
-    "rsvp-denied"                      => "RSVP Denied Attendees",
-    "checked-in"                       => "Checked-In Attendees",
-    "non-checked-in"                   => "Non-Checked-In, Accepted & RSVP'd Applications",
-    "non-checked-in-excluding"         => "Non-Checked-In Applications, Excluding Accepted & RSVP'd"
+    "all" => "Everyone",
+    "incomplete" => "Incomplete Applications",
+    "complete" => "Complete Applications",
+    "accepted" => "Accepted Applications",
+    "denied" => "Denied Applications",
+    "waitlisted" => "Waitlisted Applications",
+    "late-waitlisted" => "Late, Waitlisted Applications",
+    "rsvp-confirmed" => "RSVP Confirmed Attendees",
+    "rsvp-denied" => "RSVP Denied Attendees",
+    "checked-in" => "Checked-In Attendees",
+    "non-checked-in" => "Non-Checked-In, Accepted & RSVP'd Applications",
+    "non-checked-in-excluding" => "Non-Checked-In Applications, Excluding Accepted & RSVP'd"
   }.freeze
 
   POSSIBLE_TRIGGERS = {
-    "questionnaire.pending"        => "Questionnaire Status: Pending Review (new application)",
-    "questionnaire.accepted"       => "Questionnaire Status: Accepted",
-    "questionnaire.waitlist"       => "Questionnaire Status: Waitlisted",
-    "questionnaire.denied"         => "Questionnaire Status: Denied",
-    "questionnaire.late_waitlist"  => "Questionnaire Status: Waitlisted, Late",
+    "questionnaire.pending" => "Questionnaire Status: Pending Review (new application)",
+    "questionnaire.accepted" => "Questionnaire Status: Accepted",
+    "questionnaire.waitlist" => "Questionnaire Status: Waitlisted",
+    "questionnaire.denied" => "Questionnaire Status: Denied",
+    "questionnaire.late_waitlist" => "Questionnaire Status: Waitlisted, Late",
     "questionnaire.rsvp_confirmed" => "Questionnaire Status: RSVP Confirmed",
-    "questionnaire.rsvp_denied"    => "Questionnaire Status: RSVP Denied"
+    "questionnaire.rsvp_denied" => "Questionnaire Status: RSVP Denied",
+    "user.24hr_incomplete_application" => "User: Incomplete application (24 hours later)",
+    "bus_list.new_captain_confirmation" => "Bus List: New captain confirmation",
+    "bus_list.notes_update" => "Bus List: Updated notes (manually triggered)"
   }.freeze
 
   serialize :recipients, Array
@@ -107,6 +110,7 @@ class Message < ApplicationRecord
     return "delivered" if delivered?
     return "started" if started?
     return "queued" if queued?
+
     "drafted"
   end
 
@@ -160,9 +164,12 @@ class Message < ApplicationRecord
     recipients
   end
 
+  def self.for_trigger(trigger)
+    Message.where(trigger: trigger)
+  end
+
   def self.queue_for_trigger(trigger, user_id)
-    messages_to_queue = Message.where(trigger: trigger)
-    messages_to_queue.map { |message| Mailer.delay.bulk_message_email(message.id, user_id) }
+    for_trigger(trigger).map { |message| Mailer.delay.bulk_message_email(message.id, user_id) }
   end
 
   def self.bulk

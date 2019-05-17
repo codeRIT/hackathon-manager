@@ -44,15 +44,22 @@ class Manage::BusListsController < Manage::ApplicationController
     is_bus_captain = params[:bus_captain] == "1"
     @questionnaire.update_attribute(:is_bus_captain, is_bus_captain)
     if @questionnaire.reload.is_bus_captain
-      Mailer.delay.bus_captain_confirmation_email(@bus_list.id, @questionnaire.user.id)
+      Message.queue_for_trigger("bus_list.new_captain_confirmation", @questionnaire.user.id)
     end
     redirect_to [:manage, @bus_list]
   end
 
   def send_update_email
-    @bus_list.passengers.each do |passenger|
-      Mailer.delay.bus_list_update_email(passenger.id)
+    if Message.for_trigger("bus_list.notes_update").empty?
+      flash[:error] = 'Error: No automated message is configured for bus note updates!'
+      redirect_to [:manage, @bus_list]
+      return
     end
+
+    @bus_list.passengers.each do |passenger|
+      Message.queue_for_trigger("bus_list.notes_update", passenger.id).count
+    end
+    flash[:notice] = 'Bus notes update emails have been sent'
     redirect_to [:manage, @bus_list]
   end
 

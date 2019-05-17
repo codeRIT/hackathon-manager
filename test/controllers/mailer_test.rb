@@ -21,41 +21,25 @@ class MailerTest < ActionMailer::TestCase
   context "upon scheduled incomplete reminder email" do
     setup do
       @user = create(:user, email: "test@example.com")
+      @message = create(:message, subject: "Incomplete Application", type: 'automated', trigger: 'user.24hr_incomplete_application')
     end
 
-    should "deliver reminder email" do
-      email = Mailer.incomplete_reminder_email(@user.id).deliver_now
-
-      assert_equal ["test@example.com"],     email.to
-      assert_equal "Incomplete Application", email.subject
-      assert_match %r{example.com\/apply}, email.encoded
-    end
-  end
-
-  context "upon scheduled bus update email" do
-    setup do
-      @bus_list = create(:bus_list)
-      @questionnaire = create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
-      @questionnaire.user.update_attribute(:email, "test@example.com")
-    end
-
-    should "deliver update email" do
-      email = Mailer.bus_list_update_email(@questionnaire.id).deliver_now
-
-      assert_equal ["test@example.com"], email.to
-      assert_equal "Bus Update", email.subject
-      assert_match %r{example.com\/rsvp}, email.encoded
+    should "queue reminder bulk message" do
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        Mailer.incomplete_reminder_email(@user.id).deliver_now
+      end
     end
   end
 
   context "with customized HackathonConfig" do
     setup do
       @user = create(:user, email: "test@example.com")
+      @message = create(:message, subject: "Example Subject", body: "Hello World!")
       HackathonConfig['email_from'] = 'This is a test <test@custom.example.com>'
     end
 
     should "use customized email_from" do
-      email = Mailer.incomplete_reminder_email(@user.id).deliver_now
+      email = Mailer.bulk_message_email(@message.id, @user.id).deliver_now
 
       assert_equal ["test@custom.example.com"], email.from
     end

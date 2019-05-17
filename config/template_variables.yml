@@ -50,3 +50,7 @@ variables:
     description: Full URL to the RSVP denial page. Useful for a one-click RSVP link.
     use_value_as_example: true
     value: Rails.application.routes.url_helpers.deny_rsvp_url(Rails.application.config.action_mailer.default_url_options)
+  bus_captain_url:
+    description: Full URL to the Bus Captain page. Useful for bus captains to view & check-in passengers.
+    use_value_as_example: True
+    value: Rails.application.routes.url_helpers.bus_list_url(Rails.application.config.action_mailer.default_url_options)
