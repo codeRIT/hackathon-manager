@@ -165,6 +165,8 @@ class Message < ApplicationRecord
   end
 
   def self.for_trigger(trigger)
+    raise ArgumentError, "Unknown trigger: #{trigger}" unless POSSIBLE_TRIGGERS.include?(trigger)
+
     Message.where(trigger: trigger)
   end
 

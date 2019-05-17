@@ -339,10 +339,10 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
     should "send triggered email for other statuses" do
       questionnaire = create(:questionnaire, acc_status: 'rsvp_denied')
-      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status|
+      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status, _|
         create(:message, trigger: "questionnaire.#{acc_status}")
       end
-      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status|
+      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status, _|
         assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
           questionnaire.update_attribute(:acc_status, acc_status)
         end
