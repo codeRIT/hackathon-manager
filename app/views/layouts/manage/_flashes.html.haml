@@ -1,3 +1,11 @@
+- flash[:error] = 'This is a special error flash'
+- flash[:notice] = 'This is a regular notice flash'
+
+- if flash[:error].present?
+  .alert.alert-danger.mt-3
+    %span.fa.fa-exclamation-triangle.icon-space-r-half
+    = flash[:error].html_safe
+
 - if flash[:notice].present?
   .alert.alert-info.mt-3
     %span.fa.fa-info-circle.icon-space-r-half
