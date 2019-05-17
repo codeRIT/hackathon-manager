@@ -44,11 +44,11 @@ class Manage::MessagesController < Manage::ApplicationController
 
   def deliver
     if @message.automated?
-      flash[:notice] = "Automated messages cannot be manually delivered. Only bulk messages can."
+      flash[:error] = "Automated messages cannot be manually delivered. Only bulk messages can."
       return redirect_to manage_message_path(@message)
     end
     if @message.status != "drafted"
-      flash[:notice] = "Message cannot be re-delivered"
+      flash[:error] = "Message cannot be re-delivered"
       return redirect_to manage_messages_path
     end
     @message.update_attribute(:queued_at, Time.now)
@@ -96,7 +96,7 @@ class Manage::MessagesController < Manage::ApplicationController
   def check_message_access
     return if @message.can_edit?
 
-    flash[:notice] = "Message can no longer be modified"
+    flash[:error] = "Message can no longer be modified"
     redirect_to manage_message_path(@message)
   end
 end
