@@ -1,5 +1,6 @@
 - secret ||= false  # default value if prop not set
-- value = ENV[key]
+- default ||= nil  # default value if prop not set
+- value = ENV[key] || default
 
 %p
   %b= name

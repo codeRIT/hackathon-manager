@@ -34,7 +34,7 @@
         = render 'config_row', name: 'AWS S3 Secret Access Key', key: 'AWS_SECRET_ACCESS_KEY', secret: true
         %hr
         = render 'config_row', name: 'Domain Name', key: 'HM_DOMAIN_NAME'
-        = render 'config_row', name: 'Domain Protocol', key: 'HM_DOMAIN_PROTOCOL'
+        = render 'config_row', name: 'Domain Protocol', key: 'HM_DOMAIN_PROTOCOL', default: 'https'
         %hr
         = render 'config_row', name: 'Sparkpost API Key', key: 'SPARKPOST_API_KEY', secret: true
         = render 'config_row', name: 'Sparkpost Campaign ID', key: 'SPARKPOST_CAMPAIGN_ID'
