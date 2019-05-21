@@ -16,16 +16,16 @@ Originally developed for [BrickHack](https://github.com/codeRIT/brickhack.io), t
 
 ## Usage
 
-**_HackathonManager is in the midst of a significant change to how it's deployed. If you're looking to use this *right now,* reach out to [Stuart Olivera](https://github.com/sman591)_**
+HackathonManager is a standalone web app separate from your regular marketing website/public homepage.
 
-HackathonManager is intended to be a standalone web app separate from your regular marketing website/public homepage. A typical setup would be:
+A typical setup would be:
 
 - **brickhack.io** — Marketing site with event info, schedule, sponsors, etc and a button to apply
 - **apply.brickhack.io** — HackathonManager deployment to accept hacker applications + host management dashboard
 
 This allows your public marketing site to operate however you want it (e.g. GitHub pages) while HackathonManager lives in an isolated, consistent environment.
 
-HackathonManager uses a variety of third-party services & Ruby gems:
+HackathonManager makes use of a few different third-party services & Ruby gems:
 
 - [Devise](https://github.com/plataformatec/devise) + [MyMLH](https://my.mlh.io/) (authentication & attendee identity)
 - [Sidekiq](https://github.com/mperham/sidekiq) (background jobs)
@@ -35,11 +35,7 @@ HackathonManager uses a variety of third-party services & Ruby gems:
 - [Blazer](https://github.com/ankane/blazer) (custom SQL queries & analytics)
 - [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) (authentication via OAuth for API usage)
 
-TODO: re-write usage here
-
-## Installation
-
-TODO: re-write installation here
+See [Deployment](#Deployment) for instructions to deploy.
 
 ### Customization
 
@@ -57,7 +53,7 @@ HackathonManager supports two platforms out of the box:
 - [Dokku](http://dokku.viewdocs.io/dokku/) — A free alternative to Heroku, runs on your own virtual machine
 - _Coming soon: OKD/OpenShift — "Enterprise Kubernetes for Developers" packaged with a useful management UI + tooling_
 
-See the guides [on the Wiki](https://github.com/codeRIT/hackathon_manager/wiki).
+See the platform-specific guides [on the Wiki](https://github.com/codeRIT/hackathon_manager/wiki) to get started!
 
 HackathonManager can also be deployed the same as any other Rails app, however this is **not** natively supported and will require you to fork this repo to integrate code changes.
 
