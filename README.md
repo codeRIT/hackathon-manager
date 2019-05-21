@@ -51,7 +51,7 @@ HackathonManager supports two platforms out of the box:
 
 - [Heroku](https://www.heroku.com) — Easiest & quickest way that requires little server knowledge, however isn't cheap (free tier not recommended)
 - [Dokku](http://dokku.viewdocs.io/dokku/) — A free alternative to Heroku, runs on your own virtual machine
-- _Coming soon: OKD/OpenShift — "Enterprise Kubernetes for Developers" packaged with a useful management UI + tooling_
+- [OKD/OpenShift](https://www.okd.io) — "Enterprise Kubernetes for Developers" packaged with a useful management UI + tooling
 
 See the platform-specific guides [on the Wiki](https://github.com/codeRIT/hackathon_manager/wiki) to get started!
 
