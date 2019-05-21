@@ -51,7 +51,7 @@ class Manage::BusListsController < Manage::ApplicationController
 
   def send_update_email
     if Message.for_trigger("bus_list.notes_update").empty?
-      flash[:error] = 'Error: No automated message is configured for bus note updates!'
+      flash[:alert] = 'Error: No automated message is configured for bus note updates!'
       redirect_to [:manage, @bus_list]
       return
     end

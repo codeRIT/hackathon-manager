@@ -1,7 +1,7 @@
-- if flash[:error].present?
+- if flash[:alert].present?
   .alert.alert-danger.mt-3
     %span.fa.fa-exclamation-triangle.icon-space-r-half
-    = flash[:error].html_safe
+    = flash[:alert].html_safe
 
 - if flash[:notice].present?
   .alert.alert-info.mt-3

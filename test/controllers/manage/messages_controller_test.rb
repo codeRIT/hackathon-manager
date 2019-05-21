@@ -305,7 +305,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
-      assert_match /cannot be manually delivered/, flash[:error]
+      assert_match /cannot be manually delivered/, flash[:alert]
       assert_redirected_to manage_message_path(assigns(:message))
     end
 
@@ -313,14 +313,14 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       patch :deliver, params: { id: @message }
       assert_match /queued/, flash[:notice]
       patch :deliver, params: { id: @message }
-      assert_match /cannot/, flash[:error]
+      assert_match /cannot/, flash[:alert]
     end
 
     should "not be able to modify message after delivery" do
       @message.update_attribute(:delivered_at, 1.minute.ago)
       old_message_name = @message.name
       patch :update, params: { id: @message, message: { name: "New Message Name" } }
-      assert_match /can no longer/, flash[:error]
+      assert_match /can no longer/, flash[:alert]
       assert_equal old_message_name, @message.reload.name
     end
 

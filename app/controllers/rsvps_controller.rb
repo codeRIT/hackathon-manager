@@ -21,7 +21,7 @@ class RsvpsController < ApplicationController
       flash[:notice] = "Thank you for confirming your attendance! You're all set to attend."
       flash[:notice] += " See below for additional bus information." if BusList.any?
     else
-      flash[:error] = rsvp_error_notice
+      flash[:alert] = rsvp_error_notice
     end
     redirect_to rsvp_path
   end
@@ -34,7 +34,7 @@ class RsvpsController < ApplicationController
     if @questionnaire.save
       flash[:notice] = "Your RSVP has been updated."
     else
-      flash[:error] = rsvp_error_notice
+      flash[:alert] = rsvp_error_notice
     end
     redirect_to rsvp_path
   end
@@ -44,13 +44,13 @@ class RsvpsController < ApplicationController
   # rubocop:disable PerceivedComplexity
   def update
     unless @questionnaire.update_attributes(params.require(:questionnaire).permit(:agreement_accepted, :phone))
-      flash[:error] = @questionnaire.errors.full_messages.join(", ")
+      flash[:alert] = @questionnaire.errors.full_messages.join(", ")
       redirect_to rsvp_path
       return
     end
 
     unless ["rsvp_confirmed", "rsvp_denied"].include? params[:questionnaire][:acc_status]
-      flash[:error] = "Please select a RSVP status."
+      flash[:alert] = "Please select a RSVP status."
       redirect_to rsvp_path
       return
     end
@@ -64,9 +64,9 @@ class RsvpsController < ApplicationController
     is_joining_bus = new_bus_list.present? && @questionnaire.bus_list != new_bus_list
     if is_joining_bus && new_bus_list.full?
       if @questionnaire.bus_list_id?
-        flash[:error] = "Sorry, that bus is full. You are still signed up for the '#{@questionnaire.bus_list.name}' bus."
+        flash[:alert] = "Sorry, that bus is full. You are still signed up for the '#{@questionnaire.bus_list.name}' bus."
       else
-        flash[:error] = "Sorry, that bus is full. You may need to arrange other plans for transportation."
+        flash[:alert] = "Sorry, that bus is full. You may need to arrange other plans for transportation."
       end
     else
       @questionnaire.bus_list = new_bus_list
@@ -74,12 +74,12 @@ class RsvpsController < ApplicationController
     end
 
     unless @questionnaire.save
-      flash[:error] = @questionnaire.errors.full_message.join(", ")
+      flash[:alert] = @questionnaire.errors.full_message.join(", ")
       redirect_to rsvp_path
       return
     end
 
-    if flash[:notice].blank? && flash[:error].blank?
+    if flash[:notice].blank? && flash[:alert].blank?
       flash[:notice] = "Your RSVP has been updated."
       flash[:notice] += " See below for additional bus information!" if @questionnaire.bus_list_id?
     end

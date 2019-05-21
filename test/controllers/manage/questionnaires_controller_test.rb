@@ -377,7 +377,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal false, @questionnaire.can_share_info
       assert_equal "", @questionnaire.phone
       assert_equal "old_email@example.com", @questionnaire.email
-      assert_match /No check-in action provided/, flash[:error]
+      assert_match /No check-in action provided/, flash[:alert]
       assert_response :redirect
       assert_redirected_to manage_questionnaire_path(@questionnaire)
     end

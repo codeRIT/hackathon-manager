@@ -45,14 +45,14 @@ class Manage::SchoolsController < Manage::ApplicationController
   def perform_merge
     new_school_name = params[:school][:id]
     if new_school_name.blank?
-      flash[:error] = "Error: Must include the new school to merge into!"
+      flash[:alert] = "Error: Must include the new school to merge into!"
       render :merge
       return
     end
 
     new_school = School.where(name: new_school_name).first
     if new_school.blank?
-      flash[:error] = "Error: School doesn't exist: #{new_school_name}"
+      flash[:alert] = "Error: School doesn't exist: #{new_school_name}"
       render :merge
       return
     end
@@ -68,7 +68,7 @@ class Manage::SchoolsController < Manage::ApplicationController
     if @school.questionnaire_count < 1
       @school.destroy
     else
-      flash[:error] = "*** Old school NOT deleted: #{@school.questionnaire_count} questionnaires still associated!\n"
+      flash[:alert] = "*** Old school NOT deleted: #{@school.questionnaire_count} questionnaires still associated!\n"
     end
 
     redirect_to manage_school_path(new_school)

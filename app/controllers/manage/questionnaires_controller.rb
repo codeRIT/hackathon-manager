@@ -38,7 +38,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       if user.save
         @questionnaire.save
       else
-        flash[:error] = user.errors.full_messages.join(", ")
+        flash[:alert] = user.errors.full_messages.join(", ")
         if user.errors.include?(:email)
           @questionnaire.errors.add(:email, user.errors[:email].join(", "))
         end
@@ -70,7 +70,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
         @questionnaire.user.update_attributes(email: email)
       end
       unless @questionnaire.valid?
-        flash[:error] = @questionnaire.errors.full_messages.join(", ")
+        flash[:alert] = @questionnaire.errors.full_messages.join(", ")
         redirect_to show_redirect_path
         return
       end
@@ -82,7 +82,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
       flash[:notice] = "#{@questionnaire.full_name} no longer checked in."
     else
-      flash[:error] = "No check-in action provided!"
+      flash[:alert] = "No check-in action provided!"
       redirect_to show_redirect_path
       return
     end
@@ -106,7 +106,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   def update_acc_status
     new_status = params[:questionnaire][:acc_status]
     if new_status.blank?
-      flash[:error] = "No status provided"
+      flash[:alert] = "No status provided"
       redirect_to(manage_questionnaire_path(@questionnaire))
       return
     end
@@ -118,7 +118,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     if @questionnaire.save(validate: false)
       flash[:notice] = "Updated acceptance status to \"#{Questionnaire::POSSIBLE_ACC_STATUS[new_status]}\""
     else
-      flash[:error] = "Failed to update acceptance status"
+      flash[:alert] = "Failed to update acceptance status"
     end
 
     redirect_to manage_questionnaire_path(@questionnaire)
