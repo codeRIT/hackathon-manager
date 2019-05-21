@@ -3,10 +3,11 @@ class AdminDatatable < AjaxDatatablesRails::Base
 
   def view_columns
     @view_columns ||= {
-      id: { source: 'User.id' },
-      email: { source: 'User.email' },
-      role: { source: 'User.role', searchable: false },
-      created_at: { source: 'User.created_at', searchable: false }
+      id: { source: "User.id" },
+      email: { source: "User.email" },
+      role: { source: "User.role", searchable: false },
+      active: { source: "User.is_active", searchable: false },
+      created_at: { source: "User.created_at", searchable: false },
     }
   end
 
@@ -18,7 +19,8 @@ class AdminDatatable < AjaxDatatablesRails::Base
         id: record.id,
         email: link_to(bold(record.email), manage_admin_path(record)),
         role: record.role.titleize,
-        created_at: display_datetime(record.created_at)
+        active: record.is_active ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe,
+        created_at: display_datetime(record.created_at),
       }
     end
   end
@@ -27,5 +29,6 @@ class AdminDatatable < AjaxDatatablesRails::Base
   def get_raw_records
     User.where(role: [:admin, :admin_limited_access, :event_tracking])
   end
+
   # rubocop:enable Naming/AccessorMethodName
 end

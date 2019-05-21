@@ -38,6 +38,7 @@ var setupDataTables = function() {
       { orderable: true, data: "id", visible: false },
       { orderable: true, data: "email" },
       { orderable: true, data: "role" },
+      { orderable: true, data: "active" },
       { orderable: true, data: "created_at" }
     ]
   });

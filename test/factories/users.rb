@@ -5,6 +5,7 @@ FactoryBot.define do
     end
     password { "password" }
     role { :user }
+    is_active { true }
 
     factory :admin do
       sequence :email do |n|

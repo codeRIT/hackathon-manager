@@ -23,7 +23,7 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    true
+    super && is_active
   end
 
   def send_devise_notification(notification, *args)
@@ -59,9 +59,9 @@ class User < ApplicationRecord
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)
     matching_provider.or(matching_email).first_or_create do |user|
-      user.uid               = auth.uid
-      user.email             = auth.info.email
-      user.password          = Devise.friendly_token[0, 20]
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 

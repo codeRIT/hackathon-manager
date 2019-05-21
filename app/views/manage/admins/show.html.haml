@@ -13,5 +13,12 @@
     = @user.role.titleize
 
   %p
+    %b Login access:
+    - if @user.is_active
+      %span.badge.badge-success Active
+    - else
+      %span.badge.badge-danger Inactive
+
+  %p
     %b Registered:
     = display_datetime(@user.created_at)

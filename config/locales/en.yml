@@ -44,6 +44,7 @@ en:
         notes: Notes are shared with applicants. Supports Markdown and HTML.
       user:
         role: Limited access prevents the admin from adding, modifying, or deleting any records; modifications through the check-in process are allowed. Event tracking limits to only event tracking.
+        is_active: Deactivating a user will prevent them from logging in. Their access will be immediately revoked from the admin and application pages.
       message:
         type: Bulk emails are sent once, manually. Automated emails are sent upon a desired trigger/event.
         name: A friendly name to recognize this email. Applicants won't see this.
@@ -100,6 +101,8 @@ en:
       user:
         email: joe@example.com
     labels:
+      user:
+        is_active: Login access
       hackathon_config:
         name: Hackathon Name
         email_from: From Email
