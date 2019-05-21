@@ -160,7 +160,6 @@ ActiveRecord::Schema.define(version: 2019_02_16_203450) do
     t.string "acc_status", default: "pending"
     t.integer "acc_status_author_id"
     t.datetime "acc_status_date"
-    t.boolean "riding_bus", default: false
     t.boolean "bus_captain_interest", default: false
     t.boolean "is_bus_captain", default: false
     t.integer "checked_in_by_id"
