@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class QuestionnaireTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   should belong_to :user
   should belong_to :school
   should belong_to :bus_list
@@ -320,24 +322,24 @@ class QuestionnaireTest < ActiveSupport::TestCase
       # Two messages that shouldn't be triggered
       create(:message, trigger: "questionnaire.pending")
       create(:message, trigger: "questionnaire.waitlist")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
-        questionnaire.update_attribute(:acc_status, 'accepted')
+      assert_difference "enqueued_jobs.size", 1 do
+        questionnaire.update_attribute(:acc_status, "accepted")
       end
     end
 
     should "not send triggered email for same acceptance status" do
       questionnaire = create(:questionnaire, acc_status: 'accepted')
       create(:message, trigger: "questionnaire.accepted")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        questionnaire.update_attribute(:acc_status, 'accepted')
+      assert_difference "enqueued_jobs.size", 0 do
+        questionnaire.update_attribute(:acc_status, "accepted")
       end
     end
 
     should "not send triggered email different changed value" do
       questionnaire = create(:questionnaire, acc_status: 'accepted')
       create(:message, trigger: "questionnaire.accepted")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        questionnaire.update_attribute(:first_name, 'foo bar baz')
+      assert_difference "enqueued_jobs.size", 0 do
+        questionnaire.update_attribute(:first_name, "foo bar baz")
       end
     end
 
@@ -347,7 +349,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
         create(:message, trigger: "questionnaire.#{acc_status}")
       end
       Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status, _|
-        assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        assert_difference "enqueued_jobs.size", 1 do
           questionnaire.update_attribute(:acc_status, acc_status)
         end
       end
@@ -355,8 +357,8 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
     should "send triggered email on creation" do
       create(:message, trigger: "questionnaire.pending")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 2 do
-        create(:questionnaire, acc_status: 'pending')
+      assert_difference "enqueued_jobs.size", 2 do
+        create(:questionnaire, acc_status: "pending")
       end
     end
   end

@@ -5,7 +5,7 @@ guard :minitest, all_on_start: false, all_after_pass: false, spring: "bin/rails 
   watch(%r{^app/mailers/(.+)\.rb$})                              { |m| "test/controllers/#{m[1]}_test.rb" }
   watch(%r{^app/controllers/(.+)\.rb$})                          { |m| "test/controllers/#{m[1]}_test.rb" }
   watch(%r{^app/views/(.+)\/.+$})                                { |m| "test/controllers/#{m[1]}_controller_test.rb" }
-  watch(%r{^app/workers/(.+)\.rb$})                              { |m| "test/workers/#{m[1]}_test.rb" }
+  watch(%r{^app/jobs/(.+)\.rb$})                                 { |m| "test/jobs/#{m[1]}_test.rb" }
   watch(%r{^app/views/layouts/.+$})                              { "test/controllers" }
   watch(%r{^app/views/.+\.rb$})                                  { "test/integration" }
   watch(%r{^test/.+_test.rb$})

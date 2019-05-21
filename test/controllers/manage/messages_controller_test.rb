@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class Manage::MessagesControllerTest < ActionController::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @message = create(:message)
   end
@@ -54,7 +56,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "not deliver message" do
-      assert_difference('BulkMessageWorker.jobs.size', 0) do
+      assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
       assert_response :redirect
@@ -138,7 +140,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "not deliver message" do
-      assert_difference('BulkMessageWorker.jobs.size', 0) do
+      assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
       assert_response :redirect
@@ -219,7 +221,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "not deliver message" do
-      assert_difference('BulkMessageWorker.jobs.size', 0) do
+      assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
       assert_response :redirect
@@ -291,7 +293,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "deliver a bulk message" do
-      assert_difference('BulkMessageWorker.jobs.size', 1) do
+      assert_difference("enqueued_jobs.size", 1) do
         patch :deliver, params: { id: @message }
       end
       assert_match /queued/, flash[:notice]
@@ -299,8 +301,8 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "not deliver an automated message" do
-      @message.update_attribute(:type, 'automated')
-      assert_difference('BulkMessageWorker.jobs.size', 0) do
+      @message.update_attribute(:type, "automated")
+      assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
       assert_match /cannot be manually delivered/, flash[:error]

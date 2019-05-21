@@ -1,6 +1,8 @@
-require 'test_helper'
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   should strip_attribute :email
 
   should validate_uniqueness_of :email
@@ -54,14 +56,13 @@ class UserTest < ActiveSupport::TestCase
 
   context "queue_reminder_email" do
     setup do
-      ActionMailer::Base.deliveries = []
-      Sidekiq::Extensions::DelayedMailer.jobs.clear
+      clear_enqueued_jobs
     end
 
     should "queue an email to be sent out" do
       user = create(:user)
       user.queue_reminder_email
-      assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_equal 1, enqueued_jobs.size
     end
 
     should "only queue email once" do
@@ -69,7 +70,7 @@ class UserTest < ActiveSupport::TestCase
       user.queue_reminder_email
       user.queue_reminder_email
       user.queue_reminder_email
-      assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_equal 1, enqueued_jobs.size
     end
   end
 
@@ -99,7 +100,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   should "queue reminder email" do
-    assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+    assert_difference "enqueued_jobs.size", 1 do
       create(:user)
     end
   end

@@ -1,6 +1,8 @@
-require 'test_helper'
+require "test_helper"
 
 class Manage::BusListsControllerTest < ActionController::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @bus_list = create(:bus_list)
   end
@@ -44,8 +46,8 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_bus_lists#toggle_bus_captain" do
       questionnaire = create(:questionnaire)
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      assert_difference "enqueued_jobs.size", 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       end
       assert_equal false, questionnaire.reload.is_bus_captain
       assert_response :redirect
@@ -53,7 +55,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_bus_lists#send_update_email" do
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+      assert_difference "enqueued_jobs.size", 0 do
         patch :send_update_email, params: { id: @bus_list }
       end
       assert_response :redirect
@@ -112,8 +114,8 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_bus_lists#toggle_bus_captain" do
       questionnaire = create(:questionnaire)
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      assert_difference "enqueued_jobs.size", 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       end
       assert_equal false, questionnaire.reload.is_bus_captain
       assert_response :redirect
@@ -121,7 +123,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_bus_lists#send_update_email" do
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+      assert_difference "enqueued_jobs.size", 0 do
         patch :send_update_email, params: { id: @bus_list }
       end
       assert_response :redirect
@@ -178,8 +180,8 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_bus_lists#toggle_bus_captain" do
       questionnaire = create(:questionnaire)
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      assert_difference "enqueued_jobs.size", 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       end
       assert_equal false, questionnaire.reload.is_bus_captain
       assert_response :redirect
@@ -187,7 +189,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_bus_lists#send_update_email" do
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+      assert_difference "enqueued_jobs.size", 0 do
         patch :send_update_email, params: { id: @bus_list }
       end
       assert_response :redirect
@@ -230,14 +232,14 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "render markdown in manage_bus_lists#show" do
-      @bus_list.update_attribute(:notes, '### This is a title')
+      @bus_list.update_attribute(:notes, "### This is a title")
       get :show, params: { id: @bus_list }
       assert_response :success
       assert_select "fieldset h3", "This is a title"
     end
 
     should "render html in manage_bus_lists#show" do
-      @bus_list.update_attribute(:notes, '<h3>This is a title</h3>')
+      @bus_list.update_attribute(:notes, "<h3>This is a title</h3>")
       get :show, params: { id: @bus_list }
       assert_response :success
       assert_select "fieldset h3", "This is a title"
@@ -255,7 +257,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "make questionnaire a bus captain" do
       questionnaire = create(:questionnaire)
-      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       assert_equal true, questionnaire.reload.is_bus_captain
       assert_response :redirect
       assert_redirected_to manage_bus_list_path(@bus_list)
@@ -263,16 +265,16 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "send message to notify bus captain" do
       questionnaire = create(:questionnaire)
-      create(:message, type: 'automated', trigger: 'bus_list.new_captain_confirmation')
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
-        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      create(:message, type: "automated", trigger: "bus_list.new_captain_confirmation")
+      assert_difference "enqueued_jobs.size", 1 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       end
     end
 
     should "remove questionnaire from being a bus captain" do
       questionnaire = create(:questionnaire)
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '0' }
+      assert_difference "enqueued_jobs.size", 0 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "0" }
       end
       assert_equal false, questionnaire.reload.is_bus_captain
       assert_response :redirect
@@ -280,9 +282,9 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "send email upon manage_bus_lists#send_update_email" do
-      create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
-      create(:message, type: 'automated', trigger: 'bus_list.notes_update')
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id)
+      create(:message, type: "automated", trigger: "bus_list.notes_update")
+      assert_difference "enqueued_jobs.size", 1 do
         patch :send_update_email, params: { id: @bus_list }
       end
       assert_response :redirect
@@ -291,7 +293,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     context "#destroy" do
       should "destroy bus_list" do
-        assert_difference('BusList.count', -1) do
+        assert_difference("BusList.count", -1) do
           patch :destroy, params: { id: @bus_list }
         end
         assert_redirected_to manage_bus_lists_path

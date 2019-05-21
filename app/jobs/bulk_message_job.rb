@@ -1,16 +1,15 @@
-class BulkMessageWorker
-  include Sidekiq::Worker
+class BulkMessageJob < ApplicationJob
+  queue_as :default
 
-  def perform(message_id)
-    message = Message.find(message_id)
-    return unless message.present? && message.status == "queued"
+  def perform(message)
+    return unless message.status == "queued"
 
     message.update_attribute(:started_at, Time.now)
 
     recipients = self.class.build_recipients(message.recipients)
 
     recipients.each do |recipient|
-      Mailer.delay.bulk_message_email(message.id, recipient)
+      Mailer.bulk_message_email(message.id, recipient).deliver_later
     end
 
     message.update_attribute(:delivered_at, Time.now)
