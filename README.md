@@ -5,7 +5,7 @@
 [![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager/coverage)
 [![security](https://hakiri.io/github/codeRIT/hackathon_manager/master.svg)](https://hakiri.io/github/codeRIT/hackathon_manager/master)
 
-Originally developed for [BrickHack](https://github.com/codeRIT/brickhack.io), this is a Ruby on Rails web application for managing hackathons.
+An all-in-one platform for managing hackathon registration & logistics, originally developed for [BrickHack](https://github.com/codeRIT/brickhack.io).
 
 - **Hacker applications:** Enable hackers to apply to your hackathon while providing all relevant information (contact info, school, demographics, etc)
 - **MyMLH support:** Streamline the application process when users log in with [MyMLH](https://my.mlh.io/), a common platform for applying to any MLH hackathon. Basic info is pre-filled based on a common application, so hackers don't have to re-type it every time.
