@@ -12,3 +12,9 @@ amazon:
   secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
   region: <%= ENV["AWS_REGION"] %>
   bucket: <%= ENV["AWS_BUCKET"] %>
+  <% if ENV["AWS_ENDPOINT"].present? %>
+  endpoint: <%= ENV["AWS_ENDPOINT"] %>
+  <% end %>
+  <% if ENV["S3_FORCE_PATH_STYLE"] == "true" %>
+  force_path_style: true
+  <% end %>
