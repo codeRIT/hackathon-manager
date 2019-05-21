@@ -1,3 +1,5 @@
+# Originally adapted from https://github.com/thoughtbot/paperclip/blob/master/lib/paperclip/matchers/have_attached_file_matcher.rb
+
 module HackathonManager
   module Shoulda
     module Matchers
