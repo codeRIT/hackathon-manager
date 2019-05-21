@@ -7,7 +7,6 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Simple Transactional Email</title>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -147,45 +146,20 @@
       }
 
       /* -------------------------------------
-          BUTTONS
+          BUTTON
       ------------------------------------- */
-      .btn {
-        box-sizing: border-box;
-        width: 100%; }
-        .btn > tbody > tr > td {
-          padding-bottom: 15px; }
-        .btn table {
-          width: auto;
-      }
-        .btn table td {
-          background-color: #ffffff;
-          border-radius: 5px;
-          text-align: center;
-      }
-        .btn a {
-          background-color: #ffffff;
-          border: solid 1px #3498db;
-          border-radius: 5px;
-          box-sizing: border-box;
-          color: #3498db;
-          cursor: pointer;
-          display: inline-block;
-          font-size: 14px;
-          font-weight: bold;
-          margin: 0;
-          padding: 12px 25px;
-          text-decoration: none;
-          text-transform: capitalize;
-      }
-
-      .btn-primary table td {
-        background-color: #3498db;
-      }
-
-      .btn-primary a {
-        background-color: #3498db;
-        border-color: #3498db;
+      .button {
+        background: #3498db;
+        border: 1px solid #3498db;
+        display: inline-block;
+        padding: 0.6em 1.3em;
+        font-size: 15px;
+        letter-spacing: 0.07em;
         color: #ffffff;
+        font-weight: 600;
+        margin: 0.25em 0 0.25em;
+        text-decoration: none;
+        border-radius: 3px;
       }
 
       /* -------------------------------------
@@ -325,7 +299,7 @@
 
     </style>
   </head>
-  <body class="">
+  <body>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -336,9 +310,7 @@
             <% end %>
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <!-- <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span> -->
             <table role="presentation" class="main">
-
               <!-- START MAIN CONTENT AREA -->
               <tr>
                 <td class="wrapper">
@@ -351,8 +323,7 @@
                   </table>
                 </td>
               </tr>
-
-            <!-- END MAIN CONTENT AREA -->
+              <!-- END MAIN CONTENT AREA -->
             </table>
 
             <!-- START FOOTER -->

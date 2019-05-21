@@ -1,0 +1,56 @@
+sections:
+  user:
+    description: The email recipient
+  buslist:
+    description: The bus list specified for the email, or the bus list a recipient is signed up for.
+variables:
+  first_name:
+    description: The recipient's first name, if it exists
+    example: John
+    value: user&.first_name
+  last_name:
+    description: The recipient's last name, if it exists
+    example: Smith
+    value: user&.last_name
+
+  bus_list_exists?:
+    description: True/false if bus list information is available. Useful for optionally including bus content in emails.
+    example: true
+    value: bus_list.present?
+  bus_list_name:
+    description: The bus list's name.
+    example: Toronto & Buffalo Bus
+    value: bus_list&.name
+  bus_list_notes:
+    description: The bus list's bus notes
+    example: |
+      **Some notes for your bus:**
+
+      Picks up at 8:00am
+    value: bus_list&.name
+
+  hackathon_name:
+    description: Name of the hackathon
+    use_value_as_example: true
+    value: HackathonConfig['name']
+
+  apply_url:
+    description: Full URL of the apply page. Useful for links.
+    use_value_as_example: true
+    value: Rails.application.routes.url_helpers.root_url(Rails.application.config.action_mailer.default_url_options)
+  rsvp_url:
+    description: Full URL of RSVP page. Useful for links.
+    use_value_as_example: true
+    value: Rails.application.routes.url_helpers.rsvp_url(Rails.application.config.action_mailer.default_url_options)
+  rsvp_accept_url:
+    description: Full URL to the RSVP acceptance page. Useful for a one-click RSVP link.
+    use_value_as_example: true
+    value: Rails.application.routes.url_helpers.accept_rsvp_url(Rails.application.config.action_mailer.default_url_options)
+  rsvp_deny_url:
+    description: Full URL to the RSVP denial page. Useful for a one-click RSVP link.
+    use_value_as_example: true
+    value: Rails.application.routes.url_helpers.deny_rsvp_url(Rails.application.config.action_mailer.default_url_options)
+  bus_captain_url:
+    description: Full URL to the Bus Captain page. Useful for bus captains to view & check-in passengers.
+    use_value_as_example: True
+    value: Rails.application.routes.url_helpers.bus_list_url(Rails.application.config.action_mailer.default_url_options)

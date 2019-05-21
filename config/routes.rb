@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   mount MailPreview => 'mail_view' if Rails.env.development?
 
+  root to: 'questionnaires#show'
+
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
     mount Blazer::Engine, at: "blazer"

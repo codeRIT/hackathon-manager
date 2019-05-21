@@ -11,7 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    flash[:notice] = "External authentication failed - try again?"
+    flash[:error] = "External authentication failed - try again?"
     redirect_to new_user_session_url
   end
 end

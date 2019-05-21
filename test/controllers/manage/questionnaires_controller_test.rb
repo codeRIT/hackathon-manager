@@ -3,6 +3,7 @@ require 'test_helper'
 class Manage::QuestionnairesControllerTest < ActionController::TestCase
   setup do
     @questionnaire = create(:questionnaire)
+    stub_request(:get, /api.sparkpost.com.*/).to_return(status: 200, body: "", headers: {})
   end
 
   context "while not authenticated" do
@@ -374,7 +375,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal false, @questionnaire.can_share_info
       assert_equal "", @questionnaire.phone
       assert_equal "old_email@example.com", @questionnaire.email
-      assert_match /No check-in action provided/, flash[:notice]
+      assert_match /No check-in action provided/, flash[:error]
       assert_response :redirect
       assert_redirected_to manage_questionnaire_path(@questionnaire)
     end

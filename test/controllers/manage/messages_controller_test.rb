@@ -303,7 +303,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_difference('BulkMessageWorker.jobs.size', 0) do
         patch :deliver, params: { id: @message }
       end
-      assert_match /Automated/, flash[:notice]
+      assert_match /cannot be manually delivered/, flash[:error]
       assert_redirected_to manage_message_path(assigns(:message))
     end
 
@@ -311,14 +311,14 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       patch :deliver, params: { id: @message }
       assert_match /queued/, flash[:notice]
       patch :deliver, params: { id: @message }
-      assert_match /cannot/, flash[:notice]
+      assert_match /cannot/, flash[:error]
     end
 
     should "not be able to modify message after delivery" do
       @message.update_attribute(:delivered_at, 1.minute.ago)
       old_message_name = @message.name
       patch :update, params: { id: @message, message: { name: "New Message Name" } }
-      assert_match /can no longer/, flash[:notice]
+      assert_match /can no longer/, flash[:error]
       assert_equal old_message_name, @message.reload.name
     end
 
@@ -356,6 +356,19 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       get :preview, params: { id: @message }
       assert_response :success
       assert_select "h3", "This is a title"
+    end
+
+    should "render template variables in manage_messages#preview" do
+      @message.update_attribute(:body, '### Hello, {{first_name}}!')
+      get :preview, params: { id: @message }
+      assert_response :success
+      assert_select "h3", "Hello, John!"
+    end
+
+    should "render template variables in manage_messages#live_preview" do
+      get :live_preview, params: { body: '### {{first_name}} {{last_name}}' }
+      assert_response :success
+      assert_select "h3", "John Smith"
     end
 
     context "manage_messages#duplicate" do

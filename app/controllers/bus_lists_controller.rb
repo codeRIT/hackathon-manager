@@ -5,8 +5,6 @@ class BusListsController < ApplicationController
   before_action :find_bus_list
   before_action :require_bus_captain
 
-  layout 'hackathon_manager/application'
-
   def logged_in
     authenticate_user!
   end

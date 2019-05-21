@@ -4,6 +4,7 @@ class BulkMessageWorker
   def perform(message_id)
     message = Message.find(message_id)
     return unless message.present? && message.status == "queued"
+
     message.update_attribute(:started_at, Time.now)
 
     recipients = self.class.build_recipients(message.recipients)
@@ -27,8 +28,10 @@ class BulkMessageWorker
   def self.user_ids(type)
     case type
     when "all"
-      User.non_admins.pluck(:id)
+      # Everyone, including admins that completed a questionnaire
+      User.non_admins.pluck(:id) + Questionnaire.pluck(:user_id)
     when "incomplete"
+      # Incomplete applications, excluding admins that don't have a questionnaire
       User.non_admins.pluck(:id) - Questionnaire.pluck(:user_id)
     when "complete"
       Questionnaire.pluck(:user_id)
@@ -74,6 +77,7 @@ class BulkMessageWorker
       result = Blazer::RunStatement.new.perform(Blazer.data_sources[model.data_source], model.statement)
       user_id_column = result.columns.index("user_id")
       raise "Blazer query is missing required \"user_id\" column" unless user_id_column.present?
+
       result.rows.map { |row| row[user_id_column] }
     else
       raise "Unknown recipient query type: #{recipient_query.type.inspect} (in message recipient query: #{type.inspect}"

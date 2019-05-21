@@ -255,12 +255,18 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "make questionnaire a bus captain" do
       questionnaire = create(:questionnaire)
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
-        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
-      end
+      patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
       assert_equal true, questionnaire.reload.is_bus_captain
       assert_response :redirect
       assert_redirected_to manage_bus_list_path(@bus_list)
+    end
+
+    should "send message to notify bus captain" do
+      questionnaire = create(:questionnaire)
+      create(:message, type: 'automated', trigger: 'bus_list.new_captain_confirmation')
+      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: '1' }
+      end
     end
 
     should "remove questionnaire from being a bus captain" do
@@ -275,6 +281,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "send email upon manage_bus_lists#send_update_email" do
       create(:questionnaire, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id)
+      create(:message, type: 'automated', trigger: 'bus_list.notes_update')
       assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
         patch :send_update_email, params: { id: @bus_list }
       end

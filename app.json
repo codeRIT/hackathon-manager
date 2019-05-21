@@ -1,0 +1,83 @@
+{
+  "name": "HackathonManager",
+  "description": "All-in-one platform for managing hackathon registration & logistics",
+  "keywords": ["hackathons", "ruby on rails", "registration"],
+  "website": "https://github.com/codeRIT/hackathon_manager",
+  "repository": "https://github.com/codeRIT/hackathon_manager",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "bin/rails db:migrate",
+    "dokku": {
+      "predeploy": "bin/rails db:create",
+      "postdeploy": "bin/rails db:migrate"
+    }
+  },
+  "env": {
+    "DEVISE_SECRET_KEY": {
+      "description": "A randomly-generated secret key for devise authentication.",
+      "generator": "secret",
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "description": "A randomly-generated secret key for verifying the integrity of signed cookies.",
+      "generator": "secret",
+      "required": true
+    },
+    "MLH_KEY": {
+      "description": "MyMLH Application ID from https://my.mlh.io/oauth/applications",
+      "required": false
+    },
+    "MLH_SECRET": {
+      "description": "MyMLH Secret from https://my.mlh.io/oauth/applications",
+      "required": false
+    },
+    "AWS_BUCKET": {
+      "description": "S3 bucket to store resumes in",
+      "required": false
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "description": "AWS Access Key ID to store resumes via S3",
+      "required": false
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "description": "AWS Secret Access Key to store resumes via S3",
+      "required": false
+    },
+    "AWS_REGION": {
+      "description": "AWS Secret Access Key to store resumes via S3",
+      "value": "us-east-1",
+      "required": true
+    },
+    "ROLLBAR_ACCESS_TOKEN": {
+      "description": "Rollbar access token for code exception reporting",
+      "required": false
+    },
+    "SPARKPOST_API_KEY": {
+      "description": "Sparkpost API key for sending email",
+      "required": false
+    },
+    "SPARKPOST_CAMPAIGN_ID": {
+      "description": "Sparkpost campaign ID for sending email (e.g. the name of your hackathon)",
+      "required": false
+    },
+    "HM_DOMAIN_NAME": {
+      "description": "Domain name hosting the website (e.g. apply.example.com)",
+      "required": true
+    }
+  },
+  "addons": [
+    {
+      "plan": "jawsdb",
+      "as": "DATABASE"
+    },
+    {
+      "plan": "heroku-redis",
+      "as": "REDIS"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

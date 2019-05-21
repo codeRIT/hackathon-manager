@@ -1,0 +1,13 @@
+- if flash[:error].present?
+  .flashes.flashes--error
+    .container
+      .form-container
+        %span.fa.fa-info-circle.flashes__icon
+        = flash[:error].html_safe
+
+- if flash[:notice].present?
+  .flashes
+    .container
+      .form-container
+        %span.fa.fa-info-circle.flashes__icon
+        = flash[:notice].html_safe

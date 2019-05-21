@@ -4,8 +4,6 @@ class QuestionnairesController < ApplicationController
   before_action :logged_in
   before_action :find_questionnaire, only: [:show, :update, :edit, :destroy]
 
-  layout 'hackathon_manager/application'
-
   def logged_in
     authenticate_user!
   end
