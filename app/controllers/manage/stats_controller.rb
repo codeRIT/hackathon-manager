@@ -31,13 +31,13 @@ class Manage::StatsController < Manage::ApplicationController
   def sponsor_info
     data = Rails.cache.fetch(cache_key_for_questionnaires("sponsor_info")) do
       select_attributes = [
+        :id,
         :first_name,
         :last_name,
         :vcs_url,
         :portfolio_url,
         :user_id,
-        :school_id,
-        :resume_file_name
+        :school_id
       ]
       json_attributes = [
         :first_name,
@@ -47,9 +47,9 @@ class Manage::StatsController < Manage::ApplicationController
         :vcs_url,
         :portfolio_url
       ]
-      data = Questionnaire.where("can_share_info = '1' AND checked_in_at != 0").select(select_attributes)
+      data = Questionnaire.where("can_share_info = '1' AND checked_in_at != 0").joins(:resume_attachment).select(select_attributes)
       json = to_json_array(data, json_attributes)
-      json.map.with_index { |item, index| item.insert(5, data[index].resume? ? data[index].resume.url : '') }
+      json.map.with_index { |item, index| item.insert(6, data[index].resume.attached? ? url_for(data[index].resume) : '') }
     end
     render json: { data: data }
   end

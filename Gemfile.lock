@@ -103,7 +103,6 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
-    climate_control (0.2.0)
     codeclimate-test-reporter (0.6.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.2)
@@ -152,6 +151,9 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
+    file_validators (2.3.0)
+      activemodel (>= 3.2)
+      mime-types (>= 1.0)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
     formatador (0.2.5)
@@ -265,12 +267,6 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paperclip (6.1.0)
-      activemodel (>= 4.2.0)
-      activesupport (>= 4.2.0)
-      mime-types
-      mimemagic (~> 0.3.0)
-      terrapin (~> 0.6.0)
     popper_js (1.14.5)
     power_assert (1.1.4)
     pry (0.12.2)
@@ -413,8 +409,6 @@ GEM
     strip_attributes (1.9.0)
       activemodel (>= 3.0, < 7.0)
     temple (0.8.1)
-    terrapin (0.6.0)
-      climate_control (>= 0.0.3, < 1.0)
     test-unit (3.3.3)
       power_assert
     thor (0.20.3)
@@ -470,6 +464,7 @@ DEPENDENCIES
   doorkeeper (~> 5.0)
   dotenv-rails
   factory_bot_rails
+  file_validators
   font-awesome-rails (~> 4.0)
   groupdate
   guard
@@ -484,7 +479,6 @@ DEPENDENCIES
   mustache (~> 1.0)
   mysql2 (>= 0.4.4, < 0.6.0)
   omniauth-mlh (~> 0.1)
-  paperclip (~> 6.0)
   puma (~> 3.11)
   rails (~> 5.2.2)
   rails-controller-testing

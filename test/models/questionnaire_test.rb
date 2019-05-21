@@ -85,19 +85,23 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should_not allow_value("foo").for(:acc_status)
 
   should have_attached_file(:resume)
-  should validate_attachment_content_type(:resume)
-    .allowing('application/pdf')
-    .rejecting('text/plain', 'image/png', 'image/jpg', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-  should validate_attachment_size(:resume).less_than(2.megabytes)
 
-  should "allow deletion of attachment via method" do
+  should "allow attachment of resume" do
     questionnaire = create(:questionnaire)
-    questionnaire.resume = sample_file
-    assert_equal "sample_pdf.pdf", questionnaire.resume_file_name
+    questionnaire.resume.attach(io: sample_file, filename: 'sample_pdf.pdf')
+    questionnaire.reload
+    assert_equal true, questionnaire.resume.attached?
+    assert_equal "sample_pdf.pdf", questionnaire.resume.filename.to_s
+  end
+
+  should "allow deletion via delete_resume attribute" do
+    questionnaire = create(:questionnaire)
+    questionnaire.resume.attach(io: sample_file, filename: 'sample_pdf.pdf')
+    questionnaire.reload
+    assert_equal true, questionnaire.resume.attached?
     questionnaire.delete_resume = "1"
     questionnaire.save
-    assert_equal false, questionnaire.resume?
-    assert_nil questionnaire.resume_file_name
+    assert_equal false, questionnaire.resume.attached?
   end
 
   should allow_value('foo.com').for(:portfolio_url)

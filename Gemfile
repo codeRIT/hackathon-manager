@@ -46,8 +46,8 @@ gem 'doorkeeper', '~> 5.0'
 gem 'devise-doorkeeper'
 
 # User uploads
-gem 'paperclip', '~> 6.0'
-gem 'aws-sdk-s3'
+gem "aws-sdk-s3", require: false
+gem "file_validators"
 
 # Templating utilities
 gem 'haml-rails', '~> 1.0'

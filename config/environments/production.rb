@@ -39,7 +39,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -102,15 +102,4 @@ Rails.application.configure do
   mailer_url_protocol = ENV["HM_PROTOCOL"].presence || 'https'
   config.action_mailer.default_url_options = { host: mailer_url_host, protocol: mailer_url_protocol }
   config.action_mailer.asset_host = "#{mailer_url_protocol}://#{mailer_url_host}"
-
-  # Paperclip
-  config.paperclip_defaults = {
-    storage: :s3,
-    bucket: ENV['AWS_BUCKET'],
-    s3_credentials: {
-      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-    },
-    s3_region: ENV['AWS_REGION']
-  }
 end

@@ -22,8 +22,8 @@ require "minitest/reporters"
 require "valid_attribute"
 require "factory_bot_rails"
 require "sidekiq/testing"
-require "paperclip/matchers"
 require "webmock/minitest"
+require_relative './matchers'
 
 Minitest::Reporters.use!
 if ENV["RUN_COVERAGE"] == "travis"
@@ -43,7 +43,7 @@ class ActiveSupport::TestCase
   extend StripAttributes::Matchers
   include ValidAttribute::Method
   include FactoryBot::Syntax::Methods
-  extend Paperclip::Shoulda::Matchers
+  extend HackathonManager::Shoulda::Matchers
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all

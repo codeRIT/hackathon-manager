@@ -91,7 +91,7 @@
             = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : not_provided
           %dt.col-md-4 Resume
           %dd.col-md-8
-            = @questionnaire.resume? ? link_to("Download &raquo;".html_safe, @questionnaire.resume.url) : not_provided
+            = @questionnaire.resume.attached? ? link_to("Download &raquo;".html_safe, @questionnaire.resume) : not_provided
 
     .card.mb-3
       .card-header Education
