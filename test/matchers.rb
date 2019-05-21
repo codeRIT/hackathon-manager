@@ -8,16 +8,16 @@ module HackathonManager
       #   describe User do
       #     it { should have_attached_file(:avatar) }
       #   end
-      def have_attached_file name
+      def have_attached_file(name)
         HaveAttachedFileMatcher.new(name)
       end
 
       class HaveAttachedFileMatcher
-        def initialize attachment_name
+        def initialize(attachment_name)
           @attachment_name = attachment_name
         end
 
-        def matches? subject
+        def matches?(subject)
           @subject = subject
           responds?
         end
@@ -29,6 +29,7 @@ module HackathonManager
         def failure_message_when_negated
           "Should not have an attachment named #{@attachment_name}"
         end
+
         alias negative_failure_message failure_message_when_negated
 
         def description
