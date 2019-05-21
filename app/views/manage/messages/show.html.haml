@@ -1,6 +1,6 @@
 :ruby
   begin
-    recipient_count = pluralize(BulkMessageWorker.build_recipients(@message.recipients).count, "recipient")
+    recipient_count = pluralize(BulkMessageJob.build_recipients(@message.recipients).count, "recipient")
   rescue => recipient_error
   end
 

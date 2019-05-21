@@ -23,24 +23,18 @@ class Mailer < ApplicationMailer
     Message.queue_for_trigger("user.24hr_incomplete_application", @user.id)
   end
 
+  rescue_from SparkPostRails::DeliveryException do |e|
+    error_codes_to_not_retry = [
+      "1902" # Generation rejection
+    ]
+    raise e unless e.blank? || error_codes_to_not_retry.include?(e.service_code)
+  end
+
   private
 
   def pretty_email(name, email)
     return email if name.blank?
 
     "\"#{name}\" <#{email}>"
-  end
-
-  def mail_questionnaire(subject, sparkpost_data = {})
-    mail(
-      to: pretty_email(@questionnaire.full_name, @questionnaire.user.email),
-      subject: subject,
-      sparkpost_data: sparkpost_data
-    )
-  rescue SparkPostRails::DeliveryException => e
-    error_code_to_not_retry = [
-      "1902" # Generation rejection
-    ]
-    raise e unless e.blank? || error_code_to_not_retry.include?(e.service_code)
   end
 end
