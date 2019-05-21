@@ -5,6 +5,13 @@
         %span.fa.fa-info-circle.flashes__icon
         = flash[:error].html_safe
 
+- if flash[:alert].present?
+  .flashes.flashes--error
+    .container
+      .form-container
+        %span.fa.fa-info-circle.flashes__icon
+        = flash[:alert].html_safe
+
 - if flash[:notice].present?
   .flashes
     .container
