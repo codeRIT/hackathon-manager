@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  docusaurus:
+    build:
+      context: ../
+      dockerfile: Dockerfile-website
+    ports:
+      - 3000:3000
+      - 35729:35729
+    volumes:
+      - ../docs:/app/docs
+      - ./blog:/app/website/blog
+      - ./core:/app/website/core
+      - ./i18n:/app/website/i18n
+      - ./pages:/app/website/pages
+      - ./static:/app/website/static
+      - ./sidebars.json:/app/website/sidebars.json
+      - ./siteConfig.js:/app/website/siteConfig.js
+    working_dir: /app/website
