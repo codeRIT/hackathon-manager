@@ -58,7 +58,7 @@ const siteConfig = {
   /* path to images for header/footer */
   headerIcon: 'img/coderit-square.svg',
   footerIcon: 'img/coderit-square.svg',
-  // favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   /* Colors for website */
   colors: {
