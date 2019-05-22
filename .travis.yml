@@ -21,4 +21,4 @@ deploy:
   provider: script
   script: bash website/travis-deploy.sh
   on:
-    branch: docusaurus
+    branch: master

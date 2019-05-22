@@ -36,7 +36,7 @@ const siteConfig = {
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
-  editUrl: 'https://github.com/codeRIT/hackathon-manager/edit/docusaurus/docs/',
+  editUrl: 'https://github.com/codeRIT/hackathon-manager/edit/master/docs/',
 
   // Used for publishing and more
   projectName: 'hackathon-manager',
