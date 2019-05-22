@@ -93,7 +93,7 @@ class Index extends React.Component {
         {[
           {
             content:
-              'HackathonManager is the product of running multiple hackathons over the past 5 years',
+              'HackathonManager is the product of running various hackathons over the past 5 years',
             image: `${baseUrl}img/undraw_predictive_analytics_kf9n.svg`,
             imageAlign: 'top',
             title: 'Battle-tested',
