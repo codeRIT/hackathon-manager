@@ -16,7 +16,7 @@ script:
   - bin/rails coverage:report
 addons:
   code_climate:
-    repo_token: 702251f0d6eb1f569078a27c4ae3366b1e48c4c6d7e4dd3ae0ca3583fd2bc8db
+    repo_token: a42e116d4d68894b025a60cb722a0b9ba2cf1c6497debb02993d0702284d2511
 deploy:
   provider: script
   script: bash website/travis-deploy.sh
