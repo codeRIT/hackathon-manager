@@ -1,6 +1,7 @@
 {
   "docs": {
     "HackathonManager": ["running-a-hackathon", "busses", "questionnaires"],
+    "API Usage": ["api"],
     "Deployment": [
       "deployment",
       "deployment-dokku",
