@@ -1,9 +1,9 @@
 # HackathonManager
 
-[![Build Status](https://travis-ci.org/codeRIT/hackathon_manager.svg?branch=master)](https://travis-ci.org/codeRIT/hackathon_manager)
-[![Code Climate](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/gpa.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager)
-[![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon_manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon_manager/coverage)
-[![security](https://hakiri.io/github/codeRIT/hackathon_manager/master.svg)](https://hakiri.io/github/codeRIT/hackathon_manager/master)
+[![Build Status](https://travis-ci.org/codeRIT/hackathon-manager.svg?branch=master)](https://travis-ci.org/codeRIT/hackathon-manager)
+[![Code Climate](https://codeclimate.com/github/codeRIT/hackathon-manager/badges/gpa.svg)](https://codeclimate.com/github/codeRIT/hackathon-manager)
+[![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon-manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon-manager/coverage)
+[![security](https://hakiri.io/github/codeRIT/hackathon-manager/master.svg)](https://hakiri.io/github/codeRIT/hackathon-manager/master)
 
 An all-in-one platform for managing hackathon registration & logistics, originally developed for [BrickHack](https://github.com/codeRIT/brickhack.io).
 
@@ -64,8 +64,8 @@ Pre-requisite: Have a functioning, local Ruby + MySQL development environment. [
 1. Clone the repo
 
 ```bash
-$ git clone git@github.com:codeRIT/hackathon_manager
-$ cd hackathon_manager
+$ git clone git@github.com:codeRIT/hackathon-manager
+$ cd hackathon-manager
 ```
 
 2. Install dependencies
@@ -91,7 +91,7 @@ $ bin/rails s  # short for bin/rails server
 5. In another bash window, promote your user to an admin
 
 ```bash
-$ cd hackathon_manager
+$ cd hackathon-manager
 $ bin/rails c  # short for bin/rails console
 # Wait for the console to start...
 Loading development environment (Rails 5.1.1)
