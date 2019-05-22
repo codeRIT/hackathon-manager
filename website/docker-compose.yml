@@ -6,7 +6,7 @@ services:
       context: ../
       dockerfile: Dockerfile-website
     ports:
-      - 3000:3000
+      - 4000:4000
       - 35729:35729
     volumes:
       - ../docs:/app/docs
