@@ -3,11 +3,7 @@
 <url> <loc>https://codeRIT.org/hackathon-manager/help</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/en/help" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/index</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/en/index" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/users</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/en/users" /> </url>
-<url> <loc>https://codeRIT.org/hackathon-manager/blog/2017/10/24/new-version-1.0.0</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://codeRIT.org/hackathon-manager/blog/2017/09/26/adding-rss</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://codeRIT.org/hackathon-manager/blog/2017/09/25/testing-rss</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://codeRIT.org/hackathon-manager/blog/2017/04/10/blog-post-two</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://codeRIT.org/hackathon-manager/blog/2016/03/11/blog-post</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
+<url> <loc>https://codeRIT.org/hackathon-manager/docs/api</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/api" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/busses</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/busses" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/deployment-dokku</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/deployment-dokku" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/deployment-environment-variables</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/deployment-environment-variables" /> </url>
