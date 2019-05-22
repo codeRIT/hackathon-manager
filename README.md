@@ -41,9 +41,19 @@ HackathonManager makes use of a few different third-party services & Ruby gems:
 
 **[Deploy HackathonManager for your hackathon &raquo;](https://coderit.org/hackathon-manager/docs/deployment)**
 
+## Documentation
+
+Documentation is available at https://coderit.org/hackathon-manager/
+
+Docs are maintained as markdown files in the `docs/` folder, with the website configuration & tooling stored in `website/`.
+
+Doc & website changes are auto-built and deployed via [Travis CI](https://travis-ci.org/codeRIT/hackathon-manager) once merged into master.
+
 ## Contributing
 
 GitHub issues and pull requests welcome!
+
+All documentation is easily editable using the GitHub UI. Click the "Edit" button at the top of any documentation page to get started.
 
 If there's a new feature you're looking to implement, **please** file an issue to open discussion on the feature before starting work or opening a pull request.
 
