@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   docusaurus:
@@ -10,7 +10,6 @@ services:
       - 35729:35729
     volumes:
       - ../docs:/app/docs
-      - ./blog:/app/website/blog
       - ./core:/app/website/core
       - ./i18n:/app/website/i18n
       - ./pages:/app/website/pages
