@@ -163,7 +163,7 @@ class Index extends React.Component {
         {[
           {
             content:
-              "Streamline the application process when users log in with [MyMLH](https://my.mlh.io/), a common platform for applying to any MLH hackathon. Basic info is pre-filled based on a common application, so hackers don't have to re-type it every time.",
+              "Streamline the application process when users log in with [MyMLH](https://my.mlh.io/), a common platform for applying to any MLH hackathon. Basic info is pre-filled based on a common application, so hackers don't have to re-type it every time.<br /><br />Learn more at [my.mlh.io](https://my.mlh.io/)",
             image: `${baseUrl}img/mymlh.png`,
             imageAlign: 'left',
             title: 'MyMLH Support',

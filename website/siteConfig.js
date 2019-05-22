@@ -23,7 +23,7 @@ const users = [
   {
     caption: 'CSH Hacks',
     image: 'img/csh.svg',
-    infoLink: 'https://hacks.cs.house',
+    infoLink: 'https://csh.rit.edu',
   },
 ];
 
@@ -49,7 +49,7 @@ const siteConfig = {
   headerLinks: [
     { doc: 'deployment', label: 'Get Started' },
     { doc: 'running-a-hackathon', label: 'Docs' },
-    { href: 'https://github.com/codeRIT/hackathon-manager', label: 'Repo' },
+    { href: 'https://github.com/codeRIT/hackathon-manager', label: 'GitHub' },
   ],
 
   // If you have users set above, you add it here:
