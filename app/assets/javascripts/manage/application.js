@@ -7,10 +7,10 @@
 //= require_directory ./lib
 
 function applicationReady() {
-  $(".selectize").selectize();
-  $("select[data-bulk-row-edit]").bulkRowEdit();
+  $('.selectize').selectize();
+  $('select[data-bulk-row-edit]').bulkRowEdit();
   $().bulkRowSelect();
-  $("body").chartkickAutoReload();
+  $('body').chartkickAutoReload();
   setupDataTables();
   setupHighcharts();
   $('[data-toggle="popover"]').popover();
@@ -18,6 +18,12 @@ function applicationReady() {
   setupSimpleMde();
   setupEmailEvents();
   setupManageForms();
+
+  $.ajaxSetup({
+    beforeSend: function(xhr) {
+      Rails.CSRFProtection(xhr);
+    },
+  });
 }
 
-document.addEventListener("turbolinks:load", applicationReady);
+document.addEventListener('turbolinks:load', applicationReady);
