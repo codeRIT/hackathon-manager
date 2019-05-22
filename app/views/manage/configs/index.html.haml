@@ -3,6 +3,7 @@
 .row
   .col-lg-6.mb-3
     - @config.each_key do |key|
+      - value = @config[key]
       .card.mb-3
         .card-body
           %p.mb-1
@@ -14,11 +15,23 @@
             %small
               %code= key
           %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
-          - if @config[key] == ''
+          - if value == ''
             %p.mb-0
               %span.badge.badge-secondary Not set
           - else
-            %pre.mb-0= @config[key]
+            %pre.mb-0= value
+            - if value.is_a?(String)
+              - images = ['.ico', '.jpg', '.jpeg', '.png', '.gif', '.svg'].freeze
+              - links = ['http://', 'https://'].freeze
+              - if value.end_with?(*images)
+                %br
+                = image_tag value, style: 'max-height: 100px;', class: 'img-thumbnail img-template'
+              - elsif value.start_with?(*links)
+                %br
+                = link_to value, target: 'blank' do
+                  %span
+                    %span.fa.fa-external-link.icon-space-r-half
+                    Open link
 
   .col-lg-6.mb-3
     .card.mb-3
@@ -29,9 +42,9 @@
         %hr
         = render 'config_row', name: 'AWS S3 Bucket for Resumes', key: 'AWS_BUCKET'
         = render 'config_row', name: 'AWS S3 Region', key: 'AWS_REGION'
-        = render 'config_row', name: 'AWS S3 Region', key: 'AWS_REGION'
         = render 'config_row', name: 'AWS S3 Access Key ID', key: 'AWS_ACCESS_KEY_ID'
         = render 'config_row', name: 'AWS S3 Secret Access Key', key: 'AWS_SECRET_ACCESS_KEY', secret: true
+        = render 'config_row', name: 'AWS S3 Endpoint', key: 'AWS_ENDPOINT', required: false
         %hr
         = render 'config_row', name: 'Domain Name', key: 'HM_DOMAIN_NAME'
         = render 'config_row', name: 'Domain Protocol', key: 'HM_DOMAIN_PROTOCOL', default: 'https'
@@ -42,4 +55,4 @@
         = render 'config_row', name: 'My MLH Application ID', key: 'MLH_KEY'
         = render 'config_row', name: 'My MLH Secret', key: 'MLH_SECRET', secret: true
         %hr
-        = render 'config_row', name: 'Rollbar Access Token', key: 'ROLLBAR_ACCESS_TOKEN', secret: true
+        = render 'config_row', name: 'Rollbar Access Token', key: 'ROLLBAR_ACCESS_TOKEN', secret: true, required: false

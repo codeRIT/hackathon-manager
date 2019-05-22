@@ -1,5 +1,6 @@
 - secret ||= false  # default value if prop not set
 - default ||= nil  # default value if prop not set
+- required = true if required.nil?  # default value if prop not set
 - value = ENV[key] || default
 
 %p
@@ -13,5 +14,8 @@
       %span.badge.badge-success Set
     - else
       %pre= value
-  - else
+  - elsif required
     %span.badge.badge-danger Not set
+  - else
+    %span.badge.badge-secondary Not set
+    %span.badge.badge-secondary Optional
