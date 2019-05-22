@@ -12,7 +12,7 @@ HackathonManager enables you to facilitate bus sign-ups for attendees during the
 
 By signing up, they reserve one spot on the bus. If a bus fills up, no more attendees will be able to sign up for that bus.
 
-![Screenshot from attendee perspective for signing up for a bus](https://uc4147ba334917fee4ae57a2c4d3.previews.dropboxusercontent.com/p/thumb/AAUnCRfBb283VhF8VZLsAXS7c8PDamPvRGNWqdfufuD1SIMXjJ_3BXVetnhCjnk8mt17c-1ByJPWFB878bv94eyCGNZXkGtHqBoB7Z9wonnwfTumQRqzN_hEdVyAlC2DU_KBOHQykauq-YPlLR8PtcWVqImoh_gDIEaR91Jc9Lc1PtLL1sk9RCRKX2E1uz6S3tnCpeo6SGOPllTKla9nC2CR-T_25PZTRCuTdtw2ExRMek5HSzid7N5YlKCQnyiiFOQtGHN-vndCoaRdJ6BDIzzxp-gjidxfTdJF54j_f3E8gVFmqK68inFNBvro5Vwd8ipYvtJo0vxEolfHMYif85rQvaCrRDLjzAJKOXNw7p-8Dw/p.png)
+![Screenshot from attendee perspective for signing up for a bus](assets/bus-sign-up.png)
 
 ## Bus Captains
 
@@ -35,7 +35,7 @@ You'll see the option to promote a passenger to being a bus captain, as well as 
 - Their name, email, and phone number will be visible to passengers
 - The new captain will receive an email notification ([this is the default template](https://github.com/codeRIT/hackathon_manager/blob/master/app/views/mailer/bus_captain_confirmation_email.html.erb))
 
-![Screenshot of bus list detail with links to promote bus captains ](https://uc628f57e931f35c766bce9025c9.previews.dropboxusercontent.com/p/thumb/AAVs-SV9GSWwZfFRqGSpLmgTaM2Mp8gcLql2H4iQP25rSzMG-fmDCMrhVc-KhD0Dewny1ah8-oUGmGuIHYbxpS5KbKvVSYoo28yj8BtCMQhnBTyhhGeWmydjVdGJWlguPGokaUrEJr6nBJwZTnELYPsOSVWG_A5kaPV0IIdTI_Lu7hhZjJ7oVe-cqYf-Ulry4diMcpKMcsAEAtzGtBHGfpIW5Fo66Vmc6oueMaC_ZqEPoarcPKgTSVdqzeI53TeWv4orkKM_BQ88ycd-w7bMmGtyUkVvYs6An60HXDUmAUmcALLWk5EoXYRYa3iRXMyfb0Hxy7RXQHmIgWklsdQpZ09v6MPufa_2scP2ZD2-YvXm9A/p.png?size=2048x1536&size_mode=3)
+![Screenshot of list of users with link to promote to bus captain status](assets/promote-bus-captain.png)
 
 ### Boarding flow for bus captains
 
