@@ -5,28 +5,32 @@
       %h1.section-title
         RSVP
         %span.emphasized Preferences
-      - if @questionnaire.acc_status == "rsvp_confirmed" || @questionnaire.checked_in?
-        %strong
-          %span.fa.fa-check.icon-space-r-half
-          YOU ARE ATTENDING!
-        - if HackathonConfig['thanks_for_rsvp_message'].present?
-          %br
-          = markdown(HackathonConfig['thanks_for_rsvp_message'])
+      %p
+        - if @questionnaire.checked_in?
+          %strong
+            %span.fa.fa-check.icon-space-r-half
+            You have been checked in
+        - elsif @questionnaire.acc_status == "rsvp_confirmed"
+          %strong
+            %span.fa.fa-check.icon-space-r-half
+            YOU ARE ATTENDING!
+          - if HackathonConfig['thanks_for_rsvp_message'].present?
+            %br
+            = markdown(HackathonConfig['thanks_for_rsvp_message'])
+          - else
+            %br
         - else
-          %br
-          %br
-      - else
-        %strong
-          - if @questionnaire.acc_status == "accepted"
-            %span.fa.fa-clock-o.icon-space-r-half
-          - elsif @questionnaire.acc_status == "rsvp_denied"
-            %span.fa.fa-close.icon-space-r-half
-          = current_user.questionnaire.verbal_status.upcase
-        - if @questionnaire.acc_status == "rsvp_denied"
-          %p Sorry to hear you won't be with us this year.
-        - else
-          %p You've been accepted to #{HackathonConfig['name']}!
-          %p Will you be attending?
+          %strong
+            - if @questionnaire.acc_status == "accepted"
+              %span.fa.fa-clock-o.icon-space-r-half
+            - elsif @questionnaire.acc_status == "rsvp_denied"
+              %span.fa.fa-close.icon-space-r-half
+            = current_user.questionnaire.verbal_status.upcase
+          - if @questionnaire.acc_status == "rsvp_denied"
+            %p Sorry to hear you won't be with us this year.
+          - else
+            %p You've been accepted to #{HackathonConfig['name']}!
+            %p Will you be attending?
 
       .form-inputs
         = f.input :acc_status, as: :radio_buttons, collection: { " Attending!" => "rsvp_confirmed", " Not Attending." => "rsvp_denied" }, label: "Attendance:", required: true

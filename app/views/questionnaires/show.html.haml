@@ -5,9 +5,11 @@
       Application
       %span.emphasized Status
     - if @questionnaire.blank?
-      %strong AWAITING APPLICATION
+      %p
+        %strong AWAITING APPLICATION
     - else
-      %strong= @questionnaire.verbal_status.upcase
+      %p
+        %strong= @questionnaire.verbal_status.upcase
       - if @questionnaire.can_rsvp?
         - if @questionnaire.did_rsvp?
           - if @questionnaire.acc_status == "rsvp_confirmed"
@@ -24,9 +26,7 @@
             %br
           %p.center
             = btn_link_to "RSVP NOW &raquo;".html_safe, rsvp_path
-      - elsif @questionnaire.acc_status == "denied"
-        %p
-      - else
+      - if !@questionnaire.can_rsvp? && @questionnaire.acc_status != "denied"
         - if HackathonConfig['registration_is_open']
           - if HackathonConfig['thanks_for_applying_message'].present?
             = markdown(HackathonConfig['thanks_for_applying_message'])
