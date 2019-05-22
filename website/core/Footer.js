@@ -40,6 +40,7 @@ class Footer extends React.Component {
             <a href={this.docUrl('running-a-hackathon.html')}>
               Running a hackathon
             </a>
+            <a href={this.docUrl('api.html')}>API Usage</a>
             <a href={this.docUrl('deployment.html')}>Deployment</a>
           </div>
           <div />
