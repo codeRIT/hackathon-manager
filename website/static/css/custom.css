@@ -14,6 +14,45 @@ a:hover .headerTitleWithLogo {
   color: #fff;
 }
 
+.gridBlock .twoByGridBlock {
+  justify-content: center;
+  align-items: center;
+}
+
+.imageAlignSide .blockContent {
+  max-width: 560px;
+  margin-top: -30px;
+}
+
+/* Override text-align: left; */
+.container .wrapper .imageAlignSide h2 {
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  /* Override display: none; */
+  .headerTitleWithLogo {
+    display: block !important;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container.paddingTop {
+    padding-top: 20px;
+  }
+
+  .imageAlignSide .blockContent {
+    margin-top: 0;
+    flex-basis: 400px;
+  }
+
+  .imageAlignSide .blockImage {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
