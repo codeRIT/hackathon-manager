@@ -7,6 +7,8 @@
 
 An all-in-one platform for managing hackathon registration & logistics, originally developed for [BrickHack](https://github.com/codeRIT/brickhack.io).
 
+Read more at **[coderit.org/hackathon-manager/](https://coderit.org/hackathon-manager/)**
+
 - **Hacker applications:** Enable hackers to apply to your hackathon while providing all relevant information (contact info, school, demographics, etc)
 - **MyMLH support:** Streamline the application process when users log in with [MyMLH](https://my.mlh.io/), a common platform for applying to any MLH hackathon. Basic info is pre-filled based on a common application, so hackers don't have to re-type it every time.
 - **Admissions & RSVPs**: Facilitate accepting hackers to your hackathon & enable them to RSVP
@@ -35,33 +37,15 @@ HackathonManager makes use of a few different third-party services & Ruby gems:
 - [Blazer](https://github.com/ankane/blazer) (custom SQL queries, analytics, and charts)
 - [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) (authentication via OAuth for API usage)
 
-See [Deployment](#Deployment) for instructions to deploy.
+## Get Started
 
-### Customization
-
-Be sure to review all of these before going live!
-
-- **Content**: Various settings are available at http://your-site/manage/configs
-- **Emails**: Default automated emails are loaded into http://your-site/manage/messages
-- **Styling**: Custom styling is not yet supported, but should be available starting Summer 2019.
-
-## Deployment
-
-HackathonManager supports two platforms out of the box:
-
-- [Heroku](https://www.heroku.com) — Easiest & quickest way that requires little server knowledge, however isn't cheap (free tier not recommended)
-- [Dokku](http://dokku.viewdocs.io/dokku/) — A free alternative to Heroku, runs on your own virtual machine
-- [OKD/OpenShift](https://www.okd.io) — "Enterprise Kubernetes for Developers" packaged with a useful management UI + tooling
-
-See the platform-specific guides [on the Wiki](https://github.com/codeRIT/hackathon_manager/wiki) to get started!
-
-HackathonManager can also be deployed the same as any other Rails app, however this is **not** natively supported and will require you to fork this repo to integrate code changes.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+**[Deploy HackathonManager for your hackathon &raquo;](https://coderit.org/hackathon-manager/docs/deployment)**
 
 ## Contributing
 
 GitHub issues and pull requests welcome!
+
+If there's a new feature you're looking to implement, **please** file an issue to open discussion on the feature before starting work or opening a pull request.
 
 ## Development
 

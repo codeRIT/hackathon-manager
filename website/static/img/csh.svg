@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1416px" height="548px" viewBox="0 0 1416 548" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="CSH-Logo" sketch:type="MSLayerGroup" fill="#000000">
+            <path d="M420,135 L420,30 C420,13.431 406.567,0 390,0 L30,0 C13.431,0 0,13.431 0,30 L0,495 C0,511.567 13.431,525 30,525 L390,525 C406.567,525 420,511.567 420,495 L420,390 L330,390 L330,420 C330,428.284 323.285,435 315,435 L105,435 C96.716,435 90,428.284 90,420 L90,105 C90,96.716 96.716,90 105,90 L315,90 C323.285,90 330,96.716 330,105 L330,135 L420,135 L420,135 Z" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M292.5,119.999 L127.501,119.999 C123.358,119.999 120.001,123.356 120.001,127.499 L120.001,285 C120.001,289.143 123.358,292.499 127.501,292.499 L228.751,292.499 C230.822,292.499 232.501,294.179 232.501,296.25 L232.501,341.249 C232.501,343.32 230.822,344.999 228.751,344.999 L191.25,344.999 C189.179,344.999 187.5,343.32 187.5,341.249 L187.5,322.5 L120.001,322.5 L120.001,397.5 C120.001,401.642 123.358,405 127.501,405 L292.5,405 C296.643,405 300,401.642 300,397.5 L300,240 C300,235.857 296.643,232.5 292.5,232.5 L191.25,232.5 C189.179,232.5 187.5,230.821 187.5,228.75 L187.499,183.75 C187.499,181.679 189.178,180 191.249,180 L228.75,180 C230.821,180 232.5,181.679 232.5,183.75 L232.501,202.5 L300,202.5 L300,127.499 C300,123.356 296.643,119.999 292.5,119.999 L292.5,119.999 Z" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M420,300 L420,360 L330,360 L330,165 L420,165 L420,225 L450,225 L450,0 L540,0 L540,525 L450,525 L450,300 L420,300 Z" id="Shape" sketch:type="MSShapeGroup"></path>
+        </g>
+        <text id="Computer" sketch:type="MSTextLayer" font-family="Helvetica" font-size="180" font-weight="bold" line-spacing="197" fill="#000000">
+            <tspan x="566" y="132">Computer</tspan>
+            <tspan x="566" y="329">Science</tspan>
+            <tspan x="566" y="526">House</tspan>
+        </text>
+    </g>
+</svg>

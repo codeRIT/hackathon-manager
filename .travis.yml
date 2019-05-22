@@ -1,5 +1,7 @@
 language: ruby
-cache: bundler
+cache:
+  bundler: true
+  yarn: true
 sudo: false
 bundler_args: --path vendor --local --without development
 env:
@@ -15,3 +17,8 @@ script:
 addons:
   code_climate:
     repo_token: 702251f0d6eb1f569078a27c4ae3366b1e48c4c6d7e4dd3ae0ca3583fd2bc8db
+deploy:
+  provider: script
+  script: bash website/travis-deploy.sh
+  on:
+    branch: master
