@@ -1,9 +1,3 @@
-// For 1.0 release only
-const parserOpts = {
-  headerPattern: /^\[(\w*)] (.*)$/,
-  headerCorrespondence: [`type`, `subject`],
-};
-
 const writerOpts = {
   transform: (commit, context) => {
     let discard = true;
@@ -14,35 +8,9 @@ const writerOpts = {
       discard = false;
     });
 
-    if (commit.type === 'breaking') {
-      commit.type = 'Breaking Changes';
-      discard = false;
-    }
-
-    // Re-categorize
-    if (commit.type === 'dokku' || commit.type == 'heroku') {
-      commit.scope = commit.type;
-      commit.type = 'deploy';
-    }
-    if (commit.type === 'readme') {
-      commit.type = 'docs';
-    }
-    if (commit.type === 'codeclimate' || commit.type === 'travis') {
-      commit.scope = commit.type;
-      commit.type = 'ci';
-    }
-    if (commit.type === 'config') {
-      commit.type = 'improvement';
-    }
-    if (commit.type === 'blazer') {
-      commit.type = 'fix';
-    }
-
     // Set up sections
-    if (commit.type === `feature` || commit.type === 'feat') {
+    if (commit.type === 'feat') {
       commit.type = `Features`;
-    } else if (commit.type === `improvement`) {
-      commit.type = `Improvements`;
     } else if (commit.type === `fix`) {
       commit.type = `Bug Fixes`;
     } else if (commit.type === `perf`) {
@@ -113,10 +81,6 @@ const writerOpts = {
 
     return commit;
   },
-  groupBy: `type`,
-  commitGroupsSort: `title`,
-  commitsSort: [`scope`, `subject`],
-  noteGroupsSort: `title`,
 };
 
 module.exports = {
@@ -124,16 +88,12 @@ module.exports = {
     [
       '@semantic-release/commit-analyzer',
       {
-        preset: 'angular',
-        releaseRules: [{ type: 'breaking', release: 'major' }],
-        parserOpts,
+        releaseRules: [{ type: 'deploy', release: 'minor' }],
       },
     ],
     [
       '@semantic-release/release-notes-generator',
       {
-        preset: 'angular',
-        parserOpts,
         writerOpts,
       },
     ],
