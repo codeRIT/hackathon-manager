@@ -137,6 +137,14 @@ module.exports = {
         writerOpts,
       },
     ],
-    '@semantic-release/github',
+    [
+      '@semantic-release/github',
+      {
+        successComment: false,
+        failComment: false,
+        failTitle: false,
+        labels: false,
+      },
+    ],
   ],
 };
