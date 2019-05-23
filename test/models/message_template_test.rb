@@ -10,6 +10,7 @@ class MessageTemplateTest < ActiveSupport::TestCase
       message.update_attribute(:html, "foo")
     end
     assert_equal true, message.reload.customized?
+    MessageTemplate.replace_with_default # clean up
   end
 
   should "refresh stored instance when calling #load_singleton" do
@@ -43,6 +44,7 @@ class MessageTemplateTest < ActiveSupport::TestCase
     MessageTemplate.destroy_all
     create(:message_template, html: "this is it")
     assert_equal "this is it", MessageTemplate.uncached_instance.html
+    MessageTemplate.replace_with_default # clean up
   end
 
   should "update template with default when calling #replace_with_default" do
