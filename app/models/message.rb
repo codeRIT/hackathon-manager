@@ -48,9 +48,9 @@ class Message < ApplicationRecord
   def parsed_body(context, use_examples = false)
     return body if body.blank?
 
-    message_template = MessageTemplate.new(context, use_examples)
-    message_template.template = body
-    message_template.render
+    message_variables = MessageVariables.new(context, use_examples)
+    message_variables.template = body
+    message_variables.render
   end
 
   def valid_body?

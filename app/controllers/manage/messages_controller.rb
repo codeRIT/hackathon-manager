@@ -1,6 +1,7 @@
 class Manage::MessagesController < Manage::ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy, :deliver, :preview, :duplicate]
   before_action :check_message_access, only: [:edit, :update, :destroy]
+  before_action :limit_template_access_to_admins, only: [:template, :template_preview, :template_update, :template_replace_with_default]
 
   respond_to :html, :json
 
@@ -63,7 +64,7 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def live_preview
-    body = params[:body] || ''
+    body = params[:body] || ""
     message = Message.new(body: body)
     email = Mailer.bulk_message_email(nil, current_user.id, message, true)
     render html: email.body.raw_source.html_safe
@@ -75,17 +76,44 @@ class Manage::MessagesController < Manage::ApplicationController
       delivered_at: nil,
       started_at: nil,
       queued_at: nil,
-      name: "Copy of #{@message.name}"
+      name: "Copy of #{@message.name}",
     )
     new_message.save
     redirect_to edit_manage_message_path(new_message.reload)
   end
 
+  def template
+  end
+
+  def template_preview
+    body = File.read("app/views/manage/messages/_template_example.html.md")
+    message = Message.new(body: body)
+    email = Mailer.bulk_message_email(nil, current_user.id, message, true)
+    render html: email.body.raw_source.html_safe
+  end
+
+  def template_update
+    message_template = MessageTemplate.uncached_instance
+    message_template_params = params.require(:message_template).permit(:html)
+    message_template.update_attributes(message_template_params)
+    redirect_to template_manage_messages_path
+  end
+
+  def template_replace_with_default
+    MessageTemplate.replace_with_default
+    redirect_to template_manage_messages_path
+  end
+
   private
+
+  def limit_template_access_to_admins
+    # From Manage::ApplicationController
+    limit_write_access_to_admins
+  end
 
   def message_params
     params.require(:message).permit(
-      :type, :name, :subject, :template, :body, :trigger, recipients: []
+      :type, :name, :subject, :template, :body, :trigger, recipients: [],
     )
   end
 

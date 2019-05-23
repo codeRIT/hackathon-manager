@@ -11,8 +11,9 @@
       %th About
       %th Example
   %tbody
-    - example = MessageTemplate.new(nil, true)
-    - MessageTemplate.variables.each do |variable, config|
+    - example = MessageVariables.new(nil, true)
+    - variables = MessageVariables.variables.select { |_, config| !config["hidden_for_internal_use_only"] }
+    - variables.each do |variable, config|
       %tr
         %td
           %pre {{#{variable}}}

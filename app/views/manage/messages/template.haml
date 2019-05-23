@@ -1,0 +1,29 @@
+= render "layouts/manage/page_title", title: "Message Template"
+
+%div.mb-4
+  %p The message template is used for all outgoing emails. If desired, it may be customized to your needs.
+
+  = render 'message_template_status'
+
+  %p
+    %b Preview:
+    = link_to template_preview_manage_messages_path, target: '_blank' do
+      Open full preview
+      %span.fa.fa-external-link.icon-space-l-half
+
+  %iframe.email-preview{src: template_preview_manage_messages_path}
+
+%hr
+
+.form-container
+  = bs_horizontal_simple_form_for MessageTemplate.instance, url: template_update_manage_messages_path do |f|
+    = f.error_notification
+
+    .form-inputs
+      %h5.mb-3 Customize template
+      %p.text-secondary Must save to update preview. CSS will be converted to inline styles when messages are sent.
+      %p.text-secondary Be sure to test with as many email providers as possible! <a href="https://putsmail.com" target="blank">Litmus PutsMail</a> is one great resource.
+      = f.input :html, input_html: { 'data-code-mirror-textarea' => '1' }, label: false, wrapper: :bootstrap_inline_form
+
+    .form-actions.mt-3.mb-3
+      = f.button :submit, class: 'btn-primary', value: 'Update message template'

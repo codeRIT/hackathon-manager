@@ -54,3 +54,13 @@ variables:
     description: Full URL to the Bus Captain page. Useful for bus captains to view & check-in passengers.
     use_value_as_example: True
     value: Rails.application.routes.url_helpers.bus_list_url(Rails.application.config.action_mailer.default_url_options)
+
+  email_banner_asset:
+    hidden_for_internal_use_only: true
+    description: Image URL of banner image for the top of all emails.
+    use_value_as_example: true
+    value: HackathonConfig['email_banner_asset'].presence
+  message_body:
+    hidden_for_internal_use_only: true
+    description: Message body content.
+    value: '@var_context[:message_body]'

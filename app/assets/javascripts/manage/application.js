@@ -3,6 +3,10 @@
 //= require popper
 //= require bootstrap
 //= require ../vendor/datatables.min
+//= require ../vendor/codemirror
+//= require ../vendor/codemirror-modes/htmlmixed
+//= require ../vendor/codemirror-modes/xml
+//= require ../vendor/codemirror-modes/css
 //= require selectize
 //= require_directory ./lib
 
@@ -18,6 +22,7 @@ function applicationReady() {
   setupSimpleMde();
   setupEmailEvents();
   setupManageForms();
+  setupCodeMirror();
 
   $.ajaxSetup({
     beforeSend: function(xhr) {

@@ -63,6 +63,11 @@ Rails.application.routes.draw do
       post :datatable, on: :collection
       patch :deliver, on: :member
       patch :duplicate, on: :member
+      # Message template
+      get :template, on: :collection
+      get :template_preview, on: :collection
+      patch :template_update, on: :collection
+      post :template_replace_with_default, on: :collection
     end
     resources :bus_lists do
       post :toggle_bus_captain, on: :member
