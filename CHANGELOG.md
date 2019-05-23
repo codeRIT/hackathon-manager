@@ -1,3 +1,8 @@
+## 1.1.0 (2019-05-23)
+
+* feat: Add links to documentation on management pages ([673af0f](https://github.com/codeRIT/hackathon-manager/commit/673af0f))
+* docs: Add 1.0.0 release to changelog ([efd6d20](https://github.com/codeRIT/hackathon-manager/commit/efd6d20))
+
 # [1.0.0](https://github.com/codeRIT/hackathon-manager/compare/v0.14.1...v1.0.0) (2019-05-23)
 
 
