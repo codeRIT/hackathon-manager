@@ -88,12 +88,14 @@ module.exports = {
     [
       '@semantic-release/commit-analyzer',
       {
+        preset: 'angular',
         releaseRules: [{ type: 'deploy', release: 'minor' }],
       },
     ],
     [
       '@semantic-release/release-notes-generator',
       {
+        preset: 'angular',
         writerOpts,
       },
     ],
