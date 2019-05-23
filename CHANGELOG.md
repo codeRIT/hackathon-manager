@@ -1,3 +1,66 @@
+# [1.0.0](https://github.com/codeRIT/hackathon-manager/compare/v0.14.1...v1.0.0) (2019-05-23)
+
+
+### Breaking Changes
+
+* 1.0 standalone app release ([5c081ce](https://github.com/codeRIT/hackathon-manager/commit/5c081ce))
+
+
+### Bug Fixes
+
+* Display login error messages ([978d6d3](https://github.com/codeRIT/hackathon-manager/commit/978d6d3)), closes [#28](https://github.com/codeRIT/hackathon-manager/issues/28)
+* Fall back to DATABASE_URL if BLAZER_ isn't set ([b93763e](https://github.com/codeRIT/hackathon-manager/commit/b93763e))
+* Fix message form UI controls ([4ea9e09](https://github.com/codeRIT/hackathon-manager/commit/4ea9e09)), closes [#146](https://github.com/codeRIT/hackathon-manager/issues/146)
+* Hide empty disclaimer message on register page ([b176891](https://github.com/codeRIT/hackathon-manager/commit/b176891))
+* Include admins in everyone message recipient ([8ac979f](https://github.com/codeRIT/hackathon-manager/commit/8ac979f)), closes [#145](https://github.com/codeRIT/hackathon-manager/issues/145)
+* Only use S3 storage when AWS_ACCESS_KEY_ID is present ([7d40baa](https://github.com/codeRIT/hackathon-manager/commit/7d40baa))
+* Remove hard-coded debug flashes ([faf2a9a](https://github.com/codeRIT/hackathon-manager/commit/faf2a9a))
+* Restore ajax calls with CSRF protection ([b42cfea](https://github.com/codeRIT/hackathon-manager/commit/b42cfea))
+* Selectize style on message form ([a869445](https://github.com/codeRIT/hackathon-manager/commit/a869445))
+* Usage of HackathonConfig values in initializers ([c0f5403](https://github.com/codeRIT/hackathon-manager/commit/c0f5403))
+
+
+### Code Refactoring
+
+* Migrate from Paperclip to ActiveStorage ([#152](https://github.com/codeRIT/hackathon-manager/issues/152)) ([6a956aa](https://github.com/codeRIT/hackathon-manager/commit/6a956aa))
+* Migrate from Sidekiq workers to ActiveJob jobs ([#153](https://github.com/codeRIT/hackathon-manager/issues/153)) ([cb0aa16](https://github.com/codeRIT/hackathon-manager/commit/cb0aa16)), closes [#26](https://github.com/codeRIT/hackathon-manager/issues/26)
+* Standardize on flash[:alert] instead of flash[:error] ([6231f6b](https://github.com/codeRIT/hackathon-manager/commit/6231f6b))
+
+
+### Deployment
+
+* **dokku:** Add CHECKS file ([8366716](https://github.com/codeRIT/hackathon-manager/commit/8366716))
+* **dokku:** Scale worker process from 0 -> 1 ([3941567](https://github.com/codeRIT/hackathon-manager/commit/3941567))
+* **dokku:** Tweak checks schedule ([88f4bca](https://github.com/codeRIT/hackathon-manager/commit/88f4bca))
+* **heroku:** Add db:migrate step to release phase ([d22f9aa](https://github.com/codeRIT/hackathon-manager/commit/d22f9aa))
+
+
+### Documentation
+
+* Add documentation section ([c9419f6](https://github.com/codeRIT/hackathon-manager/commit/c9419f6))
+* Add notes on usage + deployment platforms ([2da8d33](https://github.com/codeRIT/hackathon-manager/commit/2da8d33))
+* Move to dedicated documentation site ([#155](https://github.com/codeRIT/hackathon-manager/issues/155)) ([fa45732](https://github.com/codeRIT/hackathon-manager/commit/fa45732))
+* Rename hackathon_manager to hackathon-manager ([4ddbe56](https://github.com/codeRIT/hackathon-manager/commit/4ddbe56))
+
+
+### Features
+
+* Add ability to deactivate accounts ([bd934a5](https://github.com/codeRIT/hackathon-manager/commit/bd934a5)), closes [#129](https://github.com/codeRIT/hackathon-manager/issues/129)
+* Configure remaining automated emails from UI ([#148](https://github.com/codeRIT/hackathon-manager/issues/148)) ([c79b76d](https://github.com/codeRIT/hackathon-manager/commit/c79b76d))
+* Enable template variables in messages ([#143](https://github.com/codeRIT/hackathon-manager/issues/143)) ([a3927dc](https://github.com/codeRIT/hackathon-manager/commit/a3927dc)), closes [#139](https://github.com/codeRIT/hackathon-manager/issues/139)
+* Enable UI-customizable message layout ([#156](https://github.com/codeRIT/hackathon-manager/issues/156)) ([3c760d0](https://github.com/codeRIT/hackathon-manager/commit/3c760d0)), closes [#140](https://github.com/codeRIT/hackathon-manager/issues/140)
+* Support third-party S3 providers ([61b9f83](https://github.com/codeRIT/hackathon-manager/commit/61b9f83)), closes [#151](https://github.com/codeRIT/hackathon-manager/issues/151)
+
+
+### Improvements
+
+* Add button style for emails ([88a70ee](https://github.com/codeRIT/hackathon-manager/commit/88a70ee))
+* Add image preview, links to config page ([c0dce7b](https://github.com/codeRIT/hackathon-manager/commit/c0dce7b))
+* Add remaining environment variables to config screen ([3dddf96](https://github.com/codeRIT/hackathon-manager/commit/3dddf96))
+* Better listing display of environment var config ([#150](https://github.com/codeRIT/hackathon-manager/issues/150)) ([42a9250](https://github.com/codeRIT/hackathon-manager/commit/42a9250))
+* Separate info from error flash notices ([#149](https://github.com/codeRIT/hackathon-manager/issues/149)) ([d00dc28](https://github.com/codeRIT/hackathon-manager/commit/d00dc28))
+
+
 # 0.14.1 - 2019-03-03
 
 - Fix: Date of birth parsing with new config
