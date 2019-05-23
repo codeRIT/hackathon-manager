@@ -22,13 +22,14 @@ jobs:
     - stage: Release + website update
       language: node_js
       node_js: lts/*
-      install: true
+      cache:
+        yarn: true
       script: skip
       deploy:
         provider: script
         skip_cleanup: true
         script:
-          - npx semantic-release
+          - yarn semantic-release
         on:
           branch: master
     - # stage name not required, will continue to use `Release + website update`

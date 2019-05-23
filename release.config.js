@@ -97,6 +97,8 @@ module.exports = {
         writerOpts,
       },
     ],
+    '@semantic-release/changelog',
+    '@semantic-release/git',
     [
       '@semantic-release/github',
       {
