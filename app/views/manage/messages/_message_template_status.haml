@@ -1,0 +1,22 @@
+%dl.row
+  %dt.col-md-3 Status
+  %dd.col-md-9
+    - if MessageTemplate.instance.customized?
+      %span.badge.badge-danger.mb-1 Using customized template
+      %br
+      Not in sync with HackathonManager
+      - if current_user.try(:admin?)
+        %br
+        %small
+          = link_to template_replace_with_default_manage_messages_path, method: :post, data: { confirm: 'Are you sure? This will permanently erase the existing template and replace it with the HackathonManager default. This action is irreversible.'} do
+            %span.fa.fa-refresh.icon-space-r-half
+            Restore HackathonManager default
+
+    - else
+      %span.badge.badge-success.mb-1 Using default template
+      %br
+      In sync with HackathonManager
+- if MessageTemplate.instance.customized?
+  %dl.row
+    %dt.col-md-3 Last modified
+    %dd.col-md-9= display_datetime(MessageTemplate.instance.updated_at || MessageTemplate.instance.created_at)

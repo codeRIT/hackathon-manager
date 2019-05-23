@@ -60,6 +60,9 @@ Style/IfUnlessModifier:
 Style/StringLiterals:
   Enabled: false
 
+Style/TrailingCommaInArguments:
+  Enabled: false
+
 TrailingCommaInHashLiteral:
   Enabled: false
 

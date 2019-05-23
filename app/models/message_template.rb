@@ -1,58 +1,55 @@
-class MessageTemplate < Mustache
-  def initialize(context, use_examples = false)
-    @var_context = context
-    @use_examples = use_examples
-  end
-
-  def method_missing(method_name, *arguments, &block)
-    variable = MessageTemplate.variables[method_name.to_s]
-    return evaluate(variable) if variable
-
-    super
-  end
-
-  def respond_to_missing?(method_name, include_private = false)
-    MessageTemplate.variables.key?(method_name.to_s) || super
-  end
-
+class MessageTemplate < ApplicationRecord
   class << self
-    def variables
-      config["variables"]
+    # Maximum amount of time to use the in-memory singleton before checking the database for updates.
+    SINGLETON_MAX_AGE = 30.seconds.from_now
+
+    # Retrieve the instance.
+    # Use the one stored in memory if it is recent enough.
+    def instance
+      if Time.now > @singleton_expiration
+        load_singleton
+      end
+      @singleton_instance
     end
 
-    def config
-      @config ||= reload_config
+    # Retrieve the instance from the database
+    def uncached_instance
+      first
     end
 
-    def reload_config
-      @config = YAML.load_file('config/template_variables.yml')
+    # Load the current template into memory.
+    # If one doesn't exist yet, import it.
+    def load_singleton
+      if none?
+        replace_with_default
+      end
+      @singleton_expiration = SINGLETON_MAX_AGE
+      @singleton_instance = uncached_instance
     end
+
+    # Replace stored template with default HackathonManager template
+    def replace_with_default
+      html = File.read("db/message-template-default.html.mustache")
+      MessageTemplate.destroy_all
+      create!(html: html)
+    end
+  end
+
+  load_singleton
+
+  validates :html, presence: true
+  after_save :refresh_singleton
+
+  def customized?
+    updated_at != created_at
   end
 
   private
 
-  def evaluate(variable)
-    return variable["example"] if @use_examples && !variable["use_value_as_example"]
-
-    value = variable["value"]
-    instance_eval(value)
-  end
-
-  def user
-    @user ||= begin
-      user_id = @var_context[:user_id]
-      return nil if user_id.blank?
-
-      User.find_by_id(user_id)
-    end
-  end
-
-  def bus_list
-    @bus_list ||= begin
-      bus_list_id = @var_context[:bus_list_id] || user&.questionnaire&.bus_list_id
-      return nil if bus_list_id.blank?
-
-      BusList.find_by_id(bus_list_id)
-    end
+  # Note that each Ruby process has its own memory space (web, sidekiq, console, etc),
+  # and calling refresh_singleton only updates the current memory space.
+  # It may take up to SINGLETON_MAX_AGE for other spaces to notice updates.
+  def refresh_singleton
+    MessageTemplate.load_singleton
   end
 end
