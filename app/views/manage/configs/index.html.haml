@@ -39,6 +39,7 @@
         %h5.card-title Environment Variables
         %h6.card-subtitle.mb-2.text-muted
           Environment variables are configured on the production server.
+        = render 'docs_link', title: 'Environment variable documentation', url: 'https://coderit.org/hackathon-manager/docs/deployment-environment-variables'
         %hr
         = render 'config_row', name: 'AWS S3 Bucket for Resumes', key: 'AWS_BUCKET'
         = render 'config_row', name: 'AWS S3 Region', key: 'AWS_REGION'
