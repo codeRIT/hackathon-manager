@@ -45,9 +45,9 @@
       "required": false
     },
     "AWS_REGION": {
-      "description": "AWS Secret Access Key to store resumes via S3",
+      "description": "AWS region to store resumes via S3. If using an S3-compliant alternative without a region, leave as us-east-1.",
       "value": "us-east-1",
-      "required": false
+      "required": true
     },
     "AWS_ENDPOINT": {
       "description": "If you are using an S3-compliant storage provider other than Amazon S3, specify its custom endpoint here. Otherwise leave blank.",
