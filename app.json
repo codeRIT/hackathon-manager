@@ -2,8 +2,9 @@
   "name": "HackathonManager",
   "description": "All-in-one platform for managing hackathon registration & logistics",
   "keywords": ["hackathons", "ruby on rails", "registration"],
-  "website": "https://github.com/codeRIT/hackathon_manager",
-  "repository": "https://github.com/codeRIT/hackathon_manager",
+  "website": "https://coderit.org/hackathon-manager",
+  "repository": "https://github.com/codeRIT/hackathon-manager",
+  "logo": "https://coderit.org/hackathon-manager/img/coderit-square.svg",
   "success_url": "/",
   "scripts": {
     "postdeploy": "bin/rails db:migrate",
