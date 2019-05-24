@@ -50,9 +50,9 @@
       "required": false
     },
     "AWS_ENDPOINT": {
-      "description": "If you are using an S3-compliant storage provider, specify its custom endpoint here. Otherwise leave blank.",
+      "description": "If you are using an S3-compliant storage provider other than Amazon S3, specify its custom endpoint here. Otherwise leave blank.",
       "value": "",
-      "required": true
+      "required": false
     },
     "ROLLBAR_ACCESS_TOKEN": {
       "description": "Rollbar access token for code exception reporting",
