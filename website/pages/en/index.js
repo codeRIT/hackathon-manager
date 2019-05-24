@@ -63,6 +63,17 @@ class HomeSplash extends React.Component {
               GitHub
             </Button>
           </PromoSection>
+          <p style={{ marginTop: '2em' }}>
+            <a
+              href="https://heroku.com/deploy?template=https://github.com/codeRIT/hackathon-manager"
+              target="blank"
+            >
+              <img
+                src="https://www.herokucdn.com/deploy/button.svg"
+                alt="Deploy to Heroku"
+              />
+            </a>
+          </p>
         </div>
       </SplashContainer>
     );

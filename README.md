@@ -41,6 +41,8 @@ HackathonManager makes use of a few different third-party services & Ruby gems:
 
 **[Deploy HackathonManager for your hackathon &raquo;](https://coderit.org/hackathon-manager/docs/deployment)**
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Documentation
 
 Documentation is available at https://coderit.org/hackathon-manager/

@@ -9,7 +9,7 @@ Click the button below to start. You'll be prompted to fill out a few questions 
 
 **See [Environment Variables](deployment-environment-variables.md) for all required environment variables**
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/codeRIT/hackathon-manager)
 
 ### Validating initial deploy
 
