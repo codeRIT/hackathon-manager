@@ -29,6 +29,12 @@ a:hover .headerTitleWithLogo {
   text-align: center;
 }
 
+@media (max-width: 400px) {
+  .projectTitle {
+    font-size: 230%;
+  }
+}
+
 @media (max-width: 480px) {
   /* Override display: none; */
   .headerTitleWithLogo {
