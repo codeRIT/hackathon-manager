@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/codeRIT/hackathon-manager/compare/v1.1.0...v1.2.0) (2019-05-25)
+
+
+### Deployment
+
+* Upgrade Ruby from 2.6.1 to 2.6.2 ([5401144](https://github.com/codeRIT/hackathon-manager/commit/5401144))
+
+
+### Documentation
+
+* Add deploy to Heroku button on README and homepage ([4279f3f](https://github.com/codeRIT/hackathon-manager/commit/4279f3f)), closes [#158](https://github.com/codeRIT/hackathon-manager/issues/158)
+* Fit project title on one line on small devices ([eff8cc5](https://github.com/codeRIT/hackathon-manager/commit/eff8cc5))
+* Update links & add logo to app.json ([32f2dad](https://github.com/codeRIT/hackathon-manager/commit/32f2dad))
+* **heroku:** Clarify AWS_REGION env var ([e35ca69](https://github.com/codeRIT/hackathon-manager/commit/e35ca69))
+* **heroku:** Make AWS_ENDPOINT not a required env var ([b9ac1d6](https://github.com/codeRIT/hackathon-manager/commit/b9ac1d6))
+* **okd:** Add post-installation steps ([ef885a7](https://github.com/codeRIT/hackathon-manager/commit/ef885a7))
+
 ## 1.1.0 (2019-05-23)
 
 * feat: Add links to documentation on management pages ([673af0f](https://github.com/codeRIT/hackathon-manager/commit/673af0f))
