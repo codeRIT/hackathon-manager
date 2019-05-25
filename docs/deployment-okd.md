@@ -3,6 +3,8 @@ id: deployment-okd
 title: OKD Deployment
 ---
 
+## Deployment configuration
+
 Three deployments should be made:
 
 - HackathonManager (seen below)
@@ -16,7 +18,7 @@ Each should share a common secret, containing all relevant environment variables
 - `REDIS_URL=redis://:password@redis:6379/`
 - All remaining environment variables from [Environment Variables](deployment-environment-variables.md)
 
-## MySQL Deployment
+### MySQL Deployment
 
 1. Set up a MySQL deployment from the standard OpenShift catalog.
 2. Copy the username/password/port/host/database name to the relevant parts of `DATABSE_URL` in the shared secret config
@@ -26,12 +28,12 @@ Each should share a common secret, containing all relevant environment variables
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
 ```
 
-## Redis Deployment
+### Redis Deployment
 
 1. Set up a Redis deployment from the standard OpenShift catalog.
 2. Copy the password/port/host to the relevant parts of `REDIS_URL` in the shared secret config
 
-## HackathonManager Deployment
+### HackathonManager Deployment
 
 This consists of a pod with two containers: `web` and `sidekiq`. Both use the same built image; sidekiq runs with a custom command.
 
@@ -130,3 +132,42 @@ spec:
       type: ImageChange
     - type: ConfigChange
 ```
+
+## Post-installation steps
+
+1. Seed the database (schools, emails, etc) -- do this **before** you create your first user
+2. Apply as a hacker
+3. Manually promote your (first) account to an admin
+4. Configure your hackathon
+
+### Seed the database
+
+1. On the OKD website, navigate to the currently-running HackathonManager pod (Applications -> Pods -> Click the HM pod in the list)
+2. In the tab bar, click "Terminal"
+3. Once the terminal opens up, run the following:
+```bash
+bin/rails db:seed
+exit
+```
+
+### Apply as a hacker
+
+1. Open your hackathon's website, create an account, and complete an application
+2. Validate that you received a confirmation email (if you didn't, don't fix it now, but take note for later)
+
+### Manually promote your account to admin status
+
+1. On the OKD website, navigate to the currently-running HackathonManager pod (Applications -> Pods -> Click the HM pod in the list)
+2. In the tab bar, click "Terminal"
+3. Once the terminal opens up, run the following:
+```bash
+bin/rails c
+# Wait for the Rails console to start...
+User.find_by(email: "your-email@example.com").update_attribute(:role, :admin)
+exit
+exit
+```
+
+### Configure your hackathon
+
+1. Navigate to https://apply.your-hackathon.com/manage/configs and fill in/update all relevant values
