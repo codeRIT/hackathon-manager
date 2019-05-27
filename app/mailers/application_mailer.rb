@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
   default from: -> { HackathonConfig["email_from"] }
-  layout "mailer"
+  layout "user_mailer"
 
   def pretty_email(name, email)
     return email if name.blank?

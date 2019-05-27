@@ -9,7 +9,7 @@ class BulkMessageJob < ApplicationJob
     recipients = self.class.build_recipients(message.recipients)
 
     recipients.each do |recipient|
-      Mailer.bulk_message_email(message.id, recipient).deliver_later
+      UserMailer.bulk_message_email(message.id, recipient).deliver_later
     end
 
     message.update_attribute(:delivered_at, Time.now)

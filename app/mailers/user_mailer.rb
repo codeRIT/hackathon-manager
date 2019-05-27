@@ -1,4 +1,4 @@
-class Mailer < ApplicationMailer
+class UserMailer < ApplicationMailer
   include Roadie::Rails::Automatic
   add_template_helper(HackathonManagerHelper)
 

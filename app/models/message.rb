@@ -171,7 +171,7 @@ class Message < ApplicationRecord
   end
 
   def self.queue_for_trigger(trigger, user_id)
-    for_trigger(trigger).map { |message| Mailer.bulk_message_email(message.id, user_id).deliver_later }
+    for_trigger(trigger).map { |message| UserMailer.bulk_message_email(message.id, user_id).deliver_later }
   end
 
   def self.bulk
