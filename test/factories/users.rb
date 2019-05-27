@@ -6,6 +6,7 @@ FactoryBot.define do
     password { "password" }
     role { :user }
     is_active { true }
+    receive_weekly_report { false }
 
     factory :admin do
       sequence :email do |n|

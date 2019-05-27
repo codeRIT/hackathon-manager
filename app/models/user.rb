@@ -40,6 +40,11 @@ class User < ApplicationRecord
     super value.try(:downcase)
   end
 
+  def safe_receive_weekly_report
+    return false unless is_active
+    receive_weekly_report
+  end
+
   def first_name
     return "" if questionnaire.blank?
     questionnaire.first_name

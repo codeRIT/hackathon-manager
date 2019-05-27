@@ -20,5 +20,17 @@
       %span.badge.badge-danger Inactive
 
   %p
+    %b Receive weekly report:
+    - if @user.receive_weekly_report
+      %span.badge.badge-success Yes
+      - if !@user.is_active
+        %br
+        %small
+          %span.fa.fa-info-circle.icon-space-r-half
+          Will not receive while user is inactive
+    - else
+      %span.badge.badge-secondary No
+
+  %p
     %b Registered:
     = display_datetime(@user.created_at)

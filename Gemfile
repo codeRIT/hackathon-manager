@@ -75,6 +75,7 @@ gem 'validate_url'
 
 # Background job processing
 gem 'sidekiq', '< 6'
+gem 'sidekiq-cron', '~> 1.1'
 
 # Misc support gems
 gem 'rails-settings-cached', '~> 0.7.2'

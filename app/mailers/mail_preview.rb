@@ -4,5 +4,9 @@ if defined?(ActionMailer::Preview)
       message = Message.first
       Mailer.bulk_message_email(message, User.first.id)
     end
+
+    def admin_weekly_report
+      AdminMailer.weekly_report(User.first.id)
+    end
   end
 end
