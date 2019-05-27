@@ -1,3 +1,20 @@
+# [1.3.0](https://github.com/codeRIT/hackathon-manager/compare/v1.2.0...v1.3.0) (2019-05-27)
+
+
+### Code Refactoring
+
+* Mailer -> UserMailer ([a77aa96](https://github.com/codeRIT/hackathon-manager/commit/a77aa96))
+
+
+### Features
+
+* Implement weekly email report ([c4df212](https://github.com/codeRIT/hackathon-manager/commit/c4df212)), closes [#80](https://github.com/codeRIT/hackathon-manager/issues/80)
+
+
+### Tests
+
+* Improve MessageTemplateTest reliability ([a3fcb88](https://github.com/codeRIT/hackathon-manager/commit/a3fcb88))
+
 # [1.2.0](https://github.com/codeRIT/hackathon-manager/compare/v1.1.0...v1.2.0) (2019-05-25)
 
 
