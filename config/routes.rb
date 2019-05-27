@@ -1,17 +1,18 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
-  require 'sidekiq/web'
+  require "sidekiq/web"
+  require "sidekiq/cron/web"
 
   devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
   use_doorkeeper
 
-  mount MailPreview => 'mail_view' if Rails.env.development?
+  mount MailPreview => "mail_view" if Rails.env.development?
 
-  root to: 'questionnaires#show'
+  root to: "questionnaires#show"
 
   authenticate :user, ->(u) { u.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => "/sidekiq"
     mount Blazer::Engine, at: "blazer"
   end
 

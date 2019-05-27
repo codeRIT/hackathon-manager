@@ -14,6 +14,8 @@ class MessageTemplateTest < ActiveSupport::TestCase
   end
 
   should "refresh stored instance when calling #load_singleton" do
+    # Fresh load + instance expiration
+    MessageTemplate.load_singleton
     # Mutate the in-memory instance
     MessageTemplate.instance.html = "foo"
     assert_equal "foo", MessageTemplate.instance.html
@@ -23,6 +25,8 @@ class MessageTemplateTest < ActiveSupport::TestCase
   end
 
   should "refresh singleton after instance has aged" do
+    # Fresh load + instance expiration
+    MessageTemplate.load_singleton
     # Mutate the in-memory instance
     MessageTemplate.instance.html = "foo"
     assert_equal "foo", MessageTemplate.instance.html

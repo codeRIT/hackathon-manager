@@ -59,14 +59,14 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def preview
-    email = Mailer.bulk_message_email(@message.id, current_user.id, nil, true)
+    email = UserMailer.bulk_message_email(@message.id, current_user.id, nil, true)
     render html: email.body.raw_source.html_safe
   end
 
   def live_preview
     body = params[:body] || ""
     message = Message.new(body: body)
-    email = Mailer.bulk_message_email(nil, current_user.id, message, true)
+    email = UserMailer.bulk_message_email(nil, current_user.id, message, true)
     render html: email.body.raw_source.html_safe
   end
 
@@ -88,7 +88,7 @@ class Manage::MessagesController < Manage::ApplicationController
   def template_preview
     body = File.read("app/views/manage/messages/_template_example.html.md")
     message = Message.new(body: body)
-    email = Mailer.bulk_message_email(nil, current_user.id, message, true)
+    email = UserMailer.bulk_message_email(nil, current_user.id, message, true)
     render html: email.body.raw_source.html_safe
   end
 

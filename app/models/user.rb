@@ -32,12 +32,17 @@ class User < ApplicationRecord
 
   def queue_reminder_email
     return if reminder_sent_at
-    Mailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
+    UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
     update_attribute(:reminder_sent_at, Time.now)
   end
 
   def email=(value)
     super value.try(:downcase)
+  end
+
+  def safe_receive_weekly_report
+    return false unless is_active
+    receive_weekly_report
   end
 
   def first_name

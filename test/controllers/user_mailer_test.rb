@@ -1,6 +1,6 @@
 require "test_helper"
 
-class MailerTest < ActionMailer::TestCase
+class UserMailerTest < ActionMailer::TestCase
   context "upon trigger of a bulk message" do
     setup do
       @message = create(:message, subject: "Example Subject", body: "Hello World!")
@@ -8,7 +8,7 @@ class MailerTest < ActionMailer::TestCase
     end
 
     should "deliver bulk messages" do
-      email = Mailer.bulk_message_email(@message.id, @user.id).deliver_now
+      email = UserMailer.bulk_message_email(@message.id, @user.id).deliver_now
 
       assert_equal ["test@example.com"], email.to
       assert_equal "Example Subject", email.subject
@@ -24,7 +24,7 @@ class MailerTest < ActionMailer::TestCase
 
     should "queue reminder bulk message" do
       assert_difference "enqueued_jobs.size", 1 do
-        Mailer.incomplete_reminder_email(@user.id).deliver_later
+        UserMailer.incomplete_reminder_email(@user.id).deliver_later
       end
     end
   end
@@ -37,7 +37,7 @@ class MailerTest < ActionMailer::TestCase
     end
 
     should "use customized email_from" do
-      email = Mailer.bulk_message_email(@message.id, @user.id).deliver_now
+      email = UserMailer.bulk_message_email(@message.id, @user.id).deliver_now
 
       assert_equal ["test@custom.example.com"], email.from
     end

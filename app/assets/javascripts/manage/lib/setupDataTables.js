@@ -39,6 +39,7 @@ var setupDataTables = function() {
       { orderable: true, data: "email" },
       { orderable: true, data: "role" },
       { orderable: true, data: "active" },
+      { orderable: true, data: "receive_weekly_report" },
       { orderable: true, data: "created_at" }
     ]
   });

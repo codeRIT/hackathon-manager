@@ -104,4 +104,13 @@ class UserTest < ActiveSupport::TestCase
       create(:user)
     end
   end
+
+  context "safe_receive_weekly_report" do
+    should "return false if user is inactive" do
+      user = build(:user, is_active: true, receive_weekly_report: true)
+      assert_equal true, user.safe_receive_weekly_report
+      user.is_active = false
+      assert_equal false, user.safe_receive_weekly_report
+    end
+  end
 end
