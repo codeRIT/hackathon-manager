@@ -20,6 +20,7 @@ jobs:
         - RUN_COVERAGE=travis bin/rails test
         - bin/rails coverage:report
     - stage: Release + website update
+      if: branch = master
       language: node_js
       node_js: lts/*
       cache:
@@ -30,9 +31,8 @@ jobs:
         skip_cleanup: true
         script:
           - yarn semantic-release
-        on:
-          branch: master
     - # stage name not required, will continue to use `Release + website update`
+      if: branch = master
       language: node_js
       node_js: lts/*
       cache:
@@ -42,5 +42,3 @@ jobs:
         provider: script
         skip_cleanup: true
         script: bash website/travis-deploy.sh
-        on:
-          branch: master
