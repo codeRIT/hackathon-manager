@@ -92,8 +92,10 @@ module HackathonManagerHelper
   end
 
   def display_datetime(datetime, opts = {})
+    opts[:relative] = true if opts[:relative].nil?
+
     formatted = ""
-    if Time.now - datetime < 5.hours
+    if Time.now - datetime < 5.hours && opts[:relative]
       formatted << "#{time_ago_in_words(datetime, include_seconds: true)} ago"
     else
       format = datetime.year == Time.now.year ? "%b %-d <small>at %I:%M %P</small>" : "%b %-d, %Y <small>at %I:%M %P</small>"

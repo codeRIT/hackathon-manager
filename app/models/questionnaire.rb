@@ -1,4 +1,6 @@
 class Questionnaire < ApplicationRecord
+  audited
+
   include ActiveModel::Dirty
   include DeletableAttachment
 

@@ -98,3 +98,8 @@
             %td= q.email
             %td= "<span class=\"text-#{acc_status_class(q.acc_status)}\">#{Questionnaire::POSSIBLE_ACC_STATUS[q.acc_status]}</span>".html_safe
             %td= q.checked_in? ? "Yes" : "No"
+
+.row.mt-2.mb-4
+  .col-lg-6
+    %h4.border-bottom.pb-2.mb-3 Change History
+    = render "model_history", model: @school

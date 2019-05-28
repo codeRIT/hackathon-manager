@@ -1,0 +1,43 @@
+- ignore_fields = ['acc_status_author_id', 'acc_status_date']
+
+- audits ||= model.audits if defined?(model)
+- audits = audits.sort_by(&:created_at).reverse
+- audits.each_with_index do |audit, index|
+  .d-xl-flex.justify-content-between
+    %div
+      - if audit.action == 'create'
+        %p.mb-1
+          = audit.auditable.model_name.human
+          created
+      - else
+        - audit.audited_changes.each do |field, value_pairs|
+          - next if ignore_fields.include? field
+          %p.mb-1
+            = t("simple_form.labels.#{audit.auditable.class.name.downcase}.#{field}")
+            - if audit.auditable.class.columns_hash[field].type == :text
+              changed
+            - else
+              changed to
+              %strong= display_audit_value(value_pairs[1], field)
+              %br
+              %small.text-secondary
+                Previously:
+                %strong= display_audit_value(value_pairs[0], field)
+    .text-secondary.d-flex.justify-content-between.flex-xl-column.justify-content-xl-start.text-xl-right
+      %p.mb-0
+        %small
+          %span.fa.fa-clock-o.icon-space-r-half
+          = display_datetime(audit.created_at)
+      %p.mb-2
+        - if audit.user
+          %small{"data-toggle" => "popover", "data-content" => audit.user.email, "data-trigger" => "hover"}
+            %span.fa.fa-user-o.icon-space-r-half
+            = audit.user.full_name
+        - else
+          &nbsp;
+  - unless (index + 1) == audits.count
+    %hr.mt-1.mb-2
+
+- if audits.empty?
+  %p.alert.alert-info
+    No history recorded.

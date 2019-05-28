@@ -1,5 +1,11 @@
 .row
-  .col-md-6
+  .col-lg-6
+    .card.mb-3
+      .card-header Recent Changes
+      .card-body.pb-2
+        = render "model_history", model: @questionnaire, audits: @questionnaire.audits + @questionnaire.user.audits
+
+  .col-lg-6
     .card.mb-3
       .card-header Recent Email Events
       .card-body
