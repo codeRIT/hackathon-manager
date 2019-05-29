@@ -96,7 +96,7 @@ module HackathonManagerHelper
     if Time.now - datetime < 5.hours
       formatted << "#{time_ago_in_words(datetime, include_seconds: true)} ago"
     else
-      format = datetime.year == Time.now.year ? "%b %-d <small>at %I:%M %P</span>" : "%b %-d, %Y <small>at %I:%M %P</small>"
+      format = datetime.year == Time.now.year ? "%b %-d <small>at %I:%M %P</small>" : "%b %-d, %Y <small>at %I:%M %P</small>"
       if Time.now - datetime > 6.months
         format = "%b %-d, %Y"
       end
