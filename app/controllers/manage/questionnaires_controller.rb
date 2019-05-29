@@ -42,7 +42,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
         if user.errors.include?(:email)
           @questionnaire.errors.add(:email, user.errors[:email].join(", "))
         end
-        return render 'new'
+        return render "new"
       end
     end
     respond_with(:manage, @questionnaire)
@@ -162,7 +162,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   def convert_boarded_bus_param(values, questionnaire = nil)
     boarded_bus = values.delete(:boarded_bus)
     current_value = questionnaire&.boarded_bus_at
-    values[:boarded_bus_at] = boarded_bus == '1' ? (current_value || Time.now) : nil
+    values[:boarded_bus_at] = boarded_bus == "1" ? (current_value || Time.now) : nil
     values
   end
 
