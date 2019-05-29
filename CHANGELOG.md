@@ -1,3 +1,16 @@
+# [1.8.0](https://github.com/codeRIT/hackathon-manager/compare/v1.7.0...v1.8.0) (2019-05-29)
+
+
+### Features
+
+* Alert confirmation after promoting/removing a bus captain ([abc034d](https://github.com/codeRIT/hackathon-manager/commit/abc034d))
+* Clean up datatables ([6c062c5](https://github.com/codeRIT/hackathon-manager/commit/6c062c5))
+
+
+### Performance Improvements
+
+* Speed up questionnaire datatable ([14643c0](https://github.com/codeRIT/hackathon-manager/commit/14643c0))
+
 # [1.7.0](https://github.com/codeRIT/hackathon-manager/compare/v1.6.0...v1.7.0) (2019-05-29)
 
 
