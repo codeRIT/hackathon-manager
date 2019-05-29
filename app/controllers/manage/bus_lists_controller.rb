@@ -44,14 +44,17 @@ class Manage::BusListsController < Manage::ApplicationController
     is_bus_captain = params[:bus_captain] == "1"
     @questionnaire.update_attribute(:is_bus_captain, is_bus_captain)
     if @questionnaire.reload.is_bus_captain
+      flash[:notice] = "#{@questionnaire.full_name} has been promoted to a bus captain."
       Message.queue_for_trigger("bus_list.new_captain_confirmation", @questionnaire.user.id)
+    else
+      flash[:notice] = "#{@questionnaire.full_name} has been removed as a bus captain."
     end
     redirect_to [:manage, @bus_list]
   end
 
   def send_update_email
     if Message.for_trigger("bus_list.notes_update").empty?
-      flash[:alert] = 'Error: No automated message is configured for bus note updates!'
+      flash[:alert] = "Error: No automated message is configured for bus note updates!"
       redirect_to [:manage, @bus_list]
       return
     end
@@ -59,7 +62,7 @@ class Manage::BusListsController < Manage::ApplicationController
     @bus_list.passengers.each do |passenger|
       Message.queue_for_trigger("bus_list.notes_update", passenger.id).count
     end
-    flash[:notice] = 'Bus notes update emails have been sent'
+    flash[:notice] = "Bus notes update emails have been sent"
     redirect_to [:manage, @bus_list]
   end
 
