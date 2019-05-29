@@ -1,3 +1,21 @@
+# [1.4.0](https://github.com/codeRIT/hackathon-manager/compare/v1.3.0...v1.4.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* Close <small> tag in datetime helper ([456b26a](https://github.com/codeRIT/hackathon-manager/commit/456b26a))
+
+
+### Features
+
+* Use email as fallback for User.full_name ([80e06eb](https://github.com/codeRIT/hackathon-manager/commit/80e06eb))
+
+
+### Tests
+
+* Add watch test/helpers/ dir for Guard ([a50e9db](https://github.com/codeRIT/hackathon-manager/commit/a50e9db))
+* Remove unused helper tests ([87ba1d2](https://github.com/codeRIT/hackathon-manager/commit/87ba1d2))
+
 # [1.3.0](https://github.com/codeRIT/hackathon-manager/compare/v1.2.0...v1.3.0) (2019-05-27)
 
 
