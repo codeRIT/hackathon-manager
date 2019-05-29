@@ -27,10 +27,7 @@ class AdminDatatable < AjaxDatatablesRails::Base
     end
   end
 
-  # rubocop:disable Naming/AccessorMethodName
   def get_raw_records
     User.where(role: [:admin, :admin_limited_access, :event_tracking])
   end
-
-  # rubocop:enable Naming/AccessorMethodName
 end
