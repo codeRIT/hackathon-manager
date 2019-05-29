@@ -1,4 +1,4 @@
-class QuestionnaireDatatable < AjaxDatatablesRails::Base
+class QuestionnaireDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_questionnaire_path, :manage_school_path, :current_user, :acc_status_class, :display_datetime, :bold
 
   def view_columns

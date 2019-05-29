@@ -8,7 +8,7 @@ class Manage::AdminsController < Manage::ApplicationController
   end
 
   def datatable
-    render json: AdminDatatable.new(view_context)
+    render json: AdminDatatable.new(params, view_context: view_context)
   end
 
   def show

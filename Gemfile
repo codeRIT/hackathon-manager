@@ -50,7 +50,7 @@ gem "file_validators"
 # Templating utilities
 gem 'haml-rails', '~> 2.0'
 gem 'simple_form'
-gem 'ajax-datatables-rails', '~> 0.4.0' # Does NOT follow semver
+gem 'ajax-datatables-rails', '~> 1.0'
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.0'
 gem 'groupdate'

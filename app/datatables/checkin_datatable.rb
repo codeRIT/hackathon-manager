@@ -1,4 +1,4 @@
-class CheckinDatatable < AjaxDatatablesRails::Base
+class CheckinDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_checkin_path, :display_datetime, :bold
 
   def view_columns

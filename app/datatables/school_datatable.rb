@@ -1,4 +1,4 @@
-class SchoolDatatable < AjaxDatatablesRails::Base
+class SchoolDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_school_path, :bold
 
   def view_columns

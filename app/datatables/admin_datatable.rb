@@ -1,4 +1,4 @@
-class AdminDatatable < AjaxDatatablesRails::Base
+class AdminDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_admin_path, :bold, :display_datetime
 
   def view_columns

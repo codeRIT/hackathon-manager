@@ -8,7 +8,7 @@ class Manage::CheckinsController < Manage::ApplicationController
   end
 
   def datatable
-    render json: CheckinDatatable.new(view_context)
+    render json: CheckinDatatable.new(params, view_context: view_context)
   end
 
   def show

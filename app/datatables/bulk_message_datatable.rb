@@ -1,4 +1,4 @@
-class BulkMessageDatatable < AjaxDatatablesRails::Base
+class BulkMessageDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_message_path, :display_datetime, :bold, :h
 
   def view_columns

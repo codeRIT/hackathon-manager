@@ -10,7 +10,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def datatable
-    render json: QuestionnaireDatatable.new(view_context)
+    render json: QuestionnaireDatatable.new(params, view_context: view_context)
   end
 
   def show

@@ -10,7 +10,7 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def datatable
-    render json: BulkMessageDatatable.new(view_context)
+    render json: BulkMessageDatatable.new(params, view_context: view_context)
   end
 
   def show

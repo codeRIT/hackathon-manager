@@ -8,7 +8,7 @@ class Manage::SchoolsController < Manage::ApplicationController
   end
 
   def datatable
-    render json: SchoolDatatable.new(view_context)
+    render json: SchoolDatatable.new(params, view_context: view_context)
   end
 
   def show
