@@ -89,7 +89,7 @@
 
 = render "questionnaire_datatable", scope_params: { school_id: @school.id }, page_length: 25, columns: %w(link note first_name last_name email acc_status checked_in created_at)
 
-.row.mt-2.mb-4
+.row.mt-4.mb-5
   .col-lg-6
     %h4.border-bottom.pb-2.mb-3 Change History
     = render "model_history", model: @school

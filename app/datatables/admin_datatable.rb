@@ -21,7 +21,7 @@ class AdminDatatable < ApplicationDatatable
         email: link_to(bold(record.email), manage_admin_path(record)),
         role: record.role.titleize,
         active: record.is_active ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe,
-        receive_weekly_report: record.receive_weekly_report ? '<span class="badge badge-success">Yes</span>'.html_safe : '<span class="badge badge-secondary">No<span>'.html_safe,
+        receive_weekly_report: yes_no_display(record.receive_weekly_report),
         created_at: display_datetime(record.created_at),
       }
     end

@@ -22,7 +22,7 @@ class SchoolDatatable < ApplicationDatatable
         city: record.city,
         state: record.state,
         questionnaire_count: record.questionnaire_count,
-        home_school: record.is_home ? '<span class="badge badge-success">Yes</span>'.html_safe : '<span class="badge badge-secondary">No</span>'.html_safe,
+        home_school: yes_no_display(record.is_home),
       }
     end
   end

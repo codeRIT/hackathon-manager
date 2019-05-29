@@ -25,7 +25,7 @@ class CheckinDatatable < ApplicationDatatable
         first_name: record.first_name,
         last_name: record.last_name,
         about: about(record),
-        checked_in: record.checked_in? ? "<span class=\"text-success\">Yes</span>".html_safe : "No",
+        checked_in: yes_no_display(record.checked_in?),
         actions: "<a class=\"btn btn-primary btn-sm\" href=\"#{manage_checkin_path(record)}\">View</a>".html_safe,
       }
     end
