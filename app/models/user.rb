@@ -56,7 +56,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    return "" if questionnaire.blank?
+    return email if questionnaire.blank?
     questionnaire.full_name
   end
 

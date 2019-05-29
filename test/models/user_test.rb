@@ -48,9 +48,9 @@ class UserTest < ActiveSupport::TestCase
       assert_equal "Alpha Beta", questionnaire.user.full_name
     end
 
-    should "return blank when no questionnaire exists" do
-      user = create(:user)
-      assert_equal "", user.full_name
+    should "return email when no questionnaire exists" do
+      user = create(:user, email: "foo@example.com")
+      assert_equal "foo@example.com", user.full_name
     end
   end
 
