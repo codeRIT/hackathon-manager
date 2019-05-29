@@ -15,7 +15,7 @@ class Manage::DashboardController < Manage::ApplicationController
     if params[:school_id]
       where_filter = { school_id: params[:school_id] }
     else
-      types << "Non-Applied Users"
+      types << "Incomplete Applications"
     end
     render json: activity_chart_data(types, "hour", Time.zone.today.beginning_of_day..Time.zone.today.end_of_day, where_filter)
   end
@@ -26,7 +26,7 @@ class Manage::DashboardController < Manage::ApplicationController
       "Applications" => Questionnaire.where("created_at >= :date_min", date_min: date_min).count,
       "Confirmations" => Questionnaire.where("acc_status = \"rsvp_confirmed\" AND acc_status_date >= :date_min", date_min: date_min).count,
       "Denials" => Questionnaire.where("acc_status = \"rsvp_denied\" AND acc_status_date >= :date_min", date_min: date_min).count,
-      "Non-Applied Users" => User.without_questionnaire.where("users.created_at >= :date_min", date_min: date_min).count
+      "Incomplete Applications" => User.without_questionnaire.where("users.created_at >= :date_min", date_min: date_min).count,
     }
   end
 
@@ -43,16 +43,16 @@ class Manage::DashboardController < Manage::ApplicationController
   end
 
   def application_activity_data
-    render json: activity_chart_data(["Non-RIT Applications", "RIT Applications", "Non-Applied Users"], "day", 3.week.ago..Time.zone.now)
+    render json: activity_chart_data(["Away Applications", "Home Applications", "Incomplete Applications"], "day", 3.week.ago..Time.zone.now)
   end
 
   def user_distribution_data
     total_stats_data = {}
     total_count = Questionnaire.count
     rit_count = Questionnaire.where("school_id = \"2304\"").count
-    total_stats_data["Non-Applied Users"] = User.without_questionnaire.count
-    total_stats_data["Non-RIT Applications"] = total_count - rit_count
-    total_stats_data["RIT Applications"] = rit_count
+    total_stats_data["Incomplete Applications"] = User.without_questionnaire.count
+    total_stats_data["Away Applications"] = total_count - rit_count
+    total_stats_data["Home Applications"] = rit_count
     render json: total_stats_data
   end
 
@@ -116,22 +116,22 @@ class Manage::DashboardController < Manage::ApplicationController
       case type
       when "Applications"
         data = Questionnaire.send("group_by_#{group_type}", :created_at, range: range)
-      when "RIT Applications"
+      when "Home Applications"
         data = Questionnaire.where("school_id = \"2304\"").send("group_by_#{group_type}", :created_at, range: range)
-      when "Non-RIT Applications"
+      when "Away Applications"
         data = Questionnaire.where("school_id != \"2304\"").send("group_by_#{group_type}", :created_at, range: range)
       when "Confirmations"
         data = Questionnaire.where(acc_status: "rsvp_confirmed").send("group_by_#{group_type}", :acc_status_date, range: range)
       when "Denials"
         data = Questionnaire.where(acc_status: "rsvp_denied").send("group_by_#{group_type}", :acc_status_date, range: range)
-      when "Non-Applied Users"
+      when "Incomplete Applications"
         data = User.without_questionnaire.send("group_by_#{group_type}", "users.created_at", range: range)
       when "Checked In"
         data = Questionnaire.where("checked_in_at > 0").send("group_by_#{group_type}", :checked_in_at, range: range)
       when "Boarded Bus"
         data = Questionnaire.where("boarded_bus_at > 0").send("group_by_#{group_type}", :boarded_bus_at, range: range)
       end
-      data = data.where(where_filter) if where_filter && type != "Non-Applied Users"
+      data = data.where(where_filter) if where_filter && type != "Incomplete Applications"
       chart_data << { name: type, data: data.count }
     end
     chart_data

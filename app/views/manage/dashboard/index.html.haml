@@ -35,7 +35,7 @@
         %p total checked in
         %h3= Questionnaire.where('boarded_bus_at > 0').count
         %p total boarded bus
-      = area_chart checkin_activity_data_manage_dashboard_index_path, colors: [orange, blue], library: { legend: { enabled: false } }
+      = area_chart checkin_activity_data_manage_dashboard_index_path, colors: [blue, grey], library: { legend: { enabled: false } }
 
 .row
   .col
