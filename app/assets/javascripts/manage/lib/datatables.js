@@ -34,10 +34,15 @@ $.fn.autoDatatable = function() {
 
   var config = convertDataAttrsToConfig(this);
   if (config.order) {
-    var parts = config.order.split(' ');
-    var index = parseInt(parts[0], 10);
-    var direction = parts.length > 1 ? parts[1] : 'asc';
-    config.order = [index, direction];
+    var sequence = config.order.split(',').map(function(piece) {
+      return piece.trim();
+    });
+    config.order = sequence.map(function(piece) {
+      var parts = piece.split(' ');
+      var index = parseInt(parts[0], 10);
+      var direction = parts.length > 1 ? parts[1] : 'asc';
+      return [index, direction];
+    });
   } else {
     config.order = [1, 'asc'];
   }

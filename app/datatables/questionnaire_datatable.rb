@@ -1,5 +1,5 @@
 class QuestionnaireDatatable < ApplicationDatatable
-  def_delegators :@view, :link_to, :manage_questionnaire_path, :manage_school_path, :current_user, :acc_status_class, :display_datetime, :bold
+  def_delegators :@view, :link_to, :manage_questionnaire_path, :manage_school_path, :toggle_bus_captain_manage_bus_list_path, :current_user, :acc_status_class, :display_datetime, :bold
 
   def view_columns
     @view_columns ||= {
@@ -14,6 +14,7 @@ class QuestionnaireDatatable < ApplicationDatatable
       acc_status: { source: "Questionnaire.acc_status", searchable: true },
       checked_in: { source: "Questionnaire.checked_in_at", searchable: false },
       boarded_bus: { source: "Questionnaire.boarded_bus_at", searchable: false },
+      bus_captain: { source: "Questionnaire.is_bus_captain", searchable: false },
       school: { source: "School.name" },
       created_at: { source: "Questionnaire.created_at", searchable: false },
       dietary_restrictions: { source: "Questionnaire.dietary_restrictions", searchable: true },
@@ -32,6 +33,17 @@ class QuestionnaireDatatable < ApplicationDatatable
     output.html_safe
   end
 
+  def bus_captain(record)
+    return "No" unless record.bus_list_id?
+    return record.is_bus_captain? ? '<span class="badge badge-success">Yes</span>' : "No" unless current_user.admin?
+
+    if record.is_bus_captain?
+      link_to("Remove", toggle_bus_captain_manage_bus_list_path(record.bus_list, questionnaire_id: record.id, bus_captain: "0"), method: "post", class: "text-danger")
+    else
+      link_to("Promote", toggle_bus_captain_manage_bus_list_path(record.bus_list, questionnaire_id: record.id, bus_captain: "1"), method: "post", data: { confirm: "Are you sure you want to make #{record.full_name} a bus captain? They will receive a confirmation email." })
+    end
+  end
+
   def data
     records.map do |record|
       {
@@ -48,6 +60,7 @@ class QuestionnaireDatatable < ApplicationDatatable
         acc_status: "<span class=\"text-#{acc_status_class(record.acc_status)}\">#{record.acc_status.titleize}</span>".html_safe,
         checked_in: record.checked_in? ? '<span class="badge badge-success">Yes</span>'.html_safe : "No",
         boarded_bus: record.boarded_bus? ? '<span class="badge badge-success">Yes</span>'.html_safe : "No",
+        bus_captain: bus_captain(record),
         school: link_to(record.school.name, manage_school_path(record.school)),
         created_at: record.created_at.present? ? display_datetime(record.created_at) : "",
         dietary_restrictions: record.dietary_restrictions,
@@ -57,6 +70,16 @@ class QuestionnaireDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    Questionnaire.includes(:user, :school).references(:user, :school)
+    records = Questionnaire.includes(:user, :school).references(:user, :school)
+    if @params[:school_id].present?
+      records = records.where(school_id: @params[:school_id])
+    end
+    if @params[:bus_list_id].present?
+      records = records.where(bus_list_id: @params[:bus_list_id])
+    end
+    if @params[:acc_status].present?
+      records = records.where(acc_status: @params[:acc_status])
+    end
+    records
   end
 end
