@@ -1,7 +1,8 @@
-- ignore_fields = ['acc_status_author_id', 'acc_status_date']
+:ruby
+  ignore_fields = ['acc_status_author_id', 'acc_status_date']
+  audits ||= model.audits if defined?(model)
+  audits = audits.sort_by(&:created_at).reverse
 
-- audits ||= model.audits if defined?(model)
-- audits = audits.sort_by(&:created_at).reverse
 - audits.each_with_index do |audit, index|
   .d-xl-flex.justify-content-between
     %div
