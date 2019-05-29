@@ -1,26 +1,10 @@
-var setupDataTables = function() {
-  window.questionnairesDataTable = $('.datatable.questionnaires').DataTable({
-    order: [3, 'desc'],
-    columns: [
-      { orderable: false, data: 'bulk' },
-      { orderable: false, data: 'link' },
-      { orderable: false, data: 'note' },
-      { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'first_name' },
-      { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email', visible: false },
-      { orderable: true, data: 'phone', visible: false },
-      { orderable: true, data: 'gender', visible: false },
-      { orderable: true, data: 'date_of_birth', visible: false },
-      { orderable: true, data: 'acc_status' },
-      { orderable: true, data: 'checked_in' },
-      { orderable: true, data: 'school' },
-      { orderable: true, data: 'created_at' },
-      { orderable: true, data: 'dietary_restrictions', visible: false },
-      { orderable: true, data: 'special_needs', visible: false },
-    ],
-  });
+/*
+ * NOTE: This should only be used for legacy datatables.
+ * All future datatables should be generated using data-table-* HTML attributes.
+ * See app/views/manage/application/_questionnaire_datatable.html.haml for an example.
+ */
 
+var setupDataTables = function() {
   $('.datatable.checkins').DataTable({
     order: [1, 'asc'],
     columns: [

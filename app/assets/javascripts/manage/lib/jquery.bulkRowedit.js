@@ -41,7 +41,7 @@ $.fn.bulkRowEdit = function() {
       },
     })
       .done(function() {
-        window.questionnairesDataTable.draw(false);
+        window.activeDatatable.draw(false);
       })
       .fail(function() {
         alert('Request failed, please refresh the page or try again later.');

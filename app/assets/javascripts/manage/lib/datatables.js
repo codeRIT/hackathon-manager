@@ -1,5 +1,51 @@
 // Global settings and initializer
 
+function lowercaseFirstChar(string) {
+  return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
+function convertDataAttrsToConfig(target) {
+  var allData = $(target).data();
+  var data = Object.keys(allData)
+    .filter(function(key) {
+      return key.startsWith('table');
+    })
+    .reduce(function(data, rawKey) {
+      var key = lowercaseFirstChar(rawKey.replace('table', ''));
+      var value = allData[rawKey];
+      if (value == 'true' || value == 'false') {
+        value = value == 'true';
+      }
+      data[key] = value;
+
+      return data;
+    }, {});
+  return data;
+}
+
+$.fn.autoDatatable = function() {
+  var columns = [];
+  $(this)
+    .find('thead th')
+    .each(function() {
+      var data = convertDataAttrsToConfig(this);
+      columns.push(data);
+    });
+
+  var config = convertDataAttrsToConfig(this);
+  if (config.order) {
+    var parts = config.order.split(' ');
+    var index = parseInt(parts[0], 10);
+    var direction = parts.length > 1 ? parts[1] : 'asc';
+    config.order = [index, direction];
+  } else {
+    config.order = [1, 'asc'];
+  }
+  config.columns = columns;
+
+  window.activeDatatable = $(this).DataTable(config);
+};
+
 function setupFooterSearch(table) {
   table.columns().every(function() {
     var column = this;
@@ -78,6 +124,7 @@ $(document).on('preInit.dt', function(e, settings) {
 
 // init on turbolinks load
 $(document).on('turbolinks:load', function() {
+  $('table[data-auto-datatable]').autoDatatable();
   if (!$.fn.DataTable.isDataTable('table[id^=dttb-]')) {
     $('table[id^=dttb-]').DataTable();
   }

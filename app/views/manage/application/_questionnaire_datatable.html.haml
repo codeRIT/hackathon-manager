@@ -1,0 +1,80 @@
+:ruby
+  params = { format: :json }
+  if defined?(scope_params)
+    params = params.merge(scope_params)
+  end
+  data_source = datatable_manage_questionnaires_path(params)
+
+  columns ||= %w(link note first_name last_name email acc_status checked_in school created_at)
+  visible = -> (column, columns) { columns.include?(column) ? 'true' : 'false' }
+
+  # Use default page length if not defined
+  page_length ||= nil
+
+%div
+  %table.datatable.table.table-striped.table-hover{ data: { "auto-datatable": true, source: data_source, "table-order": "14 desc", 'page-length': page_length } }
+    %thead
+      %tr
+        %th{'data-table': { orderable: 'false', data: 'bulk' }}
+          - if current_user.admin?
+            %input{ type: "checkbox", name: "select_allc", value: "1", data: { bulk_row_select: "" } }
+        %th{'data-table': { orderable: 'false', data: 'link', visible: visible.call('link', columns) }}
+        %th{'data-table': { orderable: 'false', data: 'note', visible: visible.call('note', columns) }}
+        %th{'data-table': { orderable: 'true', data: 'id', visible: visible.call('id', columns) }} ID
+        %th{'data-table': { orderable: 'true', data: 'first_name', visible: visible.call('first_name', columns) }} First name
+        %th{'data-table': { orderable: 'true', data: 'last_name', visible: visible.call('last_name', columns) }} Last name
+        %th{'data-table': { orderable: 'true', data: 'email', visible: visible.call('email', columns) }} Email
+        %th{'data-table': { orderable: 'true', data: 'phone', visible: visible.call('phone', columns) }} Phone
+        %th{'data-table': { orderable: 'true', data: 'gender', visible: visible.call('gender', columns) }} Gender
+        %th{'data-table': { orderable: 'true', data: 'date_of_birth', visible: visible.call('date_of_birth', columns) }} Date of birth
+        %th{'data-table': { orderable: 'true', data: 'acc_status', visible: visible.call('acc_status', columns) }} Status
+        %th{'data-table': { orderable: 'true', data: 'checked_in', visible: visible.call('checked_in', columns) }} Checked in
+        %th{'data-table': { orderable: 'true', data: 'boarded_bus', visible: visible.call('boarded_bus', columns) }} Boarded bus
+        %th{'data-table': { orderable: 'true', data: 'school', visible: visible.call('school', columns) }} School
+        %th{'data-table': { orderable: 'true', data: 'created_at', visible: visible.call('created_at', columns) }} Applied on
+        %th{'data-table': { orderable: 'true', data: 'dietary_restrictions', visible: visible.call('dietary_restrictions', columns) }} Dietary restrictions
+        %th{'data-table': { orderable: 'true', data: 'special_needs', visible: visible.call('special_needs', columns) }} Special needs
+    %tbody
+    %tfoot
+      %tr
+        %th
+        %th
+        %th
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'ID'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'First name'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Last name'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Email'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Phone'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Gender'}
+        %th
+        %th
+          %select.form-control.form-control-sm
+            %option{value: ''} Status
+            - Questionnaire::POSSIBLE_ACC_STATUS.each do |key, value|
+              %option{value: key}= value
+        %th
+        %th
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'School'}
+        %th
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Dietary restrictions'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Special needs'}
+
+
+  .row
+    .col-sm-7.col-lg-6
+      %br
+      .card
+        .card-body
+          %h5.card-title Bulk Action
+          = bs_vertical_simple_form Questionnaire.new, url: bulk_apply_manage_questionnaires_path, html: { data: { bulk_row_edit: true } } do |f|
+            = f.input :acc_status, as: :select, collection: Questionnaire::POSSIBLE_ACC_STATUS.invert, include_blank: false, label: "Acceptance Status:", input_html: { data: { bulk_row_edit: true } }, hint: "Updating this status may trigger an automatic email to each applicant - see below for details."
+            = f.button :submit, value: "Update Status", data: { bulk_row_edit: true }, class: 'btn-primary'

@@ -77,27 +77,11 @@
 
 .row.mt-2
   .col
-    %h4.pb-0
+    %h4.border-bottom.pb-2.mb-3
       Questionnaires
       %small.text-muted (#{@school.questionnaires.count} total, #{@school.questionnaires.count { |q| q.checked_in? }} checked in)
-    %table.table
-      %thead
-        %tr
-          %th
-          %th First Name
-          %th Last Name
-          %th Email
-          %th Status
-          %th Checked In?
-      %tbody
-        - @school.questionnaires.order(:acc_status).each do |q|
-          %tr
-            %td= link_to '<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(q)
-            %td= q.first_name
-            %td= q.last_name
-            %td= q.email
-            %td= "<span class=\"text-#{acc_status_class(q.acc_status)}\">#{Questionnaire::POSSIBLE_ACC_STATUS[q.acc_status]}</span>".html_safe
-            %td= q.checked_in? ? "Yes" : "No"
+
+= render "questionnaire_datatable", scope_params: { school_id: @school.id }, page_length: 25, columns: %w(link note first_name last_name email acc_status checked_in created_at)
 
 .row.mt-2.mb-4
   .col-lg-6
