@@ -1,10 +1,9 @@
-document.addEventListener("turbolinks:load", function() {
-
+document.addEventListener('turbolinks:load', function() {
   $checkboxes = $('[data-boarded-bus]');
 
   function updateCount() {
-    var count = $checkboxes.filter(':checked').length
-    $('#boarded-bus-count').text(count + ' boarded')
+    var count = $checkboxes.filter(':checked').length;
+    $('#boarded-bus-count').text(count + ' boarded');
   }
 
   if ($checkboxes.length < 1) {
@@ -22,15 +21,18 @@ document.addEventListener("turbolinks:load", function() {
         questionnaire: {
           boarded_bus: checked,
           id: $checkbox.data('id'),
-        }
-      }
-    }).done(function() {
-      $checkbox.prop('checked', checked);
-    }).fail(function() {
-      alert("Request failed, please refresh the page or try again later.");
-    }).always(function() {
-      $('[type=submit][data-bulk-row-edit]').prop('disabled', false);
-      updateCount()
-    });
+        },
+      },
+    })
+      .done(function() {
+        $checkbox.prop('checked', checked);
+      })
+      .fail(function() {
+        alert('Request failed, please refresh the page or try again later.');
+      })
+      .always(function() {
+        $('[type=submit][data-bulk-row-edit]').prop('disabled', false);
+        updateCount();
+      });
   });
 });

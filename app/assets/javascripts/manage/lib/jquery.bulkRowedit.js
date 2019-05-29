@@ -1,5 +1,4 @@
 $.fn.bulkRowEdit = function() {
-
   var applyAction = function() {
     $('[type=submit][data-bulk-row-edit]').prop('disabled', true);
 
@@ -19,7 +18,14 @@ $.fn.bulkRowEdit = function() {
     var number = ids.length;
     var questionnaires = number === 1 ? 'questionnaire' : 'questionnaires';
     var status = $('select[data-bulk-row-edit] option[value=' + action + ']').text();
-    var message = 'Are you sure? This will set ' + number + ' ' + questionnaires + ' to "' + status + '".\n\nThis may trigger an automatic email to each applicant depending on your automated messages.';
+    var message =
+      'Are you sure? This will set ' +
+      number +
+      ' ' +
+      questionnaires +
+      ' to "' +
+      status +
+      '".\n\nThis may trigger an automatic email to each applicant depending on your automated messages.';
 
     if (!confirm(message)) {
       $('[type=submit][data-bulk-row-edit]').prop('disabled', false);
@@ -31,15 +37,18 @@ $.fn.bulkRowEdit = function() {
       type: 'PATCH',
       data: {
         bulk_action: action,
-        bulk_ids: ids
-      }
-    }).done(function() {
-      window.questionnairesDataTable.draw(false);
-    }).fail(function() {
-      alert("Request failed, please refresh the page or try again later.");
-    }).always(function() {
-      $('[type=submit][data-bulk-row-edit]').prop('disabled', false);
-    });
+        bulk_ids: ids,
+      },
+    })
+      .done(function() {
+        window.questionnairesDataTable.draw(false);
+      })
+      .fail(function() {
+        alert('Request failed, please refresh the page or try again later.');
+      })
+      .always(function() {
+        $('[type=submit][data-bulk-row-edit]').prop('disabled', false);
+      });
 
     return true;
   };
@@ -48,5 +57,4 @@ $.fn.bulkRowEdit = function() {
     e.preventDefault();
     return applyAction();
   });
-
 };

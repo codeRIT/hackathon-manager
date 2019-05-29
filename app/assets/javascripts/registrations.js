@@ -1,24 +1,24 @@
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener('turbolinks:load', function() {
   $('[data-school-picker]').autocomplete({
-    source: function( request, response ) {
+    source: function(request, response) {
       $.ajax({
         url: '/apply/schools',
         dataType: 'json',
         data: {
-          name: request.term
+          name: request.term,
         },
-        success: function( data ) {
-          response( data );
-        }
+        success: function(data) {
+          response(data);
+        },
       });
     },
     // hides helper messages
     messages: {
       noResults: '',
-      results: function() {}
+      results: function() {},
     },
     minLength: 3,
     delay: 100,
-    autoFocus: true
+    autoFocus: true,
   });
 });

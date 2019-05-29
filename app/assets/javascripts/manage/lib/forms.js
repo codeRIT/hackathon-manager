@@ -18,7 +18,7 @@ var setupManageForms = function() {
     $trigger = $('.message_trigger');
 
     var type = $type.val();
-    if (type === "automated") {
+    if (type === 'automated') {
       disable($recipients);
       enable($trigger);
     } else {
@@ -31,4 +31,4 @@ var setupManageForms = function() {
   $('[name="message[type]"]').on('change', function() {
     updateMessageForm();
   });
-}
+};

@@ -22,14 +22,20 @@ var setupEmailEvents = function() {
         };
         const groupedEvents = json.reduce(reducer, {});
 
-        const innerHtml = Object.keys(groupedEvents).map(function(key) {
-          const group = groupedEvents[key];
-          const groupHtml = group.map(function(event) {
-            const timestamp = new Date(event.timestamp);
-            return '<br /><small>' + event.type + ' at ' + timestamp.toLocaleString() + '</small>';
-          }).join('');
-          return '<li><p><strong>' + group[0].subject + '</strong>' + groupHtml + '</li>';
-        }).join('');
+        const innerHtml = Object.keys(groupedEvents)
+          .map(function(key) {
+            const group = groupedEvents[key];
+            const groupHtml = group
+              .map(function(event) {
+                const timestamp = new Date(event.timestamp);
+                return (
+                  '<br /><small>' + event.type + ' at ' + timestamp.toLocaleString() + '</small>'
+                );
+              })
+              .join('');
+            return '<li><p><strong>' + group[0].subject + '</strong>' + groupHtml + '</li>';
+          })
+          .join('');
         const newHtml = '<ul>' + innerHtml + '</ul>';
 
         $(events_container).html(newHtml);
@@ -38,4 +44,4 @@ var setupEmailEvents = function() {
         $(events_container).html('<em>An error ocurred. Please try again later.</em>');
       });
   });
-}
+};

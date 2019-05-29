@@ -1,9 +1,8 @@
 $.fn.messageLivePreview = function() {
-
   var updateLivePreview = function() {
     var textarea = $('[data-message-live-preview="textarea"]');
     var iframe = $('[data-message-live-preview="iframe"]');
-    var baseSrc = iframe.data('message-live-preview-base-src') ;
+    var baseSrc = iframe.data('message-live-preview-base-src');
     var newSrc = baseSrc + '?body=' + encodeURIComponent(textarea.val());
     console.log(newSrc);
     iframe.attr('src', newSrc);
