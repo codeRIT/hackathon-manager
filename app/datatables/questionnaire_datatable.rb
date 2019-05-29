@@ -38,9 +38,9 @@ class QuestionnaireDatatable < ApplicationDatatable
     return record.is_bus_captain? ? '<span class="badge badge-success">Yes</span>' : "No" unless current_user.admin?
 
     if record.is_bus_captain?
-      link_to("Remove", toggle_bus_captain_manage_bus_list_path(record.bus_list, questionnaire_id: record.id, bus_captain: "0"), method: "post", class: "text-danger")
+      link_to("Remove", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "0"), method: "post", class: "text-danger")
     else
-      link_to("Promote", toggle_bus_captain_manage_bus_list_path(record.bus_list, questionnaire_id: record.id, bus_captain: "1"), method: "post", data: { confirm: "Are you sure you want to make #{record.full_name} a bus captain? They will receive a confirmation email." })
+      link_to("Promote", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "1"), method: "post", data: { confirm: "Are you sure you want to make #{record.full_name} a bus captain? They will receive a confirmation email." })
     end
   end
 
@@ -70,7 +70,7 @@ class QuestionnaireDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    records = Questionnaire.includes(:user, :school).references(:user, :school)
+    records = Questionnaire.includes(:user, :school, :bus_list).references(:user, :school, :bus_list)
     if @params[:school_id].present?
       records = records.where(school_id: @params[:school_id])
     end
