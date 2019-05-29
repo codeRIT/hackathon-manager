@@ -27,6 +27,8 @@ const writerOpts = {
       commit.type = `Tests`;
     } else if (commit.type === `deploy`) {
       commit.type = `Deployment`;
+    } else if (commit.type === 'maint') {
+      commit.type = 'Maintenance';
     } else if (discard) {
       return;
     } else if (commit.type === `build`) {
