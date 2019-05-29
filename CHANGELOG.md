@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/codeRIT/hackathon-manager/compare/v1.4.0...v1.5.0) (2019-05-29)
+
+
+### Features
+
+* Track history of model changes ([#161](https://github.com/codeRIT/hackathon-manager/issues/161)) ([4c62bd3](https://github.com/codeRIT/hackathon-manager/commit/4c62bd3))
+
 # [1.4.0](https://github.com/codeRIT/hackathon-manager/compare/v1.3.0...v1.4.0) (2019-05-29)
 
 
