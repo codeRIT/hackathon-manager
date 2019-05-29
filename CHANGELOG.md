@@ -1,3 +1,21 @@
+# [1.7.0](https://github.com/codeRIT/hackathon-manager/compare/v1.6.0...v1.7.0) (2019-05-29)
+
+
+### Features
+
+* Add ability to mark a school as a home school ([86cad60](https://github.com/codeRIT/hackathon-manager/commit/86cad60)), closes [#157](https://github.com/codeRIT/hackathon-manager/issues/157)
+* Always show interested bus captains table ([e0142d9](https://github.com/codeRIT/hackathon-manager/commit/e0142d9))
+* Rename RIT/non-RIT to Home/Away ([3d1d1c1](https://github.com/codeRIT/hackathon-manager/commit/3d1d1c1)), closes [#157](https://github.com/codeRIT/hackathon-manager/issues/157)
+* Use interactive table on bus list passengers ([90f3b7b](https://github.com/codeRIT/hackathon-manager/commit/90f3b7b))
+* Use interactive table on school questionnaires list ([7364223](https://github.com/codeRIT/hackathon-manager/commit/7364223))
+
+
+### Maintenance
+
+* Remove unused coffeescript gem ([556ac98](https://github.com/codeRIT/hackathon-manager/commit/556ac98))
+* Update gems ([342dce7](https://github.com/codeRIT/hackathon-manager/commit/342dce7))
+* Upgrade to ajax-datatables-rails 1.x ([3c2d6d3](https://github.com/codeRIT/hackathon-manager/commit/3c2d6d3))
+
 # [1.6.0](https://github.com/codeRIT/hackathon-manager/compare/v1.5.0...v1.6.0) (2019-05-29)
 
 
