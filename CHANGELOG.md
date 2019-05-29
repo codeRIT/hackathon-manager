@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/codeRIT/hackathon-manager/compare/v1.5.0...v1.6.0) (2019-05-29)
+
+
+### Features
+
+* Enable per-column filtering ([f1008e7](https://github.com/codeRIT/hackathon-manager/commit/f1008e7)), closes [#109](https://github.com/codeRIT/hackathon-manager/issues/109)
+
 # [1.5.0](https://github.com/codeRIT/hackathon-manager/compare/v1.4.0...v1.5.0) (2019-05-29)
 
 
