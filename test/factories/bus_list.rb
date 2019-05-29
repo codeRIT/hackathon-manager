@@ -5,6 +5,6 @@ FactoryBot.define do
       "Bus List #{n}"
     end
     capacity { 50 }
-    notes    { "Notes!" }
+    notes { "Notes!" }
   end
 end

@@ -63,8 +63,8 @@ class Manage::DashboardController < Manage::ApplicationController
   end
 
   def schools_confirmed_data
-    schools = Questionnaire.joins(:school).group('schools.name').where("acc_status = 'rsvp_confirmed'").order("schools.name ASC").count
-    schools_riding = Questionnaire.joins(:school).group('schools.name').where("acc_status = 'rsvp_confirmed' AND bus_list_id").count
+    schools = Questionnaire.joins(:school).group("schools.name").where("acc_status = 'rsvp_confirmed'").order("schools.name ASC").count
+    schools_riding = Questionnaire.joins(:school).group("schools.name").where("acc_status = 'rsvp_confirmed' AND bus_list_id").count
     schools = schools.map do |name, count|
       bus_count_row = schools_riding.select { |school_bus_name, _| school_bus_name == name }
       bus_count = bus_count_row ? bus_count_row[name] || 0 : 0
@@ -73,7 +73,7 @@ class Manage::DashboardController < Manage::ApplicationController
     end
     render json: [
       { name: "Not riding bus", data: schools.sort_by { |_, no_bus, bus| [bus, no_bus] }.reverse },
-      { name: "Riding bus", data: schools_riding }
+      { name: "Riding bus", data: schools_riding },
     ]
   end
 
@@ -85,7 +85,7 @@ class Manage::DashboardController < Manage::ApplicationController
       "late_waitlist" => {},
       "waitlist" => {},
       "accepted" => {},
-      "rsvp_confirmed" => {}
+      "rsvp_confirmed" => {},
     }
     # Temporary fix
     # result = Questionnaire.joins(:school).group(:acc_status, "schools.name").where("schools.questionnaire_count >= 5").order("schools.questionnaire_count DESC").order("schools.name ASC").count
@@ -104,7 +104,7 @@ class Manage::DashboardController < Manage::ApplicationController
       { name: "Late Waitlisted", data: counted_schools["late_waitlist"] },
       { name: "RSVP Denied", data: counted_schools["rsvp_denied"] },
       { name: "Denied", data: counted_schools["denied"] },
-      { name: "Pending", data: counted_schools["pending"] }
+      { name: "Pending", data: counted_schools["pending"] },
     ]
   end
 
