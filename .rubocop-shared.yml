@@ -51,6 +51,10 @@ Style/Documentation:
 Style/GuardClause:
   Enabled: false
 
+Style/HashSyntax:
+  Exclude:
+    - db/migrate/*
+
 Style/PercentLiteralDelimiters:
   Enabled: false
 

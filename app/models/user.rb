@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  audited only: [:email, :role, :is_active, :receive_weekly_report]
+
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
          :doorkeeper, :omniauthable, omniauth_providers: [:mlh]

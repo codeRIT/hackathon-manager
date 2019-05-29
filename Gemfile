@@ -68,9 +68,10 @@ gem 'bootstrap', '~> 4.3.1'
 # Markdown parsing
 gem 'redcarpet'
 
-# Model validation
+# Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
+gem 'audited', '~> 4.7'
 
 # Background job processing
 gem 'sidekiq', '< 6'

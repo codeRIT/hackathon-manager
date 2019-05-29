@@ -36,3 +36,8 @@
         %td
           - if current_user.admin? || current_user == trackable_event.user
             = link_to 'Edit', edit_manage_trackable_event_path(trackable_event)
+
+.row.mt-2.mb-4
+  .col-lg-6
+    %h4.border-bottom.pb-2.mb-3 Change History
+    = render "model_history", model: @trackable_tag

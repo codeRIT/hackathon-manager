@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  audited
+
   self.inheritance_column = nil # To enable using "type" field
 
   validates_presence_of :name, :subject, :template
