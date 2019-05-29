@@ -1,5 +1,17 @@
 // Global settings and initializer
 
+function setupFooterSearch(table) {
+  table.columns().every(function() {
+    var column = this;
+    $(':input', column.footer()).on('keyup change', function() {
+      var input = this;
+      if (column.search() !== input.value) {
+        column.search(input.value).draw();
+      }
+    });
+  });
+}
+
 $.extend($.fn.dataTable.defaults, {
   processing: true,
   serverSide: true,
@@ -14,6 +26,7 @@ $.extend($.fn.dataTable.defaults, {
       .buttons()
       .container()
       .appendTo($('.col-md-6', table.table().container()).first());
+    setupFooterSearch(table);
   },
   pagingType: 'full_numbers',
   lengthChange: false,

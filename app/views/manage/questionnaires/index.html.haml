@@ -24,6 +24,38 @@
         %th Dietary restrictions
         %th Special needs
     %tbody
+    %tfoot
+      %tr
+        %th
+        %th
+        %th
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'ID'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'First name'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Last name'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Email'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Phone'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Gender'}
+        %th
+        %th
+          %select.form-control.form-control-sm
+            %option{value: ''} Status
+            - Questionnaire::POSSIBLE_ACC_STATUS.each do |key, value|
+              %option{value: key}= value
+        %th
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'School'}
+        %th
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Dietary restrictions'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Special needs'}
+
 
   .row
     .col-sm-7.col-lg-6
