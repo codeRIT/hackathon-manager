@@ -40,6 +40,12 @@
           = link_to link, target: '_blank' do
             Search in Google Maps
             %span.fa.fa-external-link.icon-space-l-half
+      %dt.col-md-4 Home school
+      %dd.col-md-8
+        - if @school.is_home?
+          %span.badge.badge-success Home school
+        - else
+          %span.badge.badge-secondary Not home school
 
   .col-md-6
     %h4.pb-0 Duplicate Names

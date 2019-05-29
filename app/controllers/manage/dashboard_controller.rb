@@ -49,7 +49,7 @@ class Manage::DashboardController < Manage::ApplicationController
   def user_distribution_data
     total_stats_data = {}
     total_count = Questionnaire.count
-    rit_count = Questionnaire.where("school_id = \"2304\"").count
+    rit_count = Questionnaire.joins(:school).where("schools.is_home = true").count
     total_stats_data["Incomplete Applications"] = User.without_questionnaire.count
     total_stats_data["Away Applications"] = total_count - rit_count
     total_stats_data["Home Applications"] = rit_count
@@ -117,9 +117,9 @@ class Manage::DashboardController < Manage::ApplicationController
       when "Applications"
         data = Questionnaire.send("group_by_#{group_type}", :created_at, range: range)
       when "Home Applications"
-        data = Questionnaire.where("school_id = \"2304\"").send("group_by_#{group_type}", :created_at, range: range)
+        data = Questionnaire.joins(:school).where("schools.is_home = true").send("group_by_#{group_type}", :created_at, range: range)
       when "Away Applications"
-        data = Questionnaire.where("school_id != \"2304\"").send("group_by_#{group_type}", :created_at, range: range)
+        data = Questionnaire.joins(:school).where("schools.is_home != true").send("group_by_#{group_type}", :created_at, range: range)
       when "Confirmations"
         data = Questionnaire.where(acc_status: "rsvp_confirmed").send("group_by_#{group_type}", :acc_status_date, range: range)
       when "Denials"

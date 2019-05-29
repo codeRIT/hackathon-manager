@@ -50,6 +50,8 @@ en:
         type: Bulk emails are sent once, manually. Automated emails are sent upon a desired trigger/event.
         name: A friendly name to recognize this email. Applicants won't see this.
         trigger: Sent automatically when a new or updated applicant matches this criteria. Does not send to anyone already matching this criteria.
+      school:
+        is_home: The "home" school is separated from all other schools on dashboard metrics.
       hackathon_config:
         registration_is_open: Specify that registration is open. This does <strong>not</strong> block registration; it only changes messaging around it.
         event_is_over: Specify that the event is over
@@ -102,6 +104,8 @@ en:
       user:
         email: joe@example.com
     labels:
+      school:
+        is_home: Home school
       user:
         is_active: Login access
       hackathon_config:

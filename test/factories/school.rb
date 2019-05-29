@@ -11,5 +11,6 @@ FactoryBot.define do
     city { "Rochester" }
     state { "NY" }
     questionnaire_count { 0 }
+    is_home { false }
   end
 end
