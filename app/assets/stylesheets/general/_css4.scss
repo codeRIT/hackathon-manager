@@ -1,8 +1,57 @@
+/*
+
+Source:
+ - https://css-tricks.com/difference-between-types-of-css-variables/
+ - https://codepen.io/vank0/pen/kkGvAb
+
+Enables use of CSS variables with a default fallback.
+Overrides the var() function, which when wrapped around a "@include css4" block,
+will generate both a CSS variable- and hard-coded definition.
+
+Usage example:
+
+$variables: (
+  --primary: blue;
+}
+
+.my-div {
+  padding: 10px;
+  @include css4 {
+    background: var(--blue);
+  }
+}
+
+Would output:
+
+.my-div {
+  padding: 10px;
+  background: blue;
+  background: var(--blue);
+}
+
+Browsers that support CSS variables will use the second var(--primary) definition,
+while older browsers (i.e. IE 11) will ignore it and use the fallback.
+
+If the CSS variable is dynamically overridden later on in the CSS/HTML/JS,
+older browsers will *not* respect the change. For example,
+
+:root {
+  --primary: red;
+}
+
+New browsers would use "red" for all instances of var(--primary),
+but old browsers would be stuck at "blue".
+
+We accept this trade-off because:
+ - Our main audience is using newer browsers than IE 11
+ - Old browsers will at least render _something_ rather than looking broken
+*/
+
+// Toggle these to debug the fallback
 $css4: true;
 $compatibility: true;
-//it is nessesary to define the variables in sass map instead of :root, for compatibility reasons.
 
-//Here we transfer the variables from the map to the :root element
+// Here we transfer the variables from the map to the :root element
 @if ($css4) {
   :root {
     @each $variable, $value in $variables {
@@ -11,7 +60,7 @@ $compatibility: true;
   }
 }
 
-//this is the "magic" function
+// This is the "magic" function
 @function var($variable) {
   @if ($css4) {
     @return unquote('var(' + $variable + ')');
@@ -30,7 +79,7 @@ $compatibility: true;
   }
 }
 
-//the mixin temporally sets the $css4 variable to false, compiles the css3 fallback, then makes the variable true again and compiles the css4 code. It should contain properties that use css4 variables, otherwise there will be unnessesary duplication of properties.
+// The mixin temporally sets the $css4 variable to false, compiles the css3 fallback, then makes the variable true again and compiles the css4 code. It should contain properties that use css4 variables, otherwise there will be unnessesary duplication of properties.
 @mixin css4 {
   @if ($css4) {
     $css4-backup: $css4;

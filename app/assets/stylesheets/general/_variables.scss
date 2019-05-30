@@ -1,21 +1,19 @@
-// TODO: automatically generate a /app/assets/stylesheets/variable-overrides.sass
-// so people know they can override them, and provide instructions to modify this file.
-
 /*
- * Allow for overridden variables.
- * To use, place a custom `variable-overrides.sass` in your own app, at:
- * /app/assets/stylesheets/variable-overrides.sass
- * with any of the variables below.
- */
-// TODO: support overrides
 
-/*
- * hackathon_manager variables
- *
- * All variables defined below should have the !default flag at the end of
- * the value. This ensures that if the variable is set in variable-overrides,
- * the default value here won't be used.
- */
+HackathonManager variables
+
+All variables defined below end up being defined as CSS variables:
+:root {
+  --my-var: ...;
+  ...
+}
+
+Which enables them to be overridden for theming.
+
+It is nessesary to define the variables in sass map instead of :root for compatibility reasons.
+See css4.scss for more details.
+
+*/
 
 $variables: (
   /*
