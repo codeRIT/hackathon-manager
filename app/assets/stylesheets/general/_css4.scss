@@ -16,7 +16,17 @@ $compatibility: true;
   @if ($css4) {
     @return unquote('var(' + $variable + ')');
   } @else {
-    @return map-get($variables, $variable);
+    $value: map-get($variables, $variable);
+    $value-as-str: '#{$value}';
+    @if (str-index($value-as-str, 'var')) {
+      // Turns "var(--foo)" into "--foo"
+      // Trade-off: this will use the default, non-customized
+      // variables on old browsers (e.g. IE 11)
+      $deep-variable: str-slice($value-as-str, 5, -2);
+      @return var($deep-variable);
+    } @else {
+      @return $value;
+    }
   }
 }
 
