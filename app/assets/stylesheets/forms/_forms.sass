@@ -1,5 +1,4 @@
-@include css4
-  var(--form-spacing-horizontal): 9px
+$form-spacing-horizontal: 9px
 
 #disclaimer, .alert
   @include css4
@@ -90,19 +89,15 @@ hr
   display: flex
   flex-flow: row wrap
   justify-content: stretch
-  @include css4
-    margin-left: -1 * var(--form-spacing-horizontal)
-  @include css4
-    margin-right: -1 * var(--form-spacing-horizontal)
+  margin-left: -1 * $form-spacing-horizontal
+  margin-right: -1 * $form-spacing-horizontal
 
 .input
   flex: 1 1 600px
   display: flex
   flex-flow: row wrap
-  @include css4
-    margin-left: var(--form-spacing-horizontal)
-  @include css4
-    margin-right: var(--form-spacing-horizontal)
+  margin-left: $form-spacing-horizontal
+  margin-right: $form-spacing-horizontal
   margin-bottom: 15px
   position: relative
   text-align: left
@@ -169,12 +164,10 @@ select
     background-image: asset-url("arrow_down.svg")
   &.date:nth-child(2)
     flex: 3 0 120px
-    @include css4
-      margin-right: 2 * var(--form-spacing-horizontal)
+    margin-right: 2 * $form-spacing-horizontal
   &.date:nth-child(3)
     flex: 1 1 65px
-    @include css4
-      margin-right: 2 * var(--form-spacing-horizontal)
+    margin-right: 2 * $form-spacing-horizontal
   &.date:nth-child(4)
     flex: 1 1 85px
 
@@ -267,10 +260,8 @@ input[type=submit]
   @include css4
     color: var(--input--hint)
   line-height: 1.5
-  @include css4
-    margin-left: var(--form-spacing-horizontal)
-  @include css4
-    margin-right: var(--form-spacing-horizontal)
+  margin-left: $form-spacing-horizontal
+  margin-right: $form-spacing-horizontal
   margin-bottom: 3px
 
 
