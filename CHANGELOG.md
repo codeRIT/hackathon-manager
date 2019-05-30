@@ -1,3 +1,11 @@
+# [1.9.0](https://github.com/codeRIT/hackathon-manager/compare/v1.8.0...v1.9.0) (2019-05-30)
+
+
+### Features
+
+* Better wording for sign-in alert ([1b96e6d](https://github.com/codeRIT/hackathon-manager/commit/1b96e6d))
+* Improve My MLH sign-in button ([c914d34](https://github.com/codeRIT/hackathon-manager/commit/c914d34))
+
 # [1.8.0](https://github.com/codeRIT/hackathon-manager/compare/v1.7.0...v1.8.0) (2019-05-29)
 
 
