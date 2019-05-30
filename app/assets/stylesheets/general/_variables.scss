@@ -29,11 +29,7 @@ $variables: (
    * Standardized colors
    ***************************************************************************/
     --primary: #f58625,
-  --primary-light: lighten(#f58625, 5%),
-  --primary-lighter: lighten(#f58625, 10%),
-  --primary-lighterer: lighten(#f58625, 15%),
-  --primary-lightest: lighten(#f58625, 40%),
-  --primary-darkest: darken(#f58625, 20%),
+  --primary-light: lighten(#f58625, 12%),
   /*
    * General colors
    ***************************************************************************/
@@ -68,15 +64,15 @@ $variables: (
    * Links
    ***************************************************************************/
     --link--text: var(--primary),
-  --link--text--hover: var(--primary-lighter),
+  --link--text--hover: var(--primary-light),
   /*
    * Buttons
    ***************************************************************************/
     --button--background: var(--primary),
   --button--border: var(--primary),
   --button--text: var(--white-pure),
-  --button--background--hover: var(--primary-lighterer),
-  --button--border--hover: var(--primary-lighterer),
+  --button--background--hover: var(--primary-light),
+  --button--border--hover: var(--primary-light),
   --button--text--hover: var(--white-pure),
   /*
    * Forms
