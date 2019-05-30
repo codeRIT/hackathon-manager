@@ -35,7 +35,7 @@ class Manage::ConfigsController < Manage::ApplicationController
       start_index = old_value.index(':root {')
       end_index = old_value.index('}', start_index) + 1
       pre_value = old_value[0...start_index].rstrip
-      post_value = old_value[end_index..].lstrip
+      post_value = old_value[end_index..-1].lstrip
       new_value = "#{pre_value}\n\n#{posted_value}\n\n#{post_value}".strip
     else
       # Prepend the variable definitions to the existing value
