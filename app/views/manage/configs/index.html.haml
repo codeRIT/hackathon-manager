@@ -15,6 +15,11 @@
             %small
               %code= key
           %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
+          - if key == 'custom_css'
+            %p
+              = link_to enter_theming_editor_manage_configs_path do
+                %span.fa.fa-paint-brush.icon-space-r-half
+                Interactive editor
           - if value == ''
             %p.mb-0
               %span.badge.badge-secondary Not set

@@ -86,7 +86,11 @@ Rails.application.routes.draw do
       post :mlh_info_applied, on: :collection
       post :mlh_info_checked_in, on: :collection
     end
-    resources :configs
+    resources :configs do
+      patch :update_only_css_variables, on: :member
+      get :enter_theming_editor, on: :collection
+      get :exit_theming_editor, on: :collection
+    end
     resources :trackable_events
     resources :trackable_tags
   end
