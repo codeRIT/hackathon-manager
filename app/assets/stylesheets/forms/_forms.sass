@@ -3,13 +3,11 @@ $form-spacing-horizontal: 9px
 #disclaimer, .alert
   @include css4
     background: var(--alert--background)
-  @include css4
     color: var(--alert--text)
+    border: 1px solid var(--alert--border)
   margin: 5px auto 55px auto
   padding: 18px 35px
   line-height: 1.4
-  @include css4
-    border: 1px solid var(--alert--border)
   border-radius: 3px
   box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
 
@@ -33,7 +31,6 @@ fieldset
   legend
     @include css4
       background: var(--black)
-    @include css4
       color: var(--white)
     width: 100%
     text-align: center
@@ -49,9 +46,7 @@ hr
 .alert
   @include css4
     color: var(--alert--text--error)
-  @include css4
     background: var(--alert--background--error)
-  @include css4
     border-color: var(--alert--border--error)
 
 .form-container, .cancel_btn_wrap
@@ -72,7 +67,6 @@ hr
   .error
     @include css4
       background: var(--input--error--background)
-    @include css4
       color: var(--input--error--text)
     font-size: 0.74rem
     padding: 6px 9px
@@ -122,15 +116,11 @@ label
 input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], input[type=radio], textarea, select
   @include css4
     background: var(--input--background)
-  @include css4
     color: var(--input--text)
-  @include css4
     font-family: var(--font-body-family)
-  @include css4
     font-weight: var(--font-reg)
-  font-size: 100%
-  @include css4
     border: 1px solid var(--input--border-color)
+  font-size: 100%
   margin-bottom: 5px
   outline: none
   padding: 9px 14px
@@ -141,9 +131,7 @@ input[type=text], input[type=email], input[type=tel], input[type=date], input[ty
   &:focus
     @include css4
       color: var(--input--text--focus)
-    @include css4
       background-color: var(--input--background--focus)
-    @include css4
       border-color: var(--input--border-color--focus)
     border-width: 2px
     padding: 8px 13px
@@ -269,9 +257,7 @@ input[type=submit]
 .ui-autocomplete
   @include css4
     background: var(--input--background--focus)
-  @include css4
     border: 1px solid var(--input--border-color--focus)
-  @include css4
     color: var(--input--text--focus)
   list-style: none
   padding: 0
