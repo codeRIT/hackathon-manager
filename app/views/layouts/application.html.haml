@@ -26,3 +26,5 @@
       %section.section
         .container
           = yield
+    - if cookies[:theming_editor]
+      = render "layouts/theming_editor"

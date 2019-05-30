@@ -17,6 +17,7 @@
 //= require jquery.ui.autocomplete
 //= require highcharts
 //= require chartkick
+//= require ./vendor/debounce
 //= require_directory .
 //= require_directory ./channels
 //= require ./vendor/simplemde.min.js
