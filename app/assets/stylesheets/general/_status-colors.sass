@@ -5,9 +5,11 @@
 .acc-status-waitlist
   color: darken(#0df, 7%)
 .acc-status-late_waitlist
-  color: darken(var(--primary), 20%)
+  @include css4
+    color: darken(var(--primary), 20%)
 .acc-status-pending
-  color: var(--primary)
+  @include css4
+    color: var(--primary)
 .acc-status-rsvp_denied
   color: darken(#f00, 7%)
 .acc-status-rsvp_confirmed

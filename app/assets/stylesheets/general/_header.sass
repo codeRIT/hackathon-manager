@@ -1,5 +1,7 @@
-var(--account-nav-spacing-horiz): 20px
-var(--account-nav-padding-vert): 15px
+@include css4
+  var(--account-nav-spacing-horiz): 20px
+@include css4
+  var(--account-nav-padding-vert): 15px
 
 .header
   width: 100%
@@ -7,7 +9,8 @@ var(--account-nav-padding-vert): 15px
   display: flex
   flex-flow: row nowrap
   justify-content: center
-  background: var(--account-header--background)
+  @include css4
+    background: var(--account-header--background)
 
 .header__wrapper
   display: flex
@@ -28,7 +31,8 @@ var(--account-nav-padding-vert): 15px
       margin-right: 0
 
 .account-nav
-  border-bottom: 1px solid var(--account-nav--border-color)
+  @include css4
+    border-bottom: 1px solid var(--account-nav--border-color)
   width: 100%
   display: flex
   flex-flow: row nowrap
@@ -46,25 +50,35 @@ var(--account-nav-padding-vert): 15px
 .account-nav__links
   display: flex
   flex-flow: row wrap
-  margin-left: -1 * var(--account-nav-spacing-horiz)
-  margin-right: -1 * var(--account-nav-spacing-horiz)
+  @include css4
+    margin-left: -1 * var(--account-nav-spacing-horiz)
+  @include css4
+    margin-right: -1 * var(--account-nav-spacing-horiz)
   @media (max-width: 700px)
     justify-content: center
 
 .account-nav__link
   display: flex
-  padding: var(--account-nav-padding-vert) 2px var(--account-nav-padding-vert)
-  margin-left: var(--account-nav-spacing-horiz)
-  margin-right: var(--account-nav-spacing-horiz)
+  @include css4
+    padding: var(--account-nav-padding-vert) 2px var(--account-nav-padding-vert)
+  @include css4
+    margin-left: var(--account-nav-spacing-horiz)
+  @include css4
+    margin-right: var(--account-nav-spacing-horiz)
   text-transform: uppercase
-  font-weight: var(--font-bold)
-  color: var(--account-nav--text)
+  @include css4
+    font-weight: var(--font-bold)
+  @include css4
+    color: var(--account-nav--text)
   @media (max-width: 700px)
     margin-left: 10px
     margin-right: 10px
 
 .account-nav__link--active
-  color: var(--account-nav--text--active)
-  border-bottom: 4px solid var(--account-nav--border-color--active)
-  padding-bottom: var(--account-nav-padding-vert) - 3px
+  @include css4
+    color: var(--account-nav--text--active)
+  @include css4
+    border-bottom: 4px solid var(--account-nav--border-color--active)
+  @include css4
+    padding-bottom: var(--account-nav-padding-vert) - 3px
   margin-bottom: -1px

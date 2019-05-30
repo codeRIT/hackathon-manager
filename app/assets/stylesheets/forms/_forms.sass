@@ -1,12 +1,16 @@
-var(--form-spacing-horizontal): 9px
+@include css4
+  var(--form-spacing-horizontal): 9px
 
 #disclaimer, .alert
-  background: var(--alert--background)
-  color: var(--alert--text)
+  @include css4
+    background: var(--alert--background)
+  @include css4
+    color: var(--alert--text)
   margin: 5px auto 55px auto
   padding: 18px 35px
   line-height: 1.4
-  border: 1px solid var(--alert--border)
+  @include css4
+    border: 1px solid var(--alert--border)
   border-radius: 3px
   box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
 
@@ -28,22 +32,28 @@ fieldset
     margin-right: -10px
 
   legend
-    background: var(--black)
-    color: var(--white)
+    @include css4
+      background: var(--black)
+    @include css4
+      color: var(--white)
     width: 100%
     text-align: center
     padding: 0.5em
 
 hr
   border: none
-  border-top: 1px solid var(--input--border-color)
+  @include css4
+    border-top: 1px solid var(--input--border-color)
   margin: 35px 0 40px
   width: 80px
 
 .alert
-  color: var(--alert--text--error)
-  background: var(--alert--background--error)
-  border-color: var(--alert--border--error)
+  @include css4
+    color: var(--alert--text--error)
+  @include css4
+    background: var(--alert--background--error)
+  @include css4
+    border-color: var(--alert--border--error)
 
 .form-container, .cancel_btn_wrap
   margin: 0 auto
@@ -58,10 +68,13 @@ hr
     margin-bottom: 30px
 
 .simple_form
-  color: var(--grey)
+  @include css4
+    color: var(--grey)
   .error
-    background: var(--input--error--background)
-    color: var(--input--error--text)
+    @include css4
+      background: var(--input--error--background)
+    @include css4
+      color: var(--input--error--text)
     font-size: 0.74rem
     padding: 6px 9px
     flex: 1 1 100%
@@ -69,22 +82,27 @@ hr
     text-decoration: none
     position: absolute
     margin-left: -16px
-    color: var(--input--required-star)
+    @include css4
+      color: var(--input--required-star)
     align-self: flex-start
 
 .form-inputs
   display: flex
   flex-flow: row wrap
   justify-content: stretch
-  margin-left: -1 * var(--form-spacing-horizontal)
-  margin-right: -1 * var(--form-spacing-horizontal)
+  @include css4
+    margin-left: -1 * var(--form-spacing-horizontal)
+  @include css4
+    margin-right: -1 * var(--form-spacing-horizontal)
 
 .input
   flex: 1 1 600px
   display: flex
   flex-flow: row wrap
-  margin-left: var(--form-spacing-horizontal)
-  margin-right: var(--form-spacing-horizontal)
+  @include css4
+    margin-left: var(--form-spacing-horizontal)
+  @include css4
+    margin-right: var(--form-spacing-horizontal)
   margin-bottom: 15px
   position: relative
   text-align: left
@@ -99,36 +117,47 @@ label
   align-items: center
   width: 100%
   flex-shrink: 0
-  font-weight: var(--font-light)
+  @include css4
+    font-weight: var(--font-light)
   padding-top: 5px
   padding-bottom: 8px
   text-align: left
 
 // all form input types
 input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], input[type=radio], textarea, select
-  background: var(--input--background)
-  color: var(--input--text)
-  font-family: var(--font-body-family)
-  font-weight: var(--font-reg)
+  @include css4
+    background: var(--input--background)
+  @include css4
+    color: var(--input--text)
+  @include css4
+    font-family: var(--font-body-family)
+  @include css4
+    font-weight: var(--font-reg)
   font-size: 100%
-  border: 1px solid var(--input--border-color)
+  @include css4
+    border: 1px solid var(--input--border-color)
   margin-bottom: 5px
   outline: none
   padding: 9px 14px
   width: 100%
   @include transition(150ms, border-color, ease-out, 0ms)
-  @include placeholder-color(var(--input--text--placeholder))
+  @include css4
+    @include placeholder-color(var(--input--text--placeholder))
   &:focus
-    color: var(--input--text--focus)
-    background-color: var(--input--background--focus)
-    border-color: var(--input--border-color--focus)
+    @include css4
+      color: var(--input--text--focus)
+    @include css4
+      background-color: var(--input--background--focus)
+    @include css4
+      border-color: var(--input--border-color--focus)
     border-width: 2px
     padding: 8px 13px
 
 // just selects
 select
   @include appearance (none)
-  background: asset-url("arrow_down_hover.svg"), var(--input--background)
+  @include css4
+    background: asset-url("arrow_down_hover.svg"), var(--input--background)
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
@@ -140,10 +169,12 @@ select
     background-image: asset-url("arrow_down.svg")
   &.date:nth-child(2)
     flex: 3 0 120px
-    margin-right: 2 * var(--form-spacing-horizontal)
+    @include css4
+      margin-right: 2 * var(--form-spacing-horizontal)
   &.date:nth-child(3)
     flex: 1 1 65px
-    margin-right: 2 * var(--form-spacing-horizontal)
+    @include css4
+      margin-right: 2 * var(--form-spacing-horizontal)
   &.date:nth-child(4)
     flex: 1 1 85px
 
@@ -162,7 +193,8 @@ input[type=checkbox]
     -moz-osx-font-smoothing: grayscale
     // end .fa
     content: ""
-    color: var(--primary)
+    @include css4
+      color: var(--primary)
     font-size: 25px
     margin-left: 2px
     margin-top: -4px
@@ -196,7 +228,8 @@ input[type=radio]
   &:checked
     &::after
       content: ""
-      background: var(--primary)
+      @include css4
+        background: var(--primary)
       display: block
       width: 100%
       height: 100%
@@ -221,34 +254,44 @@ input[type=submit]
   margin-top: 20px
 
 .field_with_errors
-  color: var(--red) !important
+  @include css4
+    color: var(--red) !important
 
 .hint
-  color: var(--input--hint)
+  @include css4
+    color: var(--input--hint)
   font-style: italic
   width: 100%
 
 .supporting-text
-  color: var(--input--hint)
+  @include css4
+    color: var(--input--hint)
   line-height: 1.5
-  margin-left: var(--form-spacing-horizontal)
-  margin-right: var(--form-spacing-horizontal)
+  @include css4
+    margin-left: var(--form-spacing-horizontal)
+  @include css4
+    margin-right: var(--form-spacing-horizontal)
   margin-bottom: 3px
 
 
 // jquery ui override
 .ui-autocomplete
-  background: var(--input--background--focus)
-  border: 1px solid var(--input--border-color--focus)
-  color: var(--input--text--focus)
+  @include css4
+    background: var(--input--background--focus)
+  @include css4
+    border: 1px solid var(--input--border-color--focus)
+  @include css4
+    color: var(--input--text--focus)
   list-style: none
   padding: 0
   .ui-menu-item a
     padding: 2px 5px
     display: block
     &:hover, &.ui-state-focus
-      background: var(--primary)
-      color: var(--white)
+      @include css4
+        background: var(--primary)
+      @include css4
+        color: var(--white)
 
 // form wizard
 .wizard-stage

@@ -1,8 +1,10 @@
 // located in the sidebar
 .footer
-  background: var(--grey-dark)
+  @include css4
+    background: var(--grey-dark)
   bottom: 0
-  color: var(--offwhite)
+  @include css4
+    color: var(--offwhite)
   font-size: 0.875rem
   padding: 7px 0
   position: absolute
@@ -11,7 +13,8 @@
   .coderit-logo
     background: url(image_path('coderit_logo.png')) center center no-repeat
     @include background-size (contain)
-    color: var(--primary)
+    @include css4
+      color: var(--primary)
     display: inline-block
     opacity: 0.9
     text-indent: -9999px

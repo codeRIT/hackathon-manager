@@ -1,64 +1,110 @@
-@mixin transition(var(--duration), var(--property), var(--function), var(--delay))
-  -webkit-transition: var(--duration) var(--property) var(--function) var(--delay)
-  -moz-transition-duration: var(--duration)
-  -moz-transtition-property: var(--property)
-  -moz-transition-timing-function: var(--function)
-  -moz-transition-delay: var(--delay)
-  -o-transition: var(--duration) var(--property) var(--function) var(--delay)
-  transition: var(--duration) var(--property) var(--function) var(--delay)
+@include css4
+  @mixin transition(var(--duration), var(--property), var(--function), var(--delay))
+  @include css4
+    -webkit-transition: var(--duration) var(--property) var(--function) var(--delay)
+  @include css4
+    -moz-transition-duration: var(--duration)
+  @include css4
+    -moz-transtition-property: var(--property)
+  @include css4
+    -moz-transition-timing-function: var(--function)
+  @include css4
+    -moz-transition-delay: var(--delay)
+  @include css4
+    -o-transition: var(--duration) var(--property) var(--function) var(--delay)
+  @include css4
+    transition: var(--duration) var(--property) var(--function) var(--delay)
 
-@mixin border-radius(var(--radius))
-  -webkit-border-radius: var(--radius)
-  -moz-border-radius: var(--radius)
-  -ms-border-radius: var(--radius)
-  -o-border-radius: var(--radius)
-  border-radius: var(--radius)
+@include css4
+  @mixin border-radius(var(--radius))
+  @include css4
+    -webkit-border-radius: var(--radius)
+  @include css4
+    -moz-border-radius: var(--radius)
+  @include css4
+    -ms-border-radius: var(--radius)
+  @include css4
+    -o-border-radius: var(--radius)
+  @include css4
+    border-radius: var(--radius)
 
-@mixin scale(var(--args))
-  -webkit-transform: scale(var(--args))
-  -o-transform: scale(var(--args))
-  transform: scale(var(--args))
+@include css4
+  @mixin scale(var(--args))
+  @include css4
+    -webkit-transform: scale(var(--args))
+  @include css4
+    -o-transform: scale(var(--args))
+  @include css4
+    transform: scale(var(--args))
 
-@mixin box-shadow(var(--args))
-  -webkit-box-shadow: var(--args)
-  -moz-box-shadow: var(--args)
-  box-shadow: var(--args)
+@include css4
+  @mixin box-shadow(var(--args))
+  @include css4
+    -webkit-box-shadow: var(--args)
+  @include css4
+    -moz-box-shadow: var(--args)
+  @include css4
+    box-shadow: var(--args)
 
-@mixin placeholder-color(var(--color))
+@include css4
+  @mixin placeholder-color(var(--color))
   &::placeholder
-    color: var(--color)
+    @include css4
+      color: var(--color)
     font-style: italic
   &::-webkit-input-placeholder
-    color: var(--color)
+    @include css4
+      color: var(--color)
     font-style: italic
   &:-moz-placeholder /* Firefox 18- */
-    color: var(--color)
+    @include css4
+      color: var(--color)
     font-style: italic
   &::-moz-placeholder  /* Firefox 19+ */
-    color: var(--color)
+    @include css4
+      color: var(--color)
     font-style: italic
   &:-ms-input-placeholder
-    color: var(--color)
+    @include css4
+      color: var(--color)
     font-style: italic
 
-@mixin box-sizing(var(--box-model))
-  -webkit-box-sizing: var(--box-model)
-  -moz-box-sizing: var(--box-model)
-  box-sizing: var(--box-model)
+@include css4
+  @mixin box-sizing(var(--box-model))
+  @include css4
+    -webkit-box-sizing: var(--box-model)
+  @include css4
+    -moz-box-sizing: var(--box-model)
+  @include css4
+    box-sizing: var(--box-model)
 
-@mixin appearance(var(--appearance))
-  -webkit-appearance: var(--appearance)
-  -moz-appearance: var(--appearance)
-  appearance: var(--appearance)
+@include css4
+  @mixin appearance(var(--appearance))
+  @include css4
+    -webkit-appearance: var(--appearance)
+  @include css4
+    -moz-appearance: var(--appearance)
+  @include css4
+    appearance: var(--appearance)
 
-@mixin background-size(var(--arg))
-  -webkit-background-size: var(--arg)
-  -moz-background-size: var(--arg)
-  -o-background-size: var(--arg)
-  background-size: var(--arg)
+@include css4
+  @mixin background-size(var(--arg))
+  @include css4
+    -webkit-background-size: var(--arg)
+  @include css4
+    -moz-background-size: var(--arg)
+  @include css4
+    -o-background-size: var(--arg)
+  @include css4
+    background-size: var(--arg)
 
-@mixin translate(var(--x), var(--y))
-  transform: translate(var(--x), var(--y))
-  -webkit-transform: translate(var(--x), var(--y))
-  -moz-transform: translate(var(--x), var(--y))
-  -o-transform: translate(var(--x), var(--y))
+@include css4
+  @mixin translate(var(--x), var(--y))
+  @include css4
+    transform: translate(var(--x), var(--y))
+  @include css4
+    -webkit-transform: translate(var(--x), var(--y))
+  @include css4
+    -moz-transform: translate(var(--x), var(--y))
+  @include css4
+    -o-transform: translate(var(--x), var(--y))

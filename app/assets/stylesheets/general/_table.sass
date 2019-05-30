@@ -1,17 +1,21 @@
 .table
   border: 0
   border-spacing: 0
-  color: var(--black)
+  @include css4
+    color: var(--black)
   margin: 20px 0
   width: 100%
   th, td
     margin: 0
     border: 0
   th
-    background: var(--secondary)
-    color: var(--white)
+    @include css4
+      background: var(--secondary)
+    @include css4
+      color: var(--white)
     font-size: 1em
-    font-weight: var(--font-light)
+    @include css4
+      font-weight: var(--font-light)
     text-align: left
     padding: 9px 13px
   td
@@ -21,6 +25,8 @@
       padding-left: 10px
   tr
     &:nth-child(odd)
-      background: var(--grey-light)
+      @include css4
+        background: var(--grey-light)
     &.accent
-      background: lighten(var(--grey-med), 20%)
+      @include css4
+        background: lighten(var(--grey-med), 20%)
