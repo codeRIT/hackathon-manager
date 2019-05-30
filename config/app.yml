@@ -22,6 +22,7 @@ defaults: &defaults
   thanks_for_applying_message: ""
   thanks_for_rsvp_message: ""
   bus_captain_notes: ""
+  custom_css: ""
 
 development:
   <<: *defaults

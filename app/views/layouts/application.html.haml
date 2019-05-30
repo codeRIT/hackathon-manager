@@ -14,6 +14,9 @@
     = stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': 'reload'
     = javascript_include_tag "application", 'data-turbolinks-track': 'reload'
     %link{ href:'//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700', rel: 'stylesheet', type: 'text/css' }
+    - if HackathonConfig['custom_css'].present?
+      %style
+        = HackathonConfig['custom_css']
 
   %body
     = render "layouts/header"
