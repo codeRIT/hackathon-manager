@@ -1,0 +1,37 @@
+$css4: true;
+$compatibility: true;
+//it is nessesary to define the variables in sass map instead of :root, for compatibility reasons.
+
+//Here we transfer the variables from the map to the :root element
+@if ($css4) {
+  :root {
+    @each $variable, $value in $variables {
+      #{$variable}: $value;
+    }
+  }
+}
+
+//this is the "magic" function
+@function var($variable) {
+  @if ($css4) {
+    @return unquote('var(' + $variable + ')');
+  } @else {
+    @return map-get($variables, $variable);
+  }
+}
+
+//the mixin temporally sets the $css4 variable to false, compiles the css3 fallback, then makes the variable true again and compiles the css4 code. It should contain properties that use css4 variables, otherwise there will be unnessesary duplication of properties.
+@mixin css4 {
+  @if ($css4) {
+    $css4-backup: $css4;
+    @if ($compatibility) {
+      $css4: false !global;
+      @content;
+    }
+    $css4: true !global;
+    @content;
+    $css4: $css4-backup;
+  } @else {
+    @content;
+  }
+}

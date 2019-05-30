@@ -1,0 +1,122 @@
+// TODO: automatically generate a /app/assets/stylesheets/variable-overrides.sass
+// so people know they can override them, and provide instructions to modify this file.
+
+/*
+ * Allow for overridden variables.
+ * To use, place a custom `variable-overrides.sass` in your own app, at:
+ * /app/assets/stylesheets/variable-overrides.sass
+ * with any of the variables below.
+ */
+// TODO: support overrides
+
+/*
+ * hackathon_manager variables
+ *
+ * All variables defined below should have the !default flag at the end of
+ * the value. This ensures that if the variable is set in variable-overrides,
+ * the default value here won't be used.
+ */
+
+$variables: (
+  /*
+   * Colors
+   ***************************************************************************/
+    --orange: #f58625,
+  --black: #231f20,
+  --grey: #6d6e71,
+  --blue: #3413ac,
+  --white: darken(#fff, 1%),
+  --white-grey: darken(#fff, 6%),
+  --red: #fc401c,
+  /*
+   * Standardized colors
+   ***************************************************************************/
+    --primary: #f58625,
+  --primary-light: lighten(#f58625, 5%),
+  --primary-lighter: lighten(#f58625, 10%),
+  --primary-lighterer: lighten(#f58625, 15%),
+  /*
+   * General colors
+   ***************************************************************************/
+    --white-pure: #ffffff,
+  --grey-light: #bbbbbb,
+  --grey-med: #888888,
+  --grey-dark: #343434,
+  --offwhite: #fcf7f2,
+  /*
+   * Fonts
+   ***************************************************************************/
+    --font-body-family: "'Open Sans', sans-serif",
+  --font-headlines-family: "'Open Sans', sans-serif",
+  --font-bold: 600,
+  --font-reg: 400,
+  --font-light: 300,
+  /*
+   * Constants
+   ***************************************************************************/
+    --sidebar-width: 200px,
+  /*
+   * Media breakpoints
+   ***************************************************************************/
+    --breakpoint-tablet: 1000px,
+  /*
+   * Headings
+   ***************************************************************************/
+    --section-title--text: #5d5c77,
+  --section-title--text--emphasized: var(--primary),
+  /*
+   * Links
+   ***************************************************************************/
+    --link--text: var(--primary),
+  --link--text--hover: var(--primary-lighter),
+  /*
+   * Buttons
+   ***************************************************************************/
+    --button--background: var(--primary),
+  --button--border: var(--primary),
+  --button--text: var(--white-pure),
+  --button--background--hover: var(--primary-lighterer),
+  --button--border--hover: var(--primary-lighterer),
+  --button--text--hover: var(--white-pure),
+  /*
+   * Forms
+   ***************************************************************************/
+    --input--border-color: #d1d3d4,
+  --input--background: var(--white-pure),
+  --input--text: var(--grey-dark),
+  --input--text--placeholder: #d1d3d4,
+  --input--hint: darken(#d1d3d4, 10%),
+  --input--error--background: var(--red),
+  --input--error--text: var(--white-pure),
+  --input--required-star: #bcbec0,
+  --input--border-color--focus: var(--primary),
+  --input--background--focus: var(--input--background),
+  --input--text--focus: var(--input--text),
+  /*
+   * Alerts
+   ***************************************************************************/
+    --alert--background: var(--white-pure),
+  --alert--border: var(--grey-dark),
+  --alert--text: var(--grey-dark),
+  --alert--background--error: var(--red),
+  --alert--border--error: var(--red),
+  --alert--text--error: var(--white-pure),
+  /*
+   * Flashes
+   ***************************************************************************/
+    --flashes--background: hsl(51, 87%, 94%),
+  --flashes--text: hsl(40, 68%, 20%),
+  --flashes--error--background: hsl(11, 87%, 94%),
+  --flashes--error--text: hsl(0, 68%, 20%),
+  /*
+   * Account header
+   ***************************************************************************/
+    --account-header--background: var(--grey-dark),
+  /*
+   * Account navigation
+   ***************************************************************************/
+    --account-nav--text: #888,
+  --account-nav--border-color: var(--grey-light),
+  --account-nav--text--active: var(--grey-dark),
+  --account-nav--border-color--active: var(--primary)
+);

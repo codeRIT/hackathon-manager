@@ -1,64 +1,64 @@
-@mixin transition($duration, $property, $function, $delay)
-  -webkit-transition: $duration $property $function $delay
-  -moz-transition-duration: $duration
-  -moz-transtition-property: $property
-  -moz-transition-timing-function: $function
-  -moz-transition-delay: $delay
-  -o-transition: $duration $property $function $delay
-  transition: $duration $property $function $delay
+@mixin transition(var(--duration), var(--property), var(--function), var(--delay))
+  -webkit-transition: var(--duration) var(--property) var(--function) var(--delay)
+  -moz-transition-duration: var(--duration)
+  -moz-transtition-property: var(--property)
+  -moz-transition-timing-function: var(--function)
+  -moz-transition-delay: var(--delay)
+  -o-transition: var(--duration) var(--property) var(--function) var(--delay)
+  transition: var(--duration) var(--property) var(--function) var(--delay)
 
-@mixin border-radius($radius)
-  -webkit-border-radius: $radius
-  -moz-border-radius: $radius
-  -ms-border-radius: $radius
-  -o-border-radius: $radius
-  border-radius: $radius
+@mixin border-radius(var(--radius))
+  -webkit-border-radius: var(--radius)
+  -moz-border-radius: var(--radius)
+  -ms-border-radius: var(--radius)
+  -o-border-radius: var(--radius)
+  border-radius: var(--radius)
 
-@mixin scale($args)
-  -webkit-transform: scale($args)
-  -o-transform: scale($args)
-  transform: scale($args)
+@mixin scale(var(--args))
+  -webkit-transform: scale(var(--args))
+  -o-transform: scale(var(--args))
+  transform: scale(var(--args))
 
-@mixin box-shadow($args)
-  -webkit-box-shadow: $args
-  -moz-box-shadow: $args
-  box-shadow: $args
+@mixin box-shadow(var(--args))
+  -webkit-box-shadow: var(--args)
+  -moz-box-shadow: var(--args)
+  box-shadow: var(--args)
 
-@mixin placeholder-color($color)
+@mixin placeholder-color(var(--color))
   &::placeholder
-    color: $color
+    color: var(--color)
     font-style: italic
   &::-webkit-input-placeholder
-    color: $color
+    color: var(--color)
     font-style: italic
   &:-moz-placeholder /* Firefox 18- */
-    color: $color
+    color: var(--color)
     font-style: italic
   &::-moz-placeholder  /* Firefox 19+ */
-    color: $color
+    color: var(--color)
     font-style: italic
   &:-ms-input-placeholder
-    color: $color
+    color: var(--color)
     font-style: italic
 
-@mixin box-sizing($box-model)
-  -webkit-box-sizing: $box-model
-  -moz-box-sizing: $box-model
-  box-sizing: $box-model
+@mixin box-sizing(var(--box-model))
+  -webkit-box-sizing: var(--box-model)
+  -moz-box-sizing: var(--box-model)
+  box-sizing: var(--box-model)
 
-@mixin appearance($appearance)
-  -webkit-appearance: $appearance
-  -moz-appearance: $appearance
-  appearance: $appearance
+@mixin appearance(var(--appearance))
+  -webkit-appearance: var(--appearance)
+  -moz-appearance: var(--appearance)
+  appearance: var(--appearance)
 
-@mixin background-size($arg)
-  -webkit-background-size: $arg
-  -moz-background-size: $arg
-  -o-background-size: $arg
-  background-size: $arg
+@mixin background-size(var(--arg))
+  -webkit-background-size: var(--arg)
+  -moz-background-size: var(--arg)
+  -o-background-size: var(--arg)
+  background-size: var(--arg)
 
-@mixin translate($x, $y)
-  transform: translate($x, $y)
-  -webkit-transform: translate($x, $y)
-  -moz-transform: translate($x, $y)
-  -o-transform: translate($x, $y)
+@mixin translate(var(--x), var(--y))
+  transform: translate(var(--x), var(--y))
+  -webkit-transform: translate(var(--x), var(--y))
+  -moz-transform: translate(var(--x), var(--y))
+  -o-transform: translate(var(--x), var(--y))
