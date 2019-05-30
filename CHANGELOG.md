@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/codeRIT/hackathon-manager/compare/v1.10.0...v1.11.0) (2019-05-30)
+
+
+### Features
+
+* Support custom CSS for public pages ([158a996](https://github.com/codeRIT/hackathon-manager/commit/158a996)), closes [#162](https://github.com/codeRIT/hackathon-manager/issues/162)
+* Support rich text editing for config variables ([a5b002a](https://github.com/codeRIT/hackathon-manager/commit/a5b002a))
+
 # [1.10.0](https://github.com/codeRIT/hackathon-manager/compare/v1.9.0...v1.10.0) (2019-05-30)
 
 
