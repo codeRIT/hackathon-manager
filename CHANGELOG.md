@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/codeRIT/hackathon-manager/compare/v1.11.0...v1.12.0) (2019-05-30)
+
+
+### Code Refactoring
+
+* Consolidate CSS variable usage ([d4e8b70](https://github.com/codeRIT/hackathon-manager/commit/d4e8b70))
+
+
+### Features
+
+* Interactively customize CSS variables ([#163](https://github.com/codeRIT/hackathon-manager/issues/163)) ([e1da59b](https://github.com/codeRIT/hackathon-manager/commit/e1da59b))
+
 # [1.11.0](https://github.com/codeRIT/hackathon-manager/compare/v1.10.0...v1.11.0) (2019-05-30)
 
 
