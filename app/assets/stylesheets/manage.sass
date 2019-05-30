@@ -4,10 +4,8 @@
 @import vendor/simplemde.min
 @import vendor/codemirror
 
-@include css4
-  var(--grey-dark): #555
-@include css4
-  var(--grey-med): #999
+$grey-dark: #555
+$grey-med: #999
 
 // external dependencies
 @import font-awesome
@@ -55,27 +53,22 @@
 // #manageNav
 //   z-index: 1
 //   width: 100%
-@include css4
-  //   background: var(--black)
-@include css4
-  //   color: var(--white)
+//   background: $black
+//   color: $white
 //   padding: 16px 20px 6px
 //   p, a
 //     margin: 0 5px 10px
 //   p
-@include css4
-  //     color: var(--primary)
+//     color: $primary
 //     display: inline-block
 //     margin-top: 0
 //     &:first-child
 //       margin-right: 10px
 //   a
-@include css4
-  //     color: var(--white)
+//     color: $white
 //     display: inline-block
 //     &:hover
-@include css4
-  //       color: darken(var(--grey-light), 5%)
+//       color: darken($grey-light, 5%)
 
 .land
   fill: #dadada
@@ -88,8 +81,7 @@
   stroke-width: 2px
 
 .county
-  @include css4
-    fill: var(--primary)
+  fill: $primary
   fill-opacity: .5
   stroke: #eee
   stroke-width: .5px
@@ -116,8 +108,7 @@
   padding: 0 6%
   height: 136px
   h3
-    @include css4
-      color: var(--black)
+    color: $black
     font-weight: 500
     margin: 1.2em 0 0
   p
@@ -144,8 +135,7 @@
 
 .email-preview
   width: 100%
-  @include css4
-    border: 2px solid var(--grey-med)
+  border: 2px solid $grey-med
   min-height: 800px
 
 .email-preview-in-simplemde
