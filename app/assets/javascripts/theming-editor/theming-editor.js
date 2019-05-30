@@ -35,6 +35,10 @@
       css += '  ' + variable + ': ' + value + ';\n';
     });
     css += '}';
+    saveConfig(css);
+  }
+
+  function saveConfig(css) {
     var data = {
       hackathon_config: {
         custom_css: css,
@@ -52,9 +56,9 @@
       .then(function(response) {
         if (!response.ok && response.type != 'opaqueredirect') {
           alert('There was an error attempting to save. Please try again or refresh the page.');
-        } else {
-          window.location.replace('/manage/configs/exit_theming_editor');
+          return;
         }
+        window.location.replace('/manage/configs/exit_theming_editor');
       })
       .catch(function() {
         alert('There was an error attempting to save. Please try again or refresh the page.');
@@ -64,9 +68,11 @@
   var onTextChange = throttle(_onTextChange, 100);
   var onPickrChange = throttle(_onPickrChange, 100);
 
-  function init() {
+  function initHtml() {
     var variables = Object.values(getComputedStyle(document.documentElement))
-      .filter(x => x.startsWith('--primary'))
+      .filter(function(x) {
+        return x.startsWith('--primary');
+      })
       .sort();
     var $editor = $('#theming-editor');
     var $variables = $editor.find('.theming-editor__variables');
@@ -85,7 +91,10 @@
       $input.on('input', onTextChange);
       $variables.append($new_variable);
     });
+    $editor.find('.theming-editor__button-save').on('click', onSave);
+  }
 
+  function initColorPickers() {
     window.pickrs = {};
     $('.theming-editor__color-picker').each(function() {
       var $input = $(this)
@@ -104,8 +113,11 @@
       var variable = $input.attr('name');
       window.pickrs[variable] = pickr;
     });
+  }
 
-    $editor.find('.theming-editor__button-save').on('click', onSave);
+  function init() {
+    initHtml();
+    initColorPickers();
   }
 
   document.addEventListener('turbolinks:load', init);
