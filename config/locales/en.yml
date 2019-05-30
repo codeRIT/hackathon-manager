@@ -31,6 +31,9 @@
 
 en:
   devise:
+  devise:
+    failure:
+      unauthenticated: "Please sign in or sign up to continue."
     registrations:
       user:
         signed_up: Welcome! Your account has been created.
