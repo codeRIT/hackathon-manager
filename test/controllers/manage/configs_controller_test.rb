@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Manage::ConfigsControllerTest < ActionController::TestCase
   context "while not authenticated" do
@@ -15,9 +15,9 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not update config" do
-      HackathonConfig['registration_is_open'] = false
+      HackathonConfig["registration_is_open"] = false
       patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig['registration_is_open']
+      assert_equal false, HackathonConfig["registration_is_open"]
       assert_redirected_to new_user_session_path
     end
   end
@@ -42,9 +42,9 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not update config" do
-      HackathonConfig['registration_is_open'] = false
+      HackathonConfig["registration_is_open"] = false
       patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig['registration_is_open']
+      assert_equal false, HackathonConfig["registration_is_open"]
       assert_redirected_to root_path
     end
   end
@@ -67,9 +67,9 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not update config" do
-      HackathonConfig['registration_is_open'] = false
+      HackathonConfig["registration_is_open"] = false
       patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig['registration_is_open']
+      assert_equal false, HackathonConfig["registration_is_open"]
     end
   end
 
@@ -91,9 +91,9 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "update config" do
-      HackathonConfig['registration_is_open'] = false
+      HackathonConfig["registration_is_open"] = false
       patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal true, HackathonConfig['registration_is_open']
+      assert_equal true, HackathonConfig["registration_is_open"]
       assert_redirected_to manage_configs_path
     end
   end
