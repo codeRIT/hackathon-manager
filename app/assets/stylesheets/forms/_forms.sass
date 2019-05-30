@@ -1,12 +1,13 @@
 $form-spacing-horizontal: 9px
 
 #disclaimer, .alert
-  background: $alert--background
-  color: $alert--text
+  @include css4
+    background: var(--alert--background)
+    color: var(--alert--text)
+    border: 1px solid var(--alert--border)
   margin: 5px auto 55px auto
   padding: 18px 35px
   line-height: 1.4
-  border: 1px solid $alert--border
   border-radius: 3px
   box-shadow: 0 6px 35px rgba(0, 0, 0, .1)
 
@@ -28,22 +29,25 @@ fieldset
     margin-right: -10px
 
   legend
-    background: $black
-    color: $white
+    @include css4
+      background: var(--black)
+      color: var(--white)
     width: 100%
     text-align: center
     padding: 0.5em
 
 hr
   border: none
-  border-top: 1px solid $input--border-color
+  @include css4
+    border-top: 1px solid var(--input--border-color)
   margin: 35px 0 40px
   width: 80px
 
 .alert
-  color: $alert--text--error
-  background: $alert--background--error
-  border-color: $alert--border--error
+  @include css4
+    color: var(--alert--text--error)
+    background: var(--alert--background--error)
+    border-color: var(--alert--border--error)
 
 .form-container, .cancel_btn_wrap
   margin: 0 auto
@@ -58,10 +62,12 @@ hr
     margin-bottom: 30px
 
 .simple_form
-  color: $grey
+  @include css4
+    color: var(--grey)
   .error
-    background: $input--error--background
-    color: $input--error--text
+    @include css4
+      background: var(--input--error--background)
+      color: var(--input--error--text)
     font-size: 0.74rem
     padding: 6px 9px
     flex: 1 1 100%
@@ -69,7 +75,8 @@ hr
     text-decoration: none
     position: absolute
     margin-left: -16px
-    color: $input--required-star
+    @include css4
+      color: var(--input--required-star)
     align-self: flex-start
 
 .form-inputs
@@ -99,36 +106,41 @@ label
   align-items: center
   width: 100%
   flex-shrink: 0
-  font-weight: $font-light
+  @include css4
+    font-weight: var(--font-light)
   padding-top: 5px
   padding-bottom: 8px
   text-align: left
 
 // all form input types
 input[type=text], input[type=email], input[type=tel], input[type=date], input[type="url"], input[type=password], input[type=file], input[type=checkbox], input[type=radio], textarea, select
-  background: $input--background
-  color: $input--text
-  font-family: $font-body-family
-  font-weight: $font-reg
+  @include css4
+    background: var(--input--background)
+    color: var(--input--text)
+    font-family: var(--font-body-family)
+    font-weight: var(--font-reg)
+    border: 1px solid var(--input--border-color)
   font-size: 100%
-  border: 1px solid $input--border-color
   margin-bottom: 5px
   outline: none
   padding: 9px 14px
   width: 100%
   @include transition(150ms, border-color, ease-out, 0ms)
-  @include placeholder-color($input--text--placeholder)
+  @include css4
+    @include placeholder-color(var(--input--text--placeholder))
   &:focus
-    color: $input--text--focus
-    background-color: $input--background--focus
-    border-color: $input--border-color--focus
+    @include css4
+      color: var(--input--text--focus)
+      background-color: var(--input--background--focus)
+      border-color: var(--input--border-color--focus)
     border-width: 2px
     padding: 8px 13px
 
 // just selects
 select
   @include appearance (none)
-  background: asset-url("arrow_down_hover.svg"), $input--background
+  @include css4
+    background: asset-url("arrow_down_hover.svg"), var(--input--background)
   background-repeat: no-repeat
   background-position: right
   background-size: auto 100%
@@ -162,7 +174,8 @@ input[type=checkbox]
     -moz-osx-font-smoothing: grayscale
     // end .fa
     content: ""
-    color: $primary
+    @include css4
+      color: var(--primary)
     font-size: 25px
     margin-left: 2px
     margin-top: -4px
@@ -196,7 +209,8 @@ input[type=radio]
   &:checked
     &::after
       content: ""
-      background: $primary
+      @include css4
+        background: var(--primary)
       display: block
       width: 100%
       height: 100%
@@ -221,15 +235,18 @@ input[type=submit]
   margin-top: 20px
 
 .field_with_errors
-  color: $red !important
+  @include css4
+    color: var(--red) !important
 
 .hint
-  color: $input--hint
+  @include css4
+    color: var(--input--hint)
   font-style: italic
   width: 100%
 
 .supporting-text
-  color: $input--hint
+  @include css4
+    color: var(--input--hint)
   line-height: 1.5
   margin-left: $form-spacing-horizontal
   margin-right: $form-spacing-horizontal
@@ -238,17 +255,20 @@ input[type=submit]
 
 // jquery ui override
 .ui-autocomplete
-  background: $input--background--focus
-  border: 1px solid $input--border-color--focus
-  color: $input--text--focus
+  @include css4
+    background: var(--input--background--focus)
+    border: 1px solid var(--input--border-color--focus)
+    color: var(--input--text--focus)
   list-style: none
   padding: 0
   .ui-menu-item a
     padding: 2px 5px
     display: block
     &:hover, &.ui-state-focus
-      background: $primary
-      color: $white
+      @include css4
+        background: var(--primary)
+      @include css4
+        color: var(--white)
 
 // form wizard
 .wizard-stage

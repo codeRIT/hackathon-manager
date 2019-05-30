@@ -1,17 +1,19 @@
 .table
   border: 0
   border-spacing: 0
-  color: $black
+  @include css4
+    color: var(--black)
   margin: 20px 0
   width: 100%
   th, td
     margin: 0
     border: 0
   th
-    background: $secondary
-    color: $white
+    @include css4
+      background: var(--primary)
+      color: var(--white)
+      font-weight: var(--font-light)
     font-size: 1em
-    font-weight: $font-light
     text-align: left
     padding: 9px 13px
   td
@@ -21,6 +23,8 @@
       padding-left: 10px
   tr
     &:nth-child(odd)
-      background: $grey-light
+      @include css4
+        background: var(--grey-light)
     &.accent
-      background: lighten($grey-med, 20%)
+      @include css4
+        background: var(--gray-med-light)

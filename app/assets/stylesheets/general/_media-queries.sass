@@ -4,7 +4,8 @@
     margin-left: 0
 
   .sidebar
-    left: -$sidebar-width
+    @include css4
+      left: -var(--sidebar-width)
     #sidebar-toggle
       display: block
 

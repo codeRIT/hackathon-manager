@@ -7,7 +7,8 @@ $account-nav-padding-vert: 15px
   display: flex
   flex-flow: row nowrap
   justify-content: center
-  background: $account-header--background
+  @include css4
+    background: var(--account-header--background)
 
 .header__wrapper
   display: flex
@@ -28,7 +29,8 @@ $account-nav-padding-vert: 15px
       margin-right: 0
 
 .account-nav
-  border-bottom: 1px solid $account-nav--border-color
+  @include css4
+    border-bottom: 1px solid var(--account-nav--border-color)
   width: 100%
   display: flex
   flex-flow: row nowrap
@@ -57,14 +59,16 @@ $account-nav-padding-vert: 15px
   margin-left: $account-nav-spacing-horiz
   margin-right: $account-nav-spacing-horiz
   text-transform: uppercase
-  font-weight: $font-bold
-  color: $account-nav--text
+  @include css4
+    font-weight: var(--font-bold)
+    color: var(--account-nav--text)
   @media (max-width: 700px)
     margin-left: 10px
     margin-right: 10px
 
 .account-nav__link--active
-  color: $account-nav--text--active
-  border-bottom: 4px solid $account-nav--border-color--active
+  @include css4
+    color: var(--account-nav--text--active)
+    border-bottom: 4px solid var(--account-nav--border-color--active)
   padding-bottom: $account-nav-padding-vert - 3px
   margin-bottom: -1px
