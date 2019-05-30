@@ -1,3 +1,16 @@
+# [1.10.0](https://github.com/codeRIT/hackathon-manager/compare/v1.9.0...v1.10.0) (2019-05-30)
+
+
+### Documentation
+
+* Add recommendation notes to deployment platform list ([6f732e7](https://github.com/codeRIT/hackathon-manager/commit/6f732e7))
+* Clarify prerequisites to deploying on Dokku ([3240c4b](https://github.com/codeRIT/hackathon-manager/commit/3240c4b))
+
+
+### Features
+
+* Use CSS variables instead of SASS variables ([c6c01f5](https://github.com/codeRIT/hackathon-manager/commit/c6c01f5)), closes [#142](https://github.com/codeRIT/hackathon-manager/issues/142)
+
 # [1.9.0](https://github.com/codeRIT/hackathon-manager/compare/v1.8.0...v1.9.0) (2019-05-30)
 
 
