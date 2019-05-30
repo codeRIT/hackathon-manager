@@ -21,8 +21,7 @@ $variables: (
   /*
    * Colors
    ***************************************************************************/
-    --orange: #f58625,
-  --black: #231f20,
+    --black: #231f20,
   --grey: #6d6e71,
   --blue: #3413ac,
   --white: darken(#fff, 1%),
@@ -35,19 +34,21 @@ $variables: (
   --primary-light: lighten(#f58625, 5%),
   --primary-lighter: lighten(#f58625, 10%),
   --primary-lighterer: lighten(#f58625, 15%),
+  --primary-darkest: darken(#f58625, 20%),
   /*
    * General colors
    ***************************************************************************/
     --white-pure: #ffffff,
   --grey-light: #bbbbbb,
+  --gray-med-light: lighten(#888888, 20%),
   --grey-med: #888888,
   --grey-dark: #343434,
   --offwhite: #fcf7f2,
   /*
    * Fonts
    ***************************************************************************/
-    --font-body-family: "'Open Sans', sans-serif",
-  --font-headlines-family: "'Open Sans', sans-serif",
+    --font-body-family: unquote('"Open Sans", sans-serif'),
+  --font-headlines-family: unquote('"Open Sans", sans-serif'),
   --font-bold: 600,
   --font-reg: 400,
   --font-light: 300,
