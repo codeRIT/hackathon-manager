@@ -42,6 +42,7 @@ gem 'devise', '~> 4.2'
 gem 'omniauth-mlh', '~> 0.1'
 gem 'doorkeeper', '~> 5.0'
 gem 'devise-doorkeeper'
+gem 'omniauth-rails_csrf_protection'
 
 # User uploads
 gem "aws-sdk-s3", require: false
