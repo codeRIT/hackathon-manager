@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/codeRIT/hackathon-manager/compare/v1.12.0...v1.12.1) (2019-06-04)
+
+
+### Bug Fixes
+
+* Patch CSRF vulnerability with omniauth authorization ([80ec947](https://github.com/codeRIT/hackathon-manager/commit/80ec947))
+
 # [1.12.0](https://github.com/codeRIT/hackathon-manager/compare/v1.11.0...v1.12.0) (2019-05-30)
 
 
