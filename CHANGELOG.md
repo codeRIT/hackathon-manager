@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/codeRIT/hackathon-manager/compare/v1.13.0...v1.13.1) (2019-06-05)
+
+
+### Bug Fixes
+
+* Update gems to include Chartkick security patch ([d0a4796](https://github.com/codeRIT/hackathon-manager/commit/d0a4796))
+
 # [1.13.0](https://github.com/codeRIT/hackathon-manager/compare/v1.12.1...v1.13.0) (2019-06-05)
 
 
