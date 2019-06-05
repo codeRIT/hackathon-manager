@@ -86,6 +86,7 @@ DOKKU_DEPLOY_HOOKS_PREFIX=/app \
 ENVIRONMENT=<span class="hljs-string">"production"</span> \
 <span class="hljs-comment"># ...remaining general environment variables...</span>
 </code></pre>
+<p><em>providing a <code>\</code> at the end of the line allows you to continue the command onto new lines instead of typing all of the variables in one line</em></p>
 <p><strong>See <a href="/hackathon-manager/docs/deployment-environment-variables">Environment Variables</a> for all required environment variables</strong></p>
 <p>Once all configuration is set, add Dokku as a remote &amp; run an initial deploy.</p>
 <h3><a class="anchor" aria-hidden="true" id="initial-deploy"></a><a href="#initial-deploy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initial deploy</h3>
@@ -145,7 +146,7 @@ User.find_by(email: <span class="hljs-string">"your-email@example.com"</span>).u
 </ol>
 <h3><a class="anchor" aria-hidden="true" id="sidekiq"></a><a href="#sidekiq" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sidekiq</h3>
 <p>Sidekiq's web UI will throw a 502 Gateway error out of the box on production. To fix this, <a href="https://github.com/mperham/sidekiq/issues/3143#issuecomment-248923576">increase the nginx buffer size</a>.</p>
-<p>Create <code>proxy_buffer.conf</code> with the following:</p>
+<p>Create <code>/home/dokku/hm/nginx.conf.d/proxy_buffer.conf</code> with the following:</p>
 <pre><code class="hljs"># Fix <span class="hljs-keyword">for</span> Sidekiq web console
 proxy_buffer_size   <span class="hljs-number">128</span>k;
 proxy_buffers   <span class="hljs-number">4</span> <span class="hljs-number">256</span>k;
@@ -153,12 +154,12 @@ proxy_busy_buffers_size   <span class="hljs-number">256</span>k;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="resumes"></a><a href="#resumes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resumes</h3>
 <p>Support decently-sized resumes.</p>
-<p>Create <code>upload.conf</code> with the following:</p>
+<p>Create <code>/home/dokku/hm/nginx.conf.d/upload.conf</code> with the following:</p>
 <pre><code class="hljs">client_max_body_size <span class="hljs-number">2</span>M<span class="hljs-comment">;</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="mysql"></a><a href="#mysql" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MySQL</h2>
 <h3><a class="anchor" aria-hidden="true" id="mysql-timezone-tables-groupdate"></a><a href="#mysql-timezone-tables-groupdate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MySQL Timezone Tables (Groupdate)</h3>
-<p><strong>Update: Looks like dokku-mysql has timezone information by default, so this shouldn't be necessary.</strong></p>
+<p><strong>Update: Looks like dokku-mysql has timezone information by default, so this shouldn't be necessary anymore.</strong></p>
 <p>In order to support groupdate, timezone tables must be created.</p>
 <pre><code class="hljs css language-bash">mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u <span class="hljs-variable">$OPENSHIFT_MYSQL_DB_USERNAME</span> -p mysql
 </code></pre>
