@@ -1,7 +1,7 @@
 = render "layouts/manage/page_title", title: "Messages" do
   = link_to "New Message", new_manage_message_path, class: "btn btn-sm btn-outline-secondary"
 
-.mb-5
+.mb-4
   %table.bulk-messages.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_messages_path(format: :json) }
     %thead
       %tr
@@ -13,6 +13,9 @@
         %th Last modified
         %th Delivered
     %tbody
+
+.mb-4
+  = render 'docs_link', title: 'Message documentation', url: 'https://coderit.org/hackathon-manager/docs/messages'
 
 = render 'triggered_email_summary'
 
