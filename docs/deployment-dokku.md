@@ -43,6 +43,8 @@ ENVIRONMENT="production" \
 # ...remaining general environment variables...
 ```
 
+_providing a `\` at the end of the line allows you to continue the command onto new lines instead of typing all of the variables in one line_
+
 **See [Environment Variables](deployment-environment-variables.md) for all required environment variables**
 
 Once all configuration is set, add Dokku as a remote & run an initial deploy.
@@ -123,7 +125,7 @@ Usually, there's no need to modify the nginx config for the apps. However, we ha
 
 Sidekiq's web UI will throw a 502 Gateway error out of the box on production. To fix this, [increase the nginx buffer size](https://github.com/mperham/sidekiq/issues/3143#issuecomment-248923576).
 
-Create `proxy_buffer.conf` with the following:
+Create `/home/dokku/hm/nginx.conf.d/proxy_buffer.conf` with the following:
 
 ```
 # Fix for Sidekiq web console
@@ -136,7 +138,7 @@ proxy_busy_buffers_size   256k;
 
 Support decently-sized resumes.
 
-Create `upload.conf` with the following:
+Create `/home/dokku/hm/nginx.conf.d/upload.conf` with the following:
 
 ```
 client_max_body_size 2M;
@@ -146,7 +148,7 @@ client_max_body_size 2M;
 
 ### MySQL Timezone Tables (Groupdate)
 
-**Update: Looks like dokku-mysql has timezone information by default, so this shouldn't be necessary.**
+**Update: Looks like dokku-mysql has timezone information by default, so this shouldn't be necessary anymore.**
 
 In order to support groupdate, timezone tables must be created.
 
