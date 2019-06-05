@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Messages · HackathonManager</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;Messages (emails) are the primary method of communication with your applicants and attendees. Your organizing team can send messages directly to various segments of your applicants, in addition to automated, continuous messages in response to certain events (e.g. upon accepting or checking-in an applicant).&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Messages · HackathonManager"/><meta property="og:type" content="website"/><meta property="og:url" content="https://codeRIT.org/hackathon-manager/"/><meta property="og:description" content="&lt;p&gt;Messages (emails) are the primary method of communication with your applicants and attendees. Your organizing team can send messages directly to various segments of your applicants, in addition to automated, continuous messages in response to certain events (e.g. upon accepting or checking-in an applicant).&lt;/p&gt;
+"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/hackathon-manager/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/hackathon-manager/js/scrollSpy.js"></script><link rel="stylesheet" href="/hackathon-manager/css/main.css"/><script src="/hackathon-manager/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/hackathon-manager/"><img class="logo" src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager"/><h2 class="headerTitleWithLogo">HackathonManager</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/hackathon-manager/docs/deployment" target="_self">Get Started</a></li><li class="siteNavGroupActive"><a href="/hackathon-manager/docs/running-a-hackathon" target="_self">Docs</a></li><li class=""><a href="https://github.com/codeRIT/hackathon-manager" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>HackathonManager</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">HackathonManager</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/running-a-hackathon">Running a hackathon</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/busses">Busses</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/questionnaires">Questionnaires</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/hackathon-manager/docs/messages">Messages</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API Usage</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/api">API Usage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Deployment</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment">Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-dokku">Dokku Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-heroku">Heroku Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-okd">OKD Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-environment-variables">Environment Variables</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/customization">Customization</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/codeRIT/hackathon-manager/edit/master/docs/messages.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Messages</h1></header><article><div><span><p>Messages (emails) are the primary method of communication with your applicants and attendees. Your organizing team can send messages directly to various segments of your applicants, in addition to automated, continuous messages in response to certain events (e.g. upon accepting or checking-in an applicant).</p>
+<p>This takes the place of traditional email list/campaign software by integrating directly with your applicant data and admissions process.</p>
+<h2><a class="anchor" aria-hidden="true" id="types-of-messages"></a><a href="#types-of-messages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Types of messages</h2>
+<h3><a class="anchor" aria-hidden="true" id="bulk-messages"></a><a href="#bulk-messages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bulk messages</h3>
+<p>These emails are single-use, &quot;broadcast&quot;-style messages set out to segments (or all) of your applicants.</p>
+<h4><a class="anchor" aria-hidden="true" id="recipient-segments"></a><a href="#recipient-segments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Recipient segments</h4>
+<p>Multiple recipient groups can be chosen. These include:</p>
+<ul>
+<li><strong>Status</strong> — Incomplete, complete, accepted, denied, RSVP'd, etc</li>
+<li><strong>School</strong> — Confirmed or accepted students from a given school</li>
+<li><strong>Bus-list</strong> — Passengers signed up for a given bus</li>
+<li><strong>Custom (SQL) lists</strong> — Custom SQL-based queries built in Blazer</li>
+</ul>
+<p>The input supports auto-complete; start typing to search and select.</p>
+<h4><a class="anchor" aria-hidden="true" id="custom-sql-recipients-with-blazer"></a><a href="#custom-sql-recipients-with-blazer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom SQL recipients with Blazer</h4>
+<p>If the pre-built options for recipients don't fit your needs, you can also build your own email list using SQL in the Blazer tool.</p>
+<blockquote>
+<p>The <code>user_id</code> column <strong>must</strong> present in the SQL results for emails to be sent.</p>
+</blockquote>
+<ol>
+<li>Open Blazer (<a href="http://your-site/blazer">http://your-site/blazer</a>)</li>
+<li>Create a new query (with a name)</li>
+</ol>
+<p>Examples:</p>
+<p><code>SELECT user_id FROM questionnaires WHERE school_id=123</code></p>
+<p><code>SELECT id as user_id FROM users WHERE provider='mlh'</code></p>
+<p>(additional fields can be included, but won't be used for email purposes)</p>
+<ol start="3">
+<li>Click &quot;Run&quot; to preview your results, or &quot;Create&quot; to save the query</li>
+<li>Go back to the message (<a href="http://your-site/manage/messages">http://your-site/manage/messages</a>) and select the Blazer query</li>
+<li>Save the message. On the message detail page, you should see the # of expected recipients.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="automated-messages"></a><a href="#automated-messages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Automated messages</h3>
+<p>Automated emails can also be sent out upon certain events happening. All events and their descriptions are listed at <a href="http://your-site/manage/messages">http://your-site/manage/messages</a>, which include:</p>
+<ul>
+<li><strong>Questionnaire status</strong> — Upon being accepted, denied, RSVP'd, etc</li>
+<li><strong>Bust list</strong> — Becoming a passenger or bus captain</li>
+</ul>
+<p>These messages are sent immediatley upon an applicant entering the given state. For example, when an admin marks someone as &quot;accepted,&quot; they will immediately receive any automated messages assocaited with the &quot;Questionnaire Status: Accepted&quot; event.</p>
+<h2><a class="anchor" aria-hidden="true" id="message-formatting"></a><a href="#message-formatting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Message formatting</h2>
+<p>Messages support full markdown &amp; HTML.</p>
+<h3><a class="anchor" aria-hidden="true" id="template-variables"></a><a href="#template-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Template variables</h3>
+<p>Message bodies can make use of template variables to help personalize and streamline emails. These include information such as <code>{{first_name}}</code> and <code>{{last_name}}</code>, URLs such as <code>{{apply_url}}</code> and <code>{{rsvp_url}}</code>, and logical conditions such as <code>{{bus_list_exists?}}</code>. The full list of variables, their explanations, and example values can be found at the bottom of the message edit page.</p>
+<p>Templating is powered by <a href="https://mustache.github.io/mustache.5.html">mustache</a>.</p>
+<p>Example:</p>
+<pre><code class="hljs css language-md"><span class="hljs-section">## RSVP Confirmation</span>
+
+Hey {{first_name}},
+
+Thank you for your RSVP to {{hackathon_name}}! We can't wait to see you.
+
+{{#bus<span class="hljs-emphasis">_list_</span>exists?}}
+You've also signed up for the {{bus<span class="hljs-emphasis">_list_</span>name}} bus. Keep an eye out for more information closer to the event for pickup times &amp; locations.
+{{/bus<span class="hljs-emphasis">_list_</span>exists?}}
+
+Let us know if you have any questions in the meantime.
+
+\- The {{hackathon_name}} Team
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="message-template"></a><a href="#message-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Message template</h2>
+<p>The overall message template is used for all outgoing emails and provides the basic structure &amp; style for your emails. A basic template is included for you by default, but can be customized if you need it.</p>
+<p>Visit <a href="http://your-site/manage/messages/template">http://your-site/manage/messages/template</a> for more details.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/hackathon-manager/docs/questionnaires"><span class="arrow-prev">← </span><span>Questionnaires</span></a><a class="docs-next button" href="/hackathon-manager/docs/api"><span>API Usage</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#types-of-messages">Types of messages</a><ul class="toc-headings"><li><a href="#bulk-messages">Bulk messages</a></li><li><a href="#automated-messages">Automated messages</a></li></ul></li><li><a href="#message-formatting">Message formatting</a><ul class="toc-headings"><li><a href="#template-variables">Template variables</a></li></ul></li><li><a href="#message-template">Message template</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/hackathon-manager/" class="nav-home"><img src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager" width="66" height="58"/></a><div><h5>Docs</h5><a href="/hackathon-manager/docs/running-a-hackathon.html">Running a hackathon</a><a href="/hackathon-manager/docs/api.html">API Usage</a><a href="/hackathon-manager/docs/deployment.html">Deployment</a></div><div></div><div><h5>More</h5><a href="https://github.com/codeRIT/hackathon-manager" target="_blank">GitHub Repo</a><a class="github-button" href="https://github.com/codeRIT/hackathon-manager" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 codeRIT</section></footer></div></body></html>

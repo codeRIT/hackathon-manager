@@ -11,6 +11,7 @@
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/deployment-heroku</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/deployment-heroku" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/deployment-okd</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/deployment-okd" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/deployment</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/deployment" /> </url>
+<url> <loc>https://codeRIT.org/hackathon-manager/docs/messages</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/messages" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/questionnaires</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/questionnaires" /> </url>
 <url> <loc>https://codeRIT.org/hackathon-manager/docs/running-a-hackathon</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://codeRIT.org/hackathon-manager/docs/running-a-hackathon" /> </url>
 </urlset>
