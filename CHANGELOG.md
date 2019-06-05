@@ -1,3 +1,17 @@
+# [1.13.0](https://github.com/codeRIT/hackathon-manager/compare/v1.12.1...v1.13.0) (2019-06-05)
+
+
+### Documentation
+
+* **dokku:** Clarify env var setting, nginx conf paths ([ddb8d90](https://github.com/codeRIT/hackathon-manager/commit/ddb8d90))
+* Add page on message usage ([0559573](https://github.com/codeRIT/hackathon-manager/commit/0559573))
+* Note email & CSS customization options ([56cc11b](https://github.com/codeRIT/hackathon-manager/commit/56cc11b))
+
+
+### Features
+
+* Add message documentation link ([1e89d3e](https://github.com/codeRIT/hackathon-manager/commit/1e89d3e))
+
 ## [1.12.1](https://github.com/codeRIT/hackathon-manager/compare/v1.12.0...v1.12.1) (2019-06-04)
 
 
