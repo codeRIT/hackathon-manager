@@ -147,16 +147,39 @@ User.find_by(email: <span class="hljs-string">"your-email@example.com"</span>).u
 </ol>
 <h3><a class="anchor" aria-hidden="true" id="sidekiq"></a><a href="#sidekiq" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sidekiq</h3>
 <p>Sidekiq's web UI will throw a 502 Gateway error out of the box on production. To fix this, <a href="https://github.com/mperham/sidekiq/issues/3143#issuecomment-248923576">increase the nginx buffer size</a>.</p>
-<p>Create <code>/home/dokku/hm/nginx.conf.d/proxy_buffer.conf</code> with the following:</p>
+<ol>
+<li>Create <code>proxy_buffer.conf</code></li>
+</ol>
+<pre><code class="hljs css language-bash">sudo nano /home/dokku/hm/nginx.conf.d/proxy_buffer.conf
+</code></pre>
+<ol start="2">
+<li>Copy/paste or type in these contents:</li>
+</ol>
 <pre><code class="hljs"># Fix <span class="hljs-keyword">for</span> Sidekiq web console
 proxy_buffer_size   <span class="hljs-number">128</span>k;
 proxy_buffers   <span class="hljs-number">4</span> <span class="hljs-number">256</span>k;
 proxy_busy_buffers_size   <span class="hljs-number">256</span>k;
 </code></pre>
+<ol start="3">
+<li>Save the file</li>
+</ol>
 <h3><a class="anchor" aria-hidden="true" id="resumes"></a><a href="#resumes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resumes</h3>
 <p>Support decently-sized resumes.</p>
-<p>Create <code>/home/dokku/hm/nginx.conf.d/upload.conf</code> with the following:</p>
+<ol>
+<li>Create <code>upload.conf</code></li>
+</ol>
+<pre><code class="hljs css language-bash">sudo nano /home/dokku/hm/nginx.conf.d/upload.conf
+</code></pre>
+<ol start="2">
+<li>Copy/paste or type in these contents:</li>
+</ol>
 <pre><code class="hljs">client_max_body_size <span class="hljs-number">2</span>M<span class="hljs-comment">;</span>
+</code></pre>
+<ol start="3">
+<li>Save the file</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="restart-nginx"></a><a href="#restart-nginx" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restart Nginx</h3>
+<pre><code class="hljs css language-bash">dokku nginx:build-config hm
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="mysql"></a><a href="#mysql" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MySQL</h2>
 <h3><a class="anchor" aria-hidden="true" id="mysql-timezone-tables-groupdate"></a><a href="#mysql-timezone-tables-groupdate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MySQL Timezone Tables (Groupdate)</h3>
@@ -164,4 +187,4 @@ proxy_busy_buffers_size   <span class="hljs-number">256</span>k;
 <p>In order to support groupdate, timezone tables must be created.</p>
 <pre><code class="hljs css language-bash">mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u <span class="hljs-variable">$OPENSHIFT_MYSQL_DB_USERNAME</span> -p mysql
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/hackathon-manager/docs/deployment"><span class="arrow-prev">← </span><span>Deployment</span></a><a class="docs-next button" href="/hackathon-manager/docs/deployment-heroku"><span>Heroku Deployment</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#dokku-plugins">Dokku plugins</a><ul class="toc-headings"><li><a href="#dokku-setup-steps">Dokku Setup Steps</a></li><li><a href="#initial-deploy">Initial deploy</a></li><li><a href="#domain-setup">Domain setup</a></li><li><a href="#validating-initial-deploy">Validating initial deploy</a></li><li><a href="#promote-account-to-admin">Promote account to admin</a></li></ul></li><li><a href="#nginx-config">Nginx Config</a><ul class="toc-headings"><li><a href="#sidekiq">Sidekiq</a></li><li><a href="#resumes">Resumes</a></li></ul></li><li><a href="#mysql">MySQL</a><ul class="toc-headings"><li><a href="#mysql-timezone-tables-groupdate">MySQL Timezone Tables (Groupdate)</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/hackathon-manager/" class="nav-home"><img src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager" width="66" height="58"/></a><div><h5>Docs</h5><a href="/hackathon-manager/docs/running-a-hackathon.html">Running a hackathon</a><a href="/hackathon-manager/docs/api.html">API Usage</a><a href="/hackathon-manager/docs/deployment.html">Deployment</a></div><div></div><div><h5>More</h5><a href="https://github.com/codeRIT/hackathon-manager" target="_blank">GitHub Repo</a><a class="github-button" href="https://github.com/codeRIT/hackathon-manager" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 codeRIT</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/hackathon-manager/docs/deployment"><span class="arrow-prev">← </span><span>Deployment</span></a><a class="docs-next button" href="/hackathon-manager/docs/deployment-heroku"><span>Heroku Deployment</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#dokku-plugins">Dokku plugins</a><ul class="toc-headings"><li><a href="#dokku-setup-steps">Dokku Setup Steps</a></li><li><a href="#initial-deploy">Initial deploy</a></li><li><a href="#domain-setup">Domain setup</a></li><li><a href="#validating-initial-deploy">Validating initial deploy</a></li><li><a href="#promote-account-to-admin">Promote account to admin</a></li></ul></li><li><a href="#nginx-config">Nginx Config</a><ul class="toc-headings"><li><a href="#sidekiq">Sidekiq</a></li><li><a href="#resumes">Resumes</a></li><li><a href="#restart-nginx">Restart Nginx</a></li></ul></li><li><a href="#mysql">MySQL</a><ul class="toc-headings"><li><a href="#mysql-timezone-tables-groupdate">MySQL Timezone Tables (Groupdate)</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/hackathon-manager/" class="nav-home"><img src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager" width="66" height="58"/></a><div><h5>Docs</h5><a href="/hackathon-manager/docs/running-a-hackathon.html">Running a hackathon</a><a href="/hackathon-manager/docs/api.html">API Usage</a><a href="/hackathon-manager/docs/deployment.html">Deployment</a></div><div></div><div><h5>More</h5><a href="https://github.com/codeRIT/hackathon-manager" target="_blank">GitHub Repo</a><a class="github-button" href="https://github.com/codeRIT/hackathon-manager" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 codeRIT</section></footer></div></body></html>
