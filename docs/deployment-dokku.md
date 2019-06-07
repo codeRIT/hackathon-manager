@@ -127,8 +127,12 @@ The two sections
 
 Sidekiq's web UI will throw a 502 Gateway error out of the box on production. To fix this, [increase the nginx buffer size](https://github.com/mperham/sidekiq/issues/3143#issuecomment-248923576).
 
-Create `/home/dokku/hm/nginx.conf.d/proxy_buffer.conf` with the following:
+1. Create `proxy_buffer.conf`
+```bash
+sudo nano /home/dokku/hm/nginx.conf.d/proxy_buffer.conf
+```
 
+2. Copy/paste or type in these contents:
 ```
 # Fix for Sidekiq web console
 proxy_buffer_size   128k;
@@ -136,15 +140,30 @@ proxy_buffers   4 256k;
 proxy_busy_buffers_size   256k;
 ```
 
+3. Save the file
+
 ### Resumes
 
 Support decently-sized resumes.
 
-Create `/home/dokku/hm/nginx.conf.d/upload.conf` with the following:
+1. Create `upload.conf`
+```bash
+sudo nano /home/dokku/hm/nginx.conf.d/upload.conf
+```
 
+2. Copy/paste or type in these contents:
 ```
 client_max_body_size 2M;
 ```
+
+3. Save the file
+
+### Restart Nginx
+
+```bash
+dokku nginx:build-config hm
+```
+
 
 ## MySQL
 
