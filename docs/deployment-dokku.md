@@ -117,8 +117,10 @@ exit
 
 A few special additions must be made to Dokku's standard nginx configuration.
 
+The two sections
+
 1. Create the directory `/home/dokku/hm/nginx.conf.d/`
-2. Add files ending in `.conf` (such as `rewrites.conf`) that you want loaded
+2. Add files ending in `.conf` as specified below (`proxy_buffer.conf` for sidekiq, `upload.conf` for resumes)
 3. Restart nginx: `dokku nginx:build-config hm`
 
 ### Sidekiq
