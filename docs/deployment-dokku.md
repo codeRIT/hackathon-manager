@@ -115,7 +115,7 @@ exit
 
 ## Nginx Config
 
-Usually, there's no need to modify the nginx config for the apps. However, we have a few special cases.
+A few special additions must be made to Dokku's standard nginx configuration.
 
 1. Create the directory `/home/dokku/hm/nginx.conf.d/`
 2. Add files ending in `.conf` (such as `rewrites.conf`) that you want loaded
