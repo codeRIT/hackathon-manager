@@ -16,6 +16,7 @@ defaults: &defaults
   agreement_pdf_asset: agreement.pdf
   email_from: '"HackFoo" <hello@example.com>'
   default_page_title: HackFoo - Jan 1-2, 2017
+  homepage_url: ""
 
   disabled_fields: ""
   disclaimer_message: ""
