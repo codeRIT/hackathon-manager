@@ -1,15 +1,16 @@
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  .form-actions
-    .center
-      = render 'my_mlh_cta'
-      %p
-        %em or continue manually:
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-    = f.input :password, required: true
-    = f.input :password_confirmation, required: true, label:"Confirm"
-  .form-actions.right
-    = f.button :submit, "Register"
-    %p.session-link
-      Have an account?
-      = link_to "Sign in!".html_safe, new_user_session_path
+  - if ENV["MLH_KEY"].present?
+    .form-actions
+      .center
+        = render 'my_mlh_cta'
+        %p
+          %em or continue manually:
+    .form-inputs
+      = f.input :email, required: true, autofocus: true
+      = f.input :password, required: true
+      = f.input :password_confirmation, required: true, label:"Confirm"
+    .form-actions.right
+      = f.button :submit, "Register"
+      %p.session-link
+        Have an account?
+        = link_to "Sign in!".html_safe, new_user_session_path
