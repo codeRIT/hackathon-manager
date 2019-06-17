@@ -5,7 +5,7 @@
         = link_to root_path do
           = image_tag HackathonConfig['logo_asset'], id: 'logo', alt: "#{HackathonConfig['name']} logo", title: HackathonConfig['name'], class: 'header-logo__image'
     - else
-      if HackathonConfig['homepage_url'].present?
+      - if HackathonConfig['homepage_url'].present?
         .header-nav
           = btn_link_to "Home", HackathonConfig['homepage_url']
     .header-nav
