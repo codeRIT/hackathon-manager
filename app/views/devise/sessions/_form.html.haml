@@ -1,9 +1,10 @@
 = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .form-actions
-    .center
-      = render 'my_mlh_cta'
-      %p
-        %em or use an email & password:
+  - if ENV["MLH_KEY"].present?
+    .form-actions
+      .center
+        = render 'my_mlh_cta'
+        %p
+          %em or use an email & password:
   .form-inputs
     = f.input :email, required: false, input_html: { autofocus: true }
     = f.input :password, required: false
