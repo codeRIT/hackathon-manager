@@ -73,36 +73,42 @@ If there's a new feature you're looking to implement, **please** file an issue t
 
 ## Development
 
-Pre-requisite: Have a functioning, local Ruby + MySQL development environment. [See this guide for pointers.](https://gorails.com/setup)
+1. Setup Ruby + MySQL for local development
 
-1. Clone the repo
+If you don't already have Ruby + MySQL set up, see [this guide by GoRails](https://gorails.com/setup) for pointers.
+
+* Select your computer's operating system & version
+* If given the choice, use `rbenv` -- this will ensure a clean, sustainable Ruby dev environment
+* SQLite and PostgreSQL steps are optional
+
+2. Clone the repo
 
 ```bash
 $ git clone git@github.com:codeRIT/hackathon-manager
 $ cd hackathon-manager
 ```
 
-2. Install dependencies
+3. Install dependencies
 
 ```bash
 $ bundle install
 ```
 
-3. Setup databse
+4. Setup databse
 
 ```bash
 $ bin/rails db:setup
 ```
 
-4. Start up the server
+5. Start up the server
 
 ```bash
 $ bin/rails s  # short for bin/rails server
 ```
 
-4. Visit http://localhost:3000/apply, create an account, and complete an application
+6. Visit http://localhost:3000/apply, create an account, and complete an application
 
-5. In another bash window, promote your user to an admin
+7. In another bash window, promote your user to an admin
 
 ```bash
 $ cd hackathon-manager
@@ -112,7 +118,9 @@ Loading development environment (Rails 5.1.1)
 irb(main):001:0> User.last.update_attribute(:role, :admin)
 ```
 
-6. Visit http://localhost:3000/manage and set up the hackathon as needed
+8. Visit http://localhost:3000/manage and set up the hackathon as needed
+
+_See https://coderit.org/hackathon-manager/ for docs on regular hackathon setup_
 
 ### Development Utilities
 
