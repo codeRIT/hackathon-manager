@@ -1,3 +1,18 @@
+# [1.14.0](https://github.com/codeRIT/hackathon-manager/compare/v1.13.1...v1.14.0) (2019-06-18)
+
+
+### Documentation
+
+* **dokku:** Clarify .conf files to create ([1745f00](https://github.com/codeRIT/hackathon-manager/commit/1745f00))
+* **dokku:** Clarify steps to edit Nginx files + sudo ([8057801](https://github.com/codeRIT/hackathon-manager/commit/8057801))
+* **dokku:** Clear up nginx setup description ([4b20eab](https://github.com/codeRIT/hackathon-manager/commit/4b20eab))
+
+
+### Features
+
+* Hide MyMLH button if MLH_KEY env var is not set ([#167](https://github.com/codeRIT/hackathon-manager/issues/167)) ([9b81034](https://github.com/codeRIT/hackathon-manager/commit/9b81034))
+* Link "home" button to marketing site ([#166](https://github.com/codeRIT/hackathon-manager/issues/166)) ([d65416d](https://github.com/codeRIT/hackathon-manager/commit/d65416d))
+
 ## [1.13.1](https://github.com/codeRIT/hackathon-manager/compare/v1.13.0...v1.13.1) (2019-06-05)
 
 
