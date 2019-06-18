@@ -5,14 +5,14 @@
         = render 'my_mlh_cta'
         %p
           %em or use an email & password:
-    .form-inputs
-      = f.input :email, required: false, input_html: { autofocus: true }
-      = f.input :password, required: false
-      = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-    .form-actions.right
-      = f.button :submit, "Sign In"
-      %p.session-link
-        No account?
-        = link_to "Register!".html_safe, new_user_registration_path
-      %p.session-link
-        = link_to "Forgot password", new_user_password_path
+  .form-inputs
+    = f.input :email, required: false, input_html: { autofocus: true }
+    = f.input :password, required: false
+    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+  .form-actions.right
+    = f.button :submit, "Sign In"
+    %p.session-link
+      No account?
+      = link_to "Register!".html_safe, new_user_registration_path
+    %p.session-link
+      = link_to "Forgot password", new_user_password_path
