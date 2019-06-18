@@ -1,3 +1,15 @@
+# [1.15.0](https://github.com/codeRIT/hackathon-manager/compare/v1.14.0...v1.15.0) (2019-06-18)
+
+
+### Deployment
+
+* Upgrade from Ruby 2.6.2 to 2.6.3 ([7448c1d](https://github.com/codeRIT/hackathon-manager/commit/7448c1d))
+
+
+### Documentation
+
+* **readme:** Improve first step of setting up Ruby + MySQL ([66a9675](https://github.com/codeRIT/hackathon-manager/commit/66a9675))
+
 # [1.14.0](https://github.com/codeRIT/hackathon-manager/compare/v1.13.1...v1.14.0) (2019-06-18)
 
 
