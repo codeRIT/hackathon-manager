@@ -1,13 +1,13 @@
+- homepage_url = HackathonConfig['homepage_url'].presence || root_path
 .header
   .header__wrapper.account-nav__wrapper
     - if HackathonConfig['logo_asset'].present?
       .header-logo
-        = link_to root_path do
+        = link_to homepage_url do
           = image_tag HackathonConfig['logo_asset'], id: 'logo', alt: "#{HackathonConfig['name']} logo", title: HackathonConfig['name'], class: 'header-logo__image'
     - else
-      - if HackathonConfig['homepage_url'].present?
-        .header-nav
-          = btn_link_to "Home", HackathonConfig['homepage_url']
+      .header-nav
+        = btn_link_to "Home", homepage_url
     .header-nav
       - if user_signed_in?
         - if current_user.admin?
