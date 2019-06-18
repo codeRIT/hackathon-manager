@@ -26,9 +26,6 @@ require "webmock/minitest"
 require_relative './matchers'
 
 Minitest::Reporters.use!
-if ENV["RUN_COVERAGE"] == "travis"
-  Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new(color: true)]
-end
 
 def sample_file(filename = "sample_pdf.pdf")
   File.new("test/fixtures/#{filename}")
