@@ -1,7 +1,7 @@
 class MessageTemplate < ApplicationRecord
   class << self
     # Maximum amount of time to use the in-memory singleton before checking the database for updates.
-    SINGLETON_MAX_AGE = 30.seconds.from_now
+    SINGLETON_MAX_AGE = 30.seconds
 
     # Retrieve the instance.
     # Use the one stored in memory if it is recent enough.
@@ -23,7 +23,7 @@ class MessageTemplate < ApplicationRecord
       if none?
         replace_with_default
       end
-      @singleton_expiration = SINGLETON_MAX_AGE
+      @singleton_expiration = SINGLETON_MAX_AGE.from_now
       @singleton_instance = uncached_instance
     end
 
