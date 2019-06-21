@@ -1,18 +1,86 @@
-inherit_from:
-  - .rubocop-shared.yml
-
 AllCops:
   Exclude:
     - db/schema.rb
     - vendor/**/*
     - bin/**/*
-    - test/dummy/bin/**/*
-    - test/dummy/db/schema.rb
+
+Bundler/OrderedGems:
+  Enabled: false
 
 Gemspec/OrderedDependencies:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+
+Metrics/AbcSize:
   Enabled: false
 
 Metrics/BlockLength:
   Exclude:
     - test/**/*
-    - config/routes.rb
+    - config/**/*
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/HashSyntax:
+  Exclude:
+    - db/migrate/*
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  Enabled: false
+
+TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
