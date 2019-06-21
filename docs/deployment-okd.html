@@ -159,6 +159,21 @@
 <span class="hljs-attr">          terminationMessagePath:</span> <span class="hljs-string">/dev/termination-log</span>
 <span class="hljs-attr">          terminationMessagePolicy:</span> <span class="hljs-string">File</span>
 <span class="hljs-attr">      dnsPolicy:</span> <span class="hljs-string">ClusterFirst</span>
+<span class="hljs-attr">      initContainers:</span>
+<span class="hljs-attr">        - command:</span>
+<span class="hljs-bullet">            -</span> <span class="hljs-string">bash</span>
+<span class="hljs-bullet">            -</span> <span class="hljs-string">'-c'</span>
+<span class="hljs-bullet">            -</span> <span class="hljs-string">'bundle exec rails db:migrate'</span>
+<span class="hljs-attr">          envFrom:</span>
+<span class="hljs-attr">            - secretRef:</span>
+<span class="hljs-attr">                name:</span> <span class="hljs-string">hackathon-manager-demo</span>
+<span class="hljs-attr">          image:</span> <span class="hljs-string">&gt;-</span>
+            <span class="hljs-string">docker-registry.default.svc:5000/hackathon-manager-demo/hackathon-manager-demo@sha256:66933712fc8cbb42ed553e5f07dd278bb12f2a1a964af8c635028f84d9149f49</span>
+<span class="hljs-attr">          imagePullPolicy:</span> <span class="hljs-string">Always</span>
+<span class="hljs-attr">          name:</span> <span class="hljs-string">db-migrate</span>
+<span class="hljs-attr">          resources:</span> <span class="hljs-string">{}</span>
+<span class="hljs-attr">          terminationMessagePath:</span> <span class="hljs-string">/dev/termination-log</span>
+<span class="hljs-attr">          terminationMessagePolicy:</span> <span class="hljs-string">File</span>
 <span class="hljs-attr">      restartPolicy:</span> <span class="hljs-string">Always</span>
 <span class="hljs-attr">      schedulerName:</span> <span class="hljs-string">default-scheduler</span>
 <span class="hljs-attr">      securityContext:</span> <span class="hljs-string">{}</span>
