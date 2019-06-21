@@ -1,3 +1,17 @@
+## [1.15.1](https://github.com/codeRIT/hackathon-manager/compare/v1.15.0...v1.15.1) (2019-06-21)
+
+
+### Bug Fixes
+
+* MessageTemplate cache expiration ([6d74b53](https://github.com/codeRIT/hackathon-manager/commit/6d74b53))
+
+
+### Documentation
+
+* **okd:** Add init container for running db:migrate ([484c1c0](https://github.com/codeRIT/hackathon-manager/commit/484c1c0))
+* **okd:** Fix consistent sha256 hash example ([0e2d1f1](https://github.com/codeRIT/hackathon-manager/commit/0e2d1f1))
+* **readme:** Rename development -> local development ([ceb91f0](https://github.com/codeRIT/hackathon-manager/commit/ceb91f0))
+
 # [1.15.0](https://github.com/codeRIT/hackathon-manager/compare/v1.14.0...v1.15.0) (2019-06-18)
 
 
