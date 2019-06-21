@@ -112,6 +112,21 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
+      initContainers:
+        - command:
+            - bash
+            - '-c'
+            - 'bundle exec rails db:migrate'
+          envFrom:
+            - secretRef:
+                name: hackathon-manager-demo
+          image: >-
+            docker-registry.default.svc:5000/hackathon-manager-demo/hackathon-manager-demo@sha256:120c47715f30bbfbf610d3a3161f3839e5eef2b599e61868f6dbeb935e515151
+          imagePullPolicy: Always
+          name: db-migrate
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
