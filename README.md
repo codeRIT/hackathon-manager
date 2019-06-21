@@ -71,7 +71,7 @@ All documentation is easily editable using the GitHub UI. Click the "Edit" butto
 
 If there's a new feature you're looking to implement, **please** file an issue to open discussion on the feature before starting work or opening a pull request.
 
-## Development
+## Local Development
 
 1. Setup Ruby + MySQL for local development
 
@@ -122,7 +122,7 @@ irb(main):001:0> User.last.update_attribute(:role, :admin)
 
 _See https://coderit.org/hackathon-manager/ for docs on regular hackathon setup_
 
-### Development Utilities
+### Local Development Utilities
 
 - **Mail View** - Email templates can be previewed at http://localhost:3000/rails/mailers
 - **Mail Catcher** - When active, emails will be captured by MailCatcher instead of slipping into a black hole (no emails are ever sent in development). Visit [mailcatcher.me](http://mailcatcher.me/) and follow instructions under "How" to get setup.
