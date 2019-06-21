@@ -121,7 +121,7 @@ spec:
             - secretRef:
                 name: hackathon-manager-demo
           image: >-
-            docker-registry.default.svc:5000/hackathon-manager-demo/hackathon-manager-demo@sha256:120c47715f30bbfbf610d3a3161f3839e5eef2b599e61868f6dbeb935e515151
+            docker-registry.default.svc:5000/hackathon-manager-demo/hackathon-manager-demo@sha256:66933712fc8cbb42ed553e5f07dd278bb12f2a1a964af8c635028f84d9149f49
           imagePullPolicy: Always
           name: db-migrate
           resources: {}
