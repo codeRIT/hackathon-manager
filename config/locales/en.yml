@@ -117,3 +117,5 @@ en:
         email_from: From Email
         agreement_pdf_asset: Agreement PDF Asset
         custom_css: Custom CSS
+        homepage_url: Homepage URL
+        thanks_for_rsvp_message: Thanks For RSVP Message
