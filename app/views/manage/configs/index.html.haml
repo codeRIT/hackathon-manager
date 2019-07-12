@@ -28,7 +28,7 @@
                 %span.badge.badge-secondary Not set
             - else
               %pre.mb-0= cleaned_value
-          - elsif value == ''
+          - elsif value.nil? || value == ''
             %p.mb-0
               %span.badge.badge-secondary Not set
           - else
