@@ -20,7 +20,15 @@
               = link_to enter_theming_editor_manage_configs_path do
                 %span.fa.fa-paint-brush.icon-space-r-half
                 Interactive editor
-          - if value == ''
+          - if key == 'disabled_fields'
+            - cleaned_value = value
+            - cleaned_value = cleaned_value.join(' ') if cleaned_value.is_a?(Array)
+            - if cleaned_value.blank?
+              %p.mb-0
+                %span.badge.badge-secondary Not set
+            - else
+              %pre.mb-0= cleaned_value
+          - elsif value == ''
             %p.mb-0
               %span.badge.badge-secondary Not set
           - else

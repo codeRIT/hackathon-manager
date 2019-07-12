@@ -70,7 +70,7 @@ en:
         email_from: '"From" email address for all emails sent through the website (e.g. BrickHack &lt;hello@example.com&gt;)'
         default_page_title: Default &lt;title&gt; for all pages (e.g. HackFoo - Jan 1-2, 2017)
 
-        disabled_fields: Optional comma-separated list of fields (e.g. why_attend)
+        disabled_fields: Optional list of fields to turn off (e.g. why_attend)
         disclaimer_message: Optional message that appears before signing up & applying. Supports markdown.
         thanks_for_applying_message: Optional message that appears after completing an application. Supports markdown.
         thanks_for_rsvp_message: Optional message that appears after RSVP'ing as attending. Supports markdown.
