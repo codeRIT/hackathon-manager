@@ -92,3 +92,11 @@
         %main.col-md-10.ml-sm-auto.px-4{role: "main"}
           = render "layouts/manage/flashes"
           = yield
+          %div.mb-4.text-center
+            %small.text-muted
+              Powered by
+              = link_to 'hackathon-manager', 'https://codeRIT.org/hackathon-manager/'
+              &nbsp;·&nbsp;
+              = link_to 'Changelog', 'https://github.com/codeRIT/hackathon-manager/releases'
+              &nbsp;·&nbsp;
+              = link_to 'Report bug', 'https://github.com/codeRIT/hackathon-manager/issues/new'
