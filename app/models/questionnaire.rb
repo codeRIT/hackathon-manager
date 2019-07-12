@@ -194,7 +194,7 @@ class Questionnaire < ApplicationRecord
   end
 
   def message_events
-    return [] unless ENV['SPARKPOST_API_KEY']
+    return [] unless ENV["SPARKPOST_API_KEY"].presence
 
     simple_spark = SimpleSpark::Client.new
     simple_spark.message_events.search(recipients: email)
