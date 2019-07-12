@@ -9,5 +9,10 @@
     .card.mb-3
       .card-header Recent Email Events
       .card-body
-        .email-events{ data: { url: message_events_manage_questionnaire_path(@questionnaire) } }
-          %em Email events not available at this time.
+        - email_provider = Rails.application.config.action_mailer.delivery_method
+        - if email_provider == :sparkpost
+          .email-events{ data: { url: message_events_manage_questionnaire_path(@questionnaire) } }
+            %em Email events not available at this time.
+        - else
+          %p.alert.alert-info
+            Not supported with current email provider (#{email_provider})

@@ -55,10 +55,30 @@
         = render 'config_row', name: 'Domain Name', key: 'HM_DOMAIN_NAME'
         = render 'config_row', name: 'Domain Protocol', key: 'HM_DOMAIN_PROTOCOL', default: 'https'
         %hr
-        = render 'config_row', name: 'Sparkpost API Key', key: 'SPARKPOST_API_KEY', secret: true
-        = render 'config_row', name: 'Sparkpost Campaign ID', key: 'SPARKPOST_CAMPAIGN_ID'
-        %hr
         = render 'config_row', name: 'My MLH Application ID', key: 'MLH_KEY'
         = render 'config_row', name: 'My MLH Secret', key: 'MLH_SECRET', secret: true
         %hr
         = render 'config_row', name: 'Rollbar Access Token', key: 'ROLLBAR_ACCESS_TOKEN', secret: true, required: false
+        %hr
+        %p.mb-0
+          %b Email Provider
+        - if Rails.application.config.action_mailer.delivery_method == :smtp
+          %p
+            %span.badge.badge-secondary SparkPost
+            %span.badge.badge-success SMTP
+            %br
+            %small
+              %i To switch to SparkPost, unset the <code>SMTP_ADDRESS</code> environment variable
+          = render 'config_row', name: 'SMTP Address', key: 'SMTP_ADDRESS'
+          = render 'config_row', name: 'SMTP Port', key: 'SMTP_PORT', default: 587
+          = render 'config_row', name: 'SMTP Username', key: 'SMTP_USER_NAME'
+          = render 'config_row', name: 'SMTP Password', key: 'SMTP_PASSWORD'
+        - else
+          %p
+            %span.badge.badge-success SparkPost
+            %span.badge.badge-secondary SMTP
+            %br
+            %small
+              %i To switch to SMTP, set the <code>SMTP_ADDRESS</code> environment variable
+          = render 'config_row', name: 'SparkPost Campaign ID', key: 'SPARKPOST_CAMPAIGN_ID'
+          = render 'config_row', name: 'SparkPost API Key', key: 'SPARKPOST_API_KEY', secret: true

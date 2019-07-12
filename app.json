@@ -59,11 +59,11 @@
       "required": false
     },
     "SPARKPOST_API_KEY": {
-      "description": "Sparkpost API key for sending email",
+      "description": "SparkPost API key for sending email",
       "required": false
     },
     "SPARKPOST_CAMPAIGN_ID": {
-      "description": "Sparkpost campaign ID for sending email (e.g. the name of your hackathon)",
+      "description": "SparkPost campaign ID for sending email (e.g. the name of your hackathon)",
       "required": false
     },
     "HM_DOMAIN_NAME": {
