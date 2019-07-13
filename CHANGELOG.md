@@ -1,3 +1,20 @@
+# [1.16.0](https://github.com/codeRIT/hackathon-manager/compare/v1.15.1...v1.16.0) (2019-07-13)
+
+
+### Bug Fixes
+
+* Capitalization of URL and RSVP config variable names ([4561412](https://github.com/codeRIT/hackathon-manager/commit/4561412))
+* Consistent bottom margin on all manage pages ([324d820](https://github.com/codeRIT/hackathon-manager/commit/324d820))
+* Don’t load message events when SparkPost API key is blank ([a989d02](https://github.com/codeRIT/hackathon-manager/commit/a989d02))
+* Show “not set” for nil config values ([7bb8d4a](https://github.com/codeRIT/hackathon-manager/commit/7bb8d4a))
+
+
+### Features
+
+* Add link to docs, changelog, bug report on all manage pages ([0429eee](https://github.com/codeRIT/hackathon-manager/commit/0429eee))
+* Improve editor for disabled_fields configuration ([9206718](https://github.com/codeRIT/hackathon-manager/commit/9206718))
+* Note sensitive config values as hidden when set in UI ([271b49e](https://github.com/codeRIT/hackathon-manager/commit/271b49e))
+
 ## [1.15.1](https://github.com/codeRIT/hackathon-manager/compare/v1.15.0...v1.15.1) (2019-06-21)
 
 
