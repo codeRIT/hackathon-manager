@@ -31,7 +31,7 @@ HackathonManager makes use of a few different third-party services & Ruby gems:
 
 - [Devise](https://github.com/plataformatec/devise) + [MyMLH](https://my.mlh.io/) (authentication & attendee identity)
 - [Sidekiq](https://github.com/mperham/sidekiq) (background jobs)
-- [Sparkpost](https://www.sparkpost.com/) (email)
+- [SparkPost](https://www.sparkpost.com/) (email)
 - [Amazon S3](https://aws.amazon.com/s3/) (resume storage)
 - [Chartkick](http://chartkick.com/) (management UI charts)
 - [Blazer](https://github.com/ankane/blazer) (custom SQL queries, analytics, and charts)

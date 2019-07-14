@@ -60,13 +60,34 @@ S3_FORCE_PATH_STYLE=true
 
 ### E-mail
 
-Currently, emails are queued via Sidekiq and then sent by Sparkpost's servers.
+Emails can be sent using [SparkPost](https://www.sparkpost.com) or traditional SMTP.
 
-Create a Sparkpost API key with **Transmissions: Read/Write** and **Message Events: Read-only** permissions, limited to the production server's IP address. SMTP is _not_ required, as email is sent over the Sparkpost API rather than SMTP.
+#### SparkPost
+
+[SparkPost](https://www.sparkpost.com) is the recommended email provider, and provides a free plan suitable for most hackathons.
+
+Create a SparkPost API key with **Transmissions: Read/Write** and **Message Events: Read-only** permissions. The SMTP permission is _not_ required, as email is sent over the SparkPost API instead of SMTP.
+
+For added security, whitelist the API key to your server's IP address.
 
 ```bash
 SPARKPOST_API_KEY=""
 SPARKPOST_CAMPAIGN_ID=""
+```
+
+#### SMTP
+
+>Sending email with SMTP over a personal or school email address (such as Gmail) is **NOT** recommended. Your hackathon may easily send several hundred to a few thousand emails during months leading up to the event, which regular email accounts block and may get reported for spam.
+>
+>Be sure your SMTP provider is configured appropriately for mass email, and check periodically that emails are being delivered successfully.
+
+```bash
+SMTP_ADDRESS="mail.example.com"
+SMTP_USER_NAME=""
+SMTP_PASSWORD=""
+SMTP_PORT=""           # optional, 587 by default
+SMTP_AUTHENTICATION="" # optional, "plain" by default
+SMTP_STARTTLS_AUTO=""  # optional, "true" by default
 ```
 
 ### Rollbar

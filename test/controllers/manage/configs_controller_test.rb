@@ -115,6 +115,20 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       assert_redirected_to manage_configs_path
     end
 
+    should "update logo_asset with a url" do
+      HackathonConfig["logo_asset"] = ""
+      patch :update, params: { id: "logo_asset", hackathon_config: { logo_asset: "https://picsum.photos/200" } }
+      assert_equal "https://picsum.photos/200", HackathonConfig["logo_asset"]
+      assert_redirected_to manage_configs_path
+    end
+
+    should "not update logo_asset with an asset that is not URL based" do
+      HackathonConfig["logo_asset"] = ""
+      patch :update, params: { id: "logo_asset", hackathon_config: { logo_asset: "test" } }
+      assert_equal "", HackathonConfig["logo_asset"]
+      assert_template :edit
+    end
+
     should "update config CSS variables when custom_css is blank" do
       HackathonConfig["custom_css"] = ""
       patch :update, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
