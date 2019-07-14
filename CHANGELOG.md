@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/codeRIT/hackathon-manager/compare/v1.16.0...v1.17.0) (2019-07-14)
+
+
+### Features
+
+* Support SMTP as an alternative email provider to Sparkpost ([#172](https://github.com/codeRIT/hackathon-manager/issues/172)) ([5904384](https://github.com/codeRIT/hackathon-manager/commit/5904384))
+
 # [1.16.0](https://github.com/codeRIT/hackathon-manager/compare/v1.15.1...v1.16.0) (2019-07-13)
 
 
