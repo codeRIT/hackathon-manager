@@ -1,3 +1,11 @@
+## [1.17.1](https://github.com/codeRIT/hackathon-manager/compare/v1.17.0...v1.17.1) (2019-07-15)
+
+
+### Bug Fixes
+
+* Correct user_name usage for SMTP mail ([b8e2d2e](https://github.com/codeRIT/hackathon-manager/commit/b8e2d2e))
+* Set SMTP username & password as secret ([2b30306](https://github.com/codeRIT/hackathon-manager/commit/2b30306))
+
 # [1.17.0](https://github.com/codeRIT/hackathon-manager/compare/v1.16.0...v1.17.0) (2019-07-14)
 
 
