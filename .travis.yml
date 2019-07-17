@@ -29,7 +29,7 @@ jobs:
   include:
     - stage: deploy
       name: Build & publish new release (if needed)
-      if: branch = master
+      if: branch = master AND repo = "codeRIT/hackathon-manager"
       language: node_js
       node_js: lts/*
       cache:
@@ -39,7 +39,7 @@ jobs:
       script: yarn semantic-release
     - stage: deploy
       name: Push docs website update
-      if: branch = master
+      if: branch = master AND repo = "codeRIT/hackathon-manager"
       language: node_js
       node_js: lts/*
       cache:
