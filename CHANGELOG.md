@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/codeRIT/hackathon-manager/compare/v1.17.1...v1.17.2) (2019-07-17)
+
+
+### Bug Fixes
+
+* Corrects typo in the Bus Captain Notes config description ([#173](https://github.com/codeRIT/hackathon-manager/issues/173)) ([6e4f871](https://github.com/codeRIT/hackathon-manager/commit/6e4f871))
+
 ## [1.17.1](https://github.com/codeRIT/hackathon-manager/compare/v1.17.0...v1.17.1) (2019-07-15)
 
 
