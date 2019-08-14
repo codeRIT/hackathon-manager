@@ -22,7 +22,7 @@ class UserMailer < ApplicationMailer
   end
 
   def rsvp_reminder_email(user_id)
-    @questionnaire = Questionnaire.find_by(user_id : @user.id)
+    @questionnaire = Questionnaire.find_by(user_id : user.id)
     more_than_two_weeks = ( @questionnaire.acc_status_date - Date.parse(HackathonConfig["last_day_to_apply"]) > 14 ) && ( @questionnaire.acc_status_date + 7 == TIme.now )
     more_than_ten_days = ( @questionnaire.acc_status_date - Date.parse(HackathonConfig["last_day_to_apply"]) > 10 ) && ( Date.parse(HackathonConfig["last_day_to_apply"]) - 5 == Time.now )
     more_than_three_days = ( @questionnaire.acc_status_date - Date.parse(HackathonConfig["last_day_to_apply"]) > 3 ) && ( Date.parse(HackathonConfig["last_day_to_apply"]) - 2  == Time.now)

@@ -35,7 +35,7 @@ class User < ApplicationRecord
   def queue_reminder_email
     return if reminder_sent_at
     UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
-    UserMailer.rsvp_reminder_email(id).deliver_later(wait:1.day)
+    UserMailer.rsvp_reminder_email(id).deliver_later(wait: 1.day)
     update_attribute(:reminder_sent_at, Time.now)
   end
 
