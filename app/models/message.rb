@@ -38,6 +38,7 @@ class Message < ApplicationRecord
     "questionnaire.rsvp_confirmed" => "Questionnaire Status: RSVP Confirmed",
     "questionnaire.rsvp_denied" => "Questionnaire Status: RSVP Denied",
     "user.24hr_incomplete_application" => "User: Incomplete application (24 hours later)",
+    "user.rsvp_reminder_email" => "User: RSVP Reminder",
     "bus_list.new_captain_confirmation" => "Bus List: New captain confirmation",
     "bus_list.notes_update" => "Bus List: Updated notes (manually triggered)"
   }.freeze
