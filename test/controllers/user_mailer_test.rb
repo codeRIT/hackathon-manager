@@ -29,14 +29,14 @@ class UserMailerTest < ActionMailer::TestCase
     end
   end
 
-  context "" do
+  context "upon scheduled rsvp reminder email" do
     setup do
       @user = create(:user, email: "test@example.com")
       @message = create(:message, subject: "Please RSVP", type: "automated", trigger: "user.rsvp_reminder_email")
       
       should "queue reminder bulk message" do
         assert_difference "enqueued_jobs.size", 1 do
-          UserMailer.incomplete_reminder_email(@user.id).deliver_later
+          UserMailer.rsvp_reminder_email(@user.id).deliver_later
         end
       end
   end
