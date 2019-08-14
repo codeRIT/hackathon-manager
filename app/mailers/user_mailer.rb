@@ -23,11 +23,11 @@ class UserMailer < ApplicationMailer
 
   def rsvp_reminder_email(user_id)
     @questionnaire = Questionnaire.where(user_id: user_id)
-    more_than_two_weeks = ((@questionnaire.acc_status_date - Date.parse(HackathonConfig["last_day_to_apply"])).to_i > 14 ) && ( @questionnaire.acc_status_date + 7 == Date.today )
-    more_than_ten_days = ((@questionnaire.acc_status_date - Date.parse(HackathonConfig["last_day_to_apply"])).to_i > 10 ) && ( Date.parse(HackathonConfig["last_day_to_apply"]) - 5 == Date.today )
-    more_than_three_days = ((@questionnaire.acc_status_date - Date.parse(HackathonConfig["last_day_to_apply"])).to_i > 3 ) && ( Date.parse(HackathonConfig["last_day_to_apply"]) - 2  == Date.today)
+    more_than_two_weeks = ((@questionnaire.acc_status_date-Date.parse(HackathonConfig["last_day_to_apply"])).to_i > 14) && (@questionnaire.acc_status_date+7 == Date.today)
+    more_than_ten_days = ((@questionnaire.acc_status_date-Date.parse(HackathonConfig["last_day_to_apply"])).to_i > 10) && (Date.parse(HackathonConfig["last_day_to_apply"])-5 == Date.today)
+    more_than_three_days = ((@questionnaire.acc_status_date-Date.parse(HackathonConfig["last_day_to_apply"])).to_i > 3) && (Date.parse(HackathonConfig["last_day_to_apply"])-2 == Date.today)
     if @questionnaire.acc_status == "accepted"
-      if more_than_two_weeks  || more_than_ten_days || more_than_three_days
+      if more_than_two_weeks || more_than_ten_days || more_than_three_days
         Message.queue_for_trigger("user.rsvp_reminder_email", user_id)
       end
     end
