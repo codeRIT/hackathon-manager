@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :email
 
-  after_create :queue_reminder_email
+  after_create :queue_reminder_email, :queue_rsvp_email
 
   enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
   after_initialize :set_default_role, if: :new_record?
@@ -35,8 +35,11 @@ class User < ApplicationRecord
   def queue_reminder_email
     return if reminder_sent_at
     UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
-    UserMailer.rsvp_reminder_email(id).deliver_later(wait: 1.day)
     update_attribute(:reminder_sent_at, Time.now)
+  end
+
+  def queue_rsvp_email
+    UserMailer.rsvp_reminder_email(id)
   end
 
   def email=(value)
