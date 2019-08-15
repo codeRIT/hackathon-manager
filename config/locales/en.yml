@@ -61,6 +61,7 @@ en:
         last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
         event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
+        disable_account_registration: Prevent applicants from applying
 
         name: Your hackathon's name
         logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)

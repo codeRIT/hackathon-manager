@@ -3,9 +3,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if HackathonConfig['disable_account_registration']
+      flash[:failure] = 'Registration had ended'
+      redirect_to root_path
+    else
+      super
+    end
+  end
 
   # POST /resource
   # def create

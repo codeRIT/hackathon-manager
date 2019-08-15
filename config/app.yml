@@ -7,6 +7,7 @@ defaults: &defaults
   last_day_to_apply: "<%= Date.new(2000, 1, 1).to_s %>"
   event_start_date: "<%= Date.new(2000, 1, 1).to_s %>"
   auto_late_waitlist: false
+  disable_account_registration: false
 
   # Content config
   name: HackFoo
