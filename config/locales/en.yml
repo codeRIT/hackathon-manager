@@ -31,7 +31,6 @@
 
 en:
   devise:
-  devise:
     failure:
       unauthenticated: "Please sign in or sign up to continue."
     registrations:
