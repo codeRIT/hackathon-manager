@@ -117,13 +117,13 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 
     should "update logo_asset with a url" do
       HackathonConfig["logo_asset"] = ''
-      patch :update, params: {id: "logo_asset", hackathon_config: { logo_asset: "https://picsum.photos/200" } }
+      patch :update, params: { id: "logo_asset", hackathon_config: { logo_asset: "https://picsum.photos/200" } }
       assert_equal "https://picsum.photos/200", HackathonConfig["logo_asset"]
     end
 
-    should "update logo_asset with an asset that is not URL based" do 
+    should "update logo_asset with an asset that is not URL based" do
       HackathonConfig["logo_asset"] = ''
-      patch :update, params: {id: "logo_asset", hackathon_config: { logo_asset: "test" } }
+      patch :update, params: { id: "logo_asset", hackathon_config: { logo_asset: "test" } }
       assert_equal '', HackathonConfig["logo_asset"]
     end
 

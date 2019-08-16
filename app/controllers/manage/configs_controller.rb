@@ -19,14 +19,12 @@ class Manage::ConfigsController < Manage::ApplicationController
     value = false if value == "false"
     if @config.var.end_with?("_asset") && !value.start_with?('http://', 'https://')
       redirect_to manage_configs_path, notice: "Config \"#{key}\" was not changed"
-    else 
-      if @config.value != value
-        @config.value = value
-        @config.save
-        redirect_to manage_configs_path, notice: "Config \"#{key}\" has been updated."
-      else
-        redirect_to manage_configs_path, notice: "Config \"#{key}\" was not changed"
-      end
+    elsif @config.value != value
+      @config.value = value
+      @config.save
+      redirect_to manage_configs_path, notice: "Config \"#{key}\" has been updated."
+    else
+      redirect_to manage_configs_path, notice: "Config \"#{key}\" was not changed"
     end
   end
 
