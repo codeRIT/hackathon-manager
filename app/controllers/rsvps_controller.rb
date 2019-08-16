@@ -106,6 +106,7 @@ class RsvpsController < ApplicationController
 
   def require_accepted_questionnaire
     return if @questionnaire.can_rsvp? || @questionnaire.checked_in?
+    
     flash[:alert] = "You had not been accepted"
     redirect_to new_questionnaires_path
   end
