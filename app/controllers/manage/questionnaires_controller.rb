@@ -1,6 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
+  before_action :check_for_registration, only: [:new, :create]
   before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events]
 
   respond_to :html, :json
@@ -169,4 +170,10 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   def set_questionnaire
     @questionnaire = ::Questionnaire.find(params[:id])
   end
+
+  def check_for_registration
+    if HackathonConfig['disable_account_registration']
+      flash[:alert] = "Registration has closed"
+      redirect_to root_path
+    end
 end
