@@ -9,6 +9,11 @@ class AdminDatatable < ApplicationDatatable
       active: { source: "User.is_active", searchable: false },
       receive_weekly_report: { source: "User.receive_weekly_report", searchable: false },
       created_at: { source: "User.created_at", searchable: false },
+      current_sign_in_at: { source: "User.current_sign_in_at", searchable: false },
+      last_sign_in_at: { source: "User.last_sign_in_at", searchable: false },
+      current_sign_in_ip: { source: "User.current_sign_in_ip", searchable: false },
+      last_sign_in_ip: { source: "User.last_sign_in_ip", searchable: false },
+      sign_in_count: { source: "User.sign_in_count", searchable: false },
     }
   end
 
@@ -23,6 +28,11 @@ class AdminDatatable < ApplicationDatatable
         active: record.is_active ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe,
         receive_weekly_report: yes_no_display(record.receive_weekly_report),
         created_at: display_datetime(record.created_at),
+        current_sign_in_at: display_datetime(record.current_sign_in_at),
+        last_sign_in_at: display_datetime(record.last_sign_in_at),
+        current_sign_in_ip: record.current_sign_in_ip,
+        last_sign_in_ip: record.last_sign_in_ip,
+        sign_in_count: record.sign_in_count,
       }
     end
   end
