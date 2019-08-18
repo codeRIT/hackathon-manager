@@ -18,7 +18,8 @@ class Manage::ConfigsController < Manage::ApplicationController
     value = true if value == "true"
     value = false if value == "false"
     if @config.var.end_with?("_asset") && !value.start_with?('http://', 'https://')
-      redirect_to manage_configs_path, notice: "Config \"#{key}\" was not changed"
+      flash[:alert] = "Config \"#{key}\" must start with http:// or https://"
+      render :edit
     elsif @config.value != value
       @config.value = value
       @config.save
