@@ -2,6 +2,8 @@ sudo: false
 
 # "test" step configuration
 language: ruby
+services:
+  - mysql
 rvm:
   - 2.6
   - 2.5
