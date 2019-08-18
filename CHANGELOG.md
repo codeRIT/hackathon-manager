@@ -1,3 +1,15 @@
+# [1.18.0](https://github.com/codeRIT/hackathon-manager/compare/v1.17.2...v1.18.0) (2019-08-18)
+
+
+### Features
+
+* alert if user is redirected when arriving to rsvp ([3b6260a](https://github.com/codeRIT/hackathon-manager/commit/3b6260a))
+
+
+### Maintenance
+
+* Update gems ([#179](https://github.com/codeRIT/hackathon-manager/issues/179)) ([dc1b039](https://github.com/codeRIT/hackathon-manager/commit/dc1b039))
+
 ## [1.17.2](https://github.com/codeRIT/hackathon-manager/compare/v1.17.1...v1.17.2) (2019-07-17)
 
 
