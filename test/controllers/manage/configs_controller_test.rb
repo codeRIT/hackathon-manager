@@ -122,7 +122,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       assert_redirected_to manage_configs_path
     end
 
-    should "update logo_asset with an asset that is not URL based" do
+    should "not update logo_asset with an asset that is not URL based" do
       HackathonConfig["logo_asset"] = ''
       patch :update, params: { id: "logo_asset", hackathon_config: { logo_asset: "test" } }
       assert_equal '', HackathonConfig["logo_asset"]
