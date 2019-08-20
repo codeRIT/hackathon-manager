@@ -16,7 +16,7 @@ subject_mapping = {
   "questionnaire.denied" => "Your application status",
   "questionnaire.rsvp_confirmed" => "RSVP Confirmation",
   "user.24hr_incomplete_application" => "Incomplete application",
-  "user.rsvp_reminder_email" => "Please RSVP",
+  "user.rsvp_reminder" => "Reminder: Please RSVP",
   "bus_list.new_captain_confirmation" => "You're a bus captain!",
   "bus_list.update_notes" => "Bus Update"
 }
@@ -27,7 +27,7 @@ name_mapping = {
   "questionnaire.denied" => "Denied email",
   "questionnaire.rsvp_confirmed" => "RSVP confirmed email",
   "user.24hr_incomplete_application" => "Incomplete application (24-hour reminder)",
-  "user.rsvp_reminder_email" => "User: RSVP Reminder",
+  "user.rsvp_reminder" => "RSVP Reminder",
   "bus_list.new_captain_confirmation" => "New bus captain confirmation",
   "bus_list.update_notes" => "Bus list update"
 }
