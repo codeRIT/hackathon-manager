@@ -1,8 +1,12 @@
 class ResumeCollectionJob < ApplicationJob
   queue_as :default
 
-  def perform(user_id)
-    questionnaires = Questionnaire.where("(acc_status = 'rsvp_confirmed') OR checked_in_at > 0")
+  after_perform do |job|
+    AdminMailer.resume_collection(job.arguments.first, ).deliver_now
+  end
+
+  def perform(user_id, message)
+    questionnaires = Questionnaire.where("can_share_info = 1 AND (acc_status = 'rsvp_confirmed' OR checked_in_at > 0)")
 
         Dir.mktmpdir('resume-bundle') do |dir|
         Dir.mkdir(File.join(dir, "resumes"))
@@ -40,8 +44,6 @@ class ResumeCollectionJob < ApplicationJob
 
         # Generate a temporary link
         signer = Aws::S3::Presigner.new
-        url = signer.presigned_url(:get_object, bucket: bucket, key: zipfile_name)
-
-        AdminMailer.resume_collection(user_id, url).deliver_now
+        message = signer.presigned_url(:get_object, bucket: bucket, key: zipfile_name)
   end
 end
