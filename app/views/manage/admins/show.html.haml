@@ -46,11 +46,11 @@
 
     %p
       %b IP:
-      = @user.current_sign_in_ip
+      = @user.current_sign_in_ip == "::1" ? "127.0.0.1" : @user.current_sign_in_ip
 
     %p
       %b Last IP:
-      = @user.last_sign_in_ip
+      = @user.last_sign_in_ip == "::1" ? "127.0.0.1" : @user.last_sign_in_ip
 
     %p
       %b Sign-in Count:

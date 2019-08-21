@@ -19,10 +19,6 @@ class AdminDatatable < ApplicationDatatable
 
   private
 
-  def ip(record)
-    return ( record == "::1" ) ? "127.0.0.1" : record
-  end
-
   def data
     records.map do |record|
       {
@@ -34,8 +30,8 @@ class AdminDatatable < ApplicationDatatable
         created_at: display_datetime(record.created_at),
         current_sign_in_at: display_datetime(record.current_sign_in_at),
         last_sign_in_at: display_datetime(record.last_sign_in_at),
-        current_sign_in_ip: ip(record.current_sign_in_ip),
-        last_sign_in_ip: ip(record.last_sign_in_ip),
+        current_sign_in_ip: record.current_sign_in_ip == "::1" ? "127.0.0.1" : record.current_sign_in_ip,
+        last_sign_in_ip: record.last_sign_in_ip == "::1" ? "127.0.0.1" : record.last_sign_in_ip,
         sign_in_count: record.sign_in_count,
       }
     end
