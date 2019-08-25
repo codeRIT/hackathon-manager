@@ -38,10 +38,6 @@ class User < ApplicationRecord
     update_attribute(:reminder_sent_at, Time.now)
   end
 
-  def queue_rsvp_email
-    UserMailer.rsvp_reminder_email(id)
-  end
-
   def email=(value)
     super value.try(:downcase)
   end
