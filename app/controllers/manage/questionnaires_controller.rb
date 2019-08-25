@@ -176,4 +176,5 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       flash[:alert] = "Registration has closed"
       redirect_to root_path
     end
+  end
 end
