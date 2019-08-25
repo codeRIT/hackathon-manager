@@ -79,8 +79,8 @@
               %i To switch to SparkPost, unset the <code>SMTP_ADDRESS</code> environment variable
           = render 'config_row', name: 'SMTP Address', key: 'SMTP_ADDRESS'
           = render 'config_row', name: 'SMTP Port', key: 'SMTP_PORT', default: 587
-          = render 'config_row', name: 'SMTP Username', key: 'SMTP_USER_NAME'
-          = render 'config_row', name: 'SMTP Password', key: 'SMTP_PASSWORD'
+          = render 'config_row', name: 'SMTP Username', key: 'SMTP_USER_NAME', secret: true
+          = render 'config_row', name: 'SMTP Password', key: 'SMTP_PASSWORD', secret: true
         - else
           %p
             %span.badge.badge-success SparkPost

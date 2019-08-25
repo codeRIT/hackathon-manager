@@ -1,3 +1,37 @@
+# [1.18.0](https://github.com/codeRIT/hackathon-manager/compare/v1.17.2...v1.18.0) (2019-08-18)
+
+
+### Features
+
+* alert if user is redirected when arriving to rsvp ([3b6260a](https://github.com/codeRIT/hackathon-manager/commit/3b6260a))
+
+
+### Maintenance
+
+* Update gems ([#179](https://github.com/codeRIT/hackathon-manager/issues/179)) ([dc1b039](https://github.com/codeRIT/hackathon-manager/commit/dc1b039))
+
+## [1.17.2](https://github.com/codeRIT/hackathon-manager/compare/v1.17.1...v1.17.2) (2019-07-17)
+
+
+### Bug Fixes
+
+* Corrects typo in the Bus Captain Notes config description ([#173](https://github.com/codeRIT/hackathon-manager/issues/173)) ([6e4f871](https://github.com/codeRIT/hackathon-manager/commit/6e4f871))
+
+## [1.17.1](https://github.com/codeRIT/hackathon-manager/compare/v1.17.0...v1.17.1) (2019-07-15)
+
+
+### Bug Fixes
+
+* Correct user_name usage for SMTP mail ([b8e2d2e](https://github.com/codeRIT/hackathon-manager/commit/b8e2d2e))
+* Set SMTP username & password as secret ([2b30306](https://github.com/codeRIT/hackathon-manager/commit/2b30306))
+
+# [1.17.0](https://github.com/codeRIT/hackathon-manager/compare/v1.16.0...v1.17.0) (2019-07-14)
+
+
+### Features
+
+* Support SMTP as an alternative email provider to Sparkpost ([#172](https://github.com/codeRIT/hackathon-manager/issues/172)) ([5904384](https://github.com/codeRIT/hackathon-manager/commit/5904384))
+
 # [1.16.0](https://github.com/codeRIT/hackathon-manager/compare/v1.15.1...v1.16.0) (2019-07-13)
 
 
