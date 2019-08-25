@@ -9,11 +9,11 @@ class AdminDatatable < ApplicationDatatable
       active: { source: "User.is_active", searchable: false },
       receive_weekly_report: { source: "User.receive_weekly_report", searchable: false },
       created_at: { source: "User.created_at", searchable: false },
-      current_sign_in_at: { source: "User.current_sign_in_at", searchable: false  },
-      last_sign_in_at: { source: "User.last_sign_in_at", searchable: false  },
+      current_sign_in_at: { source: "User.current_sign_in_at", searchable: false },
+      last_sign_in_at: { source: "User.last_sign_in_at", searchable: false },
       current_sign_in_ip: { source: "User.current_sign_in_ip" },
       last_sign_in_ip: { source: "User.last_sign_in_ip" },
-      sign_in_count: { source: "User.sign_in_count", searchable: false  },
+      sign_in_count: { source: "User.sign_in_count", searchable: false },
     }
   end
 
