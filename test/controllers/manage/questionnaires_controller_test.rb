@@ -82,6 +82,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow access to questionnaire when registration closed" do
       HackathonConfig["disable_account_registration"] = true
+      get :new
       assert_match /Registration has closed/, flash[:alert]
       assert_response :redirect
       assert_redirected_to root_path

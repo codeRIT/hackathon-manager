@@ -25,6 +25,7 @@ class Users::RegistrationsControllerTest < ActionController::TestCase
   context "while not authenticated" do
     should "registration closed" do
       HackathonConfig["disable_account_registration"] = true
+      get :new
       assert_match /Registration has closed/, flash[:alert]
       assert_redirected_to root_path
     end
