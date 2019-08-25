@@ -1,7 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
-  before_action :check_for_registration, only: [:new, :create]
+  before_action :ensure_registration_is_open, only: [:new, :create]
   before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events]
 
   respond_to :html, :json
