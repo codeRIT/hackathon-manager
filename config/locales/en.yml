@@ -74,7 +74,7 @@ en:
         disclaimer_message: Optional message that appears before signing up & applying. Supports markdown.
         thanks_for_applying_message: Optional message that appears after completing an application. Supports markdown.
         thanks_for_rsvp_message: Optional message that appears after RSVP'ing as attending. Supports markdown.
-        bus_captain_notes: Optional message that appers on the bus captain's bus list page. Supports markdown.
+        bus_captain_notes: Optional message that appears on the bus captain's bus list page. Supports markdown.
         custom_css: CSS to inject into the &lt;head&gt; of every public page
     placeholders:
       bus_list:

@@ -36,6 +36,26 @@
       %b Registered:
       = display_datetime(@user.created_at)
 
+    %p
+      %b Signed-in on:
+      = display_datetime(@user.current_sign_in_at)
+
+    %p
+      %b Previous signed-in on:
+      = display_datetime(@user.last_sign_in_at)
+
+    %p
+      %b Signed-in IP:
+      = @user.current_sign_in_ip == "::1" ? "127.0.0.1" : @user.current_sign_in_ip
+
+    %p
+      %b Previous signed-in IP:
+      = @user.last_sign_in_ip == "::1" ? "127.0.0.1" : @user.last_sign_in_ip
+
+    %p
+      %b Sign-in count:
+      = @user.sign_in_count
+
   .col-lg-6
     %h4.border-bottom.pb-2.mb-3 Change History
     = render "model_history", model: @user
