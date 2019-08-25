@@ -39,6 +39,7 @@ class UserMailerTest < ActionMailer::TestCase
           UserMailer.rsvp_reminder_email(@user.id).deliver_later
         end
       end
+    end
   end
 
   context "with customized HackathonConfig" do
