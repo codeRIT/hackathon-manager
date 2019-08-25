@@ -37,23 +37,23 @@
       = display_datetime(@user.created_at)
 
     %p
-      %b Signed-in:
+      %b Signed-in on:
       = display_datetime(@user.current_sign_in_at)
 
     %p
-      %b Previous Signed-in:
+      %b Previous signed-in on:
       = display_datetime(@user.last_sign_in_at)
 
     %p
-      %b IP:
+      %b Signed-in IP:
       = @user.current_sign_in_ip == "::1" ? "127.0.0.1" : @user.current_sign_in_ip
 
     %p
-      %b Last IP:
+      %b Previous signed-in IP:
       = @user.last_sign_in_ip == "::1" ? "127.0.0.1" : @user.last_sign_in_ip
 
     %p
-      %b Sign-in Count:
+      %b Sign-in count:
       = @user.sign_in_count
 
   .col-lg-6
