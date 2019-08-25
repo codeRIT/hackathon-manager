@@ -4,7 +4,7 @@
  * See app/views/manage/application/_questionnaire_datatable.html.haml for an example.
  */
 
-var setupDataTables = function() {
+var setupDataTables = function () {
   $('.datatable.checkins').DataTable({
     order: [1, 'asc'],
     columns: [
@@ -25,6 +25,11 @@ var setupDataTables = function() {
       { orderable: true, data: 'active' },
       { orderable: true, data: 'receive_weekly_report' },
       { orderable: true, data: 'created_at' },
+      { orderable: true, data: 'current_sign_in_at' },
+      { orderable: true, data: 'last_sign_in_at', visible: false },
+      { orderable: true, data: 'current_sign_in_ip', visible: false },
+      { orderable: true, data: 'last_sign_in_ip', visible: false },
+      { orderable: true, data: 'sign_in_count', visible: false },
     ],
   });
 

@@ -92,6 +92,9 @@ module HackathonManagerHelper
   end
 
   def display_datetime(datetime, opts = {})
+    if datetime.blank?
+      return ""
+    end
     opts[:relative] = true if opts[:relative].nil?
 
     formatted = ""
