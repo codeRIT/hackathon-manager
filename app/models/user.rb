@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :email
 
-  after_create :queue_reminder_email, :queue_rsvp_email
+  after_create :queue_reminder_email
 
   enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
   after_initialize :set_default_role, if: :new_record?
