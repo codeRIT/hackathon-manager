@@ -171,7 +171,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     @questionnaire = ::Questionnaire.find(params[:id])
   end
 
-  def check_for_registration
+  def ensure_registration_is_open
     if HackathonConfig['disable_account_registration']
       flash[:alert] = "Registration has closed"
       redirect_to root_path
