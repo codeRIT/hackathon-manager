@@ -21,4 +21,16 @@ class Users::RegistrationsControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
   end
+
+  context "when regirstion is disabled should redirect to root path" do
+    HackathonConfig["disable_account_registration"] = true
+    assert_response :redirect
+    assert_redirected_to root_path
+  end
+
+  context "when regirstion occurs should redirect to questionnaire path" do
+    HackathonConfig["disable_account_registration"] = false
+    assert_response :redirect
+    assert_redirected_to questionnaires_path
+  end
 end
