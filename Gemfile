@@ -38,7 +38,7 @@ gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
-gem 'devise', '~> 4.2'
+gem 'devise', '~> 4.7'
 gem 'omniauth-mlh', '~> 0.1'
 gem 'doorkeeper', '~> 5.0'
 gem 'devise-doorkeeper'
