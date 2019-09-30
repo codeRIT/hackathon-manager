@@ -26,6 +26,13 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
       assert_equal "", HackathonConfig["custom_css"]
     end
+
+    should "not allow access to questionnaire when registration closed" do
+      HackathonConfig["disable_account_registration"] = true
+      get :new
+      assert_response :redirect
+      assert_redirected_to root_path
+    end
   end
 
   context "while authenticated as a user" do
