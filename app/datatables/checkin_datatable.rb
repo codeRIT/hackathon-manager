@@ -14,7 +14,7 @@ class CheckinDatatable < ApplicationDatatable
   def about(record)
     output = ""
     output += [record.first_name, record.last_name].join(" ") + " "
-    output += '<span class="badge badge-warning"><i class="fa fa-exclamation-triangle icon-space-r"></i>Minor</span>' if record.minor?
+    output += '<span class="badge badge-warning"><i class="fa fa-exclamation-triangle"></i>Minor</span>' if record.minor?
     output += "<br /><small>" + record.school.name + "</small>"
     output.html_safe
   end
