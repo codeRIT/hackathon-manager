@@ -1,3 +1,20 @@
+# [1.19.0](https://github.com/codeRIT/hackathon-manager/compare/v1.18.0...v1.19.0) (2019-10-05)
+
+
+### Features
+
+* Add ability to close registration completely ([#176](https://github.com/codeRIT/hackathon-manager/issues/176)) ([457781d](https://github.com/codeRIT/hackathon-manager/commit/457781d)), closes [#172](https://github.com/codeRIT/hackathon-manager/issues/172)
+
+
+### Maintenance
+
+* Code reformat ([123eafc](https://github.com/codeRIT/hackathon-manager/commit/123eafc))
+
+
+### Tests
+
+* Fix _asset config test ([63f49ec](https://github.com/codeRIT/hackathon-manager/commit/63f49ec))
+
 # [1.18.0](https://github.com/codeRIT/hackathon-manager/compare/v1.17.2...v1.18.0) (2019-08-18)
 
 
