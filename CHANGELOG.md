@@ -1,3 +1,10 @@
+## [1.19.2](https://github.com/codeRIT/hackathon-manager/compare/v1.19.1...v1.19.2) (2019-10-07)
+
+
+### Bug Fixes
+
+*  update the gem rubyzip due to security issue reported by Hakiri ([#188](https://github.com/codeRIT/hackathon-manager/issues/188)) ([4fc9057](https://github.com/codeRIT/hackathon-manager/commit/4fc9057))
+
 ## [1.19.1](https://github.com/codeRIT/hackathon-manager/compare/v1.19.0...v1.19.1) (2019-10-07)
 
 
