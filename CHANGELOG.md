@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/codeRIT/hackathon-manager/compare/v1.19.0...v1.19.1) (2019-10-07)
+
+
+### Bug Fixes
+
+* position of favicon to be centered for better UX in datatables ([#186](https://github.com/codeRIT/hackathon-manager/issues/186)) ([6e881ba](https://github.com/codeRIT/hackathon-manager/commit/6e881ba))
+
 # [1.19.0](https://github.com/codeRIT/hackathon-manager/compare/v1.18.0...v1.19.0) (2019-10-05)
 
 
