@@ -86,7 +86,7 @@ gem 'sparkpost_rails'
 gem 'httparty'
 gem 'rollbar', '~> 2.8'
 gem 'skylight'
-gem 'rubyzip', '>= 1.0.0'
+gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 
 group :development, :test do
