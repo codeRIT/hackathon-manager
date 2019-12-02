@@ -99,7 +99,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    chartkick (3.2.1)
+    chartkick (3.3.0)
     childprocess (1.0.1)
       rake (< 13.0)
     chromedriver-helper (2.1.1)
@@ -462,7 +462,7 @@ DEPENDENCIES
   bootstrap (~> 4.3.1)
   byebug
   capybara (>= 2.15)
-  chartkick (~> 3.0)
+  chartkick (~> 3.3)
   chromedriver-helper
   codeclimate-test-reporter (~> 0.6.0)
   devise (~> 4.7)
