@@ -5,7 +5,7 @@ title: Dokku Deployment
 
 >These docs assume you already have a virtual machine with [Dokku](http://dokku.viewdocs.io/dokku/) running on it, and can SSH into the VM. DNS should be set up as well, but isn't required for bare minimum functionality.
 >
->If you need a VM, check out [DigitalOean](https://m.do.co/c/b5ee103e23c3) or [Linode](https://www.linode.com/?r=e90a6fb2a6999fb4ec7b60b1add3e288f97954bf) and the [Dokku docs](http://dokku.viewdocs.io/dokku/) to get started.
+>If you need a VM, check out [DigitalOcean](https://m.do.co/c/b5ee103e23c3) or [Linode](https://www.linode.com/?r=e90a6fb2a6999fb4ec7b60b1add3e288f97954bf) and the [Dokku docs](http://dokku.viewdocs.io/dokku/) to get started.
 
 ## Updating an existing deployment
 
