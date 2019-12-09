@@ -1,3 +1,15 @@
+## [1.19.3](https://github.com/codeRIT/hackathon-manager/compare/v1.19.2...v1.19.3) (2019-12-09)
+
+
+### Bug Fixes
+
+* **rollbar:** Enable error reporting to Rollbar ([](https://github.com/codeRIT/hackathon-manager/commit/11d5750))
+
+
+### Documentation
+
+* **dokku:** Add notes for updating an existing deployment ([](https://github.com/codeRIT/hackathon-manager/commit/114ce4c))
+
 ## [1.19.2](https://github.com/codeRIT/hackathon-manager/compare/v1.19.1...v1.19.2) (2019-10-07)
 
 
