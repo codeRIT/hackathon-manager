@@ -138,7 +138,7 @@ GEM
     erubis (2.7.0)
     et-orbi (1.2.1)
       tzinfo
-    excon (0.66.0)
+    excon (0.71.0)
     execjs (2.7.0)
     factory_bot (5.1.1)
       activesupport (>= 4.2.0)
