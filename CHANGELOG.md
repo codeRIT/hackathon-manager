@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/codeRIT/hackathon-manager/compare/v1.20.0...v1.20.1) (2020-01-19)
+
+
+### Bug Fixes
+
+* Correct timeline in today's activity chart ([](https://github.com/codeRIT/hackathon-manager/commit/e83c423))
+
 # [1.20.0](https://github.com/codeRIT/hackathon-manager/compare/v1.19.3...v1.20.0) (2020-01-19)
 
 
