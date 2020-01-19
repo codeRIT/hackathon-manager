@@ -69,6 +69,10 @@
     "HM_DOMAIN_NAME": {
       "description": "Domain name hosting the website (e.g. apply.example.com)",
       "required": true
+    },
+    "TIME_ZONE": {
+      "description": "Time zone (e.g. America/New_York, default is UTC)",
+      "required": false
     }
   },
   "addons": [

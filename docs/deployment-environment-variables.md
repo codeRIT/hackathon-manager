@@ -20,6 +20,7 @@ AWS_REGION="us-east-1"
 ROLLBAR_ACCESS_TOKEN="<server-side rollbar token>"
 SPARKPOST_API_KEY="<sparkpost api key>"
 SPARKPOST_CAMPAIGN_ID="my-hackathon"
+TIME_ZONE="America/New_York"
 ```
 
 _Also see [app.json](https://github.com/codeRIT/hackathon_manager/blob/master/app.json)_
@@ -111,6 +112,18 @@ My MLH provides us authentication & initial application information.
 ```bash
 MLH_KEY=""
 MLH_SECRET=""
+```
+
+### Time Zone
+
+By default, charts & timestamps will be in UTC.
+
+>HackathonManager will crash at startup if the time zone isn't valid.
+>
+>To find your appropriate time zone (e.g. `America/New_York`), see "TZ database name" on [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+```bash
+TIME_ZONE="America/Los_Angeles"
 ```
 
 ### Skylight

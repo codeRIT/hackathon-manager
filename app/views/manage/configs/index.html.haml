@@ -68,6 +68,8 @@
         %hr
         = render 'config_row', name: 'Rollbar Access Token', key: 'ROLLBAR_ACCESS_TOKEN', secret: true, required: false
         %hr
+        = render 'config_row', name: 'Time Zone', key: 'TIME_ZONE', default: 'UTC', required: false
+        %hr
         %p.mb-0
           %b Email Provider
         - if Rails.application.config.action_mailer.delivery_method == :smtp
