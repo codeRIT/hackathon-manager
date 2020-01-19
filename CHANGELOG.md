@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/codeRIT/hackathon-manager/compare/v1.19.3...v1.20.0) (2020-01-19)
+
+
+### Features
+
+* Add TIME_ZONE environment variable ([](https://github.com/codeRIT/hackathon-manager/commit/5332ba5))
+
 ## [1.19.3](https://github.com/codeRIT/hackathon-manager/compare/v1.19.2...v1.19.3) (2019-12-09)
 
 
