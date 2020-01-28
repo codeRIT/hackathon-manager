@@ -1,3 +1,15 @@
+# [1.21.0](https://github.com/codeRIT/hackathon-manager/compare/v1.20.1...v1.21.0) (2020-01-28)
+
+
+### Bug Fixes
+
+* **messages:** Side-by-side preview ([](https://github.com/codeRIT/hackathon-manager/commit/0889f67))
+
+
+### Features
+
+* **messages:** Improve message composing hint for preview ([](https://github.com/codeRIT/hackathon-manager/commit/b19e403))
+
 ## [1.20.1](https://github.com/codeRIT/hackathon-manager/compare/v1.20.0...v1.20.1) (2020-01-19)
 
 
