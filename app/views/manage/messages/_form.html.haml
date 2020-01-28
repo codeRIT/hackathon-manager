@@ -15,9 +15,9 @@
       %br
 
       %h5.mb-3 Body
-      = f.input :body, input_html: { rows: 36, 'data-message-live-preview-base-src' => live_preview_manage_messages_path, style: 'font-size: 14px', 'data-simple-mde' => '1' }, hint: "Supports markdown and HTML", label: false, wrapper: :bootstrap_inline_form
+      = f.input :body, input_html: { rows: 36, 'data-message-live-preview-base-src' => live_preview_manage_messages_path, style: 'font-size: 14px', 'data-simple-mde' => '1' }, hint: "Supports markdown and HTML. Use toolbar to view side-by-side preview.", label: false, wrapper: :bootstrap_inline_form
 
-    .form-actions.mb-3
+    .form-actions.mb-3.mt-3
       = f.button :submit, class: 'btn-primary'
 
 = render 'templating'
