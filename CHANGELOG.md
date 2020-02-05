@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/codeRIT/hackathon-manager/compare/v1.22.0...v1.22.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* **exports:** Ensure enqueue works ([](https://github.com/codeRIT/hackathon-manager/commit/ad2e667))
+
 # [1.22.0](https://github.com/codeRIT/hackathon-manager/compare/v1.21.1...v1.22.0) (2020-02-05)
 
 
