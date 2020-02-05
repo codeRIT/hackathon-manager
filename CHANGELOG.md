@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/codeRIT/hackathon-manager/compare/v1.21.1...v1.22.0) (2020-02-05)
+
+
+### Features
+
+* **exports:** Add ability to generate data exports for sponsors ([#199](https://github.com/codeRIT/hackathon-manager/issues/199)) ([](https://github.com/codeRIT/hackathon-manager/commit/70b1336)), closes [#133](https://github.com/codeRIT/hackathon-manager/issues/133)
+
 ## [1.21.1](https://github.com/codeRIT/hackathon-manager/compare/v1.21.0...v1.21.1) (2020-02-05)
 
 
