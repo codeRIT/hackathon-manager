@@ -29,7 +29,7 @@ class Manage::DataExportsController < Manage::ApplicationController
     @data_export = DataExport.new(data_export_params)
 
     if @data_export.save
-      @data_export.enqueue!
+      @data_export.reload.enqueue!
       respond_to do |format|
         format.html { redirect_to manage_data_exports_path, notice: "Data export was successfully created." }
         format.json { render json: @data_export }
