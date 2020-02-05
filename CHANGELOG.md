@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/codeRIT/hackathon-manager/compare/v1.21.0...v1.21.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* **sidekiq:** Upgrade rack to fix Sidekiq admin page error ([](https://github.com/codeRIT/hackathon-manager/commit/958d908))
+
 # [1.21.0](https://github.com/codeRIT/hackathon-manager/compare/v1.20.1...v1.21.0) (2020-01-28)
 
 
