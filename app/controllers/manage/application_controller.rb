@@ -8,6 +8,10 @@ class Manage::ApplicationController < ApplicationController
     authenticate_user!
   end
 
+  def require_full_admin
+    return redirect_to root_path unless current_user.try(:admin?)
+  end
+
   def require_admin_or_limited_admin
     return redirect_to root_path unless current_user.try(:admin?) || current_user.try(:admin_limited_access?)
   end

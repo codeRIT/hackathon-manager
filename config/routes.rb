@@ -93,5 +93,6 @@ Rails.application.routes.draw do
     end
     resources :trackable_events
     resources :trackable_tags
+    resources :data_exports
   end
 end
