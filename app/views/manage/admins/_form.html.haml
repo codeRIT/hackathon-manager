@@ -12,6 +12,8 @@
     .form-inputs
       = f.input :email, input_html: { "data-validate" => "presence" }, required: true
       = f.input :role, collection: User.roles.to_a.collect{|c| [c[0].titleize, c[0]]}, include_blank: false
+      = f.input :is_active, collection: [['Active', true], ['Inactive', false]], as: :radio_buttons
+      = f.input :receive_weekly_report, collection: [['Yes', true], ['No', false]], as: :radio_buttons
 
     .center
       = f.button :submit, value: ( @user.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'

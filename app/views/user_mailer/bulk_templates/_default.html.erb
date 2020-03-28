@@ -1,0 +1,9 @@
+<%
+  begin
+    parsed_body = @message.parsed_body({ user_id: @user.id }, @use_examples)
+  rescue Mustache::Parser::SyntaxError
+    raise unless @use_examples
+    parsed_body = @message.body
+  end
+%>
+<%= markdown(parsed_body) %>

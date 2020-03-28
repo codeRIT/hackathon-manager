@@ -2,20 +2,11 @@ if defined?(ActionMailer::Preview)
   class MailPreview < ActionMailer::Preview
     def bulk_message_email
       message = Message.first
-      Mailer.bulk_message_email(message, User.first.id)
+      UserMailer.bulk_message_email(message, User.first.id)
     end
 
-    def incomplete_reminder_email
-      Mailer.incomplete_reminder_email(User.without_questionnaire.first.id)
-    end
-
-    def bus_captain_confirmation_email
-      buslist = BusList.first
-      Mailer.bus_captain_confirmation_email(buslist.id, buslist.captains.first.id)
-    end
-
-    def bus_list_update_email
-      Mailer.bus_list_update_email(BusList.first.passengers.first.id)
+    def admin_weekly_report
+      AdminMailer.weekly_report(User.first.id)
     end
   end
 end

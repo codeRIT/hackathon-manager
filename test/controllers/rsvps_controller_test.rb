@@ -1,6 +1,8 @@
-require 'test_helper'
+require "test_helper"
 
 class RsvpsControllerTest < ActionController::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @school = create(:school, name: "Another School")
     @questionnaire = create(:questionnaire, school_id: @school.id)
@@ -86,8 +88,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
   context "while authenticated with an accepted questionnaire" do
     setup do
-      ActionMailer::Base.deliveries = []
-      Sidekiq::Extensions::DelayedMailer.jobs.clear
+      clear_enqueued_jobs
 
       @request.env["devise.mapping"] = Devise.mappings[:admin]
       sign_in @questionnaire.user
@@ -109,7 +110,7 @@ class RsvpsControllerTest < ActionController::TestCase
         context "attempting #{status}" do
           should "include error message" do
             get status
-            assert_match /was an error/, flash[:notice]
+            assert_match /was an error/, flash[:alert]
           end
 
           should "not change acceptance status" do
@@ -118,26 +119,26 @@ class RsvpsControllerTest < ActionController::TestCase
           end
 
           should "include hackathon name in notice" do
-            Rails.configuration.hackathon['name'] = 'Foo Bar'
+            HackathonConfig["name"] = "Foo Bar"
             get status
-            assert_match /Foo Bar Agreement/, flash[:notice]
+            assert_match /Foo Bar Agreement/, flash[:alert]
           end
         end
       end
     end
 
     should "update the questionnaire status to accepted" do
-      create(:message, type: 'automated', trigger: 'questionnaire.rsvp_confirmed')
+      create(:message, type: "automated", trigger: "questionnaire.rsvp_confirmed")
       get :accept
       assert_equal "rsvp_confirmed", @questionnaire.reload.acc_status
-      assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size, "should email confirmation to questionnaire"
+      assert_equal 1, enqueued_jobs.size, "should email confirmation to questionnaire"
       assert_redirected_to rsvp_path
     end
 
     should "update the questionnaire status to denied" do
       get :deny
       assert_equal "rsvp_denied", @questionnaire.reload.acc_status
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size, "no emails should be sent"
+      assert_equal 0, enqueued_jobs.size, "no emails should be sent"
       assert_redirected_to rsvp_path
     end
 
@@ -153,8 +154,8 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_equal "rsvp_confirmed", @questionnaire.reload.acc_status
       assert_equal false, @questionnaire.reload.bus_list_id?
       assert_equal 0, bus_list.passengers.count
-      assert_match /full/, flash[:notice]
-      assert_no_match /still signed up/, flash[:notice]
+      assert_match /full/, flash[:alert]
+      assert_no_match /still signed up/, flash[:alert]
       assert_redirected_to rsvp_path
     end
 
@@ -163,7 +164,7 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_equal 0, bus_list.passengers.count
       patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list.id } }
       assert_equal 1, bus_list.passengers.count
-      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: '' } }
+      patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: "" } }
       assert_equal 0, bus_list.passengers.count
     end
 
@@ -178,10 +179,10 @@ class RsvpsControllerTest < ActionController::TestCase
       # Try to switch busses
       patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list2.id } }
       assert_equal "rsvp_confirmed", @questionnaire.reload.acc_status
-      assert_equal 0, bus_list2.passengers.count, 'passenger should not be assigned to bus that is full'
-      assert_equal 1, bus_list1.passengers.count, 'passenger should stay on original bus'
-      assert_match /full/, flash[:notice]
-      assert_match /still signed up/, flash[:notice]
+      assert_equal 0, bus_list2.passengers.count, "passenger should not be assigned to bus that is full"
+      assert_equal 1, bus_list1.passengers.count, "passenger should stay on original bus"
+      assert_match /full/, flash[:alert]
+      assert_match /still signed up/, flash[:alert]
       assert_redirected_to rsvp_path
     end
 
@@ -189,18 +190,18 @@ class RsvpsControllerTest < ActionController::TestCase
       bus_list = create(:bus_list, capacity: 1)
       # Initial sign up
       patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list.id } }
-      assert_no_match /full/, flash[:notice], 'should not complain about bus being full'
+      assert_no_match /full/, flash[:alert], "should not complain about bus being full"
       # Submit again
       patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list.id } }
-      assert_no_match /full/, flash[:notice], 'should not complain about bus being full'
+      assert_no_match /full/, flash[:alert], "should not complain about bus being full"
     end
 
     should "not send email if updating info after confirming" do
       @questionnaire.update_attribute(:acc_status, "rsvp_confirmed")
-      create(:message, type: 'automated', trigger: 'questionnaire.rsvp_confirmed')
+      create(:message, type: "automated", trigger: "questionnaire.rsvp_confirmed")
       bus_list = create(:bus_list)
       patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed", bus_list_id: bus_list.id } }
-      assert_equal 0, Sidekiq::Extensions::DelayedMailer.jobs.size, "no emails should be sent"
+      assert_equal 0, enqueued_jobs.size, "no emails should be sent"
     end
 
     should "allow riding a bus list" do
@@ -222,7 +223,7 @@ class RsvpsControllerTest < ActionController::TestCase
       @questionnaire.update_attribute(:phone, "1111111111")
       @questionnaire.update_attribute(:agreement_accepted, false)
       patch :update, params: { questionnaire: { phone: "1234567890" } }
-      assert_not_nil flash[:notice]
+      assert_not_nil flash[:alert]
       assert_equal "1111111111", @questionnaire.reload.phone
       assert_redirected_to rsvp_path
     end
@@ -231,7 +232,7 @@ class RsvpsControllerTest < ActionController::TestCase
       @questionnaire.update_attribute(:phone, "1111111111")
       @questionnaire.update_attribute(:first_name, "")
       patch :update, params: { questionnaire: { phone: "1234567890" } }
-      assert_not_nil flash[:notice]
+      assert_not_nil flash[:alert]
       assert_equal "1111111111", @questionnaire.reload.phone
       assert_redirected_to rsvp_path
     end
@@ -239,7 +240,7 @@ class RsvpsControllerTest < ActionController::TestCase
     should "not allow forbidden status update to questionnaire" do
       patch :update, params: { questionnaire: { acc_status: "pending" } }
       assert_equal "accepted", @questionnaire.reload.acc_status
-      assert_match /select a RSVP status/, flash[:notice]
+      assert_match /select a RSVP status/, flash[:alert]
       assert_redirected_to rsvp_path
     end
   end

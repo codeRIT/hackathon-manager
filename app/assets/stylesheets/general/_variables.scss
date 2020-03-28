@@ -1,0 +1,110 @@
+/*
+
+HackathonManager variables
+
+All variables defined below end up being defined as CSS variables:
+:root {
+  --my-var: ...;
+  ...
+}
+
+Which enables them to be overridden for theming.
+
+It is nessesary to define the variables in sass map instead of :root for compatibility reasons.
+See css4.scss for more details.
+
+*/
+
+$variables: (
+  /*
+   * Colors
+   ***************************************************************************/
+    --black: #231f20,
+  --grey: #6d6e71,
+  --blue: #3413ac,
+  --white: darken(#fff, 1%),
+  --white-grey: darken(#fff, 6%),
+  --red: #fc401c,
+  /*
+   * Standardized colors
+   ***************************************************************************/
+    --primary: #f58625,
+  --primary-light: lighten(#f58625, 12%),
+  /*
+   * General colors
+   ***************************************************************************/
+    --white-pure: #ffffff,
+  --grey-light: #bbbbbb,
+  --gray-med-light: lighten(#888888, 20%),
+  --grey-med: #888888,
+  --grey-dark: #343434,
+  --offwhite: #fcf7f2,
+  /*
+   * Fonts
+   ***************************************************************************/
+    --font-body-family: unquote('"Open Sans", sans-serif'),
+  --font-headlines-family: unquote('"Open Sans", sans-serif'),
+  --font-bold: 600,
+  --font-reg: 400,
+  --font-light: 300,
+  /*
+   * Headings
+   ***************************************************************************/
+    --section-title--text: #5d5c77,
+  --section-title--text--emphasized: var(--primary),
+  /*
+   * Links
+   ***************************************************************************/
+    --link--text: var(--primary),
+  --link--text--hover: var(--primary-light),
+  /*
+   * Buttons
+   ***************************************************************************/
+    --button--background: var(--primary),
+  --button--border: var(--primary),
+  --button--text: var(--white-pure),
+  --button--background--hover: var(--primary-light),
+  --button--border--hover: var(--primary-light),
+  --button--text--hover: var(--white-pure),
+  /*
+   * Forms
+   ***************************************************************************/
+    --input--border-color: #d1d3d4,
+  --input--background: var(--white-pure),
+  --input--text: var(--grey-dark),
+  --input--text--placeholder: #d1d3d4,
+  --input--hint: darken(#d1d3d4, 10%),
+  --input--error--background: var(--red),
+  --input--error--text: var(--white-pure),
+  --input--required-star: #bcbec0,
+  --input--border-color--focus: var(--primary),
+  --input--background--focus: var(--input--background),
+  --input--text--focus: var(--input--text),
+  /*
+   * Alerts
+   ***************************************************************************/
+    --alert--background: var(--white-pure),
+  --alert--border: var(--grey-dark),
+  --alert--text: var(--grey-dark),
+  --alert--background--error: var(--red),
+  --alert--border--error: var(--red),
+  --alert--text--error: var(--white-pure),
+  /*
+   * Flashes
+   ***************************************************************************/
+    --flashes--background: hsl(51, 87%, 94%),
+  --flashes--text: hsl(40, 68%, 20%),
+  --flashes--error--background: hsl(11, 87%, 94%),
+  --flashes--error--text: hsl(0, 68%, 20%),
+  /*
+   * Account header
+   ***************************************************************************/
+    --account-header--background: var(--grey-dark),
+  /*
+   * Account navigation
+   ***************************************************************************/
+    --account-nav--text: #888,
+  --account-nav--border-color: var(--grey-light),
+  --account-nav--text--active: var(--grey-dark),
+  --account-nav--border-color--active: var(--primary)
+);

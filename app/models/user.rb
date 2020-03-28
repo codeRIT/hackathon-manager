@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  audited only: [:email, :role, :is_active, :receive_weekly_report]
+
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
          :doorkeeper, :omniauthable, omniauth_providers: [:mlh]
@@ -11,6 +13,8 @@ class User < ApplicationRecord
                            foreign_key: :resource_owner_id,
                            dependent: :delete_all # or :destroy if you need callbacks
 
+  validates_uniqueness_of :email
+
   after_create :queue_reminder_email
 
   enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
@@ -21,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    true
+    super && is_active
   end
 
   def send_devise_notification(notification, *args)
@@ -30,12 +34,17 @@ class User < ApplicationRecord
 
   def queue_reminder_email
     return if reminder_sent_at
-    Mailer.delay_for(1.day).incomplete_reminder_email(id)
+    UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
     update_attribute(:reminder_sent_at, Time.now)
   end
 
   def email=(value)
     super value.try(:downcase)
+  end
+
+  def safe_receive_weekly_report
+    return false unless is_active
+    receive_weekly_report
   end
 
   def first_name
@@ -49,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    return "" if questionnaire.blank?
+    return email if questionnaire.blank?
     questionnaire.full_name
   end
 
@@ -57,9 +66,9 @@ class User < ApplicationRecord
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)
     matching_provider.or(matching_email).first_or_create do |user|
-      user.uid               = auth.uid
-      user.email             = auth.info.email
-      user.password          = Devise.friendly_token[0, 20]
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 

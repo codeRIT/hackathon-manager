@@ -2,6 +2,8 @@ require 'test_helper'
 require 'minitest/mock'
 
 class QuestionnairesControllerTest < ActionController::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @school = create(:school, name: "Another School")
     @questionnaire = create(:questionnaire, school_id: @school.id)
@@ -49,7 +51,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
       end
 
       assert_redirected_to questionnaires_path
-      if Rails.configuration.hackathon['auto_late_waitlist']
+      if HackathonConfig['auto_late_waitlist']
         assert_equal "late_waitlist", assigns(:questionnaire).acc_status
       else
         assert_equal "pending", assigns(:questionnaire).acc_status
@@ -90,21 +92,21 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
         should "send confirmation email to questionnaire" do
           message = create(:message, type: 'automated', trigger: "questionnaire.pending")
-          assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+          assert_difference 'enqueued_jobs.size', 1 do
             assert_difference 'Questionnaire.count', 1 do
               post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
             end
           end
           questionnaire = Questionnaire.last
-          job = Sidekiq::Extensions::DelayedMailer.jobs.last
-          args = job["args"][0].split("\n")
-          job_name_arg = args[2]
+          job = enqueued_jobs.last
+          args = job[:args]
+          job_name_arg = args[1]
           message_id_arg = args[3]
           user_id_arg = args[4]
 
-          assert_equal "- :bulk_message_email", job_name_arg, "expected correct job name in job args"
-          assert_equal "- - #{message.id}", message_id_arg, "expected correct message ID in job args"
-          assert_equal "  - #{questionnaire.user_id}", user_id_arg, "expected correct user ID in job args"
+          assert_equal "bulk_message_email", job_name_arg, "expected correct job name in job args"
+          assert_equal message.id, message_id_arg, "expected correct message ID in job args"
+          assert_equal questionnaire.user_id, user_id_arg, "expected correct user ID in job args"
         end
       end
     end

@@ -1,0 +1,6 @@
+<%
+  context = { message_body: yield }
+  message_variables = MessageVariables.new(context)
+  message_variables.template = MessageTemplate.instance.html
+%>
+<%= message_variables.render.html_safe %>

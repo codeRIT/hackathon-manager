@@ -30,6 +30,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  devise:
+    failure:
+      unauthenticated: "Please sign in or sign up to continue."
+    registrations:
+      user:
+        signed_up: Welcome! Your account has been created.
   simple_form:
     hints:
       bus_list:
@@ -40,10 +46,36 @@ en:
         notes: Notes are shared with applicants. Supports Markdown and HTML.
       user:
         role: Limited access prevents the admin from adding, modifying, or deleting any records; modifications through the check-in process are allowed. Event tracking limits to only event tracking.
+        is_active: Deactivating a user will prevent them from logging in. Their access will be immediately revoked from the admin and application pages.
+        receive_weekly_report: A weekly email report on admissions, bus lists, and messages. Only sent when there are weekly updates up until 7 days past the event. Disabled for inactive admins.
       message:
         type: Bulk emails are sent once, manually. Automated emails are sent upon a desired trigger/event.
         name: A friendly name to recognize this email. Applicants won't see this.
         trigger: Sent automatically when a new or updated applicant matches this criteria. Does not send to anyone already matching this criteria.
+      school:
+        is_home: The "home" school is separated from all other schools on dashboard metrics.
+      hackathon_config:
+        registration_is_open: Specify that registration is open. This does <strong>not</strong> block registration; it only changes messaging around it.
+        event_is_over: Specify that the event is over
+        last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
+        event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
+        auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
+        disable_account_registration: Prevent applicants from applying
+
+        name: Your hackathon's name
+        logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)
+        favicon_asset: Optional favicon asset (should be a full https:// URL to a .ico file)
+        email_banner_asset: Optional banner asset to show at top of emails (should be a full https:// URL to a .jpg or .png file)
+        agreement_pdf_asset: Your hackathon's agreement (e.g. school activity release form, should be a full https:// URL to a web page or .pdf file)
+        email_from: '"From" email address for all emails sent through the website (e.g. BrickHack &lt;hello@example.com&gt;)'
+        default_page_title: Default &lt;title&gt; for all pages (e.g. HackFoo - Jan 1-2, 2017)
+
+        disabled_fields: Optional list of fields to turn off (e.g. why_attend)
+        disclaimer_message: Optional message that appears before signing up & applying. Supports markdown.
+        thanks_for_applying_message: Optional message that appears after completing an application. Supports markdown.
+        thanks_for_rsvp_message: Optional message that appears after RSVP'ing as attending. Supports markdown.
+        bus_captain_notes: Optional message that appears on the bus captain's bus list page. Supports markdown.
+        custom_css: CSS to inject into the &lt;head&gt; of every public page
     placeholders:
       bus_list:
         notes: |
@@ -75,3 +107,15 @@ en:
         vcs_url: https://github.com/coderit
       user:
         email: joe@example.com
+    labels:
+      school:
+        is_home: Home school
+      user:
+        is_active: Login access
+      hackathon_config:
+        name: Hackathon Name
+        email_from: From Email
+        agreement_pdf_asset: Agreement PDF Asset
+        custom_css: Custom CSS
+        homepage_url: Homepage URL
+        thanks_for_rsvp_message: Thanks For RSVP Message

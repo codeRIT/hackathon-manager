@@ -1,8 +1,11 @@
-require 'test_helper'
+require "test_helper"
 
 class Manage::QuestionnairesControllerTest < ActionController::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @questionnaire = create(:questionnaire)
+    stub_request(:get, /api.sparkpost.com.*/).to_return(status: 200, body: "", headers: {})
   end
 
   context "while not authenticated" do
@@ -265,8 +268,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "create questionnaire and user" do
-      assert_difference('User.count', 1) do
-        assert_difference('Questionnaire.count', 1) do
+      assert_difference("User.count", 1) do
+        assert_difference("Questionnaire.count", 1) do
           post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "test@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
         end
       end
@@ -278,8 +281,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     should "not create a duplicate questionnaire for a user" do
       user = create(:user, email: "existing@example.com")
       create(:questionnaire, user_id: user.id)
-      assert_difference('User.count', 0) do
-        assert_difference('Questionnaire.count', 0) do
+      assert_difference("User.count", 0) do
+        assert_difference("Questionnaire.count", 0) do
           post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "existing@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
         end
       end
@@ -288,8 +291,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "create a questionnaire with existing user" do
       create(:user, email: "existing@example.com")
-      assert_difference('User.count', 0) do
-        assert_difference('Questionnaire.count', 1) do
+      assert_difference("User.count", 0) do
+        assert_difference("Questionnaire.count", 1) do
           post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "existing@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
         end
       end
@@ -298,8 +301,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "create school if doesn't exist in questionnaire" do
-      assert_difference('Questionnaire.count', 1) do
-        assert_difference('School.count', 1) do
+      assert_difference("Questionnaire.count", 1) do
+        assert_difference("School.count", 1) do
           post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: "My New School", email: "taken@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
         end
       end
@@ -325,8 +328,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "destroy questionnaire" do
-      assert_difference('Questionnaire.count', -1) do
-        assert_difference('User.count', -1) do
+      assert_difference("Questionnaire.count", -1) do
+        assert_difference("User.count", -1) do
           delete :destroy, params: { id: @questionnaire }
         end
       end
@@ -374,7 +377,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal false, @questionnaire.can_share_info
       assert_equal "", @questionnaire.phone
       assert_equal "old_email@example.com", @questionnaire.email
-      assert_match /No check-in action provided/, flash[:notice]
+      assert_match /No check-in action provided/, flash[:alert]
       assert_response :redirect
       assert_redirected_to manage_questionnaire_path(@questionnaire)
     end
@@ -422,14 +425,14 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "fail manage_questionnaires#bulk_apply when missing action" do
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+      assert_difference "enqueued_jobs.size", 0 do
         patch :bulk_apply, params: { bulk_ids: [@questionnaire.id] }
       end
       assert_response 400
     end
 
     should "fail manage_questionnaires#bulk_apply when missing ids" do
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+      assert_difference "enqueued_jobs.size", 0 do
         patch :bulk_apply, params: { id: @questionnaire }
       end
       assert_response 400
@@ -437,15 +440,15 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
       should "send notification emails appropriately for #{status} bulk_apply" do
-        create(:message, type: 'automated', trigger: "questionnaire.#{status}")
-        assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        create(:message, type: "automated", trigger: "questionnaire.#{status}")
+        assert_difference "enqueued_jobs.size", 1 do
           patch :bulk_apply, params: { bulk_action: status, bulk_ids: [@questionnaire.id] }
         end
       end
     end
 
     should "fail manage_questionnaires#update_acc_status when missing status" do
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
+      assert_difference "enqueued_jobs.size", 0 do
         patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "" } }
       end
       assert_response :redirect
@@ -453,8 +456,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
       should "send notification emails appropriately for #{status} update_acc_status" do
-        create(:message, type: 'automated', trigger: "questionnaire.#{status}")
-        assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+        create(:message, type: "automated", trigger: "questionnaire.#{status}")
+        assert_difference "enqueued_jobs.size", 1 do
           patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: status } }
         end
       end

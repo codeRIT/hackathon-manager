@@ -1,6 +1,6 @@
 :ruby
   begin
-    recipient_count = pluralize(BulkMessageWorker.build_recipients(@message.recipients).count, "recipient")
+    recipient_count = pluralize(BulkMessageJob.build_recipients(@message.recipients).count, "recipient")
   rescue => recipient_error
   end
 
@@ -25,8 +25,6 @@
       %dd.col-md-9= @message.name
       %dt.col-md-3 Subject
       %dd.col-md-9= @message.subject
-      %dt.col-md-3 Template
-      %dd.col-md-9= @message.template.titleize
   .col-lg-6
     - if @message.bulk?
       %p.mb-1
@@ -61,20 +59,28 @@
 
   %iframe.email-preview{src: preview_manage_message_path(@message)}
 
+.row.mt-3
+  .col-lg-6
+    .card.mb-3
+      .card-body.pb-1
+        %h5.card-title Change history
+        = render "model_history", model: @message
+
   - if @message.bulk?
-    .card.mt-3.mb-3
-      .card-body
-        %h5.card-title Bulk delivery details
-        %p.card-text
-          %b
-            Status:
-            = @message.status.titleize
-        %p.card-text
-          %b Queued At:
-          = @message.queued_at || "(n/a)"
-        %p.card-text
-          %b Started At:
-          = @message.started_at || "(n/a)"
-        %p.card-text
-          %b Delivered At:
-          = @message.delivered_at || "(n/a)"
+    .col-lg-6
+      .card.mb-3
+        .card-body
+          %h5.card-title Bulk delivery details
+          %p.card-text
+            %b
+              Status:
+              = @message.status.titleize
+          %p.card-text
+            %b Queued At:
+            = @message.queued_at || "(n/a)"
+          %p.card-text
+            %b Started At:
+            = @message.started_at || "(n/a)"
+          %p.card-text
+            %b Delivered At:
+            = @message.delivered_at || "(n/a)"

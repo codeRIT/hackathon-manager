@@ -1,9 +1,10 @@
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  .form-actions
-    .center
-      = btn_link_to "Continue with My MLH &raquo;".html_safe, user_mlh_omniauth_authorize_path
-      %p
-        %em or create an account:
+  - if ENV["MLH_KEY"].present?
+    .form-actions
+      .center
+        = render 'my_mlh_cta'
+        %p
+          %em or continue manually:
   .form-inputs
     = f.input :email, required: true, autofocus: true
     = f.input :password, required: true

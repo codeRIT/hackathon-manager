@@ -1,7 +1,11 @@
-require 'test_helper'
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   should strip_attribute :email
+
+  should validate_uniqueness_of :email
 
   should validate_presence_of :email
   should validate_presence_of :password
@@ -44,22 +48,21 @@ class UserTest < ActiveSupport::TestCase
       assert_equal "Alpha Beta", questionnaire.user.full_name
     end
 
-    should "return blank when no questionnaire exists" do
-      user = create(:user)
-      assert_equal "", user.full_name
+    should "return email when no questionnaire exists" do
+      user = create(:user, email: "foo@example.com")
+      assert_equal "foo@example.com", user.full_name
     end
   end
 
   context "queue_reminder_email" do
     setup do
-      ActionMailer::Base.deliveries = []
-      Sidekiq::Extensions::DelayedMailer.jobs.clear
+      clear_enqueued_jobs
     end
 
     should "queue an email to be sent out" do
       user = create(:user)
       user.queue_reminder_email
-      assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_equal 1, enqueued_jobs.size
     end
 
     should "only queue email once" do
@@ -67,7 +70,7 @@ class UserTest < ActiveSupport::TestCase
       user.queue_reminder_email
       user.queue_reminder_email
       user.queue_reminder_email
-      assert_equal 1, Sidekiq::Extensions::DelayedMailer.jobs.size
+      assert_equal 1, enqueued_jobs.size
     end
   end
 
@@ -97,8 +100,17 @@ class UserTest < ActiveSupport::TestCase
   end
 
   should "queue reminder email" do
-    assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+    assert_difference "enqueued_jobs.size", 1 do
       create(:user)
+    end
+  end
+
+  context "safe_receive_weekly_report" do
+    should "return false if user is inactive" do
+      user = build(:user, is_active: true, receive_weekly_report: true)
+      assert_equal true, user.safe_receive_weekly_report
+      user.is_active = false
+      assert_equal false, user.safe_receive_weekly_report
     end
   end
 end

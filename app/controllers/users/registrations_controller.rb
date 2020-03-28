@@ -2,12 +2,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  layout 'hackathon_manager/application'
-
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if HackathonConfig['disable_account_registration']
+      flash[:alert] = "Registration has closed"
+      redirect_to root_path
+    else
+      super
+    end
+  end
 
   # POST /resource
   # def create

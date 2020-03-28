@@ -6,8 +6,8 @@
       = f.input :type, as: :select, collection: Message::POSSIBLE_TYPES.map { |x| [x.titleize, x] }, include_blank: false
       = f.input :trigger, as: :select, collection: Message::POSSIBLE_TRIGGERS.invert, include_blank: "(disabled)"
       = f.input :name
-      = f.input :subject, hint: "All emails are from <pre class=\"d-inline\">#{html_escape(Rails.configuration.hackathon['email_from'])}</pre>".html_safe
-      = f.input :template, as: :select, collection: Message::POSSIBLE_TEMPLATES.map { |x| [x.titleize, x] }, include_blank: false
+      = f.input :subject, hint: "All emails are from <pre class=\"d-inline\">#{html_escape(HackathonConfig['email_from'])}</pre>".html_safe
+      = f.input :template, as: :hidden, value: @message.template || 'default'
       - if @message.status == "drafted"
         = f.input :recipients, as: :select, collection: @message.possible_recipients, input_html: { class: "selectize", multiple: true,  }, placeholder: "Type to search by school or type..."
       - else
@@ -15,7 +15,11 @@
       %br
 
       %h5.mb-3 Body
-      = f.input :body, input_html: { rows: 36, 'data-message-live-preview-base-src' => live_preview_manage_messages_path, style: 'font-size: 14px', 'data-simple-mde' => '1' }, hint: "Supports markdown and HTML", label: false, wrapper: :bootstrap_inline_form
+      = f.input :body, input_html: { rows: 36, 'data-message-live-preview-base-src' => live_preview_manage_messages_path, style: 'font-size: 14px', 'data-simple-mde' => '1' }, hint: "Supports markdown and HTML. Use toolbar to view side-by-side preview.", label: false, wrapper: :bootstrap_inline_form
 
-    .form-actions.mb-3
+    .form-actions.mb-3.mt-3
       = f.button :submit, class: 'btn-primary'
+
+= render 'templating'
+
+.mb-4

@@ -8,8 +8,9 @@ FactoryBot.define do
       "University of Rails #{n}"
     end
     address { "123 Fake Street" }
-    city    { "Rochester" }
-    state   { "NY" }
+    city { "Rochester" }
+    state { "NY" }
     questionnaire_count { 0 }
+    is_home { false }
   end
 end

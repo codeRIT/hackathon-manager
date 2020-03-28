@@ -5,7 +5,7 @@
     = render 'top_alerts'
 
     .card.mb-3
-      .card-header Personal Information
+      .card-header Personal information
       .card-body
         .row
           %dt.col-md-4 First name
@@ -77,7 +77,7 @@
       .card-body
         .row
           - if HackathonManager.field_enabled?(:why_attend)
-            %dt.col-md-4 Why #{Rails.configuration.hackathon['name']}?
+            %dt.col-md-4 Why #{HackathonConfig['name']}?
             %dd.col-md-8
               = @questionnaire.why_attend.presence || not_provided
           %dt.col-md-4 Experience
@@ -91,7 +91,7 @@
             = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : not_provided
           %dt.col-md-4 Resume
           %dd.col-md-8
-            = @questionnaire.resume? ? link_to("Download &raquo;".html_safe, @questionnaire.resume.url) : not_provided
+            = @questionnaire.resume.attached? ? link_to("Download &raquo;".html_safe, @questionnaire.resume) : not_provided
 
     .card.mb-3
       .card-header Education

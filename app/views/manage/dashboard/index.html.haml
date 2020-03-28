@@ -5,9 +5,9 @@
 - grey = "#A6A6A6"
 - colors = { accepted: blue, rsvp_confirmed: green, rsvp_denied: red, pending: "#F98728", denied: "#666", waitlist: "#059", late_waitlist: "#057" }
 
-= javascript_include_tag "hackathon_manager/vendor/d3.v3.min.js"
-= javascript_include_tag "hackathon_manager/vendor/queue.v1.min.js"
-= javascript_include_tag "hackathon_manager/vendor/topojson.v1.min.js"
+= javascript_include_tag "vendor/d3.v3.min.js"
+= javascript_include_tag "vendor/queue.v1.min.js"
+= javascript_include_tag "vendor/topojson.v1.min.js"
 
 = render "layouts/manage/page_title", title: "Dashboard"
 
@@ -22,16 +22,25 @@
   .col-7
     %h5.dashboard-container-title  Today's Activity
     = area_chart todays_activity_data_manage_dashboard_index_path, colors: [blue, green, red, grey]
-  .col
+  .col-5
     %h5.dashboard-container-title Today's Stats
     = pie_chart todays_stats_data_manage_dashboard_index_path, colors: [blue, green, red, grey]
+
+- if Questionnaire.where('checked_in_at > 0').any? || Questionnaire.where('boarded_bus_at > 0').any?
+  .row
+    .col
+      %h5.dashboard-container-title Check-in activity
+      .graph-overlay.double-metrics
+        %h3= Questionnaire.where('checked_in_at > 0').count
+        %p total checked in
+        %h3= Questionnaire.where('boarded_bus_at > 0').count
+        %p total boarded bus
+      = area_chart checkin_activity_data_manage_dashboard_index_path, colors: [blue, grey], library: { legend: { enabled: false } }
 
 .row
   .col
     %h5.dashboard-container-title Confirmation Activity
-    .graph-overlay.double-metrics
-      %h3= Questionnaire.where("checked_in_at != 0").count
-      %p total checked in
+    .graph-overlay
       %h3= Questionnaire.where(acc_status: "rsvp_confirmed").count
       %p total confirmed
     = area_chart confirmation_activity_data_manage_dashboard_index_path, colors: [green, red], library: { legend: { enabled: false } }

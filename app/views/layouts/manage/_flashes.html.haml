@@ -1,3 +1,8 @@
+- if flash[:alert].present?
+  .alert.alert-danger.mt-3
+    %span.fa.fa-exclamation-triangle.icon-space-r-half
+    = flash[:alert].html_safe
+
 - if flash[:notice].present?
   .alert.alert-info.mt-3
     %span.fa.fa-info-circle.icon-space-r-half

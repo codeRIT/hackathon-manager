@@ -1,0 +1,50 @@
+%h1 Your Weekly Report
+
+%p
+  For the week of
+  %strong
+    = @period_start.strftime("%A, %B %-d")
+    &ndash;
+    = @period_end.strftime("%A, %B %-d")
+
+%h2 Admissions
+
+- if @new_admissions_metrics
+  %p
+    📥&nbsp;
+    %strong= @applications[:new]
+    new applications (#{@applications[:total]} total)
+
+  %p
+    ✅&nbsp;
+    %strong= @rsvp_confirmed[:new]
+    new RSVP confirmations (#{@rsvp_confirmed[:total]} total)
+
+  %p
+    ❌&nbsp;
+    %strong= @rsvp_denied[:new]
+    new RSVP denials (#{@rsvp_denied[:total]} total)
+- else
+  %p
+    %em No change from last week
+
+%h2 Transportation
+
+- @bus_metrics.each do |bus_metric|
+  %p
+    %u= bus_metric[:name]
+    %br
+    🚌&nbsp;
+    %strong= bus_metric[:total]
+    total passengers
+
+%h2 Communication
+
+- if @new_communication_metrics
+  %p
+    ✉️&nbsp;
+    %strong= @messages_sent
+    new bulk emails sent out
+- else
+  %p
+    %em No new bulk emails sent

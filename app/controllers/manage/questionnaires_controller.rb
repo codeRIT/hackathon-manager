@@ -1,6 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
+  before_action :ensure_registration_is_open, only: [:new, :create]
   before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events]
 
   respond_to :html, :json
@@ -10,7 +11,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def datatable
-    render json: QuestionnaireDatatable.new(view_context)
+    render json: QuestionnaireDatatable.new(params, view_context: view_context)
   end
 
   def show
@@ -29,19 +30,20 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     create_params = questionnaire_params
     email = create_params.delete(:email)
     create_params = convert_school_name_to_id(create_params)
+    create_params = convert_boarded_bus_param(create_params)
     @questionnaire = ::Questionnaire.new(create_params)
+    users = User.where(email: email)
+    user = users.count == 1 ? users.first : User.new(email: email, password: Devise.friendly_token.first(10))
+    @questionnaire.user = user
     if @questionnaire.valid?
-      users = User.where(email: email)
-      user = users.count == 1 ? users.first : User.new(email: email, password: Devise.friendly_token.first(10))
       if user.save
-        @questionnaire.user = user
         @questionnaire.save
       else
-        flash[:notice] = user.errors.full_messages.join(", ")
+        flash[:alert] = user.errors.full_messages.join(", ")
         if user.errors.include?(:email)
           @questionnaire.errors.add(:email, user.errors[:email].join(", "))
         end
-        return render 'new'
+        return render "new"
       end
     end
     respond_with(:manage, @questionnaire)
@@ -52,6 +54,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     email = update_params.delete(:email)
     @questionnaire.user.update_attributes(email: email) if email.present?
     update_params = convert_school_name_to_id(update_params)
+    update_params = convert_boarded_bus_param(update_params, @questionnaire)
     @questionnaire.update_attributes(update_params)
     respond_with(:manage, @questionnaire)
   end
@@ -68,7 +71,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
         @questionnaire.user.update_attributes(email: email)
       end
       unless @questionnaire.valid?
-        flash[:notice] = @questionnaire.errors.full_messages.join(", ")
+        flash[:alert] = @questionnaire.errors.full_messages.join(", ")
         redirect_to show_redirect_path
         return
       end
@@ -80,7 +83,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
       flash[:notice] = "#{@questionnaire.full_name} no longer checked in."
     else
-      flash[:notice] = "No check-in action provided!"
+      flash[:alert] = "No check-in action provided!"
       redirect_to show_redirect_path
       return
     end
@@ -104,7 +107,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   def update_acc_status
     new_status = params[:questionnaire][:acc_status]
     if new_status.blank?
-      flash[:notice] = "No status provided"
+      flash[:alert] = "No status provided"
       redirect_to(manage_questionnaire_path(@questionnaire))
       return
     end
@@ -116,7 +119,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     if @questionnaire.save(validate: false)
       flash[:notice] = "Updated acceptance status to \"#{Questionnaire::POSSIBLE_ACC_STATUS[new_status]}\""
     else
-      flash[:notice] = "Failed to update acceptance status"
+      flash[:alert] = "Failed to update acceptance status"
     end
 
     redirect_to manage_questionnaire_path(@questionnaire)
@@ -153,11 +156,25 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       :phone, :can_share_info, :code_of_conduct_accepted,
       :travel_not_from_school, :travel_location, :data_sharing_accepted,
       :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
-      :bus_list_id, :is_bus_captain
+      :bus_list_id, :is_bus_captain, :boarded_bus
     )
+  end
+
+  def convert_boarded_bus_param(values, questionnaire = nil)
+    boarded_bus = values.delete(:boarded_bus)
+    current_value = questionnaire&.boarded_bus_at
+    values[:boarded_bus_at] = boarded_bus == "1" ? (current_value || Time.now) : nil
+    values
   end
 
   def set_questionnaire
     @questionnaire = ::Questionnaire.find(params[:id])
+  end
+
+  def ensure_registration_is_open
+    if HackathonConfig['disable_account_registration']
+      flash[:alert] = "Registration has closed"
+      redirect_to root_path
+    end
   end
 end

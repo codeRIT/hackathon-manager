@@ -1,6 +1,7 @@
 class Manage::MessagesController < Manage::ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy, :deliver, :preview, :duplicate]
   before_action :check_message_access, only: [:edit, :update, :destroy]
+  before_action :limit_template_access_to_admins, only: [:template, :template_preview, :template_update, :template_replace_with_default]
 
   respond_to :html, :json
 
@@ -9,7 +10,7 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def datatable
-    render json: BulkMessageDatatable.new(view_context)
+    render json: BulkMessageDatatable.new(params, view_context: view_context)
   end
 
   def show
@@ -44,28 +45,28 @@ class Manage::MessagesController < Manage::ApplicationController
 
   def deliver
     if @message.automated?
-      flash[:notice] = "Automated messages cannot be manually delivered. Only bulk messages can."
+      flash[:alert] = "Automated messages cannot be manually delivered. Only bulk messages can."
       return redirect_to manage_message_path(@message)
     end
     if @message.status != "drafted"
-      flash[:notice] = "Message cannot be re-delivered"
+      flash[:alert] = "Message cannot be re-delivered"
       return redirect_to manage_messages_path
     end
     @message.update_attribute(:queued_at, Time.now)
-    BulkMessageWorker.perform_async(@message.id)
+    BulkMessageJob.perform_later(@message)
     flash[:notice] = "Message queued for delivery"
     redirect_to manage_message_path(@message)
   end
 
   def preview
-    email = Mailer.bulk_message_email(@message.id, current_user.id)
+    email = UserMailer.bulk_message_email(@message.id, current_user.id, nil, true)
     render html: email.body.raw_source.html_safe
   end
 
   def live_preview
-    body = params[:body] || ''
+    body = params[:body] || ""
     message = Message.new(body: body)
-    email = Mailer.bulk_message_email(nil, current_user.id, message)
+    email = UserMailer.bulk_message_email(nil, current_user.id, message, true)
     render html: email.body.raw_source.html_safe
   end
 
@@ -75,17 +76,44 @@ class Manage::MessagesController < Manage::ApplicationController
       delivered_at: nil,
       started_at: nil,
       queued_at: nil,
-      name: "Copy of #{@message.name}"
+      name: "Copy of #{@message.name}",
     )
     new_message.save
     redirect_to edit_manage_message_path(new_message.reload)
   end
 
+  def template
+  end
+
+  def template_preview
+    body = File.read("app/views/manage/messages/_template_example.html.md")
+    message = Message.new(body: body)
+    email = UserMailer.bulk_message_email(nil, current_user.id, message, true)
+    render html: email.body.raw_source.html_safe
+  end
+
+  def template_update
+    message_template = MessageTemplate.uncached_instance
+    message_template_params = params.require(:message_template).permit(:html)
+    message_template.update_attributes(message_template_params)
+    redirect_to template_manage_messages_path
+  end
+
+  def template_replace_with_default
+    MessageTemplate.replace_with_default
+    redirect_to template_manage_messages_path
+  end
+
   private
+
+  def limit_template_access_to_admins
+    # From Manage::ApplicationController
+    limit_write_access_to_admins
+  end
 
   def message_params
     params.require(:message).permit(
-      :type, :name, :subject, :template, :body, :trigger, recipients: []
+      :type, :name, :subject, :template, :body, :trigger, recipients: [],
     )
   end
 
@@ -96,7 +124,7 @@ class Manage::MessagesController < Manage::ApplicationController
   def check_message_access
     return if @message.can_edit?
 
-    flash[:notice] = "Message can no longer be modified"
+    flash[:alert] = "Message can no longer be modified"
     redirect_to manage_message_path(@message)
   end
 end

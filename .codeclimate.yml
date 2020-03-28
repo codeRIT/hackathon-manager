@@ -2,16 +2,31 @@ version: "2"
 plugins:
   rubocop:
     enabled: true
+    channel: rubocop-0-67
   csslint:
     enabled: true
   duplication:
     enabled: true
     config:
       languages:
-      - ruby
+        - ruby
         #mass_threshold: 30
-      - javascript
+        - javascript
 exclude_patterns:
-- "**/*.min.*"
-- test/**/*
-- "**/vendor/**/*"
+  # Custom patterns:
+  - "**/*.min.*"
+  - public/**/*
+  # CodeClimate defaults:
+  - config/
+  - db/
+  - dist/
+  - features/
+  - "**/node_modules/"
+  - script/
+  - "**/spec/"
+  - "**/test/"
+  - "**/tests/"
+  - Tests/
+  - "**/vendor/"
+  - "**/*_test.go"
+  - "**/*.d.ts"

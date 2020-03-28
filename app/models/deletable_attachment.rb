@@ -2,15 +2,14 @@
 module DeletableAttachment
   extend ActiveSupport::Concern
 
-  included do
-    attachment_definitions.keys.each do |name|
+  class_methods do
+    def deletable_attachment(name, dependent: :purge_later)
       attr_accessor :"delete_#{name}"
 
-      before_validation { send(name).destroy if send("delete_#{name}") == '1' }
+      before_validation { send(name)&.purge if send("delete_#{name}") == '1' }
 
       define_method :"delete_#{name}=" do |value|
         instance_variable_set :"@delete_#{name}", value
-        send("#{name}_file_name_will_change!")
       end
     end
   end

@@ -4,8 +4,6 @@ class QuestionnairesController < ApplicationController
   before_action :logged_in
   before_action :find_questionnaire, only: [:show, :update, :edit, :destroy]
 
-  layout 'hackathon_manager/application'
-
   def logged_in
     authenticate_user!
   end
@@ -139,7 +137,7 @@ class QuestionnairesController < ApplicationController
   end
 
   def default_acc_status
-    return "late_waitlist" if Rails.configuration.hackathon['auto_late_waitlist']
+    return "late_waitlist" if HackathonConfig['auto_late_waitlist']
     "pending"
   end
 end

@@ -1,0 +1,37 @@
+# config/app.yml for rails-settings-cached
+defaults: &defaults
+
+  # Logic config
+  registration_is_open: true
+  event_is_over: false
+  last_day_to_apply: "<%= Date.new(2000, 1, 1).to_s %>"
+  event_start_date: "<%= Date.new(2000, 1, 1).to_s %>"
+  auto_late_waitlist: false
+  disable_account_registration: false
+
+  # Content config
+  name: HackFoo
+  logo_asset: ""
+  favicon_asset: ""
+  email_banner_asset: ""
+  agreement_pdf_asset: agreement.pdf
+  email_from: '"HackFoo" <hello@example.com>'
+  default_page_title: HackFoo - Jan 1-2, 2017
+  homepage_url: ""
+
+  disabled_fields: ""
+  disclaimer_message: ""
+  thanks_for_applying_message: ""
+  thanks_for_rsvp_message: ""
+  bus_captain_notes: ""
+  custom_css: ""
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  last_day_to_apply: "<%= 2.months.from_now.to_date.to_s %>"
+
+production:
+  <<: *defaults

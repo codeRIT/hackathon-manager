@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class QuestionnaireTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   should belong_to :user
   should belong_to :school
   should belong_to :bus_list
@@ -85,19 +87,23 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should_not allow_value("foo").for(:acc_status)
 
   should have_attached_file(:resume)
-  should validate_attachment_content_type(:resume)
-    .allowing('application/pdf')
-    .rejecting('text/plain', 'image/png', 'image/jpg', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-  should validate_attachment_size(:resume).less_than(2.megabytes)
 
-  should "allow deletion of attachment via method" do
+  should "allow attachment of resume" do
     questionnaire = create(:questionnaire)
-    questionnaire.resume = sample_file
-    assert_equal "sample_pdf.pdf", questionnaire.resume_file_name
+    questionnaire.resume.attach(io: sample_file, filename: 'sample_pdf.pdf')
+    questionnaire.reload
+    assert_equal true, questionnaire.resume.attached?
+    assert_equal "sample_pdf.pdf", questionnaire.resume.filename.to_s
+  end
+
+  should "allow deletion via delete_resume attribute" do
+    questionnaire = create(:questionnaire)
+    questionnaire.resume.attach(io: sample_file, filename: 'sample_pdf.pdf')
+    questionnaire.reload
+    assert_equal true, questionnaire.resume.attached?
     questionnaire.delete_resume = "1"
     questionnaire.save
-    assert_equal false, questionnaire.resume?
-    assert_nil questionnaire.resume_file_name
+    assert_equal false, questionnaire.resume.attached?
   end
 
   should allow_value('foo.com').for(:portfolio_url)
@@ -187,7 +193,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
 
     should "return nil without a user" do
-      questionnaire = create(:questionnaire, user: nil)
+      questionnaire = build(:questionnaire, user: nil)
       assert_nil questionnaire.email
     end
   end
@@ -219,25 +225,25 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
   context "#minor?" do
     should "return true for 16 year old" do
-      Rails.configuration.hackathon['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2004, 1, 1))
       assert questionnaire.minor?
     end
 
     should "return true for 17 year, 12 month, 30 day old" do
-      Rails.configuration.hackathon['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2002, 6, 13))
       assert_equal true, questionnaire.minor?
     end
 
     should "return false for 18 year old" do
-      Rails.configuration.hackathon['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2002, 6, 12))
       assert_equal false, questionnaire.minor?
     end
 
     should "return false for 20 year old" do
-      Rails.configuration.hackathon['event_start_date'] = Date.new(2020, 6, 12)
+      HackathonConfig['event_start_date'] = "2020-06-12"
       questionnaire = create(:questionnaire, date_of_birth: Date.new(2000, 1, 1))
       assert_equal false, questionnaire.minor?
     end
@@ -328,34 +334,34 @@ class QuestionnaireTest < ActiveSupport::TestCase
       # Two messages that shouldn't be triggered
       create(:message, trigger: "questionnaire.pending")
       create(:message, trigger: "questionnaire.waitlist")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
-        questionnaire.update_attribute(:acc_status, 'accepted')
+      assert_difference "enqueued_jobs.size", 1 do
+        questionnaire.update_attribute(:acc_status, "accepted")
       end
     end
 
     should "not send triggered email for same acceptance status" do
       questionnaire = create(:questionnaire, acc_status: 'accepted')
       create(:message, trigger: "questionnaire.accepted")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        questionnaire.update_attribute(:acc_status, 'accepted')
+      assert_difference "enqueued_jobs.size", 0 do
+        questionnaire.update_attribute(:acc_status, "accepted")
       end
     end
 
     should "not send triggered email different changed value" do
       questionnaire = create(:questionnaire, acc_status: 'accepted')
       create(:message, trigger: "questionnaire.accepted")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 0 do
-        questionnaire.update_attribute(:first_name, 'foo bar baz')
+      assert_difference "enqueued_jobs.size", 0 do
+        questionnaire.update_attribute(:first_name, "foo bar baz")
       end
     end
 
     should "send triggered email for other statuses" do
       questionnaire = create(:questionnaire, acc_status: 'rsvp_denied')
-      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status|
+      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status, _|
         create(:message, trigger: "questionnaire.#{acc_status}")
       end
-      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status|
-        assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 1 do
+      Questionnaire::POSSIBLE_ACC_STATUS.each do |acc_status, _|
+        assert_difference "enqueued_jobs.size", 1 do
           questionnaire.update_attribute(:acc_status, acc_status)
         end
       end
@@ -363,8 +369,8 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
     should "send triggered email on creation" do
       create(:message, trigger: "questionnaire.pending")
-      assert_difference 'Sidekiq::Extensions::DelayedMailer.jobs.size', 2 do
-        create(:questionnaire, acc_status: 'pending')
+      assert_difference "enqueued_jobs.size", 2 do
+        create(:questionnaire, acc_status: "pending")
       end
     end
   end

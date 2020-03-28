@@ -8,7 +8,7 @@ class Manage::TrackableTagsController < Manage::ApplicationController
 
   # GET /manage/trackable_tags
   def index
-    @trackable_tags = TrackableTag.all
+    @trackable_tags = TrackableTag.all.order("name ASC")
     respond_with(:manage, @trackable_tags)
   end
 
@@ -65,6 +65,6 @@ class Manage::TrackableTagsController < Manage::ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def trackable_tag_params
-    params.require(:trackable_tag).permit(:name)
+    params.require(:trackable_tag).permit(:name, :allow_duplicate_band_events)
   end
 end

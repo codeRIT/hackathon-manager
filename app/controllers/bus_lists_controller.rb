@@ -3,9 +3,7 @@ class BusListsController < ApplicationController
   before_action :check_user_has_questionnaire
   before_action :find_questionnaire
   before_action :find_bus_list
-  before_action :require_bus_captian
-
-  layout 'hackathon_manager/application'
+  before_action :require_bus_captain
 
   def logged_in
     authenticate_user!
@@ -54,7 +52,7 @@ class BusListsController < ApplicationController
     redirect_to root_path if current_user.questionnaire.nil?
   end
 
-  def require_bus_captian
+  def require_bus_captain
     redirect_to root_path unless @questionnaire.is_bus_captain?
   end
 end

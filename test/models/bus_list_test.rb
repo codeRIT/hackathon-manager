@@ -76,7 +76,7 @@ class BusListTest < ActiveSupport::TestCase
     end
   end
 
-  context "#captians" do
+  context "#captains" do
     setup do
       @bus_list = create(:bus_list)
     end

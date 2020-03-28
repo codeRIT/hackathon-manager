@@ -1,5 +1,8 @@
 class Questionnaire < ApplicationRecord
+  audited
+
   include ActiveModel::Dirty
+  include DeletableAttachment
 
   before_validation :consolidate_school_names
   before_validation :clean_for_non_rsvp
@@ -29,11 +32,11 @@ class Questionnaire < ApplicationRecord
   #   validates_presence_of :why_attend
   # end
 
-  has_attached_file :resume
-  validates_attachment_content_type :resume, content_type: %w[application/pdf], message: "Invalid file type"
-  validates_attachment_size :resume, in: 0..2.megabytes, message: "File size is too big"
-
-  include DeletableAttachment
+  has_one_attached :resume
+  deletable_attachment :resume
+  validates :resume, file_size: { less_than_or_equal_to: 2.megabytes },
+                     file_content_type: { allow: ['application/pdf'] },
+                     if: -> { resume.attached? }
 
   validates :portfolio_url, url: { allow_blank: true }
   validates :vcs_url, url: { allow_blank: true }
@@ -176,7 +179,7 @@ class Questionnaire < ApplicationRecord
   end
 
   def age_at_time_of_event
-    (Rails.configuration.hackathon['event_start_date'] - date_of_birth).to_i * 1.day
+    (Date.parse(HackathonConfig['event_start_date']) - date_of_birth).to_i * 1.day
   end
 
   def minor?
@@ -192,7 +195,7 @@ class Questionnaire < ApplicationRecord
   end
 
   def message_events
-    return [] unless ENV['SPARKPOST_API_KEY']
+    return [] unless ENV["SPARKPOST_API_KEY"].presence
 
     simple_spark = SimpleSpark::Client.new
     simple_spark.message_events.search(recipients: email)

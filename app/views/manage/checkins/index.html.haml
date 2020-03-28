@@ -1,6 +1,6 @@
 = render "layouts/manage/page_title", title: "Check-in"
 
-%div
+.mb-4
   %table.checkins.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_checkins_path(format: :json) }
     %thead
       %tr

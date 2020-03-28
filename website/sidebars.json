@@ -1,0 +1,14 @@
+{
+  "docs": {
+    "HackathonManager": ["running-a-hackathon", "busses", "questionnaires", "messages"],
+    "API Usage": ["api"],
+    "Deployment": [
+      "deployment",
+      "deployment-dokku",
+      "deployment-heroku",
+      "deployment-okd",
+      "deployment-environment-variables",
+      "customization"
+    ]
+  }
+}
