@@ -7,6 +7,7 @@ class Questionnaire < ApplicationRecord
   before_validation :consolidate_school_names
   before_validation :clean_for_non_rsvp
   before_validation :clean_negative_special_needs
+  before_validation :clean_negative_dietary_restrictions
   after_create :queue_triggered_email_create
   after_update :queue_triggered_email_update
   after_save :update_school_questionnaire_count
@@ -228,7 +229,11 @@ class Questionnaire < ApplicationRecord
   end
 
   def clean_negative_special_needs
-    self.special_needs = nil if special_needs.present? && %w[none n/a].include?(special_needs.strip.downcase)
+    self.special_needs = nil if special_needs.present? && %w[none n/a non-applicable na nothing nil null no].include?(special_needs.strip.downcase)
+  end
+
+  def clean_negative_dietary_restrictions
+    self.dietary_restrictions = nil if dietary_restrictions.present? && %w[none n/a non-applicable na nothing nil null no].include?(dietary_restrictions.strip.downcase)
   end
 
   def consolidate_school_names
