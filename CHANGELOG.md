@@ -1,3 +1,10 @@
+## [1.22.2](https://github.com/codeRIT/hackathon-manager/compare/v1.22.1...v1.22.2) (2020-03-29)
+
+
+### Bug Fixes
+
+* Fixes label mismatch with dietary restrictions ([#206](https://github.com/codeRIT/hackathon-manager/issues/206)) ([](https://github.com/codeRIT/hackathon-manager/commit/70fdf73))
+
 ## [1.22.1](https://github.com/codeRIT/hackathon-manager/compare/v1.22.0...v1.22.1) (2020-02-05)
 
 
