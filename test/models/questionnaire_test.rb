@@ -252,6 +252,11 @@ class QuestionnaireTest < ActiveSupport::TestCase
       assert_nil questionnaire.special_needs
     end
 
+    should "return nil if special_needs fiels is no (with spaces)" do
+      questionnaire = create(:questionnaire, special_needs: " no ")
+      assert_nil questionnaire.special_needs
+    end
+
     should "return value if special_needs is none except for wheelchair" do
       questionnaire = create(:questionnaire, special_needs: "None except for wheelchair")
       assert_equal "None except for wheelchair", questionnaire.special_needs
@@ -306,6 +311,11 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
     should "return nil if dietary_restrictions fiels is no" do
       questionnaire = create(:questionnaire, dietary_restrictions: "no")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions fiels is no (with spaces)" do
+      questionnaire = create(:questionnaire, dietary_restrictions: " no ")
       assert_nil questionnaire.dietary_restrictions
     end
 
