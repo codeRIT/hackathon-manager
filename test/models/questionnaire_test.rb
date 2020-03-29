@@ -211,6 +211,130 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
   end
 
+  context "#clean_negative_special_needs" do
+    should "return nil if special_needs field is None" do
+      questionnaire = create(:questionnaire, special_needs: "NoNE")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs field is n/a" do
+      questionnaire = create(:questionnaire, special_needs: "N/a")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is non-applicable" do
+      questionnaire = create(:questionnaire, special_needs: "Non-applicable")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is na" do
+      questionnaire = create(:questionnaire, special_needs: "na")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is nothing" do
+      questionnaire = create(:questionnaire, special_needs: "nOthing")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is nil" do
+      questionnaire = create(:questionnaire, special_needs: "Nil")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is null" do
+      questionnaire = create(:questionnaire, special_needs: "nULL")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is no" do
+      questionnaire = create(:questionnaire, special_needs: "no")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return nil if special_needs fiels is no (with spaces)" do
+      questionnaire = create(:questionnaire, special_needs: " no ")
+      assert_nil questionnaire.special_needs
+    end
+
+    should "return value if special_needs is none except for wheelchair" do
+      questionnaire = create(:questionnaire, special_needs: "None except for wheelchair")
+      assert_equal "None except for wheelchair", questionnaire.special_needs
+    end
+
+    should "return value if special_needs is no thank you" do
+      questionnaire = create(:questionnaire, special_needs: "no thank you")
+      assert_equal "no thank you", questionnaire.special_needs
+    end
+
+    should "return value if special_needs is need i need to sleep" do
+      questionnaire = create(:questionnaire, special_needs: "I need to sleep")
+      assert_equal "I need to sleep", questionnaire.special_needs
+    end
+  end
+
+  context "#clean_negative_dietary_restrictions" do
+    should "return nil if dietary_restrictions field is None" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "NoNE")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions field is n/a" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "N/a")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions field is non-applicable" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "Non-applicable")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions fiels is na" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "na")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions fiels is nothing" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "nOthing")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions fiels is nil" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "Nil")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions fiels is null" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "nULL")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions fiels is no" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "no")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return nil if dietary_restrictions fiels is no (with spaces)" do
+      questionnaire = create(:questionnaire, dietary_restrictions: " no ")
+      assert_nil questionnaire.dietary_restrictions
+    end
+
+    should "return value if dietary_restrictions is nothing except for peanuts" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "Nothing except for peanuts")
+      assert_equal "Nothing except for peanuts", questionnaire.dietary_restrictions
+    end
+
+    should "return value if dietary_restrictions is no thank you" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "no thank you")
+      assert_equal "no thank you", questionnaire.dietary_restrictions
+    end
+
+    should "return value if dietary_restrictions is need i am a vegetarian" do
+      questionnaire = create(:questionnaire, dietary_restrictions: "I am a vegetarian")
+      assert_equal "I am a vegetarian", questionnaire.dietary_restrictions
+    end
+  end
+
   context "#minor?" do
     should "return true for 16 year old" do
       HackathonConfig['event_start_date'] = "2020-06-12"
