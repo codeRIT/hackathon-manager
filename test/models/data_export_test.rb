@@ -15,6 +15,8 @@ class DataExportTest < ActiveSupport::TestCase
 
   context "#file_basename" do
     should "use mix of type, date, and time" do
+      # Set consistent local time
+      Timecop.freeze(DateTime.new(2020, 01, 15, 4, 5, 6, 0))
       timezone_offset = DateTime.now.offset
       data_export = build(
         :data_export,
@@ -23,6 +25,8 @@ class DataExportTest < ActiveSupport::TestCase
         export_type: "sponsor_dump_rsvp_confirmed",
       )
       assert_equal "sponsor_dump_rsvp_confirmed 2020-01-15 04-05-06 AM", data_export.file_basename
+      # Restore global time
+      Timecop.return
     end
   end
 
