@@ -61,7 +61,7 @@ gem 'mustache', '~> 1.0'
 # Assets
 gem 'sprockets'
 gem 'jquery-rails'
-gem 'jquery-ui-sass-rails'
+gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
 gem 'bootstrap', '~> 4.3.1'
