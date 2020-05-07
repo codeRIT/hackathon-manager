@@ -40,7 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Authentication
 gem 'devise', '~> 4.7'
 gem 'omniauth-mlh', '~> 0.1'
-gem 'doorkeeper', '~> 5.0'
+gem 'doorkeeper', '~> 5.3'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
 
