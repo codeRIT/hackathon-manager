@@ -1,53 +1,46 @@
 require 'test_helper'
 
-class Manage::AdminsControllerTest < ActionController::TestCase
+class Manage::UsersControllerTest < ActionController::TestCase
   setup do
     @user = create(:user)
   end
 
   context "while not authenticated" do
-    should "redirect to sign in page on manage_admins#index" do
+    should "redirect to sign in page on manage_users#index" do
       get :index
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_admins datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+    should "not allow access to manage_users user datatables api" do
+      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response 401
     end
 
-    should "not allow access to manage_admins#show" do
+    should "not allow access to manage_users admin datatables api" do
+      post :admin_datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_response 401
+    end
+
+    should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_admins#new" do
-      get :new, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_admins#edit" do
+    should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_admins#create" do
-      post :create, params: { user: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_admins#update" do
+    should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_admins#destroy" do
+    should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
       assert_response :redirect
       assert_redirected_to new_user_session_path
@@ -60,49 +53,43 @@ class Manage::AdminsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "not allow access to manage_admins#index" do
+    should "not allow access to manage_users#index" do
       get :index
       assert_response :redirect
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_admins datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+    should "not allow access to manage_users users datatables api" do
+      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_admins#new" do
-      get :new, params: { id: @user }
+    should "not allow access to manage_users admin datatables api" do
+      post :admin_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_admins#show" do
+    should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_admins#edit" do
+    should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_admins#create" do
-      post :create, params: { user: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_admins#update" do
+    should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_admins#destroy" do
+    should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
       assert_response :redirect
       assert_redirected_to root_path
@@ -116,49 +103,42 @@ class Manage::AdminsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "allow access to manage_admins#index" do
+    should "not allow access to manage_users#index" do
       get :index
-      assert_response :success
+      assert_redirected_to root_path
     end
 
-    should "allow access to manage_admins datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :success
+    should "not allow access to manage_users users datatables api" do
+      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_redirected_to root_path
     end
 
-    should "allow access to manage_admins#show" do
+    should "not allow access to manage_users admins datatables api" do
+      post :admin_datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_redirected_to root_path
+    end
+
+    should "allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_response :success
+      assert_redirected_to root_path
     end
 
-    should "not allow access to manage_admins#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_admins_path
-    end
-
-    should "not allow access to manage_admins#edit" do
+    should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
       assert_response :redirect
-      assert_redirected_to manage_admins_path
+      assert_redirected_to manage_users_path
     end
 
-    should "not allow access to manage_admins#create" do
-      post :create, params: { user: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to manage_admins_path
-    end
-
-    should "not allow access to manage_admins#update" do
+    should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
       assert_response :redirect
-      assert_redirected_to manage_admins_path
+      assert_redirected_to manage_users_path
     end
 
-    should "not allow access to manage_admins#destroy" do
+    should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
       assert_response :redirect
-      assert_redirected_to manage_admins_path
+      assert_redirected_to manage_users_path
     end
   end
 
@@ -169,7 +149,7 @@ class Manage::AdminsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "allow access to manage_admins#index" do
+    should "allow access to manage_users#index" do
       get :index
       assert_response :success
     end
@@ -179,14 +159,14 @@ class Manage::AdminsControllerTest < ActionController::TestCase
     # should "create a new admin" do
     #   post :create, params: { user: { email: "test@example.com", role: 'admin' } }
     #   assert_response :redirect
-    #   assert_redirected_to manage_admins_path
+    #   assert_redirected_to manage_users_path
     #   assert assigns(:user).admin?, "new user should be an admin"
     # end
 
     # should "create a new limited access admin" do
     #   post :create, params: { user: { email: "test@example.com", role: 'admin_limited_access' } }
     #   assert_response :redirect
-    #   assert_redirected_to manage_admins_path
+    #   assert_redirected_to manage_users_path
     #   assert !assigns(:user).admin?, "new user should not be an admin"
     #   assert assigns(:user).admin_limited_access?, "new user should be a limited access admin"
     # end
@@ -215,14 +195,14 @@ class Manage::AdminsControllerTest < ActionController::TestCase
 
     # should "update user" do
     #   patch :update, params: { id: @user, user: { email: "test@example.coma" } }
-    #   assert_redirected_to manage_admins_path
+    #   assert_redirected_to manage_users_path
     # end
 
     # should "destroy user" do
     #   assert_difference('User.count', -1) do
     #     patch :destroy, params: { id: @user }
     #   end
-    #   assert_redirected_to manage_admins_path
+    #   assert_redirected_to manage_users_path
     # end
   end
 end
