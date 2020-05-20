@@ -8,7 +8,6 @@ function setupSimpleMde() {
     if (baseSrc) {
       options['previewRender'] = function(plainText) {
         var iframe = document.createElement('iframe');
-        var baseSrc = baseSrc;
         var newSrc = baseSrc + '?body=' + encodeURIComponent(plainText);
         iframe.className = 'email-preview-in-simplemde';
         iframe.src = newSrc;

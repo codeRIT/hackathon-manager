@@ -5,13 +5,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '>= 2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.4.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -38,7 +38,7 @@ gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
-gem 'devise', '~> 4.2'
+gem 'devise', '~> 4.7'
 gem 'omniauth-mlh', '~> 0.1'
 gem 'doorkeeper', '~> 5.0'
 gem 'devise-doorkeeper'
@@ -53,7 +53,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'simple_form'
 gem 'ajax-datatables-rails', '~> 1.0'
 gem 'roadie-rails'
-gem 'chartkick', '~> 3.0'
+gem 'chartkick', '~> 3.3'
 gem 'groupdate'
 gem 'font-awesome-rails', '~> 4.0' # needed for icon helpers
 gem 'mustache', '~> 1.0'
@@ -61,7 +61,7 @@ gem 'mustache', '~> 1.0'
 # Assets
 gem 'sprockets'
 gem 'jquery-rails'
-gem 'jquery-ui-sass-rails'
+gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
 gem 'bootstrap', '~> 4.3.1'
@@ -75,7 +75,7 @@ gem 'validate_url'
 gem 'audited', '~> 4.7'
 
 # Background job processing
-gem 'sidekiq', '< 6'
+gem 'sidekiq', '< 7'
 gem 'sidekiq-cron', '~> 1.1'
 
 # Misc support gems
@@ -86,7 +86,7 @@ gem 'sparkpost_rails'
 gem 'httparty'
 gem 'rollbar', '~> 2.8'
 gem 'skylight'
-gem 'rubyzip', '>= 1.0.0'
+gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 
 group :development, :test do

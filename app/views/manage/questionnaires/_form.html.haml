@@ -23,7 +23,7 @@
             = f.input :major, input_html: { "data-validate" => "presence" }
             = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
             = f.input :gender, input_html: { "data-validate" => "presence" }
-            = f.input :dietary_restrictions, label: "Health Restrictions"
+            = f.input :dietary_restrictions, label: "Dietary restrictions"
             = f.input :special_needs, label: "Special needs"
 
       .col-xl-6

@@ -17,7 +17,10 @@ class Manage::ConfigsController < Manage::ApplicationController
     value = params[:hackathon_config][key]
     value = true if value == "true"
     value = false if value == "false"
-    if @config.value != value
+    if @config.var.end_with?("_asset") && !value.start_with?('http://', 'https://')
+      flash[:alert] = "Config \"#{key}\" must start with http:// or https://"
+      render :edit
+    elsif @config.value != value
       @config.value = value
       @config.save
       redirect_to manage_configs_path, notice: "Config \"#{key}\" has been updated."

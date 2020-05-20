@@ -1,3 +1,125 @@
+## [1.22.3](https://github.com/codeRIT/hackathon-manager/compare/v1.22.2...v1.22.3) (2020-05-16)
+
+
+### Bug Fixes
+
+* **dashboard:** Fixes security vulnerability that allowed event_tracking role to access Dashboard ([#215](https://github.com/codeRIT/hackathon-manager/issues/215)) ([](https://github.com/codeRIT/hackathon-manager/commit/74a40ad))
+
+
+### Styles
+
+* **check-in:** Changes table header to be more descriptive ([#207](https://github.com/codeRIT/hackathon-manager/issues/207)) ([](https://github.com/codeRIT/hackathon-manager/commit/889fbd0))
+* **config:** Removes unused event_is_over flag ([#208](https://github.com/codeRIT/hackathon-manager/issues/208)) ([](https://github.com/codeRIT/hackathon-manager/commit/0c73e66))
+
+## [1.22.2](https://github.com/codeRIT/hackathon-manager/compare/v1.22.1...v1.22.2) (2020-03-29)
+
+
+### Bug Fixes
+
+* Fixes label mismatch with dietary restrictions ([#206](https://github.com/codeRIT/hackathon-manager/issues/206)) ([](https://github.com/codeRIT/hackathon-manager/commit/70fdf73))
+
+## [1.22.1](https://github.com/codeRIT/hackathon-manager/compare/v1.22.0...v1.22.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* **exports:** Ensure enqueue works ([](https://github.com/codeRIT/hackathon-manager/commit/ad2e667))
+
+# [1.22.0](https://github.com/codeRIT/hackathon-manager/compare/v1.21.1...v1.22.0) (2020-02-05)
+
+
+### Features
+
+* **exports:** Add ability to generate data exports for sponsors ([#199](https://github.com/codeRIT/hackathon-manager/issues/199)) ([](https://github.com/codeRIT/hackathon-manager/commit/70b1336)), closes [#133](https://github.com/codeRIT/hackathon-manager/issues/133)
+
+## [1.21.1](https://github.com/codeRIT/hackathon-manager/compare/v1.21.0...v1.21.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* **sidekiq:** Upgrade rack to fix Sidekiq admin page error ([](https://github.com/codeRIT/hackathon-manager/commit/958d908))
+
+# [1.21.0](https://github.com/codeRIT/hackathon-manager/compare/v1.20.1...v1.21.0) (2020-01-28)
+
+
+### Bug Fixes
+
+* **messages:** Side-by-side preview ([](https://github.com/codeRIT/hackathon-manager/commit/0889f67))
+
+
+### Features
+
+* **messages:** Improve message composing hint for preview ([](https://github.com/codeRIT/hackathon-manager/commit/b19e403))
+
+## [1.20.1](https://github.com/codeRIT/hackathon-manager/compare/v1.20.0...v1.20.1) (2020-01-19)
+
+
+### Bug Fixes
+
+* Correct timeline in today's activity chart ([](https://github.com/codeRIT/hackathon-manager/commit/e83c423))
+
+# [1.20.0](https://github.com/codeRIT/hackathon-manager/compare/v1.19.3...v1.20.0) (2020-01-19)
+
+
+### Features
+
+* Add TIME_ZONE environment variable ([](https://github.com/codeRIT/hackathon-manager/commit/5332ba5))
+
+## [1.19.3](https://github.com/codeRIT/hackathon-manager/compare/v1.19.2...v1.19.3) (2019-12-09)
+
+
+### Bug Fixes
+
+* **rollbar:** Enable error reporting to Rollbar ([](https://github.com/codeRIT/hackathon-manager/commit/11d5750))
+
+
+### Documentation
+
+* **dokku:** Add notes for updating an existing deployment ([](https://github.com/codeRIT/hackathon-manager/commit/114ce4c))
+
+## [1.19.2](https://github.com/codeRIT/hackathon-manager/compare/v1.19.1...v1.19.2) (2019-10-07)
+
+
+### Bug Fixes
+
+*  update the gem rubyzip due to security issue reported by Hakiri ([#188](https://github.com/codeRIT/hackathon-manager/issues/188)) ([4fc9057](https://github.com/codeRIT/hackathon-manager/commit/4fc9057))
+
+## [1.19.1](https://github.com/codeRIT/hackathon-manager/compare/v1.19.0...v1.19.1) (2019-10-07)
+
+
+### Bug Fixes
+
+* position of favicon to be centered for better UX in datatables ([#186](https://github.com/codeRIT/hackathon-manager/issues/186)) ([6e881ba](https://github.com/codeRIT/hackathon-manager/commit/6e881ba))
+
+# [1.19.0](https://github.com/codeRIT/hackathon-manager/compare/v1.18.0...v1.19.0) (2019-10-05)
+
+
+### Features
+
+* Add ability to close registration completely ([#176](https://github.com/codeRIT/hackathon-manager/issues/176)) ([457781d](https://github.com/codeRIT/hackathon-manager/commit/457781d)), closes [#172](https://github.com/codeRIT/hackathon-manager/issues/172)
+
+
+### Maintenance
+
+* Code reformat ([123eafc](https://github.com/codeRIT/hackathon-manager/commit/123eafc))
+
+
+### Tests
+
+* Fix _asset config test ([63f49ec](https://github.com/codeRIT/hackathon-manager/commit/63f49ec))
+
+# [1.18.0](https://github.com/codeRIT/hackathon-manager/compare/v1.17.2...v1.18.0) (2019-08-18)
+
+
+### Features
+
+* alert if user is redirected when arriving to rsvp ([3b6260a](https://github.com/codeRIT/hackathon-manager/commit/3b6260a))
+
+
+### Maintenance
+
+* Update gems ([#179](https://github.com/codeRIT/hackathon-manager/issues/179)) ([dc1b039](https://github.com/codeRIT/hackathon-manager/commit/dc1b039))
+
 ## [1.17.2](https://github.com/codeRIT/hackathon-manager/compare/v1.17.1...v1.17.2) (2019-07-17)
 
 

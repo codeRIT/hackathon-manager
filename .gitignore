@@ -28,3 +28,8 @@
 
 # don't commit local env vars
 .env
+
+# Ignore RubyMine
+/.idea
+
+.generators

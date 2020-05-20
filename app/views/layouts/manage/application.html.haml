@@ -89,6 +89,11 @@
                     Doorkeeper
                     %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description OAuth2 provider management
+                %li.nav-item
+                  = active_link_to manage_data_exports_path, class: "nav-link" do
+                    .fa.fa-download.fa-fw.icon-space-r-half
+                    Data Exports
+                    .nav-item-description Generate & export data
         %main.col-md-10.ml-sm-auto.px-4{role: "main"}
           = render "layouts/manage/flashes"
           = yield
