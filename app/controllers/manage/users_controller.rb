@@ -3,11 +3,11 @@ class Manage::UsersController < Manage::ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json
-  
+
   def index
     respond_with(:manage, User.where(role: [:admin, :admin_limited_access, :event_tracking]))
   end
-  
+
   def user_datatable
     render json: UserDatatable.new(params, view_context: view_context)
   end
