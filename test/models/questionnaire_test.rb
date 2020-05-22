@@ -414,7 +414,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
       questionnaire = create(:questionnaire, checked_in_by_id: user.id)
       old_user_id = user.id.dup
       User.destroy(user.id)
-      deleted_user = DeletedUser.find_by(:user_id => old_user_id)
+      deleted_user = DeletedUser.find_by(user_id: old_user_id)
       assert_equal deleted_user.id, questionnaire.checked_in_by.id
       assert_equal deleted_user.user_id, questionnaire.checked_in_by_id
     end
@@ -424,7 +424,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
       questionnaire = create(:questionnaire, checked_in_by_id: user.id)
       old_user_id = user.id.dup
       User.destroy(user.id)
-      deleted_user = DeletedUser.find_by(:user_id => old_user_id)
+      deleted_user = DeletedUser.find_by(user_id: old_user_id)
       DeletedUser.destroy(deleted_user.id)
       assert_nil questionnaire.checked_in_by
     end
