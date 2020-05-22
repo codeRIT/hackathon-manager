@@ -27,7 +27,7 @@ class Manage::AdminsController < Manage::ApplicationController
     @user = ::User.new(user_params.merge(password: Devise.friendly_token.first(10)))
     if @user.save
       @user.send_reset_password_instructions
-      flash[:notice] = "Created account for #{@user.email} and sent email with link to set a password"
+      flash[:notice] = "Created account for #{@user.email} and sent email with link to set a password."
     end
     respond_with(:manage, @user, location: manage_admins_path)
   end
@@ -38,7 +38,9 @@ class Manage::AdminsController < Manage::ApplicationController
   end
 
   def destroy
-    @user.destroy
+    @email = @user.email.dup
+    User.destroy(@user.id)
+    flash[:notice] = "Successfully deleted #{@email}."
     respond_with(:manage, @user, location: manage_admins_path)
   end
 

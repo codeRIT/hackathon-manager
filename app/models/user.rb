@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   audited only: [:email, :role, :is_active, :receive_weekly_report]
+  before_destroy :save_audit_information
 
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -78,5 +79,9 @@ class User < ApplicationRecord
 
   def self.without_questionnaire
     non_admins.left_outer_joins(:questionnaire).where(questionnaires: { id: nil })
+  end
+
+  def save_audit_information
+    @deleted_user = ::DeletedUser.new(:user_id => self.id, :email => self.email).save
   end
 end

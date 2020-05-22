@@ -402,11 +402,31 @@ class QuestionnaireTest < ActiveSupport::TestCase
       assert_nil questionnaire.checked_in_by_id
     end
 
-    should "return user who checked in ther questionnaire" do
+    should "return user who checked in their questionnaire" do
       user = create(:user)
       questionnaire = create(:questionnaire, checked_in_by_id: user.id)
       assert_equal user.id, questionnaire.checked_in_by.id
       assert_equal user.id, questionnaire.checked_in_by_id
+    end
+
+    should "return deleted user who checked in their questionnaire" do
+      user = create(:user)
+      questionnaire = create(:questionnaire, checked_in_by_id: user.id)
+      old_user_id = user.id.dup
+      User.destroy(user.id)
+      deleted_user = DeletedUser.find_by(:user_id => old_user_id)
+      assert_equal deleted_user.id, questionnaire.checked_in_by.id
+      assert_equal deleted_user.user_id, questionnaire.checked_in_by_id
+    end
+
+    should "return no one if all user records were completely deleted from system" do
+      user = create(:user)
+      questionnaire = create(:questionnaire, checked_in_by_id: user.id)
+      old_user_id = user.id.dup
+      User.destroy(user.id)
+      deleted_user = DeletedUser.find_by(:user_id => old_user_id)
+      DeletedUser.destroy(deleted_user.id)
+      assert_nil questionnaire.checked_in_by
     end
   end
 
