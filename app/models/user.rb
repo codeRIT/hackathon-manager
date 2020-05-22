@@ -82,6 +82,6 @@ class User < ApplicationRecord
   end
 
   def save_audit_information
-    @deleted_user = ::DeletedUser.new(:user_id => self.id, :email => self.email).save
+    @deleted_user = ::DeletedUser.new(user_id: id, email: email).save
   end
 end
