@@ -173,7 +173,7 @@ class Questionnaire < ApplicationRecord
   def checked_in_by
     return unless checked_in_by_id.present?
     return User.find_by_id(checked_in_by_id) unless User.find_by_id(checked_in_by_id).nil?
-    
+
     DeletedUser.find_by(user_id: checked_in_by_id)
   end
 
