@@ -1,0 +1,10 @@
+= render "layouts/manage/page_title", title: "Events" do
+  %div
+    %button.btn.btn-light{:id => "masterButton"} Master
+    %button.btn.btn-light{:id => "publicButton"} Public
+
+
+= link_to "Add Event", new_manage_event_path, class: "btn btn-sm btn-outline-secondary"
+
+#calendarPublic
+#calendarMaster

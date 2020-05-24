@@ -39,6 +39,10 @@
                   .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
                   Check-in
               %li.nav-item
+                = active_link_to manage_events_path, class: "nav-link" do
+                  .fa.fa-calendar.fa-fw.icon-space-r-half
+                  Events
+              %li.nav-item
                 = active_link_to manage_admins_path, class: "nav-link" do
                   .fa.fa-users.fa-fw.icon-space-r-half
                   Admins

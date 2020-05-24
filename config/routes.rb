@@ -55,6 +55,9 @@ Rails.application.routes.draw do
     resources :checkins do
       post :datatable, on: :collection
     end
+    resources :events do
+
+    end
     resources :admins do
       post :datatable, on: :collection
     end

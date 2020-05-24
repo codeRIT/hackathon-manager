@@ -65,6 +65,8 @@ gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
 gem 'bootstrap', '~> 4.3.1'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # Markdown parsing
 gem 'redcarpet'
