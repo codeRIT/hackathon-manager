@@ -55,11 +55,10 @@ en:
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
       hackathon_config:
-        registration_is_open: Specify that registration is open. This does <strong>not</strong> block registration; it only changes messaging around it.
+        accepting_questionnaires: Specify that questionnaires are being accepted. This does <strong>not</strong> block applying; it only changes messaging around it.
         last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
         event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
-        disable_account_registration: Prevent applicants from applying
 
         name: Your hackathon's name
         logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)
