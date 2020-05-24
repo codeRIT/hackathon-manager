@@ -1,3 +1,16 @@
+## [1.22.3](https://github.com/codeRIT/hackathon-manager/compare/v1.22.2...v1.22.3) (2020-05-16)
+
+
+### Bug Fixes
+
+* **dashboard:** Fixes security vulnerability that allowed event_tracking role to access Dashboard ([#215](https://github.com/codeRIT/hackathon-manager/issues/215)) ([](https://github.com/codeRIT/hackathon-manager/commit/74a40ad))
+
+
+### Styles
+
+* **check-in:** Changes table header to be more descriptive ([#207](https://github.com/codeRIT/hackathon-manager/issues/207)) ([](https://github.com/codeRIT/hackathon-manager/commit/889fbd0))
+* **config:** Removes unused event_is_over flag ([#208](https://github.com/codeRIT/hackathon-manager/issues/208)) ([](https://github.com/codeRIT/hackathon-manager/commit/0c73e66))
+
 ## [1.22.2](https://github.com/codeRIT/hackathon-manager/compare/v1.22.1...v1.22.2) (2020-03-29)
 
 

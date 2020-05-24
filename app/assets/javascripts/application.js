@@ -14,7 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
-//= require jquery.ui.autocomplete
+//= require jquery-ui/widgets/autocomplete
 //= require highcharts
 //= require chartkick
 //= require ./vendor/debounce
