@@ -1,5 +1,5 @@
 ---
-id: api
+id: api-usage
 title: API Usage
 ---
 
