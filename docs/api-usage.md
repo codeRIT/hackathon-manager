@@ -3,39 +3,40 @@ id: api-usage
 title: API Usage
 ---
 
-Almost all of the functionality exposed to users can also be accessed as an API with OAuth credentials. This includes both public- and management-facing functionality.
+## Introduction
 
-**Please note:** HackathonManager's primary audience is the web interface.
+Almost all of the functionality exposed to users can also be accessed as an API with OAuth credentials. This includes both public and management-facing functionality.
 
-While functionality may co-exist for both browser and API usage, API-style support might be a little rough around some edges. If you stumble upon something that works a little different than usual (e.g. returns HTML instead of JSON), open an issue and we can figure it out.
+**Please note:** HackathonManager's primary audience is the web interface. The API is currently being rewritten to support more application-based functionality, however this is still a work in progress, and not all functions will be supported on version `2.0`.
+
+If you run into any inconsistencies, feel free to open an issue on the [hackathon-manager](https://github.com/codeRIT/hackathon-manager) repo.
 
 ## Endpoints
 
+> Note that endpoints are currently being rewritten to support more user-based access, rather than hiding most information under an admin-level restriction. 
+
 Endpoints are shared with regular page controllers for browser-style functionality. This leverages Ruby on Rails routing (for a deep dive, see [Rails Routing from the Outside In](https://guides.rubyonrails.org/routing.html)).
-
-For example, listing bus lists:
-
-- User-facing page: https://apply.brickhack.io/manage/bus_lists
-- API endpoint: https://apply.brickhack.io/manage/bus_lists.json
 
 Because Rails follows a standard CRUD-format, these endpoints become very REST-like.
 
 For example:
 
-- List all tags: `GET https://apply.brickhack.io/manage/trackable_tags.json`
-- View specific tag: `GET https://apply.brickhack.io/manage/trackable_tags/1.json`
-- Create tag: `POST https://apply.brickhack.io/manage/trackable_tags.json` (with a JSON body of parameters)
-- Update tag: `PATCH https://apply.brickhack.io/manage/trackable_tags/1.json` (with a JSON body of parameters)
-- Delete tag: `DELETE https://apply.brickhack.io/manage/trackable_tags/1.json`
+|       Action      |                                             Reuqest                                              |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| List all tags     | `GET https://your-hackathon.io/manage/trackable_tags.json`                                      |
+| View specific tag | `GET https://your-hackathon.io/manage/trackable_tags/1.json`                                    |
+| Create tag        | `POST https://your-hackathon.io/manage/trackable_tags.json` (with body parameters)              |
+| Update tag        | `PATCH https://your-hackathon.io/manage/trackable_tags/1.json` (with body parameters) |
+| Delete tag        | `DELETE https://your-hackathon.io/manage/trackable_tags/1.json`                                 |
 
 For a full list of endpoints, run `bin/rails routes` locally. This utility, provided by Ruby on Rails, lists all possible paths you can route too (along with their respective HTTP method).
 
-**Note: datatable endpoints** are highly coupled to [Datatables](https://datatables.net) functionality and are not easy to use.
+> Note: Datatable endpoints are highly coupled to [Datatables](https://datatables.net) functionality and are not easy to use.
 
+> Note: The following endpoints are currently being rewritten to allow for less restrictions, i.e., bypassing the `/manage/`-level permission.
 Example for questionnaire management endpoints:
 
 ```
-...
                                 Prefix Verb     URI Pattern                                              Controller#Action
        datatable_manage_questionnaires POST     /manage/questionnaires/datatable(.:format)               manage/questionnaires#datatable
          check_in_manage_questionnaire PATCH    /manage/questionnaires/:id/check_in(.:format)            manage/questionnaires#check_in
@@ -52,10 +53,9 @@ update_acc_status_manage_questionnaire PATCH    /manage/questionnaires/:id/updat
                                        PUT      /manage/questionnaires/:id(.:format)                     manage/questionnaires#update
                                        DELETE   /manage/questionnaires/:id(.:format)                     manage/questionnaires#destroy
              datatable_manage_checkins POST     /manage/checkins/datatable(.:format)
-...
 ```
 
-## Request & response
+## Request & Response
 
 Most endpoints can operate with JSON requests & responses. Simply provide `.json` at the end of the URL to be returned JSON, and provide `Content-Type: application/json` when using POST or PATCH with a JSON body.
 
@@ -72,13 +72,11 @@ end
 - This "show" endpoint is the natural mapping for something like `GET /manage/questionnaires/1.json`
 - Because `respond_with` is used, it will return JSON when `.json` is used in the URL
 
-# Authentication
+## Authentication
 
-Authentication is implemented with OAauth 2, provided by the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem.
+Authentication is implemented with OAauth 2, provided by the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem. For full Doorkeeper endpoints + docs, see the [Doorkeeper wiki](https://github.com/doorkeeper-gem/doorkeeper/wiki/API-endpoint-descriptions-and-examples) for more info.
 
-An OAuth app should be created by an admin at https://apply.your-hackathon.com/oauth/applications. From there, you can implement a standard OAuth 2 flow.
-
-For Doorkeeper endpoints + docs, see https://github.com/doorkeeper-gem/doorkeeper/wiki/API-endpoint-descriptions-and-examples
+For a guide to a local Postman/Paw setup, see the page on [API Setup](api-setup.md).
 
 Once appropriate authentication credentials are retrieved, they should be provided on all API requests.
 

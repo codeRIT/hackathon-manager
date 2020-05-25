@@ -12,9 +12,9 @@ This page will show you how to setup API requests with Postman and Paw. The main
 ## OAuth2 Notes
 
 - The application only supports `Authorization Code` and `Implicit Grant` authorization methods. It's suggested to use an `implicit` grant for native apps, as they are inherently trusted. 
-- In a real application, the callback URL would have a specific scope that's not just `http://`, i.e., `brickhack-ios://` (for BrickHack's iOS application). However Postman would really be confused with that scheme. 
+- In a real application, the callback URL should have a specific scope that's not just `http://`, i.e., `brickhack-ios://` (for BrickHack's iOS application). However Postman would really be confused with that scheme, so for local development, it's not advised.
 - Client credentails must be sent in the body.
-- Browser authorization is currently not supported, at least in Postman. Not sure why! If you discover a reason, please open an Issue on the [hackathon manager repo](https://github.com/codeRIT/hackathon-manager).
+- Browser authorization is currently not supported, at least in Postman. Not sure why! If you discover a reason, please open an Issue on the [hackathon manager](https://github.com/codeRIT/hackathon-manager) repo.
 
 ## Initial Setup with Postman
 
