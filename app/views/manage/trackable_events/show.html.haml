@@ -11,7 +11,7 @@
   = link_to @trackable_event.trackable_tag.name, manage_trackable_tag_path(@trackable_event.trackable_tag)
 %p
   %b User:
-  = link_to @trackable_event.user.email, manage_admin_path(@trackable_event.user)
+  = link_to @trackable_event.user.email, manage_user_path(@trackable_event.user)
 
 = link_to 'Edit', edit_manage_trackable_event_path(@trackable_event)
 \|
