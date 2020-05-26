@@ -1,7 +1,7 @@
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
   .d-flex.align-items-center.flex-wrap
     %h1.h2.mr-3
-      = title @questionnaire.full_name
+      = title @questionnaire.user.full_name
     %div
       %span.mr-1
         = render 'acc_status_badge'
@@ -16,7 +16,7 @@
         %button.btn.btn-sm.btn-outline-secondary.dropdown-toggle#title-actions{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
           .fa.fa-cog
         .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "title-actions"}
-          = link_to 'Convert to Admin', convert_to_admin_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.full_name}\" will be permanently erased, and \"#{@questionnaire.email}\" will become an admin. This action is irreversible." }, class: 'dropdown-item'
+          = link_to 'Convert to Admin', convert_to_admin_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.user.full_name}\" will be permanently erased, and \"#{@questionnaire.email}\" will become an admin. This action is irreversible." }, class: 'dropdown-item'
 
 = render 'overview'
 

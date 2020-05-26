@@ -4,8 +4,8 @@ class QuestionnaireDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       id: { source: "Questionnaire.id", cond: :eq },
-      first_name: { source: "Questionnaire.first_name" },
-      last_name: { source: "Questionnaire.last_name" },
+      first_name: { source: "User.first_name" },
+      last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       phone: { source: "Questionnaire.phone" },
       gender: { source: "Questionnaire.gender" },

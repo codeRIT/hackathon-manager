@@ -3,8 +3,8 @@ class CheckinDatatable < ApplicationDatatable
 
   def view_columns
     @view_columns ||= {
-      first_name: { source: "Questionnaire.first_name" },
-      last_name: { source: "Questionnaire.last_name" },
+      first_name: { source: "User.first_name" },
+      last_name: { source: "User.last_name" },
       checked_in: { source: "Questionnaire.checked_in_at", searchable: false },
     }
   end
