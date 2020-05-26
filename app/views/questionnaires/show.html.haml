@@ -27,7 +27,7 @@
           %p.center
             = btn_link_to "RSVP NOW &raquo;".html_safe, rsvp_path
       - if !@questionnaire.can_rsvp? && @questionnaire.acc_status != "denied"
-        - if HackathonConfig['registration_is_open']
+        - if HackathonConfig['accepting_questionnaires']
           - if HackathonConfig['thanks_for_applying_message'].present?
             = markdown(HackathonConfig['thanks_for_applying_message'])
           - else

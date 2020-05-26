@@ -1,5 +1,5 @@
-class AdminDatatable < ApplicationDatatable
-  def_delegators :@view, :link_to, :manage_user_path, :bold, :display_datetime
+class UserDatatable < ApplicationDatatable
+  def_delegators :@view, :link_to, :manage_user_path, :manage_questionnaire_path, :bold, :display_datetime
 
   def view_columns
     @view_columns ||= {
@@ -7,7 +7,6 @@ class AdminDatatable < ApplicationDatatable
       email: { source: "User.email" },
       role: { source: "User.role", searchable: false },
       active: { source: "User.is_active", searchable: false },
-      receive_weekly_report: { source: "User.receive_weekly_report", searchable: false },
       created_at: { source: "User.created_at", searchable: false },
       current_sign_in_at: { source: "User.current_sign_in_at", searchable: false },
       last_sign_in_at: { source: "User.last_sign_in_at", searchable: false },
@@ -25,8 +24,8 @@ class AdminDatatable < ApplicationDatatable
         id: record.id,
         email: link_to(bold(record.email), manage_user_path(record)),
         role: record.role.titleize,
+        questionnaire: record.questionnaire.present? ? link_to(bold("View &raquo;".html_safe), manage_questionnaire_path(record.questionnaire.id)) : 'None',
         active: record.is_active ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe,
-        receive_weekly_report: yes_no_display(record.receive_weekly_report),
         created_at: display_datetime(record.created_at),
         current_sign_in_at: display_datetime(record.current_sign_in_at),
         last_sign_in_at: display_datetime(record.last_sign_in_at),
@@ -38,6 +37,6 @@ class AdminDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    User.where(role: [:admin, :admin_limited_access, :event_tracking])
+    User.all
   end
 end
