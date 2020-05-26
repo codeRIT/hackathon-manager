@@ -9,8 +9,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
   should validate_uniqueness_of :user_id
 
-  should strip_attribute :first_name
-  should strip_attribute :last_name
   should strip_attribute :acc_status
   should strip_attribute :major
   should strip_attribute :gender
@@ -19,8 +17,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should strip_attribute :travel_location
   should strip_attribute :why_attend
 
-  should validate_presence_of :first_name
-  should validate_presence_of :last_name
   should validate_presence_of :date_of_birth
   should validate_presence_of :experience
   should validate_presence_of :interest
@@ -160,13 +156,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
       school = create(:school, name: "My University")
       questionnaire = create(:questionnaire, school_id: school.id)
       assert_equal "My University", questionnaire.school_name
-    end
-  end
-
-  context "#full_name" do
-    should "concatenate first and last name" do
-      questionnaire = create(:questionnaire, first_name: "Foo", last_name: "Bar")
-      assert_equal "Foo Bar", questionnaire.full_name
     end
   end
 
@@ -463,7 +452,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
       questionnaire = create(:questionnaire, acc_status: 'accepted')
       create(:message, trigger: "questionnaire.accepted")
       assert_difference "enqueued_jobs.size", 0 do
-        questionnaire.update_attribute(:first_name, "foo bar baz")
+        questionnaire.update_attribute(:interest, "code")
       end
     end
 

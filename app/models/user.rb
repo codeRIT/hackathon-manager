@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  audited only: [:email, :role, :is_active, :receive_weekly_report]
+  audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
+
+  strip_attributes
 
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -14,11 +16,12 @@ class User < ApplicationRecord
                            dependent: :delete_all # or :destroy if you need callbacks
 
   validates_uniqueness_of :email
+  validates_presence_of :first_name, :last_name
 
   after_create :queue_reminder_email
+  after_initialize :set_default_role, if: :new_record?
 
   enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
-  after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
     self.role ||= :user
@@ -34,7 +37,7 @@ class User < ApplicationRecord
 
   def queue_reminder_email
     return if reminder_sent_at
-    UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
+    # UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
     update_attribute(:reminder_sent_at, Time.now)
   end
 
@@ -47,25 +50,16 @@ class User < ApplicationRecord
     receive_weekly_report
   end
 
-  def first_name
-    return "" if questionnaire.blank?
-    questionnaire.first_name
-  end
-
-  def last_name
-    return "" if questionnaire.blank?
-    questionnaire.last_name
-  end
-
   def full_name
-    return email if questionnaire.blank?
-    questionnaire.full_name
+    "#{first_name} #{last_name}"
   end
 
   def self.from_omniauth(auth)
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)
     matching_provider.or(matching_email).first_or_create do |user|
+      user.first_name = auth.first_name
+      user.last_name = auth.last_name
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]

@@ -28,8 +28,6 @@ class QuestionnairesController < ApplicationController
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
       @skip_my_mlh_fields = true
       @questionnaire.tap do |q|
-        q.first_name = session["devise.provider_data"]["info"]["first_name"]
-        q.last_name = session["devise.provider_data"]["info"]["last_name"]
         q.phone = session["devise.provider_data"]["info"]["phone_number"]
         q.level_of_study = session["devise.provider_data"]["info"]["level_of_study"]
         q.major = session["devise.provider_data"]["info"]["major"]
@@ -119,7 +117,7 @@ class QuestionnairesController < ApplicationController
 
   def questionnaire_params
     params.require(:questionnaire).permit(
-      :email, :experience, :first_name, :last_name, :gender,
+      :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
       :portfolio_url, :vcs_url, :agreement_accepted, :bus_captain_interest,
