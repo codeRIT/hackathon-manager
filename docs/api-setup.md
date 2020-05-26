@@ -18,9 +18,9 @@ This page will show you how to setup API requests with Postman and Paw. The main
 
 ## Initial Setup with Postman
 
-This guide assumes you have already setup an admin account on a local hackathon manager install. For more details on this, see the [main README](https://github.com/codeRIT/hackathon-manager#local-development).
+This guide assumes you have already setup an admin account on a local Hackathon Manager install. For more details on this, see the [main README](https://github.com/codeRIT/hackathon-manager#local-development).
 
-Sign in to your admin account, and click "Manage". Then go to the **Doorkeeper** tab on the bottom-left.
+In Hackathon Manager, sign in to your admin account and click "Manage". Then, at the bottom left of the sidebar, click the **Doorkeeper** tab.
 
 <img src="assets/api-setup/doorkeeper.png" width="300px" />
 
@@ -62,7 +62,6 @@ The process is very similar to above. To save time, here is a screenshot of the 
 <img src="assets/api-setup/paw1.png" />
 
 To reset your login, remove the dynamic fields in `Refresh Token` and `Token`. If your web login is still cached, try clearing cookies (`Paw > Web Views > Clear Cookies`) and Cache (`Paw > Web Views > Clear Cache`). 
-
 
 
 

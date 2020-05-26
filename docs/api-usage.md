@@ -34,6 +34,7 @@ For a full list of endpoints, run `bin/rails routes` locally. This utility, prov
 > Note: Datatable endpoints are highly coupled to [Datatables](https://datatables.net) functionality and are not easy to use.
 
 > Note: The following endpoints are currently being rewritten to allow for less restrictions, i.e., bypassing the `/manage/`-level permission.
+
 Example for questionnaire management endpoints:
 
 ```
@@ -74,9 +75,9 @@ end
 
 ## Authentication
 
-Authentication is implemented with OAauth 2, provided by the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem. For full Doorkeeper endpoints + docs, see the [Doorkeeper wiki](https://github.com/doorkeeper-gem/doorkeeper/wiki/API-endpoint-descriptions-and-examples) for more info.
+Authentication is implemented with OAauth 2, provided by the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem. For full Doorkeeper endpoints + docs, see the [Doorkeeper wiki](https://github.com/doorkeeper-gem/doorkeeper/wiki/API-endpoint-descriptions-and-examples).
 
-For a guide to a local Postman/Paw setup, see the page on [API Setup](api-setup.md).
+For a guide to set up & test the API using Postman or Paw, see the [API Setup](api-setup.md) page.
 
 Once appropriate authentication credentials are retrieved, they should be provided on all API requests.
 
