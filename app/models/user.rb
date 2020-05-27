@@ -70,6 +70,7 @@ class User < ApplicationRecord
     User.where.not(role: :admin).where.not(role: :admin_limited_access)
   end
 
+  # TODO: No longer needed?
   def self.without_questionnaire
     non_admins.left_outer_joins(:questionnaire).where(questionnaires: { id: nil })
   end

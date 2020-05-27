@@ -20,6 +20,8 @@ var setupDataTables = function () {
     order: [1, 'asc'],
     columns: [
       { orderable: true, data: 'id', visible: false },
+      { orderable: true, data: 'first_name' },
+      { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
       { orderable: true, data: 'role' },
       { orderable: true, data: 'active' },

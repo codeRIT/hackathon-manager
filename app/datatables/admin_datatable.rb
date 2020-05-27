@@ -4,6 +4,8 @@ class AdminDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       id: { source: "User.id" },
+      first_name: { source: "User.first_name" },
+      last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       role: { source: "User.role", searchable: false },
       active: { source: "User.is_active", searchable: false },
@@ -23,6 +25,8 @@ class AdminDatatable < ApplicationDatatable
     records.map do |record|
       {
         id: record.id,
+        first_name: record.first_name,
+        last_name: record.last_name,
         email: link_to(bold(record.email), manage_admin_path(record)),
         role: record.role.titleize,
         active: record.is_active ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe,
