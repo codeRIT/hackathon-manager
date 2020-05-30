@@ -1,9 +1,6 @@
 = render "layouts/manage/page_title", title: "New Event"
 
--#.form-container
--#  = bs_horizontal_simple_form_for @events, url: url_for(action: @events.new_record? ? "create" : "update", controller: "@events") do |f|
--#    - if f.error_notification.present?
--#      #disclaimer
--#        = f.error_notification
--#    .form-inputs
--#      = f.input :name
+.form-container
+  = render "form"
+  .center
+    = link_to 'Back', manage_events_path

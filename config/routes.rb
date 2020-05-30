@@ -56,7 +56,7 @@ Rails.application.routes.draw do
       post :datatable, on: :collection
     end
     resources :events do
-
+      # get :events, on: :collection
     end
     resources :admins do
       post :datatable, on: :collection
