@@ -55,11 +55,10 @@ en:
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
       hackathon_config:
-        registration_is_open: Specify that registration is open. This does <strong>not</strong> block registration; it only changes messaging around it.
+        accepting_questionnaires: Specify that questionnaires are being accepted. This does <strong>not</strong> block applying; it only changes messaging around it.
         last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
         event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
-        disable_account_registration: Prevent applicants from applying
 
         name: Your hackathon's name
         logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)
@@ -118,3 +117,55 @@ en:
         custom_css: Custom CSS
         homepage_url: Homepage URL
         thanks_for_rsvp_message: Thanks For RSVP Message
+  pages:
+    manage:
+      users: 
+        title: Users & Staff
+        users: All Users
+        staff: "%{hackathon_name} Staff"
+        table:
+          id: ID
+          email: Email
+          role: Role
+          questionnaire: Questionnaire
+          login_access: Login access
+          weekly_report: Weekly report
+          registered_on: Registered on
+          signed_in_on: Signed-in on
+          previous_signed_in_on: Previous signed-in on
+          signed_in_ip: Signed-in ip
+          previous_signed_in_ip: Previous signed-in IP
+          sign_in_count: Sign-in count
+        show:
+          title: "%{user_email}"
+          edit: Edit
+          reset_password: Reset Password
+          delete: Delete
+          user_information: User Information
+          email_address: Email address
+          role: Role
+          login_access: Login access
+          active: Active
+          inactive: Inactive
+          receive_weekly_report: Receive weekly report
+          yes: Yes
+          no: No
+          inactive_warning: Will not receive while user is inactive
+          registered: Registered
+          signed_in_on: Signed-in on
+          previous_signed_in_on: Previous signed-in on
+          signed_in_ip: Signed-in ip
+          previous_signed_in_ip: Previous signed-in IP
+          sign_in_count: Sign-in count
+          change_history: Change History
+        edit:
+          title: Edit User
+          subtitle: "%{user_email}"
+          cancel: Cancel
+          delete: Delete
+          form:
+            active: Active
+            inactive: Inactive
+            yes: Yes
+            no: No
+            save: Save

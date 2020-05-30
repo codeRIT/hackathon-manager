@@ -4,11 +4,11 @@
     Register for
     %span.emphasized= HackathonConfig['name']
 
-  - if !HackathonConfig['registration_is_open'] || HackathonConfig['disclaimer_message'].present?
+  - if !HackathonConfig['accepting_questionnaires'] || HackathonConfig['disclaimer_message'].present?
     #disclaimer
-      - if !HackathonConfig['registration_is_open']
+      - if !HackathonConfig['accepting_questionnaires']
         .center
-          %strong Registration is now closed. Thanks to everyone who applied!
+          %strong We are no longer accepting applications. Thanks to everyone who applied!
         %br
       - if HackathonConfig['disclaimer_message'].present?
         = markdown(HackathonConfig['disclaimer_message'])

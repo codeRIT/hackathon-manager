@@ -1,12 +1,12 @@
 class Manage::DashboardController < Manage::ApplicationController
   skip_before_action :require_admin_or_limited_admin
-  before_action :require_admin_or_limited_admin_or_event_tracking
+  before_action :require_admin_or_limited_admin
 
   def index
   end
 
   def map_data
-    @schools = School.where("questionnaire_count", 1..Float::INFINITY).select([:city, :state, :questionnaire_count])
+    @schools = School.where("questionnaire_count", 1..Float::INFINITY).select([:name, :address, :city, :state, :questionnaire_count])
   end
 
   def todays_activity_data

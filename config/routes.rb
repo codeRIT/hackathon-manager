@@ -61,6 +61,11 @@ Rails.application.routes.draw do
     resources :admins do
       post :datatable, on: :collection
     end
+    resources :users do
+      post :user_datatable, on: :collection
+      post :admin_datatable, on: :collection
+      patch :reset_password, on: :member
+    end
     resources :messages do
       get :preview, on: :member
       get :live_preview, on: :collection
