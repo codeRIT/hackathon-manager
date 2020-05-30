@@ -60,8 +60,59 @@ var setupDataTables = function () {
     ],
   });
 
-  $('.datatable.stats').DataTable({
-    processing: false,
-    serverSide: false,
+  // MARK: Datatables for the stats
+
+  $('.datatable.stats-dietary').DataTable({
+    columns: [
+      { orderable: true, data: 'first_name' },
+      { orderable: true, data: 'last_name' },
+      { orderable: true, data: 'email' },
+      { orderable: true, data: 'phone' },
+      { orderable: true, data: 'checked_in_at' },
+      { orderable: true, data: 'dietary_restrictions' },
+      { orderable: true, data: 'special_needs' }
+    ]
   });
+
+  $('.datatable.stats-notscooltravel').DataTable({
+    columns: [
+      { orderable: true, data: 'questionnaire_link' },
+      { orderable: true, data: 'first_name' },
+      { orderable: true, data: 'last_name' },
+      { orderable: true, data: 'email' },
+      { orderable: true, data: 'travel_location' },
+      { orderable: true, data: 'acc_status' }
+    ]
+  });
+
+  $('.datatable.stats-attendeeinfo').DataTable({
+    columns: [
+      { orderable: true, data: 'first_name' },
+      { orderable: true, data: 'last_name' },
+      { orderable: true, data: 'email' },
+      { orderable: true, data: 'school_name' },
+      { orderable: true, data: 'vcs_url' },
+      { orderable: true, data: 'portfolio_url' }
+    ]
+  });
+
+  $('.datatable.stats-mlhinfo-applied').DataTable({
+    columns: [
+      { orderable: true, data: 'first_name' },
+      { orderable: true, data: 'last_name' },
+      { orderable: true, data: 'email' },
+      { orderable: true, data: 'school_name' }
+    ]
+  });
+
+  $('.datatable.stats-mlhinfo-checkedin').DataTable({
+    columns: [
+      { orderable: true, data: 'first_name' },
+      { orderable: true, data: 'last_name' },
+      { orderable: true, data: 'email' },
+      { orderable: true, data: 'school_name' }
+    ]
+  });
+
+
 };

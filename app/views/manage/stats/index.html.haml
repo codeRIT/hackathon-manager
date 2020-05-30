@@ -3,7 +3,7 @@
 .row
   .col
     %h5.dashboard-container-title Dietary Restrictions & Special Needs
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => dietary_special_needs_manage_stats_path(format: :json) }
+    %table.datatable.stats-dietary.table.table-striped.table-hover{ "data-source" => dietary_special_needs_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name
@@ -18,10 +18,10 @@
 .row
   .col
     %h5.dashboard-container-title Attendees Not Traveling From Their School
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => alt_travel_manage_stats_path(format: :json) }
+    %table.datatable.stats-notscooltravel.table.table-striped.table-hover{ "data-source" => alt_travel_manage_stats_path(format: :json) }
       %thead
         %tr
-          %th Link
+          %th Questionnaire
           %th First name
           %th Last name
           %th Email
@@ -32,7 +32,7 @@
 .row
   .col
     %h5.dashboard-container-title Attendee Info for Sponsors
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => sponsor_info_manage_stats_path(format: :json) }
+    %table.datatable.stats-attendeeinfo.table.table-striped.table-hover{ "data-source" => sponsor_info_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name
@@ -41,13 +41,12 @@
           %th School
           %th Open Source Link
           %th Portfolio Link
-          %th Resume Link
       %tbody
 
 .row
   .col
     %h5.dashboard-container-title MLH Info (applied)
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_applied_manage_stats_path(format: :json) }
+    %table.datatable.stats-mlhinfo-applied.table.table-striped.table-hover{ "data-source" => mlh_info_applied_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name
@@ -59,7 +58,7 @@
 .row
   .col
     %h5.dashboard-container-title MLH Info (checked in)
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_checked_in_manage_stats_path(format: :json) }
+    %table.datatable.stats-mlhinfo-checkedin.table.table-striped.table-hover{ "data-source" => mlh_info_checked_in_manage_stats_path(format: :json) }
       %thead
         %tr
           %th First name
