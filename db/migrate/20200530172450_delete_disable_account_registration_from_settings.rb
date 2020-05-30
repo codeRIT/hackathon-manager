@@ -5,6 +5,7 @@ class DeleteDisableAccountRegistrationFromSettings < ActiveRecord::Migration[5.2
   end
 
   def self.down
-    HackathonConfig.create(var: 'disable_account_registration', value: false)
+    return unless HackathonConfig.find_by(var: 'disable_account_registration').nil?
+    HackathonConfig.create(var: 'disable_account_registration', value: false).save
   end
 end
