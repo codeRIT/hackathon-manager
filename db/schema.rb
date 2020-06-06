@@ -120,12 +120,13 @@ ActiveRecord::Schema.define(version: 2020_05_29_142141) do
   end
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.string "description"
-    t.string "owner"
-    t.boolean "allDay"
-    t.datetime "start"
-    t.datetime "end"
+    t.string "owner", null: false
+    t.boolean "allDay", null: false
+    t.boolean "public", null: false
+    t.datetime "start", null: false
+    t.datetime "end", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

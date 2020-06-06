@@ -1,0 +1,7 @@
+= render "layouts/manage/page_title", title: "Edit Event"
+
+= render "form"
+.center
+  = link_to 'Delete', manage_event_path(@event), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure? This action is irreversible.' }
+.center
+  = link_to 'Back', manage_events_path

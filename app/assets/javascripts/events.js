@@ -1,25 +1,22 @@
 function eventCalendar() {
   return $('#calendar').fullCalendar({
     defaultView: 'listYear',
-    eventRender: function(info) {
-
+    eventRender: function(event, element, view) {
+      console.log(event);
+      let publicText= "";
+      if(event.public)
+        publicText = "Public";
+      element.find('.fc-list-item-title').append('<div class="hr-line-solid-no-margin" style="float: right"><span style="color: red">' + publicText + '</span></div>');
+      element.find('.fc-list-item-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 12px">' + event.description + '</span>');
+      element.find('.fc-list-item-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 12px">' + event.owner + '</span>')
     },
     events: '/manage/events.json',
     eventClick: function(info) {
-      $('#eventModal').modal('show');
-      document.addEventListener('turbolinks:load', function () {
-        $('#showDelete').click(function () {
-          $('#eventModal').modal('hide');
-          $('#confirmModal').modal('show')
-        });
-        $('#saveChanges').click(function(){
-
-        });
-        $('#confirmDelete').click(function(){
-
-        });
-      })
-    }
+      // $('#eventModal').show();
+      // $('#editEventBody').html("<%= escape_javascript(render(:partial => 'show', :locals => { :id => "+info.id+" })) %>");
+      window.location = "events/"+info.id
+    },
+    height: "auto",
   });
 }
 

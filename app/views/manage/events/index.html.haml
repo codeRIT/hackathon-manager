@@ -11,21 +11,8 @@
         %button.close{"data-dismiss" =>"modal", "aria-label" =>"Close"}
           %span{"aria-hidden"=>"true"} X
       .modal-body
-        %p Test
+        #editEventBody
       .modal-footer
         %button.btn.btn-primary{:id => "saveChanges"} Save Changes
         %button.btn.btn-danger{:id => "showDelete"} Delete
-
-.modal{:id =>"confirmModal"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        .modal-title Edit Event
-        %button.close{"data-dismiss" =>"modal", "aria-label" =>"Close"}
-          %span{"aria-hidden"=>"true"} X
-      .modal-body
-        %p Are you sure you want to delete this event
-      .modal-footer
-        %button.btn.btn-danger{:id => "confirmDelete"} Delete Event
-        %button.btn.btn-secondary{"data-dismiss" =>"modal"} Cancel
 
