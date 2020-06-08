@@ -324,7 +324,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :convert_to_admin, params: { id: @questionnaire }
       assert assigns(:questionnaire).user.admin?
       assert_nil assigns(:questionnaire).user.reload.questionnaire
-      assert_redirected_to edit_manage_admin_path(assigns(:questionnaire).user)
+      assert_redirected_to edit_manage_user_path(assigns(:questionnaire).user)
     end
 
     should "destroy questionnaire" do

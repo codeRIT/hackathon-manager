@@ -125,11 +125,3 @@ By default, charts & timestamps will be in UTC.
 ```bash
 TIME_ZONE="America/Los_Angeles"
 ```
-
-### Skylight
-
-Skylight provides detailed performance analytics for the app, if you chose to use it.
-
-```bash
-SKYLIGHT_AUTHENTICATION=""
-```

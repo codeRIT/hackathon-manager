@@ -17,6 +17,23 @@ var setupDataTables = function () {
   });
 
   $('.datatable.users').DataTable({
+    order: [5, 'desc'],
+    columns: [
+      { orderable: true, data: 'id', visible: false },
+      { orderable: true, data: 'email' },
+      { orderable: true, data: 'role' },
+      { orderable: false, data: 'questionnaire'},
+      { orderable: true, data: 'active' },
+      { orderable: true, data: 'created_at' },
+      { orderable: true, data: 'current_sign_in_at', visible: false },
+      { orderable: true, data: 'last_sign_in_at', visible: false },
+      { orderable: true, data: 'current_sign_in_ip', visible: false },
+      { orderable: true, data: 'last_sign_in_ip', visible: false },
+      { orderable: true, data: 'sign_in_count', visible: false },
+    ],
+  });
+
+  $('.datatable.admins').DataTable({
     order: [1, 'asc'],
     columns: [
       { orderable: true, data: 'id', visible: false },
@@ -31,7 +48,7 @@ var setupDataTables = function () {
       { orderable: true, data: 'last_sign_in_at', visible: false },
       { orderable: true, data: 'current_sign_in_ip', visible: false },
       { orderable: true, data: 'last_sign_in_ip', visible: false },
-      { orderable: true, data: 'sign_in_count', visible: false },
+      { orderable: true, data: 'sign_in_count', visible: true },
     ],
   });
 
