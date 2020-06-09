@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
 
-
   strip_attributes
 
   devise :database_authenticatable, :registerable, :timeoutable,
