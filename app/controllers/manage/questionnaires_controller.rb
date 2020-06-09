@@ -51,6 +51,10 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   def update
     update_params = questionnaire_params
     email = update_params.delete(:email)
+    # Take our nested user object out as a whole
+    user_params = params[:questionnaire][:user]
+    @questionnaire.user.update_attributes(first_name: user_params[:first_name])
+    @questionnaire.user.update_attributes(last_name: user_params[:last_name])
     @questionnaire.user.update_attributes(email: email) if email.present?
     update_params = convert_school_name_to_id(update_params)
     update_params = convert_boarded_bus_param(update_params, @questionnaire)
@@ -147,6 +151,8 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   private
 
   def questionnaire_params
+    # Note that this ONLY considers parameters for the questionnaire, not the user.
+    # TODO: Refactor "email" out to user as first_name and last_name were
     params.require(:questionnaire).permit(
       :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
 
+
   strip_attributes
 
   devise :database_authenticatable, :registerable, :timeoutable,
@@ -14,6 +15,8 @@ class User < ApplicationRecord
   has_many :access_tokens, class_name: "Doorkeeper::AccessToken",
                            foreign_key: :resource_owner_id,
                            dependent: :delete_all # or :destroy if you need callbacks
+
+  accepts_nested_attributes_for :questionnaire
 
   validates_uniqueness_of :email
   validates_presence_of :first_name, :last_name
@@ -37,7 +40,7 @@ class User < ApplicationRecord
 
   def queue_reminder_email
     return if reminder_sent_at
-    # UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
+    UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
     update_attribute(:reminder_sent_at, Time.now)
   end
 
