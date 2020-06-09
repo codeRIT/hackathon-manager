@@ -23,17 +23,21 @@ class Manage::StatsController < Manage::ApplicationController
       q_request = Questionnaire.where(restrictions)
       q_json = q_request.select(q_attributes).as_json
 
-      for i in 0..q_request.count - 1
-        q_json[i]["first_name"] = q_request[i].user.first_name
-        q_json[i]["last_name"]  = q_request[i].user.last_name
-        q_json[i]["email"]      = q_request[i].user.email
+      q_request.each_with_index do |request, index|
+        q_json[index]["first_name"] = request.user.first_name
+        q_json[index]["last_name"]  = request.user.last_name
+        q_json[index]["email"]      = request.user.email
       end
 
       q_json
     end
 
     # Finally, render it out
-    render json: { data: data }
+    render json: {
+      data: data,
+      recordsTotal: Questionnaire.count,
+      recordsFiltered: data.count
+    }
   end
 
   def alt_travel
@@ -51,16 +55,20 @@ class Manage::StatsController < Manage::ApplicationController
       q_request = Questionnaire.where(restrictions)
       q_json = q_request.select(q_attributes).as_json
 
-      for i in 0..q_request.count - 1
-        q_json[i]["first_name"] = q_request[i].user.first_name
-        q_json[i]["last_name"]  = q_request[i].user.last_name
-        q_json[i]["email"]      = q_request[i].user.email
-        q_json[i]["questionnaire_link"] = view_context.link_to("View &raquo;".html_safe, manage_questionnaire_path(q_request[i]))
+      q_request.each_with_index do |request, index|
+        q_json[index]["first_name"] = request.user.first_name
+        q_json[index]["last_name"]  = request.user.last_name
+        q_json[index]["email"]      = request.user.email
+        q_json[index]["questionnaire_link"] = view_context.link_to("View &raquo;".html_safe, manage_questionnaire_path(request))
       end
 
       q_json
     end
-    render json: { data: data }
+    render json: {
+      data: data,
+      recordsTotal: Questionnaire.count,
+      recordsFiltered: data.count
+    }
   end
 
 
@@ -80,16 +88,20 @@ class Manage::StatsController < Manage::ApplicationController
       q_request = Questionnaire.where(restrictions)
       q_json = q_request.select(q_attributes).as_json
 
-      for i in 0..q_request.count - 1
-        q_json[i]["first_name"]  = q_request[i].user.first_name
-        q_json[i]["last_name"]   = q_request[i].user.last_name
-        q_json[i]["email"]       = q_request[i].user.email
-        q_json[i]["school_name"] = q_request[i].school_name
+      q_request.each_with_index do |request, index|
+        q_json[index]["first_name"]  = request.user.first_name
+        q_json[index]["last_name"]   = request.user.last_name
+        q_json[index]["email"]       = request.user.email
+        q_json[index]["school_name"] = request.school_name
       end
 
       q_json
     end
-    render json: { data: data }
+    render json: {
+      data: data,
+      recordsTotal: Questionnaire.count,
+      recordsFiltered: data.count
+    }
   end
 
   def mlh_info_applied
@@ -104,16 +116,20 @@ class Manage::StatsController < Manage::ApplicationController
       q_request = Questionnaire.joins(:school)
       q_json = q_request.select(q_attributes).as_json
 
-      for i in 0..q_request.count - 1
-        q_json[i]["first_name"]  = q_request[i].user.first_name
-        q_json[i]["last_name"]   = q_request[i].user.last_name
-        q_json[i]["email"]       = q_request[i].user.email
-        q_json[i]["school_name"] = q_request[i].school_name
+      q_request.each_with_index do |request, index|
+        q_json[index]["first_name"]  = request.user.first_name
+        q_json[index]["last_name"]   = request.user.last_name
+        q_json[index]["email"]       = request.user.email
+        q_json[index]["school_name"] = request.school_name
       end
 
       q_json
     end
-    render json: { data: data }
+    render json: {
+      data: data,
+      recordsTotal: Questionnaire.count,
+      recordsFiltered: data.count
+    }
   end
 
   def mlh_info_checked_in
@@ -129,16 +145,20 @@ class Manage::StatsController < Manage::ApplicationController
       q_request = Questionnaire.joins(:school).where(restrictions)
       q_json = q_request.select(q_attributes).as_json
 
-      for i in 0..q_request.count - 1
-        q_json[i]["first_name"]  = q_request[i].user.first_name
-        q_json[i]["last_name"]   = q_request[i].user.last_name
-        q_json[i]["email"]       = q_request[i].user.email
-        q_json[i]["school_name"] = q_request[i].school_name
+      q_request.each_with_index do |request, index|
+        q_json[index]["first_name"]  = request.user.first_name
+        q_json[index]["last_name"]   = request.user.last_name
+        q_json[index]["email"]       = request.user.email
+        q_json[index]["school_name"] = request.school_name
       end
 
       q_json
     end
-    render json: { data: data }
+    render json: {
+      data: data,
+      recordsTotal: Questionnaire.count,
+      recordsFiltered: data.count
+    }
   end
 
   private
