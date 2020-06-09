@@ -379,12 +379,16 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @questionnaire.user.update_attribute(:email, "old_email@example.com")
       @questionnaire.update_attribute(:checked_in_at, nil)
       @questionnaire.update_attribute(:checked_in_by_id, nil)
-      patch :check_in, params: { id: @questionnaire,
+      patch :check_in, params: {
+        id: @questionnaire,
         check_in: "",
-        questionnaire: { agreement_accepted: 1,
-        can_share_info: 1,
-        phone: "(123) 333-3333",
-        email: "new_email@example.com" } }
+        questionnaire: {
+          agreement_accepted: 1,
+          can_share_info: 1,
+          phone: "(123) 333-3333",
+          email: "new_email@example.com"
+        }
+      }
       @questionnaire.reload
       assert_nil @questionnaire.checked_in_at
       assert_nil @questionnaire.checked_in_by_id

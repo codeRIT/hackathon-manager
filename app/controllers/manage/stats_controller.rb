@@ -71,7 +71,6 @@ class Manage::StatsController < Manage::ApplicationController
     }
   end
 
-
   def sponsor_info
     data = Rails.cache.fetch(cache_key_for_questionnaires("sponsor_info")) do
 
