@@ -403,13 +403,13 @@ class QuestionnaireTest < ActiveSupport::TestCase
   end
 
   context "#checked_in_by" do
-    should "return no one if not checked in" do
+    should "return nil if not checked in" do
       questionnaire = create(:questionnaire)
       assert_nil questionnaire.checked_in_by
       assert_nil questionnaire.checked_in_by_id
     end
 
-    should "return no one if user who checked-in questionnaire is deleted" do
+    should "return nil if user who checked-in questionnaire is deleted" do
       user = create(:user)
       questionnaire = create(:questionnaire, checked_in_by_id: user.id)
       user.destroy
