@@ -73,10 +73,10 @@ class Manage::MessagesController < Manage::ApplicationController
   def duplicate
     new_message = @message.dup
     new_message.update_attributes(
-      delivered_at: nil,
-      started_at: nil,
-      queued_at: nil,
-      name: "Copy of #{@message.name}",
+        delivered_at: nil,
+        started_at: nil,
+        queued_at: nil,
+        name: "Copy of #{@message.name}",
     )
     new_message.save
     redirect_to edit_manage_message_path(new_message.reload)
@@ -113,7 +113,7 @@ class Manage::MessagesController < Manage::ApplicationController
 
   def message_params
     params.require(:message).permit(
-      :type, :name, :subject, :template, :body, :trigger, recipients: [],
+        :type, :name, :subject, :template, :body, :trigger, recipients: [],
     )
   end
 

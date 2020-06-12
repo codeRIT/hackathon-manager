@@ -1,6 +1,4 @@
 class Event < ApplicationRecord
-  def all_day?
-    allDay.present?
-  end
+  validates_presence_of :title, :owner, :start, :end
 
 end
