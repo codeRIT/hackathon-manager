@@ -423,8 +423,6 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2020.1)
-      tzinfo (>= 1.0.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     valid_attribute (2.0.0)
@@ -519,7 +517,6 @@ DEPENDENCIES
   test-unit (~> 3.0)
   timecop
   turbolinks (~> 5)
-  tzinfo-data
   uglifier (>= 1.3.0)
   valid_attribute
   validate_url
