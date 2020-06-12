@@ -1,18 +1,4 @@
 = render "layouts/manage/page_title", title: "Events" do
   = link_to "Add Event", new_manage_event_path, class: "btn btn-sm btn-outline-secondary"
 
-#calendar
-
-.modal{:id =>"eventModal"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        .modal-title Edit Event
-        %button.close{"data-dismiss" =>"modal", "aria-label" =>"Close"}
-          %span{"aria-hidden"=>"true"} X
-      .modal-body
-        #editEventBody
-      .modal-footer
-        %button.btn.btn-primary{:id => "saveChanges"} Save Changes
-        %button.btn.btn-danger{:id => "showDelete"} Delete
-
+#calendar.calendar-list

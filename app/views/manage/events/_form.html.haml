@@ -1,11 +1,12 @@
 = bs_horizontal_simple_form_for @event, url: url_for(action: @event.new_record? ? "create" : "update", controller: "events") do |f|
   .form-inputs
-    = f.input :title, required: true
+    = f.input :title
     = f.input :description
+    = f.input :location
     = f.input :owner, input_html: {value: @event.new_record? ? current_user.full_name: @event.owner }, required: true
     = f.input :allDay, label: "All day"
     = f.input :public
-    = f.input :start, required: true
-    = f.input :end, required: true
+    = f.input :start, minute_step: 5
+    = f.input :end, minute_step: 5
   .center
     = f.button :submit, value: ( @event.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
