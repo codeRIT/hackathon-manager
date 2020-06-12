@@ -2,21 +2,28 @@ function eventCalendar() {
   return $('#calendar').fullCalendar({
     defaultView: 'listYear',
     eventRender: function(event, element, view) {
-      console.log(event);
+      if(event.public){
+        element.find('.fc-event-dot').css('background-color','red');
+      }
       let publicText= "";
       if(event.public)
         publicText = "Public";
-      element.find('.fc-list-item-title').append('<div class="hr-line-solid-no-margin" style="float: right"><span style="color: red">' + publicText + '</span></div>');
-      element.find('.fc-list-item-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 12px">' + event.description + '</span>');
-      element.find('.fc-list-item-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 12px">' + event.owner + '</span>')
+      let description = event.description? event.description : ""
+      let location = event.location? event.location : ""
+      element.find('.fc-list-item-title').append('<div style="float: right"><span style="color: red">' + publicText + '</span></div>');
+      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + description + '</span>');
+      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + location + '</span>');
+      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + event.owner + '</span>')
     },
     events: '/manage/events.json',
     eventClick: function(info) {
-      // $('#eventModal').show();
-      // $('#editEventBody').html("<%= escape_javascript(render(:partial => 'show', :locals => { :id => "+info.id+" })) %>");
       window.location = "events/"+info.id
     },
+    eventData: {
+      Color: 'red'
+    },
     height: "auto",
+
   });
 }
 

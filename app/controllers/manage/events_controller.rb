@@ -5,7 +5,7 @@ class Manage::EventsController < Manage::ApplicationController
   def index
     events = Event.all
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # index.html.erb
       format.json { render json: Event.all }
     end
   end
@@ -32,15 +32,10 @@ class Manage::EventsController < Manage::ApplicationController
     respond_with(:manage, @event)
   end
 
-  def edit
-    @event = Event.find_by_id(params[:id])
-    respond_with(:manage, @event)
-  end
-
   def update
     @event = Event.find_by_id(params[:id])
     all_day_checked_params = event_params
-    # If a event is marked all day but with different times in the same day it will not appear.
+    # full calendar will not render events that are marked all day but have different times in the same day
     if @event.allDay and Time.at(@event.start).to_date === Time.at(@event.end).to_date
       all_day_checked_params["end(1i)"] = all_day_checked_params["start(1i)"]
       all_day_checked_params["end(2i)"] = all_day_checked_params["start(2i)"]
@@ -58,17 +53,16 @@ class Manage::EventsController < Manage::ApplicationController
 
   def destroy
     @event = Event.find_by_id(params[:id])
-    @event.destroy
-    redirect_to(manage_events_path)
-  end
-
-  def delete
-    @event = Event.find_by_id(params[:id])
+    if @event.destroy
+      redirect_to(manage_events_path)
+    else
+      render('show')
+    end
   end
 
   def event_params
     params.require(:event).permit(
-        :title, :description, :owner, :allDay,:public ,:start, :end,
+        :title, :description, :location, :owner, :allDay,:public ,:start, :end,
         )
   end
 end
