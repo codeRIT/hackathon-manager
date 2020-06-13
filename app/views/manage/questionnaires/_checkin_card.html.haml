@@ -5,7 +5,13 @@
       = render 'manage/questionnaires/check_in_badge'
       - if @questionnaire.checked_in_at
         %small
-          = @questionnaire.checked_in_by_id ? @questionnaire.checked_in_by.email : "(never checked in)"
+          - if @questionnaire.checked_in_by_id
+            - if @questionnaire.checked_in_by
+              = @questionnaire.checked_in_by.email
+            - else
+              = "(deleted user)"
+          - else
+            = "(never checked in)"
           = @questionnaire.checked_in_at ? display_datetime(@questionnaire.checked_in_at, in_sentence: true) : "(not checked in)"
     - if !@questionnaire.checked_in_at
       %p.card-text

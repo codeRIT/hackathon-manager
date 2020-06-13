@@ -87,7 +87,6 @@ gem 'simple_spark'
 gem 'sparkpost_rails'
 gem 'httparty'
 gem 'rollbar', '~> 2.8'
-gem 'skylight'
 gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 
