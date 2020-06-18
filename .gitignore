@@ -33,3 +33,6 @@
 /.idea
 
 .generators
+
+# macOS
+.DS_Store
