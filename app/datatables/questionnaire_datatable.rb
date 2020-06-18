@@ -40,7 +40,7 @@ class QuestionnaireDatatable < ApplicationDatatable
     if record.is_bus_captain?
       link_to("Remove", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "0"), method: "post", class: "text-danger")
     else
-      link_to("Promote", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "1"), method: "post", data: { confirm: "Are you sure you want to make #{record.full_name} a bus captain? They will receive a confirmation email." })
+      link_to("Promote", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "1"), method: "post", data: { confirm: "Are you sure you want to make #{record.user.full_name} a bus captain? They will receive a confirmation email." })
     end
   end
 
