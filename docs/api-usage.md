@@ -13,7 +13,7 @@ If you run into any inconsistencies, feel free to open an issue on the [hackatho
 
 ## Endpoints
 
-> Note that endpoints are currently being rewritten to support more user-based access, rather than hiding most information under an admin-level restriction. 
+> Note that endpoints are currently being rewritten to support more user-based access, rather than hiding most information under an admin-level restriction.
 
 Endpoints are shared with regular page controllers for browser-style functionality. This leverages Ruby on Rails routing (for a deep dive, see [Rails Routing from the Outside In](https://guides.rubyonrails.org/routing.html)).
 
@@ -77,7 +77,7 @@ end
 
 Authentication is implemented with OAauth 2, provided by the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem. For full Doorkeeper endpoints + docs, see the [Doorkeeper wiki](https://github.com/doorkeeper-gem/doorkeeper/wiki/API-endpoint-descriptions-and-examples).
 
-For a guide to set up & test the API using Postman or Paw, see the [API Setup](api-setup.md) page.
+See the [Setup Postman/Paw for API Testing](api-setup.md) page for information on using those tools for testing the API locally.
 
 Once appropriate authentication credentials are retrieved, they should be provided on all API requests.
 
