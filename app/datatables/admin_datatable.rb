@@ -25,9 +25,10 @@ class AdminDatatable < ApplicationDatatable
     records.map do |record|
       {
         id: record.id,
+        link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_user_path(record)),
         first_name: record.first_name,
         last_name: record.last_name,
-        email: link_to(bold(record.email), manage_user_path(record)),
+        email: record.email,
         role: record.role.titleize,
         active: record.is_active ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe,
         receive_weekly_report: yes_no_display(record.receive_weekly_report),

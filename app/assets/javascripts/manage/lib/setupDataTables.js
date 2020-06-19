@@ -17,10 +17,13 @@ var setupDataTables = function () {
   });
 
   $('.datatable.users').DataTable({
-    order: [5, 'desc'],
+    order: [8, 'desc'],
     columns: [
       { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'email' },
+      { orderable: false, data: 'link' },
+      { orderable: true, data: 'first_name' },
+      { orderable: true, data: 'last_name' },
+      { orderable: true, data: 'email', visible: false },
       { orderable: true, data: 'role' },
       { orderable: false, data: 'questionnaire'},
       { orderable: true, data: 'active' },
@@ -34,17 +37,18 @@ var setupDataTables = function () {
   });
 
   $('.datatable.admins').DataTable({
-    order: [1, 'asc'],
+    order: [2, 'asc'],
     columns: [
       { orderable: true, data: 'id', visible: false },
+      { orderable: false, data: 'link' },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email' },
+      { orderable: true, data: 'email', visible: false },
       { orderable: true, data: 'role' },
       { orderable: true, data: 'active' },
       { orderable: true, data: 'receive_weekly_report' },
-      { orderable: true, data: 'created_at' },
-      { orderable: true, data: 'current_sign_in_at' },
+      { orderable: true, data: 'created_at', visible: false },
+      { orderable: true, data: 'current_sign_in_at', visible: false },
       { orderable: true, data: 'last_sign_in_at', visible: false },
       { orderable: true, data: 'current_sign_in_ip', visible: false },
       { orderable: true, data: 'last_sign_in_ip', visible: false },
