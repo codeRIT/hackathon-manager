@@ -8,6 +8,7 @@ class Questionnaire < ApplicationRecord
   before_validation :clean_for_non_rsvp
   before_validation :clean_negative_special_needs
   before_validation :clean_negative_dietary_restrictions
+  before_save :strip_phone_number
   after_create :queue_triggered_email_create
   after_update :queue_triggered_email_update
   after_save :update_school_questionnaire_count
@@ -135,6 +136,11 @@ class Questionnaire < ApplicationRecord
   def vcs_url=(value)
     value = "http://" + value if !value.blank? && !value.include?("http://") && !value.include?("https://")
     super value
+  end
+
+  def strip_phone_number
+    # strips the string to just numbers and possible a plus sign for country code for standardization
+    self.phone = phone.tr('^0-9+', '')
   end
 
   def school

@@ -40,6 +40,18 @@ document.addEventListener('turbolinks:load', function() {
               }
             }
             break;
+          case 'phone':
+            if (!value || $.trim(value).length < 1) {
+              notify(this, 'Missing Information');
+            }
+            else if(value){
+              var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+              if (!re.test(value)) {
+                notify(this, 'Please enter a valid phone number');
+                success = false;
+              }
+            }
+            break;
           case 'file-max-size':
             if (
               this.files &&
