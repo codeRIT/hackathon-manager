@@ -4,12 +4,20 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   require "sidekiq/cron/web"
 
-  devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks"}
   use_doorkeeper
 
   mount MailPreview => "mail_view" if Rails.env.development?
 
-  root to: "questionnaires#show"
+  devise_scope :user do
+    authenticated do
+      root to: "questionnaires#show"
+    end
+
+    unauthenticated do
+      root to: "devise/sessions#new"
+    end
+  end
 
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => "/sidekiq"
