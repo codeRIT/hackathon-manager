@@ -100,15 +100,23 @@ $ bundle install
 $ bin/rails db:setup
 ```
 
-5. Start up the server
+5. If you are not setting up Mail Catcher comment out these two lines in messages.rb and user.rb
+```ruby
+for_trigger(trigger).map { |message| UserMailer.bulk_message_email(message.id, user_id).deliver_later }
+```
+```ruby
+UserMailer.incomplete_reminder_email(id).deliver_later(wait: 1.day)
+```
+
+6. Start up the server
 
 ```bash
 $ bin/rails s  # short for bin/rails server
 ```
 
-6. Visit http://localhost:3000/apply, create an account, and complete an application
+7. Visit http://localhost:3000/apply, create an account, and complete an application
 
-7. In another bash window, promote your user to an admin
+8. In another bash window, promote your user to an admin
 
 ```bash
 $ cd hackathon-manager
@@ -118,7 +126,7 @@ Loading development environment (Rails 5.1.1)
 irb(main):001:0> User.last.update_attribute(:role, :admin)
 ```
 
-8. Visit http://localhost:3000/manage and set up the hackathon as needed
+9. Visit http://localhost:3000/manage and set up the hackathon as needed
 
 _See https://coderit.org/hackathon-manager/ for docs on regular hackathon setup_
 
