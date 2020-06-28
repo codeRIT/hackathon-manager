@@ -84,23 +84,29 @@ var setupDataTables = function () {
   // MARK: Datatables for the stats
 
   $('.datatable.stats-dietary').DataTable({
+    order: [1, 'asc'],
     columns: [
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
-      { orderable: true, data: 'phone' },
-      { orderable: true, data: 'checked_in_at' },
+      { orderable: true, data: 'phone', visible: false },
+      { orderable: false, data: 'questionnaire' },
+      { orderable: true, data: 'checked_in_at', visible: false },
       { orderable: true, data: 'dietary_restrictions' },
       { orderable: true, data: 'special_needs' }
     ]
   });
 
-  $('.datatable.stats-notscooltravel').DataTable({
+  $('.datatable.stats-notschooltravel').DataTable({
+    order: [1, 'asc'],
     columns: [
-      { orderable: true, data: 'questionnaire_link' },
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
+      { orderable: true, data: 'phone', visible: false },
+      { orderable: false, data: 'questionnaire' },
       { orderable: true, data: 'travel_location' },
       { orderable: true, data: 'acc_status' }
     ]
@@ -108,6 +114,7 @@ var setupDataTables = function () {
 
   $('.datatable.stats-attendeeinfo').DataTable({
     columns: [
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
@@ -118,19 +125,25 @@ var setupDataTables = function () {
   });
 
   $('.datatable.stats-mlhinfo-applied').DataTable({
+    order: [1, 'asc'],
     columns: [
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
+      { orderable: true, data: 'phone', visible: false },
       { orderable: true, data: 'school_name' }
     ]
   });
 
   $('.datatable.stats-mlhinfo-checkedin').DataTable({
+    order: [1, 'asc'],
     columns: [
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
+      { orderable: true, data: 'phone' },
       { orderable: true, data: 'school_name' }
     ]
   });
