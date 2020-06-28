@@ -2,9 +2,6 @@ class Manage::StatsController < Manage::ApplicationController
 
   respond_to :html, :json
 
-  def index
-  end
-
   def dietary_restrictions_special_needs_datatable
     render json:  DietarySpecialNeedsDatatable.new(params, view_context: view_context)
   end

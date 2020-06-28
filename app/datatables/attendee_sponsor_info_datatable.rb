@@ -16,7 +16,8 @@ class AttendeeSponsorInfoDatatable < ApplicationDatatable
   private
 
   def data
-    records.map do |record| {
+    records.map do |record| 
+      {
         id: record.id,
         first_name: record.user.first_name,
         last_name: record.user.last_name,
@@ -33,9 +34,9 @@ class AttendeeSponsorInfoDatatable < ApplicationDatatable
     restrictions = "can_share_info = '1' AND checked_in_at != 0"
 
     q_attributes = [
-        :id,
-        :vcs_url,
-        :portfolio_url,
+      :id,
+      :vcs_url,
+      :portfolio_url
     ]
 
     Questionnaire.includes(:user).references(:user).where(restrictions).select(q_attributes)

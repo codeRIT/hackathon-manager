@@ -16,7 +16,8 @@ class AltTravelDatatable < ApplicationDatatable
   private
 
   def data
-    records.map do |record| {
+    records.map do |record| 
+      {
         id: record.id,
         first_name: record.user.first_name,
         last_name: record.user.last_name,
@@ -33,10 +34,10 @@ class AltTravelDatatable < ApplicationDatatable
     restrictions = "travel_not_from_school = '1'"
 
     q_attributes = [
-        :id,
-        :phone,
-        :travel_location,
-        :acc_status,
+      :id,
+      :phone,
+      :travel_location,
+      :acc_status
     ]
 
     Questionnaire.includes(:user).references(:user).where(restrictions).select(q_attributes)

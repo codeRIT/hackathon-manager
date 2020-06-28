@@ -17,7 +17,8 @@ class DietarySpecialNeedsDatatable < ApplicationDatatable
   private
 
   def data
-    records.map do |record| {
+    records.map do |record| 
+      {
         id: record.id,
         first_name: record.user.first_name,
         last_name: record.user.last_name,
@@ -37,12 +38,12 @@ class DietarySpecialNeedsDatatable < ApplicationDatatable
     "dietary_restrictions != '' OR special_needs != ''"
 
     q_attributes = [
-        :id,
-        :phone,
-        :checked_in_at,
-        :dietary_restrictions,
-        :special_needs,
-      ]
+      :id,
+      :phone,
+      :checked_in_at,
+      :dietary_restrictions,
+      :special_needs
+    ]
 
     Questionnaire.includes(:user).references(:user).where(restrictions).select(q_attributes)
   end

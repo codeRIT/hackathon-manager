@@ -15,7 +15,8 @@ class MLHCheckedInDatatable < ApplicationDatatable
   private
 
   def data
-    records.map do |record| {
+    records.map do |record| 
+      {
         id: record.id,
         first_name: record.user.first_name,
         last_name: record.user.last_name,
@@ -30,9 +31,9 @@ class MLHCheckedInDatatable < ApplicationDatatable
     restrictions = "checked_in_at > 0"
 
     q_attributes = [
-        :id,
-        :phone
-      ]
+      :id,
+      :phone
+    ]
 
     Questionnaire.includes(:user).references(:user).where(restrictions).select(q_attributes)
   end
