@@ -3,7 +3,7 @@ class Manage::StatsController < Manage::ApplicationController
   respond_to :html, :json
 
   def dietary_restrictions_special_needs_datatable
-    render json:  DietarySpecialNeedsDatatable.new(params, view_context: view_context)
+    render json: DietarySpecialNeedsDatatable.new(params, view_context: view_context)
   end
 
   def alt_travel_datatable

@@ -16,7 +16,7 @@ class AttendeeSponsorInfoDatatable < ApplicationDatatable
   private
 
   def data
-    records.map do |record| 
+    records.map do |record|
       {
         id: record.id,
         first_name: record.user.first_name,
