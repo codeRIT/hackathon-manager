@@ -15,15 +15,12 @@
           - next if ignore_fields.include? field
           %p.mb-1
             = t("simple_form.labels.#{audit.auditable.class.name.downcase}.#{field}")
-            - if audit.auditable.class.columns_hash[field].type == :text
-              changed
-            - else
-              changed to
-              %strong= display_audit_value(value_pairs[1], field)
-              %br
-              %small.text-secondary
-                Previously:
-                %strong= display_audit_value(value_pairs[0], field)
+            changed to
+            %strong= display_audit_value(value_pairs[1], field)
+            %br
+            %small.text-secondary
+              Previously:
+              %strong= display_audit_value(value_pairs[0], field)
     .text-secondary.d-flex.justify-content-between.flex-xl-column.justify-content-xl-start.text-xl-right
       %p.mb-0
         %small
