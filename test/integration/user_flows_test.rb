@@ -12,7 +12,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
 
   should "be able to login and browse site as an admin" do
     login(FactoryBot.create(:admin))
-    assert_redirected_to manage_root_path
+    assert_redirected_to new_questionnaires_path
 
     get manage_dashboard_index_path
     assert_response :success
