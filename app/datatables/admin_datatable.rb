@@ -1,5 +1,5 @@
 class AdminDatatable < ApplicationDatatable
-  def_delegators :@view, :link_to, :manage_admin_path, :bold, :display_datetime
+  def_delegators :@view, :link_to, :manage_user_path, :bold, :display_datetime
 
   def view_columns
     @view_columns ||= {
@@ -23,7 +23,7 @@ class AdminDatatable < ApplicationDatatable
     records.map do |record|
       {
         id: record.id,
-        email: link_to(bold(record.email), manage_admin_path(record)),
+        email: link_to(bold(record.email), manage_user_path(record)),
         role: record.role.titleize,
         active: record.is_active ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe,
         receive_weekly_report: yes_no_display(record.receive_weekly_report),
