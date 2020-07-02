@@ -32,7 +32,13 @@
         %p.card-text
           = render 'acc_status_badge'
           %small
-            = @questionnaire.acc_status_author_id ? @questionnaire.acc_status_author.email : "(no author)"
+            - if @questionnaire.acc_status_author_id
+              - if @questionnaire.acc_status_author
+                = @questionnaire.acc_status_author.email
+              - else
+                = "(deleted user)"
+            - else
+              = "(no author)"
             = @questionnaire.acc_status_date ? display_datetime(@questionnaire.acc_status_date, in_sentence: true) : "(no date)"
         - if current_user.admin?
           = bs_vertical_simple_form @questionnaire, url: url_for(action: "update_acc_status", controller: "questionnaires") do |f|

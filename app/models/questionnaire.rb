@@ -155,7 +155,7 @@ class Questionnaire < ApplicationRecord
 
   def acc_status_author
     return unless acc_status_author_id.present?
-    User.find(acc_status_author_id)
+    User.find_by_id(acc_status_author_id)
   end
 
   def checked_in?
@@ -168,7 +168,7 @@ class Questionnaire < ApplicationRecord
 
   def checked_in_by
     return unless checked_in_by_id.present?
-    User.find(checked_in_by_id)
+    User.find_by_id(checked_in_by_id)
   end
 
   def fips_code
