@@ -62,7 +62,7 @@ class QuestionnairesController < ApplicationController
     if current_user.reload.questionnaire.present?
       return redirect_to questionnaires_path, notice: 'Application already exists.'
     end
-    return if not HackathonConfig['accepting_questionnaires']
+    return unless HackathonConfig['accepting_questionnaires']
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
     @questionnaire.user_id = current_user.id
 
