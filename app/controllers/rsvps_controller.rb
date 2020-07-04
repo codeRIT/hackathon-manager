@@ -80,7 +80,7 @@ class RsvpsController < ApplicationController
 
     if (before_account != after_account || before_bus != after_bus) && @questionnaire.is_bus_captain == true
       @questionnaire.is_bus_captain = false
-      if before_bus != after_bus && after_bus != nil
+      if before_bus != after_bus && !after_bus.nil?
         @questionnaire.bus_captain_interest = true
       end
       users = User.where(role: 3)

@@ -47,11 +47,10 @@ class AdminMailer < ApplicationMailer
     @former_captain = User.find_by_id(former_captain_id)
     @user = User.find_by_id(user_id)
 
-
     mail(
-        to: pretty_email(@user.full_name, @user.email),
-        subject: "Bus Captain Left Bus Route: " + @bus_route.name,
-        )
+      to: pretty_email(@user.full_name, @user.email),
+      subject: "Bus Captain Left Bus Route: " + @bus_route.name,
+    )
   end
 
   private
