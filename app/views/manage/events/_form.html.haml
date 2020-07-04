@@ -4,7 +4,6 @@
     = f.input :description
     = f.input :location
     = f.input :owner, input_html: {value: @event.new_record? ? current_user.full_name: @event.owner }, required: true
-    = f.input :allDay, label: "All day"
     = f.input :public
     = f.input :start, minute_step: 5
     = f.input :end, minute_step: 5
