@@ -139,7 +139,7 @@ class Questionnaire < ApplicationRecord
 
   def phone=(value)
     # strips the string to just numbers and possible a plus sign for country code for standardization
-    value = value.try(:tr, '^0-9+', '')
+    value = value.try(:tr, '^0-9', '')
     super value
   end
 
