@@ -10,17 +10,17 @@
       - if recipient_error.present?
         %button.btn.btn-sm.btn-outline-secondary{disabled: 'disabled', title: 'Cannot deliver when there is a recipient error; see error above.'} Deliver
       - else
-        %button.btn.btn-sm.btn-primary{"data-toggle"=>"modal", "data-target"=>"#confirm_messages"}
+        %button.btn.btn-sm.btn-primary{"data-toggle"=>"modal", "data-target"=>"#confirmMessages"}
           %span.fa.fa-send.icon-space-r-half
           %span Send
-        .modal{:id => "confirm_messages"}
+        .modal{:id => "confirmMessages"}
           .modal-dialog{:role => "document"}
             .modal-content
               .modal-header
                 %h5{:class => "modal-title"} Confirm
               .modal-body
                 %p Are you sure? The message "#{@message.name}" will be sent to:
-                %p.center.font-weight-bold{:style => "color: red; font-size: 18px"} #{recipient_count}
+                %p.center.font-weight-bold{:style => "color: red; font-size: 18px"} = recipient_count
               .modal-footer
                 %button.btn.btn-secondary{'data-dismiss'=>"modal"} Close
                 = link_to deliver_manage_message_path(@message), method: :patch, class: 'btn btn-danger' do
