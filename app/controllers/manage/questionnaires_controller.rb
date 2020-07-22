@@ -141,7 +141,8 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def message_events
-    render json: @questionnaire.message_events
+    # TODO stubbed for HM-2.1
+    # render json: @questionnaire.message_events
   end
 
   private

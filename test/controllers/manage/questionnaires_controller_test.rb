@@ -5,7 +5,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
   setup do
     @questionnaire = create(:questionnaire)
-    stub_request(:get, /api.sparkpost.com.*/).to_return(status: 200, body: "", headers: {})
+    stub_request(:get, /api.sendgrid.com.*/).to_return(status: 200, body: "", headers: {})
   end
 
   context "while not authenticated" do
@@ -182,10 +182,11 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :success
-    end
+    #Stubbed for HM-2.1
+    #should "allow access to manage_questionnaires#message_events" do
+      #get :message_events, params: { id: @questionnaire }
+      #assert_response :success
+    #end
 
     should "not allow access to manage_questionnaires#new" do
       get :new, params: { id: @questionnaire }
@@ -257,10 +258,11 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :success
-    end
+    #Stubbed for HM-2.1
+    #should "allow access to manage_questionnaires#message_events" do
+      #get :message_events, params: { id: @questionnaire }
+      #assert_response :success
+    #end
 
     should "allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }

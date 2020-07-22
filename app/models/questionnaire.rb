@@ -196,10 +196,9 @@ class Questionnaire < ApplicationRecord
   end
 
   def message_events
-    return [] unless ENV["SPARKPOST_API_KEY"].presence
-
-    simple_spark = SimpleSpark::Client.new
-    simple_spark.message_events.search(recipients: email)
+    return []
+    # TODO stubbed for HM-2.1
+    # return [] unless ENV["SENDGRID_API_KEY"].presence
   end
 
   def verbal_status
