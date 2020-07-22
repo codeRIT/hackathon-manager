@@ -97,9 +97,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def destroy
-    user = @questionnaire.user
     @questionnaire.destroy
-    user.destroy if user.present?
     respond_with(:manage, @questionnaire)
   end
 
