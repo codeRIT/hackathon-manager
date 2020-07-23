@@ -1,0 +1,15 @@
+.form-container
+  = bs_horizontal_simple_form_for @individual_message, url: url_for(action: @individual_message.new_record? ? "create" : "update", controller: "individual_message") do |f|
+    = f.error_notification
+
+    .form-inputs
+      = f.input :name, input_html: {value: @user_name}
+      = f.input :subject, hint: "All emails are from <pre class=\"d-inline\">#{html_escape(HackathonConfig['email_from'])}</pre>".html_safe
+      = f.input :recipient, input_html: {value: @recipient}
+      %br
+
+      -#%h5.mb-3 Body
+      = f.input :body, input_html: { rows: 36, 'data-message-live-preview-base-src' => live_preview_manage_messages_path, style: 'font-size: 14px', 'data-simple-mde' => '1' }, hint: "Supports markdown and HTML. Use toolbar to view side-by-side preview.", label: false, wrapper: :bootstrap_inline_form
+
+    .form-actions.mb-3.mt-3
+      = f.button :submit, class: 'btn-primary'

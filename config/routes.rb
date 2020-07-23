@@ -63,6 +63,9 @@ Rails.application.routes.draw do
     resources :checkins do
       post :datatable, on: :collection
     end
+    resources :individual_message do
+
+    end
     resources :users do
       post :user_datatable, on: :collection
       post :admin_datatable, on: :collection

@@ -17,7 +17,7 @@
           .fa.fa-cog
         .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "title-actions"}
           = link_to 'Convert to Admin', convert_to_admin_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.full_name}\" will be permanently erased, and \"#{@questionnaire.email}\" will become an admin. This action is irreversible." }, class: 'dropdown-item'
-
+          = link_to 'Send Email', {:controller =>  'individual_message', :action => 'new', :id => @questionnaire.user_id}, class: 'dropdown-item'
 = render 'overview'
 
 .row
