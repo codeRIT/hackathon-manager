@@ -1,6 +1,12 @@
 :ruby
   begin
     recipient_count = pluralize(BulkMessageJob.build_recipients(@message.recipients).count, "Recipient")
+    number_of_recipients = BulkMessageJob.build_recipients(@message.recipients).count
+    recipient_plural = "Recipient"
+    if number_of_recipients > 1
+      recipient_plural = "Recipients"
+    end
+
   rescue => recipient_error
   end
 
@@ -20,11 +26,13 @@
                 %h5{:class => "modal-title"} Confirm
               .modal-body
                 %p Are you sure? The message "#{@message.name}" will be sent to:
-                %p.center.font-weight-bold{:style => "color: red; font-size: 18px"} = recipient_count
+                %p.center
+                  %span.font-weight-bold{:style => "color: red; font-size: 18px"}= number_of_recipients
+                  %span.font-weight-bold{:style => "font-size: 18px"}= recipient_plural
               .modal-footer
                 %button.btn.btn-secondary{'data-dismiss'=>"modal"} Close
                 = link_to deliver_manage_message_path(@message), method: :patch, class: 'btn btn-danger' do
-                  %span Send Messages
+                  %span Send Message
     - if @message.can_edit?
       = link_to 'Edit', edit_manage_message_path(@message), class: 'btn btn-sm btn-outline-secondary'
       = link_to 'Delete', manage_message_path(@message), method: :delete, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
