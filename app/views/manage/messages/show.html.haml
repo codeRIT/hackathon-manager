@@ -27,7 +27,7 @@
               .modal-body
                 %p Are you sure? The message "#{@message.name}" will be sent to:
                 %h3.center
-                  %span.font-weight-bold.text-danger= number_of_recipients
+                  %span.font-weight-bold= number_of_recipients
                   %span= recipient_plural
               .modal-footer
                 %button.btn.btn-secondary{'data-dismiss'=>"modal"} Close
