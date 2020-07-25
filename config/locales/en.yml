@@ -119,6 +119,22 @@ en:
         thanks_for_rsvp_message: Thanks For RSVP Message
   pages:
     manage:
+      dashboard:
+        title: Dashboard
+      questionnaires:
+        title: Questionnaires
+      messages:
+        title: Messages
+      check-in:
+        title: Check-in
+      stats:
+        title: Stats
+      trackable-tags:
+        title: Trackable Tags
+      bus-lists:
+        title: Bus Lists
+      schools:
+        title: Schools
       users: 
         title: Users & Staff
         users: All Users
