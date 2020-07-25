@@ -35,43 +35,54 @@
                   .fa.fa-inbox.fa-fw.icon-space-r-half
                   Questionnaires
               %li.nav-item
-                = active_link_to manage_checkins_path, class: "nav-link" do
-                  .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
-                  Check-in
-              - if current_user.admin?
+                = active_link_to manage_messages_path, class: "nav-link" do
+                  .fa.fa-bullhorn.fa-fw.icon-space-r-half
+                  Messages
+
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span Logistics
+              %ul.nav.flex-column.mb-2
+                %li.nav-item
+                  = active_link_to manage_checkins_path, class: "nav-link" do
+                    .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
+                    Check-in
+                %li.nav-item
+                  = active_link_to manage_stats_path, class: "nav-link" do
+                    .fa.fa-table.fa-fw.icon-space-r-half
+                    Stats
+                %li.nav-item
+                  = active_link_to manage_trackable_tags_path, class: "nav-link" do
+                    .fa.fa-tag.fa-fw.icon-space-r-half
+                    Trackable Tags
+
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span Travel
+              %ul.nav.flex-column.mb-2
+                %li.nav-item
+                  = active_link_to manage_bus_lists_path, class: "nav-link" do
+                    .fa.fa-bus.fa-fw.icon-space-r-half
+                    Bus Lists
+                %li.nav-item
+                  = active_link_to manage_schools_path, class: "nav-link" do
+                    .fa.fa-home.fa-fw.icon-space-r-half
+                    Schools
+
+            - if current_user.admin?
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span Administration
+              %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to manage_users_path, class: "nav-link" do
                     .fa.fa-users.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.users')
-              %li.nav-item
-                = active_link_to manage_messages_path, class: "nav-link" do
-                  .fa.fa-bullhorn.fa-fw.icon-space-r-half
-                  Messages
-              %li.nav-item
-                = active_link_to manage_bus_lists_path, class: "nav-link" do
-                  .fa.fa-bus.fa-fw.icon-space-r-half
-                  Bus Lists
-              %li.nav-item
-                = active_link_to manage_schools_path, class: "nav-link" do
-                  .fa.fa-home.fa-fw.icon-space-r-half
-                  Schools
-              %li.nav-item
-                = active_link_to manage_stats_path, class: "nav-link" do
-                  .fa.fa-table.fa-fw.icon-space-r-half
-                  Stats
-              %li.nav-item
-                = active_link_to manage_trackable_tags_path, class: "nav-link" do
-                  .fa.fa-tag.fa-fw.icon-space-r-half
-                  Trackable Tags
-            - if current_user.admin?
-              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
-                %span Advanced
-              %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to manage_configs_path, class: "nav-link" do
                     .fa.fa-wrench.fa-fw.icon-space-r-half
-                    Config
-                    .nav-item-description Manage configuration
+                    Hackathon Settings
+                    
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span Advanced
+              %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half
