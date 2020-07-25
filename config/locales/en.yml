@@ -169,3 +169,6 @@ en:
             yes: Yes
             no: No
             save: Save
+      settings:
+        title: Hackathon Settings
+
