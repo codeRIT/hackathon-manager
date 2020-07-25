@@ -27,10 +27,12 @@
               .modal-body
                 %p Are you sure? The message "#{@message.name}" will be sent to:
                 %h3.center
-                  %span.font-weight-bold= number_of_recipients
-                  %span= recipient_plural
+                  %span.font-weight-bold
+                    = number_with_delimiter(number_of_recipients)
+                  %span
+                    = recipient_plural
               .modal-footer
-                %button.btn.btn-secondary{'data-dismiss'=>"modal"} Close
+                %button.btn.btn-outline-secondary{'data-dismiss'=>"modal"} Close
                 = link_to deliver_manage_message_path(@message), method: :patch, class: 'btn btn-danger' do
                   %span Send Message
     - if @message.can_edit?
