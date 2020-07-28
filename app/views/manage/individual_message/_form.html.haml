@@ -5,9 +5,9 @@
     .form-inputs
       = f.input :name, input_html: {value: @user_name}
       = f.input :subject, hint: "All emails are from <pre class=\"d-inline\">#{html_escape(HackathonConfig['email_from'])}</pre>".html_safe
-      = f.input :recipient, input_html: {value: @recipient}
-      %br
-
+      %label.col-sm-3.col-form-label Recipient
+      .col-sm-9.float-right
+        %p=@recipient
       -#%h5.mb-3 Body
       = f.input :body, input_html: { rows: 36, 'data-message-live-preview-base-src' => live_preview_manage_messages_path, style: 'font-size: 14px', 'data-simple-mde' => '1' }, hint: "Supports markdown and HTML. Use toolbar to view side-by-side preview.", label: false, wrapper: :bootstrap_inline_form
 

@@ -14,6 +14,10 @@ class UserMailer < ApplicationMailer
     )
   end
 
+  def individual_message(individual_message_id)
+    @message = IndividualMessageTest.find_by_id(individual_message_id)
+  end
+
   def incomplete_reminder_email(user_id)
     @user = User.find_by_id(user_id)
     return if @user.blank? || @user.admin? || @user.questionnaire || Time.now.to_date > Date.parse(HackathonConfig["last_day_to_apply"])
