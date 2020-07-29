@@ -258,11 +258,11 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    #Stubbed for HM-2.1
-    #should "allow access to manage_questionnaires#message_events" do
-      #get :message_events, params: { id: @questionnaire }
-      #assert_response :success
-    #end
+    # Stubbed for HM-2.1
+    # should "allow access to manage_questionnaires#message_events" do
+    # get :message_events, params: { id: @questionnaire }
+    # assert_response :success
+    # end
 
     should "allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
