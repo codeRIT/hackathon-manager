@@ -25,7 +25,9 @@
       .row
         %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
           .sidebar-sticky
-            %ul.nav.flex-column
+            %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+              %span Overview
+            %ul.nav.flex-column.mb-2
               %li.nav-item
                 = active_link_to manage_root_path, class: "nav-link", active_children: false do
                   .fa.fa-area-chart.fa-fw.icon-space-r-half
