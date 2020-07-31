@@ -1,6 +1,12 @@
 :ruby
   begin
-    recipient_count = pluralize(BulkMessageJob.build_recipients(@message.recipients).count, "recipient")
+    recipient_count = pluralize(BulkMessageJob.build_recipients(@message.recipients).count, "Recipient")
+    number_of_recipients = BulkMessageJob.build_recipients(@message.recipients).count
+    recipient_plural = "Recipient"
+    if number_of_recipients > 1
+      recipient_plural = "Recipients"
+    end
+
   rescue => recipient_error
   end
 
@@ -10,9 +16,25 @@
       - if recipient_error.present?
         %button.btn.btn-sm.btn-outline-secondary{disabled: 'disabled', title: 'Cannot deliver when there is a recipient error; see error above.'} Deliver
       - else
-        = link_to deliver_manage_message_path(@message), method: :patch, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be sent to #{recipient_count}." }, class: 'btn btn-sm btn-primary' do
+        %button.btn.btn-sm.btn-primary{"data-toggle"=>"modal", "data-target"=>"#confirm-messages"}
           %span.fa.fa-send.icon-space-r-half
-          Send
+          %span Send
+        .modal{:id => "confirm-messages"}
+          .modal-dialog{:role => "document"}
+            .modal-content
+              .modal-header
+                %h5{:class => "modal-title"} Confirm
+              .modal-body
+                %p Are you sure? The message "#{@message.name}" will be sent to:
+                %h3.center
+                  %span.font-weight-bold
+                    = number_with_delimiter(number_of_recipients)
+                  %span
+                    = recipient_plural
+              .modal-footer
+                %button.btn.btn-outline-secondary{'data-dismiss'=>"modal"} Close
+                = link_to deliver_manage_message_path(@message), method: :patch, class: 'btn btn-danger' do
+                  %span Send Message
     - if @message.can_edit?
       = link_to 'Edit', edit_manage_message_path(@message), class: 'btn btn-sm btn-outline-secondary'
       = link_to 'Delete', manage_message_path(@message), method: :delete, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
