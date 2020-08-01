@@ -21,6 +21,13 @@ class UserMailer < ApplicationMailer
     Message.queue_for_trigger("user.24hr_incomplete_application", @user.id)
   end
 
+  def rsvp_reminder_email(user_id)
+    @user = User.find_by_id(user_id)
+    return if @user.blank? || Time.now.to_date > Date.parse(HackathonConfig["last_day_to_apply"])
+
+    Message.queue_for_trigger("user.rsvp_reminder", @user.id)
+  end
+
   rescue_from SparkPostRails::DeliveryException do |e|
     error_codes_to_not_retry = [
       "1902", # Generation rejection, specific to the Sparkpost API

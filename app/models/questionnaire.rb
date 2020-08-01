@@ -272,7 +272,7 @@ class Questionnaire < ApplicationRecord
       elsif days_remaining > 3
         deliver_date = 2.days.from_now
       end
-      Message.queue_for_trigger("user.rsvp_reminder", user_id).deliver_later(wait_until: deliver_date) if deliver_date.present?
+      UserMailer.rsvp_reminder_email(user_id).deliver_later(wait_until: deliver_date) if deliver_date.present?
     end
   end
 end
