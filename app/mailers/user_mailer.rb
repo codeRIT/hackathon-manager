@@ -15,7 +15,12 @@ class UserMailer < ApplicationMailer
   end
 
   def individual_message(individual_message_id)
-    @message = IndividualMessageTest.find_by_id(individual_message_id)
+    @message = IndividualMessage.find_by_id(individual_message_id)
+    @user = User.find_by_id(@message.user_id)
+    mail(
+      to: pretty_email(@user.full_name, @message.recipient),
+      subject: @message.subject
+    )
   end
 
   def incomplete_reminder_email(user_id)

@@ -64,7 +64,7 @@ Rails.application.routes.draw do
       post :datatable, on: :collection
     end
     resources :individual_message do
-
+      patch :deliver, on: :member
     end
     resources :users do
       post :user_datatable, on: :collection
