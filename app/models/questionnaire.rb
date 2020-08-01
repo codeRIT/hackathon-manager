@@ -264,7 +264,7 @@ class Questionnaire < ApplicationRecord
 
   def queue_triggered_email_rsvp_reminder
     if saved_change_to_acc_status? && acc_status == "accepted"
-      days_remaining = Date.parse(HackathonConfig["event_start_date"]) - @questionnaire.acc_status_date.to_date
+      days_remaining = Date.parse(HackathonConfig["event_start_date"]) - Time.now.to_date
       if days_remaining > 14
         deliver_date = 7.days.from_now
       elsif days_remaining > 10
