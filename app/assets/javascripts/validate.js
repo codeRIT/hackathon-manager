@@ -45,7 +45,7 @@ document.addEventListener('turbolinks:load', function() {
               notify(this, 'Missing Information');
             }
             else if(value){
-              var phoneReg = /^[\+]?[0-9]{0,3}[-\s\.]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+              var phoneReg = /^[\+]?[0-9]{0,3}[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{4,6}$/;
               if (!phoneReg.test(value)) {
                 notify(this, 'Please enter a valid phone number');
                 success = false;
