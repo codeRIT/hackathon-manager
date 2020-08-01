@@ -45,10 +45,10 @@ class Manage::DashboardControllerTest < ActionController::TestCase
         FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status)
       end
 
-      stub_request(:get, "https://maps.googleapis.com/maps/api/geocode/json?address=Rochester%20NY&sensor=true").
-        to_return(status: 200, body: '{"results":[{"geometry":{"location":{"lat": 100, "lng": 100}}}]}', headers: {'Content-Type' => 'application/json; charset=UTF-8'})
-      stub_request(:get, "https://geo.fcc.gov/api/census/area?format=json&lat=100&lon=100").
-        to_return(status: 200, body: '{"results":[{"country_fips":1234}]}', headers: {'Content-Type' => 'application/json; charset=UTF-8'})
+      stub_request(:get, "https://geocoding.geo.census.gov/geocoder/locations/address?street=123+Fake+Street&city=Rochester&state=NY&benchmark=Public_AR_Current&format=json")
+        .to_return(status: 200, body: '{ "result":{ "addressMatches":[{ "coordinates":{ "x": 100, "y": 100 } }] } }', headers: { 'Content-Type' => 'application/json; charset=UTF-8' })
+      stub_request(:get, "https://geo.fcc.gov/api/census/area?format=json&lat=100&lon=100")
+        .to_return(status: 200, body: '{ "results":[{ "country_fips":1234 }] }', headers: { 'Content-Type' => 'application/json; charset=UTF-8' })
 
       paths = [
         :todays_activity_data,
