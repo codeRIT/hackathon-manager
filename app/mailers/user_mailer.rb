@@ -25,7 +25,7 @@ class UserMailer < ApplicationMailer
     @user = User.find_by_id(user_id)
     return if @user.blank? || !@user.questionnaire.acc_status == "accepted" || Time.now.to_date > Date.parse(HackathonConfig["event_start_date"])
 
-    Message.queue_for_trigger("user.rsvp_reminder", @user.id)
+    Message.queue_for_trigger("questionnaire.rsvp_reminder", @user.id)
   end
 
   rescue_from SparkPostRails::DeliveryException do |e|

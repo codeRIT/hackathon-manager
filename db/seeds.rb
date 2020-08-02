@@ -15,8 +15,8 @@ subject_mapping = {
   "questionnaire.accepted" => "You've been accepted!",
   "questionnaire.denied" => "Your application status",
   "questionnaire.rsvp_confirmed" => "RSVP Confirmation",
+  "questionnaire.rsvp_reminder" => "Are you coming to #{HackathonConfig['name']}?",
   "user.24hr_incomplete_application" => "Incomplete application",
-  "user.rsvp_reminder" => "Are you coming to #{HackathonConfig['name']}?",
   "bus_list.new_captain_confirmation" => "You're a bus captain!",
   "bus_list.update_notes" => "Bus Update"
 }
@@ -26,8 +26,8 @@ name_mapping = {
   "questionnaire.accepted" => "Accepted email",
   "questionnaire.denied" => "Denied email",
   "questionnaire.rsvp_confirmed" => "RSVP confirmed email",
+  "questionnaire.rsvp_reminder" => "RSVP Reminder",
   "user.24hr_incomplete_application" => "Incomplete application (24-hour reminder)",
-  "user.rsvp_reminder" => "RSVP Reminder",
   "bus_list.new_captain_confirmation" => "New bus captain confirmation",
   "bus_list.update_notes" => "Bus list update"
 }
