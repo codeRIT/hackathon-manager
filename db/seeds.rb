@@ -16,7 +16,7 @@ subject_mapping = {
   "questionnaire.denied" => "Your application status",
   "questionnaire.rsvp_confirmed" => "RSVP Confirmation",
   "user.24hr_incomplete_application" => "Incomplete application",
-  "user.rsvp_reminder" => "Reminder: Please RSVP",
+  "user.rsvp_reminder" => "Are you coming to #{HackathonConfig['name']}?",
   "bus_list.new_captain_confirmation" => "You're a bus captain!",
   "bus_list.update_notes" => "Bus Update"
 }

@@ -23,7 +23,7 @@ class UserMailer < ApplicationMailer
 
   def rsvp_reminder_email(user_id)
     @user = User.find_by_id(user_id)
-    return if @user.blank? || Time.now.to_date > Date.parse(HackathonConfig["last_day_to_apply"])
+    return if @user.blank? || !@user.questionnaire.acc_status == "accepted" || Time.now.to_date > Date.parse(HackathonConfig["event_start_date"])
 
     Message.queue_for_trigger("user.rsvp_reminder", @user.id)
   end
