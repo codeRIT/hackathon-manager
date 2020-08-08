@@ -3,7 +3,7 @@
     = f.error_notification
 
     .form-inputs
-      = f.input :name, input_html: {value: @user_name}
+      = f.input :name
       = f.input :subject, hint: "All emails are from <pre class=\"d-inline\">#{html_escape(HackathonConfig['email_from'])}</pre>".html_safe
       = f.hidden_field  :user_id
       = f.hidden_field  :recipient

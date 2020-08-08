@@ -1,0 +1,15 @@
+= render "layouts/manage/page_title", title: @individual_message.name, subtitle: "Message"
+
+.row
+  .col-lg-6
+    %dl.row
+      %dt.col-md-3 Name
+      %dd.col-md-9= @individual_message.name
+      %dt.col-md-3 Subject
+      %dd.col-md-9= @individual_message.subject
+      %dt.col-md-3 Recipient
+      %dd.col-md-9= @individual_message.recipient
+
+
+%div
+  %iframe.email-preview{src: preview_manage_individual_message_path(@individual_message)}

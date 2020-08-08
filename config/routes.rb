@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     end
     resources :individual_messages do
       post :datatable, on: :collection
+      get :preview, on: :member
     end
     resources :users do
       post :user_datatable, on: :collection

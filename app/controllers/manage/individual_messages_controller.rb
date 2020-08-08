@@ -1,4 +1,6 @@
 class Manage::IndividualMessagesController < Manage::ApplicationController
+  before_action :set_message, only: [:show, :preview]
+
   respond_to :html, :json
 
   def index
@@ -30,12 +32,22 @@ class Manage::IndividualMessagesController < Manage::ApplicationController
     render json: IndividualMessageDatatable.new(params, view_context: view_context)
   end
 
-  def show
+  def preview
+    email = UserMailer.individual_message(@individual_message.id)
+    render html: email.body.raw_source.html_safe
+  end
 
+
+  def show
+    respond_with(:manage, @message)
   end
 
   def update
 
+  end
+
+  def set_message
+    @individual_message = IndividualMessage.find(params[:id])
   end
 
   def message_params
