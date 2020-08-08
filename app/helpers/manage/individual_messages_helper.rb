@@ -1,0 +1,2 @@
+module Manage::IndividualMessagesHelper
+end

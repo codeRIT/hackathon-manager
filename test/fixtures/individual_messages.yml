@@ -4,16 +4,18 @@ one:
   name: MyString
   subject: MyString
   recipient: MyString
+  user_id: 1
   body: MyText
-  queued_at: 2020-07-18 18:06:35
-  started_at: 2020-07-18 18:06:35
-  delivered_at: 2020-07-18 18:06:35
+  queued_at: 2020-08-07 21:42:03
+  started_at: 2020-08-07 21:42:03
+  delivered_at: 2020-08-07 21:42:03
 
 two:
   name: MyString
   subject: MyString
   recipient: MyString
+  user_id: 1
   body: MyText
-  queued_at: 2020-07-18 18:06:35
-  started_at: 2020-07-18 18:06:35
-  delivered_at: 2020-07-18 18:06:35
+  queued_at: 2020-08-07 21:42:03
+  started_at: 2020-08-07 21:42:03
+  delivered_at: 2020-08-07 21:42:03

@@ -1,5 +1,5 @@
 .form-container
-  = bs_horizontal_simple_form_for @individual_message, url: url_for(action: @individual_message.new_record? ? "create" : "update", controller: "individual_message") do |f|
+  = bs_horizontal_simple_form_for @individual_message, url: url_for(action: @individual_message.new_record? ? "create" : "update", controller: "individual_messages") do |f|
     = f.error_notification
 
     .form-inputs

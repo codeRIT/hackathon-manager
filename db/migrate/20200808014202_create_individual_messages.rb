@@ -4,6 +4,7 @@ class CreateIndividualMessages < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :subject
       t.string :recipient
+      t.integer :user_id
       t.text :body
       t.datetime :queued_at
       t.datetime :started_at

@@ -63,8 +63,8 @@ Rails.application.routes.draw do
     resources :checkins do
       post :datatable, on: :collection
     end
-    resources :individual_message do
-      patch :deliver, on: :member
+    resources :individual_messages do
+      post :datatable, on: :collection
     end
     resources :users do
       post :user_datatable, on: :collection

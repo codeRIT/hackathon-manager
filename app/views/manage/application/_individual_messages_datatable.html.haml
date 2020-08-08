@@ -1,0 +1,27 @@
+:ruby
+  params = {format: :json}
+  if defined?(scope_params)
+    params = params.merge(scope_params)
+  end
+  data_source = datatable_manage_individual_messages_path(params)
+
+  columns ||= %w(id name subject recipient started_at delivered_at)
+  visible = -> (column, columns) { columns.include?(column) ? 'true' : 'false' }
+
+  order ||= "15 desc"
+
+  # Use default page length if not defined
+  page_length ||= nil
+
+%div
+  %table.datatable.table.table-striped.table-hover{ data: { "auto-datatable": true, source: data_source, "table-order": order, 'page-length': page_length } }
+    %thead
+      %tr
+        %th{'data-table': { orderable: 'true', data: 'id', visible: visible.call('id', columns) }} ID
+        %th{'data-table': { orderable: 'true', data: 'name', visible: visible.call('name', columns) }} Name
+        %th{'data-table': { orderable: 'true', data: 'subject', visible: visible.call('subject', columns) }} Subject
+        %th{'data-table': { orderable: 'true', data: 'recipient', visible: visible.call('recipient', columns) }} Recipient
+        %th{'data-table': { orderable: 'true', data: 'started_at', visible: visible.call('started_at', columns) }} Started
+        %th{'data-table': { orderable: 'true', data: 'delivered_at', visible: visible.call('delivered_at', columns) }} Delivered
+    %tbody
+    %tfoot

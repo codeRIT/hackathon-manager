@@ -1,6 +1,5 @@
-class Manage::IndividualMessageController < Manage::ApplicationController
-
-  respond_to :html
+class Manage::IndividualMessagesController < Manage::ApplicationController
+  respond_to :html, :json
 
   def index
 
@@ -27,6 +26,9 @@ class Manage::IndividualMessageController < Manage::ApplicationController
     end
   end
 
+  def datatable
+    render json: IndividualMessageDatatable.new(params, view_context: view_context)
+  end
 
   def show
 
