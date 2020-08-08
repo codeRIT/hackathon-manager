@@ -5,6 +5,7 @@
 @import vendor/codemirror
 @import general/variables
 @import general/css4
+@import forms/autocomplete
 
 $grey-dark: #555
 $grey-med: #999
@@ -174,29 +175,6 @@ $grey-med: #999
 .sidebar-mobile .sidebar-sticky
   height: auto
 
-// jquery ui override
-.ui-autocomplete
-  @include css4
-    background: var(--input--background--focus)
-    border: 1px solid var(black)
-    color: var(--input--text--focus)
-  list-style: none
-  padding: 0
-  .ui-menu-item div
-    padding: 2px 5px
-    display: block
-    cursor: pointer
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-    &:hover
-      @include css4
-        background: var(--primary)
-      @include css4
-        color: var(--white)
-// needed for ellipsis in text to work and acts as a min-width
-.ui-menu
-  width: 50px
 
 /*
  * Datatable changes
