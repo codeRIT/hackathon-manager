@@ -3,7 +3,7 @@
     = f.input :title
     = f.input :description
     = f.input :location
-    = f.input :owner, input_html: {value: @event.new_record? ? current_user.full_name: @event.owner }, required: true
+    = f.input :owner, as: :select, collection: @event.possible_owners, input_html: { class: "selectize", multiple: true,  }, placeholder: "Type to search for admins..."
     = f.input :public
     = f.input :start, minute_step: 5
     = f.input :end, minute_step: 5
