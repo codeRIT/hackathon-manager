@@ -3,24 +3,31 @@ id: deployment-environment-variables
 title: Environment Variables
 ---
 
-Various services require environment variables to operate.
+Various services require environment variables to operate. While they may appear overwheling, this setup guide aims to alleviate some of the concern. It is recommended you start with the required variables and work through this guide so all are properly setup.
 
-**The following environment variables should be present on all deployments.** Below is an example:
+> Stuck on an environment variable? codeRIT is here to help! [Send us an email](mailto:engineering@coderit.org) with any questions.
+
+## Required
+**The following environment variables are required for HackathonManager to function.**
 
 ```bash
 SECRET_KEY_BASE="<randomly generated string>"
 DEVISE_SECRET_KEY="<randomly generated string>"
 HM_DOMAIN_NAME="apply.example.com"
-MLH_KEY="my-mlh-application-id"
-MLH_SECRET="my-mlh-secret"
 AWS_BUCKET="my-example-bucket"
 AWS_ACCESS_KEY_ID="<AWS access key ID>"
 AWS_SECRET_ACCESS_KEY="<AWS secret key>"
 AWS_REGION="us-east-1"
-ROLLBAR_ACCESS_TOKEN="<server-side rollbar token>"
 SPARKPOST_API_KEY="<sparkpost api key>"
 SPARKPOST_CAMPAIGN_ID="my-hackathon"
 TIME_ZONE="America/New_York"
+```
+
+## Recommended
+```bash
+MLH_KEY="my-mlh-application-id"
+MLH_SECRET="my-mlh-secret"
+ROLLBAR_ACCESS_TOKEN="<server-side rollbar token>"
 ```
 
 _Also see [app.json](https://github.com/codeRIT/hackathon_manager/blob/master/app.json)_
@@ -36,7 +43,7 @@ HM_DOMAIN_NAME=""
 HM_DOMAIN_PROTOCOL=""  # optional, https by default
 ```
 
-### Resumes and S3
+### AWS S3 and Resumes
 
 Resumes are stored locally in development and on S3 in production.
 
@@ -99,9 +106,9 @@ Rollbar captures and notifies of errors in production, and requires a server-sid
 ROLLBAR_ACCESS_TOKEN=""
 ```
 
-### My MLH
+### MyMLH
 
-My MLH provides us authentication & initial application information.
+MyMLH makes it easy for hackers to quickly onboard themselves into HackathonManager. With MyMLH, hackers can save time by skipping fields in the questionnaire where the answer is already provided on their MyMLH profiles.
 
 1. Create an account at https://my.mlh.io
 2. Click "My Apps" in the top navbar
