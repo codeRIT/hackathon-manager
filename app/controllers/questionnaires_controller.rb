@@ -34,9 +34,6 @@ class QuestionnairesController < ApplicationController
         q.level_of_study = session["devise.provider_data"]["info"]["level_of_study"]
         q.major = session["devise.provider_data"]["info"]["major"]
         q.date_of_birth = session["devise.provider_data"]["info"]["date_of_birth"]
-        q.shirt_size = session["devise.provider_data"]["info"]["shirt_size"]
-        q.dietary_restrictions = session["devise.provider_data"]["info"]["dietary_restrictions"]
-        q.special_needs = session["devise.provider_data"]["info"]["special_needs"]
         q.gender = session["devise.provider_data"]["info"]["gender"]
 
         school = School.where(name: session["devise.provider_data"]["info"]["school"]["name"]).first_or_create do |s|
