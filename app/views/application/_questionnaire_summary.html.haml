@@ -17,7 +17,15 @@
 %p
   %b Traveling from:
   = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "My school (#{@questionnaire.school.full_name})"
-
+%p
+  %b Shirt size:
+  = @questionnaire.shirt_size
+%p
+  %b Dietary restrictions
+  = @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe
+%p
+  %b Special needs
+  = @questionnaire.special_needs || "<i>(none)</i>".html_safe
 %fieldset
   - if @questionnaire.user.provider == 'mlh'
     %legend Provided by My MLH
@@ -48,12 +56,3 @@
   %p
     %b Level of study:
     = @questionnaire.level_of_study
-  %p
-    %b Shirt size:
-    = @questionnaire.shirt_size
-  %p
-    %b Dietary restrictions
-    = @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe
-  %p
-    %b Special needs
-    = @questionnaire.special_needs || "<i>(none)</i>".html_safe
