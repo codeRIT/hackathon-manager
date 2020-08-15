@@ -19,7 +19,7 @@
         = f.input :level_of_study, collection: collection_or_text(@questionnaire.level_of_study, Questionnaire::POSSIBLE_LEVELS_OF_STUDY), include_blank: "(select one...)", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :major, input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :gender, collection: collection_or_text(@questionnaire.gender, Questionnaire::POSSIBLE_GENDERS), include_blank: "(select one...)", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
-        
+
       .right
         %button.button{ type: "button", "data-wizard" => "next" } Next
 
