@@ -57,7 +57,7 @@ class RsvpsController < ApplicationController
 
     update_acc_status
     update_bus_list
-    
+
     unless @questionnaire.save
       flash[:alert] = @questionnaire.errors.full_message.join(", ")
       redirect_to rsvp_path
