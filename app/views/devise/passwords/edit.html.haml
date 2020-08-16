@@ -1,6 +1,6 @@
 - title 'Change Password'
-.form-container
-  .section-title
+.form-container.password
+  .section-title.center
     Change Your
     %span.emphasized Password
   = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
@@ -10,6 +10,8 @@
     .form-inputs
       = f.input :password, label: "New Password", required: true, autofocus: true
       = f.input :password_confirmation, label: "Confirm", required: true
-    .form-actions
+    .form-actions.right
       = f.button :submit, "Change My Password"
-  = render "devise/shared/links"
+      %p.session-link
+        Remembered it?
+        = link_to "Sign in!".html_safe, new_user_session_path
