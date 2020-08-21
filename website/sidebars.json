@@ -12,6 +12,6 @@
       "updating-hm"
     ],
     "Guides": ["running-a-hackathon", "questionnaires", "messages", "busses"],
-    "Developer": ["api"]
+    "Developer": ["api-overview", "api-testing-setup"]
   }
 }
