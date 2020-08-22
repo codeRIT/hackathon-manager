@@ -43,6 +43,8 @@ class Questionnaire < ApplicationRecord
   validates :vcs_url, url: { allow_blank: true }
   validates_format_of :vcs_url, with: %r{((github.com\/\w+\/?)|(bitbucket.org\/\w+\/?))}, allow_blank: true, message: "Must be a GitHub or BitBucket url"
 
+  serialize :extra_question_data, Hash
+
   strip_attributes
 
   POSSIBLE_EXPERIENCES = {
@@ -57,6 +59,8 @@ class Questionnaire < ApplicationRecord
     "hardware"    => "Hardware",
     "combination" => "Combination of everything!"
   }.freeze
+
+  # POSSIBLE_QUESTION_TYPES = %w[string boolean integer date datetime binary decimal float bigint text time timestamp].freeze
 
   POSSIBLE_SHIRT_SIZES = [
     "Women's - XS",

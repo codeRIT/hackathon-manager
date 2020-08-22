@@ -107,3 +107,11 @@
           %dd.col-md-8= @questionnaire.major
           %dt.col-md-4 Level of study
           %dd.col-md-8= @questionnaire.level_of_study
+
+    .card.mb-3
+      .card-header Hackathon Specific Questions
+      .card-body
+        .row
+          - @questionnaire.extra_question_data.each do |q,a|
+            %dt.col-md-4=@extra_questions.find(q).question
+            %dd.col-md-8=a

@@ -3,7 +3,6 @@
 
     - if f.error_notification.present?
       = f.error_notification
-
     .row
       .col-xl-6
         .card.mb-4
@@ -45,6 +44,14 @@
             = f.input :vcs_url, label: "GitHub/BitBucket"
 
             = f.input :can_share_info, label: "Share resume with employers?"
+
+      .col-xl-6
+        .card.mb-4
+          .card-header Hackathon Specific Questions
+          .card-body
+            = f.simple_fields_for :extra_question_data do |e|
+              - @extra_questions.each do |q|
+                = e.input q.id.to_s.to_sym, label: q.question, as: q.data_type, input_html: {:value => @questionnaire.extra_question_data[q.id.to_s], :checked => (!!@questionnaire.extra_question_data[q.id.to_s]) }
 
       .col-xl-6
         .card.mb-4

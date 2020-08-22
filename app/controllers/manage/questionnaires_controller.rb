@@ -14,15 +14,18 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def show
+    @extra_questions = ExtraQuestion.all
     respond_with(:manage, @questionnaire)
   end
 
   def new
     @questionnaire = ::Questionnaire.new
+    @extra_questions = ExtraQuestion.all
     respond_with(:manage, @questionnaire)
   end
 
   def edit
+    @extra_questions = ExtraQuestion.all
   end
 
   def create
@@ -147,6 +150,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   private
 
   def questionnaire_params
+    extra_questions = ExtraQuestion.all
+    questions = []
+    extra_questions.each do |q|
+      questions.append(q.id.to_s)
+    end
     params.require(:questionnaire).permit(
       :email, :experience, :first_name, :last_name, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
@@ -155,7 +163,8 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       :phone, :can_share_info, :code_of_conduct_accepted,
       :travel_not_from_school, :travel_location, :data_sharing_accepted,
       :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
-      :bus_list_id, :is_bus_captain, :boarded_bus
+      :bus_list_id, :is_bus_captain, :boarded_bus,
+      extra_question_data: questions
     )
   end
 
