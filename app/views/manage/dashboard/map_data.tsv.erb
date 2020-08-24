@@ -23,8 +23,8 @@ redo_limit = 10
     addressMatches = result["addressMatches"]
     next if addressMatches.blank?
 
-    lat = result["addressMatches"][0]["coordinates"]["x"]
-    lng = result["addressMatches"][0]["coordinates"]["y"]
+    lng = result["addressMatches"][0]["coordinates"]["x"]
+    lat = result["addressMatches"][0]["coordinates"]["y"]
     next if lat.blank? || lng.blank?
 
     resp = HTTParty.get("https://geo.fcc.gov/api/census/area?lat=#{lat}&lon=#{lng}&format=json")
