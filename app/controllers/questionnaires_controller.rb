@@ -11,6 +11,7 @@ class QuestionnairesController < ApplicationController
   # GET /apply
   # GET /apply.json
   def show
+    @extra_questions = ExtraQuestion.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @questionnaire }

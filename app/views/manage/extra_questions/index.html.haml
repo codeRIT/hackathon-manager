@@ -1,0 +1,8 @@
+= render "layouts/manage/page_title", title: "Hackathon Specific Questions" do
+  = link_to "New Question", new_manage_extra_question_path, class: "btn btn-sm btn-outline-secondary"
+
+
+%ul
+  - @extra_questions.each do |q|
+    %li
+      %a{:href => edit_manage_extra_question_path(q)}= q.question

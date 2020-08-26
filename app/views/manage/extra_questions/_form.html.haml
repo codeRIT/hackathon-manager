@@ -1,0 +1,7 @@
+= bs_horizontal_simple_form_for @extra_question, url: url_for(action: @extra_question.new_record? ? "create" : "update", controller: "extra_questions"), html: { "data-validate" => "form" } do |f|
+  .form-inputs
+    = f.input :question
+    = f.input :data_type, as: :select, collection: ExtraQuestion::POSSIBLE_TYPES, include_blank: "(select type...)"
+    = f.input :required
+  .center
+    = f.button :submit, value: ( @extra_question.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'

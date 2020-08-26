@@ -24,7 +24,7 @@
         = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
         = f.simple_fields_for :extra_question_data do |e|
           - @extra_questions.each do |q|
-            = e.input q.id.to_s.to_sym, label: q.question, as: q.data_type, input_html: {:value => @questionnaire.extra_question_data[q.id.to_s], :checked => (!!@questionnaire.extra_question_data[q.id.to_s]) }
+            = e.input q.id.to_s.to_sym, required: q.required, label: q.question, as: q.data_type, input_html: {:value => @questionnaire.extra_question_data[q.id.to_s], :checked => (!!@questionnaire.extra_question_data[q.id.to_s]) }
 
       .right
         %button.button{ type: "button", "data-wizard" => "next" } Next

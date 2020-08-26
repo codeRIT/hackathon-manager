@@ -1,0 +1,7 @@
+= render "layouts/manage/page_title", title: "Edit Question"
+.form-container
+  = render "form"
+  .center
+    = link_to 'Delete', manage_extra_question_path(@extra_question), method: :delete, data: { confirm: "Are you sure? This action is irreversible." }, class: 'btn btn-sm btn-danger'
+  .center
+    = link_to 'Back', manage_extra_questions_path

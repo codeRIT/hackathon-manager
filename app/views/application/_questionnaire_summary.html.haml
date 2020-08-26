@@ -57,3 +57,7 @@
   %p
     %b Special needs
     = @questionnaire.special_needs || "<i>(none)</i>".html_safe
+  - @extra_questions.each do |q|
+    %p
+      %b= q.question
+      = @questionnaire.extra_question_data[q.id.to_s] || "(not provided)"

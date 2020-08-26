@@ -35,6 +35,10 @@
                   .fa.fa-inbox.fa-fw.icon-space-r-half
                   Questionnaires
               %li.nav-item
+                = active_link_to manage_extra_questions_path, class: "nav-link" do
+                  .fa.fa-inbox.fa-fw.icon-space-r-half
+                  Hackathon Questions
+              %li.nav-item
                 = active_link_to manage_checkins_path, class: "nav-link" do
                   .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
                   Check-in
