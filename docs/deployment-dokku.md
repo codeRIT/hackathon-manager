@@ -7,33 +7,11 @@ title: Dokku Deployment
 >
 >If you need a VM, check out [DigitalOcean](https://m.do.co/c/b5ee103e23c3) or [Linode](https://www.linode.com/?r=e90a6fb2a6999fb4ec7b60b1add3e288f97954bf) and the [Dokku docs](http://dokku.viewdocs.io/dokku/) to get started.
 
-## Updating an existing deployment
-
-If you already have a deployment of HackathonManager on Dokku, follow these steps to update it.
-
-* If you already have the hackathon-manager repo cloned locally:
-```bash
-# cd into the directory you have hackathon-manager cloned
-cd hackathon-manager
-git pull
-# Skip to "git push" if you already added the remote
-git remote add dokku dokku@your-host.example.com:hm
-git push dokku master
-```
-
-* If you don't have it cloned locally:
-```bash
-git clone git@github.com:codeRIT/hackathon-manager
-cd hackathon-manager
-git remote add dokku dokku@your-host.example.com:hm
-git push dokku master
-```
-
 ## Setting up a new deployment
 
-Below are steps & notes to deploy HackathonManager on Dokku.
+Below are steps & notes to deploy HackathonManager on Dokku. Need to update an existing deployment?
 
-If you have any questions at all, please don't hesitate to reach out to [Stuart](https://github.com/sman591)! This doc is very much a work in progress but we want to keep it as up to date as possible.
+If you have any questions at all, please don't hesitate to reach out to the [codeRIT Engineering Team](mailto:engineering@coderit.org)! This doc is very much a work in progress but we want to keep it as up to date as possible.
 
 ## Dokku plugins
 
