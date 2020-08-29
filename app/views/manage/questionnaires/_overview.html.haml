@@ -34,10 +34,9 @@
         = HackathonConfig['name'] + " Information"
       .card-body
         .row
-          - @questionnaire.extra_question_data.each do |q,a|
-            %dt.col-md-4=@extra_questions.find(q).question
-            %dd.col-md-8
-              = a
+          - @questionnaire.extra_question_data.each do |qn,ans|
+            %dt.col-md-4= @extra_questions.find(qn).question
+            %dd.col-md-8= ans
           %dt.col-md-4 Dietary restrictions
           %dd.col-md-8
             - if @questionnaire.dietary_restrictions.present?
