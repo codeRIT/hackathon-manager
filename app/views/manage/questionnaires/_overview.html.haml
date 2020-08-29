@@ -5,7 +5,7 @@
     = render 'top_alerts'
 
     .card.mb-3
-      .card-header Personal information
+      .card-header Personal Information
       .card-body
         .row
           %dt.col-md-4 First name
@@ -30,9 +30,14 @@
 
   .col-md-6
     .card.mb-3
-      .card-header Special notices
+      .card-header 
+        = HackathonConfig['name'] + " Information"
       .card-body
         .row
+          - @questionnaire.extra_question_data.each do |q,a|
+            %dt.col-md-4=@extra_questions.find(q).question
+            %dd.col-md-8
+              = a
           %dt.col-md-4 Dietary restrictions
           %dd.col-md-8
             - if @questionnaire.dietary_restrictions.present?
@@ -108,10 +113,3 @@
           %dt.col-md-4 Level of study
           %dd.col-md-8= @questionnaire.level_of_study
 
-    .card.mb-3
-      .card-header Hackathon Specific Questions
-      .card-body
-        .row
-          - @questionnaire.extra_question_data.each do |q,a|
-            %dt.col-md-4=@extra_questions.find(q).question
-            %dd.col-md-8=a
