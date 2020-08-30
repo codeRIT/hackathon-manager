@@ -1,7 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events]
+  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status]
 
   respond_to :html, :json
 
@@ -144,10 +144,6 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       q.save(validate: false)
     end
     head :ok
-  end
-
-  def message_events
-    render json: @questionnaire.message_events
   end
 
   private

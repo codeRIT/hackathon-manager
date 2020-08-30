@@ -191,13 +191,6 @@ class Questionnaire < ApplicationRecord
     ['rsvp_confirmed', 'rsvp_denied'].include? acc_status
   end
 
-  def message_events
-    return [] unless ENV["SPARKPOST_API_KEY"].presence
-
-    simple_spark = SimpleSpark::Client.new
-    simple_spark.message_events.search(recipients: email)
-  end
-
   def verbal_status
     if acc_status == "rsvp_denied"
       "Not Attending"
