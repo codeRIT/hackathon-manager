@@ -25,8 +25,8 @@ class QuestionnairesController < ApplicationController
     end
     @questionnaire = Questionnaire.new
 
-    info = session["devise.provider_data"]["info"]
-    if session["devise.provider_data"] && info
+    if session["devise.provider_data"] && session["devise.provider_data"]["info"]
+      info = session["devise.provider_data"]["info"]
       @skip_my_mlh_fields = true
       @questionnaire.tap do |q|
         q.phone          = info["phone_number"]

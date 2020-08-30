@@ -36,7 +36,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
   context "while authenticated without a completed questionnaire" do
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
-      @user = create(:user, email: "newabc@example.com")
+      @user = create(:user)
       sign_in @user
     end
 
