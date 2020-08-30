@@ -1,6 +1,6 @@
-= render "layouts/manage/page_title", title: "Edit Questionnaire", subtitle: @questionnaire.full_name do
+= render "layouts/manage/page_title", title: "Edit Questionnaire", subtitle: @questionnaire.user.full_name do
   .btn-group
     = link_to 'Cancel', manage_questionnaire_path(@questionnaire), class: 'btn btn-sm btn-outline-secondary'
-    = link_to 'Delete', manage_questionnaire_path(@questionnaire), method: :delete, data: { confirm: "Are you sure? The questionnaire and account for \"#{@questionnaire.full_name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Delete', manage_questionnaire_path(@questionnaire), method: :delete, data: { confirm: "Are you sure? The questionnaire and account for \"#{@questionnaire.user.full_name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
 
 = render 'form'

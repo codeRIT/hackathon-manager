@@ -40,9 +40,9 @@ class MessageTest < ActiveSupport::TestCase
     end
 
     should "parse template variables with real values" do
-      questionnaire = create(:questionnaire, first_name: 'Richard')
+      user = create(:user, first_name: 'Richard')
       message = build(:message, body: "Hello, {{first_name}}!")
-      assert_equal "Hello, Richard!", message.parsed_body(user_id: questionnaire.user_id)
+      assert_equal "Hello, Richard!", message.parsed_body(user_id: user.id)
     end
 
     should "ignore unknown variables" do

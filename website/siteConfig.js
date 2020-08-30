@@ -48,7 +48,7 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     { doc: 'deployment', label: 'Get Started' },
-    { doc: 'running-a-hackathon', label: 'Docs' },
+    { doc: 'running-a-hackathon', label: 'Guides' },
     { href: 'https://github.com/codeRIT/hackathon-manager', label: 'GitHub' },
   ],
 

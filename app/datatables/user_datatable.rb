@@ -4,6 +4,8 @@ class UserDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       id: { source: "User.id" },
+      first_name: { source: "User.first_name" },
+      last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       role: { source: "User.role", searchable: false },
       active: { source: "User.is_active", searchable: false },
@@ -22,6 +24,9 @@ class UserDatatable < ApplicationDatatable
     records.map do |record|
       {
         id: record.id,
+        link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_user_path(record)),
+        first_name: record.first_name,
+        last_name: record.last_name,
         email: link_to(bold(record.email), manage_user_path(record)),
         role: record.role.titleize,
         questionnaire: record.questionnaire.present? ? link_to(bold("View &raquo;".html_safe), manage_questionnaire_path(record.questionnaire.id)) : 'None',

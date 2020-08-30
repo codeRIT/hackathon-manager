@@ -7,7 +7,7 @@ Heroku deployment is pretty straightforward thanks to Heroku's one-click deploys
 
 Click the button below to start. You'll be prompted to fill out a few questions and environment variables.
 
-**See [Environment Variables](deployment-environment-variables.md) for all required environment variables**
+**See [Environment Variables](deployment-environment-variables.md) for all required environment variables and what they do.**
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/codeRIT/hackathon-manager)
 
