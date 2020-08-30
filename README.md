@@ -33,7 +33,7 @@ HackathonManager makes use of a few different third-party services & Ruby gems:
 - [Sidekiq](https://github.com/mperham/sidekiq) (background jobs)
 - [SendGrid](https://sendgrid.com) (email)
 - [Amazon S3](https://aws.amazon.com/s3) (resume storage)
-- [Chartkick](http://chartkick.com/) (management UI charts)
+- [Chartkick](http://chartkick.com) (management UI charts)
 - [Blazer](https://github.com/ankane/blazer) (custom SQL queries, analytics, and charts)
 - [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) (authentication via OAuth for API usage)
 
