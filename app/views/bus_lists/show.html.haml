@@ -43,8 +43,8 @@
         %tr
           %td
             %input{type: 'checkbox', checked: p.boarded_bus?, data: { "boarded-bus": true, action: boarded_bus_bus_list_path, id: p.id } }
-          %td= p.first_name
-          %td= p.last_name
+          %td= p.user.first_name
+          %td= p.user.last_name
           %td= p.email
           %td= phone_link_to p.phone
           %td= p.school.name
