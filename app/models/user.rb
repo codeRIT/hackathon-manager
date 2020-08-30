@@ -59,7 +59,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)
-    matching_provider.or(matching_email).first_or_create do |user|
+    current_user = matching_provider.or(matching_email).first_or_create do |user|
       user.uid = auth.uid
       user.first_name = auth.first_name
       user.last_name = auth.last_name
