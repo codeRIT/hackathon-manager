@@ -38,7 +38,7 @@ class Manage::UsersController < Manage::ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :email, :password, :password_confirmation, :remember_me, :role, :is_active, :receive_weekly_report
+      :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :role, :is_active, :receive_weekly_report
     )
   end
 

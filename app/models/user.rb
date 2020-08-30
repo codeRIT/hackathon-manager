@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  audited only: [:email, :role, :is_active, :receive_weekly_report]
+  audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
+
+  strip_attributes
 
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -13,12 +15,15 @@ class User < ApplicationRecord
                            foreign_key: :resource_owner_id,
                            dependent: :delete_all # or :destroy if you need callbacks
 
+  accepts_nested_attributes_for :questionnaire
+
   validates_uniqueness_of :email
+  validates_presence_of :first_name, :last_name
 
   after_create :queue_reminder_email
+  after_initialize :set_default_role, if: :new_record?
 
   enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
-  after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
     self.role ||= :user
@@ -47,19 +52,8 @@ class User < ApplicationRecord
     receive_weekly_report
   end
 
-  def first_name
-    return "" if questionnaire.blank?
-    questionnaire.first_name
-  end
-
-  def last_name
-    return "" if questionnaire.blank?
-    questionnaire.last_name
-  end
-
   def full_name
-    return email if questionnaire.blank?
-    questionnaire.full_name
+    "#{first_name} #{last_name}"
   end
 
   def self.from_omniauth(auth)
@@ -67,8 +61,10 @@ class User < ApplicationRecord
     matching_email = where(email: auth.info.email)
     current_user = matching_provider.or(matching_email).first_or_create do |user|
       user.uid = auth.uid
-      user.provider = auth.provider
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
       user.email = auth.info.email
+      user.provider = auth.provider
       user.password = Devise.friendly_token[0, 20]
     end
     # Autofill MyMLH provider if provider info is missing
