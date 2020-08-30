@@ -61,8 +61,8 @@ class User < ApplicationRecord
     matching_email = where(email: auth.info.email)
     current_user = matching_provider.or(matching_email).first_or_create do |user|
       user.uid = auth.uid
-      user.first_name = auth.first_name
-      user.last_name = auth.last_name
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
       user.email = auth.info.email
       user.provider = auth.provider
       user.password = Devise.friendly_token[0, 20]
