@@ -65,11 +65,18 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)
-    matching_provider.or(matching_email).first_or_create do |user|
+    current_user = matching_provider.or(matching_email).first_or_create do |user|
       user.uid = auth.uid
+      user.provider = auth.provider
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
     end
+    # Autofill MyMLH provider if provider info is missing
+    # (as we are executing this from OAuth)
+    if current_user.provider.blank?
+      current_user.provider = auth.provider
+    end
+    current_user
   end
 
   def self.non_admins
