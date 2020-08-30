@@ -76,7 +76,7 @@ class User < ApplicationRecord
     if current_user.provider.blank?
       current_user.provider = auth.provider
     end
-    return current_user
+    current_user
   end
 
   def self.non_admins
