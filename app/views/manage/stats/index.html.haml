@@ -2,14 +2,16 @@
 
 .row
   .col
-    %h5.dashboard-container-title Dietary Restrictions & Special Needs
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => dietary_special_needs_manage_stats_path(format: :json) }
+    %h5.dashboard-container-title Dietary Restrictions or Special Needs
+    %table.datatable.stats-dietary.table.table-striped.table-hover{ "data-source" => dietary_restrictions_special_needs_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
-          %th First name
-          %th Last name
+          %th ID
+          %th First Name
+          %th Last Name
           %th Email
           %th Phone
+          %th Questionnaire
           %th Checked In
           %th Dietary Restrictions
           %th Special Needs
@@ -18,53 +20,59 @@
 .row
   .col
     %h5.dashboard-container-title Attendees Not Traveling From Their School
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => alt_travel_manage_stats_path(format: :json) }
+    %table.datatable.stats-notschooltravel.table.table-striped.table-hover{ "data-source" => alt_travel_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
-          %th Link
-          %th First name
-          %th Last name
+          %th ID
+          %th First Name
+          %th Last Name
           %th Email
+          %th Phone
+          %th Questionnaire
           %th Traveling From
-          %th Acc Status
+          %th Questionnaire Status
       %tbody
 
 .row
   .col
     %h5.dashboard-container-title Attendee Info for Sponsors
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => sponsor_info_manage_stats_path(format: :json) }
+    %table.datatable.stats-attendeeinfo.table.table-striped.table-hover{ "data-source" => attendee_sponsor_info_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
+          %th ID
           %th First name
           %th Last name
           %th Email
           %th School
           %th Open Source Link
           %th Portfolio Link
-          %th Resume Link
       %tbody
 
 .row
   .col
     %h5.dashboard-container-title MLH Info (applied)
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_applied_manage_stats_path(format: :json) }
+    %table.datatable.stats-mlhinfo-applied.table.table-striped.table-hover{ "data-source" => mlh_applied_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
+          %th ID
           %th First name
           %th Last name
           %th Email
+          %th Phone
           %th School Name
       %tbody
 
 .row
   .col
     %h5.dashboard-container-title MLH Info (checked in)
-    %table.stats.datatable.table.table-striped.table-hover{ "data-source" => mlh_info_checked_in_manage_stats_path(format: :json) }
+    %table.datatable.stats-mlhinfo-checkedin.table.table-striped.table-hover{ "data-source" => mlh_checked_in_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
+          %th ID
           %th First name
           %th Last name
           %th Email
+          %th Phone
           %th School Name
       %tbody
 
