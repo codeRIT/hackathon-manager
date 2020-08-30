@@ -25,14 +25,15 @@ class QuestionnairesController < ApplicationController
     end
     @questionnaire = Questionnaire.new
 
-    if session["devise.provider_data"] && session["devise.provider_data"]["info"]
+    info = session["devise.provider_data"]["info"]
+    if session["devise.provider_data"] && info
       @skip_my_mlh_fields = true
       @questionnaire.tap do |q|
-        q.phone = session["devise.provider_data"]["info"]["phone_number"]
-        q.level_of_study = session["devise.provider_data"]["info"]["level_of_study"]
-        q.major = session["devise.provider_data"]["info"]["major"]
-        q.date_of_birth = session["devise.provider_data"]["info"]["date_of_birth"]
-        q.gender = session["devise.provider_data"]["info"]["gender"]
+        q.phone          = info["phone_number"]
+        q.level_of_study = info["level_of_study"]
+        q.major          = info["major"]
+        q.date_of_birth  = info["date_of_birth"]
+        q.gender         = info["gender"]
 
         school = School.where(name: session["devise.provider_data"]["info"]["school"]["name"]).first_or_create do |s|
           s.name = session["devise.provider_data"]["info"]["school"]["name"]
