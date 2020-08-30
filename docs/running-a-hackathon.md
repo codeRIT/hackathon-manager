@@ -1,7 +1,7 @@
 ---
 id: running-a-hackathon
-title: Running a hackathon with HackathonManager
-sidebar_label: Running a hackathon
+title: HackathonManager Guides
+sidebar_label: Overview
 ---
 
 > HackathonManager is a full-service tool to run your hackathon from start to finish.
@@ -9,8 +9,9 @@ sidebar_label: Running a hackathon
 Guides to get you started:
 
 - [Timeline of a hackathon](#timeline)
-- [Busses](busses.md)
 - [Questionnaires](questionnaires.md)
+- [Messages](messages.md)
+- [Bus Lists](busses.md)
 - _More to come..._
 
 ## Timeline of a hackathon

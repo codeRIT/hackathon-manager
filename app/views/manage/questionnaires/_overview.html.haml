@@ -23,8 +23,6 @@
               = @questionnaire.age_at_time_of_event / 1.year
           %dt.col-md-4 Gender
           %dd.col-md-8= @questionnaire.gender
-          %dt.col-md-4 Shirt size
-          %dd.col-md-8= @questionnaire.shirt_size
 
     = render 'checkin_compliance_card'
 
@@ -33,6 +31,8 @@
       .card-header Special notices
       .card-body
         .row
+          %dt.col-md-4 Shirt size
+          %dd.col-md-8= @questionnaire.shirt_size
           %dt.col-md-4 Dietary restrictions
           %dd.col-md-8
             - if @questionnaire.dietary_restrictions.present?

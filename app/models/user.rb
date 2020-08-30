@@ -60,19 +60,25 @@ class User < ApplicationRecord
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)
     matching_provider.or(matching_email).first_or_create do |user|
+      user.uid = auth.uid
       user.first_name = auth.first_name
       user.last_name = auth.last_name
-      user.uid = auth.uid
       user.email = auth.info.email
+      user.provider = auth.provider
       user.password = Devise.friendly_token[0, 20]
     end
+    # Autofill MyMLH provider if provider info is missing
+    # (as we are executing this from OAuth)
+    if current_user.provider.blank?
+      current_user.provider = auth.provider
+    end
+    current_user
   end
 
   def self.non_admins
     User.where.not(role: :admin).where.not(role: :admin_limited_access)
   end
 
-  # TODO: No longer needed?
   def self.without_questionnaire
     non_admins.left_outer_joins(:questionnaire).where(questionnaires: { id: nil })
   end
