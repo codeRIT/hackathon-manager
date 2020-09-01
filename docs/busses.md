@@ -1,7 +1,7 @@
 ---
 id: busses
-title: Busses
-sidebar_label: Busses
+title: Bus Lists
+sidebar_label: Bus Lists
 ---
 
 HackathonManager enables you to facilitate bus sign-ups for attendees during the RSVP process.
