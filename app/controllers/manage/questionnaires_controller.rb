@@ -95,13 +95,6 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     redirect_to index_redirect_path
   end
 
-  def convert_to_admin
-    user = @questionnaire.user
-    @questionnaire.destroy
-    user.update_attributes(role: :admin)
-    redirect_to edit_manage_user_path(user)
-  end
-
   def destroy
     user = @questionnaire.user
     @questionnaire.destroy
