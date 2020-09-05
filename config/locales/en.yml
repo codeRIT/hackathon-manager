@@ -133,9 +133,11 @@ en:
         title: Trackable Tags
       bus-lists:
         title: Bus Lists
+      extra-questions:
+        title: Hackathon Questions
       schools:
         title: Schools
-      users: 
+      users:
         title: Users & Staff
         users: All Users
         staff: "%{hackathon_name} Staff"

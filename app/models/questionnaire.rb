@@ -44,18 +44,19 @@ class Questionnaire < ApplicationRecord
   validates_format_of :vcs_url, with: %r{((github.com\/\w+\/?)|(bitbucket.org\/\w+\/?))}, allow_blank: true, message: "Must be a GitHub or BitBucket url"
 
   serialize :extra_question_data, Hash
-
   validates_each :extra_question_data do |record, attr, value|
-    # problems = ''
-    # if value
-    #   value.each{|question|
-    #     problems << "Name #{question['name']} is missing its url. " \
-    #     unless question['url']}
-    # else
-    #   problems = 'Please supply at least one name and url'
-    # end
-    # record.errors.add(:extra_question_data, problems) unless problems.empty?
+    problems = ''
+    value.each do |q,a|
+      extra_question = ExtraQuestion.find(q)
+      puts(extra_question.required)
+      puts(a.presence)
+      if extra_question.required && a.blank?
+        problems += "#{extra_question.question} can not be blank"
+      end
+    end
+    record.errors.add(:extra_question_data, problems) unless problems.empty?
   end
+
 
   strip_attributes
 

@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Hackathon Specific Questions" do
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.extra-questions') do
   = link_to "New Question", new_manage_extra_question_path, class: "btn btn-sm btn-outline-secondary"
 
 

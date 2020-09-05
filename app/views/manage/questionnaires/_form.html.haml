@@ -52,7 +52,10 @@
           .card-body
             = f.simple_fields_for :extra_question_data do |e|
               - @extra_questions.each do |q|
-                = e.input q.id.to_s.to_sym, required: q.required, label: q.question, as: q.data_type, input_html: {:value => @questionnaire.extra_question_data[q.id.to_s], :checked => (!!@questionnaire.extra_question_data[q.id.to_s]) }
+                - if q.required
+                  = e.input q.id.to_s.to_sym, required: q.required, label: q.question, as: q.data_type, input_html: {:value => @questionnaire.extra_question_data[q.id.to_s], :checked => (!!@questionnaire.extra_question_data[q.id.to_s]), "data-validate" => "presence" }
+                - else
+                  = e.input q.id.to_s.to_sym, required: q.required, label: q.question, as: q.data_type, input_html: {:value => @questionnaire.extra_question_data[q.id.to_s], :checked => (!!@questionnaire.extra_question_data[q.id.to_s])}
 
       .col-xl-6
         .card.mb-4
