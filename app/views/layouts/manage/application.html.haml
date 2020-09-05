@@ -25,80 +25,98 @@
       .row
         %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
           .sidebar-sticky
-            %ul.nav.flex-column
+            %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+              %span
+                = t(:overview, scope: 'layouts.manage.navigation')
+            %ul.nav.flex-column.mb-2
               %li.nav-item
                 = active_link_to manage_root_path, class: "nav-link", active_children: false do
                   .fa.fa-area-chart.fa-fw.icon-space-r-half
-                  Dashboard
+                  = t(:title, scope: 'pages.manage.dashboard')
               %li.nav-item
                 = active_link_to manage_questionnaires_path, class: "nav-link" do
                   .fa.fa-inbox.fa-fw.icon-space-r-half
-                  Questionnaires
+                  = t(:title, scope: 'pages.manage.questionnaires')
               %li.nav-item
-                = active_link_to manage_extra_questions_path, class: "nav-link" do
-                  .fa.fa-inbox.fa-fw.icon-space-r-half
-                  Hackathon Questions
-              %li.nav-item
-                = active_link_to manage_checkins_path, class: "nav-link" do
-                  .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
-                  Check-in
-              - if current_user.admin?
+                = active_link_to manage_messages_path, class: "nav-link" do
+                  .fa.fa-bullhorn.fa-fw.icon-space-r-half
+                  = t(:title, scope: 'pages.manage.messages')
+
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span
+                  = t(:logistics, scope: 'layouts.manage.navigation')
+              %ul.nav.flex-column.mb-2
+                %li.nav-item
+                  = active_link_to manage_checkins_path, class: "nav-link" do
+                    .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.check-in')
+                %li.nav-item
+                  = active_link_to manage_stats_path, class: "nav-link" do
+                    .fa.fa-table.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.stats')
+                %li.nav-item
+                  = active_link_to manage_trackable_tags_path, class: "nav-link" do
+                    .fa.fa-tag.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.trackable-tags')
+
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span
+                  = t(:travel, scope: 'layouts.manage.navigation')
+              %ul.nav.flex-column.mb-2
+                %li.nav-item
+                  = active_link_to manage_bus_lists_path, class: "nav-link" do
+                    .fa.fa-bus.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.bus-lists')
+                %li.nav-item
+                  = active_link_to manage_schools_path, class: "nav-link" do
+                    .fa.fa-home.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.schools')
+
+            - if current_user.admin?
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span
+                  = t(:administration, scope: 'layouts.manage.navigation')
+              %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to manage_users_path, class: "nav-link" do
                     .fa.fa-users.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.users')
-              %li.nav-item
-                = active_link_to manage_messages_path, class: "nav-link" do
-                  .fa.fa-bullhorn.fa-fw.icon-space-r-half
-                  Messages
-              %li.nav-item
-                = active_link_to manage_bus_lists_path, class: "nav-link" do
-                  .fa.fa-bus.fa-fw.icon-space-r-half
-                  Bus Lists
-              %li.nav-item
-                = active_link_to manage_schools_path, class: "nav-link" do
-                  .fa.fa-home.fa-fw.icon-space-r-half
-                  Schools
-              %li.nav-item
-                = active_link_to manage_stats_path, class: "nav-link" do
-                  .fa.fa-table.fa-fw.icon-space-r-half
-                  Stats
-              %li.nav-item
-                = active_link_to manage_trackable_tags_path, class: "nav-link" do
-                  .fa.fa-tag.fa-fw.icon-space-r-half
-                  Trackable Tags
-            - if current_user.admin?
-              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
-                %span Advanced
-              %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to manage_configs_path, class: "nav-link" do
                     .fa.fa-wrench.fa-fw.icon-space-r-half
-                    Config
-                    .nav-item-description Manage configuration
+                    = t(:title, scope: 'pages.manage.settings')
+
+              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+                %span
+                  = t(:advanced, scope: 'layouts.manage.navigation')
+              %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half
-                    Sidekiq
+                    = t(:title, scope: 'pages.manage.sidekiq')
                     %span.fa.fa-external-link.icon-space-l-half
-                    .nav-item-description Monitor background jobs
+                    .nav-item-description
+                      = t(:sidekiq, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
                   = active_link_to blazer_path, target: '_blank', class: "nav-link" do
                     .fa.fa-terminal.fa-fw.icon-space-r-half
-                    Blazer
+                    = t(:title, scope: 'pages.manage.blazer')
                     %span.fa.fa-external-link.icon-space-l-half
-                    .nav-item-description Run custom SQL queries
+                    .nav-item-description
+                      = t(:blazer, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
                   = active_link_to oauth_applications_path, target: '_blank', class: "nav-link" do
                     .fa.fa-unlock.fa-fw.icon-space-r-half
-                    Doorkeeper
+                    = t(:title, scope: 'pages.manage.doorkeeper')
                     %span.fa.fa-external-link.icon-space-l-half
-                    .nav-item-description OAuth2 provider management
+                    .nav-item-description
+                      = t(:doorkeeper, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
                   = active_link_to manage_data_exports_path, class: "nav-link" do
                     .fa.fa-download.fa-fw.icon-space-r-half
-                    Data Exports
-                    .nav-item-description Generate & export data
+                    = t(:title, scope: 'pages.manage.data-exports')
+                    .nav-item-description
+                      = t(:dataexports, scope: 'layouts.manage.navigation.descriptors')
         %main.col-md-10.ml-sm-auto.px-4{role: "main"}
           = render "layouts/manage/flashes"
           = yield

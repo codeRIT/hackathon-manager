@@ -11,8 +11,9 @@
             - if @questionnaire&.user&.provider == 'mlh'
               %h6.card-subtitle.mb-2
                 %span.badge.badge-info Provided by My MLH
-            = f.input :first_name, input_html: { "data-validate" => "presence" }, label: "First Name", autofocus: true
-            = f.input :last_name, input_html: { "data-validate" => "presence" }, label: "Last Name"
+            = f.simple_fields_for :user, @questionnaire.user do |u|
+              = u.input :first_name, input_html: { "data-validate" => "presence" }, label: "First Name", autofocus: true
+              = u.input :last_name, input_html: { "data-validate" => "presence" }, label: "Last Name"
             = f.input :email, input_html: { "data-validate" => "presence email", value: @questionnaire.user.try(:email) }, required: true, hint: 'Can be an existing user (without a questionnaire) or a new user. If this is a new user, they will receive a randomly-generated password that they must request a password reset for.'
             = f.input :phone, input_html: { "data-validate" => "presence" }
             = f.input :date_of_birth, start_year: Date.today.year - 18, end_year: Date.today.year - 90, order: [:month, :day, :year], input_html: { "data-validate" => "presence" }

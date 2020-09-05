@@ -65,8 +65,8 @@
         - @bus_list.passengers.select { |q| q.bus_captain_interest }.each do |p|
           %tr
             %td= link_to '<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(p)
-            %td= p.first_name
-            %td= p.last_name
+            %td= p.user.first_name
+            %td= p.user.last_name
             %td= p.email
             %td= phone_link_to p.phone
             %td= link_to p.school.name, manage_school_path(p.school)

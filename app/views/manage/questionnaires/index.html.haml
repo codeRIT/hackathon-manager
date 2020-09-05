@@ -1,12 +1,5 @@
-= render "layouts/manage/page_title", title: "Questionnaires" do
-  .btn-group{role: "group"}
-    = link_to "New Questionnaire", new_manage_questionnaire_path, class: "btn btn-sm btn-outline-secondary"
-    .btn-group{role: "group"}
-      %button.btn.btn-sm.btn-outline-secondary.dropdown-toggle#title-actions{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
-        .fa.fa-cog
-      .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "title-actions"}
-        = link_to 'Edit Questionnaire Form', manage_extra_questions_path, class: 'dropdown-item'
-
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.questionnaires') do
+  = link_to "New Questionnaire", new_manage_questionnaire_path, class: "btn btn-sm btn-outline-secondary"
 
 = render "questionnaire_datatable"
 
