@@ -45,6 +45,18 @@ class Questionnaire < ApplicationRecord
 
   serialize :extra_question_data, Hash
 
+  validates_each :extra_question_data do |record, attr, value|
+    # problems = ''
+    # if value
+    #   value.each{|question|
+    #     problems << "Name #{question['name']} is missing its url. " \
+    #     unless question['url']}
+    # else
+    #   problems = 'Please supply at least one name and url'
+    # end
+    # record.errors.add(:extra_question_data, problems) unless problems.empty?
+  end
+
   strip_attributes
 
   POSSIBLE_EXPERIENCES = {
