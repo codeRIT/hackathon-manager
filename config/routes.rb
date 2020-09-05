@@ -58,7 +58,6 @@ Rails.application.routes.draw do
       patch :convert_to_admin, on: :member
       patch :update_acc_status, on: :member
       patch :bulk_apply, on: :collection
-      get :message_events, on: :member
     end
     resources :checkins do
       post :datatable, on: :collection
@@ -96,11 +95,11 @@ Rails.application.routes.draw do
       patch :perform_merge, on: :member
     end
     resources :stats do
-      post :dietary_special_needs, on: :collection
-      post :sponsor_info, on: :collection
-      post :alt_travel, on: :collection
-      post :mlh_info_applied, on: :collection
-      post :mlh_info_checked_in, on: :collection
+      post :dietary_restrictions_special_needs_datatable, on: :collection
+      post :alt_travel_datatable, on: :collection
+      post :attendee_sponsor_info_datatable, on: :collection
+      post :mlh_applied_datatable, on: :collection
+      post :mlh_checked_in_datatable, on: :collection
     end
     resources :configs do
       patch :update_only_css_variables, on: :member
