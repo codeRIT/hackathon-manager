@@ -131,11 +131,13 @@ en:
         title: Statistics
       trackable-tags:
         title: Trackable Tags
+      events:
+        title: Events
       bus-lists:
         title: Bus Lists
       schools:
         title: Schools
-      users: 
+      users:
         title: Users & Staff
         users: All Users
         staff: "%{hackathon_name} Staff"

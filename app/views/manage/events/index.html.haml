@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Events" do
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.events') do
   = link_to "Add Event", new_manage_event_path, class: "btn btn-sm btn-outline-secondary"
 
 .calendar-list#calendar
