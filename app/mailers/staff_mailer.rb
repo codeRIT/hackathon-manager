@@ -1,8 +1,8 @@
-class AdminMailer < ApplicationMailer
+class StaffMailer < ApplicationMailer
   include Roadie::Rails::Automatic
   add_template_helper(HackathonManagerHelper)
 
-  layout "admin_mailer"
+  layout "staff_mailer"
 
   def weekly_report(user_id)
     # Don't send emails more than 7 days after event starts

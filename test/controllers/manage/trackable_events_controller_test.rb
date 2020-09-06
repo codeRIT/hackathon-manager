@@ -15,7 +15,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       setup do
         if do_sign_in
           @user = create(:user)
-          @request.env["devise.mapping"] = Devise.mappings[:admin]
+          @request.env["devise.mapping"] = Devise.mappings[:director]
           sign_in @user
           @trackable_event.update_attribute(:user, @user)
         end
@@ -60,7 +60,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     context "while authenticated as a #{condition_name}" do
       setup do
         @user = create(:user, role: user_role)
-        @request.env["devise.mapping"] = Devise.mappings[:admin]
+        @request.env["devise.mapping"] = Devise.mappings[:director]
         sign_in @user
         @trackable_event.update_attribute(:user, @user)
       end
@@ -105,10 +105,10 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as a director" do
     setup do
-      @user = create(:admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:director)
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 

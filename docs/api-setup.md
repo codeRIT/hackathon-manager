@@ -9,7 +9,7 @@ These programs allow you to run API requests (`GET`, `POST`, and so on) in an is
 
 In order to make requests in either Postman or Paw, you need to setup _OAuth 2 authorization_, as in HackathonManager, each request needs to be authorized first. This guide discusses how to enable OAuth 2 for these apps.
 
-This guide assumes you have already setup an admin account on a local HackathonManager instance. For more details on this, see the [main README](https://github.com/codeRIT/hackathon-manager#local-development).
+This guide assumes you have already setup an account with Director status on a local HackathonManager instance. For more details on this, see the [main README](https://github.com/codeRIT/hackathon-manager#local-development).
 
 > To make API requests on a live/remote instance, simply replace `localhost` in all following commands with your HackathonManager's URL.
 
@@ -27,7 +27,7 @@ Select an app below to jump directly to its guide:
 
 ## Connecting with Postman
 
-In HackathonManager, sign in to your admin account and click "Manage". Then, at the bottom left of the sidebar, click the **Doorkeeper** tab.
+In HackathonManager, sign in to your staff account and click "Manage". Then, at the bottom left of the sidebar, click the **Doorkeeper** tab.
 
 <img src="assets/api-setup/doorkeeper.png" width="300px" />
 
@@ -47,7 +47,7 @@ On this screen, fill out the information but with your own keys from the image a
 
 <img src="assets/api-setup/postman2.png" width="500px" />
 
-You should get a popup with your hackathon's sign in screen. Type in your admin credentials and log in.
+You should get a popup with your hackathon's sign in screen. Type in your staff credentials and log in.
 
 On the next screen, select `Authorize`:
 

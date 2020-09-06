@@ -137,7 +137,7 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
   context "while authenticated as a limited access admin" do
     setup do
       @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 
@@ -199,9 +199,9 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as a director" do
     setup do
-      @user = create(:admin)
+      @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end

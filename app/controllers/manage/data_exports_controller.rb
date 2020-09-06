@@ -1,6 +1,6 @@
 class Manage::DataExportsController < Manage::ApplicationController
-  skip_before_action :require_admin_or_limited_admin
-  before_action :require_full_admin
+  skip_before_action :require_director_or_limited_admin
+  before_action :require_director
 
   before_action :set_data_export, only: [:destroy]
 

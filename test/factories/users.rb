@@ -10,11 +10,11 @@ FactoryBot.define do
     is_active { true }
     receive_weekly_report { false }
 
-    factory :admin do
+    factory :director do
       sequence :email do |n|
-        "admin#{n}@example.com"
+        "director#{n}@example.com"
       end
-      role { :admin }
+      role { :director }
     end
 
     factory :limited_access_admin do

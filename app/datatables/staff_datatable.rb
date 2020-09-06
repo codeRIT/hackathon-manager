@@ -1,4 +1,4 @@
-class AdminDatatable < ApplicationDatatable
+class StaffDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_user_path, :bold, :display_datetime
 
   def view_columns
@@ -43,6 +43,6 @@ class AdminDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    User.where(role: [:admin, :admin_limited_access, :event_tracking])
+    User.where(role: [:director, :admin_limited_access, :event_tracking])
   end
 end

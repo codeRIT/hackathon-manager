@@ -12,7 +12,7 @@ class Manage::DashboardControllerTest < ActionController::TestCase
   context "while authenticated as a user" do
     setup do
       @user = create(:user)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 
@@ -25,8 +25,8 @@ class Manage::DashboardControllerTest < ActionController::TestCase
 
   context "while authenticated as an admin" do
     setup do
-      @user = create(:admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:director)
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 

@@ -50,8 +50,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
+    should "not allow convert questionnaire's user to an director" do
+      patch :convert_to_director, params: { id: @questionnaire }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
@@ -77,7 +77,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated as a user" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
     end
 
@@ -123,8 +123,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
-    should "not allow convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
+    should "not allow convert questionnaire's user to a director" do
+      patch :convert_to_director, params: { id: @questionnaire }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -151,7 +151,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
   context "while authenticated as a limited access admin" do
     setup do
       @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 
@@ -194,10 +194,10 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaires_path
     end
 
-    should "not allow convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
+    should "not allow convert questionnaire's user to a director" do
+      patch :convert_to_director, params: { id: @questionnaire }
       assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_redirected_to edit_manage_user_path(assigns(:questionnaire).user)
     end
 
     should "not allow access to manage_questionnaires#destroy" do
@@ -218,10 +218,10 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as a director" do
     setup do
-      @user = create(:admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:director)
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 
@@ -299,9 +299,9 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
-    should "convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
-      assert assigns(:questionnaire).user.admin?
+    should "convert questionnaire's user to a director" do
+      patch :convert_to_director, params: { id: @questionnaire }
+      assert assigns(:questionnaire).user.director?
       assert_nil assigns(:questionnaire).user.reload.questionnaire
       assert_redirected_to edit_manage_user_path(assigns(:questionnaire).user)
     end

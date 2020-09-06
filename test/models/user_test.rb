@@ -64,11 +64,11 @@ class UserTest < ActiveSupport::TestCase
       assert_equal 2, User.without_questionnaire.count
     end
 
-    should "not return admins" do
+    should "not return staff" do
       create(:questionnaire) # user, has questionnaire
       create(:user, role: :event_tracking) # user, does not
       create(:user, role: :admin_limited_access) # admin, does not
-      create(:user, role: :admin) # admin, does not
+      create(:user, role: :director) # director, does not
       assert_equal 4, User.count
       assert_equal 1, User.without_questionnaire.count
     end

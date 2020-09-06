@@ -32,7 +32,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
   context "while authenticated without a questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
       sign_in @user
     end
@@ -60,7 +60,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
   context "while authenticated with a non-accepted questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
       @questionnaire.acc_status = "denied"
     end
@@ -90,7 +90,7 @@ class RsvpsControllerTest < ActionController::TestCase
     setup do
       clear_enqueued_jobs
 
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")
     end

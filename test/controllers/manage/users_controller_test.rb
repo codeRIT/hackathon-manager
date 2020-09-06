@@ -17,8 +17,8 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_response 401
     end
 
-    should "not allow access to manage_users admin datatables api" do
-      post :admin_datatable, format: :json, params: { "columns[0][data]" => "" }
+    should "not allow access to manage_users staff datatables api" do
+      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response 401
     end
 
@@ -65,8 +65,8 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_users admin datatables api" do
-      post :admin_datatable, format: :json, params: { "columns[0][data]" => "" }
+    should "not allow access to manage_users staff datatables api" do
+      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -99,7 +99,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
   context "while authenticated as a limited access admin" do
     setup do
       @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:staff]
       sign_in @user
     end
 
@@ -113,8 +113,8 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_users admins datatables api" do
-      post :admin_datatable, format: :json, params: { "columns[0][data]" => "" }
+    should "not allow access to manage_users staff datatables api" do
+      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_redirected_to root_path
     end
 
@@ -142,9 +142,9 @@ class Manage::UsersControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as a director" do
     setup do
-      @user = create(:admin)
+      @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end

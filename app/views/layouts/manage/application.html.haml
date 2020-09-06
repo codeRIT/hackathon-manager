@@ -72,7 +72,7 @@
                     .fa.fa-home.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.schools')
 
-            - if current_user.admin?
+            - if current_user.director?
               %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
                 %span
                   = t(:administration, scope: 'layouts.manage.navigation')

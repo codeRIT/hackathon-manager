@@ -35,7 +35,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated without a completed questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user)
       sign_in @user
     end
@@ -130,7 +130,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated with a completed questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
     end
 

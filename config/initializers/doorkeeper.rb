@@ -18,7 +18,7 @@ Doorkeeper.configure do
   # every time somebody will try to access the admin web interface.
   admin_authenticator do
     if current_user
-      head :forbidden unless current_user.admin? || current_user.admin_limited_access?
+      head :forbidden unless current_user.director? || current_user.admin_limited_access?
     else
       redirect_to new_user_session_url
     end
