@@ -13,7 +13,7 @@ class BusList < ApplicationRecord
   end
 
   def passengers
-    questionnaires.where("acc_status = 'rsvp_confirmed'").order("last_name ASC")
+    questionnaires.where("acc_status = 'rsvp_confirmed'")
   end
 
   def schools

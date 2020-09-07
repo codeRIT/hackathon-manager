@@ -17,8 +17,8 @@ class AuditHelperTest < ActiveSupport::TestCase
     should "model values for related fields" do
       bus_list = create(:bus_list, name: "Foo bus list")
       assert_equal "Foo bus list", display_audit_value(bus_list.id, "bus_list_id")
-      user = create(:user, email: "abc@example.com")
-      assert_equal "abc@example.com", display_audit_value(user.id, "checked_in_by_id")
+      user = create(:user, first_name: "Tom", last_name: "Nook")
+      assert_equal "Tom Nook", display_audit_value(user.id, "checked_in_by_id")
     end
 
     should "use human description for arrays" do
