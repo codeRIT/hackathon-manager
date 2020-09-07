@@ -23,7 +23,7 @@ class User < ApplicationRecord
   after_create :queue_reminder_email
   after_initialize :set_default_role, if: :new_record?
 
-  enum role: { user: 0, event_tracking: 1, organizer: 2, director: 3 }
+  enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
 
   def set_default_role
     self.role ||= :user

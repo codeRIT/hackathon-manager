@@ -5,7 +5,7 @@ class Manage::UsersController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, User.where(role: [:director, :organizer, :event_tracking]))
+    respond_with(:manage, User.where(role: [:director, :organizer, :volunteer]))
   end
 
   def user_datatable

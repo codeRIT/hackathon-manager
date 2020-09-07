@@ -43,6 +43,6 @@ class StaffDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    User.where(role: [:director, :organizer, :event_tracking])
+    User.where(role: [:director, :organizer, :volunteer])
   end
 end

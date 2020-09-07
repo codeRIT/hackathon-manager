@@ -51,7 +51,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
   end
 
   limited_conditions = {
-    'event tracking user' => :event_tracking,
+    'volunteer' => :volunteer,
     'organizer' => :organizer
   }
 

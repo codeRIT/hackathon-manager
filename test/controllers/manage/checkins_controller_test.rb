@@ -53,7 +53,7 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
   end
 
   limited_conditions = {
-    'event tracking user' => :event_tracking,
+    'volunteer' => :volunteer,
   }
 
   limited_conditions.each do |condition_name, user_role|
