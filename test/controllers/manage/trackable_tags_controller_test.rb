@@ -52,7 +52,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
 
   limited_conditions = {
     'event tracking user' => :event_tracking,
-    'limited access admin' => :admin_limited_access
+    'organizer' => :organizer
   }
 
   limited_conditions.each do |condition_name, user_role|

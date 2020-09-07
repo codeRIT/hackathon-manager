@@ -79,7 +79,7 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
   end
 
   success_conditions = {
-    'limited access admin' => :admin_limited_access,
+    'organizer' => :organizer,
     'director' => :director
   }
 

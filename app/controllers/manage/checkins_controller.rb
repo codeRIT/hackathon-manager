@@ -1,4 +1,5 @@
 class Manage::CheckinsController < Manage::ApplicationController
+  before_action :require_director_or_organizer
   before_action :set_questionnaire, only: [:show]
 
   respond_to :html, :json

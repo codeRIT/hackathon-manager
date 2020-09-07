@@ -1,9 +1,6 @@
 class Manage::TrackableEventsController < Manage::ApplicationController
-  skip_before_action :require_director_or_limited_admin
-  before_action :require_director_or_limited_admin_or_event_tracking
-
   before_action :set_trackable_event, only: [:show, :edit, :update, :destroy]
-  before_action :scope_limited_admin_access, only: [:edit, :update, :destroy]
+  before_action :scope_organizer_access, only: [:edit, :update, :destroy]
 
   respond_to :html, :json
 
@@ -86,7 +83,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   end
 
   # If the user isn't a director, scope changes only to those they created
-  def scope_limited_admin_access
+  def scope_organizer_access
     return if current_user.director? || @trackable_event.blank? || @trackable_event.user.blank?
     redirect_to manage_trackable_events_path, notice: 'You may not view events you did not create.' if @trackable_event.user != current_user
   end

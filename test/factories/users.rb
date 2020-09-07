@@ -17,11 +17,11 @@ FactoryBot.define do
       role { :director }
     end
 
-    factory :limited_access_admin do
+    factory :organizer do
       sequence :email do |n|
-        "limited_admin#{n}@example.com"
+        "organizer#{n}@example.com"
       end
-      role { :admin_limited_access }
+      role { :organizer }
     end
   end
 end

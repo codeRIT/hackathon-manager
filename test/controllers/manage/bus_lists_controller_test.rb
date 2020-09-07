@@ -137,9 +137,9 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a limited access admin" do
+  context "while authenticated as an organizer" do
     setup do
-      @user = create(:limited_access_admin)
+      @user = create(:organizer)
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end

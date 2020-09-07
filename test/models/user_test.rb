@@ -67,7 +67,7 @@ class UserTest < ActiveSupport::TestCase
     should "not return staff" do
       create(:questionnaire) # user, has questionnaire
       create(:user, role: :event_tracking) # user, does not
-      create(:user, role: :admin_limited_access) # admin, does not
+      create(:user, role: :organizer) # organizer, does not
       create(:user, role: :director) # director, does not
       assert_equal 4, User.count
       assert_equal 1, User.without_questionnaire.count

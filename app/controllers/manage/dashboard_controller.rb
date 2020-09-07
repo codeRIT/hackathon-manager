@@ -1,5 +1,4 @@
 class Manage::DashboardController < Manage::ApplicationController
-  before_action :require_director_or_limited_admin
 
   def index
   end
