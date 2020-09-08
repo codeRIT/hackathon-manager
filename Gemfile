@@ -39,7 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
 gem 'devise', '~> 4.7'
-gem 'omniauth-mlh', '~> 0.1'
+gem 'omniauth-mlh', '~> 0.4.1'
 gem 'doorkeeper', '~> 5.0'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
@@ -82,7 +82,7 @@ gem 'sidekiq-cron', '~> 1.1'
 gem 'rails-settings-cached', '~> 0.7.2'
 gem 'blazer'
 gem 'simple_spark'
-gem 'sparkpost_rails'
+gem 'sendgrid-actionmailer'
 gem 'httparty'
 gem 'rollbar', '~> 2.8'
 gem 'rubyzip', '>= 1.3.0'

@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Data Exports" do
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.data-exports') do
   = link_to "New Data Export", new_manage_data_export_path, class: "btn btn-sm btn-outline-secondary"
 
 %table.table.table-striped

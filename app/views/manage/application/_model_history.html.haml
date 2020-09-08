@@ -15,7 +15,7 @@
           - next if ignore_fields.include? field
           %p.mb-1
             = t("simple_form.labels.#{audit.auditable.class.name.downcase}.#{field}")
-            - if audit.auditable.class.columns_hash[field].type == :text
+            - if audit.auditable.class.columns_hash[field].nil? || audit.auditable.class.columns_hash[field].type == :text
               changed
             - else
               changed to
