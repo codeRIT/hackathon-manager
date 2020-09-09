@@ -18,8 +18,7 @@ AWS_ACCESS_KEY_ID="<AWS access key ID>"
 AWS_SECRET_ACCESS_KEY="<AWS secret key>"
 AWS_REGION="us-east-1"
 ROLLBAR_ACCESS_TOKEN="<server-side rollbar token>"
-SPARKPOST_API_KEY="<sparkpost api key>"
-SPARKPOST_CAMPAIGN_ID="my-hackathon"
+SENDGRID_API_KEY="<sendgrid api key>"
 TIME_ZONE="America/New_York"
 ```
 
@@ -61,19 +60,19 @@ S3_FORCE_PATH_STYLE=true
 
 ### E-mail
 
-Emails can be sent using [SparkPost](https://www.sparkpost.com) or traditional SMTP.
+Emails can be sent using [SendGrid](https://sendgrid.com) or traditional SMTP.
 
-#### SparkPost
+#### SendGrid
 
-[SparkPost](https://www.sparkpost.com) is the recommended email provider, and provides a free plan suitable for most hackathons.
+[SendGrid](https://sendgrid.com) is the recommended email provider, and provides a free plan suitable for most hackathons.
 
-Create a SparkPost API key with **Transmissions: Read/Write** and **Message Events: Read-only** permissions. The SMTP permission is _not_ required, as email is sent over the SparkPost API instead of SMTP.
+Create a SendGrid API key to get started. During the setup process you will be asked to authenticate your sending domain with SendGrid. For guidance on this process please visit [SendGrid Domain Authentication Support](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/). If you would like to maintain your sending reputation and stay out of the spam folder, we reccomend enabling [SendGrid Link Branding](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/) when asked during the setup process. 
 
-For added security, whitelist the API key to your server's IP address.
+
+>During the verification process ensure you have replaced `hello@example.com` with your own domain in your HackathonManager config. SendGrid will deny the email as you are not authenticated to send on behalf of `example.com`.
 
 ```bash
-SPARKPOST_API_KEY=""
-SPARKPOST_CAMPAIGN_ID=""
+SENDGRID_API_KEY=""
 ```
 
 #### SMTP
