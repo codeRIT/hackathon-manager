@@ -29,7 +29,7 @@ For example:
 | Update tag        | `PATCH https://your-hackathon.io/manage/trackable_tags/1.json` (with body parameters) |
 | Delete tag        | `DELETE https://your-hackathon.io/manage/trackable_tags/1.json`                                 |
 
-For a full list of endpoints, run `bin/rails routes` locally. This utility, provided by Ruby on Rails, lists all possible paths you can route too (along with their respective HTTP method).
+For a full list of endpoints, run `bin/rails routes` locally. This utility, provided by Ruby on Rails, lists all possible paths you can route to (along with their respective HTTP method).
 
 > Note: Datatable endpoints are highly coupled to [Datatables](https://datatables.net) functionality and are not easy to use.
 
