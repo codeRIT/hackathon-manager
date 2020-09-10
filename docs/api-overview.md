@@ -1,6 +1,6 @@
 ---
 id: api-overview
-title: API Overview
+title: Overview
 ---
 
 ## Introduction

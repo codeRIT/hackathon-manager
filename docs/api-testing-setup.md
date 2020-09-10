@@ -1,6 +1,6 @@
 ---
 id: api-testing-setup
-title: API Testing Setup
+title: Testing Setup
 ---
 
 This page will show you how to simulate API requests with [Postman](https://www.postman.com/) or [Paw](https://paw.cloud/).
