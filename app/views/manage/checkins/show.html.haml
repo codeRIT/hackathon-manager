@@ -1,7 +1,7 @@
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
   .d-flex.align-items-center.flex-wrap
     %h1.h2.mr-3
-      = title @questionnaire.full_name
+      = title @questionnaire.user.full_name
     %div
       %span.mr-1
         = render 'manage/questionnaires/acc_status_badge'
@@ -19,7 +19,7 @@
       .card-body
         .row
           %dt.col-md-4 Name
-          %dd.col-md-8= @questionnaire.full_name
+          %dd.col-md-8= @questionnaire.user.full_name
           %dt.col-md-4 School
           %dd.col-md-8
             - school = @questionnaire.school

@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Messages" do
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.messages') do
   = link_to "New Message", new_manage_message_path, class: "btn btn-sm btn-outline-secondary"
 
 .mb-4

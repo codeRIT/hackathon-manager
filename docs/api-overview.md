@@ -44,7 +44,6 @@ Example for questionnaire management endpoints:
  convert_to_admin_manage_questionnaire PATCH    /manage/questionnaires/:id/convert_to_admin(.:format)    manage/questionnaires#convert_to_admin
 update_acc_status_manage_questionnaire PATCH    /manage/questionnaires/:id/update_acc_status(.:format)   manage/questionnaires#update_acc_status
       bulk_apply_manage_questionnaires PATCH    /manage/questionnaires/bulk_apply(.:format)              manage/questionnaires#bulk_apply
-   message_events_manage_questionnaire GET      /manage/questionnaires/:id/message_events(.:format)      manage/questionnaires#message_events
                  manage_questionnaires GET      /manage/questionnaires(.:format)                         manage/questionnaires#index
                                        POST     /manage/questionnaires(.:format)                         manage/questionnaires#create
               new_manage_questionnaire GET      /manage/questionnaires/new(.:format)                     manage/questionnaires#new
