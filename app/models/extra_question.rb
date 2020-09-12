@@ -4,6 +4,8 @@ class ExtraQuestion < ApplicationRecord
   before_save :data_type_changed
   before_destroy :remove_from_questionnaire
 
+  serialize :select_collection, Array
+
   POSSIBLE_TYPES = {
     "string (less than 256 characters)" => "string",
     "string (greater than 255 characters)" => "text",
@@ -11,6 +13,7 @@ class ExtraQuestion < ApplicationRecord
     # "date and time" => "datetime",
     # "date" => "date",
     # "time" => "time",
+    "drop down menu" => "select",
     "checkbox" => "boolean",
     "whole number" => "integer",
     "number with decimal" => "float"

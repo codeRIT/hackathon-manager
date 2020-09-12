@@ -4,5 +4,4 @@
 
 %ul
   - @extra_questions.each do |q|
-    %li
-      %a{:href => edit_manage_extra_question_path(q)}= q.question
+    %a.list-group-item.list-group-item-action{:href => edit_manage_extra_question_path(q)}= q.question

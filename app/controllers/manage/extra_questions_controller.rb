@@ -40,7 +40,7 @@ class Manage::ExtraQuestionsController < Manage::ApplicationController
 
   def extra_question_params
     params.require(:extra_question).permit(
-        :question, :data_type, :required
+        :question, :data_type, :required, :placeholder, select_collection: []
     )
   end
 end

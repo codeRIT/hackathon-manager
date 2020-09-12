@@ -2,6 +2,10 @@
   .form-inputs
     = f.input :question
     = f.input :data_type, as: :select, collection: ExtraQuestion::POSSIBLE_TYPES, include_blank: "(select type...)"
+    = f.input :select_collection, as: :array, label: "Drop down options"
+    = f.input :placeholder
     = f.input :required
   .center
     = f.button :submit, value: ( @extra_question.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
+    - if !@extra_question.new_record?
+      = link_to 'Delete', manage_extra_question_path(@extra_question), method: :delete, data: { confirm: "Are you sure? This action is irreversible." }, class: 'btn btn btn-danger'
