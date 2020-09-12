@@ -57,11 +57,11 @@ class User < ApplicationRecord
   end
 
   def staff?
-    self.director? || self.organizer? || self.volunteer?
+    director? || organizer? || volunteer?
   end
 
   def organizing_staff?
-    self.director? || self.organizer?
+    director? || organizer?
   end
 
   def self.from_omniauth(auth)

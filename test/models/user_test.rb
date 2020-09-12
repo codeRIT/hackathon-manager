@@ -90,7 +90,7 @@ class UserTest < ActiveSupport::TestCase
       user = create(:user, role: :volunteer)
       assert_equal true, user.staff?
     end
-    
+
     should "report organizer as staff" do
       user = create(:user, role: :organizer)
       assert_equal true, user.staff?
@@ -112,7 +112,7 @@ class UserTest < ActiveSupport::TestCase
       user = create(:user, role: :volunteer)
       assert_equal false, user.organizing_staff?
     end
-    
+
     should "report organizer as organizing staff" do
       user = create(:user, role: :organizer)
       assert_equal true, user.organizing_staff?
