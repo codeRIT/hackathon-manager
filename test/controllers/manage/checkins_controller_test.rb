@@ -52,33 +52,8 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
     end
   end
 
-  limited_conditions = {
-    'volunteer' => :volunteer,
-  }
-
-  limited_conditions.each do |condition_name, user_role|
-    context "while authenticated as a #{condition_name}" do
-      setup do
-        @user = create(:user, role: user_role)
-        @request.env["devise.mapping"] = Devise.mappings[:director]
-        sign_in @user
-      end
-
-      should "not get index" do
-        test_index_failure
-      end
-
-      should "not show checkin" do
-        test_show_failure
-      end
-
-      should "not render checking datatable" do
-        test_datatable_failure
-      end
-    end
-  end
-
   success_conditions = {
+    'volunteer' => :volunteer,
     'organizer' => :organizer,
     'director' => :director
   }

@@ -23,5 +23,12 @@ FactoryBot.define do
       end
       role { :organizer }
     end
+
+    factory :volunteer do
+      sequence :email do |n|
+        "volunteer#{n}@example.com"
+      end
+      role { :volunteer }
+    end
   end
 end

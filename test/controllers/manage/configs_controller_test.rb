@@ -61,10 +61,10 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an organizer" do
+  context "while authenticated as a volunteer" do
     setup do
-      @user = create(:organizer)
-      @request.env["devise.mapping"] = Devise.mappings[:director]
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -91,10 +91,40 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as an organizer" do
+    setup do
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "not allow access to manage_configs#index" do
+      get :index
+      assert_response :redirect
+    end
+
+    should "not allow access to manage_configs#edit" do
+      get :edit, params: { id: "registration_is_open" }
+      assert_response :redirect
+    end
+
+    should "not update config" do
+      HackathonConfig["registration_is_open"] = false
+      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
+      assert_equal false, HackathonConfig["registration_is_open"]
+    end
+
+    should "not update css config" do
+      HackathonConfig["custom_css"] = ""
+      patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
+      assert_equal "", HackathonConfig["custom_css"]
+    end
+  end
+
+  context "while authenticated as a director" do
     setup do
       @user = create(:director)
-      @request.env["devise.mapping"] = Devise.mappings[:director]
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 

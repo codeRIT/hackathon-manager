@@ -1,4 +1,5 @@
 class Manage::MessagesController < Manage::ApplicationController
+  before_action :require_director_or_organizer
   before_action :set_message, only: [:show, :edit, :update, :destroy, :deliver, :preview, :duplicate]
   before_action :check_message_access, only: [:edit, :update, :destroy]
   before_action :limit_template_access_to_directors, only: [:template, :template_preview, :template_update, :template_replace_with_default]

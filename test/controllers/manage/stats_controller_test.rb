@@ -39,14 +39,61 @@ class Manage::StatsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a director" do
+  context "while authenticated as a volunteer" do
     setup do
-      @user = create(:director)
-      @request.env["devise.mapping"] = Devise.mappings[:director]
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
-    should "allow access to manage_dashboard#index" do
+    should "not allow access to stats#index" do
+      get :index
+      assert_response :redirect
+      assert_redirected_to manage_root_path
+    end
+
+    should "not allow access to data endpoints" do
+      paths.each do |path|
+        patch path
+        assert_response :redirect
+        assert_redirected_to manage_root_path
+      end
+    end
+  end
+
+  context "while authenticated as an organizer" do
+    setup do
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "allow access to stats#index" do
+      get :index
+      assert_response :success
+    end
+
+    should "allow access to all data endpoints" do
+      school = create(:school)
+      Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _name|
+        create_list(:questionnaire, 5, school_id: school.id, acc_status: status, dietary_restrictions: "Vegetarian", special_needs: "Something")
+      end
+
+      paths.each do |path|
+        patch path
+        assert_response :success
+      end
+    end
+  end
+
+  context "while authenticated as a director" do
+    setup do
+      @user = create(:director)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "allow access to stats#index" do
       get :index
       assert_response :success
     end

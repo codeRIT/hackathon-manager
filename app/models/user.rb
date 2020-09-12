@@ -56,6 +56,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def staff?
+    self.director? || self.organizer? || self.volunteer?
+  end
+
+  def organizing_staff?
+    self.director? || self.organizer?
+  end
+
   def self.from_omniauth(auth)
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)

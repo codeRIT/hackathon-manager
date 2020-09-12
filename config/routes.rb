@@ -38,7 +38,15 @@ Rails.application.routes.draw do
   end
 
   namespace :manage do
-    root to: "dashboard#index"
+    authenticate :user, ->(u) { u.director? } do
+      root to: "dashboard#index"
+    end
+    authenticate :user, ->(u) { u.organizer? } do
+      root to: "dashboard#index"
+    end
+    authenticate :user, ->(u) { u.volunteer? } do
+      root to: "checkins#index"
+    end
     resources :dashboard do
       get :map_data, on: :collection
       get :todays_activity_data, on: :collection

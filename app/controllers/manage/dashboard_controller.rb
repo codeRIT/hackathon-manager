@@ -1,4 +1,5 @@
 class Manage::DashboardController < Manage::ApplicationController
+  before_action :require_director_or_organizer
 
   def index
   end

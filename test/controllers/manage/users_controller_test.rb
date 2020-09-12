@@ -96,31 +96,77 @@ class Manage::UsersControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an organizer" do
+  context "while authenticated as a volunteer" do
     setup do
-      @user = create(:organizer)
-      @request.env["devise.mapping"] = Devise.mappings[:staff]
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
     should "not allow access to manage_users#index" do
       get :index
-      assert_redirected_to root_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_users users datatables api" do
       post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to root_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_users staff datatables api" do
       post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to root_path
+      assert_redirected_to manage_root_path
     end
 
     should "allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_redirected_to root_path
+      assert_redirected_to manage_root_path
+    end
+
+    should "not allow access to manage_users#edit" do
+      get :edit, params: { id: @user }
+      assert_response :redirect
+      assert_redirected_to manage_users_path
+    end
+
+    should "not allow access to manage_users#update" do
+      patch :update, params: { id: @user, user: { email: "test@example.com" } }
+      assert_response :redirect
+      assert_redirected_to manage_users_path
+    end
+
+    should "not allow access to manage_users#destroy" do
+      patch :destroy, params: { id: @user }
+      assert_response :redirect
+      assert_redirected_to manage_users_path
+    end
+  end
+
+  context "while authenticated as an organizer" do
+    setup do
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "not allow access to manage_users#index" do
+      get :index
+      assert_redirected_to manage_root_path
+    end
+
+    should "not allow access to manage_users users datatables api" do
+      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_redirected_to manage_root_path
+    end
+
+    should "not allow access to manage_users staff datatables api" do
+      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_redirected_to manage_root_path
+    end
+
+    should "allow access to manage_users#show" do
+      get :show, params: { id: @user }
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_users#edit" do

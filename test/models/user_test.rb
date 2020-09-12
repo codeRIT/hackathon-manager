@@ -80,6 +80,50 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  context "current_user is staff" do
+    should "not report user as staff" do
+      user = create(:user, role: user)
+      assert_equal false, user.staff?
+    end
+
+    should "report volunteer as staff" do
+      user = create(:user, role: :volunteer)
+      assert_equal true, user.staff?
+    end
+    
+    should "report organizer as staff" do
+      user = create(:user, role: :organizer)
+      assert_equal true, user.staff?
+    end
+
+    should "report director as staff" do
+      user = create(:user, role: :director)
+      assert_equal true, user.staff?
+    end
+  end
+
+  context "current_user is organizing staff" do
+    should "not report user as organizing staff" do
+      user = create(:user, role: user)
+      assert_equal false, user.organizing_staff?
+    end
+
+    should "not report volunteer as organizing staff" do
+      user = create(:user, role: :volunteer)
+      assert_equal false, user.organizing_staff?
+    end
+    
+    should "report organizer as organizing staff" do
+      user = create(:user, role: :organizer)
+      assert_equal true, user.organizing_staff?
+    end
+
+    should "report director as organizing staff" do
+      user = create(:user, role: :director)
+      assert_equal true, user.organizing_staff?
+    end
+  end
+
   context "safe_receive_weekly_report" do
     should "return false if user is inactive" do
       user = build(:user, is_active: true, receive_weekly_report: true)
