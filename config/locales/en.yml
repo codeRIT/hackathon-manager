@@ -92,8 +92,6 @@ en:
 
           Contact [travel@example.com](mailto:travel@example.com)
       questionnaire:
-        first_name: Joe
-        last_name: Smith
         email: joe@example.com
         phone: (123) 456-7890
         school_id: My University
@@ -105,6 +103,8 @@ en:
         portfolio_url: https://mywebsite.com
         vcs_url: https://github.com/coderit
       user:
+        first_name: Joe
+        last_name: Smith
         email: joe@example.com
     labels:
       school:
@@ -121,6 +121,22 @@ en:
         questionnaires_closed_message: Questionnaires Closed Message
   pages:
     manage:
+      dashboard:
+        title: Dashboard
+      questionnaires:
+        title: Questionnaires
+      messages:
+        title: Messages
+      check-in:
+        title: Check-in
+      stats:
+        title: Statistics
+      trackable-tags:
+        title: Trackable Tags
+      bus-lists:
+        title: Bus Lists
+      schools:
+        title: Schools
       users: 
         title: Users & Staff
         users: All Users
@@ -171,3 +187,26 @@ en:
             yes: Yes
             no: No
             save: Save
+      settings:
+        title: Hackathon Settings
+      sidekiq:
+        title: Sidekiq
+      blazer:
+        title: Blazer
+      doorkeeper:
+        title: Doorkeeper
+      data-exports:
+        title: Data Exports
+  layouts:
+    manage:
+      navigation:
+        overview: Overview
+        logistics: Logistics
+        travel: Travel
+        administration: Administration
+        advanced: Advanced
+        descriptors:
+          sidekiq: Monitor background jobs
+          blazer: Run custom SQL queries
+          doorkeeper: OAuth2 provider management
+          dataexports: Generate & export data

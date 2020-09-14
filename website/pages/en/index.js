@@ -58,7 +58,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
             <Button href={docUrl('deployment.html')}>Get Started</Button>
-            <Button href={docUrl('running-a-hackathon.html')}>Docs</Button>
+            <Button href={docUrl('docs-overview.html')}>Docs</Button>
             <Button href="https://github.com/codeRIT/hackathon-manager">
               GitHub
             </Button>
