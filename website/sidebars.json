@@ -11,8 +11,8 @@
     "Maintenance" : [
       "updating-hm"
     ],
-    "Guides": ["running-a-hackathon", "questionnaires", "messages", "busses"],
-    "Development": ["api"],
+    "Docs": ["docs-overview", "questionnaires", "messages", "busses"],
+    "API": ["api-overview", "api-testing-setup"],
     "Getting Help": ["resources"]
   }
 }
