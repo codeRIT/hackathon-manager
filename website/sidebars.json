@@ -12,7 +12,7 @@
       "updating-hm"
     ],
     "Guides": ["running-a-hackathon", "questionnaires", "messages", "busses"],
-    "Development": ["api"],
+    "API": ["api-overview", "api-testing-setup"],
     "Getting Help": ["resources"]
   }
 }
