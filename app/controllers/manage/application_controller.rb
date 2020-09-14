@@ -14,12 +14,12 @@ class Manage::ApplicationController < ApplicationController
   end
 
   def require_director_or_organizer
-    return redirect_to manage_root_path unless !current_user.staff? || current_user.try(:director?) || current_user.try(:organizer?)
-    return redirect_to root_path unless current_user.try(:director?) || current_user.try(:organizer?)
+    return redirect_to manage_root_path if current_user.staff? && !current_user.organizing_staff?
+    return redirect_to root_path unless current_user.organizing_staff?
   end
 
   def require_director_or_organizer_or_volunteer
-    redirect_to root_path unless current_user.try(:director?) || current_user.try(:organizer?) || current_user.try(:volunteer?)
+    redirect_to root_path unless current_user.staff?
   end
 
   def limit_write_access_to_directors
