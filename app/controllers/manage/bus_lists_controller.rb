@@ -44,10 +44,10 @@ class Manage::BusListsController < Manage::ApplicationController
     is_bus_captain = params[:bus_captain] == "1"
     @questionnaire.update_attribute(:is_bus_captain, is_bus_captain)
     if @questionnaire.reload.is_bus_captain
-      flash[:notice] = "#{@questionnaire.full_name} has been promoted to a bus captain."
+      flash[:notice] = "#{@questionnaire.user.full_name} has been promoted to a bus captain."
       Message.queue_for_trigger("bus_list.new_captain_confirmation", @questionnaire.user.id)
     else
-      flash[:notice] = "#{@questionnaire.full_name} has been removed as a bus captain."
+      flash[:notice] = "#{@questionnaire.user.full_name} has been removed as a bus captain."
     end
     redirect_to [:manage, @bus_list]
   end

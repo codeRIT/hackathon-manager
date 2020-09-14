@@ -1,7 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status, :message_events]
+  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status]
 
   respond_to :html, :json
 
@@ -51,6 +51,12 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   def update
     update_params = questionnaire_params
     email = update_params.delete(:email)
+    # Take our nested user object out as a whole
+    user_params = params[:questionnaire][:user]
+    if user_params
+      @questionnaire.user.update_attributes(first_name: user_params[:first_name])
+      @questionnaire.user.update_attributes(last_name: user_params[:last_name])
+    end
     @questionnaire.user.update_attributes(email: email) if email.present?
     update_params = convert_school_name_to_id(update_params)
     update_params = convert_boarded_bus_param(update_params, @questionnaire)
@@ -76,11 +82,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       end
       @questionnaire.update_attribute(:checked_in_at, Time.now)
       @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
-      flash[:notice] = "Checked in #{@questionnaire.full_name}."
+      flash[:notice] = "Checked in #{@questionnaire.user.full_name}."
     elsif params[:check_in] == "false"
       @questionnaire.update_attribute(:checked_in_at, nil)
       @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
-      flash[:notice] = "#{@questionnaire.full_name} no longer checked in."
+      flash[:notice] = "#{@questionnaire.user.full_name} no longer checked in."
     else
       flash[:alert] = "No check-in action provided!"
       redirect_to show_redirect_path
@@ -97,9 +103,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def destroy
-    user = @questionnaire.user
     @questionnaire.destroy
-    user.destroy if user.present?
     respond_with(:manage, @questionnaire)
   end
 
@@ -140,15 +144,13 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     head :ok
   end
 
-  def message_events
-    render json: @questionnaire.message_events
-  end
-
   private
 
   def questionnaire_params
+    # Note that this ONLY considers parameters for the questionnaire, not the user.
+    # TODO: Refactor "email" out to user as first_name and last_name were
     params.require(:questionnaire).permit(
-      :email, :experience, :first_name, :last_name, :gender,
+      :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
       :portfolio_url, :vcs_url, :agreement_accepted, :bus_captain_interest,

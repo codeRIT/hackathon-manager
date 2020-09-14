@@ -3,8 +3,8 @@ class CheckinDatatable < ApplicationDatatable
 
   def view_columns
     @view_columns ||= {
-      first_name: { source: "Questionnaire.first_name" },
-      last_name: { source: "Questionnaire.last_name" },
+      first_name: { source: "User.first_name" },
+      last_name: { source: "User.last_name" },
       checked_in: { source: "Questionnaire.checked_in_at", searchable: false },
     }
   end
@@ -13,7 +13,7 @@ class CheckinDatatable < ApplicationDatatable
 
   def about(record)
     output = ""
-    output += [record.first_name, record.last_name].join(" ") + " "
+    output += [record.user.first_name, record.user.last_name].join(" ") + " "
     output += '<span class="badge badge-warning"><i class="fa fa-exclamation-triangle"></i>Minor</span>' if record.minor?
     output += "<br /><small>" + record.school.name + "</small>"
     output.html_safe
@@ -22,8 +22,8 @@ class CheckinDatatable < ApplicationDatatable
   def data
     records.map do |record|
       {
-        first_name: record.first_name,
-        last_name: record.last_name,
+        first_name: record.user.first_name,
+        last_name: record.user.last_name,
         about: about(record),
         checked_in: yes_no_display(record.checked_in?),
         actions: "<a class=\"btn btn-primary btn-sm\" href=\"#{manage_checkin_path(record)}\">View</a>".html_safe,
