@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :questionnaire do
-    first_name { "John" }
-    last_name { "Doe" }
     phone { "(123) 456-7890" }
     international { false }
     date_of_birth { Date.today - 20.years }
