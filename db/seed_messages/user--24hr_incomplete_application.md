@@ -4,7 +4,7 @@ You're almost there! You created an account, but didn't finish the additional {{
 
 <strong>You will not be considered until an application is completed.</strong>
 
-Not to worry! Just [head on back to the website]({{apply_url}}), sign in with your existing account and complete the application.
+Not to worry! Just [head on back to the website]({{apply_url}}), sign in with your existing account, and complete the application.
 
 <a href="{{apply_url}}" class="button">Finish Application »</a>
 
