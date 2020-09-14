@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '>= 2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.3'
+gem 'rails', '~> 5.2.4.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
@@ -39,7 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
 gem 'devise', '~> 4.7'
-gem 'omniauth-mlh', '~> 0.1'
+gem 'omniauth-mlh', '~> 0.4.1'
 gem 'doorkeeper', '~> 5.0'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
@@ -53,7 +53,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'simple_form'
 gem 'ajax-datatables-rails', '~> 1.0'
 gem 'roadie-rails'
-gem 'chartkick', '~> 3.3'
+gem 'chartkick', '~> 3.4'
 gem 'groupdate'
 gem 'font-awesome-rails', '~> 4.0' # needed for icon helpers
 gem 'mustache', '~> 1.0'
@@ -82,7 +82,7 @@ gem 'sidekiq-cron', '~> 1.1'
 gem 'rails-settings-cached', '~> 0.7.2'
 gem 'blazer'
 gem 'simple_spark'
-gem 'sparkpost_rails'
+gem 'sendgrid-actionmailer'
 gem 'httparty'
 gem 'rollbar', '~> 2.8'
 gem 'rubyzip', '>= 1.3.0'
