@@ -9,7 +9,7 @@ class Manage::ApplicationController < ApplicationController
   end
 
   def require_director
-    return redirect_to manage_root_path unless !current_user.staff? || current_user.try(:director?)
+    return redirect_to manage_root_path if current_user.staff? && !current_user.try(:director?)
     return redirect_to root_path unless current_user.try(:director?)
   end
 
