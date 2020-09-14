@@ -283,9 +283,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "destroy questionnaire" do
       assert_difference("Questionnaire.count", -1) do
-        assert_difference("User.count", -1) do
-          delete :destroy, params: { id: @questionnaire }
-        end
+        delete :destroy, params: { id: @questionnaire }
       end
       assert_redirected_to manage_questionnaires_path
     end
