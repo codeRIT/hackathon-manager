@@ -1,9 +1,3 @@
-<!--
-
-IMPLEMENT THIS!
-
-You'll probably want something along the lines of:
-
 ### Dear {{first_name}},
 
 It is with our sincerest regret to inform you that our admissions committee has chosen to not accept your application to {{hackathon_name}} at this time. We were overjoyed with the number of applicants we received, but unfortunately we can not accept everyone.
@@ -12,5 +6,3 @@ We invite you to apply again next year. There are plenty of other hackathons thi
 
 Thank you for applying,<br>
  - The {{hackathon_name}} Team
-
--->
