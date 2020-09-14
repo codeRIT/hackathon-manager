@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Check-in"
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.check-in')
 
 .mb-4
   %table.checkins.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_checkins_path(format: :json) }
