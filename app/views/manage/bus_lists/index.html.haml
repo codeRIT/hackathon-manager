@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Bus Lists", docs: 'https://coderit.org/hackathon-manager/docs/busses' do
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.bus-lists'), docs: 'https://coderit.org/hackathon-manager/docs/busses' do
   = link_to "New Bus List", new_manage_bus_list_path, class: "btn btn-sm btn-outline-secondary"
 
 .mb-4

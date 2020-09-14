@@ -9,11 +9,13 @@ Be sure to review all of these before going live!
 
 Various settings are available at http://your-site/manage/configs - be sure to review all of them!
 
-## Emails
+## Default Messages
 
-Default automated emails are loaded into http://your-site/manage/messages.
+Default automated Messages (or emails) are loaded into http://your-site/manage/messages. Please note some of the default Messages supplied are **awaiting content to be entered**. It is critical that all default Messages be reviewed to fit the needs of a particular hackathon.
 
-The default email layout/template can also be customized if desired. Scroll to the bottom of http://your-site/manage/messages to customize.
+The default Message layout/template can also be customized if desired. Scroll to the bottom of http://your-site/manage/messages to customize.
+
+To learn more about Messages and its capabilities, review the [Messages Guide](messages).
 
 ## Styling
 

@@ -58,12 +58,8 @@
       "description": "Rollbar access token for code exception reporting",
       "required": false
     },
-    "SPARKPOST_API_KEY": {
-      "description": "SparkPost API key for sending email",
-      "required": false
-    },
-    "SPARKPOST_CAMPAIGN_ID": {
-      "description": "SparkPost campaign ID for sending email (e.g. the name of your hackathon)",
+    "SENDGRID_API_KEY": {
+      "description": "SendGrid API key for sending email",
       "required": false
     },
     "HM_DOMAIN_NAME": {

@@ -1,14 +1,18 @@
 {
   "docs": {
-    "HackathonManager": ["running-a-hackathon", "busses", "questionnaires", "messages"],
-    "API": ["api-setup", "api-usage"],
-    "Deployment": [
+    "Setup": [
       "deployment",
-      "deployment-dokku",
       "deployment-heroku",
+      "deployment-dokku",
       "deployment-okd",
       "deployment-environment-variables",
       "customization"
-    ]
+    ],
+    "Maintenance" : [
+      "updating-hm"
+    ],
+    "Docs": ["docs-overview", "questionnaires", "messages", "busses"],
+    "API": ["api-overview", "api-testing-setup"],
+    "Getting Help": ["resources"]
   }
 }

@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Questionnaires" do
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.questionnaires') do
   = link_to "New Questionnaire", new_manage_questionnaire_path, class: "btn btn-sm btn-outline-secondary"
 
 = render "questionnaire_datatable"

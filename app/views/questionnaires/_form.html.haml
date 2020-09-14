@@ -10,19 +10,13 @@
           = markdown(HackathonConfig['disclaimer_message'])
 
       .form-inputs
-        = f.input :first_name, input_html: { "data-validate" => "presence" }, autofocus: true, wrapper_html: { class: 'input--half' }
-        = f.input :last_name, input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
-        = f.input :phone, label: "Phone number", input_html: { "data-validate" => "phone" }
+        = f.input :phone, label: "Phone number", input_html: { "data-validate" => "presence" }
         = f.input :date_of_birth, start_year: Date.today.year - 5, end_year: Date.today.year - 90, order: [:month, :day, :year], input_html: { "data-validate" => "presence" }
 
         = f.input :school_id, as: :school_selection, input_html: { "data-validate" => "presence" }
         = f.input :level_of_study, collection: collection_or_text(@questionnaire.level_of_study, Questionnaire::POSSIBLE_LEVELS_OF_STUDY), include_blank: "(select one...)", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :major, input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :gender, collection: collection_or_text(@questionnaire.gender, Questionnaire::POSSIBLE_GENDERS), include_blank: "(select one...)", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
-        = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
-        = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
-        = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
-
       .right
         %button.button{ type: "button", "data-wizard" => "next" } Next
 
@@ -45,6 +39,10 @@
         - travel_state = !@questionnaire.new_record? && @questionnaire.travel_not_from_school
         = f.input :travel_not_from_school, as: :radio_buttons, collection: { " My school" => false, " Somewhere else" => true }, label: "I am traveling from..."
         = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Where are you traveling from?", placeholder: "New York City"
+
+        = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
+        = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+        = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
 
       %hr
 

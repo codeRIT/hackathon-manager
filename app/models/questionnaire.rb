@@ -19,7 +19,7 @@ class Questionnaire < ApplicationRecord
 
   validates_uniqueness_of :user_id
 
-  validates_presence_of :first_name, :last_name, :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
+  validates_presence_of :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
   validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity
   validates_presence_of :agreement_accepted, message: "Please read & accept"
   validates_presence_of :code_of_conduct_accepted, message: "Please read & accept"
@@ -151,10 +151,6 @@ class Questionnaire < ApplicationRecord
     school.name if school_id
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
-  end
-
   def full_location
     "#{school.city}, #{school.state}"
   end
@@ -199,13 +195,6 @@ class Questionnaire < ApplicationRecord
 
   def did_rsvp?
     ['rsvp_confirmed', 'rsvp_denied'].include? acc_status
-  end
-
-  def message_events
-    return [] unless ENV["SPARKPOST_API_KEY"].presence
-
-    simple_spark = SimpleSpark::Client.new
-    simple_spark.message_events.search(recipients: email)
   end
 
   def verbal_status

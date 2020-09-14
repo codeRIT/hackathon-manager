@@ -106,8 +106,12 @@ Rails.application.configure do
       enable_starttls_auto: ENV["SMTP_STARTTLS_AUTO"] != "false", # defaults to true
     }
   else
-    # Send email through SparkPost API
-    config.action_mailer.delivery_method = :sparkpost
+    # Send email through SendGrid API
+    config.action_mailer.delivery_method = :sendgrid_actionmailer
+    config.action_mailer.sendgrid_actionmailer_settings = {
+      api_key: ENV['SENDGRID_API_KEY'],
+      raise_delivery_errors: true
+    }
   end
 
   # Required for email messages

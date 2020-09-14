@@ -230,7 +230,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
     should "not allow updates to invalid questionnaire via rsvp page" do
       @questionnaire.update_attribute(:phone, "1111111111")
-      @questionnaire.update_attribute(:first_name, "")
+      @questionnaire.update_attribute(:agreement_accepted, false)
       patch :update, params: { questionnaire: { phone: "1234567890" } }
       assert_not_nil flash[:alert]
       assert_equal "1111111111", @questionnaire.reload.phone
