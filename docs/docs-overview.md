@@ -1,12 +1,12 @@
 ---
-id: running-a-hackathon
-title: HackathonManager Guides
+id: docs-overview
+title: HackathonManager Documentation
 sidebar_label: Overview
 ---
 
 > HackathonManager is a full-service tool to run your hackathon from start to finish.
 
-Guides to get you started:
+Documentation to get you started:
 
 - [Timeline of a hackathon](#timeline)
 - [Questionnaires](questionnaires.md)
