@@ -41,7 +41,6 @@ Example for questionnaire management endpoints:
                                 Prefix Verb     URI Pattern                                              Controller#Action
        datatable_manage_questionnaires POST     /manage/questionnaires/datatable(.:format)               manage/questionnaires#datatable
          check_in_manage_questionnaire PATCH    /manage/questionnaires/:id/check_in(.:format)            manage/questionnaires#check_in
- convert_to_admin_manage_questionnaire PATCH    /manage/questionnaires/:id/convert_to_admin(.:format)    manage/questionnaires#convert_to_admin
 update_acc_status_manage_questionnaire PATCH    /manage/questionnaires/:id/update_acc_status(.:format)   manage/questionnaires#update_acc_status
       bulk_apply_manage_questionnaires PATCH    /manage/questionnaires/bulk_apply(.:format)              manage/questionnaires#bulk_apply
                  manage_questionnaires GET      /manage/questionnaires(.:format)                         manage/questionnaires#index

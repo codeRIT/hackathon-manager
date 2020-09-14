@@ -1,7 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status]
+  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :update_acc_status]
 
   respond_to :html, :json
 
