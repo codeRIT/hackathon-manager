@@ -76,7 +76,7 @@ end
 
 Authentication is implemented with OAauth 2, provided by the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem. For full Doorkeeper endpoints + docs, see the [Doorkeeper wiki](https://github.com/doorkeeper-gem/doorkeeper/wiki/API-endpoint-descriptions-and-examples).
 
-See the [Setup Postman/Paw for API Testing](api-setup.md) page for information on using those tools for testing the API locally.
+See the [Setup Postman/Paw for API Testing](api-testing-setup.md) page for information on using those tools for testing the API locally.
 
 Once appropriate authentication credentials are retrieved, they should be provided on all API requests.
 
