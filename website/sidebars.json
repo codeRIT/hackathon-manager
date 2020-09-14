@@ -12,7 +12,7 @@
       "updating-hm"
     ],
     "Docs": ["docs-overview", "questionnaires", "messages", "busses"],
-    "Development": ["api"],
+    "API": ["api-overview", "api-testing-setup"],
     "Getting Help": ["resources"]
   }
 }
