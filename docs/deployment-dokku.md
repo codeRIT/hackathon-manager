@@ -13,7 +13,7 @@ title: Dokku Deployment
 
 Below are steps to deploy a new HackathonManager instance on Dokku. To update an existing Dokku deployment, check out our [updating docs](updating-hm.html).
 
-If you have any questions at all, please don't hesitate to reach out to the [codeRIT Engineering Team](mailto:engineering@coderit.org)! This doc is very much a work in progress but we want to keep it as up to date as possible.
+If you have any questions, please don't hesitate to reach out to the [codeRIT Engineering Team](mailto:engineering@coderit.org)! This doc is very much a work in progress but we want to keep it as up to date as possible.
 
 ## Dokku Setup
 
