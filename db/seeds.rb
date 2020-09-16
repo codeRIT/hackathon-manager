@@ -57,11 +57,19 @@ end
 
 puts "Seeding school list..."
 
-csv_file = File.join(File.dirname(__FILE__), 'schools.csv')
-csv_text = File.read(csv_file)
+school_csv_file = File.join(File.dirname(__FILE__), 'schools.csv')
+csv_text = File.read(school_csv_file)
 csv = CSV.parse(csv_text, headers: true)
 csv.each do |row|
   School.create(row.to_hash)
+end
+
+puts "Seeding fips list..."
+fips_csv_file = File.join(File.dirname(__FILE__), 'fips.csv')
+fips_csv_text = File.read(fips_csv_file)
+fips_csv = CSV.parse(fips_csv_text, headers: true)
+fips_csv.each do |row|
+  Fips.create(row.to_hash)
 end
 
 puts "Done"
