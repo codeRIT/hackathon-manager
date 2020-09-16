@@ -27,11 +27,4 @@ class UserMailer < ApplicationMailer
 
     Message.queue_for_trigger("questionnaire.rsvp_reminder", @user.id)
   end
-
-  rescue_from SparkPostRails::DeliveryException do |e|
-    error_codes_to_not_retry = [
-      "1902", # Generation rejection, specific to the Sparkpost API
-    ]
-    raise e unless e.blank? || error_codes_to_not_retry.include?(e.service_code)
-  end
 end
