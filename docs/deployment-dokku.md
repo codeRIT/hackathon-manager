@@ -7,7 +7,7 @@ title: Dokku Deployment
 >
 >If you need a VM, check out [DigitalOcean](https://m.do.co/c/b5ee103e23c3) or [Linode](https://www.linode.com/?r=e90a6fb2a6999fb4ec7b60b1add3e288f97954bf) and the [Dokku docs](http://dokku.viewdocs.io/dokku/) to get started.
 >
->**Student Developer?** The [GitHub Student Developer Pack](https://education.github.com/pack?sort=popularity&tag=Cloud) has several discounts for cloud hosting. 
+>**Student Developer?** The [GitHub Student Developer Pack](https://education.github.com/pack?sort=popularity&tag=Cloud) has several discounts for cloud hosting, Ruby tutorials, and more! 
 
 ## Setting up a new deployment
 
