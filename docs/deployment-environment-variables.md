@@ -17,7 +17,7 @@ SECRET_KEY_BASE="<randomly generated string>"
 DEVISE_SECRET_KEY="<randomly generated string>"
 ```
 
-`SECRET_KEY_BASE` and `DEVISE_SECRET_KEY` are required for the app to run. You can generate secrets via `bundle exec rake secret`. This "secret" is a 64-byte hexadecimal string (128 characters). You could also generate this with `head -c 64 /dev/urandom | xxd -ps -c 128` if you are on a standard Linux distribution.
+You can generate secrets via `bundle exec rake secret`. This "secret" is a 64-byte hexadecimal string (128 characters). You could also generate this with `head -c 64 /dev/urandom | xxd -ps -c 128` if you are on a standard Linux distribution.
 
 ### Mailer domain
 
@@ -120,7 +120,6 @@ ROLLBAR_ACCESS_TOKEN=""
 ```
 
 [Rollbar](https://rollbar.com/) captures and notifies of errors in production, and requires a server-side access token.
-
 
 
 
