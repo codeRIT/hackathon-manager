@@ -10,29 +10,12 @@ Various services require environment variables to operate. While they may appear
 ## Required
 **The following environment variables are required for HackathonManager to function.**
 
+### Secret keys
+
 ```bash
 SECRET_KEY_BASE="<randomly generated string>"
 DEVISE_SECRET_KEY="<randomly generated string>"
-HM_DOMAIN_NAME="apply.example.com"
-AWS_BUCKET="my-example-bucket"
-AWS_ACCESS_KEY_ID="<AWS access key ID>"
-AWS_SECRET_ACCESS_KEY="<AWS secret key>"
-AWS_REGION="us-east-1"
-ROLLBAR_ACCESS_TOKEN="<server-side rollbar token>"
-SENDGRID_API_KEY="<sendgrid api key>"
-TIME_ZONE="America/New_York"
 ```
-
-## Recommended
-```bash
-MLH_KEY="my-mlh-application-id"
-MLH_SECRET="my-mlh-secret"
-ROLLBAR_ACCESS_TOKEN="<server-side rollbar token>"
-```
-
-_Also see [app.json](https://github.com/codeRIT/hackathon_manager/blob/master/app.json)_
-
-### Secret keys
 
 `SECRET_KEY_BASE` and `DEVISE_SECRET_KEY` are required for the app to run. You can generate secrets via `bundle exec rake secret`. This "secret" is a 64-byte hexadecimal string (128 characters). You could also generate this with `head -c 64 /dev/urandom | xxd -ps -c 128` if you are on a standard Linux distribution.
 
@@ -43,9 +26,9 @@ HM_DOMAIN_NAME=""
 HM_DOMAIN_PROTOCOL=""  # optional, https by default
 ```
 
-### AWS S3 and Resumes
+This is needed to allow HackathonManager to send email on behalf of your hackathon's domain.
 
-Resumes are stored locally in development and on S3 in production.
+### Amazon S3 and Resumes
 
 ```bash
 AWS_BUCKET=""
@@ -54,6 +37,9 @@ AWS_SECRET_ACCESS_KEY=""
 AWS_REGION=""
 ```
 
+Resumes for hackers are stored on [Amazon S3](https://aws.amazon.com/s3/).
+
+### Other providers
 If you're using a third-party S3 provider, such as [Minio](https://min.io), also specify the custom endpoint.
 
 ```bash
@@ -72,16 +58,16 @@ Emails can be sent using [SendGrid](https://sendgrid.com) or traditional SMTP.
 
 #### SendGrid
 
+```bash
+SENDGRID_API_KEY=""
+```
+
 [SendGrid](https://sendgrid.com) is the recommended email provider, and provides a free plan suitable for most hackathons.
 
 Create a SendGrid API key to get started. During the setup process you will be asked to authenticate your sending domain with SendGrid. For guidance on this process please visit [SendGrid Domain Authentication Support](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-domain-authentication/). If you would like to maintain your sending reputation and stay out of the spam folder, we reccomend enabling [SendGrid Link Branding](https://sendgrid.com/docs/ui/account-and-settings/how-to-set-up-link-branding/) when asked during the setup process. 
 
 
 >During the verification process ensure you have replaced `hello@example.com` with your own domain in your HackathonManager config. SendGrid will deny the email as you are not authenticated to send on behalf of `example.com`.
-
-```bash
-SENDGRID_API_KEY=""
-```
 
 #### SMTP
 
@@ -98,32 +84,7 @@ SMTP_AUTHENTICATION="" # optional, "plain" by default
 SMTP_STARTTLS_AUTO=""  # optional, "true" by default
 ```
 
-### Rollbar
-
-Rollbar captures and notifies of errors in production, and requires a server-side access token.
-
-```bash
-ROLLBAR_ACCESS_TOKEN=""
-```
-
-### MyMLH
-
-MyMLH makes it easy for hackers to quickly onboard themselves into HackathonManager. With MyMLH, hackers can save time by skipping fields in the questionnaire where the answer is already provided on their MyMLH profiles.
-
-1. Create an account at https://my.mlh.io
-2. Click "My Apps" in the top navbar
-3. Click "Create new app"
-4. Fill out the app name & logo
-5. For "Redirect URI", fill in https://apply.your-hackathon.com/users/auth/mlh/callback
-
-```bash
-MLH_KEY=""
-MLH_SECRET=""
-```
-
 ### Time Zone
-
-By default, charts & timestamps will be in UTC.
 
 >HackathonManager will crash at startup if the time zone isn't valid.
 >
@@ -132,3 +93,34 @@ By default, charts & timestamps will be in UTC.
 ```bash
 TIME_ZONE="America/Los_Angeles"
 ```
+
+By default, charts & timestamps will be in UTC.
+
+## Optional
+
+### MyMLH
+
+```bash
+MLH_KEY=""
+MLH_SECRET=""
+```
+
+[MyMLH](https://my.mlh.io/) makes it easy for hackers to quickly onboard themselves into HackathonManager. With MyMLH, hackers can save time by skipping fields in the questionnaire where the answer is already provided on their MyMLH profiles.
+
+1. Create an account at https://my.mlh.io
+2. Click "My Apps" in the top navbar
+3. Click "Create new app"
+4. Fill out the app name & logo
+5. For "Redirect URI", fill in https://apply.your-hackathon.com/users/auth/mlh/callback
+
+### Rollbar
+
+```bash
+ROLLBAR_ACCESS_TOKEN=""
+```
+
+[Rollbar](https://rollbar.com/) captures and notifies of errors in production, and requires a server-side access token.
+
+
+
+
