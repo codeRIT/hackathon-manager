@@ -97,6 +97,7 @@ TIME_ZONE="America/Los_Angeles"
 By default, charts & timestamps will be in UTC.
 
 ## Optional
+**The following environment variables are optional but add additional functionality.**
 
 ### MyMLH
 
