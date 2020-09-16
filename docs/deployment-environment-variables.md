@@ -3,7 +3,7 @@ id: deployment-environment-variables
 title: Environment Variables
 ---
 
-Various services require environment variables to operate. While they may appear overwheling, this setup guide aims to alleviate some of the concern. It is recommended you start with the required variables and work through this guide so all are properly setup.
+Various services require environment variables to operate. While they may appear overwhelming, this setup guide aims to alleviate some of the concern. 
 
 > Stuck on an environment variable? codeRIT is here to help! [Send us an email](mailto:engineering@coderit.org) with any questions.
 
