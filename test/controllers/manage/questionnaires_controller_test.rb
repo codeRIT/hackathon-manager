@@ -5,7 +5,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
   setup do
     @questionnaire = create(:questionnaire)
-    stub_request(:get, /api.sparkpost.com.*/).to_return(status: 200, body: "", headers: {})
+    stub_request(:get, /api.sendgrid.com.*/).to_return(status: 200, body: "", headers: {})
   end
 
   context "while not authenticated" do
@@ -28,12 +28,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_questionnaires#show" do
       get :show, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
@@ -111,12 +105,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
     should "not allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
       assert_response :redirect
@@ -179,11 +167,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "allow access to manage_questionnaires#show" do
       get :show, params: { id: @questionnaire }
-      assert_response :success
-    end
-
-    should "allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
       assert_response :success
     end
 
@@ -257,11 +240,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :success
-    end
-
     should "allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
       assert_response :success
@@ -330,9 +308,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "destroy questionnaire" do
       assert_difference("Questionnaire.count", -1) do
-        assert_difference("User.count", -1) do
-          delete :destroy, params: { id: @questionnaire }
-        end
+        delete :destroy, params: { id: @questionnaire }
       end
       assert_redirected_to manage_questionnaires_path
     end

@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: "Hackathon Configuration"
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.settings')
 
 .row
   .col-lg-6.mb-3
@@ -74,21 +74,20 @@
           %b Email Provider
         - if Rails.application.config.action_mailer.delivery_method == :smtp
           %p
-            %span.badge.badge-secondary SparkPost
+            %span.badge.badge-secondary SendGrid
             %span.badge.badge-success SMTP
             %br
             %small
-              %i To switch to SparkPost, unset the <code>SMTP_ADDRESS</code> environment variable
+              %i To switch to SendGrid, unset the <code>SMTP_ADDRESS</code> environment variable
           = render 'config_row', name: 'SMTP Address', key: 'SMTP_ADDRESS'
           = render 'config_row', name: 'SMTP Port', key: 'SMTP_PORT', default: 587
           = render 'config_row', name: 'SMTP Username', key: 'SMTP_USER_NAME', secret: true
           = render 'config_row', name: 'SMTP Password', key: 'SMTP_PASSWORD', secret: true
         - else
           %p
-            %span.badge.badge-success SparkPost
+            %span.badge.badge-success SendGrid
             %span.badge.badge-secondary SMTP
             %br
             %small
               %i To switch to SMTP, set the <code>SMTP_ADDRESS</code> environment variable
-          = render 'config_row', name: 'SparkPost Campaign ID', key: 'SPARKPOST_CAMPAIGN_ID'
-          = render 'config_row', name: 'SparkPost API Key', key: 'SPARKPOST_API_KEY', secret: true
+          = render 'config_row', name: 'SendGrid API Key', key: 'SENDGRID_API_KEY', secret: true
