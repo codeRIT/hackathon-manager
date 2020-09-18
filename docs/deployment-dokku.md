@@ -27,7 +27,7 @@ Currently used and required Dokku plugins (other than the defaults):
 
 ### Setup Steps
 
-**We'll be using `hm` as the app name in these steps,** as well as sharing the same `hm` name for both the app, database, and redis name. You're free to use another names.
+**We'll be using `hm` as the app name in these steps,** as well as sharing the same `hm` name for both the app, database, and redis name. You're free to use other names.
 
 ```bash
 dokku apps:create hm
