@@ -2,7 +2,7 @@
 .form-container.signup
   %h1.section-title.center
     Register for
-    %span.emphasized= HackathonConfig['name']
+    %div.emphasized.text-overflow-center= HackathonConfig['name']
 
   - if !HackathonConfig['accepting_questionnaires'] || HackathonConfig['disclaimer_message'].present?
     #disclaimer
