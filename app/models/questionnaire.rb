@@ -46,7 +46,7 @@ class Questionnaire < ApplicationRecord
   serialize :extra_question_data, Hash
   validates_each :extra_question_data do |record, attr, value|
     problems = ''
-    value.each do |q,a|
+    value.each do |q, a|
       extra_question = ExtraQuestion.find(q)
       puts(extra_question.required)
       puts(a.presence)
@@ -56,7 +56,6 @@ class Questionnaire < ApplicationRecord
     end
     record.errors.add(:extra_question_data, problems) unless problems.empty?
   end
-
 
   strip_attributes
 

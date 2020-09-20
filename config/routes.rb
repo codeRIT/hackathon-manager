@@ -60,7 +60,6 @@ Rails.application.routes.draw do
       patch :bulk_apply, on: :collection
     end
     resources :extra_questions do
-
     end
     resources :checkins do
       post :datatable, on: :collection

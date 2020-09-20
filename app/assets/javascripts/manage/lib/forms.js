@@ -9,7 +9,7 @@ var setupManageForms = function() {
   };
 
   var updateQuestionForm = function() {
-    var $type = $('[name="extra_question[data_type]"]')
+    var $type = $('[name="extra_question[data_type]"]');
     if(typeof $type === 'undefined'){
       return;
     }
@@ -20,7 +20,7 @@ var setupManageForms = function() {
     var type = $type.val();
     if (type === "select") {
       enable($select_collection);
-      disable($placeholder)
+      disable($placeholder);
     } else if(type === "boolean"){
       disable($placeholder);
       disable($select_collection);
@@ -28,7 +28,7 @@ var setupManageForms = function() {
       enable($placeholder);
       disable($select_collection);
     }
-  }
+  };
 
   var addRow = function(ev) {
     var $nearest_row, $new_row, $remove_button;
