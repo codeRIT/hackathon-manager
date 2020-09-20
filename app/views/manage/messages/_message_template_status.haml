@@ -5,7 +5,7 @@
       %span.badge.badge-danger.mb-1 Using customized template
       %br
       Not in sync with HackathonManager
-      - if current_user.try(:admin?)
+      - if current_user.try(:director?)
         %br
         %small
           = link_to template_replace_with_default_manage_messages_path, method: :post, data: { confirm: 'Are you sure? This will permanently erase the existing template and replace it with the HackathonManager default. This action is irreversible.'} do

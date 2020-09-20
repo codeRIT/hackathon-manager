@@ -64,11 +64,11 @@ class UserTest < ActiveSupport::TestCase
       assert_equal 2, User.without_questionnaire.count
     end
 
-    should "not return admins" do
+    should "not return staff" do
       create(:questionnaire) # user, has questionnaire
-      create(:user, role: :event_tracking) # user, does not
-      create(:user, role: :admin_limited_access) # admin, does not
-      create(:user, role: :admin) # admin, does not
+      create(:user, role: :volunteer) # volunteer, does not
+      create(:user, role: :organizer) # organizer, does not
+      create(:user, role: :director) # director, does not
       assert_equal 4, User.count
       assert_equal 1, User.without_questionnaire.count
     end
@@ -77,6 +77,50 @@ class UserTest < ActiveSupport::TestCase
   should "queue reminder email" do
     assert_difference "enqueued_jobs.size", 1 do
       create(:user)
+    end
+  end
+
+  context "current_user is staff" do
+    should "not report user as staff" do
+      user = create(:user, role: user)
+      assert_equal false, user.staff?
+    end
+
+    should "report volunteer as staff" do
+      user = create(:user, role: :volunteer)
+      assert_equal true, user.staff?
+    end
+
+    should "report organizer as staff" do
+      user = create(:user, role: :organizer)
+      assert_equal true, user.staff?
+    end
+
+    should "report director as staff" do
+      user = create(:user, role: :director)
+      assert_equal true, user.staff?
+    end
+  end
+
+  context "current_user is organizing staff" do
+    should "not report user as organizing staff" do
+      user = create(:user, role: user)
+      assert_equal false, user.organizing_staff?
+    end
+
+    should "not report volunteer as organizing staff" do
+      user = create(:user, role: :volunteer)
+      assert_equal false, user.organizing_staff?
+    end
+
+    should "report organizer as organizing staff" do
+      user = create(:user, role: :organizer)
+      assert_equal true, user.organizing_staff?
+    end
+
+    should "report director as organizing staff" do
+      user = create(:user, role: :director)
+      assert_equal true, user.organizing_staff?
     end
   end
 

@@ -134,10 +134,10 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a limited access admin" do
+  context "while authenticated as a volunteer" do
     setup do
-      @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -199,9 +199,74 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as an organizer" do
     setup do
-      @user = create(:admin)
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "allow access to manage_schools#index" do
+      get :index
+      assert_response :success
+    end
+
+    should "allow access to manage_schools datatables api" do
+      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_response :success
+    end
+
+    should "allow access to manage_schools#show" do
+      get :show, params: { id: @school }
+      assert_response :success
+    end
+
+    should "not allow access to manage_schools#new" do
+      get :new
+      assert_response :redirect
+      assert_redirected_to manage_schools_path
+    end
+
+    should "not allow access to manage_schools#edit" do
+      get :edit, params: { id: @school }
+      assert_response :redirect
+      assert_redirected_to manage_schools_path
+    end
+
+    should "not allow access to manage_schools#create" do
+      post :create, params: { school: { name: "My Test School" } }
+      assert_response :redirect
+      assert_redirected_to manage_schools_path
+    end
+
+    should "not allow access to manage_schools#update" do
+      patch :update, params: { id: @school, school: { name: "My Test School" } }
+      assert_response :redirect
+      assert_redirected_to manage_schools_path
+    end
+
+    should "not allow access to manage_schools#destroy" do
+      patch :destroy, params: { id: @school }
+      assert_response :redirect
+      assert_redirected_to manage_schools_path
+    end
+
+    should "not allow access to manage_schools#merge" do
+      patch :merge, params: { id: @school }
+      assert_response :redirect
+      assert_redirected_to manage_schools_path
+    end
+
+    should "not allow access to manage_schools#perform_merge" do
+      patch :perform_merge, params: { id: @school, school: { id: "My Test School" } }
+      assert_response :redirect
+      assert_redirected_to manage_schools_path
+    end
+  end
+
+  context "while authenticated as a director" do
+    setup do
+      @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end

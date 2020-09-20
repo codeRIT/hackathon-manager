@@ -194,16 +194,16 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
 
     should "return nil if author deleted" do
-      user = create(:user, email: "admin@example.com")
+      user = create(:user, email: "director@example.com")
       questionnaire = create(:questionnaire, acc_status_author_id: user.id)
       user.destroy
       assert_nil questionnaire.acc_status_author
     end
 
     should "return the questionnaire's user" do
-      user = create(:user, email: "admin@example.com")
+      user = create(:user, email: "director@example.com")
       questionnaire = create(:questionnaire, acc_status_author_id: user.id)
-      assert_equal "admin@example.com", questionnaire.acc_status_author.email
+      assert_equal "director@example.com", questionnaire.acc_status_author.email
     end
   end
 

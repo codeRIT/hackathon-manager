@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
-  authenticate :user, ->(u) { u.admin? } do
+  authenticate :user, ->(u) { u.director? } do
     mount Sidekiq::Web => "/sidekiq"
     mount Blazer::Engine, at: "blazer"
   end
@@ -38,7 +38,15 @@ Rails.application.routes.draw do
   end
 
   namespace :manage do
-    root to: "dashboard#index"
+    authenticate :user, ->(u) { u.director? } do
+      root to: "dashboard#index"
+    end
+    authenticate :user, ->(u) { u.organizer? } do
+      root to: "dashboard#index"
+    end
+    authenticate :user, ->(u) { u.volunteer? } do
+      root to: "checkins#index"
+    end
     resources :dashboard do
       get :map_data, on: :collection
       get :todays_activity_data, on: :collection
@@ -63,7 +71,7 @@ Rails.application.routes.draw do
     end
     resources :users do
       post :user_datatable, on: :collection
-      post :admin_datatable, on: :collection
+      post :staff_datatable, on: :collection
       patch :reset_password, on: :member
     end
     resources :messages do

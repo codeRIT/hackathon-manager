@@ -16,7 +16,7 @@ class UserMailer < ApplicationMailer
 
   def incomplete_reminder_email(user_id)
     @user = User.find_by_id(user_id)
-    return if @user.blank? || @user.admin? || @user.questionnaire || Time.now.in_time_zone.to_date > Date.parse(HackathonConfig["last_day_to_apply"]).in_time_zone.to_date
+    return if @user.blank? || @user.director? || @user.questionnaire || Time.now.in_time_zone.to_date > Date.parse(HackathonConfig["last_day_to_apply"]).in_time_zone.to_date
 
     Message.queue_for_trigger("user.24hr_incomplete_application", @user.id)
   end

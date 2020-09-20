@@ -27,7 +27,7 @@
   .col
     %h5.dashboard-container-title
       = t(:staff, scope: 'pages.manage.users', hackathon_name: HackathonConfig['name'])
-    %table.admins.datatable.table.table-striped.table-hover{ "data-source" => admin_datatable_manage_users_path(format: :json) }
+    %table.staff.datatable.table.table-striped.table-hover{ "data-source" => staff_datatable_manage_users_path(format: :json) }
       %thead
         %tr
           %th= t(:id, scope: 'pages.manage.users.table')
