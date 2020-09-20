@@ -165,12 +165,22 @@ class QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to questionnaires_path
     end
 
-    should "destroy questionnaire" do
-      assert_difference('Questionnaire.count', -1) do
-        delete :destroy
+    context "destroy questionnaire" do
+      should "if bus captain, notify admins that bus captain has been removed" do
+        @admin = create(:admin)
+        @questionnaire.update_attribute(:is_bus_captain, true)
+        assert_difference('enqueued_jobs.size', User.where(role: :admin).size) do
+          delete :destroy
+        end
       end
 
-      assert_redirected_to questionnaires_path
+      should "user destroy questionnaire" do
+        assert_difference('Questionnaire.count', -1) do
+          delete :destroy
+        end
+
+        assert_redirected_to questionnaires_path
+      end
     end
 
     context "with invalid questionnaire params" do

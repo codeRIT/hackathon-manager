@@ -281,11 +281,23 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
-    should "destroy questionnaire" do
-      assert_difference("Questionnaire.count", -1) do
-        delete :destroy, params: { id: @questionnaire }
+    context "destroy questionnaire" do
+      should "if bus captain, notify admins that bus captain has been removed" do
+        @user = create(:admin)
+        @questionnaire.update_attribute(:is_bus_captain, true)
+        assert_difference('enqueued_jobs.size', User.where(role: :admin).size) do
+          delete :destroy, params: { id: @questionnaire }
+        end
       end
-      assert_redirected_to manage_questionnaires_path
+
+      should "user destroy questionnaire" do
+        assert_difference('Questionnaire.count', -1) do
+          delete :destroy, params: { id: @questionnaire }
+        end
+
+        assert_redirected_to manage_questionnaires_path
+      end
+
     end
 
     should "check in the questionnaire" do
