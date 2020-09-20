@@ -41,10 +41,7 @@ document.addEventListener('turbolinks:load', function() {
             }
             break;
           case 'phone':
-            if (!value || $.trim(value).length < 1) {
-              notify(this, 'Missing Information');
-            }
-            else if(value){
+            if (value) {
               var phoneReg = /^[\+]?[0-9]{0,3}[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{1,3}[-\s\.]?[0-9]{4,6}$/;
               if (!phoneReg.test(value)) {
                 notify(this, 'Please enter a valid phone number');
