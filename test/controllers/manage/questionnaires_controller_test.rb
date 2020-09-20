@@ -346,10 +346,10 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     context "destroy questionnaire" do
-      should "if bus captain, notify admins that bus captain has been removed" do
-        @user = create(:admin)
+      should "if bus captain, notify directors that bus captain has been removed" do
+        @user = create(:director)
         @questionnaire.update_attribute(:is_bus_captain, true)
-        assert_difference('enqueued_jobs.size', User.where(role: :admin).size) do
+        assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
           delete :destroy, params: { id: @questionnaire }
         end
       end

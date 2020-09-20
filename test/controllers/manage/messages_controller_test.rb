@@ -210,13 +210,13 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     should "not allow access to manage_messages#index" do
       get :index
       assert_response :redirect
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to manage_messages datatables api" do
       post :datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :redirect
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to manage_messages#new" do
@@ -228,7 +228,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     should "not allow access to manage_messages#show" do
       get :show, params: { id: @message }
       assert_response :redirect
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to manage_messages#edit" do
@@ -266,7 +266,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     should "not allow access to manage_messages#preview" do
       get :preview, params: { id: @message }
       assert_response :redirect
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to manage_messages#live_preview" do

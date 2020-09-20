@@ -69,7 +69,7 @@ class Manage::DashboardControllerTest < ActionController::TestCase
     should "not allow access to manage_dashboard#index" do
       get :index
       assert_response :redirect
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to all data endpoints" do
@@ -101,11 +101,11 @@ class Manage::DashboardControllerTest < ActionController::TestCase
 
       paths.each do |path|
         get path
-        assert_redirected_to manage_root_path
+        assert_redirected_to manage_checkins_path
       end
 
       get :map_data, format: "tsv"
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
   end
 
