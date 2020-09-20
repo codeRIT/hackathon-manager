@@ -65,7 +65,7 @@ class RsvpsController < ApplicationController
     bus_after_rsvp = @questionnaire.bus_list_id
     acc_status_after_rsvp = @questionnaire.acc_status
 
-    if (acc_status != acc_status_after_rsvp || bus != bus_after_rsvp) && @questionnaire.is_bus_captain == true
+    if bus != nil && (acc_status != acc_status_after_rsvp || bus != bus_after_rsvp) && @questionnaire.is_bus_captain == true
       @questionnaire.is_bus_captain = false
       admins = User.where(role: :admin)
       admins.each do |user|
