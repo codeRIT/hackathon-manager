@@ -28,7 +28,7 @@
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
               %span
                 = t(:overview, scope: 'layouts.manage.navigation')
-            - if current_user.director?
+            - if current_user.organizing_staff?
               %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to manage_root_path, class: "nav-link", active_children: false do
@@ -42,13 +42,7 @@
                   = active_link_to manage_messages_path, class: "nav-link" do
                     .fa.fa-bullhorn.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.messages')
-            - elsif current_user.organizer?
-              %ul.nav.flex-column.mb-2
-                %li.nav-item
-                  = active_link_to manage_questionnaires_path, class: "nav-link" do
-                    .fa.fa-inbox.fa-fw.icon-space-r-half
-                    = t(:title, scope: 'pages.manage.questionnaires')
-            - else
+            - elsif current_user.volunteer?
               %ul.nav.flex-column.mb-2
                 %li.nav-item
                   = active_link_to manage_checkins_path, class: "nav-link" do
