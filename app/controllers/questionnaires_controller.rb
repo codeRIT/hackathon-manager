@@ -70,7 +70,7 @@ class QuestionnairesController < ApplicationController
         format.html { redirect_to questionnaires_path }
         format.json { render json: @questionnaire, status: :created, location: @questionnaire }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to new_questionnaires_path }
         format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
       end
     end
@@ -87,7 +87,7 @@ class QuestionnairesController < ApplicationController
         format.html { redirect_to questionnaires_path, notice: 'Application was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to edit_questionnaires_path }
         format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
       end
     end

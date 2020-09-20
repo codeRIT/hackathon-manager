@@ -29,6 +29,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def create
+    @extra_questions = ExtraQuestion.all
     create_params = questionnaire_params
     email = create_params.delete(:email)
     create_params = convert_school_name_to_id(create_params)
