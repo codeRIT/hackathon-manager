@@ -244,8 +244,8 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_redirected_to rsvp_path
     end
 
-    should "if bus captain leaves a bus, notify admins that bus captain has been removed" do
-      @admin = create(:admin)
+    should "if bus captain leaves a bus, notify directors that bus captain has been removed" do
+      @director = create(:director)
       @questionnaire.update_attribute(:is_bus_captain, true)
       @questionnaire.update_attribute(:acc_status, "rsvp_confirmed")
 
@@ -259,7 +259,7 @@ class RsvpsControllerTest < ActionController::TestCase
         }
       }
 
-      assert_difference('enqueued_jobs.size', User.where(role: :admin).size) do
+      assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
         patch :update, params: {
           questionnaire: {
             acc_status: "rsvp_confirmed",

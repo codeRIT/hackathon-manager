@@ -105,22 +105,22 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#index" do
       get :index
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to manage_users users datatables api" do
       post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to manage_users staff datatables api" do
       post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_redirected_to manage_root_path
+      assert_redirected_to manage_checkins_path
     end
 
     should "not allow access to manage_users#edit" do
