@@ -35,7 +35,7 @@ class QuestionnaireDatatable < ApplicationDatatable
 
   def bus_captain(record)
     return "No" unless record.bus_list_id?
-    return record.is_bus_captain? ? '<span class="badge badge-success">Yes</span>' : "No" unless current_user.admin?
+    return record.is_bus_captain? ? '<span class="badge badge-success">Yes</span>' : "No" unless current_user.director?
 
     if record.is_bus_captain?
       link_to("Remove", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "0"), method: "post", class: "text-danger")
@@ -47,7 +47,7 @@ class QuestionnaireDatatable < ApplicationDatatable
   def data
     records.map do |record|
       {
-        bulk: current_user.admin? ? "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe : "",
+        bulk: current_user.director? ? "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe : "",
         link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(record)),
         note: note(record),
         id: record.id,

@@ -4,5 +4,5 @@
     - if defined?(subtitle) && subtitle.present?
       %small.text-muted= subtitle
 
-  - if current_user.try(:admin?)
+  - if current_user.try(:director?)
     = yield

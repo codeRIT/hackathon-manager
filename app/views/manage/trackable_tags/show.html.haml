@@ -34,7 +34,7 @@
         %td= trackable_event.band_id
         %td= trackable_event.user.email
         %td
-          - if current_user.admin? || current_user == trackable_event.user
+          - if current_user.director? || current_user == trackable_event.user
             = link_to 'Edit', edit_manage_trackable_event_path(trackable_event)
 
 .row.mt-2.mb-4
