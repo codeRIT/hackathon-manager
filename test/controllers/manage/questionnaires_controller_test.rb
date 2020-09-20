@@ -50,12 +50,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow convert questionnaire's user to an director" do
-      patch :convert_to_director, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
     should "not allow access to manage_questionnaires#destroy" do
       patch :destroy, params: { id: @questionnaire }
       assert_response :redirect
@@ -119,12 +113,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_questionnaires#update" do
       patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow convert questionnaire's user to a director" do
-      patch :convert_to_director, params: { id: @questionnaire }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -194,12 +182,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaires_path
     end
 
-    should "not allow convert questionnaire's user to a director" do
-      patch :convert_to_director, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to edit_manage_user_path(assigns(:questionnaire).user)
-    end
-
     should "not allow access to manage_questionnaires#destroy" do
       patch :destroy, params: { id: @questionnaire }
       assert_response :redirect
@@ -262,12 +244,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
-    end
-
-    should "not allow convert questionnaire's user to a director" do
-      patch :convert_to_director, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to edit_manage_user_path(assigns(:questionnaire).user)
     end
 
     should "not allow access to manage_questionnaires#destroy" do
@@ -367,13 +343,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :update, params: { id: @questionnaire, questionnaire: { email: "update@example.com" } }
       assert_equal "update@example.com", assigns(:questionnaire).email
       assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
-    end
-
-    should "convert questionnaire's user to a director" do
-      patch :convert_to_director, params: { id: @questionnaire }
-      assert assigns(:questionnaire).user.director?
-      assert_nil assigns(:questionnaire).user.reload.questionnaire
-      assert_redirected_to edit_manage_user_path(assigns(:questionnaire).user)
     end
 
     should "destroy questionnaire" do

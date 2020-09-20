@@ -63,7 +63,6 @@ Rails.application.routes.draw do
     resources :questionnaires do
       post :datatable, on: :collection
       patch :check_in, on: :member
-      patch :convert_to_director, on: :member
       patch :update_acc_status, on: :member
       patch :bulk_apply, on: :collection
     end

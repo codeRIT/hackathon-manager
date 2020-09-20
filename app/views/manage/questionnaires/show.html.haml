@@ -11,12 +11,6 @@
   .btn-group{role: "group"}
     - if current_user.director?
       = link_to 'Edit', edit_manage_questionnaire_path(@questionnaire), class: 'btn btn-sm btn-outline-secondary'
-    - if current_user.director?
-      .btn-group{role: "group"}
-        %button.btn.btn-sm.btn-outline-secondary.dropdown-toggle#title-actions{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
-          .fa.fa-cog
-        .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "title-actions"}
-          = link_to 'Convert to Director', convert_to_director_manage_questionnaire_path(@questionnaire), method: :patch, data: { confirm: "Are you sure? The questionnaire for \"#{@questionnaire.user.full_name}\" will be permanently erased, and \"#{@questionnaire.email}\" will become a director. This action is irreversible." }, class: 'dropdown-item'
 
 = render 'overview'
 
