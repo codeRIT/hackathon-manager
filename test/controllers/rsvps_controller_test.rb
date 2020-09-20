@@ -243,5 +243,38 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_match /select a RSVP status/, flash[:alert]
       assert_redirected_to rsvp_path
     end
+
+    should "if bus captain leaves a bus, notify admins that bus captain has been removed" do
+      @admin = create(:admin)
+      @questionnaire.update_attribute(:is_bus_captain, true)
+      @questionnaire.update_attribute(:acc_status, "rsvp_confirmed")
+
+      bus_list1 = create(:bus_list, capacity: 1)
+      bus_list2 = create(:bus_list, capacity: 2)
+      patch :update, params: {
+        questionnaire: {
+          acc_status: "rsvp_confirmed",
+          phone: "(123) 456-7890",
+          bus_list_id: bus_list1.id
+        }
+      }
+
+      assert_difference('enqueued_jobs.size', User.where(role: :admin).size) do
+        patch :update, params: {
+          questionnaire: {
+            acc_status: "rsvp_confirmed",
+            phone: "(123) 456-7890",
+            bus_list_id: bus_list2.id
+          }
+        }
+      end
+    end
+
+    should "not queue bus_captain_left email if questionnaire is not a bus captain" do
+      @questionnaire.update_attribute(:is_bus_captain, false)
+      assert_difference('enqueued_jobs.size', 0) do
+        patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed" } }
+      end
+    end
   end
 end
