@@ -138,6 +138,12 @@ class Questionnaire < ApplicationRecord
     super value
   end
 
+  def phone=(value)
+    # strips the string to just numbers for standardization
+    value = value.try(:tr, '^0-9', '')
+    super value
+  end
+
   def school
     School.find(school_id) if school_id
   end

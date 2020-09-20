@@ -390,7 +390,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal @user.id, @questionnaire.checked_in_by_id
       assert_equal true, @questionnaire.agreement_accepted
       assert_equal true, @questionnaire.can_share_info
-      assert_equal "(123) 333-3333", @questionnaire.phone
+      assert_equal "1233333333", @questionnaire.phone
       assert_equal "new_email@example.com", @questionnaire.email
       assert_match /Checked in/, flash[:notice]
       assert_response :redirect
