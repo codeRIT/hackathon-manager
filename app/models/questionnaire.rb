@@ -10,6 +10,7 @@ class Questionnaire < ApplicationRecord
   before_validation :clean_negative_dietary_restrictions
   after_create :queue_triggered_email_create
   after_update :queue_triggered_email_update
+  after_update :queue_triggered_email_rsvp_reminder
   after_save :update_school_questionnaire_count
   after_destroy :update_school_questionnaire_count
 
@@ -254,5 +255,19 @@ class Questionnaire < ApplicationRecord
 
   def queue_triggered_email_create
     Message.queue_for_trigger("questionnaire.#{acc_status}", user_id)
+  end
+
+  def queue_triggered_email_rsvp_reminder
+    if saved_change_to_acc_status? && acc_status == "accepted"
+      days_remaining = Date.parse(HackathonConfig["event_start_date"]).in_time_zone.to_date - Time.now.in_time_zone.to_date
+      if days_remaining > 14
+        deliver_date = 7.days.from_now
+      elsif days_remaining > 10
+        deliver_date = 5.days.from_now
+      elsif days_remaining > 3
+        deliver_date = 2.days.from_now
+      end
+      UserMailer.rsvp_reminder_email(user_id).deliver_later(wait_until: deliver_date) if deliver_date.present?
+    end
   end
 end

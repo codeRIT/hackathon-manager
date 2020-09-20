@@ -53,7 +53,7 @@ Automated emails can also be sent out upon certain events happening. All events 
 * **Questionnaire status** &mdash; Upon being accepted, denied, RSVP'd, etc
 * **Bust list** &mdash; Becoming a passenger or bus captain
 
-These messages are sent immediatley upon an applicant entering the given state. For example, when an admin marks someone as "accepted," they will immediately receive any automated messages associated with the "Questionnaire Status: Accepted" event.
+These messages are sent immediatley upon an applicant entering the given state. For example, when a staff member marks someone as "accepted," they will immediately receive any automated messages assocaited with the "Questionnaire Status: Accepted" event.
 
 ## Message formatting
 

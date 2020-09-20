@@ -1,4 +1,5 @@
 class Manage::StatsController < Manage::ApplicationController
+  before_action :require_director_or_organizer
 
   respond_to :html, :json
 
