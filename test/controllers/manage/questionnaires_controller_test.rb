@@ -294,10 +294,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
         assert_difference('Questionnaire.count', -1) do
           delete :destroy, params: { id: @questionnaire }
         end
-
         assert_redirected_to manage_questionnaires_path
       end
-
     end
 
     should "check in the questionnaire" do
