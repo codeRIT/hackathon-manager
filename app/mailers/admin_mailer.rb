@@ -42,6 +42,17 @@ class AdminMailer < ApplicationMailer
     )
   end
 
+  def bus_captain_left(bus_list_id, former_captain_id, user_id)
+    @bus_route = BusList.find_by_id(bus_list_id)
+    @former_captain = User.find_by_id(former_captain_id)
+    @user = User.find_by_id(user_id)
+
+    mail(
+      to: pretty_email(@user.full_name, @user.email),
+      subject: "Bus Captain Left Bus Route: " + @bus_route.name,
+    )
+  end
+
   private
 
   def report_metric(query_base, new_query_field)
