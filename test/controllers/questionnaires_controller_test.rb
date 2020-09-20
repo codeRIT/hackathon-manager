@@ -76,6 +76,15 @@ class QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
+    context "with block questionnaires set" do
+      should "not allow creation" do
+        HackathonConfig['accepting_questionnaires'] = false
+        assert_difference('Questionnaire.count', 0) do
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
+        end
+      end
+    end
+
     context "#school_name" do
       context "on create" do
         should "save existing school name" do

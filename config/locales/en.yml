@@ -55,7 +55,7 @@ en:
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
       hackathon_config:
-        accepting_questionnaires: Specify that questionnaires are being accepted. This does <strong>not</strong> block applying; it only changes messaging around it.
+        accepting_questionnaires: Specify and allow questionnaires to be accepted.
         last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
         event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
@@ -72,6 +72,7 @@ en:
         disclaimer_message: Optional message that appears before signing up & applying. Supports markdown.
         thanks_for_applying_message: Optional message that appears after completing an application. Supports markdown.
         thanks_for_rsvp_message: Optional message that appears after RSVP'ing as attending. Supports markdown.
+        questionnaires_closed_message: Message that replaces the new questionnaire form. Supports markdown.
         bus_captain_notes: Optional message that appears on the bus captain's bus list page. Supports markdown.
         custom_css: CSS to inject into the &lt;head&gt; of every public page
     placeholders:
@@ -117,6 +118,7 @@ en:
         custom_css: Custom CSS
         homepage_url: Homepage URL
         thanks_for_rsvp_message: Thanks For RSVP Message
+        questionnaires_closed_message: Questionnaires Closed Message
   pages:
     manage:
       dashboard:
