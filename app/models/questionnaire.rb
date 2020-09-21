@@ -258,16 +258,17 @@ class Questionnaire < ApplicationRecord
   end
 
   def queue_triggered_email_rsvp_reminder
-    if saved_change_to_acc_status? && acc_status == "accepted"
-      days_remaining = Date.parse(HackathonConfig["event_start_date"]).in_time_zone.to_date - Time.now.in_time_zone.to_date
-      if days_remaining > 14
-        deliver_date = 7.days.from_now
-      elsif days_remaining > 10
-        deliver_date = 5.days.from_now
-      elsif days_remaining > 3
-        deliver_date = 2.days.from_now
-      end
-      UserMailer.rsvp_reminder_email(user_id).deliver_later(wait_until: deliver_date) if deliver_date.present?
+    return unless saved_change_to_acc_status? && acc_status == "accepted"
+
+    event_start = Date.parse(HackathonConfig["event_start_date"]).in_time_zone
+    days_remaining = event_start.to_date - Time.now.in_time_zone.to_date
+    if days_remaining > 14
+      deliver_date = 7.days.from_now
+    elsif days_remaining > 10
+      deliver_date = 5.days.from_now
+    elsif days_remaining > 3
+      deliver_date = 2.days.from_now
     end
+    UserMailer.rsvp_reminder_email(user_id).deliver_later(wait_until: deliver_date) if deliver_date.present?
   end
 end

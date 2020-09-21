@@ -68,5 +68,4 @@ class Manage::ConfigsController < Manage::ApplicationController
       @config.value = HackathonConfig[var]
     end
   end
-
 end

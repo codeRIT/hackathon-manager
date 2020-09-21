@@ -85,6 +85,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # If the user isn't a director, scope changes only to those they created
   def scope_organizer_access
     return if current_user.director? || @trackable_event.blank? || @trackable_event.user.blank?
+
     redirect_to manage_trackable_events_path, notice: 'You may not view events you did not create.' if @trackable_event.user != current_user
   end
 end
