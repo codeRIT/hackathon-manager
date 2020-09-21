@@ -59,6 +59,7 @@ class QuestionnairesController < ApplicationController
       return redirect_to questionnaires_path, notice: 'Application already exists.'
     end
     return unless HackathonConfig['accepting_questionnaires']
+
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
     @questionnaire.user_id = current_user.id
 
