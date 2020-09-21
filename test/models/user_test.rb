@@ -3,10 +3,14 @@ require "test_helper"
 class UserTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
+  should strip_attribute :first_name
+  should strip_attribute :last_name
   should strip_attribute :email
 
   should validate_uniqueness_of :email
 
+  should validate_presence_of :first_name
+  should validate_presence_of :last_name
   should validate_presence_of :email
   should validate_presence_of :password
 
@@ -18,39 +22,10 @@ class UserTest < ActiveSupport::TestCase
   should allow_value("test@example.com").for(:email)
   should_not allow_value("abcd").for(:email)
 
-  context "first_name" do
-    should "return first name when questionnaire exists" do
-      questionnaire = create(:questionnaire, first_name: "Alpha")
-      assert_equal "Alpha", questionnaire.user.first_name
-    end
-
-    should "return blank when no questionnaire exists" do
-      user = create(:user)
-      assert_equal "", user.first_name
-    end
-  end
-
-  context "last_name" do
-    should "return last name when questionnaire exists" do
-      questionnaire = create(:questionnaire, last_name: "Beta")
-      assert_equal "Beta", questionnaire.user.last_name
-    end
-
-    should "return blank when no questionnaire exists" do
-      user = create(:user)
-      assert_equal "", user.last_name
-    end
-  end
-
   context "full_name" do
-    should "return full name when questionnaire exists" do
-      questionnaire = create(:questionnaire, first_name: "Alpha", last_name: "Beta")
-      assert_equal "Alpha Beta", questionnaire.user.full_name
-    end
-
-    should "return email when no questionnaire exists" do
-      user = create(:user, email: "foo@example.com")
-      assert_equal "foo@example.com", user.full_name
+    should "concatenate first and last name" do
+      user = create(:user)
+      assert_equal "John Doe", user.full_name
     end
   end
 
@@ -89,11 +64,11 @@ class UserTest < ActiveSupport::TestCase
       assert_equal 2, User.without_questionnaire.count
     end
 
-    should "not return admins" do
+    should "not return staff" do
       create(:questionnaire) # user, has questionnaire
-      create(:user, role: :event_tracking) # user, does not
-      create(:user, role: :admin_limited_access) # admin, does not
-      create(:user, role: :admin) # admin, does not
+      create(:user, role: :volunteer) # volunteer, does not
+      create(:user, role: :organizer) # organizer, does not
+      create(:user, role: :director) # director, does not
       assert_equal 4, User.count
       assert_equal 1, User.without_questionnaire.count
     end
@@ -102,6 +77,50 @@ class UserTest < ActiveSupport::TestCase
   should "queue reminder email" do
     assert_difference "enqueued_jobs.size", 1 do
       create(:user)
+    end
+  end
+
+  context "current_user is staff" do
+    should "not report user as staff" do
+      user = create(:user, role: user)
+      assert_equal false, user.staff?
+    end
+
+    should "report volunteer as staff" do
+      user = create(:user, role: :volunteer)
+      assert_equal true, user.staff?
+    end
+
+    should "report organizer as staff" do
+      user = create(:user, role: :organizer)
+      assert_equal true, user.staff?
+    end
+
+    should "report director as staff" do
+      user = create(:user, role: :director)
+      assert_equal true, user.staff?
+    end
+  end
+
+  context "current_user is organizing staff" do
+    should "not report user as organizing staff" do
+      user = create(:user, role: user)
+      assert_equal false, user.organizing_staff?
+    end
+
+    should "not report volunteer as organizing staff" do
+      user = create(:user, role: :volunteer)
+      assert_equal false, user.organizing_staff?
+    end
+
+    should "report organizer as organizing staff" do
+      user = create(:user, role: :organizer)
+      assert_equal true, user.organizing_staff?
+    end
+
+    should "report director as organizing staff" do
+      user = create(:user, role: :director)
+      assert_equal true, user.organizing_staff?
     end
   end
 

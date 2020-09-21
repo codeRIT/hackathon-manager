@@ -61,7 +61,7 @@ $.fn.initMap = function() {
       })
       .append('title')
       .text(function(d) {
-        return d.properties.name + '\nApplications: ' + formatNumber(appsById.get(d.id) || 0);
+        return d.properties.name + '\nQuestionnaires: ' + formatNumber(appsById.get(d.id) || 0);
       });
   }
 

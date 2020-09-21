@@ -2,11 +2,10 @@
 defaults: &defaults
 
   # Logic config
-  registration_is_open: true
+  accepting_questionnaires: true
   last_day_to_apply: "<%= Date.new(2000, 1, 1).to_s %>"
   event_start_date: "<%= Date.new(2000, 1, 1).to_s %>"
   auto_late_waitlist: false
-  disable_account_registration: false
 
   # Content config
   name: HackFoo
@@ -22,6 +21,7 @@ defaults: &defaults
   disclaimer_message: ""
   thanks_for_applying_message: ""
   thanks_for_rsvp_message: ""
+  questionnaires_closed_message: ""
   bus_captain_notes: ""
   custom_css: ""
 

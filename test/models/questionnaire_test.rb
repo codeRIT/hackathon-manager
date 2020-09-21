@@ -9,8 +9,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
 
   should validate_uniqueness_of :user_id
 
-  should strip_attribute :first_name
-  should strip_attribute :last_name
   should strip_attribute :acc_status
   should strip_attribute :major
   should strip_attribute :gender
@@ -19,8 +17,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should strip_attribute :travel_location
   should strip_attribute :why_attend
 
-  should validate_presence_of :first_name
-  should validate_presence_of :last_name
   should validate_presence_of :date_of_birth
   should validate_presence_of :experience
   should validate_presence_of :interest
@@ -163,13 +159,6 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
   end
 
-  context "#full_name" do
-    should "concatenate first and last name" do
-      questionnaire = create(:questionnaire, first_name: "Foo", last_name: "Bar")
-      assert_equal "Foo Bar", questionnaire.full_name
-    end
-  end
-
   context "#full_location" do
     should "concatenate city and state with a comma" do
       school = create(:school, city: "Foo", state: "AZ")
@@ -205,16 +194,16 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
 
     should "return nil if author deleted" do
-      user = create(:user, email: "admin@example.com")
+      user = create(:user, email: "director@example.com")
       questionnaire = create(:questionnaire, acc_status_author_id: user.id)
       user.destroy
       assert_nil questionnaire.acc_status_author
     end
 
     should "return the questionnaire's user" do
-      user = create(:user, email: "admin@example.com")
+      user = create(:user, email: "director@example.com")
       questionnaire = create(:questionnaire, acc_status_author_id: user.id)
-      assert_equal "admin@example.com", questionnaire.acc_status_author.email
+      assert_equal "director@example.com", questionnaire.acc_status_author.email
     end
   end
 
@@ -403,13 +392,13 @@ class QuestionnaireTest < ActiveSupport::TestCase
   end
 
   context "#checked_in_by" do
-    should "return no one if not checked in" do
+    should "return nil if not checked in" do
       questionnaire = create(:questionnaire)
       assert_nil questionnaire.checked_in_by
       assert_nil questionnaire.checked_in_by_id
     end
 
-    should "return no one if user who checked-in questionnaire is deleted" do
+    should "return nil if user who checked-in questionnaire is deleted" do
       user = create(:user)
       questionnaire = create(:questionnaire, checked_in_by_id: user.id)
       user.destroy
@@ -477,7 +466,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
       questionnaire = create(:questionnaire, acc_status: 'accepted')
       create(:message, trigger: "questionnaire.accepted")
       assert_difference "enqueued_jobs.size", 0 do
-        questionnaire.update_attribute(:first_name, "foo bar baz")
+        questionnaire.update_attribute(:interest, "code")
       end
     end
 

@@ -4,8 +4,8 @@ class QuestionnaireDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       id: { source: "Questionnaire.id", cond: :eq },
-      first_name: { source: "Questionnaire.first_name" },
-      last_name: { source: "Questionnaire.last_name" },
+      first_name: { source: "User.first_name" },
+      last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       phone: { source: "Questionnaire.phone" },
       gender: { source: "Questionnaire.gender" },
@@ -35,24 +35,24 @@ class QuestionnaireDatatable < ApplicationDatatable
 
   def bus_captain(record)
     return "No" unless record.bus_list_id?
-    return record.is_bus_captain? ? '<span class="badge badge-success">Yes</span>' : "No" unless current_user.admin?
+    return record.is_bus_captain? ? '<span class="badge badge-success">Yes</span>' : "No" unless current_user.director?
 
     if record.is_bus_captain?
       link_to("Remove", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "0"), method: "post", class: "text-danger")
     else
-      link_to("Promote", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "1"), method: "post", data: { confirm: "Are you sure you want to make #{record.full_name} a bus captain? They will receive a confirmation email." })
+      link_to("Promote", toggle_bus_captain_manage_bus_list_path(record.bus_list_id, questionnaire_id: record.id, bus_captain: "1"), method: "post", data: { confirm: "Are you sure you want to make #{record.user.full_name} a bus captain? They will receive a confirmation email." })
     end
   end
 
   def data
     records.map do |record|
       {
-        bulk: current_user.admin? ? "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe : "",
+        bulk: current_user.director? ? "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe : "",
         link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(record)),
         note: note(record),
         id: record.id,
-        first_name: bold(record.first_name),
-        last_name: bold(record.last_name),
+        first_name: bold(record.user.first_name),
+        last_name: bold(record.user.last_name),
         email: record.email,
         phone: record.phone,
         gender: record.gender,

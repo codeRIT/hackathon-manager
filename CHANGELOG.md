@@ -1,6 +1,5 @@
 ## [1.22.4](https://github.com/codeRIT/hackathon-manager/compare/v1.22.3...v1.22.4) (2020-05-26)
 
-
 ### Bug Fixes
 
 * **questionnaire:** Fixes error when trying to view a questionnaire modified by a deleted admin ([#236](https://github.com/codeRIT/hackathon-manager/issues/236)) ([](https://github.com/codeRIT/hackathon-manager/commit/2ffe116))

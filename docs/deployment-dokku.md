@@ -6,36 +6,18 @@ title: Dokku Deployment
 >These docs assume you already have a virtual machine with [Dokku](http://dokku.viewdocs.io/dokku/) running on it, and can SSH into the VM. DNS should be set up as well, but isn't required for bare minimum functionality.
 >
 >If you need a VM, check out [DigitalOcean](https://m.do.co/c/b5ee103e23c3) or [Linode](https://www.linode.com/?r=e90a6fb2a6999fb4ec7b60b1add3e288f97954bf) and the [Dokku docs](http://dokku.viewdocs.io/dokku/) to get started.
-
-## Updating an existing deployment
-
-If you already have a deployment of HackathonManager on Dokku, follow these steps to update it.
-
-* If you already have the hackathon-manager repo cloned locally:
-```bash
-# cd into the directory you have hackathon-manager cloned
-cd hackathon-manager
-git pull
-# Skip to "git push" if you already added the remote
-git remote add dokku dokku@your-host.example.com:hm
-git push dokku master
-```
-
-* If you don't have it cloned locally:
-```bash
-git clone git@github.com:codeRIT/hackathon-manager
-cd hackathon-manager
-git remote add dokku dokku@your-host.example.com:hm
-git push dokku master
-```
+>
+>**Student Developer?** The [GitHub Student Developer Pack](https://education.github.com/pack?sort=popularity&tag=Cloud) has several discounts for cloud hosting, Ruby tutorials, and more! 
 
 ## Setting up a new deployment
 
-Below are steps & notes to deploy HackathonManager on Dokku.
+Below are steps to deploy a new HackathonManager instance on Dokku. To update an existing Dokku deployment, check out our [updating docs](updating-hm.html).
 
-If you have any questions at all, please don't hesitate to reach out to [Stuart](https://github.com/sman591)! This doc is very much a work in progress but we want to keep it as up to date as possible.
+If you have any questions, please don't hesitate to reach out to the [codeRIT Engineering Team](mailto:engineering@coderit.org)! This doc is very much a work in progress but we want to keep it as up to date as possible.
 
-## Dokku plugins
+## Dokku Setup
+
+### Plugins
 
 Currently used and required Dokku plugins (other than the defaults):
 
@@ -43,9 +25,9 @@ Currently used and required Dokku plugins (other than the defaults):
 - [Redis](https://github.com/dokku/dokku-redis) (background jobs + caching)
 - [dokku-letsencrypt](https://github.com/dokku/dokku-letsencrypt) (Optional: free, automated SSL certificates)
 
-### Dokku Setup Steps
+### Setup Steps
 
-**We'll be using `hm` as the app name in these steps,** as well as sharing the same `hm` name for both the app, database, and redis name. You're free to use another names.
+**We'll be using `hm` as the app name in these steps,** as well as sharing the same `hm` name for both the app, database, and redis name. You're free to use other names.
 
 ```bash
 dokku apps:create hm
@@ -125,14 +107,14 @@ dokku letsencrypt hm
 - Deploy should succeed without any red flags in the build log
 - Should be able to submit an application on the website & receive an immediate confirmation email
 
-### Promote account to admin
+### Promote account to director
 
 ```bash
 dokku enter hm web
 # Wait for a bash shell to start...
 $ bin/rails c
 # Wait for the Rails console to start...
-User.find_by(email: "your-email@example.com").update_attribute(:role, :admin)
+User.find_by(email: "your-email@example.com").update_attribute(:role, :director)
 exit
 exit
 ```

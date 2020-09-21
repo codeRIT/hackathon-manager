@@ -47,7 +47,7 @@ en:
       user:
         role: Limited access prevents the admin from adding, modifying, or deleting any records; modifications through the check-in process are allowed. Event tracking limits to only event tracking.
         is_active: Deactivating a user will prevent them from logging in. Their access will be immediately revoked from the admin and application pages.
-        receive_weekly_report: A weekly email report on admissions, bus lists, and messages. Only sent when there are weekly updates up until 7 days past the event. Disabled for inactive admins.
+        receive_weekly_report: A weekly email report on admissions, bus lists, and messages. Only sent when there are weekly updates up until 7 days past the event. Disabled for inactive staff members.
       message:
         type: Bulk emails are sent once, manually. Automated emails are sent upon a desired trigger/event.
         name: A friendly name to recognize this email. Applicants won't see this.
@@ -55,11 +55,10 @@ en:
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
       hackathon_config:
-        registration_is_open: Specify that registration is open. This does <strong>not</strong> block registration; it only changes messaging around it.
+        accepting_questionnaires: Specify and allow questionnaires to be accepted.
         last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
         event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
-        disable_account_registration: Prevent applicants from applying
 
         name: Your hackathon's name
         logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)
@@ -73,6 +72,7 @@ en:
         disclaimer_message: Optional message that appears before signing up & applying. Supports markdown.
         thanks_for_applying_message: Optional message that appears after completing an application. Supports markdown.
         thanks_for_rsvp_message: Optional message that appears after RSVP'ing as attending. Supports markdown.
+        questionnaires_closed_message: Message that replaces the new questionnaire form. Supports markdown.
         bus_captain_notes: Optional message that appears on the bus captain's bus list page. Supports markdown.
         custom_css: CSS to inject into the &lt;head&gt; of every public page
     placeholders:
@@ -92,8 +92,6 @@ en:
 
           Contact [travel@example.com](mailto:travel@example.com)
       questionnaire:
-        first_name: Joe
-        last_name: Smith
         email: joe@example.com
         phone: (123) 456-7890
         school_id: My University
@@ -105,6 +103,8 @@ en:
         portfolio_url: https://mywebsite.com
         vcs_url: https://github.com/coderit
       user:
+        first_name: Joe
+        last_name: Smith
         email: joe@example.com
     labels:
       school:
@@ -118,3 +118,95 @@ en:
         custom_css: Custom CSS
         homepage_url: Homepage URL
         thanks_for_rsvp_message: Thanks For RSVP Message
+        questionnaires_closed_message: Questionnaires Closed Message
+  pages:
+    manage:
+      dashboard:
+        title: Dashboard
+      questionnaires:
+        title: Questionnaires
+      messages:
+        title: Messages
+      check-in:
+        title: Check-in
+      stats:
+        title: Statistics
+      trackable-tags:
+        title: Trackable Tags
+      bus-lists:
+        title: Bus Lists
+      schools:
+        title: Schools
+      users: 
+        title: Users & Staff
+        users: All Users
+        staff: "%{hackathon_name} Staff"
+        table:
+          id: ID
+          email: Email
+          role: Role
+          questionnaire: Questionnaire
+          login_access: Login access
+          weekly_report: Weekly report
+          registered_on: Registered on
+          signed_in_on: Signed-in on
+          previous_signed_in_on: Previous signed-in on
+          signed_in_ip: Signed-in ip
+          previous_signed_in_ip: Previous signed-in IP
+          sign_in_count: Sign-in count
+        show:
+          title: "%{user_email}"
+          edit: Edit
+          reset_password: Reset Password
+          delete: Delete
+          user_information: User Information
+          email_address: Email address
+          role: Role
+          login_access: Login access
+          active: Active
+          inactive: Inactive
+          receive_weekly_report: Receive weekly report
+          yes: Yes
+          no: No
+          inactive_warning: Will not receive while user is inactive
+          registered: Registered
+          signed_in_on: Signed-in on
+          previous_signed_in_on: Previous signed-in on
+          signed_in_ip: Signed-in ip
+          previous_signed_in_ip: Previous signed-in IP
+          sign_in_count: Sign-in count
+          change_history: Change History
+        edit:
+          title: Edit User
+          subtitle: "%{user_email}"
+          cancel: Cancel
+          delete: Delete
+          form:
+            active: Active
+            inactive: Inactive
+            yes: Yes
+            no: No
+            save: Save
+      settings:
+        title: Hackathon Settings
+      sidekiq:
+        title: Sidekiq
+      blazer:
+        title: Blazer
+      doorkeeper:
+        title: Doorkeeper
+      data-exports:
+        title: Data Exports
+  layouts:
+    manage:
+      navigation:
+        overview: Overview
+        logistics: Logistics
+        travel: Travel
+        administration: Administration
+        advanced: Advanced
+        descriptors:
+          sidekiq: Monitor background jobs
+          blazer: Run custom SQL queries
+          doorkeeper: OAuth2 provider management
+          dataexports: Generate & export data

@@ -16,15 +16,15 @@ class UserMailer < ApplicationMailer
 
   def incomplete_reminder_email(user_id)
     @user = User.find_by_id(user_id)
-    return if @user.blank? || @user.admin? || @user.questionnaire || Time.now.to_date > Date.parse(HackathonConfig["last_day_to_apply"])
+    return if @user.blank? || @user.director? || @user.questionnaire || Time.now.in_time_zone.to_date > Date.parse(HackathonConfig["last_day_to_apply"]).in_time_zone.to_date
 
     Message.queue_for_trigger("user.24hr_incomplete_application", @user.id)
   end
 
-  rescue_from SparkPostRails::DeliveryException do |e|
-    error_codes_to_not_retry = [
-      "1902", # Generation rejection, specific to the Sparkpost API
-    ]
-    raise e unless e.blank? || error_codes_to_not_retry.include?(e.service_code)
+  def rsvp_reminder_email(user_id)
+    @user = User.find_by_id(user_id)
+    return if @user.blank? || !@user.questionnaire.acc_status == "accepted" || Time.now.in_time_zone.to_date > Date.parse(HackathonConfig["event_start_date"]).in_time_zone.to_date
+
+    Message.queue_for_trigger("questionnaire.rsvp_reminder", @user.id)
   end
 end

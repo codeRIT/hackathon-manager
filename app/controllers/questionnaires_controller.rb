@@ -26,18 +26,14 @@ class QuestionnairesController < ApplicationController
     @questionnaire = Questionnaire.new
 
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
+      info = session["devise.provider_data"]["info"]
       @skip_my_mlh_fields = true
       @questionnaire.tap do |q|
-        q.first_name = session["devise.provider_data"]["info"]["first_name"]
-        q.last_name = session["devise.provider_data"]["info"]["last_name"]
-        q.phone = session["devise.provider_data"]["info"]["phone_number"]
-        q.level_of_study = session["devise.provider_data"]["info"]["level_of_study"]
-        q.major = session["devise.provider_data"]["info"]["major"]
-        q.date_of_birth = session["devise.provider_data"]["info"]["date_of_birth"]
-        q.shirt_size = session["devise.provider_data"]["info"]["shirt_size"]
-        q.dietary_restrictions = session["devise.provider_data"]["info"]["dietary_restrictions"]
-        q.special_needs = session["devise.provider_data"]["info"]["special_needs"]
-        q.gender = session["devise.provider_data"]["info"]["gender"]
+        q.phone          = info["phone_number"]
+        q.level_of_study = info["level_of_study"]
+        q.major          = info["major"]
+        q.date_of_birth  = info["date_of_birth"]
+        q.gender         = info["gender"]
 
         school = School.where(name: session["devise.provider_data"]["info"]["school"]["name"]).first_or_create do |s|
           s.name = session["devise.provider_data"]["info"]["school"]["name"]
@@ -62,6 +58,8 @@ class QuestionnairesController < ApplicationController
     if current_user.reload.questionnaire.present?
       return redirect_to questionnaires_path, notice: 'Application already exists.'
     end
+    return unless HackathonConfig['accepting_questionnaires']
+
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
     @questionnaire.user_id = current_user.id
 
@@ -97,8 +95,14 @@ class QuestionnairesController < ApplicationController
   # DELETE /apply
   # DELETE /apply.json
   def destroy
-    @questionnaire.destroy
+    if @questionnaire.is_bus_captain
+      directors = User.where(role: :director)
+      directors.each do |user|
+        StaffMailer.bus_captain_left(@questionnaire.bus_list_id, @questionnaire.user_id, user.id).deliver_later
+      end
+    end
 
+    @questionnaire.destroy
     respond_to do |format|
       format.html { redirect_to questionnaires_url }
       format.json { head :no_content }
@@ -119,7 +123,7 @@ class QuestionnairesController < ApplicationController
 
   def questionnaire_params
     params.require(:questionnaire).permit(
-      :email, :experience, :first_name, :last_name, :gender,
+      :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
       :portfolio_url, :vcs_url, :agreement_accepted, :bus_captain_interest,

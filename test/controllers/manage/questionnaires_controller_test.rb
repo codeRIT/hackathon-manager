@@ -5,7 +5,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
   setup do
     @questionnaire = create(:questionnaire)
-    stub_request(:get, /api.sparkpost.com.*/).to_return(status: 200, body: "", headers: {})
+    stub_request(:get, /api.sendgrid.com.*/).to_return(status: 200, body: "", headers: {})
   end
 
   context "while not authenticated" do
@@ -32,12 +32,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
     should "not allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
       assert_response :redirect
@@ -45,19 +39,13 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_questionnaires#create" do
-      post :create, params: { questionnaire: { first_name: "New" } }
+      post :create, params: { questionnaire: { major: "Computer Science" } }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
     should "not allow access to manage_questionnaires#update" do
-      patch :update, params: { id: @questionnaire, questionnaire: { first_name: "New" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
+      patch :update, params: { id: @questionnaire, questionnaire: { major: "Human Centered Computing" } }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
@@ -83,7 +71,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated as a user" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
     end
 
@@ -111,12 +99,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
     should "not allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
       assert_response :redirect
@@ -124,19 +106,13 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_questionnaires#create" do
-      post :create, params: { questionnaire: { first_name: "New" } }
+      post :create, params: { questionnaire: { major: "Best Major" } }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
     should "not allow access to manage_questionnaires#update" do
-      patch :update, params: { id: @questionnaire, questionnaire: { first_name: "New" } }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
+      patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -160,10 +136,10 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a limited access admin" do
+  context "while authenticated as a volunteer" do
     setup do
-      @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -182,11 +158,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :success
-    end
-
     should "not allow access to manage_questionnaires#new" do
       get :new, params: { id: @questionnaire }
       assert_response :redirect
@@ -200,19 +171,13 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_questionnaires#create" do
-      post :create, params: { questionnaire: { first_name: "New" } }
+      post :create, params: { questionnaire: { major: "Best Major" } }
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
     end
 
     should "not allow access to manage_questionnaires#update" do
-      patch :update, params: { id: @questionnaire, questionnaire: { first_name: "New" } }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
-    end
-
-    should "not allow convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
+      patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
     end
@@ -235,10 +200,74 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as an organizer" do
     setup do
-      @user = create(:admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "allow access to manage_questionnaires#index" do
+      get :index
+      assert_response :success
+    end
+
+    should "allow access to manage_questionnaires datatables api" do
+      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_response :success
+    end
+
+    should "allow access to manage_questionnaires#show" do
+      get :show, params: { id: @questionnaire }
+      assert_response :success
+    end
+
+    should "not allow access to manage_questionnaires#new" do
+      get :new, params: { id: @questionnaire }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#edit" do
+      get :edit, params: { id: @questionnaire }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#create" do
+      post :create, params: { questionnaire: { major: "Best Major" } }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#update" do
+      patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#destroy" do
+      patch :destroy, params: { id: @questionnaire }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not access to manage_questionnaires#update_acc_status" do
+      patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "accepted" } }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "allow access to manage_questionnaires#bulk_apply" do
+      patch :bulk_apply, params: { bulk_action: "waitlist", bulk_ids: [@questionnaire.id] }
+      assert_response :success
+    end
+  end
+
+  context "while authenticated as a director" do
+    setup do
+      @user = create(:director)
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 
@@ -257,25 +286,9 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "allow access to manage_questionnaires#message_events" do
-      get :message_events, params: { id: @questionnaire }
-      assert_response :success
-    end
-
     should "allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
       assert_response :success
-    end
-
-    should "create questionnaire and user" do
-      assert_difference("User.count", 1) do
-        assert_difference("Questionnaire.count", 1) do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "test@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
-        end
-      end
-
-      assert_equal "test@example.com", assigns(:questionnaire).email
-      assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
     should "not create a duplicate questionnaire for a user" do
@@ -283,34 +296,46 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       create(:questionnaire, user_id: user.id)
       assert_difference("User.count", 0) do
         assert_difference("Questionnaire.count", 0) do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "existing@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
+          post :create, params: {
+            questionnaire: {
+              experience: @questionnaire.experience,
+              interest: @questionnaire.interest,
+              first_name: @questionnaire.user.first_name,
+              last_name: @questionnaire.user.last_name,
+              phone: @questionnaire.phone,
+              level_of_study: @questionnaire.level_of_study,
+              date_of_birth: @questionnaire.date_of_birth,
+              shirt_size: @questionnaire.shirt_size,
+              school_id: @questionnaire.school_id,
+              email: "existing@example.com",
+              agreement_accepted: "1",
+              code_of_conduct_accepted: "1",
+              data_sharing_accepted: "1",
+              gender: @questionnaire.gender,
+              major: @questionnaire.major,
+              why_attend: @questionnaire.why_attend,
+              graduation_year: @questionnaire.graduation_year,
+              race_ethnicity: @questionnaire.race_ethnicity
+            }
+          }
         end
       end
       assert_response :success
     end
 
-    should "create a questionnaire with existing user" do
-      create(:user, email: "existing@example.com")
-      assert_difference("User.count", 0) do
-        assert_difference("Questionnaire.count", 1) do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @questionnaire.school_id, email: "existing@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
-        end
-      end
-      assert_equal "existing@example.com", assigns(:questionnaire).email
-      assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
-    end
-
-    should "create school if doesn't exist in questionnaire" do
-      assert_difference("Questionnaire.count", 1) do
-        assert_difference("School.count", 1) do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, first_name: @questionnaire.first_name, last_name: @questionnaire.last_name, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: "My New School", email: "taken@example.com", agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", gender: @questionnaire.gender, major: @questionnaire.major, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
-        end
-      end
-      assert_equal "My New School", assigns(:questionnaire).school.name
-    end
-
-    should "update questionnaire" do
-      patch :update, params: { id: @questionnaire, questionnaire: { first_name: "New" } }
+    # This and email are seaparte as they are still implemented separately.
+    should "update questionnaire's user's first and last name" do
+      patch :update, params: {
+        id: @questionnaire,
+        questionnaire: {
+          user: {
+            "first_name": "firstnametest",
+            "last_name": "lastnametest"
+          }
+        }
+      }
+      assert_equal "firstnametest", assigns(:questionnaire).user.first_name
+      assert_equal "lastnametest", assigns(:questionnaire).user.last_name
       assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
@@ -320,20 +345,21 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
-    should "convert questionnaire's user to an admin" do
-      patch :convert_to_admin, params: { id: @questionnaire }
-      assert assigns(:questionnaire).user.admin?
-      assert_nil assigns(:questionnaire).user.reload.questionnaire
-      assert_redirected_to edit_manage_admin_path(assigns(:questionnaire).user)
-    end
-
-    should "destroy questionnaire" do
-      assert_difference("Questionnaire.count", -1) do
-        assert_difference("User.count", -1) do
+    context "destroy questionnaire" do
+      should "if bus captain, notify directors that bus captain has been removed" do
+        @user = create(:director)
+        @questionnaire.update_attribute(:is_bus_captain, true)
+        assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
           delete :destroy, params: { id: @questionnaire }
         end
       end
-      assert_redirected_to manage_questionnaires_path
+
+      should "user destroy questionnaire" do
+        assert_difference('Questionnaire.count', -1) do
+          delete :destroy, params: { id: @questionnaire }
+        end
+        assert_redirected_to manage_questionnaires_path
+      end
     end
 
     should "check in the questionnaire" do
@@ -349,13 +375,22 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @questionnaire.update_attribute(:agreement_accepted, false)
       @questionnaire.update_attribute(:can_share_info, false)
       @questionnaire.update_attribute(:phone, "")
-      patch :check_in, params: { id: @questionnaire, check_in: "true", questionnaire: { agreement_accepted: 1, can_share_info: 1, phone: "(123) 333-3333", email: "new_email@example.com" } }
+      patch :check_in, params: {
+        id: @questionnaire,
+        check_in: "true",
+        questionnaire: {
+          agreement_accepted: 1,
+          can_share_info: 1,
+          phone: "(123) 333-3333",
+          email: "new_email@example.com"
+        }
+      }
       @questionnaire.reload
       assert 1.minute.ago < @questionnaire.checked_in_at
       assert_equal @user.id, @questionnaire.checked_in_by_id
       assert_equal true, @questionnaire.agreement_accepted
       assert_equal true, @questionnaire.can_share_info
-      assert_equal "(123) 333-3333", @questionnaire.phone
+      assert_equal "1233333333", @questionnaire.phone
       assert_equal "new_email@example.com", @questionnaire.email
       assert_match /Checked in/, flash[:notice]
       assert_response :redirect
@@ -369,7 +404,16 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @questionnaire.user.update_attribute(:email, "old_email@example.com")
       @questionnaire.update_attribute(:checked_in_at, nil)
       @questionnaire.update_attribute(:checked_in_by_id, nil)
-      patch :check_in, params: { id: @questionnaire, check_in: "", questionnaire: { agreement_accepted: 1, can_share_info: 1, phone: "(123) 333-3333", email: "new_email@example.com" } }
+      patch :check_in, params: {
+        id: @questionnaire,
+        check_in: "",
+        questionnaire: {
+          agreement_accepted: 1,
+          can_share_info: 1,
+          phone: "(123) 333-3333",
+          email: "new_email@example.com"
+        }
+      }
       @questionnaire.reload
       assert_nil @questionnaire.checked_in_at
       assert_nil @questionnaire.checked_in_by_id

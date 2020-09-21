@@ -32,7 +32,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
   context "while authenticated without a questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
       sign_in @user
     end
@@ -60,7 +60,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
   context "while authenticated with a non-accepted questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
       @questionnaire.acc_status = "denied"
     end
@@ -90,7 +90,7 @@ class RsvpsControllerTest < ActionController::TestCase
     setup do
       clear_enqueued_jobs
 
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")
     end
@@ -230,7 +230,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
     should "not allow updates to invalid questionnaire via rsvp page" do
       @questionnaire.update_attribute(:phone, "1111111111")
-      @questionnaire.update_attribute(:first_name, "")
+      @questionnaire.update_attribute(:agreement_accepted, false)
       patch :update, params: { questionnaire: { phone: "1234567890" } }
       assert_not_nil flash[:alert]
       assert_equal "1111111111", @questionnaire.reload.phone
@@ -242,6 +242,39 @@ class RsvpsControllerTest < ActionController::TestCase
       assert_equal "accepted", @questionnaire.reload.acc_status
       assert_match /select a RSVP status/, flash[:alert]
       assert_redirected_to rsvp_path
+    end
+
+    should "if bus captain leaves a bus, notify directors that bus captain has been removed" do
+      @director = create(:director)
+      @questionnaire.update_attribute(:is_bus_captain, true)
+      @questionnaire.update_attribute(:acc_status, "rsvp_confirmed")
+
+      bus_list1 = create(:bus_list, capacity: 1)
+      bus_list2 = create(:bus_list, capacity: 2)
+      patch :update, params: {
+        questionnaire: {
+          acc_status: "rsvp_confirmed",
+          phone: "(123) 456-7890",
+          bus_list_id: bus_list1.id
+        }
+      }
+
+      assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
+        patch :update, params: {
+          questionnaire: {
+            acc_status: "rsvp_confirmed",
+            phone: "(123) 456-7890",
+            bus_list_id: bus_list2.id
+          }
+        }
+      end
+    end
+
+    should "not queue bus_captain_left email if questionnaire is not a bus captain" do
+      @questionnaire.update_attribute(:is_bus_captain, false)
+      assert_difference('enqueued_jobs.size', 0) do
+        patch :update, params: { questionnaire: { acc_status: "rsvp_confirmed" } }
+      end
     end
   end
 end

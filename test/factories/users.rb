@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :user do
+    first_name { "John" }
+    last_name { "Doe" }
     sequence :email do |n|
       "foo#{n}@example.com"
     end
@@ -8,18 +10,25 @@ FactoryBot.define do
     is_active { true }
     receive_weekly_report { false }
 
-    factory :admin do
+    factory :director do
       sequence :email do |n|
-        "admin#{n}@example.com"
+        "director#{n}@example.com"
       end
-      role { :admin }
+      role { :director }
     end
 
-    factory :limited_access_admin do
+    factory :organizer do
       sequence :email do |n|
-        "limited_admin#{n}@example.com"
+        "organizer#{n}@example.com"
       end
-      role { :admin_limited_access }
+      role { :organizer }
+    end
+
+    factory :volunteer do
+      sequence :email do |n|
+        "volunteer#{n}@example.com"
+      end
+      role { :volunteer }
     end
   end
 end

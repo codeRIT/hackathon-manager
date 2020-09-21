@@ -56,10 +56,15 @@ hr
   padding-right: 5px
 
 // custom styles
-.form-container.login, .form-container.signup
+.form-container.login, .form-container.signup, .form-container.password
   max-width: 360px
   .btn
     margin-bottom: 30px
+
+.text-overflow-center
+  text-align: center
+  display: flex
+  justify-content: center
 
 .simple_form
   @include css4
@@ -252,24 +257,6 @@ input[type=submit]
   margin-right: $form-spacing-horizontal
   margin-bottom: 3px
 
-
-// jquery ui override
-.ui-autocomplete
-  @include css4
-    background: var(--input--background--focus)
-    border: 1px solid var(--input--border-color--focus)
-    color: var(--input--text--focus)
-  list-style: none
-  padding: 0
-  .ui-menu-item div
-    padding: 2px 5px
-    display: block
-    cursor: pointer
-    &:hover, &.ui-state-focus
-      @include css4
-        background: var(--primary)
-      @include css4
-        color: var(--white)
 
 // form wizard
 .wizard-stage

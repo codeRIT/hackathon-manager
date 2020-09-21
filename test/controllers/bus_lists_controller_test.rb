@@ -19,7 +19,7 @@ class BusListsControllerTest < ActionController::TestCase
 
   context "while authenticated without a questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
       sign_in @user
     end
@@ -37,7 +37,7 @@ class BusListsControllerTest < ActionController::TestCase
 
   context "while authenticated with a questionnaire but no bus list" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")
     end
@@ -55,7 +55,7 @@ class BusListsControllerTest < ActionController::TestCase
 
   context "while authenticated with a questionnaire with a bus list" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")
       @bus_list = create(:bus_list)

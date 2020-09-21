@@ -10,9 +10,9 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert assigns(:questionnaire)
   end
 
-  should "be able to login and browse site as an admin" do
-    login(FactoryBot.create(:admin))
-    assert_redirected_to manage_root_path
+  should "be able to login and browse site as a director" do
+    login(FactoryBot.create(:director))
+    assert_redirected_to new_questionnaires_path
 
     get manage_dashboard_index_path
     assert_response :success
@@ -24,7 +24,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     get manage_questionnaires_path
     assert_response :redirect
 
-    login(FactoryBot.create(:admin))
+    login(FactoryBot.create(:director))
     assert_redirected_to manage_questionnaires_path
   end
 

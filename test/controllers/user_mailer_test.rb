@@ -29,6 +29,19 @@ class UserMailerTest < ActionMailer::TestCase
     end
   end
 
+  context "upon scheduled rsvp reminder email" do
+    setup do
+      @user = create(:user, email: "test@example.com")
+      @message = create(:message, subject: "Are you coming to HackFoo?", type: "automated", trigger: "questionnaire.rsvp_reminder_email")
+
+      should "queue reminder bulk message" do
+        assert_difference "enqueued_jobs.size", 1 do
+          UserMailer.rsvp_reminder_email(@user.id).deliver_later
+        end
+      end
+    end
+  end
+
   context "with customized HackathonConfig" do
     setup do
       @user = create(:user, email: "test@example.com")

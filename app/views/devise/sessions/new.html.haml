@@ -2,9 +2,5 @@
 .form-container.login
   %h1.section-title.center
     Sign in to
-    %span.emphasized= HackathonConfig['name']
-  - if notice
-    .form-success
-      .success_message
-        %p#notice= notice
+    .emphasized.text-overflow-center= HackathonConfig['name']
   = render 'form'

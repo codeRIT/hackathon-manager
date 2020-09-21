@@ -152,7 +152,7 @@ spec:
 
 1. Seed the database (schools, emails, etc) -- do this **before** you create your first user
 2. Apply as a hacker
-3. Manually promote your (first) account to an admin
+3. Manually promote your (first) account to a director
 4. Configure your hackathon
 
 ### Seed the database
@@ -170,7 +170,7 @@ exit
 1. Open your hackathon's website, create an account, and complete an application
 2. Validate that you received a confirmation email (if you didn't, don't fix it now, but take note for later)
 
-### Manually promote your account to admin status
+### Manually promote your account to director status
 
 1. On the OKD website, navigate to the currently-running HackathonManager pod (Applications -> Pods -> Click the HM pod in the list)
 2. In the tab bar, click "Terminal"
@@ -178,7 +178,7 @@ exit
 ```bash
 bin/rails c
 # Wait for the Rails console to start...
-User.find_by(email: "your-email@example.com").update_attribute(:role, :admin)
+User.find_by(email: "your-email@example.com").update_attribute(:role, :director)
 exit
 exit
 ```
