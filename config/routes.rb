@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   # devise doesnt parse GET /user
-  resource :user, only: :show, constraints: lambda { |req| req.format == :json }
+  resource :user, only: :show, constraints: ->(req) { req.format == :json }
 
   resource :questionnaires, path: "apply" do
     get :schools, on: :collection

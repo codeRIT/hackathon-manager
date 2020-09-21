@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :logged_in
   respond_to :json
 
