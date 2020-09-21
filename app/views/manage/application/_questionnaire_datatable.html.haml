@@ -19,7 +19,7 @@
     %thead
       %tr
         %th{'data-table': { orderable: 'false', data: 'bulk', visible: bulk_actions ? 'true' : 'false' }}
-          - if current_user.admin?
+          - if current_user.director?
             %input{ type: "checkbox", name: "select_allc", value: "1", data: { bulk_row_select: "" } }
         %th{'data-table': { orderable: 'false', data: 'link', visible: visible.call('link', columns) }}
         %th{'data-table': { orderable: 'false', data: 'note', visible: visible.call('note', columns) }}

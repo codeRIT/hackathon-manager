@@ -200,10 +200,110 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a limited access admin" do
+  context "while authenticated as a volunteer" do
     setup do
-      @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "not allow access to manage_messages#index" do
+      get :index
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_messages datatables api" do
+      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_messages#new" do
+      get :new
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not allow access to manage_messages#show" do
+      get :show, params: { id: @message }
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_messages#edit" do
+      get :edit, params: { id: @message }
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not allow access to manage_messages#create" do
+      post :create, params: { message: { email: "test@example.com" } }
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not allow access to manage_messages#update" do
+      patch :update, params: { id: @message, message: { email: "test@example.com" } }
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not allow access to manage_messages#destroy" do
+      patch :destroy, params: { id: @message }
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not deliver message" do
+      assert_difference("enqueued_jobs.size", 0) do
+        patch :deliver, params: { id: @message }
+      end
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not allow access to manage_messages#preview" do
+      get :preview, params: { id: @message }
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_messages#live_preview" do
+      get :live_preview, params: { body: "foo bar" }
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not allow access to manage_messages#duplicate" do
+      assert_difference("Message.count", 0) do
+        patch :duplicate, params: { id: @message }
+      end
+      assert_response :redirect
+      assert_redirected_to manage_messages_path
+    end
+
+    should "not allow access to manage_messages#template" do
+      test_template_failure
+    end
+
+    should "not allow access to manage_messages#template_preview" do
+      test_template_preview_failure
+    end
+
+    should "not allow access to manage_messages#template_update" do
+      test_template_update_failure
+    end
+
+    should "not allow access to manage_messages#template_replace_with_default" do
+      test_template_replace_with_default_failure
+    end
+  end
+
+  context "while authenticated as an organizer" do
+    setup do
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -296,9 +396,9 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as a director" do
     setup do
-      @user = create(:admin)
+      @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
