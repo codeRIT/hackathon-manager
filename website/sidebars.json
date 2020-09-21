@@ -9,7 +9,8 @@
       "customization"
     ],
     "Maintenance" : [
-      "updating-hm"
+      "updating-hm",
+      "2.0-migration-guide"
     ],
     "Docs": ["docs-overview", "questionnaires", "messages", "busses"],
     "API": ["api-overview", "api-testing-setup"],
