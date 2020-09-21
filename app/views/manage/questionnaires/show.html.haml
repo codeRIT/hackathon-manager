@@ -9,7 +9,7 @@
         = render 'check_in_badge'
 
   .btn-group{role: "group"}
-    - if current_user.admin?
+    - if current_user.director?
       = link_to 'Edit', edit_manage_questionnaire_path(@questionnaire), class: 'btn btn-sm btn-outline-secondary'
 
 = render 'overview'
@@ -34,7 +34,7 @@
             - else
               = "(no author)"
             = @questionnaire.acc_status_date ? display_datetime(@questionnaire.acc_status_date, in_sentence: true) : "(no date)"
-        - if current_user.admin?
+        - if current_user.director?
           = bs_vertical_simple_form @questionnaire, url: url_for(action: "update_acc_status", controller: "questionnaires") do |f|
             = f.input :acc_status, as: :select, collection: Questionnaire::POSSIBLE_ACC_STATUS.invert, include_blank: false, label: "Acceptance Status:", hint: "Updating this status may trigger an automatic email to the applicant - see #{link_to('messages', manage_messages_path(anchor: 'triggered-email-overview'))} for details.".html_safe
             = f.button :submit, value: "Update Status", class: 'btn-primary'

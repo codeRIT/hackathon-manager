@@ -59,7 +59,7 @@
           %th Email
           %th Phone Number
           %th School
-          - if current_user.admin?
+          - if current_user.director?
             %th Actions
       %tbody
         - @bus_list.passengers.select { |q| q.bus_captain_interest }.each do |p|
@@ -70,7 +70,7 @@
             %td= p.email
             %td= phone_link_to p.phone
             %td= link_to p.school.name, manage_school_path(p.school)
-            - if current_user.admin?
+            - if current_user.director?
               %td
                 - if p.is_bus_captain?
                   = link_to "Remove Bus Captain", toggle_bus_captain_manage_bus_list_path(@bus_list, questionnaire_id: p.id, bus_captain: '0'), method: 'post', class: 'text-danger'

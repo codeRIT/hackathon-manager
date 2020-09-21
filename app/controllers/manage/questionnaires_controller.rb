@@ -96,6 +96,13 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def destroy
+    if @questionnaire.is_bus_captain
+      directors = User.where(role: :director)
+      directors.each do |user|
+        StaffMailer.bus_captain_left(@questionnaire.bus_list_id, @questionnaire.user_id, user.id).deliver_later
+      end
+    end
+
     @questionnaire.destroy
     respond_with(:manage, @questionnaire)
   end

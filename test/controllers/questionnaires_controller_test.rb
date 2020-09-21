@@ -35,7 +35,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated without a completed questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user)
       sign_in @user
     end
@@ -139,7 +139,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated with a completed questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
     end
 
@@ -165,12 +165,22 @@ class QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to questionnaires_path
     end
 
-    should "destroy questionnaire" do
-      assert_difference('Questionnaire.count', -1) do
-        delete :destroy
+    context "destroy questionnaire" do
+      should "if bus captain, notify directors that bus captain has been removed" do
+        @director = create(:director)
+        @questionnaire.update_attribute(:is_bus_captain, true)
+        assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
+          delete :destroy
+        end
       end
 
-      assert_redirected_to questionnaires_path
+      should "user destroy questionnaire" do
+        assert_difference('Questionnaire.count', -1) do
+          delete :destroy
+        end
+
+        assert_redirected_to questionnaires_path
+      end
     end
 
     context "with invalid questionnaire params" do

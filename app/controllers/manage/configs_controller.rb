@@ -1,5 +1,5 @@
 class Manage::ConfigsController < Manage::ApplicationController
-  before_action :limit_access_admin
+  before_action :require_director
   before_action :get_config, only: [:edit, :update, :update_only_css_variables]
 
   respond_to :html, :json
@@ -69,7 +69,4 @@ class Manage::ConfigsController < Manage::ApplicationController
     end
   end
 
-  def limit_access_admin
-    redirect_to root_path unless current_user.admin?
-  end
 end

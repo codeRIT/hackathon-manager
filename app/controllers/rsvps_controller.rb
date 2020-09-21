@@ -43,6 +43,10 @@ class RsvpsController < ApplicationController
   # rubocop:disable CyclomaticComplexity
   # rubocop:disable PerceivedComplexity
   def update
+    # save to check if bus status changes after rsvp
+    bus = @questionnaire.bus_list_id
+    acc_status = @questionnaire.acc_status
+
     unless @questionnaire.update_attributes(params.require(:questionnaire).permit(:agreement_accepted, :phone))
       flash[:alert] = @questionnaire.errors.full_messages.join(", ")
       redirect_to rsvp_path
@@ -57,6 +61,17 @@ class RsvpsController < ApplicationController
 
     update_acc_status
     update_bus_list
+
+    bus_after_rsvp = @questionnaire.bus_list_id
+    acc_status_after_rsvp = @questionnaire.acc_status
+
+    if bus != nil && (acc_status != acc_status_after_rsvp || bus != bus_after_rsvp) && @questionnaire.is_bus_captain == true
+      @questionnaire.is_bus_captain = false
+      directors = User.where(role: :director)
+      directors.each do |user|
+        StaffMailer.bus_captain_left(@questionnaire.bus_list_id, @questionnaire.user_id, user.id).deliver_later
+      end
+    end
 
     unless @questionnaire.save
       flash[:alert] = @questionnaire.errors.full_message.join(", ")

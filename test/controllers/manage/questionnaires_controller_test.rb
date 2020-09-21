@@ -71,7 +71,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated as a user" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
     end
 
@@ -136,10 +136,10 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a limited access admin" do
+  context "while authenticated as a volunteer" do
     setup do
-      @user = create(:limited_access_admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -200,10 +200,74 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as an admin" do
+  context "while authenticated as an organizer" do
     setup do
-      @user = create(:admin)
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "allow access to manage_questionnaires#index" do
+      get :index
+      assert_response :success
+    end
+
+    should "allow access to manage_questionnaires datatables api" do
+      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      assert_response :success
+    end
+
+    should "allow access to manage_questionnaires#show" do
+      get :show, params: { id: @questionnaire }
+      assert_response :success
+    end
+
+    should "not allow access to manage_questionnaires#new" do
+      get :new, params: { id: @questionnaire }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#edit" do
+      get :edit, params: { id: @questionnaire }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#create" do
+      post :create, params: { questionnaire: { major: "Best Major" } }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#update" do
+      patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not allow access to manage_questionnaires#destroy" do
+      patch :destroy, params: { id: @questionnaire }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "not access to manage_questionnaires#update_acc_status" do
+      patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "accepted" } }
+      assert_response :redirect
+      assert_redirected_to manage_questionnaires_path
+    end
+
+    should "allow access to manage_questionnaires#bulk_apply" do
+      patch :bulk_apply, params: { bulk_action: "waitlist", bulk_ids: [@questionnaire.id] }
+      assert_response :success
+    end
+  end
+
+  context "while authenticated as a director" do
+    setup do
+      @user = create(:director)
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
     end
 
@@ -281,11 +345,21 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
-    should "destroy questionnaire" do
-      assert_difference("Questionnaire.count", -1) do
-        delete :destroy, params: { id: @questionnaire }
+    context "destroy questionnaire" do
+      should "if bus captain, notify directors that bus captain has been removed" do
+        @user = create(:director)
+        @questionnaire.update_attribute(:is_bus_captain, true)
+        assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
+          delete :destroy, params: { id: @questionnaire }
+        end
       end
-      assert_redirected_to manage_questionnaires_path
+
+      should "user destroy questionnaire" do
+        assert_difference('Questionnaire.count', -1) do
+          delete :destroy, params: { id: @questionnaire }
+        end
+        assert_redirected_to manage_questionnaires_path
+      end
     end
 
     should "check in the questionnaire" do
@@ -316,7 +390,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal @user.id, @questionnaire.checked_in_by_id
       assert_equal true, @questionnaire.agreement_accepted
       assert_equal true, @questionnaire.can_share_info
-      assert_equal "(123) 333-3333", @questionnaire.phone
+      assert_equal "1233333333", @questionnaire.phone
       assert_equal "new_email@example.com", @questionnaire.email
       assert_match /Checked in/, flash[:notice]
       assert_response :redirect

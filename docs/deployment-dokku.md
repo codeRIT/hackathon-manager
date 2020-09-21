@@ -107,14 +107,14 @@ dokku letsencrypt hm
 - Deploy should succeed without any red flags in the build log
 - Should be able to submit an application on the website & receive an immediate confirmation email
 
-### Promote account to admin
+### Promote account to director
 
 ```bash
 dokku enter hm web
 # Wait for a bash shell to start...
 $ bin/rails c
 # Wait for the Rails console to start...
-User.find_by(email: "your-email@example.com").update_attribute(:role, :admin)
+User.find_by(email: "your-email@example.com").update_attribute(:role, :director)
 exit
 exit
 ```
