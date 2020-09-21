@@ -1,5 +1,4 @@
 class MoveUserInfoFromQuestionnaireToUserModel < ActiveRecord::Migration[5.2]
-
   # See the "Hackathon Manager 2.0 Migration Guide"
   # for a more general description of what this migration does.
 
@@ -7,7 +6,6 @@ class MoveUserInfoFromQuestionnaireToUserModel < ActiveRecord::Migration[5.2]
   # from the questionnares table to the users table (and model, for both).
 
   def up
-
     # Add the first/last name columns to the users table
     add_column :users, :first_name, :string
     add_column :users, :last_name,  :string
@@ -26,7 +24,7 @@ class MoveUserInfoFromQuestionnaireToUserModel < ActiveRecord::Migration[5.2]
       email_head   = u.email.partition('@').first
       u.first_name = email_head
       u.last_name  = email_head
-      u.save()
+      u.save
     end
 
     # Remove the first/last name columns from the questionnaires table
@@ -35,7 +33,6 @@ class MoveUserInfoFromQuestionnaireToUserModel < ActiveRecord::Migration[5.2]
   end
 
   def down
-
     # Add the first/last name columns back to the questionnaires table
     add_column :questionnaires, :first_name, :string
     add_column :questionnaires, :last_name,  :string
@@ -48,7 +45,7 @@ class MoveUserInfoFromQuestionnaireToUserModel < ActiveRecord::Migration[5.2]
     # and set both their first/last name to nil.
     User.all.each do |u|
       email_head = u.email.partition('@').first
-      if u.first_name == email_head and u.last_name == email_head
+      if u.first_name == email_head && u.last_name == email_head
         u.first_name = nil
         u.last_name  = nil
       end
