@@ -22,5 +22,4 @@ class Manage::StatsController < Manage::ApplicationController
   def mlh_checked_in_datatable
     render json: MLHCheckedInDatatable.new(params, view_context: view_context)
   end
-
 end
