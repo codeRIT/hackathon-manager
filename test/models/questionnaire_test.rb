@@ -488,6 +488,21 @@ class QuestionnaireTest < ActiveSupport::TestCase
         create(:questionnaire, acc_status: "pending")
       end
     end
+
+    should "send triggered email on checked in" do
+      create(:message, trigger: "questionnaire.checked-in")
+      assert_difference "enqueued_jobs.size", 1 do
+        create(:questionnaire, checked_in_at: Time.now)
+      end
+    end
+
+    should "not send triggered email on checked out" do
+      create(:message, trigger: "questionnaire.checked-in")
+      questionnaire = create(:questionnaire, checked_in_at: Time.now)
+      assert_difference "enqueued_jobs.size", 0 do
+        questionnaire.update_attribute(:checked_in_at, nil)
+      end
+    end
   end
 
   should "clean up bus-related fields when changing RSVP" do
