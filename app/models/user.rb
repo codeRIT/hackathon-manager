@@ -91,9 +91,9 @@ class User < ApplicationRecord
     non_organizer.left_outer_joins(:questionnaire).where(questionnaires: { id: nil })
   end
 
-  def as_json(options={})
+  def as_json(options = {})
     result = super
-    result['questionnaire_id'] = Questionnaire.where(user_id: self.id).any? ? Questionnaire.where(user_id: self.id).first.id : nil
+    result['questionnaire_id'] = Questionnaire.where(user_id: id).any? ? Questionnaire.where(user_id: id).first.id : nil
     result
   end
 end
