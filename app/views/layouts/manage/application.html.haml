@@ -75,10 +75,11 @@
               %span
                 = t(:travel, scope: 'layouts.manage.navigation')
             %ul.nav.flex-column.mb-2
-              %li.nav-item
-                = active_link_to manage_bus_lists_path, class: "nav-link" do
-                  .fa.fa-bus.fa-fw.icon-space-r-half
-                  = t(:title, scope: 'pages.manage.bus-lists')
+              - if !HackathonConfig['digital_hackathon']
+                %li.nav-item
+                  = active_link_to manage_bus_lists_path, class: "nav-link" do
+                    .fa.fa-bus.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.bus-lists')
               %li.nav-item
                 = active_link_to manage_schools_path, class: "nav-link" do
                   .fa.fa-home.fa-fw.icon-space-r-half
