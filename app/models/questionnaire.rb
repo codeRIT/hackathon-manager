@@ -11,6 +11,7 @@ class Questionnaire < ApplicationRecord
   after_create :queue_triggered_email_create
   after_update :queue_triggered_email_update
   after_update :queue_triggered_email_rsvp_reminder
+  after_update :queue_triggered_email_checked_in
   after_save :update_school_questionnaire_count
   after_destroy :update_school_questionnaire_count
 
@@ -255,6 +256,11 @@ class Questionnaire < ApplicationRecord
 
   def queue_triggered_email_create
     Message.queue_for_trigger("questionnaire.#{acc_status}", user_id)
+  end
+
+  def queue_triggered_email_checked_in
+    return unless saved_change_to_checked_in_at && checked_in?
+    Message.queue_for_trigger("questionnaire.checked-in", user_id)
   end
 
   def queue_triggered_email_rsvp_reminder
