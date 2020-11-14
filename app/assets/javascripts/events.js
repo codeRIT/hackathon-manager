@@ -2,12 +2,6 @@ function eventCalendar() {
   return $('#calendar').fullCalendar({
     defaultView: 'listYear',
     eventRender: function (event, element, view) {
-      if (event.public) {
-        element.find('.fc-event-dot').css('background-color', 'red');
-      }
-      var publicText = "";
-      if (event.public)
-        publicText = "Public";
       var description = event.description ? event.description : "";
       var location = event.location ? event.location : "";
       element.find('.fc-list-item-title').append('<div style="float: right"><span style="color: #ff0000">' + publicText + '</span></div>');

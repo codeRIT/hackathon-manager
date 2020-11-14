@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_002425) do
+ActiveRecord::Schema.define(version: 2020_11_14_203953) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -122,13 +122,11 @@ ActiveRecord::Schema.define(version: 2020_08_06_002425) do
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.string "owner"
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "location"
-    t.boolean "public"
   end
 
   create_table "fips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -240,6 +238,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_002425) do
     t.integer "graduation_year"
     t.string "race_ethnicity"
     t.integer "bus_list_id"
+    t.string "extra_question_data"
     t.index ["bus_list_id"], name: "index_questionnaires_on_bus_list_id"
     t.index ["user_id"], name: "index_questionnaires_on_user_id"
   end
