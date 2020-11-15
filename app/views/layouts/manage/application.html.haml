@@ -13,19 +13,23 @@
 
   %body
     %nav.navbar.navbar-expand.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
-      %a.navbar-brand.col-xs-6.col-sm-3.col-md-2.mr-0{href: manage_root_path} #{HackathonConfig['name']} Manager
+
+      %span.navbar-mobile-toggle.m-0{onclick: 'toggleMobileNav()'}
+        .fa.fa-bars.m-3.mx-4.text-white.h-auto
+
+      / TODO: move acc/signin inside the sidebar
+      %a.navbar-brand.px-3.mr-0{href: manage_root_path} #{HackathonConfig['name']} Manager
+
       / %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
       %ul.navbar-nav.ml-auto.px-3
         %li.nav-item.text-nowrap
           = link_to "Account", root_path, class: "nav-link"
         %li.nav-item.text-nowrap
           = link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link"
-      %span.navbar-brand.navbar-mobile-toggle.mr-0.pl-3.pr-3{onclick: 'toggleMobileNav()'}
-        .fa.fa-bars.fa-fw.icon-space-r-half
 
     .container-fluid
       .row
-        %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+        %nav.col-md-3.d-none.d-md-block.bg-light.sidebar
           .sidebar-sticky
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
               %span
@@ -131,7 +135,7 @@
                     = t(:title, scope: 'pages.manage.data-exports')
                     .nav-item-description
                       = t(:dataexports, scope: 'layouts.manage.navigation.descriptors')
-        %main.col-md-10.ml-sm-auto.px-4{role: "main"}
+        %main.col-md-9.ml-sm-auto.px-4{role: "main"}
           = render "layouts/manage/flashes"
           = yield
           %div.mb-4.text-center
