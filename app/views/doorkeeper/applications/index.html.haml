@@ -1,0 +1,25 @@
+= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.doorkeeper'), docs: 'https://coderit.org/hackathon-manager/docs/busses' do
+  = link_to t(:new, scope: 'doorkeeper.applications.index'), new_oauth_application_path, class: "btn btn-sm btn-outline-secondary"
+
+.mb-4
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th
+          =t(:name, scope: 'doorkeeper.applications.index')
+        %th
+          =t(:callback_url, scope: 'doorkeeper.applications.index')
+        %th
+          =t(:confidential, scope: 'doorkeeper.applications.index')
+
+
+    %tbody
+      - @applications.each do |application|
+        %tr
+          %td
+            %strong= link_to(application.name, oauth_application_path(application))
+          %td
+            = simple_format(application.redirect_uri)
+          %td
+            = application.confidential? ? t('doorkeeper.applications.index.confidentiality.yes') : t('doorkeeper.applications.index.confidentiality.no')
+

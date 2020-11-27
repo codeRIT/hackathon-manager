@@ -20,10 +20,10 @@ en:
   doorkeeper:
     applications:
       confirmations:
-        destroy: 'Are you sure?'
+        destroy: Are you sure? The application %{name} will be permanently erased. This action is irreversible.
       buttons:
         edit: 'Edit'
-        destroy: 'Destroy'
+        destroy: 'Delete'
         submit: 'Submit'
         cancel: 'Cancel'
         authorize: 'Authorize'
@@ -49,24 +49,24 @@ en:
       new:
         title: 'New Application'
       show:
-        title: 'Application: %{name}'
+        title: 'Application'
         application_id: 'Application UID'
         secret: 'Secret'
         scopes: 'Scopes'
         confidential: 'Confidential'
-        callback_urls: 'Callback urls'
+        callback_urls: 'Callback URLs'
         actions: 'Actions'
 
     authorizations:
       buttons:
-        authorize: 'Authorize'
+        authorize: 'Allow'
         deny: 'Deny'
       error:
         title: 'An error has occurred'
       new:
         title: 'Authorization required'
-        prompt: 'Authorize %{client_name} to use your account?'
-        able_to: 'This application will be able to'
+        prompt: 'The application %{client_name} is requesting access to your information.'
+        able_to: 'This application will be able to access your personally identifiable information and questionnaire data.'
       show:
         title: 'Authorization code'
 
@@ -87,7 +87,8 @@ en:
     errors:
       messages:
         # Common error messages
-        invalid_request: 'The request is missing a required parameter, includes an unsupported parameter value, or is otherwise malformed.'
+        invalid_request:
+          missing_param: 'The request is missing a required parameter, includes an unsupported parameter value, or is otherwise malformed.'
         invalid_redirect_uri: "The requested redirect uri is malformed or doesn't match client redirect URI."
         unauthorized_client: 'The client is not authorized to perform this request using this method.'
         access_denied: 'The resource owner or authorization server denied the request.'
@@ -95,6 +96,9 @@ en:
         invalid_code_challenge_method: 'The code challenge method must be plain or S256.'
         server_error: 'The authorization server encountered an unexpected condition which prevented it from fulfilling the request.'
         temporarily_unavailable: 'The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.'
+
+        # Help from hackathon message
+        get_help: 'Please inform a %{hackathon_name} staff member of this issue for assistance.'
 
         # Configuration error messages
         credential_flow_not_configured: 'Resource Owner Password Credentials flow failed due to Doorkeeper.configure.resource_owner_from_credentials being unconfigured.'

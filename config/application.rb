@@ -7,7 +7,7 @@ require "./lib/hackathon_manager"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
+4
 module HackathonManager
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -23,5 +23,16 @@ module HackathonManager
     config.time_zone = ENV["TIME_ZONE"].presence || "UTC"
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.to_prepare do
+      # Only Applications list
+      Doorkeeper::ApplicationsController.layout "manage/application"
+    
+      # Only Authorization endpoint
+      #Doorkeeper::AuthorizationsController.layout "application"
+    
+      # Only Authorized Applications
+      Doorkeeper::AuthorizedApplicationsController.layout "application"
+    end
   end
 end

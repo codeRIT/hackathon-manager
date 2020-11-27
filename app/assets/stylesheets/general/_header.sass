@@ -23,11 +23,18 @@ $account-nav-padding-vert: 15px
 .header-nav
   display: flex
   align-items: center
+  width: 100%
   .button
     margin-right: 10px
     &:last-child
       margin-right: 0
 
+.header-nav.start
+  justify-content: flex-start
+
+.header-nav.end
+  justify-content: flex-end
+  
 .account-nav
   @include css4
     border-bottom: 1px solid var(--account-nav--border-color)
