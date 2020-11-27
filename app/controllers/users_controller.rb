@@ -7,8 +7,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json { render json: current_user }
-    end
+    render json: current_user
   end
 end

@@ -1,3 +1,18 @@
+# [2.1.0](https://github.com/codeRIT/hackathon-manager/compare/v2.0.1...v2.1.0) (2020-11-09)
+
+
+### Features
+
+* Adds "questionnaire_id" to User.as_json ([#394](https://github.com/codeRIT/hackathon-manager/issues/394)) ([](https://github.com/codeRIT/hackathon-manager/commit/774de1e))
+* **Messages:** Adds checked in message trigger ([#386](https://github.com/codeRIT/hackathon-manager/issues/386)) ([](https://github.com/codeRIT/hackathon-manager/commit/bf225b8))
+
+## [2.0.1](https://github.com/codeRIT/hackathon-manager/compare/v2.0.0...v2.0.1) (2020-10-29)
+
+
+### Bug Fixes
+
+* Updates several packages for security ([](https://github.com/codeRIT/hackathon-manager/commit/b916de0))
+
 # [1.23.0](https://github.com/codeRIT/hackathon-manager/compare/v1.22.4...v1.23.0) (2020-09-21)
 
 
