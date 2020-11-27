@@ -10,12 +10,12 @@
       %dt.col-md-4
         = t('.application_id')
       %dd.col-md-8
-        %code#application_id.bg-light
+        %code.bg-light
           = @application.uid
       %dt.col-md-4
         = t('.secret')
       %dd.col-md-8
-        %code#application_id.bg-light
+        %code.bg-light
           = flash[:application_secret].presence || @application.plaintext_secret
       %dt.col-md-4
         = t('.scopes')
