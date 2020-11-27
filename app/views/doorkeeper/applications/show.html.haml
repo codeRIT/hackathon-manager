@@ -7,17 +7,17 @@
   .col-lg-6
     %h4.border-bottom.pb-2.mb-3 Details
     %dl.row
-      %dt.col-md-4 
+      %dt.col-md-4
         = t('.application_id')
       %dd.col-md-8
         %code#application_id.bg-light
           = @application.uid
-      %dt.col-md-4 
+      %dt.col-md-4
         = t('.secret')
       %dd.col-md-8
         %code#application_id.bg-light
           = flash[:application_secret].presence || @application.plaintext_secret
-      %dt.col-md-4 
+      %dt.col-md-4
         = t('.scopes')
       %dd.col-md-8
         - if @application.scopes.present?
@@ -25,13 +25,13 @@
         - else
           %bg-light.font-italic.text-muted
             = t('.not_defined')
-      %dt.col-md-4 
+      %dt.col-md-4
         = t('.confidential')
       %dd.col-md-8
         = @application.confidential? ? "Yes" : "No"
 
   .col-lg-6
-    .h4.border-bottom.pb-2.mb-3 
+    .h4.border-bottom.pb-2.mb-3
       = t('.callback_urls')
     %table.table.table-striped.table-hover
       %tbody
