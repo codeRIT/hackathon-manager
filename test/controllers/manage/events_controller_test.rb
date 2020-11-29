@@ -1,7 +1,6 @@
 require "test_helper"
 
 class Manage::EventsControllerTest < ActionController::TestCase
-  include ActiveJob::TestHelper
 
   setup do
     @event = create(:event)
@@ -45,9 +44,10 @@ class Manage::EventsControllerTest < ActionController::TestCase
     end
   end
 
-  context "while authenticated as a user" do
+  context "while authenticated as an user" do
     setup do
       @user = create(:user)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -89,9 +89,55 @@ class Manage::EventsControllerTest < ActionController::TestCase
 
   end
 
-  context "while authenticated as a limited access admin" do
+  context "while authenticated as an volunteer" do
     setup do
-      @user = create(:limited_access_admin)
+      @user = create(:volunteer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+    end
+
+    should "not allow access to manage_events#index" do
+      get :index
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_events#new" do
+      get :new
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_events#show" do
+      get :show, params: {id: @event}
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_events#create" do
+      post :create, params: {event: {title: "should not exist title"}}
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_events#update" do
+      patch :update, params: {id: @event, title: "not allowed altered title"}
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+    should "not allow access to manage_events#destroy" do
+      patch :destroy, params: {id: @event}
+      assert_response :redirect
+      assert_redirected_to manage_checkins_path
+    end
+
+  end
+
+  context "while authenticated as an organizer" do
+    setup do
+      @user = create(:organizer)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -104,38 +150,39 @@ class Manage::EventsControllerTest < ActionController::TestCase
     should "not allow access to manage_events#new" do
       get :new
       assert_response :redirect
-      assert_redirected_to root_path
+      assert_redirected_to manage_dashboard_path
     end
 
     should "not allow access to manage_events#show" do
       get :show, params: {id: @event}
       assert_response :redirect
-      assert_redirected_to root_path
+      assert_redirected_to manage_dashboard_path
     end
 
     should "not allow access to manage_events#create" do
       post :create, params: {event: {title: "should not exist title"}}
       assert_response :redirect
-      assert_redirected_to root_path
+      assert_redirected_to manage_dashboard_path
     end
 
     should "not allow access to manage_events#update" do
       patch :update, params: {id: @event, title: "not allowed altered title"}
       assert_response :redirect
-      assert_redirected_to root_path
+      assert_redirected_to manage_dashboard_path
     end
 
     should "not allow access to manage_events#destroy" do
       patch :destroy, params: {id: @event}
       assert_response :redirect
-      assert_redirected_to root_path
+      assert_redirected_to manage_dashboard_path
     end
 
   end
 
-  context "while authenticated as a admin" do
+  context "while authenticated as an director" do
     setup do
-      @user = create(:admin)
+      @user = create(:director)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
 
@@ -156,13 +203,13 @@ class Manage::EventsControllerTest < ActionController::TestCase
 
     should "allow access to manage_events#create" do
       post :create, params: { event: {title: "test new title", start: Date.today - 1.hour, finish: Date.today}}
-      assert_redirected_to manage_event_path(assigns(:event))
+      assert_redirected_to manage_events_path
 
     end
 
     should "allow access to manage_events#update" do
       patch :update, params: { id: @event, event: {title: "test update title"}}
-      assert_redirected_to manage_bus_list_path(assigns(:event))
+      assert_redirected_to manage_events_path
     end
 
     should "allow access to manage_events#destroy" do

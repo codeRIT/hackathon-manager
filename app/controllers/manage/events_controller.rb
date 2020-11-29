@@ -1,9 +1,10 @@
 class Manage::EventsController < Manage::ApplicationController
+  before_action :require_director
   respond_to :html, :json
 
   def index
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: Event.all }
     end
   end
