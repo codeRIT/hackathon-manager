@@ -38,3 +38,6 @@
 
 # macOS
 .DS_Store
+
+# Redis
+*.rdb
