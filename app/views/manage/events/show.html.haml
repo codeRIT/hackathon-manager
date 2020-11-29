@@ -1,7 +1,6 @@
-= render "layouts/manage/page_title", title: "Edit Event"
+= render "layouts/manage/page_title", title: "Edit Event", subtitle: @event.title do
+  .btn-group
+    = link_to 'Cancel', manage_event_path(@event), class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Delete', manage_event_path(@event), method: :delete, data: { confirm: 'Are you sure? This action is irreversible.' }, class: 'btn btn-sm btn-outline-secondary'
 
 = render "form"
-.center
-  = link_to 'Delete', manage_event_path(@event), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure? This action is irreversible.' }
-.center
-  = link_to 'Back', manage_events_path

@@ -1,6 +1,9 @@
 function eventCalendar() {
   return $('#calendar').fullCalendar({
-    defaultView: 'listYear',
+    defaultView: 'listDay',
+    buttonText: {
+      today: 'Today'
+    },
     eventRender: function (event, element, view) {
       var description = event.description ? event.description : "";
       var location = event.location ? event.location : "";
@@ -10,9 +13,6 @@ function eventCalendar() {
     events: '/manage/events.json',
     eventClick: function (info) {
       window.location = "events/" + info.id;
-    },
-    eventData: {
-      Color: 'red'
     },
     height: "auto",
   });
