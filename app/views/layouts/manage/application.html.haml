@@ -113,6 +113,12 @@
                   = t(:advanced, scope: 'layouts.manage.navigation')
               %ul.nav.flex-column.mb-2
                 %li.nav-item
+                  = active_link_to oauth_applications_path, class: "nav-link" do
+                    .fa.fa-unlock.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.doorkeeper')
+                    .nav-item-description
+                      = t(:doorkeeper, scope: 'layouts.manage.navigation.descriptors')
+                %li.nav-item
                   = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.sidekiq')
@@ -126,13 +132,6 @@
                     %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description
                       = t(:blazer, scope: 'layouts.manage.navigation.descriptors')
-                %li.nav-item
-                  = active_link_to oauth_applications_path, target: '_blank', class: "nav-link" do
-                    .fa.fa-unlock.fa-fw.icon-space-r-half
-                    = t(:title, scope: 'pages.manage.doorkeeper')
-                    %span.fa.fa-external-link.icon-space-l-half
-                    .nav-item-description
-                      = t(:doorkeeper, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
                   = active_link_to manage_data_exports_path, class: "nav-link" do
                     .fa.fa-download.fa-fw.icon-space-r-half

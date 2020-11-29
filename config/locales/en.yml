@@ -196,7 +196,7 @@ en:
       blazer:
         title: Blazer
       doorkeeper:
-        title: Doorkeeper
+        title: App Authentication
       data-exports:
         title: Data Exports
   layouts:
