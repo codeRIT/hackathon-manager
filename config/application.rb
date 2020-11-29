@@ -28,9 +28,6 @@ module HackathonManager
       # Only Applications list
       Doorkeeper::ApplicationsController.layout "manage/application"
 
-      # Only Authorization endpoint
-      # Doorkeeper::AuthorizationsController.layout "application"
-
       # Only Authorized Applications
       Doorkeeper::AuthorizedApplicationsController.layout "application"
     end
