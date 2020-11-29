@@ -23,7 +23,7 @@ class User < ApplicationRecord
   after_create :queue_reminder_email
   after_initialize :set_default_role, if: :new_record?
 
-  enum role: { user: 0, event_tracking: 1, admin_limited_access: 2, admin: 3 }
+  enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
 
   def set_default_role
     self.role ||= :user
@@ -56,6 +56,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def staff?
+    director? || organizer? || volunteer?
+  end
+
+  def organizing_staff?
+    director? || organizer?
+  end
+
   def self.from_omniauth(auth)
     matching_provider = where(provider: auth.provider, uid: auth.uid)
     matching_email = where(email: auth.info.email)
@@ -75,11 +83,17 @@ class User < ApplicationRecord
     current_user
   end
 
-  def self.non_admins
-    User.where.not(role: :admin).where.not(role: :admin_limited_access)
+  def self.non_organizer
+    User.where.not(role: :director).where.not(role: :organizer)
   end
 
   def self.without_questionnaire
-    non_admins.left_outer_joins(:questionnaire).where(questionnaires: { id: nil })
+    non_organizer.left_outer_joins(:questionnaire).where(questionnaires: { id: nil })
+  end
+
+  def as_json(options = {})
+    result = super
+    result['questionnaire_id'] = Questionnaire.where(user_id: id).any? ? Questionnaire.where(user_id: id).first.id : nil
+    result
   end
 end

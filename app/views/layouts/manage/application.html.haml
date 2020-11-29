@@ -12,36 +12,54 @@
     = csrf_meta_tags
 
   %body
-    %nav.navbar.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
-      %a.navbar-brand.col-xs-6.col-sm-3.col-md-2.mr-0{href: manage_root_path} #{HackathonConfig['name']} Manager
+    %nav.navbar.navbar-expand.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
+
+      %span.navbar-mobile-toggle.m-0{onclick: 'toggleMobileNav()'}
+        .fa.fa-bars.m-3.mx-4.text-white.h-auto
+
+      / TODO: move acc/signin inside the sidebar
+      %a.navbar-brand.px-3.mr-0{href: manage_root_path} #{HackathonConfig['name']} Manager
+
       / %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
-      %span.navbar-brand.navbar-mobile-toggle.mr-0.pl-3.pr-3{onclick: 'toggleMobileNav()'}
-        .fa.fa-bars.fa-fw.icon-space-r-half
-      %ul.navbar-nav.px-3
+      %ul.navbar-nav.ml-auto.px-3
+        %li.nav-item.text-nowrap
+          = link_to "Account", root_path, class: "nav-link"
         %li.nav-item.text-nowrap
           = link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link"
 
     .container-fluid
       .row
-        %nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+        %nav.col-md-3.d-none.d-md-block.bg-light.sidebar
           .sidebar-sticky
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
               %span
                 = t(:overview, scope: 'layouts.manage.navigation')
-            %ul.nav.flex-column.mb-2
-              %li.nav-item
-                = active_link_to manage_root_path, class: "nav-link", active_children: false do
-                  .fa.fa-area-chart.fa-fw.icon-space-r-half
-                  = t(:title, scope: 'pages.manage.dashboard')
-              %li.nav-item
-                = active_link_to manage_questionnaires_path, class: "nav-link" do
-                  .fa.fa-inbox.fa-fw.icon-space-r-half
-                  = t(:title, scope: 'pages.manage.questionnaires')
-              %li.nav-item
-                = active_link_to manage_messages_path, class: "nav-link" do
-                  .fa.fa-bullhorn.fa-fw.icon-space-r-half
-                  = t(:title, scope: 'pages.manage.messages')
+            - if current_user.organizing_staff?
+              %ul.nav.flex-column.mb-2
+                %li.nav-item
+                  = active_link_to manage_root_path, class: "nav-link", active_children: false do
+                    .fa.fa-area-chart.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.dashboard')
+                %li.nav-item
+                  = active_link_to manage_questionnaires_path, class: "nav-link" do
+                    .fa.fa-inbox.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.questionnaires')
+                %li.nav-item
+                  = active_link_to manage_messages_path, class: "nav-link" do
+                    .fa.fa-bullhorn.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.messages')
+            - elsif current_user.volunteer?
+              %ul.nav.flex-column.mb-2
+                %li.nav-item
+                  = active_link_to manage_checkins_path, class: "nav-link" do
+                    .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.check-in')
+                %li.nav-item
+                  = active_link_to manage_questionnaires_path, class: "nav-link" do
+                    .fa.fa-inbox.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.questionnaires')
 
+            - if current_user.organizing_staff?
               %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
                 %span
                   = t(:logistics, scope: 'layouts.manage.navigation')
@@ -59,20 +77,20 @@
                     .fa.fa-tag.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.trackable-tags')
 
-              %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
-                %span
-                  = t(:travel, scope: 'layouts.manage.navigation')
-              %ul.nav.flex-column.mb-2
-                %li.nav-item
-                  = active_link_to manage_bus_lists_path, class: "nav-link" do
-                    .fa.fa-bus.fa-fw.icon-space-r-half
-                    = t(:title, scope: 'pages.manage.bus-lists')
-                %li.nav-item
-                  = active_link_to manage_schools_path, class: "nav-link" do
-                    .fa.fa-home.fa-fw.icon-space-r-half
-                    = t(:title, scope: 'pages.manage.schools')
+            %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+              %span
+                = t(:travel, scope: 'layouts.manage.navigation')
+            %ul.nav.flex-column.mb-2
+              %li.nav-item
+                = active_link_to manage_bus_lists_path, class: "nav-link" do
+                  .fa.fa-bus.fa-fw.icon-space-r-half
+                  = t(:title, scope: 'pages.manage.bus-lists')
+              %li.nav-item
+                = active_link_to manage_schools_path, class: "nav-link" do
+                  .fa.fa-home.fa-fw.icon-space-r-half
+                  = t(:title, scope: 'pages.manage.schools')
 
-            - if current_user.admin?
+            - if current_user.director?
               %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
                 %span
                   = t(:administration, scope: 'layouts.manage.navigation')
@@ -121,7 +139,7 @@
                     = t(:title, scope: 'pages.manage.data-exports')
                     .nav-item-description
                       = t(:dataexports, scope: 'layouts.manage.navigation.descriptors')
-        %main.col-md-10.ml-sm-auto.px-4{role: "main"}
+        %main.col-md-9.ml-sm-auto.px-4{role: "main"}
           = render "layouts/manage/flashes"
           = yield
           %div.mb-4.text-center

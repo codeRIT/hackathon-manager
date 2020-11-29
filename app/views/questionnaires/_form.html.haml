@@ -10,7 +10,7 @@
           = markdown(HackathonConfig['disclaimer_message'])
 
       .form-inputs
-        = f.input :phone, label: "Phone number", input_html: { "data-validate" => "presence" }
+        = f.input :phone, label: "Phone number", input_html: { "data-validate" => ["presence", "phone"] }
         = f.input :date_of_birth, start_year: Date.today.year - 5, end_year: Date.today.year - 90, order: [:month, :day, :year], input_html: { "data-validate" => "presence" }
 
         = f.input :school_id, as: :school_selection, input_html: { "data-validate" => "presence" }

@@ -1,19 +1,19 @@
 class Manage::UsersController < Manage::ApplicationController
-  before_action :require_full_admin
+  before_action :require_director
   before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json
 
   def index
-    respond_with(:manage, User.where(role: [:admin, :admin_limited_access, :event_tracking]))
+    respond_with(:manage, User.where(role: [:director, :organizer, :volunteer]))
   end
 
   def user_datatable
     render json: UserDatatable.new(params, view_context: view_context)
   end
 
-  def admin_datatable
-    render json: AdminDatatable.new(params, view_context: view_context)
+  def staff_datatable
+    render json: StaffDatatable.new(params, view_context: view_context)
   end
 
   def show

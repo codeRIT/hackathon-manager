@@ -1,7 +1,7 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :convert_to_admin, :update_acc_status]
+  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :update_acc_status]
 
   respond_to :html, :json
 
@@ -99,14 +99,14 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     redirect_to index_redirect_path
   end
 
-  def convert_to_admin
-    user = @questionnaire.user
-    @questionnaire.destroy
-    user.update_attributes(role: :admin)
-    redirect_to edit_manage_user_path(user)
-  end
-
   def destroy
+    if @questionnaire.is_bus_captain
+      directors = User.where(role: :director)
+      directors.each do |user|
+        StaffMailer.bus_captain_left(@questionnaire.bus_list_id, @questionnaire.user_id, user.id).deliver_later
+      end
+    end
+
     @questionnaire.destroy
     respond_with(:manage, @questionnaire)
   end

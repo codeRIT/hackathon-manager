@@ -19,10 +19,13 @@ Rails.application.routes.draw do
     end
   end
 
-  authenticate :user, ->(u) { u.admin? } do
+  authenticate :user, ->(u) { u.director? } do
     mount Sidekiq::Web => "/sidekiq"
     mount Blazer::Engine, at: "blazer"
   end
+
+  # devise doesnt parse GET /user
+  resource :user, only: :show, constraints: ->(req) { req.format == :json }
 
   resource :questionnaires, path: "apply" do
     get :schools, on: :collection
@@ -38,7 +41,15 @@ Rails.application.routes.draw do
   end
 
   namespace :manage do
-    root to: "dashboard#index"
+    authenticate :user, ->(u) { u.director? } do
+      root to: "dashboard#index"
+    end
+    authenticate :user, ->(u) { u.organizer? } do
+      root to: "dashboard#index"
+    end
+    authenticate :user, ->(u) { u.volunteer? } do
+      root to: "checkins#index"
+    end
     resources :dashboard do
       get :map_data, on: :collection
       get :todays_activity_data, on: :collection
@@ -55,7 +66,6 @@ Rails.application.routes.draw do
     resources :questionnaires do
       post :datatable, on: :collection
       patch :check_in, on: :member
-      patch :convert_to_admin, on: :member
       patch :update_acc_status, on: :member
       patch :bulk_apply, on: :collection
     end
@@ -66,7 +76,7 @@ Rails.application.routes.draw do
     end
     resources :users do
       post :user_datatable, on: :collection
-      post :admin_datatable, on: :collection
+      post :staff_datatable, on: :collection
       patch :reset_password, on: :member
     end
     resources :messages do

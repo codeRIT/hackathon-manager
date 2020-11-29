@@ -27,11 +27,11 @@ class BulkMessageJob < ApplicationJob
   def self.user_ids(type)
     case type
     when "all"
-      # Everyone, including admins that completed a questionnaire
-      User.non_admins.pluck(:id) + Questionnaire.pluck(:user_id)
+      # Everyone, including organizers that completed a questionnaire
+      User.non_organizer.pluck(:id) + Questionnaire.pluck(:user_id)
     when "incomplete"
-      # Incomplete applications, excluding admins that don't have a questionnaire
-      User.non_admins.pluck(:id) - Questionnaire.pluck(:user_id)
+      # Incomplete applications, excluding organizers that don't have a questionnaire
+      User.non_organizer.pluck(:id) - Questionnaire.pluck(:user_id)
     when "complete"
       Questionnaire.pluck(:user_id)
     when "accepted"

@@ -1,3 +1,82 @@
+# [2.1.0](https://github.com/codeRIT/hackathon-manager/compare/v2.0.1...v2.1.0) (2020-11-09)
+
+
+### Features
+
+* Adds "questionnaire_id" to User.as_json ([#394](https://github.com/codeRIT/hackathon-manager/issues/394)) ([](https://github.com/codeRIT/hackathon-manager/commit/774de1e))
+* **Messages:** Adds checked in message trigger ([#386](https://github.com/codeRIT/hackathon-manager/issues/386)) ([](https://github.com/codeRIT/hackathon-manager/commit/bf225b8))
+
+## [2.0.1](https://github.com/codeRIT/hackathon-manager/compare/v2.0.0...v2.0.1) (2020-10-29)
+
+
+### Bug Fixes
+
+* Updates several packages for security ([](https://github.com/codeRIT/hackathon-manager/commit/b916de0))
+
+# [1.23.0](https://github.com/codeRIT/hackathon-manager/compare/v1.22.4...v1.23.0) (2020-09-21)
+
+
+### Bug Fixes
+
+* CodeClimate 2.0 fixes ([#374](https://github.com/codeRIT/hackathon-manager/issues/374)) ([](https://github.com/codeRIT/hackathon-manager/commit/746bbfc))
+* Fixes failing test cases from [#242](https://github.com/codeRIT/hackathon-manager/issues/242) ([#364](https://github.com/codeRIT/hackathon-manager/issues/364)) ([](https://github.com/codeRIT/hackathon-manager/commit/113cd61))
+* Fixes various Hound issues for 2.0 ([#370](https://github.com/codeRIT/hackathon-manager/issues/370)) ([](https://github.com/codeRIT/hackathon-manager/commit/434cfb3))
+* Resolves merge conflicts with 2.0->master ([#372](https://github.com/codeRIT/hackathon-manager/issues/372)) ([](https://github.com/codeRIT/hackathon-manager/commit/eae9926)), closes [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#207](https://github.com/codeRIT/hackathon-manager/issues/207) [#208](https://github.com/codeRIT/hackathon-manager/issues/208) [#212](https://github.com/codeRIT/hackathon-manager/issues/212) [#219](https://github.com/codeRIT/hackathon-manager/issues/219) [#221](https://github.com/codeRIT/hackathon-manager/issues/221) [#236](https://github.com/codeRIT/hackathon-manager/issues/236) [#236](https://github.com/codeRIT/hackathon-manager/issues/236) [#250](https://github.com/codeRIT/hackathon-manager/issues/250) [#268](https://github.com/codeRIT/hackathon-manager/issues/268) [#280](https://github.com/codeRIT/hackathon-manager/issues/280) [#282](https://github.com/codeRIT/hackathon-manager/issues/282) [#298](https://github.com/codeRIT/hackathon-manager/issues/298)
+* **config:** Removes disable_account_registration from database ([#247](https://github.com/codeRIT/hackathon-manager/issues/247)) ([](https://github.com/codeRIT/hackathon-manager/commit/82a7ff4))
+* **dashboard:** Map data refactored for faster load times ([#269](https://github.com/codeRIT/hackathon-manager/issues/269)) ([](https://github.com/codeRIT/hackathon-manager/commit/03e632c))
+* **dashboard:** Switches map to use different geocoder, reenables map ([#224](https://github.com/codeRIT/hackathon-manager/issues/224)) ([](https://github.com/codeRIT/hackathon-manager/commit/30e3a2f))
+* **Dashboard:** Fixes missing location data in map ([#324](https://github.com/codeRIT/hackathon-manager/issues/324)) ([](https://github.com/codeRIT/hackathon-manager/commit/388c9bd))
+* **deps:** Updates the locked Ruby version ([#340](https://github.com/codeRIT/hackathon-manager/issues/340)) ([](https://github.com/codeRIT/hackathon-manager/commit/e0e537c))
+* **docs:** Refactors page titles and makes API pages visible again ([#320](https://github.com/codeRIT/hackathon-manager/issues/320)) ([](https://github.com/codeRIT/hackathon-manager/commit/8617981))
+* **questionnaire:** added phone number requirements ([#283](https://github.com/codeRIT/hackathon-manager/issues/283)) ([](https://github.com/codeRIT/hackathon-manager/commit/09167ae))
+* Hackathon names now consistently on newline, wrapping is centered ([#358](https://github.com/codeRIT/hackathon-manager/issues/358)) ([](https://github.com/codeRIT/hackathon-manager/commit/2e9379f))
+* School text-box dropdown in manage/questionnaires/edit missing background  ([#296](https://github.com/codeRIT/hackathon-manager/issues/296)) ([](https://github.com/codeRIT/hackathon-manager/commit/c9d6658))
+* Text centering on application page  ([#361](https://github.com/codeRIT/hackathon-manager/issues/361)) ([](https://github.com/codeRIT/hackathon-manager/commit/0237965))
+* **bus_captain:** Alerts admins if a bus captain is removed ([#270](https://github.com/codeRIT/hackathon-manager/issues/270)) ([](https://github.com/codeRIT/hackathon-manager/commit/28913f7))
+* Shows manage button for admin_limited_access ([#331](https://github.com/codeRIT/hackathon-manager/issues/331)) ([](https://github.com/codeRIT/hackathon-manager/commit/cb16869))
+* **login:** Removes always visible login error ([#263](https://github.com/codeRIT/hackathon-manager/issues/263)) ([](https://github.com/codeRIT/hackathon-manager/commit/513e1c2))
+* **questionnaire:** Fixes error when trying to view a questionnaire modified by a deleted admin ([#238](https://github.com/codeRIT/hackathon-manager/issues/238)) ([](https://github.com/codeRIT/hackathon-manager/commit/f07ec28)), closes [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#207](https://github.com/codeRIT/hackathon-manager/issues/207) [#208](https://github.com/codeRIT/hackathon-manager/issues/208) [#212](https://github.com/codeRIT/hackathon-manager/issues/212) [#219](https://github.com/codeRIT/hackathon-manager/issues/219) [#221](https://github.com/codeRIT/hackathon-manager/issues/221)
+* **questionnaire:** School autocomplete matches form field width ([#278](https://github.com/codeRIT/hackathon-manager/issues/278)) ([](https://github.com/codeRIT/hackathon-manager/commit/e4169a7))
+
+
+### Code Refactoring
+
+* `first_name` and `last_name` move from `questionnaire` to `user` ([#241](https://github.com/codeRIT/hackathon-manager/issues/241)) ([](https://github.com/codeRIT/hackathon-manager/commit/6266f5a)), closes [#244](https://github.com/codeRIT/hackathon-manager/issues/244) [#downwith2](https://github.com/codeRIT/hackathon-manager/issues/downwith2) [#222](https://github.com/codeRIT/hackathon-manager/issues/222) [#273](https://github.com/codeRIT/hackathon-manager/issues/273) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#207](https://github.com/codeRIT/hackathon-manager/issues/207) [#208](https://github.com/codeRIT/hackathon-manager/issues/208) [#212](https://github.com/codeRIT/hackathon-manager/issues/212) [#219](https://github.com/codeRIT/hackathon-manager/issues/219) [#221](https://github.com/codeRIT/hackathon-manager/issues/221) [#236](https://github.com/codeRIT/hackathon-manager/issues/236) [#236](https://github.com/codeRIT/hackathon-manager/issues/236) [#250](https://github.com/codeRIT/hackathon-manager/issues/250) [#268](https://github.com/codeRIT/hackathon-manager/issues/268) [#263](https://github.com/codeRIT/hackathon-manager/issues/263) [#275](https://github.com/codeRIT/hackathon-manager/issues/275) [#235](https://github.com/codeRIT/hackathon-manager/issues/235) [#247](https://github.com/codeRIT/hackathon-manager/issues/247) [#238](https://github.com/codeRIT/hackathon-manager/issues/238) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#207](https://github.com/codeRIT/hackathon-manager/issues/207) [#208](https://github.com/codeRIT/hackathon-manager/issues/208) [#212](https://github.com/codeRIT/hackathon-manager/issues/212) [#219](https://github.com/codeRIT/hackathon-manager/issues/219) [#221](https://github.com/codeRIT/hackathon-manager/issues/221) [#329](https://github.com/codeRIT/hackathon-manager/issues/329) [#326](https://github.com/codeRIT/hackathon-manager/issues/326) [#324](https://github.com/codeRIT/hackathon-manager/issues/324) [#291](https://github.com/codeRIT/hackathon-manager/issues/291) [#272](https://github.com/codeRIT/hackathon-manager/issues/272) [#278](https://github.com/codeRIT/hackathon-manager/issues/278)
+* Adds GSDP info, cleans Dokku docs ([#356](https://github.com/codeRIT/hackathon-manager/issues/356)) ([](https://github.com/codeRIT/hackathon-manager/commit/54d2cea))
+* Changes "Applications" to "Questionnaires" in map ([#326](https://github.com/codeRIT/hackathon-manager/issues/326)) ([](https://github.com/codeRIT/hackathon-manager/commit/675b3f6))
+* Cleans Questionnaire for MyMLH V3 ([#338](https://github.com/codeRIT/hackathon-manager/issues/338)) ([](https://github.com/codeRIT/hackathon-manager/commit/31b418d))
+* Cleans update method in rsvps_controller ([#305](https://github.com/codeRIT/hackathon-manager/issues/305)) ([](https://github.com/codeRIT/hackathon-manager/commit/fe66870))
+* Redesigns password reset pages ([#308](https://github.com/codeRIT/hackathon-manager/issues/308)) ([](https://github.com/codeRIT/hackathon-manager/commit/69e8d6e))
+* Renames "Guides" to "Docs" ([#353](https://github.com/codeRIT/hackathon-manager/issues/353)) ([](https://github.com/codeRIT/hackathon-manager/commit/12cc746))
+* Renames user roles, improves security ([](https://github.com/codeRIT/hackathon-manager/commit/58b5849))
+* **config:** Adjusts registration verbiage to always allow user registration ([#232](https://github.com/codeRIT/hackathon-manager/issues/232)) ([](https://github.com/codeRIT/hackathon-manager/commit/1a31861))
+* **docs:** Updates Environment Variable docs ([#300](https://github.com/codeRIT/hackathon-manager/issues/300)) ([](https://github.com/codeRIT/hackathon-manager/commit/1599fe1))
+* Updates 24hr reminder to remove MyMLH reference ([#302](https://github.com/codeRIT/hackathon-manager/issues/302)) ([](https://github.com/codeRIT/hackathon-manager/commit/9e6fe39))
+* **docs:** Updates Messages and customization instructions ([#321](https://github.com/codeRIT/hackathon-manager/issues/321)) ([](https://github.com/codeRIT/hackathon-manager/commit/a767446))
+* **questionnaire:** No longer deletes user with questionnaire ([#287](https://github.com/codeRIT/hackathon-manager/issues/287)) ([](https://github.com/codeRIT/hackathon-manager/commit/ac720d9))
+* **skylight:** Removes Skylight ([#249](https://github.com/codeRIT/hackathon-manager/issues/249)) ([](https://github.com/codeRIT/hackathon-manager/commit/2808058))
+
+
+### Documentation
+
+* Add guide for local API setup, update api-usage slightly ([#235](https://github.com/codeRIT/hackathon-manager/issues/235)) ([](https://github.com/codeRIT/hackathon-manager/commit/d1a01f8))
+* Migration guide for 2.0 ([#368](https://github.com/codeRIT/hackathon-manager/issues/368)) ([](https://github.com/codeRIT/hackathon-manager/commit/3745d9c)), closes [#283](https://github.com/codeRIT/hackathon-manager/issues/283) [#296](https://github.com/codeRIT/hackathon-manager/issues/296) [#242](https://github.com/codeRIT/hackathon-manager/issues/242) [#364](https://github.com/codeRIT/hackathon-manager/issues/364) [#361](https://github.com/codeRIT/hackathon-manager/issues/361) [#270](https://github.com/codeRIT/hackathon-manager/issues/270) [#175](https://github.com/codeRIT/hackathon-manager/issues/175) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#207](https://github.com/codeRIT/hackathon-manager/issues/207) [#208](https://github.com/codeRIT/hackathon-manager/issues/208) [#212](https://github.com/codeRIT/hackathon-manager/issues/212) [#358](https://github.com/codeRIT/hackathon-manager/issues/358)
+
+
+### Features
+
+* Automatically remind people to RSVP ([#175](https://github.com/codeRIT/hackathon-manager/issues/175)) ([](https://github.com/codeRIT/hackathon-manager/commit/d87269d)), closes [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#215](https://github.com/codeRIT/hackathon-manager/issues/215) [#207](https://github.com/codeRIT/hackathon-manager/issues/207) [#208](https://github.com/codeRIT/hackathon-manager/issues/208) [#212](https://github.com/codeRIT/hackathon-manager/issues/212)
+* Creates /user.json get route ([#367](https://github.com/codeRIT/hackathon-manager/issues/367)) ([](https://github.com/codeRIT/hackathon-manager/commit/a9e14f5))
+* Updates HackathonManager to 2.0 ([](https://github.com/codeRIT/hackathon-manager/commit/0070cd4))
+* **Dashboard:** Redesigns sidebar with category labels ([#290](https://github.com/codeRIT/hackathon-manager/issues/290)) ([](https://github.com/codeRIT/hackathon-manager/commit/abcf634))
+* **docs:** Adds new Resources page ([#318](https://github.com/codeRIT/hackathon-manager/issues/318)) ([](https://github.com/codeRIT/hackathon-manager/commit/9c61d1f))
+* **docs:** Initial documentation for 2.0 ([#291](https://github.com/codeRIT/hackathon-manager/issues/291)) ([](https://github.com/codeRIT/hackathon-manager/commit/a062140))
+* **messages:** Adds a confirmation modal to send messages ([#272](https://github.com/codeRIT/hackathon-manager/issues/272)) ([](https://github.com/codeRIT/hackathon-manager/commit/79831f6))
+* **messages:** Transitions from SparkPost to SendGrid ([#285](https://github.com/codeRIT/hackathon-manager/issues/285)) ([](https://github.com/codeRIT/hackathon-manager/commit/5e96a9c))
+* **questionnaires:** Allows directors to block new questionnaires ([#279](https://github.com/codeRIT/hackathon-manager/issues/279)) ([](https://github.com/codeRIT/hackathon-manager/commit/5e03082))
+* Updates MyMLH to V3 ([#329](https://github.com/codeRIT/hackathon-manager/issues/329)) ([](https://github.com/codeRIT/hackathon-manager/commit/ede300f))
+* **users:** Adds ability to view all users and admins ([#216](https://github.com/codeRIT/hackathon-manager/issues/216)) ([](https://github.com/codeRIT/hackathon-manager/commit/c119c9a))
+
 ## [1.22.4](https://github.com/codeRIT/hackathon-manager/compare/v1.22.3...v1.22.4) (2020-05-26)
 
 ### Bug Fixes

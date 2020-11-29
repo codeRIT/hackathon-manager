@@ -194,16 +194,16 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
 
     should "return nil if author deleted" do
-      user = create(:user, email: "admin@example.com")
+      user = create(:user, email: "director@example.com")
       questionnaire = create(:questionnaire, acc_status_author_id: user.id)
       user.destroy
       assert_nil questionnaire.acc_status_author
     end
 
     should "return the questionnaire's user" do
-      user = create(:user, email: "admin@example.com")
+      user = create(:user, email: "director@example.com")
       questionnaire = create(:questionnaire, acc_status_author_id: user.id)
-      assert_equal "admin@example.com", questionnaire.acc_status_author.email
+      assert_equal "director@example.com", questionnaire.acc_status_author.email
     end
   end
 
@@ -486,6 +486,21 @@ class QuestionnaireTest < ActiveSupport::TestCase
       create(:message, trigger: "questionnaire.pending")
       assert_difference "enqueued_jobs.size", 2 do
         create(:questionnaire, acc_status: "pending")
+      end
+    end
+
+    should "send triggered email on checked in" do
+      create(:message, trigger: "questionnaire.checked-in")
+      assert_difference "enqueued_jobs.size", 1 do
+        create(:questionnaire, checked_in_at: Time.now)
+      end
+    end
+
+    should "not send triggered email on checked out" do
+      create(:message, trigger: "questionnaire.checked-in")
+      questionnaire = create(:questionnaire, checked_in_at: Time.now)
+      assert_difference "enqueued_jobs.size", 0 do
+        questionnaire.update_attribute(:checked_in_at, nil)
       end
     end
   end

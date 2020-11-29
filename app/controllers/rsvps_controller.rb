@@ -43,6 +43,10 @@ class RsvpsController < ApplicationController
   # rubocop:disable CyclomaticComplexity
   # rubocop:disable PerceivedComplexity
   def update
+    # save to check if bus status changes after rsvp
+    bus = @questionnaire.bus_list_id
+    acc_status = @questionnaire.acc_status
+
     unless @questionnaire.update_attributes(params.require(:questionnaire).permit(:agreement_accepted, :phone))
       flash[:alert] = @questionnaire.errors.full_messages.join(", ")
       redirect_to rsvp_path
@@ -55,22 +59,18 @@ class RsvpsController < ApplicationController
       return
     end
 
-    @questionnaire.acc_status_date = Time.now if @questionnaire.acc_status != params[:questionnaire][:acc_status]
-    @questionnaire.acc_status = params[:questionnaire][:acc_status]
-    @questionnaire.acc_status_author_id = current_user.id
+    update_acc_status
+    update_bus_list
 
-    new_bus_list_id = params[:questionnaire][:bus_list_id].presence
-    new_bus_list = new_bus_list_id && BusList.find(new_bus_list_id)
-    is_joining_bus = new_bus_list.present? && @questionnaire.bus_list != new_bus_list
-    if is_joining_bus && new_bus_list.full?
-      if @questionnaire.bus_list_id?
-        flash[:alert] = "Sorry, that bus is full. You are still signed up for the '#{@questionnaire.bus_list.name}' bus."
-      else
-        flash[:alert] = "Sorry, that bus is full. You may need to arrange other plans for transportation."
+    bus_after_rsvp = @questionnaire.bus_list_id
+    acc_status_after_rsvp = @questionnaire.acc_status
+
+    if !bus.nil? && (acc_status != acc_status_after_rsvp || bus != bus_after_rsvp) && @questionnaire.is_bus_captain == true
+      @questionnaire.is_bus_captain = false
+      directors = User.where(role: :director)
+      directors.each do |user|
+        StaffMailer.bus_captain_left(@questionnaire.bus_list_id, @questionnaire.user_id, user.id).deliver_later
       end
-    else
-      @questionnaire.bus_list = new_bus_list
-      @questionnaire.bus_captain_interest = params[:questionnaire][:bus_captain_interest]
     end
 
     unless @questionnaire.save
@@ -90,6 +90,28 @@ class RsvpsController < ApplicationController
   # rubocop:enable PerceivedComplexity
 
   private
+
+  def update_acc_status
+    @questionnaire.acc_status_date = Time.now if @questionnaire.acc_status != params[:questionnaire][:acc_status]
+    @questionnaire.acc_status = params[:questionnaire][:acc_status]
+    @questionnaire.acc_status_author_id = current_user.id
+  end
+
+  def update_bus_list
+    new_bus_list_id = params[:questionnaire][:bus_list_id].presence
+    new_bus_list = new_bus_list_id && BusList.find(new_bus_list_id)
+    is_joining_bus = new_bus_list.present? && @questionnaire.bus_list != new_bus_list
+    if is_joining_bus && new_bus_list.full?
+      if @questionnaire.bus_list_id?
+        flash[:alert] = "Sorry, that bus is full. You are still signed up for the '#{@questionnaire.bus_list.name}' bus."
+      else
+        flash[:alert] = "Sorry, that bus is full. You may need to arrange other plans for transportation."
+      end
+    else
+      @questionnaire.bus_list = new_bus_list
+      @questionnaire.bus_captain_interest = params[:questionnaire][:bus_captain_interest]
+    end
+  end
 
   def rsvp_error_notice
     hackathon_name = HackathonConfig['name']
