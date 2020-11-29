@@ -6,6 +6,7 @@
     %thead
       %tr
         %th
+        %th
           = t(:name, scope: 'doorkeeper.applications.index')
         %th
           = t(:callback_url, scope: 'doorkeeper.applications.index')
@@ -17,8 +18,10 @@
       - @applications.each do |application|
         %tr
           %td
+            = link_to('<i class="fa fa-search"></i>'.html_safe, oauth_application_path(application))
+          %td
             %strong
-            = link_to(application.name, oauth_application_path(application))
+              = application.name
           %td
             = simple_format(application.redirect_uri)
           %td
