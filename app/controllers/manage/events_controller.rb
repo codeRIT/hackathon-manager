@@ -46,7 +46,7 @@ class Manage::EventsController < Manage::ApplicationController
 
   def event_params
     params.require(:event).permit(
-      :title, :description, :location, :public, :start, :end, owner: []
+      :title, :description, :location, :public, :start, :finish, owner: []
     )
   end
 end

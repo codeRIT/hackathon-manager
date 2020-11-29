@@ -3,13 +3,13 @@
 one:
   title: MyString
   description: MyString
-  owner: MyString
+  location: MyString
   start: 2020-05-29 10:21:41
-  end: 2020-05-29 10:21:41
+  finish: 2020-05-29 10:21:41
 
 two:
   title: MyString
   description: MyString
-  owner: MyString
+  location: MyString
   start: 2020-05-29 10:21:41
-  end: 2020-05-29 10:21:41
+  finish: 2020-05-29 10:21:41

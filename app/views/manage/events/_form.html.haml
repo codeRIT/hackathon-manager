@@ -4,6 +4,6 @@
     = f.input :description
     = f.input :location
     = f.input :start, input_html: {type: "datetime-local"}, html5: true
-    = f.input :end, input_html: {type: "datetime-local"}, html5: true
+    = f.input :finish, input_html: {type: "datetime-local"}, html5: true
   .center
     = f.button :submit, value: ( @event.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
