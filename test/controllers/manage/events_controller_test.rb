@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Manage::EventsControllerTest < ActionController::TestCase
-
   setup do
     @event = create(:event)
   end
