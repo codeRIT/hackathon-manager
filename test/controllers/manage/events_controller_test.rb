@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class Manage::EventsControllerTest < ActionController::TestCase
 
@@ -102,34 +102,34 @@ class Manage::EventsControllerTest < ActionController::TestCase
       assert_redirected_to manage_checkins_path
     end
 
-    should "not allow access to manage_events#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_checkins_path
-    end
-
     should "not allow access to manage_events#show" do
       get :show, params: {id: @event}
       assert_response :redirect
       assert_redirected_to manage_checkins_path
     end
 
+    should "not allow access to manage_events#new" do
+      get :new
+      assert_response :redirect
+      assert_redirected_to manage_events_path
+    end
+
     should "not allow access to manage_events#create" do
       post :create, params: {event: {title: "should not exist title"}}
       assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_events_path
     end
 
     should "not allow access to manage_events#update" do
       patch :update, params: {id: @event, title: "not allowed altered title"}
       assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_events_path
     end
 
     should "not allow access to manage_events#destroy" do
       patch :destroy, params: {id: @event}
       assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_events_path
     end
 
   end
@@ -144,37 +144,37 @@ class Manage::EventsControllerTest < ActionController::TestCase
     should "not allow access to manage_events#index" do
       get :index
       assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_events#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_dashboard_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_events#show" do
       get :show, params: {id: @event}
       assert_response :redirect
-      assert_redirected_to manage_dashboard_path
+      assert_redirected_to manage_root_path
+    end
+
+    should "not allow access to manage_events#new" do
+      get :new
+      assert_response :redirect
+      assert_redirected_to manage_events_path
     end
 
     should "not allow access to manage_events#create" do
       post :create, params: {event: {title: "should not exist title"}}
       assert_response :redirect
-      assert_redirected_to manage_dashboard_path
+      assert_redirected_to manage_events_path
     end
 
     should "not allow access to manage_events#update" do
       patch :update, params: {id: @event, title: "not allowed altered title"}
       assert_response :redirect
-      assert_redirected_to manage_dashboard_path
+      assert_redirected_to manage_events_path
     end
 
     should "not allow access to manage_events#destroy" do
       patch :destroy, params: {id: @event}
       assert_response :redirect
-      assert_redirected_to manage_dashboard_path
+      assert_redirected_to manage_events_path
     end
 
   end
