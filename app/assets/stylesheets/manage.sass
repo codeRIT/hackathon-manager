@@ -31,47 +31,6 @@ $grey-med: #999
 .CodeMirror
   font-size: 12px
 
-// .manage
-//   padding-left: 20px
-//   padding-right: 20px
-//   padding-top: 50px
-
-//   .container-half, .container-full
-//     max-width: none
-//     @media (max-width: 600px)
-//       padding-left: 0
-//       padding-right: 0
-//   .container-half
-//     display: inline-block
-//     width: 49.6% // weird issue with percentaces
-//     vertical-align: top
-//     @media (max-width: 600px)
-//       width: 100%
-//   .container-full
-//     display: inline-block
-//     width: 100%
-//     vertical-align: top
-//     margin: 0
-
-// #manageNav
-//   z-index: 1
-//   width: 100%
-//   background: $black
-//   color: $white
-//   padding: 16px 20px 6px
-//   p, a
-//     margin: 0 5px 10px
-//   p
-//     color: $primary
-//     display: inline-block
-//     margin-top: 0
-//     &:first-child
-//       margin-right: 10px
-//   a
-//     color: $white
-//     display: inline-block
-//     &:hover
-//       color: darken($grey-light, 5%)
 .center
   text-align: center
 
@@ -96,6 +55,8 @@ $grey-med: #999
 
 #map
   text-align: center
+  overflow: scroll
+  width: 100%
 
 .dashboard-container-title
   border-bottom: 3px solid #e5e5e5
@@ -164,16 +125,17 @@ $grey-med: #999
     display: inherit
 
 .navbar-mobile-toggle--active
-  color: black !important
-  background: #eee
+  background: #eeeeee
+  .fa
+    color: black !important
 
 .sidebar-mobile
   display: block !important
   bottom: auto
 
-
 .sidebar-mobile .sidebar-sticky
-  height: auto
+  height: calc(100vh - 2.25rem)
+  overflow: scroll
 
 
 /*
