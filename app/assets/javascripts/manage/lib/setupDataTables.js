@@ -36,7 +36,7 @@ var setupDataTables = function () {
     ],
   });
 
-  $('.datatable.admins').DataTable({
+  $('.datatable.staff').DataTable({
     order: [2, 'asc'],
     columns: [
       { orderable: true, data: 'id', visible: false },

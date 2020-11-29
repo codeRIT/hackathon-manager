@@ -58,6 +58,8 @@ class QuestionnairesController < ApplicationController
     if current_user.reload.questionnaire.present?
       return redirect_to questionnaires_path, notice: 'Application already exists.'
     end
+    return unless HackathonConfig['accepting_questionnaires']
+
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
     @questionnaire.user_id = current_user.id
 
@@ -93,8 +95,14 @@ class QuestionnairesController < ApplicationController
   # DELETE /apply
   # DELETE /apply.json
   def destroy
-    @questionnaire.destroy
+    if @questionnaire.is_bus_captain
+      directors = User.where(role: :director)
+      directors.each do |user|
+        StaffMailer.bus_captain_left(@questionnaire.bus_list_id, @questionnaire.user_id, user.id).deliver_later
+      end
+    end
 
+    @questionnaire.destroy
     respond_to do |format|
       format.html { redirect_to questionnaires_url }
       format.json { head :no_content }

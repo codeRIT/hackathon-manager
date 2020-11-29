@@ -35,7 +35,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated without a completed questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user)
       sign_in @user
     end
@@ -72,6 +72,15 @@ class QuestionnairesControllerTest < ActionController::TestCase
         @questionnaire.delete
         assert_difference('Questionnaire.count', 0) do
           post :create, params: { questionnaire: { major: "a great major" } }
+        end
+      end
+    end
+
+    context "with block questionnaires set" do
+      should "not allow creation" do
+        HackathonConfig['accepting_questionnaires'] = false
+        assert_difference('Questionnaire.count', 0) do
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, agreement_accepted: "1", code_of_conduct_accepted: "1", data_sharing_accepted: "1", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity } }
         end
       end
     end
@@ -130,7 +139,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
   context "while authenticated with a completed questionnaire" do
     setup do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
     end
 
@@ -156,12 +165,22 @@ class QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to questionnaires_path
     end
 
-    should "destroy questionnaire" do
-      assert_difference('Questionnaire.count', -1) do
-        delete :destroy
+    context "destroy questionnaire" do
+      should "if bus captain, notify directors that bus captain has been removed" do
+        @director = create(:director)
+        @questionnaire.update_attribute(:is_bus_captain, true)
+        assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
+          delete :destroy
+        end
       end
 
-      assert_redirected_to questionnaires_path
+      should "user destroy questionnaire" do
+        assert_difference('Questionnaire.count', -1) do
+          delete :destroy
+        end
+
+        assert_redirected_to questionnaires_path
+      end
     end
 
     context "with invalid questionnaire params" do

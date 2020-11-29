@@ -37,6 +37,8 @@ class Message < ApplicationRecord
     "questionnaire.late_waitlist" => "Questionnaire Status: Waitlisted, Late",
     "questionnaire.rsvp_confirmed" => "Questionnaire Status: RSVP Confirmed",
     "questionnaire.rsvp_denied" => "Questionnaire Status: RSVP Denied",
+    "questionnaire.rsvp_reminder" => "Questionnaire: RSVP Reminder",
+    "questionnaire.checked-in" => "Questionnaire: Checked in",
     "user.24hr_incomplete_application" => "User: Incomplete application (24 hours later)",
     "bus_list.new_captain_confirmation" => "Bus List: New captain confirmation",
     "bus_list.notes_update" => "Bus List: Updated notes (manually triggered)"

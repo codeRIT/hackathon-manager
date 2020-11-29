@@ -1,9 +1,6 @@
 class Manage::TrackableEventsController < Manage::ApplicationController
-  skip_before_action :require_admin_or_limited_admin
-  before_action :require_admin_or_limited_admin_or_event_tracking
-
   before_action :set_trackable_event, only: [:show, :edit, :update, :destroy]
-  before_action :scope_limited_admin_access, only: [:edit, :update, :destroy]
+  before_action :scope_organizer_access, only: [:edit, :update, :destroy]
 
   respond_to :html, :json
 
@@ -81,13 +78,14 @@ class Manage::TrackableEventsController < Manage::ApplicationController
     params.require(:trackable_event).permit(:band_id, :trackable_tag_id)
   end
 
-  # Permit limited-access admins (overrides Manage::ApplicationController#limit_write_access_to_admins)
-  def limit_write_access_to_admins
+  # Permit limited-access directors (overrides Manage::ApplicationController#limit_write_access_to_directors)
+  def limit_write_access_to_directors
   end
 
-  # If the user isn't a full admin, scope changes only to those they created
-  def scope_limited_admin_access
-    return if current_user.admin? || @trackable_event.blank? || @trackable_event.user.blank?
+  # If the user isn't a director, scope changes only to those they created
+  def scope_organizer_access
+    return if current_user.director? || @trackable_event.blank? || @trackable_event.user.blank?
+
     redirect_to manage_trackable_events_path, notice: 'You may not view events you did not create.' if @trackable_event.user != current_user
   end
 end
