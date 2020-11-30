@@ -4,12 +4,12 @@
     - if f.error_notification.present?
       #disclaimer
         = f.error_notification
+    .col-8.mx-auto
+      .form-inputs
+        = f.input :email, input_html: { "data-validate" => "presence" }, required: true
+        = f.input :role, collection: User.roles.to_a.collect{|c| [c[0].titleize, c[0]]}, include_blank: false
+        = f.input :is_active, collection: [[t(:active, scope: "pages.manage.users.edit.form"), true], [t(:inactive, scope: "pages.manage.users.edit.form"), false]], as: :radio_buttons
+        = f.input :receive_weekly_report, collection: [[t(:yes, scope: "pages.manage.users.edit.form"), true], [t(:no, scope: "pages.manage.users.edit.form"), false]], as: :radio_buttons
 
-    .form-inputs
-      = f.input :email, input_html: { "data-validate" => "presence" }, required: true
-      = f.input :role, collection: User.roles.to_a.collect{|c| [c[0].titleize, c[0]]}, include_blank: false
-      = f.input :is_active, collection: [[t(:active, scope: "pages.manage.users.edit.form"), true], [t(:inactive, scope: "pages.manage.users.edit.form"), false]], as: :radio_buttons
-      = f.input :receive_weekly_report, collection: [[t(:yes, scope: "pages.manage.users.edit.form"), true], [t(:no, scope: "pages.manage.users.edit.form"), false]], as: :radio_buttons
-
-    .center
-      = f.button :submit, value: ( t(:save, scope: "pages.manage.users.edit.form") ), class: 'btn-primary'
+      .text-right
+        = f.button :submit, value: ( t(:save, scope: "pages.manage.users.edit.form") ), class: 'btn-primary'

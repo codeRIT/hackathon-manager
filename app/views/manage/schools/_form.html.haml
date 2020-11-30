@@ -4,13 +4,13 @@
     - if f.error_notification.present?
       #disclaimer
         = f.error_notification
+    .col-8.mx-auto
+      .form-inputs
+        = f.input :name
+        = f.input :is_home
+        = f.input :address
+        = f.input :city
+        = f.input :state
 
-    .form-inputs
-      = f.input :name
-      = f.input :is_home
-      = f.input :address
-      = f.input :city
-      = f.input :state
-
-    .center
-      = f.button :submit, value: ( @school.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
+      .text-right
+        = f.button :submit, value: ( @school.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
