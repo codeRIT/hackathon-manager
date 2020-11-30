@@ -1,9 +1,10 @@
 = bs_horizontal_simple_form_for @event, url: url_for(action: @event.new_record? ? "create" : "update", controller: "events") do |f|
-  .form-inputs
-    = f.input :title
-    = f.input :description
-    = f.input :location
-    = f.input :start, input_html: {type: "datetime-local" }, html5: true
-    = f.input :finish, input_html: {type: "datetime-local" }, html5: true
-  .center
-    = f.button :submit, value: ( @event.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
+  .col-8.mx-auto
+    .form-inputs
+      = f.input :title
+      = f.input :description
+      = f.input :location
+      = f.input :start, input_html: {type: "datetime-local" }, html5: true
+      = f.input :finish, input_html: {type: "datetime-local" }, html5: true
+    .text-right
+      = f.button :submit, value: ( @event.new_record? ? 'Create' : 'Save' ),   class: 'btn-primary'
