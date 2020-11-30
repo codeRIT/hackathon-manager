@@ -23,5 +23,13 @@ module HackathonManager
     config.time_zone = ENV["TIME_ZONE"].presence || "UTC"
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.to_prepare do
+      # Only Applications list
+      Doorkeeper::ApplicationsController.layout "manage/application"
+
+      # Only Authorized Applications
+      Doorkeeper::AuthorizedApplicationsController.layout "application"
+    end
   end
 end

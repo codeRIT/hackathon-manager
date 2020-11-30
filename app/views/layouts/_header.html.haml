@@ -6,9 +6,9 @@
         = link_to homepage_url do
           = image_tag HackathonConfig['logo_asset'], id: 'logo', alt: "#{HackathonConfig['name']} logo", title: HackathonConfig['name'], class: 'header-logo__image'
     - else
-      .header-nav
+      .header-nav.start
         = btn_link_to "Home", homepage_url
-    .header-nav
+    .header-nav.end
       - if user_signed_in?
         - if current_user.organizing_staff?
           = btn_link_to "Manage", manage_root_path
