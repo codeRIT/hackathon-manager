@@ -17,7 +17,7 @@ class Manage::ConfigsController < Manage::ApplicationController
     value = params[:hackathon_config][key]
     value = true if value == "true"
     value = false if value == "false"
-    if @config.var.end_with?("_asset") && !value.start_with?('http://', 'https://')
+    if @config.var.start_with?("agreement_") && !value.start_with?('http://', 'https://')
       flash[:alert] = "Config \"#{key}\" must start with http:// or https://"
       render :edit
     elsif @config.value != value
