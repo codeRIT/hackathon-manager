@@ -87,7 +87,7 @@
           %dt.col-md-4 Portfolio
           %dd.col-md-8
             = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank') : not_provided
-          %dt.col-md-4 GitHub/BitBucket
+          %dt.col-md-4 GitHub/GitLab/BitBucket
           %dd.col-md-8
             = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : not_provided
           %dt.col-md-4 Resume
