@@ -21,9 +21,18 @@ jobs:
     strategy:
       matrix:
         ruby-version: [2.6.6, 2.5.8]
-
+        
     steps:
     - uses: actions/checkout@v2
+    - name: Setup MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql database: 'myapp_test'
+        mysql user: 'github'
+        run: |
+          mysql -u root -e "GRANT ALL PRIVILEGES ON myapp_test.* TO 'github'@'%';"
+          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
+          export DATABASE_URL="mysql2://travis@localhost/myapp_test"
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
@@ -33,5 +42,7 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
     - name: Install dependencies
       run: bundle install
+    - name: Prepare database
+      run: bin/rails db:migrate
     - name: Run tests
       run: bundle exec rake
