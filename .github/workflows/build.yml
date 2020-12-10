@@ -33,14 +33,14 @@ jobs:
         mysql database: 'myapp_test'
     - name: Update and install packages
       run: |
-          apt-get update
-          apt-get install -y libtool
-          apt-get install -y libyaml-dev
-          apt-get install -y build-essential
-          apt-get install -y libxslt-dev
-          apt-get install -y libxml2-dev
-          apt-get install -y default-libmysqlclient-dev
-          apt-get install -y default-mysql-client
+          sudo apt-get update
+          sudo apt-get install -y libtool
+          sudo apt-get install -y libyaml-dev
+          sudo apt-get install -y build-essential
+          sudo apt-get install -y libxslt-dev
+          sudo apt-get install -y libxml2-dev
+          sudo apt-get install -y default-libmysqlclient-dev
+          sudo apt-get install -y default-mysql-client
     - name: Set up Ruby
       env:
         ImageOS: ubuntu18
