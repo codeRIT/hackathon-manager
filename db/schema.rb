@@ -324,6 +324,7 @@ ActiveRecord::Schema.define(version: 2020_05_30_172450) do
     t.index ["uid"], name: "index_users_on_uid"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "questionnaires", "bus_lists"
