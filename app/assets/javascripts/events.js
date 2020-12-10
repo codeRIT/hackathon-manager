@@ -17,9 +17,7 @@ function eventCalendar() {
         // due to "end" being a keyword in ruby and what fullcalender uses I store it as finish and than convert
         // it to "end" when sending it to fullcalendar
         response = JSON.parse(JSON.stringify(response).split('"finish":').join('"end":'));
-        const alterResponce = response
-        console.log(alterResponce)
-        return alterResponce;
+        return response;
       }
     },
     eventClick: function (info) {
@@ -35,7 +33,6 @@ function clearCalendar() {
 }
 
 document.addEventListener('turbolinks:load', function () {
-  console.log('/manage/events.json')
   eventCalendar();
 });
 document.addEventListener('turbolinks:before-cache', clearCalendar);
