@@ -36,12 +36,15 @@
         = f.input :resume, as: :deletable_attachment, hint: "Must be a PDF, under 2MB", input_html: { "data-validate" => "file-max-size file-content-type", "data-validate-file-max-size" => "2097152", "data-validate-file-content-type" => "application/pdf" }, label: "Resume"
         = f.input :can_share_info, as: :radio_buttons, collection: { " Yes please!" => true, " No, thank you." => false }, label: "Share info with sponsors?", hint: "Our sponsors would receive info such as your name, email, resume, GitHub link, etc"
 
-        - travel_state = !@questionnaire.new_record? && @questionnaire.travel_not_from_school
-        = f.input :travel_not_from_school, as: :radio_buttons, collection: { " My school" => false, " Somewhere else" => true }, label: "I am traveling from..."
-        = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Where are you traveling from?", placeholder: "New York City"
+        - if !HackathonConfig['digital_hackathon']
+          - travel_state = !@questionnaire.new_record? && @questionnaire.travel_not_from_school
+          = f.input :travel_not_from_school, as: :radio_buttons, collection: { " My school" => false, " Somewhere else" => true }, label: "I am traveling from..."
+          = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Where are you traveling from?", placeholder: "New York City"
 
         = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
-        = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+
+        - if !HackathonConfig['digital_hackathon']
+          = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
         = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
 
       %hr

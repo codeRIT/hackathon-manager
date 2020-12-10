@@ -17,21 +17,22 @@
           %th Special Needs
       %tbody
 
-.row
-  .col
-    %h5.dashboard-container-title Attendees Not Traveling From Their School
-    %table.datatable.stats-notschooltravel.table.table-striped.table-hover{ "data-source" => alt_travel_datatable_manage_stats_path(format: :json) }
-      %thead
-        %tr
-          %th ID
-          %th First Name
-          %th Last Name
-          %th Email
-          %th Phone
-          %th Questionnaire
-          %th Traveling From
-          %th Questionnaire Status
-      %tbody
+- if !HackathonConfig['digital_hackathon']
+  .row
+    .col
+      %h5.dashboard-container-title Attendees Not Traveling From Their School
+      %table.datatable.stats-notschooltravel.table.table-striped.table-hover{ "data-source" => alt_travel_datatable_manage_stats_path(format: :json) }
+        %thead
+          %tr
+            %th ID
+            %th First Name
+            %th Last Name
+            %th Email
+            %th Phone
+            %th Questionnaire
+            %th Traveling From
+            %th Questionnaire Status
+        %tbody
 
 .row
   .col
