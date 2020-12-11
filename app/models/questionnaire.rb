@@ -43,7 +43,7 @@ class Questionnaire < ApplicationRecord
 
   validates :portfolio_url, url: { allow_blank: true }
   validates :vcs_url, url: { allow_blank: true }
-  validates_format_of :vcs_url, with: %r{((github.com\/\w+\/?)|(bitbucket.org\/\w+\/?))}, allow_blank: true, message: "Must be a GitHub or BitBucket url"
+  validates_format_of :vcs_url, with: %r{((github.com\/\w+\/?)|(gitlab.com\/\w+\/?)|(bitbucket.org\/\w+\/?))}, allow_blank: true, message: "Must be a GitHub, GitLab or Bitbucket url"
 
   strip_attributes
 
