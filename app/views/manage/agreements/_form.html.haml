@@ -1,0 +1,10 @@
+.form-container
+  = bs_horizontal_simple_form_for(@agreement, url: url_for(action: @agreement.new_record? ? "create" : "update", controller: "agreements")) do |f|
+    = f.error_notification
+
+    .form-inputs
+      = f.input :name
+      = f.input :agreement_url, hint: "Should be a full https:// URL to a web page or .pdf file", label: t(:agreement_url, scope: 'pages.manage.agreements')
+
+    .form-actions
+      = f.button :submit, class: 'btn-primary'
