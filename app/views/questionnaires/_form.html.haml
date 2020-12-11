@@ -52,7 +52,7 @@
         %strong Agreements
         %p Please review the agreements and click the corresponding checkbox next to each agreement to agree.
         .form-inputs
-          = f.association :agreements, as: :check_boxes, label_method: :formatted_agreement, value_method: :id, label: "", wrapper_html: { style: 'display: block;' }
+          = f.association :agreements, as: :check_boxes, label_method: :formatted_agreement, value_method: :id, label: "", wrapper_html: { style: 'display: block' }, input_html: { "data-validate" => "presence" }
 
       .right
         %button.button{ type: "button", "data-wizard" => "previous" } Previous
