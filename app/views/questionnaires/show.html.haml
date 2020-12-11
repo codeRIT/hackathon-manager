@@ -1,5 +1,8 @@
 - title "Application"
 .form-container
+  - if @questionnaire.unaccepted_agreements.any?
+    = render partial: 'unaccepted_agreements_notice'
+.form-container
   #disclaimer
     %h1.section-title
       Application

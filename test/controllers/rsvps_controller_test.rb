@@ -5,7 +5,10 @@ class RsvpsControllerTest < ActionController::TestCase
 
   setup do
     @school = create(:school, name: "Another School")
-    @questionnaire = create(:questionnaire, school_id: @school.id)
+    @questionnaire = build(:questionnaire, school_id: @school.id)
+    @agreement = create(:agreement)
+    @questionnaire.agreements << @agreement
+    @questionnaire.save
   end
 
   context "while not authenticated" do
@@ -102,8 +105,8 @@ class RsvpsControllerTest < ActionController::TestCase
 
     context "not update status for invalid questionnaire" do
       setup do
-        @questionnaire.update_attribute(:agreement_accepted, false)
         @questionnaire.update_attribute(:acc_status, "accepted")
+        @questionnaire.update_attribute(:agreements, [])
       end
 
       [:accept, :deny].each do |status|
@@ -221,7 +224,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
     should "not allow invalid updates to questionnaire via rsvp page" do
       @questionnaire.update_attribute(:phone, "1111111111")
-      @questionnaire.update_attribute(:agreement_accepted, false)
+      @questionnaire.update_attribute(:agreements, [])
       patch :update, params: { questionnaire: { phone: "1234567890" } }
       assert_not_nil flash[:alert]
       assert_equal "1111111111", @questionnaire.reload.phone
@@ -230,7 +233,7 @@ class RsvpsControllerTest < ActionController::TestCase
 
     should "not allow updates to invalid questionnaire via rsvp page" do
       @questionnaire.update_attribute(:phone, "1111111111")
-      @questionnaire.update_attribute(:agreement_accepted, false)
+      @questionnaire.update_attribute(:agreements, [])
       patch :update, params: { questionnaire: { phone: "1234567890" } }
       assert_not_nil flash[:alert]
       assert_equal "1111111111", @questionnaire.reload.phone

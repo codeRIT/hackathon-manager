@@ -326,9 +326,9 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
     should "merge schools" do
       new_school = create(:school, name: "Unique School")
       @school.update_attribute(:name, "Unique Sch00l")
-      create(:questionnaire, school_id: @school.id)
-      create(:questionnaire, school_id: @school.id)
-      create(:questionnaire, school_id: new_school.id)
+      create(:questionnaire, school_id: @school.id, agreements: Agreement.all)
+      create(:questionnaire, school_id: @school.id, agreements: Agreement.all)
+      create(:questionnaire, school_id: new_school.id, agreements: Agreement.all)
       assert_difference('SchoolNameDuplicate.count', 1) do
         assert_difference('School.count', -1) do
           assert_difference('new_school.reload.questionnaire_count', 2) do
