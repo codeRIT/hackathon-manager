@@ -6,6 +6,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should belong_to :user
   should belong_to :school
   should belong_to :bus_list
+  should have_and_belong_to_many :agreements
 
   should validate_uniqueness_of :user_id
 
@@ -68,10 +69,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should_not allow_value("M").for(:shirt_size)
   should_not allow_value("foo").for(:shirt_size)
 
-  should allow_value(true).for(:agreement_accepted)
-  should_not allow_value(false).for(:agreement_accepted)
-  should allow_value(true).for(:code_of_conduct_accepted)
-  should_not allow_value(false).for(:code_of_conduct_accepted)
+  should allow_value(Agreement.all).for(:agreements)
 
   should allow_value("pending").for(:acc_status)
   should allow_value("accepted").for(:acc_status)

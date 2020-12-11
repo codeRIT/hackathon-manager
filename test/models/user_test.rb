@@ -51,15 +51,15 @@ class UserTest < ActiveSupport::TestCase
 
   context "without_questionnaire" do
     should "not return users with a questionnaire" do
-      create_list(:questionnaire, 3)
+      create_list(:questionnaire, 3, agreements: Agreement.all)
       assert_equal 3, User.count
       assert_equal 0, User.without_questionnaire.count
     end
 
     should "return users without questionnaire" do
-      create_list(:questionnaire, 1)
+      create_list(:questionnaire, 1, agreements: Agreement.all)
       create_list(:user, 2)
-      create_list(:questionnaire, 3)
+      create_list(:questionnaire, 3, agreements: Agreement.all)
       assert_equal 6, User.count
       assert_equal 2, User.without_questionnaire.count
     end
