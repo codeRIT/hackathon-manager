@@ -9,7 +9,9 @@ name: Build - 2.6, 2.5
 
 on:
   pull_request:
-    branches: [ master, "2.1" ]
+    branches:
+      - master
+      - develop
 
 jobs:
   build:
