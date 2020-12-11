@@ -1,4 +1,7 @@
 - title "RSVP"
+.form-container
+  - if @questionnaire.unaccepted_agreements.any?
+    = render partial: 'unaccepted_agreements_notice'
 = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
   .form-container
     #disclaimer

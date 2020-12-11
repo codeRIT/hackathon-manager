@@ -366,8 +366,8 @@ class Manage::BusListsControllerTest < ActionController::TestCase
       end
 
       should "reset everyone's bus_list_id" do
-        questionnaire = create(:questionnaire, bus_list_id: @bus_list.id)
-        questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id)
+        questionnaire = create(:questionnaire, bus_list_id: @bus_list.id, agreements: Agreement.all)
+        questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id, agreements: Agreement.all)
         patch :destroy, params: { id: @bus_list }
         assert_equal false, questionnaire.reload.bus_list_id?
         assert_equal false, questionnaire2.reload.bus_list_id?

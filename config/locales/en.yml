@@ -54,6 +54,8 @@ en:
         trigger: Sent automatically when a new or updated applicant matches this criteria. Does not send to anyone already matching this criteria.
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
+      agreement:
+        name: 'Agreements are displayed to applicants as: "I read & accept the [agreement_name] agreement"'
       hackathon_config:
         accepting_questionnaires: Specify and allow questionnaires to be accepted.
         digital_hackathon: Optimize HackathonManager for a digital hackathon. (Removes travel, dietary restrictions, etc.)
@@ -188,6 +190,13 @@ en:
             yes: Yes
             no: No
             save: Save
+      agreements:
+        title: Legal Agreements
+        notice: "These are legal agreements that are required to be reviewed and agreed upon by all applicants of %{hackathon_name}."
+        name: Name
+        agreement_url: Agreement URL
+        new: New Agreement
+        edit: Edit Agreement
       settings:
         title: Hackathon Settings
       sidekiq:
@@ -198,6 +207,9 @@ en:
         title: App Authentication
       data-exports:
         title: Data Exports
+  buttons:
+    edit: Edit
+    destroy: Delete
   layouts:
     manage:
       navigation:
