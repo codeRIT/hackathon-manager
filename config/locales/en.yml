@@ -55,7 +55,7 @@ en:
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
       agreement:
-        name: 'Agreements are displayed to applicants as: "I read & accept the *agreement_name* agreement."'
+        name: 'Agreements are displayed to applicants as: "I read & accept the [agreement_name] agreement"'
       hackathon_config:
         accepting_questionnaires: Specify and allow questionnaires to be accepted.
         digital_hackathon: Optimize HackathonManager for a digital hackathon. (Removes travel, dietary restrictions, etc.)

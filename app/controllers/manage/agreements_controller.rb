@@ -33,9 +33,9 @@ class Manage::AgreementsController < Manage::ApplicationController
 
   # PATCH/PUT /agreements/1
   def update
-    if !agreement_params['agreement_url'].nil? && agreement_params['agreement_url'].start_with?('http://', 'https://')
+    if !agreement_params['agreement_url'].nil? && !agreement_params['agreement_url'].start_with?('http://', 'https://')
       flash[:alert] = "Agreement URL must start with http:// or https://"
-      render :edit
+      redirect_to edit_manage_agreement_url
     else
       @agreement.update_attributes(agreement_params)
       flash[:notice] = nil
