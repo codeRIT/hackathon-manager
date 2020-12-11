@@ -32,7 +32,7 @@
         = f.input :race_ethnicity, as: :select, collection: Questionnaire::POSSIBLE_RACE_ETHNICITIES, include_blank: "(select one...)", label: "Race/Ethnicity", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
 
         = f.input :portfolio_url, label: "Portfolio link", placeholder: "http://mywebsite.com"
-        = f.input :vcs_url, label: "GitHub/Bitbucket link", placeholder: "https://github.com/coderit"
+        = f.input :vcs_url, label: "GitHub/GitLab/Bitbucket link", placeholder: "https://github.com/coderit"
         = f.input :resume, as: :deletable_attachment, hint: "Must be a PDF, under 2MB", input_html: { "data-validate" => "file-max-size file-content-type", "data-validate-file-max-size" => "2097152", "data-validate-file-content-type" => "application/pdf" }, label: "Resume"
         = f.input :can_share_info, as: :radio_buttons, collection: { " Yes please!" => true, " No, thank you." => false }, label: "Share info with sponsors?", hint: "Our sponsors would receive info such as your name, email, resume, GitHub link, etc"
 
