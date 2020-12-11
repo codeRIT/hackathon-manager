@@ -3,7 +3,7 @@ en:
     attributes:
       doorkeeper/application:
         name: 'Name'
-        redirect_uri: 'Redirect URI'
+        redirect_uri: 'Redirect URI(s)'
     errors:
       models:
         doorkeeper/application:
@@ -40,7 +40,7 @@ en:
         title: 'Your applications'
         new: 'New Application'
         name: 'Name'
-        callback_url: 'Callback URLs'
+        callback_url: 'Callback URL(s)'
         confidential: 'Confidential?'
         actions: 'Actions'
         confidentiality:
@@ -54,7 +54,7 @@ en:
         secret: 'Secret'
         scopes: 'Scopes'
         confidential: 'Confidential'
-        callback_urls: 'Callback URLs'
+        callback_urls: 'Callback URL(s)'
         actions: 'Actions'
 
     authorizations:
