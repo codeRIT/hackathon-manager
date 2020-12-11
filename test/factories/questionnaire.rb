@@ -9,9 +9,6 @@ FactoryBot.define do
     shirt_size { "Unisex - M" }
     dietary_restrictions { "" }
     special_needs { "" }
-    agreement_accepted { true }
-    code_of_conduct_accepted { true }
-    data_sharing_accepted { true }
     can_share_info { true }
     gender { "Male" }
     major { "Computer Science" }
@@ -19,6 +16,7 @@ FactoryBot.define do
     graduation_year { Date.today.year }
     race_ethnicity { "Other" }
     why_attend { "This sounds cool" }
+    agreements  { [create(:agreement)] }
 
     association :user
   end
