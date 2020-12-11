@@ -16,8 +16,8 @@ class BusListTest < ActiveSupport::TestCase
     end
 
     should "return all passengers" do
-      questionnaire1 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed")
-      questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed")
+      questionnaire1 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", agreements: Agreement.all)
+      questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", agreements: Agreement.all)
       assert_equal 2, @bus_list.passengers.count
       allowed_ids = [questionnaire1, questionnaire2].map(&:id)
       assert allowed_ids.include? @bus_list.passengers[0].id
@@ -25,19 +25,19 @@ class BusListTest < ActiveSupport::TestCase
     end
 
     should "only return passengers who have RSVP'd" do
-      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id)
+      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, agreements: Agreement.all)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _title|
         next if status == "rsvp_confirmed"
-        create(:questionnaire, acc_status: status, bus_list_id: @bus_list.id)
+        create(:questionnaire, acc_status: status, bus_list_id: @bus_list.id, agreements: Agreement.all)
       end
       assert_equal 1, @bus_list.passengers.count
       assert_equal questionnaire1.id, @bus_list.passengers[0].id
     end
 
     should "not return passengers from another bus" do
-      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id)
+      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, agreements: Agreement.all)
       bus_list2 = create(:bus_list)
-      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: bus_list2.id)
+      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: bus_list2.id, agreements: Agreement.all)
       assert_equal 1, @bus_list.passengers.count
       assert_equal questionnaire1.id, @bus_list.passengers[0].id
     end
@@ -49,9 +49,9 @@ class BusListTest < ActiveSupport::TestCase
     end
 
     should "return all boarded passengers" do
-      questionnaire1 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: nil)
-      questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now)
-      questionnaire3 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now)
+      questionnaire1 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: nil, agreements: Agreement.all)
+      questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now, agreements: Agreement.all)
+      questionnaire3 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now, agreements: Agreement.all)
       assert_equal 2, @bus_list.boarded_passengers.count
       allowed_ids = [questionnaire2, questionnaire3].map(&:id)
       assert allowed_ids.include? @bus_list.boarded_passengers[0].id
@@ -69,8 +69,8 @@ class BusListTest < ActiveSupport::TestCase
     end
 
     should "only return passengers who have checked in" do
-      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, checked_in_at: 2.minutes.ago)
-      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, checked_in_at: nil)
+      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, checked_in_at: 2.minutes.ago, agreements: Agreement.all)
+      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, checked_in_at: nil, agreements: Agreement.all)
       assert_equal 2, @bus_list.passengers.count
       assert_equal 1, @bus_list.checked_in_passengers.count
     end
@@ -82,11 +82,11 @@ class BusListTest < ActiveSupport::TestCase
     end
 
     should "return all captains" do
-      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id)
-      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id)
-      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true)
-      questionnaire2 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true)
-      create(:questionnaire, acc_status: "rsvp_confirmed")
+      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, agreements: Agreement.all)
+      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, agreements: Agreement.all)
+      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true, agreements: Agreement.all)
+      questionnaire2 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true, agreements: Agreement.all)
+      create(:questionnaire, acc_status: "rsvp_confirmed", agreements: Agreement.all)
       assert_equal 2, @bus_list.captains.count
       allowed_ids = [questionnaire1, questionnaire2].map(&:id)
       assert allowed_ids.include? @bus_list.captains[0].id
@@ -94,19 +94,19 @@ class BusListTest < ActiveSupport::TestCase
     end
 
     should "only return captains who have RSVP'd" do
-      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true)
+      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true, agreements: Agreement.all)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _title|
         next if status == "rsvp_confirmed"
-        create(:questionnaire, acc_status: status, bus_list_id: @bus_list.id, is_bus_captain: true)
+        create(:questionnaire, acc_status: status, bus_list_id: @bus_list.id, is_bus_captain: true, agreements: Agreement.all)
       end
       assert_equal 1, @bus_list.captains.count
       assert_equal questionnaire1.id, @bus_list.captains[0].id
     end
 
     should "not return captains from another bus" do
-      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true)
+      questionnaire1 = create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: @bus_list.id, is_bus_captain: true, agreements: Agreement.all)
       bus_list2 = create(:bus_list)
-      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: bus_list2.id, is_bus_captain: true)
+      create(:questionnaire, acc_status: "rsvp_confirmed", bus_list_id: bus_list2.id, is_bus_captain: true, agreements: Agreement.all)
       assert_equal 1, @bus_list.captains.count
       assert_equal questionnaire1.id, @bus_list.captains[0].id
     end

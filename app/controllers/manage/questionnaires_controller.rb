@@ -14,6 +14,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def show
+    @agreements = Agreement.all
     respond_with(:manage, @questionnaire)
   end
 
@@ -70,7 +71,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     index_redirect_path = redirect_to_checkins ? manage_checkins_path : manage_questionnaires_path
     if params[:check_in] == "true"
       if params[:questionnaire]
-        q_params = params.require(:questionnaire).permit(:agreement_accepted, :phone, :can_share_info, :email)
+        q_params = params.require(:questionnaire).permit(:phone, :can_share_info, :email)
         email = q_params.delete(:email)
         @questionnaire.update_attributes(q_params)
         @questionnaire.user.update_attributes(email: email)
@@ -153,9 +154,8 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
-      :portfolio_url, :vcs_url, :agreement_accepted, :bus_captain_interest,
-      :phone, :can_share_info, :code_of_conduct_accepted,
-      :travel_not_from_school, :travel_location, :data_sharing_accepted,
+      :portfolio_url, :vcs_url, :bus_captain_interest,:phone, :can_share_info,
+      :travel_not_from_school, :travel_location,
       :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
       :bus_list_id, :is_bus_captain, :boarded_bus
     )

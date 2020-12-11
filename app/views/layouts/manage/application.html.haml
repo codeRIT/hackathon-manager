@@ -100,6 +100,10 @@
                     .fa.fa-users.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.users')
                 %li.nav-item
+                  = active_link_to manage_agreements_path, class: "nav-link" do
+                    .fa.fa-balance-scale.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.agreements')
+                %li.nav-item
                   = active_link_to manage_configs_path, class: "nav-link" do
                     .fa.fa-wrench.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.settings')

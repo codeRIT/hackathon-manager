@@ -25,11 +25,11 @@ class Manage::DashboardControllerTest < ActionController::TestCase
     should "not allow access to all data endpoints" do
       school1 = FactoryBot.create(:school)
       school2 = FactoryBot.create(:school)
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending")
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted")
-      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted")
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted", agreements: Agreement.all)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _name|
-        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status)
+        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status, agreements: Agreement.all)
       end
 
       stub_request(:get, "https://geocoding.geo.census.gov/geocoder/locations/address?street=123+Fake+Street&city=Rochester&state=NY&benchmark=Public_AR_Current&format=json")
@@ -75,11 +75,11 @@ class Manage::DashboardControllerTest < ActionController::TestCase
     should "not allow access to all data endpoints" do
       school1 = FactoryBot.create(:school)
       school2 = FactoryBot.create(:school)
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending")
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted")
-      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted")
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted", agreements: Agreement.all)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _name|
-        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status)
+        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status, agreements: Agreement.all)
       end
 
       stub_request(:get, "https://geocoding.geo.census.gov/geocoder/locations/address?street=123+Fake+Street&city=Rochester&state=NY&benchmark=Public_AR_Current&format=json")
@@ -124,11 +124,11 @@ class Manage::DashboardControllerTest < ActionController::TestCase
     should "allow access to all data endpoints" do
       school1 = FactoryBot.create(:school)
       school2 = FactoryBot.create(:school)
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending")
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted")
-      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted")
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted", agreements: Agreement.all)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _name|
-        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status)
+        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status, agreements: Agreement.all)
       end
 
       stub_request(:get, "https://geocoding.geo.census.gov/geocoder/locations/address?street=123+Fake+Street&city=Rochester&state=NY&benchmark=Public_AR_Current&format=json")
@@ -173,11 +173,11 @@ class Manage::DashboardControllerTest < ActionController::TestCase
     should "allow access to all data endpoints" do
       school1 = FactoryBot.create(:school)
       school2 = FactoryBot.create(:school)
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending")
-      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted")
-      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted")
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "pending", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 20, school_id: school1.id, acc_status: "accepted", agreements: Agreement.all)
+      FactoryBot.create_list(:questionnaire, 10, school_id: school2.id, acc_status: "accepted", agreements: Agreement.all)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _name|
-        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status)
+        FactoryBot.create_list(:questionnaire, 1, school_id: school2.id, acc_status: status, agreements: Agreement.all)
       end
 
       stub_request(:get, "https://geocoding.geo.census.gov/geocoder/locations/address?street=123+Fake+Street&city=Rochester&state=NY&benchmark=Public_AR_Current&format=json")

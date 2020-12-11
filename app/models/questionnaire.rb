@@ -18,18 +18,18 @@ class Questionnaire < ApplicationRecord
   belongs_to :user
   belongs_to :school
   belongs_to :bus_list, optional: true
+  has_and_belongs_to_many :agreements
 
   validates_uniqueness_of :user_id
 
   validates_presence_of :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
   validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity
-  validates_presence_of :agreement_accepted, message: "Please read & accept"
-  validates_presence_of :code_of_conduct_accepted, message: "Please read & accept"
-  validates_presence_of :data_sharing_accepted, message: "Please read & accept"
 
   DIETARY_SPECIAL_NEEDS_MAX_LENGTH = 500
   validates_length_of :dietary_restrictions, maximum: DIETARY_SPECIAL_NEEDS_MAX_LENGTH
   validates_length_of :special_needs, maximum: DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+
+  validate :agreements_present
 
   # if HackathonManager.field_enabled?(:why_attend)
   #   validates_presence_of :why_attend
@@ -215,6 +215,26 @@ class Questionnaire < ApplicationRecord
     end
   end
 
+  def agreements_present
+    if (Agreement.all - self.agreements).any?
+      errors.add(:agreements, "must be accepted.")
+    end
+  end
+
+  def all_agreements_accepted?
+    (Agreement.all - self.agreements).empty?
+  end
+
+  def unaccepted_agreements
+    Agreement.all - self.agreements
+  end
+
+  def as_json(options = {})
+    result = super
+    result['all_agreements_accepted'] = all_agreements_accepted?
+    result
+  end
+
   private
 
   def clean_for_non_rsvp
@@ -277,4 +297,5 @@ class Questionnaire < ApplicationRecord
     end
     UserMailer.rsvp_reminder_email(user_id).deliver_later(wait_until: deliver_date) if deliver_date.present?
   end
+
 end

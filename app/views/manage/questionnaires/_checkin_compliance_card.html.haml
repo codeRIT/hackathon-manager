@@ -33,12 +33,15 @@
         %li.list-group-item.list-group-item-warning
           %span.fa.fa-exclamation-circle.fa-fw.icon-space-r
           18 years or older
-      - if @questionnaire.agreement_accepted && @questionnaire.code_of_conduct_accepted && @questionnaire.data_sharing_accepted
-        %li.list-group-item
-          .text-success
-            %span.fa.fa-check.fa-fw.icon-space-r
-            Event agreement, MLH Code of Conduct, and MLH Data Sharing
-      - else
-        %li.list-group-item.list-group-item-danger
-          %span.fa.fa-close.fa-fw.icon-space-r
-          One or more of the following was not accepted: Event agreement, MLH Code of Conduct, and/or MLH Data Sharing
+      - if @agreements.any?
+        - if @questionnaire.all_agreements_accepted?
+          %li.list-group-item
+            .text-success
+              %span.fa.fa-check.fa-fw.icon-space-r
+              = @questionnaire.agreements.map(&:name).join(', ')
+              accepted.
+        - else
+          %li.list-group-item.list-group-item-danger
+            %span.fa.fa-close.fa-fw.icon-space-r
+            Unaccepted Agreements: 
+            = @questionnaire.unaccepted_agreements.map(&:name).join(', ')

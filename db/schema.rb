@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_172450) do
+ActiveRecord::Schema.define(version: 2020_12_09_053827) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(version: 2020_05_30_172450) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "agreement_url"
+  end
+
+  create_table "agreements_questionnaires", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "agreement_id"
+    t.integer "questionnaire_id"
+    t.index ["agreement_id", "questionnaire_id"], name: "index_agreements_questionnaires"
   end
 
   create_table "audits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -204,7 +217,6 @@ ActiveRecord::Schema.define(version: 2020_05_30_172450) do
     t.string "portfolio_url"
     t.string "vcs_url"
     t.integer "user_id"
-    t.boolean "agreement_accepted", default: false
     t.string "acc_status", default: "pending"
     t.integer "acc_status_author_id"
     t.datetime "acc_status_date"
@@ -214,13 +226,11 @@ ActiveRecord::Schema.define(version: 2020_05_30_172450) do
     t.datetime "checked_in_at"
     t.string "phone"
     t.boolean "can_share_info", default: false
-    t.boolean "code_of_conduct_accepted", default: false
     t.text "special_needs"
     t.string "gender"
     t.string "major"
     t.boolean "travel_not_from_school", default: false
     t.string "travel_location"
-    t.boolean "data_sharing_accepted"
     t.string "level_of_study"
     t.string "interest"
     t.text "why_attend"
