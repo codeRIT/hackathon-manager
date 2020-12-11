@@ -67,7 +67,6 @@ en:
         logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)
         favicon_asset: Optional favicon asset (should be a full https:// URL to a .ico file)
         email_banner_asset: Optional banner asset to show at top of emails (should be a full https:// URL to a .jpg or .png file)
-        agreement_pdf_asset: Your hackathon's agreement (e.g. school activity release form, should be a full https:// URL to a web page or .pdf file)
         email_from: '"From" email address for all emails sent through the website (e.g. BrickHack &lt;hello@example.com&gt;)'
         default_page_title: Default &lt;title&gt; for all pages (e.g. HackFoo - Jan 1-2, 2017)
 
@@ -117,7 +116,6 @@ en:
       hackathon_config:
         name: Hackathon Name
         email_from: From Email
-        agreement_pdf_asset: Agreement PDF Asset
         custom_css: Custom CSS
         homepage_url: Homepage URL
         thanks_for_rsvp_message: Thanks For RSVP Message
