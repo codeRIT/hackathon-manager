@@ -113,34 +113,7 @@
                   %span
                     %span.fa.fa-external-link.icon-space-r-half
                     Open link
-    .card.mb-3
-      .card-body
-        %h4.card-title.font-weight-bold
-          Legal
-        %h6.card-subtitle.mb-2.text-muted
-          Agreements for your hackers.
-        - @legal.each_entry do |key|
-          - value = HackathonConfig[key]
-          %hr
-          %p.mb-1
-            = link_to edit_manage_config_path(key), class: 'icon-space-r' do
-              %span.fa.fa-pencil
-            %b
-              = t("simple_form.labels.hackathon_config.#{key}")
-          %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
-          %pre.mb-0= value
-          - if value.is_a?(String)
-            - images = ['.ico', '.jpg', '.jpeg', '.png', '.gif', '.svg'].freeze
-            - links = ['http://', 'https://'].freeze
-            - if value.end_with?(*images)
-              %br
-              = image_tag value, style: 'max-height: 100px;', class: 'img-thumbnail img-template'
-            - elsif value.start_with?(*links)
-              %br
-              = link_to value, target: 'blank' do
-                %span
-                  %span.fa.fa-external-link.icon-space-r-half
-                  Open link
+
   .col-lg-6
     .card.mb-3
       .card-body
