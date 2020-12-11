@@ -192,8 +192,8 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
     end
 
     should "create a new agreement" do
-      post :create, params: { agreement: { name: "Fun Agreement" } }
-      assert_response :success
+      post :create, params: { agreement: { name: "Fun Agreement", agreement_url: "https://foo.com" } }
+      assert_response :redirect
     end
 
     should "allow access to manage_agreements#edit" do
@@ -205,6 +205,11 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
       patch :update, params: { id: @agreement, agreement: { name: "New agreement Name" } }
       assert_response :redirect
       assert_redirected_to manage_agreements_path
+    end
+
+    should "enforce agreement_url to be a link" do
+      patch :update, params: { id: @agreement, agreement: { name: "New agreement Name", agreement_url: "hello" } }
+      assert_response :redirect
     end
 
     context "#destroy" do
