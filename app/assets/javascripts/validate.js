@@ -22,7 +22,7 @@ document.addEventListener('turbolinks:load', function() {
                 $(this)
                   .parent()
                   .text()
-                  .includes('I have read and accepted')
+                  .includes('I read and accept')
               ) {
                 notify(".agreement_input", 'Please read & accept');
               } else {
