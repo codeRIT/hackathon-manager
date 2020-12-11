@@ -293,7 +293,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not create a duplicate questionnaire for a user" do
       user = create(:user, email: "existing@example.com")
-      create(:questionnaire, user_id: user.id)
+      create(:questionnaire, user_id: user.id, agreements: Agreement.all)
       assert_difference("User.count", 0) do
         assert_difference("Questionnaire.count", 0) do
           post :create, params: {
@@ -308,9 +308,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
               shirt_size: @questionnaire.shirt_size,
               school_id: @questionnaire.school_id,
               email: "existing@example.com",
-              agreement_accepted: "1",
-              code_of_conduct_accepted: "1",
-              data_sharing_accepted: "1",
               gender: @questionnaire.gender,
               major: @questionnaire.major,
               why_attend: @questionnaire.why_attend,
@@ -372,14 +369,12 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "check in the questionnaire and update information" do
-      @questionnaire.update_attribute(:agreement_accepted, false)
       @questionnaire.update_attribute(:can_share_info, false)
       @questionnaire.update_attribute(:phone, "")
       patch :check_in, params: {
         id: @questionnaire,
         check_in: "true",
         questionnaire: {
-          agreement_accepted: 1,
           can_share_info: 1,
           phone: "(123) 333-3333",
           email: "new_email@example.com"
@@ -388,7 +383,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @questionnaire.reload
       assert 1.minute.ago < @questionnaire.checked_in_at
       assert_equal @user.id, @questionnaire.checked_in_by_id
-      assert_equal true, @questionnaire.agreement_accepted
+      assert_equal true, @questionnaire.all_agreements_accepted?
       assert_equal true, @questionnaire.can_share_info
       assert_equal "1233333333", @questionnaire.phone
       assert_equal "new_email@example.com", @questionnaire.email
@@ -398,7 +393,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "require a new action to check in" do
-      @questionnaire.update_attribute(:agreement_accepted, false)
+      @questionnaire.update_attribute(:agreements, [])
       @questionnaire.update_attribute(:can_share_info, false)
       @questionnaire.update_attribute(:phone, "")
       @questionnaire.user.update_attribute(:email, "old_email@example.com")
@@ -417,7 +412,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @questionnaire.reload
       assert_nil @questionnaire.checked_in_at
       assert_nil @questionnaire.checked_in_by_id
-      assert_equal false, @questionnaire.agreement_accepted
+      assert_equal false, @questionnaire.all_agreements_accepted?
       assert_equal false, @questionnaire.can_share_info
       assert_equal "", @questionnaire.phone
       assert_equal "old_email@example.com", @questionnaire.email
@@ -426,8 +421,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaire_path(@questionnaire)
     end
 
-    should "require agreement_accepted to check in" do
-      @questionnaire.update_attribute(:agreement_accepted, false)
+    should "require all agreements to be accepted to check in" do
+      @questionnaire.update_attribute(:agreements, [])
       patch :check_in, params: { id: @questionnaire, check_in: "true" }
       assert_nil @questionnaire.reload.checked_in_at
       assert_nil @questionnaire.reload.checked_in_by_id
@@ -435,8 +430,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_redirected_to manage_questionnaire_path(@questionnaire)
     end
 
-    should "accept agreement and check in" do
-      @questionnaire.update_attribute(:agreement_accepted, false)
+    should "accept all agreements and check in" do
+      @questionnaire.update_attribute(:agreements, Agreement.all)
       patch :check_in, params: { id: @questionnaire, check_in: "true", questionnaire: { agreement_accepted: 1 } }
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id

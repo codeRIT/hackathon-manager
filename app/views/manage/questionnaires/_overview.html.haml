@@ -47,30 +47,31 @@
               = @questionnaire.special_needs
             - else
               %span.text-muted (none)
-          %dt.col-md-4 Bus list
-          %dd.col-md-8
-            - if @questionnaire.bus_list_id?
-              = link_to @questionnaire.bus_list.name, manage_bus_list_path(@questionnaire.bus_list_id)
-            - else
-              %span.text-muted (none)
-          - if @questionnaire.bus_list_id?
-            %dt.col-md-4 Boarded bus?
+          - if !HackathonConfig['digital_hackathon']
+            %dt.col-md-4 Bus list
             %dd.col-md-8
-              - if @questionnaire.boarded_bus?
-                Yes
+              - if @questionnaire.bus_list_id?
+                = link_to @questionnaire.bus_list.name, manage_bus_list_path(@questionnaire.bus_list_id)
               - else
-                No
-          %dt.col-md-4 Bus captain
-          %dd.col-md-8
-            - if @questionnaire.is_bus_captain?
-              %strong.text-danger Is bus captain
-            - elsif @questionnaire.bus_captain_interest?
-              %strong.text-success Interested in being a captain
-            - else
-              %span.text-muted No
-          %dt.col-md-4 Traveling from
-          %dd.col-md-8
-            = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "<span class=\"text-muted\">My school</span>".html_safe
+                %span.text-muted (none)
+            - if @questionnaire.bus_list_id?
+              %dt.col-md-4 Boarded bus?
+              %dd.col-md-8
+                - if @questionnaire.boarded_bus?
+                  Yes
+                - else
+                  No
+            %dt.col-md-4 Bus captain
+            %dd.col-md-8
+              - if @questionnaire.is_bus_captain?
+                %strong.text-danger Is bus captain
+              - elsif @questionnaire.bus_captain_interest?
+                %strong.text-success Interested in being a captain
+              - else
+                %span.text-muted No
+            %dt.col-md-4 Traveling from
+            %dd.col-md-8
+              = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "<span class=\"text-muted\">My school</span>".html_safe
 
     .card.mb-3
       .card-header Resume
@@ -86,7 +87,7 @@
           %dt.col-md-4 Portfolio
           %dd.col-md-8
             = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank') : not_provided
-          %dt.col-md-4 GitHub/BitBucket
+          %dt.col-md-4 GitHub/GitLab/Bitbucket
           %dd.col-md-8
             = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : not_provided
           %dt.col-md-4 Resume

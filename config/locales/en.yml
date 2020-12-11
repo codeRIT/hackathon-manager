@@ -54,8 +54,11 @@ en:
         trigger: Sent automatically when a new or updated applicant matches this criteria. Does not send to anyone already matching this criteria.
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
+      agreement:
+        name: 'Agreements are displayed to applicants as: "I read & accept the [agreement_name] agreement"'
       hackathon_config:
         accepting_questionnaires: Specify and allow questionnaires to be accepted.
+        digital_hackathon: Optimize HackathonManager for a digital hackathon. (Removes travel, dietary restrictions, etc.)
         last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
         event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
@@ -64,7 +67,6 @@ en:
         logo_asset: Optional logo asset (should be a full https:// URL to a .jpg, .png, or .svg file)
         favicon_asset: Optional favicon asset (should be a full https:// URL to a .ico file)
         email_banner_asset: Optional banner asset to show at top of emails (should be a full https:// URL to a .jpg or .png file)
-        agreement_pdf_asset: Your hackathon's agreement (e.g. school activity release form, should be a full https:// URL to a web page or .pdf file)
         email_from: '"From" email address for all emails sent through the website (e.g. BrickHack &lt;hello@example.com&gt;)'
         default_page_title: Default &lt;title&gt; for all pages (e.g. HackFoo - Jan 1-2, 2017)
 
@@ -114,7 +116,6 @@ en:
       hackathon_config:
         name: Hackathon Name
         email_from: From Email
-        agreement_pdf_asset: Agreement PDF Asset
         custom_css: Custom CSS
         homepage_url: Homepage URL
         thanks_for_rsvp_message: Thanks For RSVP Message
@@ -187,6 +188,13 @@ en:
             yes: Yes
             no: No
             save: Save
+      agreements:
+        title: Legal Agreements
+        notice: "These are legal agreements that are required to be reviewed and agreed upon by all applicants of %{hackathon_name}."
+        name: Name
+        agreement_url: Agreement URL
+        new: New Agreement
+        edit: Edit Agreement
       settings:
         title: Hackathon Settings
       sidekiq:
@@ -194,9 +202,12 @@ en:
       blazer:
         title: Blazer
       doorkeeper:
-        title: Doorkeeper
+        title: App Authentication
       data-exports:
         title: Data Exports
+  buttons:
+    edit: Edit
+    destroy: Delete
   layouts:
     manage:
       navigation:
