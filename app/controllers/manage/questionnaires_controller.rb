@@ -154,7 +154,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
-      :portfolio_url, :vcs_url, :bus_captain_interest,:phone, :can_share_info,
+      :portfolio_url, :vcs_url, :bus_captain_interest, :phone, :can_share_info,
       :travel_not_from_school, :travel_location,
       :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
       :bus_list_id, :is_bus_captain, :boarded_bus

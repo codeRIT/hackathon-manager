@@ -49,7 +49,7 @@ class BusListTest < ActiveSupport::TestCase
     end
 
     should "return all boarded passengers" do
-      questionnaire1 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: nil, agreements: Agreement.all)
+      create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: nil, agreements: Agreement.all)
       questionnaire2 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now, agreements: Agreement.all)
       questionnaire3 = create(:questionnaire, bus_list_id: @bus_list.id, acc_status: "rsvp_confirmed", boarded_bus_at: Time.now, agreements: Agreement.all)
       assert_equal 2, @bus_list.boarded_passengers.count

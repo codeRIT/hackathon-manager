@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Manage::AgreementsControllerTest < ActionController::TestCase
-
   setup do
     @agreement = create(:agreement)
   end

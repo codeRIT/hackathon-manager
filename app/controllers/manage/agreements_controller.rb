@@ -33,7 +33,7 @@ class Manage::AgreementsController < Manage::ApplicationController
 
   # PATCH/PUT /agreements/1
   def update
-    if !agreement_params['agreement_url'].nil? and agreement_params['agreement_url'].start_with?('http://', 'https://')
+    if !agreement_params['agreement_url'].nil? && agreement_params['agreement_url'].start_with?('http://', 'https://')
       flash[:alert] = "Agreement URL must start with http:// or https://"
       render :edit
     else
@@ -51,15 +51,16 @@ class Manage::AgreementsController < Manage::ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_agreement
-      @agreement = Agreement.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_agreement
+    @agreement = Agreement.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def agreement_params
-      params.require(:agreement).permit(
-        :name, :agreement_url
-      )
-    end
+  # Only allow a trusted parameter "white list" through.
+  def agreement_params
+    params.require(:agreement).permit(
+      :name, :agreement_url
+    )
+  end
 end

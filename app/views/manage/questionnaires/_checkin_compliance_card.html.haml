@@ -43,5 +43,5 @@
         - else
           %li.list-group-item.list-group-item-danger
             %span.fa.fa-close.fa-fw.icon-space-r
-            Unaccepted Agreements: 
+            Unaccepted Agreements:
             = @questionnaire.unaccepted_agreements.map(&:name).join(', ')

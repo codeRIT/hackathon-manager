@@ -216,17 +216,17 @@ class Questionnaire < ApplicationRecord
   end
 
   def agreements_present
-    if (Agreement.all - self.agreements).any?
+    if (Agreement.all - agreements).any?
       errors.add(:agreements, "must be accepted.")
     end
   end
 
   def all_agreements_accepted?
-    (Agreement.all - self.agreements).empty?
+    (Agreement.all - agreements).empty?
   end
 
   def unaccepted_agreements
-    Agreement.all - self.agreements
+    Agreement.all - agreements
   end
 
   def as_json(options = {})
@@ -297,5 +297,4 @@ class Questionnaire < ApplicationRecord
     end
     UserMailer.rsvp_reminder_email(user_id).deliver_later(wait_until: deliver_date) if deliver_date.present?
   end
-
 end
