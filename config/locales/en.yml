@@ -58,6 +58,7 @@ en:
         name: 'Agreements are displayed to applicants as: "I read & accept the *agreement_name* agreement."'
       hackathon_config:
         accepting_questionnaires: Specify and allow questionnaires to be accepted.
+        digital_hackathon: Optimize HackathonManager for a digital hackathon. (Removes travel, dietary restrictions, etc.)
         last_day_to_apply: 'Last date to apply to your hackathon (format: YYYY-MM-DD)'
         event_start_date: 'Start date of your hackathon (format: YYYY-MM-DD)'
         auto_late_waitlist: Automatically set application status to "late waitlist" for new applications
