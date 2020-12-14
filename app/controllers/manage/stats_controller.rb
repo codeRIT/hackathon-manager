@@ -15,11 +15,11 @@ class Manage::StatsController < Manage::ApplicationController
     render json: AttendeeSponsorInfoDatatable.new(params, view_context: view_context)
   end
 
-  def mlh_applied_datatable
-    render json: MLHAppliedDatatable.new(params, view_context: view_context)
+  def applied_datatable
+    render json: AppliedDatatable.new(params, view_context: view_context)
   end
 
-  def mlh_checked_in_datatable
-    render json: MLHCheckedInDatatable.new(params, view_context: view_context)
+  def checked_in_datatable
+    render json: CheckedInDatatable.new(params, view_context: view_context)
   end
 end

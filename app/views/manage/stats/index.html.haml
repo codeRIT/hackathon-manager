@@ -2,79 +2,77 @@
 
 .row
   .col
-    %h5.dashboard-container-title Dietary Restrictions or Special Needs
+    %h5.dashboard-container-title= t(:dietary_restrictions_special_needs, scope: 'pages.manage.stats')
     %table.datatable.stats-dietary.table.table-striped.table-hover{ "data-source" => dietary_restrictions_special_needs_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
-          %th ID
-          %th First Name
-          %th Last Name
-          %th Email
-          %th Phone
-          %th Questionnaire
-          %th Checked In
-          %th Dietary Restrictions
-          %th Special Needs
+          %th= t(:id, scope: 'pages.manage.stats')
+          %th= t(:first_name, scope: 'pages.manage.stats')
+          %th= t(:last_name, scope: 'pages.manage.stats')
+          %th= t(:email, scope: 'pages.manage.stats')
+          %th= t(:phone, scope: 'pages.manage.stats')
+          %th= t(:questionnaire, scope: 'pages.manage.stats')
+          %th= t(:checked_in, scope: 'pages.manage.stats')
+          %th= t(:dietary_restrictions, scope: 'pages.manage.stats')
+          %th= t(:special_needs, scope: 'pages.manage.stats')
       %tbody
 
 - if !HackathonConfig['digital_hackathon']
   .row
     .col
-      %h5.dashboard-container-title Attendees Not Traveling From Their School
+      %h5.dashboard-container-title= t(:attendees_not_traveling_from_their_school, scope: 'pages.manage.stats')
       %table.datatable.stats-notschooltravel.table.table-striped.table-hover{ "data-source" => alt_travel_datatable_manage_stats_path(format: :json) }
         %thead
           %tr
-            %th ID
-            %th First Name
-            %th Last Name
-            %th Email
-            %th Phone
-            %th Questionnaire
-            %th Traveling From
-            %th Questionnaire Status
+            %th= t(:id, scope: 'pages.manage.stats')
+            %th= t(:first_name, scope: 'pages.manage.stats')
+            %th= t(:last_name, scope: 'pages.manage.stats')
+            %th= t(:email, scope: 'pages.manage.stats')
+            %th= t(:phone, scope: 'pages.manage.stats')
+            %th= t(:questionnaire, scope: 'pages.manage.stats')
+            %th= t(:traveling_from, scope: 'pages.manage.stats')
+            %th= t(:questionnaire_status, scope: 'pages.manage.stats')
         %tbody
 
 .row
   .col
-    %h5.dashboard-container-title Attendee Info for Sponsors
+    %h5.dashboard-container-title= t(:attendee_info_for_sponsors, scope: 'pages.manage.stats')
     %table.datatable.stats-attendeeinfo.table.table-striped.table-hover{ "data-source" => attendee_sponsor_info_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
-          %th ID
-          %th First name
-          %th Last name
-          %th Email
-          %th School
-          %th Open Source Link
-          %th Portfolio Link
+          %th= t(:id, scope: 'pages.manage.stats')
+          %th= t(:first_name, scope: 'pages.manage.stats')
+          %th= t(:last_name, scope: 'pages.manage.stats')
+          %th= t(:email, scope: 'pages.manage.stats')
+          %th= t(:school, scope: 'pages.manage.stats')
+          %th= t(:open_source_link, scope: 'pages.manage.stats')
+          %th= t(:portfolio_link, scope: 'pages.manage.stats')
       %tbody
 
 .row
   .col
-    %h5.dashboard-container-title MLH Info (applied)
-    %table.datatable.stats-mlhinfo-applied.table.table-striped.table-hover{ "data-source" => mlh_applied_datatable_manage_stats_path(format: :json) }
+    %h5.dashboard-container-title= t(:applied_attendees, scope: 'pages.manage.stats')
+    %table.datatable.stats-mlhinfo-applied.table.table-striped.table-hover{ "data-source" => applied_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
-          %th ID
-          %th First name
-          %th Last name
-          %th Email
-          %th Phone
-          %th School Name
+          %th= t(:id, scope: 'pages.manage.stats')
+          %th= t(:first_name, scope: 'pages.manage.stats')
+          %th= t(:last_name, scope: 'pages.manage.stats')
+          %th= t(:email, scope: 'pages.manage.stats')
+          %th= t(:phone, scope: 'pages.manage.stats')
+          %th= t(:school, scope: 'pages.manage.stats')
       %tbody
 
 .row
   .col
-    %h5.dashboard-container-title MLH Info (checked in)
-    %table.datatable.stats-mlhinfo-checkedin.table.table-striped.table-hover{ "data-source" => mlh_checked_in_datatable_manage_stats_path(format: :json) }
+    %h5.dashboard-container-title= t(:checked_in_attendees, scope: 'pages.manage.stats')
+    %table.datatable.stats-mlhinfo-checkedin.table.table-striped.table-hover{ "data-source" => checked_in_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
-          %th ID
-          %th First name
-          %th Last name
-          %th Email
-          %th Phone
-          %th School Name
+          %th= t(:id, scope: 'pages.manage.stats')
+          %th= t(:first_name, scope: 'pages.manage.stats')
+          %th= t(:last_name, scope: 'pages.manage.stats')
+          %th= t(:email, scope: 'pages.manage.stats')
+          %th= t(:phone, scope: 'pages.manage.stats')
+          %th= t(:school, scope: 'pages.manage.stats')
       %tbody
-
-.mb-4
