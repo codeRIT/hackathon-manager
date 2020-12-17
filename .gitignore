@@ -40,4 +40,4 @@
 .DS_Store
 
 # Redis
-*.rdb
+dump.rdb

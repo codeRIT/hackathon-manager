@@ -22,9 +22,9 @@ document.addEventListener('turbolinks:load', function() {
                 $(this)
                   .parent()
                   .text()
-                  .includes('I accept')
+                  .includes('I read and accept')
               ) {
-                notify(this, 'Please read & accept');
+                notify(".agreement_input", 'Please read & accept');
               } else {
                 notify(this, 'Missing Information');
               }
@@ -73,6 +73,13 @@ document.addEventListener('turbolinks:load', function() {
       }
       if (success) {
         $(this)
+          .parent()
+          .removeClass('field_with_errors')
+          .find('.error')
+          .fadeOut(200, function() {
+            $(this).remove();
+          });
+        $(".agreement_input")
           .parent()
           .removeClass('field_with_errors')
           .find('.error')

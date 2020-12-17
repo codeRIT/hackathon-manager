@@ -12,6 +12,7 @@ class Manage::CheckinsController < Manage::ApplicationController
   end
 
   def show
+    @agreements = Agreement.all
     respond_with(:manage, @questionnaire)
   end
 
