@@ -192,7 +192,7 @@ en:
         title: Legal Agreements
         notice: "These are legal agreements that are required to be reviewed and agreed upon by all applicants of %{hackathon_name}."
         name: Name
-        agreement_url: Agreement URL
+        agreement: Agreement
         new: New Agreement
         edit: Edit Agreement
       settings:
