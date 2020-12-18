@@ -9,7 +9,6 @@ class Agreement < ApplicationRecord
 
   def formatted_agreement
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-
-    markdown.render(agreement).html_safe
+    markdown.render(agreement).gsub("<a href=", "<a target=\“_blank\” rel=\"noreferrer noopener\" href=").html_safe
   end
 end
