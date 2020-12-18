@@ -20,27 +20,17 @@ class Manage::AgreementsController < Manage::ApplicationController
 
   # POST /agreements
   def create
-    if !agreement_params['agreement_url'].start_with?('http://', 'https://')
-      flash[:alert] = "Agreement URL must start with http:// or https://"
-      redirect_to new_manage_agreement_path
-    else
-      @agreement = Agreement.new(agreement_params)
-      @agreement.save
-      flash[:notice] = "#{@agreement.name} was successfully created."
-      redirect_to manage_agreements_path
-    end
+    @agreement = Agreement.new(agreement_params)
+    @agreement.save
+    flash[:notice] = "#{@agreement.name} was successfully created."
+    redirect_to manage_agreements_path
   end
 
   # PATCH/PUT /agreements/1
   def update
-    if !agreement_params['agreement_url'].nil? && !agreement_params['agreement_url'].start_with?('http://', 'https://')
-      flash[:alert] = "Agreement URL must start with http:// or https://"
-      redirect_to edit_manage_agreement_url
-    else
-      @agreement.update_attributes(agreement_params)
-      flash[:notice] = nil
-      redirect_to manage_agreements_path
-    end
+    @agreement.update_attributes(agreement_params)
+    flash[:notice] = nil
+    redirect_to manage_agreements_path
   end
 
   # DELETE /agreements/1
@@ -60,7 +50,7 @@ class Manage::AgreementsController < Manage::ApplicationController
   # Only allow a trusted parameter "white list" through.
   def agreement_params
     params.require(:agreement).permit(
-      :name, :agreement_url
+      :name, :agreement
     )
   end
 end
