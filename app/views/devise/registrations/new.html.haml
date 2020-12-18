@@ -8,7 +8,7 @@
     #disclaimer
       - if !HackathonConfig['accepting_questionnaires']
         .center
-          %strong We are no longer accepting applications. Thanks to everyone who applied!
+          %p= markdown(HackathonConfig['questionnaires_closed_message'])
         %br
       - if HackathonConfig['disclaimer_message'].present?
         = markdown(HackathonConfig['disclaimer_message'])
