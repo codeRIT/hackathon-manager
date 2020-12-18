@@ -12,7 +12,7 @@
         %th
           = t(:name, scope: 'pages.manage.agreements')
         %th
-          = t(:agreement_url, scope: 'pages.manage.agreements')
+          = t(:agreement, scope: 'pages.manage.agreements')
 
     %tbody
       - @agreements.each do |agreement|
@@ -25,4 +25,4 @@
             %strong
               = agreement.name
           %td
-            = agreement.agreement_url
+            = markdown(agreement.agreement)
