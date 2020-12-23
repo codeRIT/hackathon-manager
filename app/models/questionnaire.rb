@@ -129,13 +129,13 @@ class Questionnaire < ApplicationRecord
   end
 
   def portfolio_url=(value)
-    value = value.downcase if !value.blank?
+    value = value.downcase unless value.blank?
     value = "http://" + value if !value.blank? && !value.include?("http://") && !value.include?("https://")
     super value
   end
 
   def vcs_url=(value)
-    value = value.downcase if !value.blank?
+    value = value.downcase unless value.blank?
     value = "https://" + value if !value.blank? && !value.include?("http://") && !value.include?("https://")
     super value
   end
