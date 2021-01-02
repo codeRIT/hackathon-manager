@@ -26,6 +26,11 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
       assert_equal "", HackathonConfig["custom_css"]
     end
+
+    should "not allow access to reset hackathon" do
+      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      assert_redirected_to new_user_session_path
+    end
   end
 
   context "while authenticated as a user" do
@@ -59,6 +64,11 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
       assert_equal "", HackathonConfig["custom_css"]
     end
+
+    should "not allow access to reset hackathon" do
+      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      assert_redirected_to root_path
+    end
   end
 
   context "while authenticated as a volunteer" do
@@ -89,6 +99,11 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
       assert_equal "", HackathonConfig["custom_css"]
     end
+
+    should "not allow access to reset hackathon" do
+      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      assert_redirected_to manage_checkins_path
+    end
   end
 
   context "while authenticated as an organizer" do
@@ -118,6 +133,11 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       HackathonConfig["custom_css"] = ""
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
       assert_equal "", HackathonConfig["custom_css"]
+    end
+
+    should "not allow access to reset hackathon" do
+      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      assert_redirected_to manage_root_path
     end
   end
 
@@ -168,6 +188,11 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       HackathonConfig["custom_css"] = ".foo {\nabc\n}\n\n:root {\n  --foo: #000;\n}\n\n.bar {\n  color: red;\n}"
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
       assert_equal ".foo {\nabc\n}\n\n:root {\n  --foo: #fff;\n}\n\n.bar {\n  color: red;\n}", HackathonConfig["custom_css"]
+    end
+
+    should "allow access to reset hackathon" do
+      post :reset_hackathon, params: { directors: "1", volunteers: "1", organizers: "1", users: "1"}
+      assert_redirected_to manage_configs_path
     end
   end
 end

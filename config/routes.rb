@@ -110,6 +110,7 @@ Rails.application.routes.draw do
       patch :update_only_css_variables, on: :member
       get :enter_theming_editor, on: :collection
       get :exit_theming_editor, on: :collection
+      post :reset_hackathon, on: :collection
     end
     resources :trackable_events
     resources :trackable_tags

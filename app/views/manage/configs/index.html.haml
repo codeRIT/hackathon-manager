@@ -193,3 +193,41 @@
               %small
                 %i To switch to SMTP, set the <code>SMTP_ADDRESS</code> environment variable
             = render 'config_row', name: 'SendGrid API Key', key: 'SENDGRID_API_KEY', secret: true
+
+    .card.mb-3
+      .card-body
+        %h4.card-title.font-weight-bold
+          Reset
+          = HackathonConfig['name']
+        %h6.card-subtitle.mb-2.text-muted
+          This will delete all users and questionnaires for the selected roles
+        %button.btn.btn-danger{"data-toggle"=>"modal", "data-target"=>"#resetModal"} Reset Hackathon
+
+.modal{:id=>"resetModal"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5.modal-title Are you sure you want to do this?
+        %button.close{:type=>"button", "data-dismiss"=>"modal", "aria-label"=>"Close"}
+          %span{"aria-hidden"=>"true"} &times;
+      .modal-body
+        %p This action is irreversible. This will delete all the questionnaires and user accounts for the roles selected
+        =form_for :hackathonReset, url:"configs/reset_hackathon" do |f|
+          .form-check
+            = f.check_box :users, class: "form-check-input"
+            = f.label :users, "Users", class: "form-check-label"
+          .form-check
+            = f.check_box :volunteers, class: "form-check-input"
+            = f.label :volunteers, "Volunteers", class: "form-check-label"
+          .form-check
+            = f.check_box :organizer, class: "form-check-input"
+            = f.label :organizer, "Organizer", class: "form-check-label"
+          .form-check
+            = f.check_box :directors, class: "form-check-input"
+            = f.label :directors, "Directors", class: "form-check-label"
+          .form-group
+            = f.label :hackName, "Type \"Reset Hackathon\" to reset #{HackathonConfig['name']}"
+            = f.text_field :hackName, class: "form-control w-100", id: "resetText"
+
+          %p.center
+            = f.submit "Reset", disabled: true, class:"btn btn-danger w-100", id: "resetButton"

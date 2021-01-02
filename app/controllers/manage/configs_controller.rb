@@ -6,6 +6,7 @@ class Manage::ConfigsController < Manage::ApplicationController
 
   def index
     @config = HackathonConfig.get_all
+    @name = HackathonConfig['name']
     @basics = ['name', 'event_start_date', 'digital_hackathon'].freeze
     @questionnaire_settings = ['accepting_questionnaires', 'last_day_to_apply', 'auto_late_waitlist', 'disabled_fields'].freeze
     @styling = ['default_page_title', 'homepage_url', 'logo_asset', 'email_banner_asset', 'favicon_asset', 'custom_css'].freeze
@@ -59,6 +60,25 @@ class Manage::ConfigsController < Manage::ApplicationController
 
   def exit_theming_editor
     cookies.delete :theming_editor
+    redirect_to manage_configs_path
+  end
+
+  def reset_hackathon
+    data = params[:hackathonReset]
+    roles_to_delete =
+      {user: data[:users].to_i,
+       volunteer: data[:volunteers].to_i,
+       organizer: data[:organizers].to_i,
+       director: data[:directors].to_i}
+    roles_to_delete.each do |r, delete|
+      if delete == 1
+        User.where(role: r).each do |u|
+          Questionnaire.where(user_id: u.id).destroy_all
+        end
+        User.where(role: r).destroy_all
+      end
+    end
+
     redirect_to manage_configs_path
   end
 
