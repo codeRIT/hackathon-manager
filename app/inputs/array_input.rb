@@ -1,5 +1,5 @@
 class ArrayInput < SimpleForm::Inputs::StringInput
-  def input(wrapper_options = nil)
+  def input(_wrapper_options = nil)
     input_html_options[:type] ||= input_type
     existing_values = object.public_send(attribute_name)
     existing_values.push(nil) if existing_values.blank?

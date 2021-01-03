@@ -47,9 +47,9 @@ class Questionnaire < ApplicationRecord
                       with: %r{\A((https?:\/\/)?(www\.)?((github\.com)|(gitlab\.com)|(bitbucket\.org))\/(.*){0,62})\z}i,
                       allow_blank: true,
                       message: "Must be a GitHub, GitLab or Bitbucket url"
-                      
+
   serialize :extra_question_data, Hash
-  validates_each :extra_question_data do |record, attr, value|
+  validates_each :extra_question_data do |record, _attr, value|
     problems = ''
     value.each do |q, a|
       extra_question = ExtraQuestion.find(q)

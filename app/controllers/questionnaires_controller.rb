@@ -32,11 +32,11 @@ class QuestionnairesController < ApplicationController
       info = session["devise.provider_data"]["info"]
       @skip_my_mlh_fields = true
       @questionnaire.tap do |q|
-        q.phone          = info["phone_number"]
+        q.phone = info["phone_number"]
         q.level_of_study = info["level_of_study"]
-        q.major          = info["major"]
-        q.date_of_birth  = info["date_of_birth"]
-        q.gender         = info["gender"]
+        q.major = info["major"]
+        q.date_of_birth = info["date_of_birth"]
+        q.gender = info["gender"]
 
         school = School.where(name: session["devise.provider_data"]["info"]["school"]["name"]).first_or_create do |s|
           s.name = session["devise.provider_data"]["info"]["school"]["name"]
@@ -128,19 +128,13 @@ class QuestionnairesController < ApplicationController
   private
 
   def questionnaire_params
-    extra_questions = ExtraQuestion.all
-    questions = []
-    extra_questions.each do |q|
-      questions.append(q.id.to_s)
-    end
     params.require(:questionnaire).permit(
       :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
-      :portfolio_url, :vcs_url, :bus_captain_interest,
-      :phone, :can_share_info, :travel_not_from_school, :travel_location,
-      :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend, agreement_ids: [],
-      extra_question_data: questions
+      :portfolio_url, :vcs_url, :bus_captain_interest, :phone, :can_share_info,
+      :travel_not_from_school, :travel_location, :graduation_year, :race_ethnicity,
+      :resume, :delete_resume, :why_attend, agreement_ids: [], extra_question_data: []
     )
   end
 
