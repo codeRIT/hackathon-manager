@@ -13,14 +13,15 @@
   %b Portfolio link:
   = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank') : 'Not provided'
 %p
-  %b GitHub/BitBucket link:
+  %b GitHub/GitLab/Bitbucket link:
   = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : 'Not provided'
 %p
   %b Resume:
   = @questionnaire.resume.attached? ? link_to("Download &raquo;".html_safe, @questionnaire.resume) : 'Not provided'
-%p
-  %b Traveling from:
-  = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "My school (#{@questionnaire.school.full_name})"
+- if !HackathonConfig['digital_hackathon']
+  %p
+    %b Traveling from:
+    = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "My school (#{@questionnaire.school.full_name})"
 %p
   %b Shirt size:
   = @questionnaire.shirt_size

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_12_211421) do
+ActiveRecord::Schema.define(version: 2020_12_18_010133) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "agreement"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "agreements_questionnaires", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "agreement_id"
+    t.integer "questionnaire_id"
+    t.index ["agreement_id", "questionnaire_id"], name: "index_agreements_questionnaires"
   end
 
   create_table "audits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -60,7 +73,9 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.integer "query_id"
     t.text "statement"
     t.string "data_source"
-    t.datetime "created_at"
+    t.timestamp "created_at"
+    t.index ["query_id"], name: "index_blazer_audits_on_query_id"
+    t.index ["user_id"], name: "index_blazer_audits_on_user_id"
   end
 
   create_table "blazer_checks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -71,9 +86,11 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.text "emails"
     t.string "check_type"
     t.text "message"
-    t.datetime "last_run_at"
+    t.timestamp "last_run_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_blazer_checks_on_creator_id"
+    t.index ["query_id"], name: "index_blazer_checks_on_query_id"
   end
 
   create_table "blazer_dashboard_queries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -82,6 +99,8 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dashboard_id"], name: "index_blazer_dashboard_queries_on_dashboard_id"
+    t.index ["query_id"], name: "index_blazer_dashboard_queries_on_query_id"
   end
 
   create_table "blazer_dashboards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,6 +108,7 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_blazer_dashboards_on_creator_id"
   end
 
   create_table "blazer_queries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -99,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.string "data_source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_blazer_queries_on_creator_id"
   end
 
   create_table "bus_lists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -173,9 +194,9 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.string "subject"
     t.string "recipients"
     t.text "body"
-    t.datetime "queued_at"
-    t.datetime "started_at"
-    t.datetime "delivered_at"
+    t.timestamp "queued_at"
+    t.timestamp "started_at"
+    t.timestamp "delivered_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "template", default: "default"
@@ -239,7 +260,6 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.string "portfolio_url"
     t.string "vcs_url"
     t.integer "user_id"
-    t.boolean "agreement_accepted", default: false
     t.string "acc_status", default: "pending"
     t.integer "acc_status_author_id"
     t.datetime "acc_status_date"
@@ -249,13 +269,11 @@ ActiveRecord::Schema.define(version: 2020_09_12_211421) do
     t.datetime "checked_in_at"
     t.string "phone"
     t.boolean "can_share_info", default: false
-    t.boolean "code_of_conduct_accepted", default: false
     t.text "special_needs"
     t.string "gender"
     t.string "major"
     t.boolean "travel_not_from_school", default: false
     t.string "travel_location"
-    t.boolean "data_sharing_accepted"
     t.string "level_of_study"
     t.string "interest"
     t.text "why_attend"

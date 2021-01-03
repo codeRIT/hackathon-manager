@@ -38,41 +38,28 @@
         = f.input :race_ethnicity, as: :select, collection: Questionnaire::POSSIBLE_RACE_ETHNICITIES, include_blank: "(select one...)", label: "Race/Ethnicity", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
 
         = f.input :portfolio_url, label: "Portfolio link", placeholder: "http://mywebsite.com"
-        = f.input :vcs_url, label: "GitHub/Bitbucket link", placeholder: "https://github.com/coderit"
+        = f.input :vcs_url, label: "GitHub/GitLab/Bitbucket link", placeholder: "https://github.com/coderit"
         = f.input :resume, as: :deletable_attachment, hint: "Must be a PDF, under 2MB", input_html: { "data-validate" => "file-max-size file-content-type", "data-validate-file-max-size" => "2097152", "data-validate-file-content-type" => "application/pdf" }, label: "Resume"
         = f.input :can_share_info, as: :radio_buttons, collection: { " Yes please!" => true, " No, thank you." => false }, label: "Share info with sponsors?", hint: "Our sponsors would receive info such as your name, email, resume, GitHub link, etc"
 
-        - travel_state = !@questionnaire.new_record? && @questionnaire.travel_not_from_school
-        = f.input :travel_not_from_school, as: :radio_buttons, collection: { " My school" => false, " Somewhere else" => true }, label: "I am traveling from..."
-        = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Where are you traveling from?", placeholder: "New York City"
+        - if !HackathonConfig['digital_hackathon']
+          - travel_state = !@questionnaire.new_record? && @questionnaire.travel_not_from_school
+          = f.input :travel_not_from_school, as: :radio_buttons, collection: { " My school" => false, " Somewhere else" => true }, label: "I am traveling from..."
+          = f.input :travel_location, input_html: { "data-validate" => "presence", disabled: !travel_state }, wrapper_html: { style: travel_state ? "" : "display: none" }, label: "Where are you traveling from?", placeholder: "New York City"
 
         = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
-        = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+
+        - if !HackathonConfig['digital_hackathon']
+          = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
         = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
 
-      %hr
-
-      .form-inputs
-        .supporting-text
-          Please read the
-          = link_to asset_url(HackathonConfig['agreement_pdf_asset']), target: '_blank' do
-            #{HackathonConfig['name']} Agreement
-            %span.fa.fa-external-link.icon-space-l-half
-        = f.input :agreement_accepted, as: :formatted_boolean, label: "I read & accept the #{HackathonConfig['name']} agreement.", input_html: { "data-validate" => "presence" }
-
-        .supporting-text
-          Please read the
-          %a{ href:"http://static.mlh.io/docs/mlh-code-of-conduct.pdf", target: "_blank" }
-            MLH Code of Conduct
-            %span.fa.fa-external-link.icon-space-l-half
-        = f.input :code_of_conduct_accepted, as: :formatted_boolean, label: "I read & accept the MLH Code of Conduct.", input_html: { "data-validate" => "presence" }
-
-        .supporting-text
-          I authorize you to share certain application/registration information for event administration, ranking, MLH administration, pre and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy. I further I agree to the terms of both the
-          <a href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions" target="_blank">MLH Contest Terms and Conditions</a>
-          and the
-          <a href="https://mlh.io/privacy" target="_blank">MLH Privacy Policy</a>.
-        = f.input :data_sharing_accepted, as: :formatted_boolean, label: "I read & accept the MLH policies.", input_html: { "data-validate" => "presence" }
+      - if @agreements.any?
+        %hr
+        %strong Agreements
+        %p Please review the agreements and click the corresponding checkbox next to each agreement to agree.
+        .form-inputs
+          .agreement_input
+            = f.association :agreements, as: :check_boxes, label_method: :formatted_agreement, value_method: :id, label: "", wrapper_html: { style: 'display: block' }, input_html: { "data-validate" => "presence" }
 
       .right
         %button.button{ type: "button", "data-wizard" => "previous" } Previous

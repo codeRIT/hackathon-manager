@@ -81,10 +81,11 @@
               %span
                 = t(:travel, scope: 'layouts.manage.navigation')
             %ul.nav.flex-column.mb-2
-              %li.nav-item
-                = active_link_to manage_bus_lists_path, class: "nav-link" do
-                  .fa.fa-bus.fa-fw.icon-space-r-half
-                  = t(:title, scope: 'pages.manage.bus-lists')
+              - if !HackathonConfig['digital_hackathon']
+                %li.nav-item
+                  = active_link_to manage_bus_lists_path, class: "nav-link" do
+                    .fa.fa-bus.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.bus-lists')
               %li.nav-item
                 = active_link_to manage_schools_path, class: "nav-link" do
                   .fa.fa-home.fa-fw.icon-space-r-half
@@ -104,6 +105,10 @@
                     .fa.fa-inbox.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.extra-questions')
                 %li.nav-item
+                  = active_link_to manage_agreements_path, class: "nav-link" do
+                    .fa.fa-balance-scale.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.agreements')
+                %li.nav-item
                   = active_link_to manage_configs_path, class: "nav-link" do
                     .fa.fa-wrench.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.settings')
@@ -112,6 +117,12 @@
                 %span
                   = t(:advanced, scope: 'layouts.manage.navigation')
               %ul.nav.flex-column.mb-2
+                %li.nav-item
+                  = active_link_to oauth_applications_path, class: "nav-link" do
+                    .fa.fa-unlock.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.doorkeeper')
+                    .nav-item-description
+                      = t(:doorkeeper, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
                   = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half
@@ -127,13 +138,6 @@
                     .nav-item-description
                       = t(:blazer, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
-                  = active_link_to oauth_applications_path, target: '_blank', class: "nav-link" do
-                    .fa.fa-unlock.fa-fw.icon-space-r-half
-                    = t(:title, scope: 'pages.manage.doorkeeper')
-                    %span.fa.fa-external-link.icon-space-l-half
-                    .nav-item-description
-                      = t(:doorkeeper, scope: 'layouts.manage.navigation.descriptors')
-                %li.nav-item
                   = active_link_to manage_data_exports_path, class: "nav-link" do
                     .fa.fa-download.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.data-exports')
@@ -145,7 +149,7 @@
           %div.mb-4.text-center
             %small.text-muted
               Powered by
-              = link_to 'hackathon-manager', 'https://codeRIT.org/hackathon-manager/'
+              = link_to 'HackathonManager', 'https://codeRIT.org/hackathon-manager/'
               &nbsp;·&nbsp;
               = link_to 'Changelog', 'https://github.com/codeRIT/hackathon-manager/releases'
               &nbsp;·&nbsp;

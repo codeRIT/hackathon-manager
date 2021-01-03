@@ -76,7 +76,7 @@ class Manage::StatsControllerTest < ActionController::TestCase
     should "allow access to all data endpoints" do
       school = create(:school)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _name|
-        create_list(:questionnaire, 5, school_id: school.id, acc_status: status, dietary_restrictions: "Vegetarian", special_needs: "Something")
+        create_list(:questionnaire, 5, school_id: school.id, acc_status: status, dietary_restrictions: "Vegetarian", special_needs: "Something", agreements: Agreement.all)
       end
 
       paths.each do |path|
@@ -101,7 +101,7 @@ class Manage::StatsControllerTest < ActionController::TestCase
     should "allow access to all data endpoints" do
       school = create(:school)
       Questionnaire::POSSIBLE_ACC_STATUS.each do |status, _name|
-        create_list(:questionnaire, 5, school_id: school.id, acc_status: status, dietary_restrictions: "Vegetarian", special_needs: "Something")
+        create_list(:questionnaire, 5, school_id: school.id, acc_status: status, dietary_restrictions: "Vegetarian", special_needs: "Something", agreements: Agreement.all)
       end
 
       paths.each do |path|

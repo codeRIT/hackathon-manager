@@ -1,4 +1,7 @@
 - title "RSVP"
+.form-container
+  - if @questionnaire.unaccepted_agreements.any?
+    = render partial: 'unaccepted_agreements_notice'
 = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
   .form-container
     #disclaimer
@@ -40,7 +43,7 @@
 
       = f.button :submit, value: "Update"
 
-  - if BusList.any?
+  - if BusList.any? && !HackathonConfig['digital_hackathon']
     .form-container.hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
       #disclaimer
         %h1.section-title

@@ -18,13 +18,8 @@ document.addEventListener('turbolinks:load', function() {
         switch (types[i]) {
           case 'presence':
             if (!value || $.trim(value).length < 1) {
-              if (
-                $(this)
-                  .parent()
-                  .text()
-                  .includes('I accept')
-              ) {
-                notify(this, 'Please read & accept');
+              if ($(this).parents('.agreement_input')) {
+                notify('.agreement_input', 'Please read & accept');
               } else {
                 notify(this, 'Missing Information');
               }
@@ -73,6 +68,13 @@ document.addEventListener('turbolinks:load', function() {
       }
       if (success) {
         $(this)
+          .parent()
+          .removeClass('field_with_errors')
+          .find('.error')
+          .fadeOut(200, function() {
+            $(this).remove();
+          });
+        $(".agreement_input")
           .parent()
           .removeClass('field_with_errors')
           .find('.error')

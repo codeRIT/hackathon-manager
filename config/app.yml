@@ -3,6 +3,7 @@ defaults: &defaults
 
   # Logic config
   accepting_questionnaires: true
+  digital_hackathon: false
   last_day_to_apply: "<%= Date.new(2000, 1, 1).to_s %>"
   event_start_date: "<%= Date.new(2000, 1, 1).to_s %>"
   auto_late_waitlist: false
@@ -12,7 +13,6 @@ defaults: &defaults
   logo_asset: ""
   favicon_asset: ""
   email_banner_asset: ""
-  agreement_pdf_asset: agreement.pdf
   email_from: '"HackFoo" <hello@example.com>'
   default_page_title: HackFoo - Jan 1-2, 2017
   homepage_url: ""

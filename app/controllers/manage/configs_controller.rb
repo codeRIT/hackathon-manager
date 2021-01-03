@@ -6,6 +6,10 @@ class Manage::ConfigsController < Manage::ApplicationController
 
   def index
     @config = HackathonConfig.get_all
+    @basics = ['name', 'event_start_date', 'digital_hackathon'].freeze
+    @questionnaire_settings = ['accepting_questionnaires', 'last_day_to_apply', 'auto_late_waitlist', 'disabled_fields'].freeze
+    @styling = ['default_page_title', 'homepage_url', 'logo_asset', 'email_banner_asset', 'favicon_asset', 'custom_css'].freeze
+    @communications = ['email_from', 'disclaimer_message', 'thanks_for_applying_message', 'thanks_for_rsvp_message', 'questionnaires_closed_message', 'bus_captain_notes']
     respond_with(HackathonConfig.get_all)
   end
 
@@ -17,7 +21,7 @@ class Manage::ConfigsController < Manage::ApplicationController
     value = params[:hackathon_config][key]
     value = true if value == "true"
     value = false if value == "false"
-    if @config.var.end_with?("_asset") && !value.start_with?('http://', 'https://')
+    if @config.var.start_with?("agreement_") && !value.start_with?('http://', 'https://')
       flash[:alert] = "Config \"#{key}\" must start with http:// or https://"
       render :edit
     elsif @config.value != value

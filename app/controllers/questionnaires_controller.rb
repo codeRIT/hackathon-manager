@@ -26,6 +26,7 @@ class QuestionnairesController < ApplicationController
     end
     @questionnaire = Questionnaire.new
     @extra_questions = ExtraQuestion.all
+    @agreements = Agreement.all
 
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
       info = session["devise.provider_data"]["info"]
@@ -53,6 +54,7 @@ class QuestionnairesController < ApplicationController
   # GET /apply/edit
   def edit
     @extra_questions = ExtraQuestion.all
+    @agreements = Agreement.all
   end
 
   # POST /apply
@@ -65,6 +67,7 @@ class QuestionnairesController < ApplicationController
 
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
     @questionnaire.user_id = current_user.id
+    @agreements = Agreement.all
 
     respond_to do |format|
       if @questionnaire.save
@@ -89,7 +92,7 @@ class QuestionnairesController < ApplicationController
         format.html { redirect_to questionnaires_path, notice: 'Application was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to edit_questionnaires_path }
+        format.html { redirect_to edit_questionnaires_url }
         format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
       end
     end
@@ -134,10 +137,9 @@ class QuestionnairesController < ApplicationController
       :email, :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
-      :portfolio_url, :vcs_url, :agreement_accepted, :bus_captain_interest,
-      :phone, :can_share_info, :code_of_conduct_accepted,
-      :travel_not_from_school, :travel_location, :data_sharing_accepted,
-      :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
+      :portfolio_url, :vcs_url, :bus_captain_interest,
+      :phone, :can_share_info, :travel_not_from_school, :travel_location,
+      :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend, agreement_ids: [],
       extra_question_data: questions
     )
   end
