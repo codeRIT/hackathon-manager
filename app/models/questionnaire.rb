@@ -43,8 +43,10 @@ class Questionnaire < ApplicationRecord
 
   validates :portfolio_url, url: { allow_blank: true }
   validates :vcs_url, url: { allow_blank: true }
-  validates_format_of :vcs_url, with: %r{((github.com\/\w+\/?)|(gitlab.com\/\w+\/?)|(bitbucket.org\/\w+\/?))}, allow_blank: true, message: "Must be a GitHub, GitLab or Bitbucket url"
-
+  validates_format_of :vcs_url,
+                      with: %r{\A((https?:\/\/)?(www\.)?((github\.com)|(gitlab\.com)|(bitbucket\.org))\/(.*){0,62})\z}i,
+                      allow_blank: true,
+                      message: "Must be a GitHub, GitLab or Bitbucket url"
   strip_attributes
 
   POSSIBLE_EXPERIENCES = {
@@ -130,12 +132,14 @@ class Questionnaire < ApplicationRecord
   end
 
   def portfolio_url=(value)
+    value = value.downcase unless value.blank?
     value = "http://" + value if !value.blank? && !value.include?("http://") && !value.include?("https://")
     super value
   end
 
   def vcs_url=(value)
-    value = "http://" + value if !value.blank? && !value.include?("http://") && !value.include?("https://")
+    value = value.downcase unless value.blank?
+    value = "https://" + value if !value.blank? && !value.include?("http://") && !value.include?("https://")
     super value
   end
 
