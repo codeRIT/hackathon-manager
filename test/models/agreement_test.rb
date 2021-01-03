@@ -4,10 +4,10 @@ class AgreementTest < ActiveSupport::TestCase
   should have_and_belong_to_many :questionnaires
 
   should strip_attribute :name
-  should strip_attribute :agreement_url
+  should strip_attribute :agreement
 
   should validate_presence_of :name
-  should validate_presence_of :agreement_url
+  should validate_presence_of :agreement
 
   should "not allow questionnaires to accept agreements for others" do
     @questionnaire1 = create(:questionnaire)
