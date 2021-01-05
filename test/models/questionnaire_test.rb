@@ -103,6 +103,8 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should allow_value('foo.com').for(:portfolio_url)
   should allow_value('github.com/foo', 'gitlab.com/bar', 'bitbucket.org/baz').for(:vcs_url)
   should allow_value('https://github.com/foo', 'https://gitlab.com/bar', 'https://bitbucket.org/baz').for(:vcs_url)
+  should allow_value('HttPs://gITHub.CoM/foo', 'hTTp://gitLAB.coM/bar').for(:vcs_url)
+  should allow_value('wWw.gITHub.CoM/fOo', 'hTTp://wWw.gitLAB.coM/f-fc-vx').for(:vcs_url)
   should_not allow_value('http://foo.com', 'https://bar.com').for(:vcs_url)
 
   context "#school" do
