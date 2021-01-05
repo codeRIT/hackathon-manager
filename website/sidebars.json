@@ -12,7 +12,7 @@
       "updating-hm",
       "2.0-whats-new"
     ],
-    "Docs": ["docs-overview", "questionnaires", "messages", "busses"],
+    "Docs": ["docs-overview", "questionnaires", "messages", "busses", "users-and-staff"],
     "API": ["api-overview", "api-testing-setup"],
     "Getting Help": ["resources"]
   }
