@@ -83,13 +83,13 @@ class QuestionnairesController < ApplicationController
   def update
     update_params = questionnaire_params
     update_params = convert_school_name_to_id(update_params)
-
+    @agreements = Agreement.all
     respond_to do |format|
       if @questionnaire.update_attributes(update_params)
         format.html { redirect_to questionnaires_path, notice: 'Application was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to edit_questionnaires_url }
+        format.html { render action: "edit" }
         format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
       end
     end
