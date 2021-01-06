@@ -30,7 +30,7 @@ class QuestionnairesController < ApplicationController
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
       info = session["devise.provider_data"]["info"]
       @skip_my_mlh_fields = true
-      if !all_my_mlh_fields_provided?
+      unless all_my_mlh_fields_provided?
         flash[:notice] = nil
         flash[:alert] = t(:my_mlh_null, scope: 'errors')
       end
