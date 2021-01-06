@@ -133,15 +133,9 @@ class QuestionnairesController < ApplicationController
   def all_my_mlh_fields_provided?
     info = session["devise.provider_data"]["info"]
 
-    return false if info["phone_number"].blank?
-    return false if info["level_of_study"].blank?
-    return false if info["major"].blank?
-    return false if info["date_of_birth"].blank?
-    return false if info["gender"].blank?
-    return false if info["school"].blank?
-    return false if info["school"]["name"].blank?
-
-    true
+    return true unless info["phone_number"].blank? || info["level_of_study"].blank? || info["major"].blank? ||
+                       info["date_of_birth"].blank? || info["gender"].blank? || info["school"].blank? ||
+                       info["school"]["name"].blank?
   end
 
   def questionnaire_params
