@@ -36,6 +36,8 @@ en:
     registrations:
       user:
         signed_up: Welcome! Your account has been created.
+  errors:
+    my_mlh_null: Some information from MyMLH is missing, please fill in the missing fields.
   simple_form:
     hints:
       bus_list:
@@ -136,7 +138,7 @@ en:
         title: Bus Lists
       schools:
         title: Schools
-      users: 
+      users:
         title: Users & Staff
         users: All Users
         staff: "%{hackathon_name} Staff"

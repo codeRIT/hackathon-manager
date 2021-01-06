@@ -11,6 +11,7 @@ class QuestionnairesController < ApplicationController
   # GET /apply
   # GET /apply.json
   def show
+    flash[:alert] = nil
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @questionnaire }
@@ -29,6 +30,10 @@ class QuestionnairesController < ApplicationController
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
       info = session["devise.provider_data"]["info"]
       @skip_my_mlh_fields = true
+      unless all_my_mlh_fields_provided?
+        flash[:notice] = nil
+        flash[:alert] = t(:my_mlh_null, scope: 'errors')
+      end
       @questionnaire.tap do |q|
         q.phone          = info["phone_number"]
         q.level_of_study = info["level_of_study"]
@@ -36,10 +41,12 @@ class QuestionnairesController < ApplicationController
         q.date_of_birth  = info["date_of_birth"]
         q.gender         = info["gender"]
 
-        school = School.where(name: session["devise.provider_data"]["info"]["school"]["name"]).first_or_create do |s|
-          s.name = session["devise.provider_data"]["info"]["school"]["name"]
+        if info["school"]
+          school = School.where(name: info["school"]["name"]).first_or_create do |s|
+            s.name = info["school"]["name"]
+          end
+          q.school_id = school.id
         end
-        q.school_id = school.id
       end
     end
 
@@ -123,6 +130,14 @@ class QuestionnairesController < ApplicationController
   end
 
   private
+
+  def all_my_mlh_fields_provided?
+    info = session["devise.provider_data"]["info"]
+
+    return true unless info["phone_number"].blank? || info["level_of_study"].blank? || info["major"].blank? ||
+                       info["date_of_birth"].blank? || info["gender"].blank? || info["school"].blank? ||
+                       info["school"]["name"].blank?
+  end
 
   def questionnaire_params
     params.require(:questionnaire).permit(
