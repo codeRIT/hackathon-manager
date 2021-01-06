@@ -36,6 +36,8 @@ en:
     registrations:
       user:
         signed_up: Welcome! Your account has been created.
+  errors:
+    my_mlh_null: Failed to retrieve application information from MyMLH, please continue manually.
   simple_form:
     hints:
       bus_list:

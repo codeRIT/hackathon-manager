@@ -11,6 +11,7 @@ class QuestionnairesController < ApplicationController
   # GET /apply
   # GET /apply.json
   def show
+    flash[:alert] = nil
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @questionnaire }
@@ -28,18 +29,23 @@ class QuestionnairesController < ApplicationController
 
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
       info = session["devise.provider_data"]["info"]
-      @skip_my_mlh_fields = true
-      @questionnaire.tap do |q|
-        q.phone          = info["phone_number"]
-        q.level_of_study = info["level_of_study"]
-        q.major          = info["major"]
-        q.date_of_birth  = info["date_of_birth"]
-        q.gender         = info["gender"]
+      if all_my_mlh_fields_provided?
+        @skip_my_mlh_fields = true
+        @questionnaire.tap do |q|
+          q.phone          = info["phone_number"]
+          q.level_of_study = info["level_of_study"]
+          q.major          = info["major"]
+          q.date_of_birth  = info["date_of_birth"]
+          q.gender         = info["gender"]
 
-        school = School.where(name: session["devise.provider_data"]["info"]["school"]["name"]).first_or_create do |s|
-          s.name = session["devise.provider_data"]["info"]["school"]["name"]
+          school = School.where(name: info["school"]["name"]).first_or_create do |s|
+            s.name = info["school"]["name"]
+          end
+          q.school_id = school.id
         end
-        q.school_id = school.id
+      else
+        flash[:notice] = nil
+        flash[:alert] = t(:my_mlh_null, scope: 'errors')
       end
     end
 
@@ -123,6 +129,20 @@ class QuestionnairesController < ApplicationController
   end
 
   private
+
+  def all_my_mlh_fields_provided?
+    info = session["devise.provider_data"]["info"]
+
+    return false if info["phone_number"].blank?
+    return false if info["level_of_study"].blank?
+    return false if info["major"].blank?
+    return false if info["date_of_birth"].blank?
+    return false if info["gender"].blank?
+    return false if info["school"].blank?
+    return false if info["school"]["name"].blank?
+
+    true
+  end
 
   def questionnaire_params
     params.require(:questionnaire).permit(
