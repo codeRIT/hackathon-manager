@@ -29,23 +29,24 @@ class QuestionnairesController < ApplicationController
 
     if session["devise.provider_data"] && session["devise.provider_data"]["info"]
       info = session["devise.provider_data"]["info"]
-      if all_my_mlh_fields_provided?
-        @skip_my_mlh_fields = true
-        @questionnaire.tap do |q|
-          q.phone          = info["phone_number"]
-          q.level_of_study = info["level_of_study"]
-          q.major          = info["major"]
-          q.date_of_birth  = info["date_of_birth"]
-          q.gender         = info["gender"]
+      @skip_my_mlh_fields = true
+      if !all_my_mlh_fields_provided?
+        flash[:notice] = nil
+        flash[:alert] = t(:my_mlh_null, scope: 'errors')
+      end
+      @questionnaire.tap do |q|
+        q.phone          = info["phone_number"]
+        q.level_of_study = info["level_of_study"]
+        q.major          = info["major"]
+        q.date_of_birth  = info["date_of_birth"]
+        q.gender         = info["gender"]
 
+        if info["school"]
           school = School.where(name: info["school"]["name"]).first_or_create do |s|
             s.name = info["school"]["name"]
           end
           q.school_id = school.id
         end
-      else
-        flash[:notice] = nil
-        flash[:alert] = t(:my_mlh_null, scope: 'errors')
       end
     end
 
