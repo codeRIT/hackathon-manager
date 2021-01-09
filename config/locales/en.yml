@@ -182,6 +182,9 @@ en:
           subtitle: "%{user_email}"
           cancel: Cancel
           delete: Delete
+          reset_password: Reset Password
+          confirm_reset_password: "Are you sure? %{full_name}'s password will be reset and %{first_name} will receive a recovery email."
+          reset_password_success: "Successfully reset password and sent recovery instructions to %{full_name}."
           form:
             active: Active
             inactive: Inactive
