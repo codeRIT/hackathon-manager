@@ -201,9 +201,9 @@
           = HackathonConfig['name']
         %h6.card-subtitle.mb-2.text-muted
           This will delete all users and questionnaires for the selected roles
-        %button.btn.btn-danger{"data-toggle"=>"modal", "data-target"=>"#resetModal"} Reset Hackathon
+        %button.btn.btn-danger{"data-toggle"=>"modal", "data-target"=>"#reset_modal"} Reset Hackathon
 
-.modal{:id=>"resetModal"}
+.modal{:id=>"reset_modal"}
   .modal-dialog
     .modal-content
       .modal-header
@@ -212,7 +212,7 @@
           %span{"aria-hidden"=>"true"} &times;
       .modal-body
         %p This action is irreversible. This will delete all the questionnaires and user accounts for the roles selected
-        =form_for :hackathonReset, url:"configs/reset_hackathon" do |f|
+        = form_for :hackathonReset, url:"configs/reset_hackathon" do |f|
           .form-check
             = f.check_box :users, class: "form-check-input"
             = f.label :users, "Users", class: "form-check-label"

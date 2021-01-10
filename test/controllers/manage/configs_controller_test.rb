@@ -28,7 +28,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to reset hackathon" do
-      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      post :reset_hackathon, params: { hackathonReset: { directors: "1", volunteers: "1", organizers: "1", users: "1" } }
       assert_redirected_to new_user_session_path
     end
   end
@@ -66,7 +66,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to reset hackathon" do
-      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      post :reset_hackathon, params: { hackathonReset: { directors: "1", volunteers: "1", organizers: "1", users: "1" } }
       assert_redirected_to root_path
     end
   end
@@ -101,7 +101,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to reset hackathon" do
-      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      post :reset_hackathon, params: { hackathonReset: { directors: "1", volunteers: "1", organizers: "1", users: "1" } }
       assert_redirected_to manage_checkins_path
     end
   end
@@ -136,7 +136,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to reset hackathon" do
-      post :reset_hackathon, params: { director: "1", volunteer: "1", organizer: "1", user: "1"}
+      post :reset_hackathon, params: { hackathonReset: { directors: "1", volunteers: "1", organizers: "1", users: "1" } }
       assert_redirected_to manage_root_path
     end
   end
@@ -191,7 +191,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "allow access to reset hackathon" do
-      post :reset_hackathon, params: { directors: "1", volunteers: "1", organizers: "1", users: "1"}
+      post :reset_hackathon, params: { hackathonReset: { directors: "1", volunteers: "1", organizers: "1", users: "1" } }
       assert_redirected_to manage_configs_path
     end
   end

@@ -66,17 +66,16 @@ class Manage::ConfigsController < Manage::ApplicationController
   def reset_hackathon
     data = params[:hackathonReset]
     roles_to_delete =
-      {user: data[:users].to_i,
-       volunteer: data[:volunteers].to_i,
-       organizer: data[:organizers].to_i,
-       director: data[:directors].to_i}
+      { user: data[:users].to_i,
+        volunteer: data[:volunteers].to_i,
+        organizer: data[:organizers].to_i,
+        director: data[:directors].to_i }
     roles_to_delete.each do |r, delete|
-      if delete == 1
-        User.where(role: r).each do |u|
-          Questionnaire.where(user_id: u.id).destroy_all
-        end
-        User.where(role: r).destroy_all
+      next if delete != 1
+      User.where(role: r).each do |u|
+        Questionnaire.where(user_id: u.id).destroy_all
       end
+      User.where(role: r).destroy_all
     end
 
     redirect_to manage_configs_path

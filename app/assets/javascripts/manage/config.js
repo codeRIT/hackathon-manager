@@ -1,9 +1,9 @@
 function checkReset() {
-  const resetText = "Reset Hackathon"
-  var inputText = $("#resetText")
+  var resetText = "Reset Hackathon";
+  var inputText = $("#resetText");
   inputText.keyup(function (){
-    document.getElementById("resetButton").disabled = !(inputText.val() === resetText)
-  })
+    document.getElementById("resetButton").disabled = (inputText.val() !== resetText);
+  });
 
 }
 
