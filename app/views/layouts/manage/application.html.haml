@@ -120,14 +120,14 @@
                     .nav-item-description
                       = t(:doorkeeper, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
-                  = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
+                  = active_link_to sidekiq_web_path, target: '_blank', rel: "noopener", class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.sidekiq')
                     %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description
                       = t(:sidekiq, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
-                  = active_link_to blazer_path, target: '_blank', class: "nav-link" do
+                  = active_link_to blazer_path, target: '_blank', rel: "noopener", class: "nav-link" do
                     .fa.fa-terminal.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.blazer')
                     %span.fa.fa-external-link.icon-space-l-half
