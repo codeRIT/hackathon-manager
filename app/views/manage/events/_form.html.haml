@@ -4,7 +4,8 @@
     = f.input :title
     = f.input :description
     = f.input :location
-    = f.input :start, input_html: { class: 'date-time-margin' }
-    = f.input :finish, input_html: { class: 'date-time-margin' }
+    = f.input :start
+    = f.input :finish, include_blank: true
   .center
+    //TODO figure out why you need to add save and it doesn't work automatically like other forms
     = f.button :submit, 'Save', value: ( @event.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
