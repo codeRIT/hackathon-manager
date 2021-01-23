@@ -1,11 +1,13 @@
 document.addEventListener('turbolinks:load', function () {
   $('.map-button').click(function (){
     const map = $('#map');
-    if(map.is(":visible")){
+    if(map.is(':visible')){
       map.hide();
+      $(this).html('Show Map');
     }
     else{
       map.show();
+      $(this).html('Hide Map');
     }
   })
 });
