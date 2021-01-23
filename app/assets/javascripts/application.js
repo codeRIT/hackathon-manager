@@ -21,3 +21,6 @@
 //= require_directory .
 //= require_directory ./channels
 //= require ./vendor/simplemde.min.js
+//= require moment
+//= require fullcalendar
+//= require fullcalendar/locale-all

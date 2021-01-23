@@ -6,6 +6,7 @@
 @import general/variables
 @import general/css4
 @import manage/autocomplete
+@import manage/events
 
 $grey-dark: #555
 $grey-med: #999
@@ -15,6 +16,7 @@ $grey-med: #999
 @import vendor/datatables.min
 @import selectize
 @import selectize.default
+@import fullcalendar
 
 .icon-space-r
   margin-right: 0.5em
@@ -151,6 +153,10 @@ $grey-med: #999
   height: calc(100vh - 2.25rem)
   overflow: scroll
 
+.calendar-list
+  width: 100%
+  min-width: 500px
+  margin: auto
 
 /*
  * Datatable changes
