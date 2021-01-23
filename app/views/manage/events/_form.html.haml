@@ -1,9 +1,10 @@
 = bs_horizontal_simple_form_for @event, url: url_for(action: @event.new_record? ? "create" : "update", controller: "events") do |f|
+  = f.error_notification
   .form-inputs
     = f.input :title
     = f.input :description
     = f.input :location
-    = f.input :start
-    = f.input :finish
+    = f.input :start, input_html: { class: 'date-time-margin' }
+    = f.input :finish, input_html: { class: 'date-time-margin' }
   .center
-    = f.button :submit, value: ( @event.new_record? ? 'Create' : 'Save' ),   class: 'btn-primary'
+    = f.button :submit, 'Save', value: ( @event.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'

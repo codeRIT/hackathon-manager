@@ -4,6 +4,7 @@
     - if f.error_notification.present?
       #disclaimer
         = f.error_notification
+
     .form-inputs
       = f.input :email, input_html: { "data-validate" => "presence" }, required: true
       = f.input :role, collection: User.roles.to_a.collect{|c| [c[0].titleize, c[0]]}, include_blank: false
