@@ -69,6 +69,10 @@
                     .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.check-in')
                 %li.nav-item
+                  = active_link_to manage_events_path, class: "nav-link" do
+                    .fa.fa-calendar.fa-fw.icon-space-r-half
+                    = t(:title, scope: 'pages.manage.events')
+                %li.nav-item
                   = active_link_to manage_stats_path, class: "nav-link" do
                     .fa.fa-table.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.stats')
