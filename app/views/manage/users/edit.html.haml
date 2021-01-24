@@ -1,4 +1,5 @@
 = render "layouts/manage/page_title", title: @user.full_name, subtitle: t(:subtitle, scope: 'pages.manage.users.edit') do
+
   .btn-group
     = link_to t(:cancel, scope: "pages.manage.users.edit"), manage_user_path(@user), class: 'btn btn-sm btn-outline-secondary'
     = link_to t(:delete, scope: "pages.manage.users.edit"), manage_user_path(@user), method: :delete, data: { confirm: "Are you sure? #{@user.email} will be permanently deleted. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
