@@ -1,6 +1,6 @@
 document.addEventListener('turbolinks:load', function () {
   $('.map-button').click(function (){
-    const map = $('#map');
+    var map = $('#map');
     if(map.is(':visible')){
       map.hide();
       $(this).html('Show Map');
@@ -9,5 +9,5 @@ document.addEventListener('turbolinks:load', function () {
       map.show();
       $(this).html('Hide Map');
     }
-  })
+  });
 });
