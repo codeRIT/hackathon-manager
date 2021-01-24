@@ -25,7 +25,7 @@
         = @school.name
         %br
         %small
-          = link_to google_maps_link(@school.name), target: '_blank' do
+          = link_to google_maps_link(@school.name), target: '_blank', rel: 'noopener' do
             Search in Google Maps
             %span.fa.fa-external-link.icon-space-l-half
       %dt.col-md-4 Address
@@ -37,7 +37,7 @@
         %br
         %small
           - link = google_maps_link(@school.address, @school.city, @school.state)
-          = link_to link, target: '_blank' do
+          = link_to link, target: '_blank', rel: 'noopener' do
             Search in Google Maps
             %span.fa.fa-external-link.icon-space-l-half
       %dt.col-md-4 Home school

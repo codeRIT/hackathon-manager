@@ -156,7 +156,7 @@ en:
           previous_signed_in_ip: Previous signed-in IP
           sign_in_count: Sign-in count
         show:
-          title: "%{user_name}"
+          subtitle: "User"
           edit: Edit
           reset_password: Reset Password
           delete: Delete
@@ -180,8 +180,7 @@ en:
           sign_in_count: Sign-in count
           change_history: Change History
         edit:
-          title: Edit User
-          subtitle: "%{user_name}"
+          subtitle: Edit User
           cancel: Cancel
           delete: Delete
           form:
