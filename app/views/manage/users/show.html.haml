@@ -1,4 +1,4 @@
-= render "layouts/manage/page_title", title: t(:title, scope: "pages.manage.users.show", user_email: @user.email) do
+= render "layouts/manage/page_title", title: t(:title, scope: "pages.manage.users.show", user_name: @user.full_name) do
   .btn-group
     = link_to t(:edit, scope: "pages.manage.users.show"), edit_manage_user_path(@user), class: 'btn btn-sm btn-outline-secondary'
     = link_to t(:delete, scope: "pages.manage.users.show"), manage_user_path(@user), method: :delete, data: { confirm: "Are you sure? #{@user.email} along with their questionnaire will be permanently deleted. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
@@ -8,6 +8,12 @@
     .card.mb-3
       .card-header= t(:user_information, scope: "pages.manage.users.show")
       .card-body
+        .row
+          %dt.col-md-5= t(:first_name, scope: "pages.manage.users.show")
+          %dd.col-md-7= @user.first_name
+        .row
+          %dt.col-md-5= t(:last_name, scope: "pages.manage.users.show")
+          %dd.col-md-7= @user.last_name
         .row
           %dt.col-md-5= t(:email_address, scope: "pages.manage.users.show")
           %dd.col-md-7= @user.email

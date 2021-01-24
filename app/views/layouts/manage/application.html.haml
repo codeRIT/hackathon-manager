@@ -18,7 +18,7 @@
         .fa.fa-bars.m-3.mx-4.text-white.h-auto
 
       / TODO: move acc/signin inside the sidebar
-      %a.navbar-brand.px-3.mr-0{href: manage_root_path} #{HackathonConfig['name']} Manager
+      %a.navbar-brand.px-3.mr-0.col-xl-2.col-lg-3{href: manage_root_path} #{HackathonConfig['name']} Manager
 
       / %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
       %ul.navbar-nav.ml-auto.px-3
@@ -29,7 +29,7 @@
 
     .container-fluid
       .row
-        %nav.col-md-3.d-none.d-md-block.bg-light.sidebar
+        %nav.col-md-3.d-none.d-md-block.bg-light.sidebar.col-xl-2.col-lg-3
           .sidebar-sticky
             %h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
               %span
@@ -124,14 +124,14 @@
                     .nav-item-description
                       = t(:doorkeeper, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
-                  = active_link_to sidekiq_web_path, target: '_blank', class: "nav-link" do
+                  = active_link_to sidekiq_web_path, target: '_blank', rel: "noopener", class: "nav-link" do
                     .fa.fa-tasks.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.sidekiq')
                     %span.fa.fa-external-link.icon-space-l-half
                     .nav-item-description
                       = t(:sidekiq, scope: 'layouts.manage.navigation.descriptors')
                 %li.nav-item
-                  = active_link_to blazer_path, target: '_blank', class: "nav-link" do
+                  = active_link_to blazer_path, target: '_blank', rel: "noopener", class: "nav-link" do
                     .fa.fa-terminal.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.blazer')
                     %span.fa.fa-external-link.icon-space-l-half
