@@ -132,11 +132,13 @@ en:
         title: Statistics
       trackable-tags:
         title: Trackable Tags
+      events:
+        title: Schedule
       bus-lists:
         title: Bus Lists
       schools:
         title: Schools
-      users: 
+      users:
         title: Users & Staff
         users: All Users
         staff: "%{hackathon_name} Staff"
@@ -154,11 +156,13 @@ en:
           previous_signed_in_ip: Previous signed-in IP
           sign_in_count: Sign-in count
         show:
-          title: "%{user_email}"
+          subtitle: "User"
           edit: Edit
           reset_password: Reset Password
           delete: Delete
           user_information: User Information
+          first_name: First name
+          last_name: Last name
           email_address: Email address
           role: Role
           login_access: Login access
@@ -176,8 +180,7 @@ en:
           sign_in_count: Sign-in count
           change_history: Change History
         edit:
-          title: Edit User
-          subtitle: "%{user_email}"
+          subtitle: Edit User
           cancel: Cancel
           delete: Delete
           reset_password: Reset Password
