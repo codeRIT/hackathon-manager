@@ -72,6 +72,8 @@ Rails.application.routes.draw do
     resources :checkins do
       post :datatable, on: :collection
     end
+    resources :events do
+    end
     resources :messages do
       get :preview, on: :member
       get :live_preview, on: :collection

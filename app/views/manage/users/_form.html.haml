@@ -6,6 +6,8 @@
         = f.error_notification
 
     .form-inputs
+      = f.input :first_name, required: true
+      = f.input :last_name, required: true
       = f.input :email, input_html: { "data-validate" => "presence" }, required: true
       = f.input :role, collection: User.roles.to_a.collect{|c| [c[0].titleize, c[0]]}, include_blank: false
       = f.input :is_active, collection: [[t(:active, scope: "pages.manage.users.edit.form"), true], [t(:inactive, scope: "pages.manage.users.edit.form"), false]], as: :radio_buttons
