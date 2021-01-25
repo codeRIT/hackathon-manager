@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_010133) do
     t.string "title"
     t.string "description"
     t.string "location"
+    t.string "category"
     t.datetime "start"
     t.datetime "finish"
     t.datetime "created_at", null: false

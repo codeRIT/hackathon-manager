@@ -7,9 +7,11 @@ function eventCalendar() {
     eventRender: function (event, element, view) {
       var description = event.description ? event.description : '';
       var location = event.location ? event.location : '';
+      var category = event.category ? event.category : '';
       element.find('.fc-event-dot').css('display','none');
       element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + description + '</span>');
       element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + location + '</span>');
+      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + category + '</span>');
     },
     events: {
       url: '/manage/events.json',
