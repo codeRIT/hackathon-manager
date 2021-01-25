@@ -144,6 +144,10 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
   context "while authenticated as a director" do
     setup do
       @user = create(:director)
+      @other_user = create(:user)
+      @other_two_user = create(:user)
+      @volunteer = create(:volunteer)
+      @organizer = create(:organizer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
     end
@@ -192,6 +196,19 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 
     should "allow access to reset hackathon" do
       post :reset_hackathon, params: { hackathonReset: { directors: "1", volunteers: "1", organizers: "1", users: "1" } }
+      assert_redirected_to manage_configs_path
+    end
+
+    should "delete users and volunteers" do
+      assert_difference('User.count', -3) do
+        post :reset_hackathon, params: { hackathonReset: { directors: "0", volunteers: "0", organizers: "1", users: "1" } }
+      end
+      assert_redirected_to manage_configs_path
+    end
+    should "delete users of all roles" do
+      assert_difference('User.count', -5) do
+        post :reset_hackathon, params: { hackathonReset: { directors: "1", volunteers: "1", organizers: "1", users: "1" } }
+      end
       assert_redirected_to manage_configs_path
     end
   end
