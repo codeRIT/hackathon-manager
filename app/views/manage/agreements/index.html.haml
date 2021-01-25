@@ -17,7 +17,7 @@
     %tbody
       - @agreements.each do |agreement|
         %tr
-          %td
+          %td.narrow-icon
             = link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_manage_agreement_path(agreement)
           %td
             = link_to '<i class="fa fa-trash"></i>'.html_safe, manage_agreement_path(agreement), method: :delete, data: { confirm: "Are you sure? The agreement will be permanently deleted. This action is irreversible." }
