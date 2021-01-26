@@ -66,7 +66,8 @@ class HomeSplash extends React.Component {
           <p style={{ marginTop: '2em' }}>
             <a
               href="https://heroku.com/deploy?template=https://github.com/codeRIT/hackathon-manager"
-              target="blank"
+              target="_blank"
+              rel="noopener"
             >
               <img
                 src="https://www.herokucdn.com/deploy/button.svg"
