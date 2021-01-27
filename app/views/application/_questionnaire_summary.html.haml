@@ -21,9 +21,10 @@
 %p
   %b Shirt size:
   = @questionnaire.shirt_size
-%p
-  %b Dietary restrictions
-  = @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe
+- if !HackathonConfig['digital_hackathon']
+  %p
+    %b Dietary restrictions
+    = @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe
 %p
   %b Special needs
   = @questionnaire.special_needs || "<i>(none)</i>".html_safe
