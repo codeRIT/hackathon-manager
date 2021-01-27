@@ -18,13 +18,8 @@ document.addEventListener('turbolinks:load', function() {
         switch (types[i]) {
           case 'presence':
             if (!value || $.trim(value).length < 1) {
-              if (
-                $(this)
-                  .parent()
-                  .text()
-                  .includes('I read and accept')
-              ) {
-                notify(".agreement_input", 'Please read & accept');
+            if ($(this).hasClass("agreement_input")) {
+                notify($(this).parent(), 'Please read & accept');
               } else {
                 notify(this, 'Missing Information');
               }
@@ -79,7 +74,9 @@ document.addEventListener('turbolinks:load', function() {
           .fadeOut(200, function() {
             $(this).remove();
           });
-        $(".agreement_input")
+        // this removes the notification for agreements
+        $(this)
+          .parent()
           .parent()
           .removeClass('field_with_errors')
           .find('.error')

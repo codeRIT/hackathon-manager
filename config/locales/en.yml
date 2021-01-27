@@ -54,8 +54,6 @@ en:
         trigger: Sent automatically when a new or updated applicant matches this criteria. Does not send to anyone already matching this criteria.
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
-      agreement:
-        name: 'Agreements are displayed to applicants as: "I read & accept the [agreement_name] agreement"'
       hackathon_config:
         accepting_questionnaires: Specify and allow questionnaires to be accepted.
         digital_hackathon: Optimize HackathonManager for a digital hackathon. (Removes travel, dietary restrictions, etc.)
@@ -134,11 +132,13 @@ en:
         title: Statistics
       trackable-tags:
         title: Trackable Tags
+      events:
+        title: Schedule
       bus-lists:
         title: Bus Lists
       schools:
         title: Schools
-      users: 
+      users:
         title: Users & Staff
         users: All Users
         staff: "%{hackathon_name} Staff"
@@ -156,11 +156,13 @@ en:
           previous_signed_in_ip: Previous signed-in IP
           sign_in_count: Sign-in count
         show:
-          title: "%{user_email}"
+          subtitle: "User"
           edit: Edit
           reset_password: Reset Password
           delete: Delete
           user_information: User Information
+          first_name: First name
+          last_name: Last name
           email_address: Email address
           role: Role
           login_access: Login access
@@ -178,8 +180,7 @@ en:
           sign_in_count: Sign-in count
           change_history: Change History
         edit:
-          title: Edit User
-          subtitle: "%{user_email}"
+          subtitle: Edit User
           cancel: Cancel
           delete: Delete
           form:
@@ -192,7 +193,7 @@ en:
         title: Legal Agreements
         notice: "These are legal agreements that are required to be reviewed and agreed upon by all applicants of %{hackathon_name}."
         name: Name
-        agreement_url: Agreement URL
+        agreement: Agreement
         new: New Agreement
         edit: Edit Agreement
       settings:
