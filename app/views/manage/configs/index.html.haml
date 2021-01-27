@@ -211,7 +211,7 @@
         %button.close{:type=>"button", "data-dismiss"=>"modal", "aria-label"=>"Close"}
           %span{"aria-hidden"=>"true"} &times;
       .modal-body
-        %p This action is irreversible. This will delete all the questionnaires and user accounts for the roles selected
+        %p This action is irreversible. This will delete all the questionnaires and user accounts for the roles selected.
         = form_for :hackathonReset, url:"configs/reset_hackathon" do |f|
           .form-check
             = f.check_box :users, class: "form-check-input"
