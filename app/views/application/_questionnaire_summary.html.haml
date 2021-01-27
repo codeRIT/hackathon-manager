@@ -7,10 +7,10 @@
   = Questionnaire::POSSIBLE_EXPERIENCES[@questionnaire.experience]
 %p
   %b Portfolio link:
-  = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank') : 'Not provided'
+  = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank', rel: 'noopener') : 'Not provided'
 %p
   %b GitHub/GitLab/Bitbucket link:
-  = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : 'Not provided'
+  = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank', rel: 'noopener') : 'Not provided'
 %p
   %b Resume:
   = @questionnaire.resume.attached? ? link_to("Download &raquo;".html_safe, @questionnaire.resume) : 'Not provided'
@@ -21,9 +21,10 @@
 %p
   %b Shirt size:
   = @questionnaire.shirt_size
-%p
-  %b Dietary restrictions
-  = @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe
+- if !HackathonConfig['digital_hackathon']
+  %p
+    %b Dietary restrictions
+    = @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe
 %p
   %b Special needs
   = @questionnaire.special_needs || "<i>(none)</i>".html_safe
