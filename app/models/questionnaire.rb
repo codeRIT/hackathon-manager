@@ -316,7 +316,7 @@ class Questionnaire < ApplicationRecord
     "Yemen",
     "Zambia",
     "Zimbabwe"
-  ]
+  ].freeze
 
   validates_inclusion_of :experience, in: POSSIBLE_EXPERIENCES
   validates_inclusion_of :interest, in: POSSIBLE_INTERESTS
