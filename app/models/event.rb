@@ -9,4 +9,18 @@ class Event < ApplicationRecord
       errors.add(:finish, 'time must be after start time')
     end
   end
+
+  def description=(value)
+    if value.blank?
+      value = nil
+    end
+    super value
+  end
+
+  def location=(value)
+    if value.blank?
+      value = nil
+    end
+    super value
+  end
 end
