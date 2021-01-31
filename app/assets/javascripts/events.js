@@ -7,15 +7,17 @@ function eventCalendar() {
     eventRender: function (event, element, view) {
       var description = event.description ? event.description : '';
       var location = event.location ? event.location : '';
+      var locationLabel = event.location ? 'Location: ' : '';
       var category = event.category ? event.category : '';
-      element.find('.fc-event-dot').css('display','none');
+      var categoryLabel = event.category ? 'Category: ' : '';
+      element.find('.fc-event-dot').css('display', 'none');
       element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + description + '</span>');
-      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + location + '</span>');
-      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + category + '</span>');
+      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px"><b>' + locationLabel + '</b>' + location + '</span>');
+      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px"><b>' + categoryLabel + '</b>' + category + '</span>');
     },
     events: {
       url: '/manage/events.json',
-      success: function(response) {
+      success: function (response) {
         // due to "end" being a keyword in ruby and what fullcalender uses it is stored as finish and than it is
         // converted to "end" when sending it to fullcalendar
         response = JSON.parse(JSON.stringify(response).split('"finish":').join('"end":'));
