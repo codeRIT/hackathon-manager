@@ -6,14 +6,14 @@ function eventCalendar() {
     },
     eventRender: function (event, element, view) {
       var description = event.description ? event.description : '';
-      var location = event.location ? event.location : '';
-      var locationLabel = event.location ? 'Location: ' : '';
-      var category = event.category ? event.category : '';
-      var categoryLabel = event.category ? 'Category: ' : '';
       element.find('.fc-event-dot').css('display', 'none');
       element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + description + '</span>');
-      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px"><b>' + locationLabel + '</b>' + location + '</span>');
-      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px"><b>' + categoryLabel + '</b>' + category + '</span>');
+      if (event.location) {
+        element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px"><b>Location: </b>' + event.location + '</span>');
+      }
+      if (event.category) {
+        element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px"><b>Category: </b>' + event.category + '</span>');
+      }
     },
     events: {
       url: '/manage/events.json',
