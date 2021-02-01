@@ -23,4 +23,11 @@ class Event < ApplicationRecord
     end
     super value
   end
+
+  def category=(value)
+    if value.blank?
+      value = nil
+    end
+    super value
+  end
 end
