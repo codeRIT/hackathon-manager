@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Use Ruby version defined in .ruby-version
 ruby '>= 2.5'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4.4'
 # Use mysql as the database for Active Record
