@@ -5,9 +5,10 @@ function eventCalendar() {
       today: 'Today'
     },
     eventRender: function (event, element, view) {
-      var description = event.description ? event.description : '';
       element.find('.fc-event-dot').css('display', 'none');
-      element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + description + '</span>');
+      if(event.description){
+        element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + event.description + '</span>');
+      }
       if (event.location) {
         element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px"><b>Location: </b>' + event.location + '</span>');
       }
