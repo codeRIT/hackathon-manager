@@ -6,7 +6,7 @@ function eventCalendar() {
     },
     eventRender: function (event, element, view) {
       element.find('.fc-event-dot').css('display', 'none');
-      if(event.description){
+      if(event.description) {
         element.find('.fc-list-item-title').append('<div></div><span style="font-size: 12px">' + event.description + '</span>');
       }
       if (event.location) {
