@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_025749) do
+ActiveRecord::Schema.define(version: 2021_01_30_175752) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -155,11 +155,10 @@ ActiveRecord::Schema.define(version: 2021_01_28_025749) do
     t.string "question"
     t.string "data_type"
     t.boolean "required"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "select_collection"
     t.string "placeholder"
-
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -168,19 +167,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_025749) do
     t.string "state"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "individual_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "subject"
-    t.string "recipient"
-    t.integer "user_id"
-    t.text "body"
-    t.datetime "queued_at"
-    t.datetime "started_at"
-    t.datetime "delivered_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "message_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -281,6 +267,7 @@ ActiveRecord::Schema.define(version: 2021_01_28_025749) do
     t.integer "graduation_year"
     t.string "race_ethnicity"
     t.integer "bus_list_id"
+    t.string "country"
     t.string "extra_question_data"
     t.index ["bus_list_id"], name: "index_questionnaires_on_bus_list_id"
     t.index ["user_id"], name: "index_questionnaires_on_user_id"

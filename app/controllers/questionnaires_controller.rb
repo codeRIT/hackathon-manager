@@ -134,7 +134,7 @@ class QuestionnairesController < ApplicationController
       :shirt_size, :dietary_restrictions, :special_needs, :international,
       :portfolio_url, :vcs_url, :bus_captain_interest, :phone, :can_share_info,
       :travel_not_from_school, :travel_location, :graduation_year, :race_ethnicity,
-      :resume, :delete_resume, :why_attend, agreement_ids: [], extra_question_data: []
+      :resume, :delete_resume, :why_attend, agreement_ids: [], extra_question_data: {}
     )
   end
 

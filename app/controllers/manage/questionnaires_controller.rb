@@ -152,11 +152,6 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   private
 
   def questionnaire_params
-    extra_questions = ExtraQuestion.all
-    questions = []
-    extra_questions.each do |q|
-      questions.append(q.id.to_s)
-    end
     # Note that this ONLY considers parameters for the questionnaire, not the user.
     # TODO: Refactor "email" out to user as first_name and last_name were
     params.require(:questionnaire).permit(
@@ -166,8 +161,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       :portfolio_url, :vcs_url, :bus_captain_interest, :phone, :can_share_info,
       :travel_not_from_school, :travel_location,
       :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
-      :bus_list_id, :is_bus_captain, :boarded_bus,
-      extra_question_data: questions
+      :bus_list_id, :is_bus_captain, :boarded_bus, extra_question_data: {}
     )
   end
 

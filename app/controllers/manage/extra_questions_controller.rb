@@ -1,4 +1,6 @@
 class Manage::ExtraQuestionsController < Manage::ApplicationController
+  before_action :require_director
+
   def index
     @extra_questions = ExtraQuestion.all
   end
