@@ -3,7 +3,6 @@ class Questionnaire < ApplicationRecord
 
   include ActiveModel::Dirty
   include DeletableAttachment
-
   before_validation :consolidate_school_names
   before_validation :clean_for_non_rsvp
   before_validation :clean_negative_special_needs
@@ -23,7 +22,8 @@ class Questionnaire < ApplicationRecord
   validates_uniqueness_of :user_id
 
   validates_presence_of :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
-  validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity, :country
+  validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity
+  validates :country, :presence => {:message => %Q[information is missing from application. Please update your <a href="#{Rails.application.routes.url_helpers.edit_questionnaires_path}">Application</a>]}
 
   DIETARY_SPECIAL_NEEDS_MAX_LENGTH = 500
   validates_length_of :dietary_restrictions, maximum: DIETARY_SPECIAL_NEEDS_MAX_LENGTH
