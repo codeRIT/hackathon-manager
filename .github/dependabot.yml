@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "build(deps): "
+
+  - package-ecosystem: "npm"
+    directory: "/website"
+    target-branch: "develop"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "build(deps): "
