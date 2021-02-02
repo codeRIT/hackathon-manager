@@ -65,6 +65,8 @@ gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
 gem 'bootstrap', '~> 4.3.1'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # Markdown parsing
 gem 'redcarpet'
@@ -111,8 +113,8 @@ end
 
 group :test do
   gem 'test-unit', '~> 3.0'
-  gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda', '~> 4.0.0'
+  gem 'shoulda-matchers', '~> 4.4.0'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'

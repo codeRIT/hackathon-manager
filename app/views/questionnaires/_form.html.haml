@@ -50,7 +50,7 @@
         = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
 
         - if !HackathonConfig['digital_hackathon']
-          = f.input :dietary_restrictions, as: :text, label: "Health restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
+          = f.input :dietary_restrictions, as: :text, label: "Dietary restrictions", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
         = f.input :special_needs, as: :text, label: "Special needs", wrapper_html: { class: 'input--half' }, maxlength: Questionnaire::DIETARY_SPECIAL_NEEDS_MAX_LENGTH
 
       - if @agreements.any?
@@ -58,8 +58,7 @@
         %strong Agreements
         %p Please review the agreements and click the corresponding checkbox next to each agreement to agree.
         .form-inputs
-          .agreement_input
-            = f.association :agreements, as: :check_boxes, label_method: :formatted_agreement, value_method: :id, label: "", wrapper_html: { style: 'display: block' }, input_html: { "data-validate" => "presence" }
+          = f.association :agreements, as: :check_boxes, label_method: :formatted_agreement, value_method: :id, label: "", wrapper_html: { style: 'display: block' }, input_html: { "data-validate" => "presence", class: "agreement_input"}
 
       .right
         %button.button{ type: "button", "data-wizard" => "previous" } Previous
