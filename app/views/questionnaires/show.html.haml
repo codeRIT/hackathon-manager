@@ -2,6 +2,8 @@
 .form-container
   - if @questionnaire.unaccepted_agreements.any?
     = render partial: 'unaccepted_agreements_notice'
+  - if @questionnaire.country.blank?
+    = render partial: 'missing_country_notice'
 .form-container
   #disclaimer
     %h1.section-title

@@ -11,6 +11,7 @@ FactoryBot.define do
     special_needs { "" }
     can_share_info { true }
     gender { "Male" }
+    country { "United States" }
     major { "Computer Science" }
     level_of_study { "University (Undergraduate)" }
     graduation_year { Date.today.year }
