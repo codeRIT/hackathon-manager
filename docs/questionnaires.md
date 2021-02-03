@@ -25,6 +25,7 @@ This includes:
 * **Level of Study** &mdash; The attendee's grade level (undergraduate, postgraduate, etc)
 * **Major** &mdash; The attendee's intended major
 * **Gender** &mdash; The attendee's sexual orientation
+* **Country** &mdash; The country where the attendee's hacking from
 
 
 ### Travel Information
