@@ -30,6 +30,7 @@
 
         = f.input :graduation_year, as: :select, collection: Questionnaire::POSSIBLE_GRAD_YEARS, include_blank: "(select one...)", label: "Graduation year", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
         = f.input :race_ethnicity, as: :select, collection: Questionnaire::POSSIBLE_RACE_ETHNICITIES, include_blank: "(select one...)", label: "Race/Ethnicity", input_html: { "data-validate" => "presence" }, wrapper_html: { class: 'input--half' }
+        = f.input :country, as: :select, collection: Questionnaire::POSSIBLE_COUNTRIES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
 
         = f.input :portfolio_url, label: "Portfolio link", placeholder: "http://mywebsite.com"
         = f.input :vcs_url, label: "GitHub/GitLab/Bitbucket link", placeholder: "https://github.com/coderit"
