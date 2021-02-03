@@ -45,7 +45,11 @@ en:
           If many people have already RSVP'd, consider sending a message out to this bus list asking for interest as well.
         notes: Notes are shared with applicants. Supports Markdown and HTML.
       user:
-        role: Limited access prevents the admin from adding, modifying, or deleting any records; modifications through the check-in process are allowed. Event tracking limits to only event tracking.
+        role: |
+          Users can only access and edit their own information <br/>
+          Volunteers can only access the check-in process <br/>
+          Organizers can not modify, add, or delete any records but can view questionnaires and other records <br/>
+          Directors do not have any restrictions and can add, edit, or delete any record or setting <br/>
         is_active: Deactivating a user will prevent them from logging in. Their access will be immediately revoked from the admin and application pages.
         receive_weekly_report: A weekly email report on admissions, bus lists, and messages. Only sent when there are weekly updates up until 7 days past the event. Disabled for inactive staff members.
       message:

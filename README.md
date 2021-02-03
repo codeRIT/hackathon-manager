@@ -108,14 +108,14 @@ $ bin/rails s  # short for bin/rails server
 
 6. Visit http://localhost:3000/apply, create an account, and complete an application
 
-7. In another bash window, promote your user to an admin
+7. In another bash window, promote your user to an director
 
 ```bash
 $ cd hackathon-manager
 $ bin/rails c  # short for bin/rails console
 # Wait for the console to start...
 Loading development environment (Rails 5.1.1)
-irb(main):001:0> User.last.update_attribute(:role, :admin)
+irb(main):001:0> User.last.update_attribute(:role, :director)
 ```
 
 8. Visit http://localhost:3000/manage and set up the hackathon as needed
