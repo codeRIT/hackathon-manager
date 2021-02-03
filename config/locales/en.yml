@@ -130,6 +130,25 @@ en:
         title: Check-in
       stats:
         title: Statistics
+        id: ID
+        first_name: First Name
+        last_name: Last Name
+        email: Email
+        phone: Phone
+        school: School
+        checked_in: Checked-in
+        traveling_from: Traveling From
+        questionnaire: Questionnaire
+        questionnaire_status: Questionnaire Status
+        dietary_restrictions: Dietary Restrictions
+        special_needs: Special Needs
+        open_source_link: Open Source Link
+        portfolio_link: Portfolio Link
+        dietary_restrictions_special_needs: Dietary Restrictions or Special Needs
+        attendes_not_traveling_from_their_school: Attendees Not Traveling From Their School
+        attendee_info_for_sponsors: Attendee Info for Sponsors
+        applied_attendees: Applied Attendees
+        checked_in_attendees: Checked-in Attendees
       trackable-tags:
         title: Trackable Tags
       events:
