@@ -108,7 +108,7 @@ $ bin/rails s  # short for bin/rails server
 
 6. Visit http://localhost:3000/apply, create an account, and complete an application
 
-7. In another bash window, promote your user to an director
+7. In another bash window, promote your user to a director
 
 ```bash
 $ cd hackathon-manager
