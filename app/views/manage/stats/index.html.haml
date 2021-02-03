@@ -52,7 +52,7 @@
 .row
   .col
     %h5.dashboard-container-title= t(:applied_attendees, scope: 'pages.manage.stats')
-    %table.datatable.stats-mlhinfo-applied.table.table-striped.table-hover{ "data-source" => applied_datatable_manage_stats_path(format: :json) }
+    %table.datatable.stats-info-applied.table.table-striped.table-hover{ "data-source" => applied_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
           %th= t(:id, scope: 'pages.manage.stats')
@@ -66,7 +66,7 @@
 .row
   .col
     %h5.dashboard-container-title= t(:checked_in_attendees, scope: 'pages.manage.stats')
-    %table.datatable.stats-mlhinfo-checkedin.table.table-striped.table-hover{ "data-source" => checked_in_datatable_manage_stats_path(format: :json) }
+    %table.datatable.stats-info-checkedin.table.table-striped.table-hover{ "data-source" => checked_in_datatable_manage_stats_path(format: :json) }
       %thead
         %tr
           %th= t(:id, scope: 'pages.manage.stats')
