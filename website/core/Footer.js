@@ -46,7 +46,7 @@ class Footer extends React.Component {
           <div />
           <div>
             <h5>More</h5>
-            <a href={this.props.config.repoUrl} target="_blank">
+            <a href={this.props.config.repoUrl} target="_blank" rel="noopener">
               GitHub Repo
             </a>
             <a
