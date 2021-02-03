@@ -101,8 +101,8 @@ Rails.application.routes.draw do
       post :dietary_restrictions_special_needs_datatable, on: :collection
       post :alt_travel_datatable, on: :collection
       post :attendee_sponsor_info_datatable, on: :collection
-      post :mlh_applied_datatable, on: :collection
-      post :mlh_checked_in_datatable, on: :collection
+      post :applied_datatable, on: :collection
+      post :checked_in_datatable, on: :collection
     end
     resources :users do
       post :user_datatable, on: :collection
