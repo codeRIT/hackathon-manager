@@ -83,7 +83,7 @@ gem 'sidekiq', '< 7'
 gem 'sidekiq-cron', github: 'codeRIT/sidekiq-cron', branch: 'master'
 
 # Misc support gems
-gem 'rails-settings-cached', '~> 0.7.2'
+gem 'rails-settings-cached', '~> 2.5.2'
 gem 'blazer'
 gem 'simple_spark'
 gem 'sendgrid-actionmailer'
