@@ -1,4 +1,4 @@
-class MLHAppliedDatatable < ApplicationDatatable
+class AppliedDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_stats_path, :bold, :display_datetime
 
   def view_columns
