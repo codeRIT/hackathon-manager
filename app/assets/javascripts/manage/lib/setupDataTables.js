@@ -124,7 +124,7 @@ var setupDataTables = function () {
     ]
   });
 
-  $('.datatable.stats-mlhinfo-applied').DataTable({
+  $('.datatable.stats-info-applied').DataTable({
     order: [1, 'asc'],
     columns: [
       { orderable: true, data: 'id', visible: false },
@@ -136,7 +136,7 @@ var setupDataTables = function () {
     ]
   });
 
-  $('.datatable.stats-mlhinfo-checkedin').DataTable({
+  $('.datatable.stats-info-checkedin').DataTable({
     order: [1, 'asc'],
     columns: [
       { orderable: true, data: 'id', visible: false },

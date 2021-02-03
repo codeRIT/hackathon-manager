@@ -1,4 +1,4 @@
-class MLHCheckedInDatatable < ApplicationDatatable
+class CheckedInDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_stats_path, :bold, :display_datetime
 
   def view_columns
