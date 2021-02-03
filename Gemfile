@@ -78,7 +78,7 @@ gem 'audited', '~> 4.7'
 
 # Background job processing
 gem 'sidekiq', '< 7'
-gem 'sidekiq-cron', '~> 1.1'
+gem 'sidekiq-cron', github: 'codeRIT/sidekiq-cron', branch: 'master'
 
 # Misc support gems
 gem 'rails-settings-cached', '~> 0.7.2'
@@ -113,8 +113,8 @@ end
 
 group :test do
   gem 'test-unit', '~> 3.0'
-  gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda', '~> 4.0.0'
+  gem 'shoulda-matchers', '~> 4.4.0'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
