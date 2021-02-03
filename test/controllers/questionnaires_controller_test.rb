@@ -47,7 +47,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
     should "create questionnaire" do
       assert_difference('Questionnaire.count', 1) do
-        post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+        post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
       end
 
       assert_redirected_to questionnaires_path
@@ -60,8 +60,8 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow multiple questionnaires" do
       assert_difference('Questionnaire.count', 1) do
-        post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
-        post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+        post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+        post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
       end
 
       assert_redirected_to questionnaires_path
@@ -80,7 +80,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
       should "not allow creation" do
         HackathonConfig['accepting_questionnaires'] = false
         assert_difference('Questionnaire.count', 0) do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
         end
       end
     end
@@ -88,13 +88,13 @@ class QuestionnairesControllerTest < ActionController::TestCase
     context "#school_name" do
       context "on create" do
         should "save existing school name" do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
           assert_redirected_to questionnaires_path
           assert_equal 1, School.all.count
         end
 
         should "create a new school when unknown" do
-          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: "New School", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: "New School", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
           assert_redirected_to questionnaires_path
           assert_equal 2, School.all.count
         end
@@ -103,7 +103,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
           message = create(:message, type: 'automated', trigger: "questionnaire.pending")
           assert_difference 'enqueued_jobs.size', 1 do
             assert_difference 'Questionnaire.count', 1 do
-              post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+              post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
             end
           end
           questionnaire = Questionnaire.last
