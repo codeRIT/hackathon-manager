@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     patch :boarded_bus, on: :collection
   end
 
+  resource :events, only: :show, constraints: ->(req) { req.format == :json }
+
   namespace :manage do
     authenticate :user, ->(u) { u.director? } do
       root to: "dashboard#index"
@@ -72,6 +74,8 @@ Rails.application.routes.draw do
     resources :checkins do
       post :datatable, on: :collection
     end
+    resources :events do
+    end
     resources :messages do
       get :preview, on: :member
       get :live_preview, on: :collection
@@ -97,8 +101,8 @@ Rails.application.routes.draw do
       post :dietary_restrictions_special_needs_datatable, on: :collection
       post :alt_travel_datatable, on: :collection
       post :attendee_sponsor_info_datatable, on: :collection
-      post :mlh_applied_datatable, on: :collection
-      post :mlh_checked_in_datatable, on: :collection
+      post :applied_datatable, on: :collection
+      post :checked_in_datatable, on: :collection
     end
     resources :users do
       post :user_datatable, on: :collection
