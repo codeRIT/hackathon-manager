@@ -1,6 +1,6 @@
 class Manage::UsersController < Manage::ApplicationController
   before_action :require_director
-  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :reset_password, :destroy]
 
   respond_to :html, :json
 
@@ -14,6 +14,14 @@ class Manage::UsersController < Manage::ApplicationController
 
   def staff_datatable
     render json: StaffDatatable.new(params, view_context: view_context)
+  end
+
+  def reset_password
+    new_password = Devise.friendly_token(50)
+    @user.reset_password(new_password, new_password)
+    @user.send_reset_password_instructions
+    flash[:notice] = t(:reset_password_success, scope: 'pages.manage.users.edit', full_name: @user.full_name)
+    respond_with(:manage, @user, location: manage_users_path)
   end
 
   def show
