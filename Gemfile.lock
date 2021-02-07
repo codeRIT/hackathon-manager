@@ -233,8 +233,8 @@ GEM
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.2)
-    minitest-reporters (1.4.2)
+    minitest (5.14.3)
+    minitest-reporters (1.4.3)
       ansi
       builder
       minitest (>= 5.0)
@@ -286,8 +286,6 @@ GEM
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.4)
@@ -342,7 +340,7 @@ GEM
       railties (>= 5.1, < 6.1)
       roadie (>= 3.1, < 5.0)
     rollbar (2.26.0)
-    ruby-progressbar (1.10.1)
+    ruby-progressbar (1.11.0)
     ruby_dep (1.5.0)
     ruby_http_client (3.5.0)
     ruby_parser (3.14.2)
