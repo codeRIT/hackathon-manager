@@ -116,7 +116,7 @@ end
 group :test do
   gem 'test-unit', '~> 3.0'
   gem 'shoulda', '~> 4.0.0'
-  gem 'shoulda-matchers', '~> 4.4.0'
+  gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
