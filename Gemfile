@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.4.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -66,7 +66,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.6.0'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
@@ -116,7 +116,7 @@ end
 group :test do
   gem 'test-unit', '~> 3.0'
   gem 'shoulda', '~> 4.0.0'
-  gem 'shoulda-matchers', '~> 4.4.0'
+  gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
