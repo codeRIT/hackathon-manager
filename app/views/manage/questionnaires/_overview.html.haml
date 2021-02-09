@@ -23,6 +23,8 @@
               = @questionnaire.age_at_time_of_event / 1.year
           %dt.col-md-4 Gender
           %dd.col-md-8= @questionnaire.gender
+          %dt.col-md-4 Country
+          %dd.col-md-8= @questionnaire.country
 
     = render 'checkin_compliance_card'
 
@@ -33,13 +35,14 @@
         .row
           %dt.col-md-4 Shirt size
           %dd.col-md-8= @questionnaire.shirt_size
-          %dt.col-md-4 Dietary restrictions
-          %dd.col-md-8
-            - if @questionnaire.dietary_restrictions.present?
-              %span.fa.fa-exclamation-triangle.text-warning.icon-space-r-half
-              = @questionnaire.dietary_restrictions
-            - else
-              %span.text-muted (none)
+          - if !HackathonConfig['digital_hackathon']
+            %dt.col-md-4 Dietary restrictions
+            %dd.col-md-8
+              - if @questionnaire.dietary_restrictions.present?
+                %span.fa.fa-exclamation-triangle.text-warning.icon-space-r-half
+                = @questionnaire.dietary_restrictions
+              - else
+                %span.text-muted (none)
           %dt.col-md-4 Special needs
           %dd.col-md-8
             - if @questionnaire.special_needs.present?
@@ -86,10 +89,10 @@
             = Questionnaire::POSSIBLE_EXPERIENCES[@questionnaire.experience]
           %dt.col-md-4 Portfolio
           %dd.col-md-8
-            = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank') : not_provided
+            = @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank', rel: 'noopener') : not_provided
           %dt.col-md-4 GitHub/GitLab/Bitbucket
           %dd.col-md-8
-            = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank') : not_provided
+            = @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank', rel: 'noopener') : not_provided
           %dt.col-md-4 Resume
           %dd.col-md-8
             = @questionnaire.resume.attached? ? link_to("Download &raquo;".html_safe, @questionnaire.resume) : not_provided
