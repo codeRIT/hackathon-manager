@@ -105,7 +105,7 @@ en:
         major: Major
         gender: Female, Male, Non-Binary, Prefer not to say, other
         dietary_restrictions: Allergies, restrictions, etc.
-        special_needs: Any special needs or requests
+        special_needs: Any accessibility requests
         portfolio_url: https://mywebsite.com
         vcs_url: https://github.com/coderit
       user:
