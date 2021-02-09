@@ -158,8 +158,8 @@ GEM
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
-    font-awesome-rails (4.7.0.5)
-      railties (>= 3.2, < 6.1)
+    font-awesome-rails (4.7.0.6)
+      railties (>= 3.2, < 6.2)
     formatador (0.2.5)
     fugit (1.4.2)
       et-orbi (~> 1.1, >= 1.1.8)
@@ -469,7 +469,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   file_validators
-  font-awesome-rails (~> 4.0)
+  font-awesome-rails (~> 4.7)
   fullcalendar-rails
   groupdate
   guard
