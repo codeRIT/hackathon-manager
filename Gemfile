@@ -57,7 +57,7 @@ gem 'ajax-datatables-rails', '~> 1.0'
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.4'
 gem 'groupdate'
-gem 'font-awesome-rails', '~> 4.0' # needed for icon helpers
+gem 'font-awesome-rails', '~> 4.7' # needed for icon helpers
 gem 'mustache', '~> 1.0'
 
 # Assets
