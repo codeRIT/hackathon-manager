@@ -66,7 +66,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.6.0'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
