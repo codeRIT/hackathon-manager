@@ -142,6 +142,7 @@ en:
         email: Email
         phone: Phone
         school: School
+        country: Country
         checked_in: Checked-in
         traveling_from: Traveling From
         questionnaire: Questionnaire

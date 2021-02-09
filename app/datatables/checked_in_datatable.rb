@@ -8,6 +8,7 @@ class CheckedInDatatable < ApplicationDatatable
       last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       phone: { source: "Questionnaire.phone" },
+      country: { source: "Questionnaire.country"},
       school_name: { source: "School.name" }
     }
   end
@@ -22,6 +23,7 @@ class CheckedInDatatable < ApplicationDatatable
         last_name: record.user.last_name,
         email: record.user.email,
         phone: record.phone,
+        country: record.country,
         school_name: record.school_name
       }
     end
