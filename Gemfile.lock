@@ -86,7 +86,7 @@ GEM
     bindex (0.8.1)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    blazer (2.2.5)
+    blazer (2.4.2)
       activerecord (>= 5)
       chartkick (>= 3.2)
       railties (>= 5)
@@ -133,11 +133,11 @@ GEM
     docile (1.3.5)
     doorkeeper (5.4.0)
       railties (>= 5)
-    dotenv (2.7.5)
-    dotenv-rails (2.7.5)
-      dotenv (= 2.7.5)
-      railties (>= 3.2, < 6.1)
-    errbase (0.2.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
+    errbase (0.2.1)
     erubi (1.10.0)
     erubis (2.7.0)
     et-orbi (1.2.4)
@@ -170,7 +170,7 @@ GEM
       momentjs-rails (>= 2.9.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    groupdate (5.0.0)
+    groupdate (5.2.2)
       activesupport (>= 5)
     guard (2.16.2)
       formatador (>= 0.2.4)
@@ -255,6 +255,8 @@ GEM
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    nokogiri (1.11.1-x86_64-darwin)
+      racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -279,7 +281,7 @@ GEM
       omniauth (>= 1.3.1)
     orm_adapter (0.5.0)
     popper_js (1.16.0)
-    power_assert (1.2.0)
+    power_assert (2.0.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -386,9 +388,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    simple_form (5.0.3)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     simple_spark (1.0.12)
       excon (>= 0.16.0, < 1.0)
       json (>= 1.7.7, < 3.0)
@@ -412,12 +414,12 @@ GEM
     strip_attributes (1.11.0)
       activemodel (>= 3.0, < 7.0)
     temple (0.8.2)
-    test-unit (3.3.6)
+    test-unit (3.4.0)
       power_assert
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    timecop (0.9.1)
+    timecop (0.9.4)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -449,6 +451,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin
 
 DEPENDENCIES
   ajax-datatables-rails (~> 1.0)
@@ -512,7 +515,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sprockets
   strip_attributes
-  test-unit (~> 3.0)
+  test-unit (~> 3.4)
   timecop
   turbolinks (~> 5)
   uglifier (>= 1.3.0)
@@ -525,4 +528,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   1.17.2
+   2.2.9
