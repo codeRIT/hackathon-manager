@@ -430,6 +430,11 @@ class Questionnaire < ApplicationRecord
     Agreement.all - agreements
   end
 
+  def update_with_invalid_attributes(attributes)
+    assign_attributes(attributes)
+    save!(:validate => false)
+  end
+
   def as_json(options = {})
     result = super
     result['all_agreements_accepted'] = all_agreements_accepted?

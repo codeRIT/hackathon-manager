@@ -61,7 +61,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     @questionnaire.user.update_attributes(email: email) if email.present?
     update_params = convert_school_name_to_id(update_params)
     update_params = convert_boarded_bus_param(update_params, @questionnaire)
-    @questionnaire.update_attributes(update_params)
+    if HackathonConfig['brickhack_7']
+      @questionnaire.update_with_invalid_attributes(update_params)
+    else
+      @questionnaire.update_attributes(update_params)
+    end
     respond_with(:manage, @questionnaire)
   end
 
@@ -157,7 +161,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       :portfolio_url, :vcs_url, :bus_captain_interest, :phone, :can_share_info,
       :travel_not_from_school, :travel_location,
       :graduation_year, :race_ethnicity, :resume, :delete_resume, :why_attend,
-      :bus_list_id, :is_bus_captain, :boarded_bus
+      :bus_list_id, :is_bus_captain, :boarded_bus, :country
     )
   end
 
