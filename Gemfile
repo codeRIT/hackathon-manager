@@ -53,7 +53,7 @@ gem "file_validators"
 # Templating utilities
 gem 'haml-rails', '~> 2.0'
 gem 'simple_form'
-gem 'ajax-datatables-rails', '~> 1.0'
+gem 'ajax-datatables-rails', '~> 1.3'
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.4'
 gem 'groupdate'
@@ -114,7 +114,7 @@ group :development do
 end
 
 group :test do
-  gem 'test-unit', '~> 3.0'
+  gem 'test-unit', '~> 3.4'
   gem 'shoulda', '~> 4.0.0'
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
