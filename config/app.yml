@@ -4,6 +4,7 @@ defaults: &defaults
   # Logic config
   accepting_questionnaires: true
   digital_hackathon: false
+  brickhack_7: true
   last_day_to_apply: "<%= Date.new(2000, 1, 1).to_s %>"
   event_start_date: "<%= Date.new(2000, 1, 1).to_s %>"
   auto_late_waitlist: false

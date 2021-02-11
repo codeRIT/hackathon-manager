@@ -432,7 +432,7 @@ class Questionnaire < ApplicationRecord
 
   def update_with_invalid_attributes(attributes)
     assign_attributes(attributes)
-    save!(:validate => false)
+    save!(validate: false)
   end
 
   def as_json(options = {})
