@@ -76,7 +76,7 @@ gem 'redcarpet'
 # Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
-gem 'audited', '~> 4.7'
+gem 'audited', '~> 4.10'
 
 # Background job processing
 gem 'sidekiq', '< 7'
@@ -114,7 +114,7 @@ group :development do
 end
 
 group :test do
-  gem 'test-unit', '~> 3.0'
+  gem 'test-unit', '~> 3.4'
   gem 'shoulda', '~> 4.0.0'
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
