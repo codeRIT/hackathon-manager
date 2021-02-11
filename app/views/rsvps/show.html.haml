@@ -2,6 +2,8 @@
 .form-container
   - if @questionnaire.unaccepted_agreements.any?
     = render partial: 'unaccepted_agreements_notice'
+  - if @questionnaire.country.blank?
+    = render partial: 'missing_country_notice'
 = simple_form_for @questionnaire, url: url_for(controller: "rsvps", action: "update"), html: { "data-validate" => "form" } do |f|
   .form-container
     #disclaimer
@@ -41,7 +43,7 @@
         .hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
           = f.input :phone, input_html: { "data-validate" => "presence" }, label: "Please verify your phone number:"
 
-      = f.button :submit, value: "Update"
+      = f.button :submit, value: "Update", disabled: @questionnaire.invalid?
 
   - if BusList.any? && !HackathonConfig['digital_hackathon']
     .form-container.hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
@@ -75,7 +77,7 @@
         %p
           %small If you sign up for a bus not stopping at your school, you are responsible for transportation to & from a pick-up location.
 
-        = f.button :submit, value: "Update"
+        = f.button :submit, value: "Update", disabled: @questionnaire.invalid?
         %br
         - if @questionnaire.bus_list_id && @questionnaire.is_bus_captain?
           %p= link_to "Bus Captain Dashboard &raquo;".html_safe, bus_list_path
