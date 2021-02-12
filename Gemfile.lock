@@ -58,8 +58,8 @@ GEM
       zeitwerk
     ansi (1.5.0)
     arel (9.0.0)
-    audited (4.9.0)
-      activerecord (>= 4.2, < 6.1)
+    audited (4.10.0)
+      activerecord (>= 4.2, < 6.2)
     autoprefixer-rails (10.2.4.0)
       execjs
     aws-eventstream (1.1.0)
@@ -455,7 +455,7 @@ PLATFORMS
 
 DEPENDENCIES
   ajax-datatables-rails (~> 1.0)
-  audited (~> 4.7)
+  audited (~> 4.10)
   aws-sdk-s3
   better_errors
   binding_of_caller

@@ -76,7 +76,7 @@ gem 'redcarpet'
 # Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
-gem 'audited', '~> 4.7'
+gem 'audited', '~> 4.10'
 
 # Background job processing
 gem 'sidekiq', '< 7'
