@@ -132,7 +132,8 @@ var setupDataTables = function () {
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
       { orderable: true, data: 'phone', visible: false },
-      { orderable: true, data: 'school_name' }
+      { orderable: true, data: 'school_name' },
+      { orderable: true, data: 'country' },
     ]
   });
 
@@ -145,7 +146,7 @@ var setupDataTables = function () {
       { orderable: true, data: 'email' },
       { orderable: true, data: 'phone' },
       { orderable: true, data: 'school_name' },
-      { orderable: true, data: 'country' },
+      { orderable: true, data: 'country' }
     ]
   });
 
