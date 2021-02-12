@@ -35,6 +35,7 @@
         %th{'data-table': { orderable: 'true', data: 'boarded_bus', visible: visible.call('boarded_bus', columns) }} Boarded bus
         %th{'data-table': { orderable: 'true', data: 'bus_captain', visible: visible.call('bus_captain', columns) }} Bus captain
         %th{'data-table': { orderable: 'true', data: 'school', visible: visible.call('school', columns) }} School
+        %th{'data-table': { orderable: 'true', data: 'country', visible: visible.call('country', columns) }} Country
         %th{'data-table': { orderable: 'true', data: 'created_at', visible: visible.call('created_at', columns) }} Applied on
         %th{'data-table': { orderable: 'true', data: 'dietary_restrictions', visible: visible.call('dietary_restrictions', columns) }} Dietary restrictions
         %th{'data-table': { orderable: 'true', data: 'special_needs', visible: visible.call('special_needs', columns) }} Special needs
@@ -67,6 +68,8 @@
         %th
         %th
           %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'School'}
+        %th
+          %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Country'}
         %th
         %th
           %input.form-control.form-control-sm{autocomplete: 'off', placeholder: 'Dietary restrictions'}
