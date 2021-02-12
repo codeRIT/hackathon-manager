@@ -88,7 +88,7 @@ gem 'blazer'
 gem 'simple_spark'
 gem 'sendgrid-actionmailer'
 gem 'httparty'
-gem 'rollbar', '~> 2.8'
+gem 'rollbar', '~> 3.1'
 gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 
