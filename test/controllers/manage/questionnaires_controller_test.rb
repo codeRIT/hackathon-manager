@@ -363,7 +363,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :html
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_match /Checked in/, flash[:notice]
+      assert_match /has been checked in./, flash[:notice]
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
     end
@@ -401,7 +401,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal true, @questionnaire.can_share_info
       assert_equal "1233333333", @questionnaire.phone
       assert_equal "new_email@example.com", @questionnaire.email
-      assert_match /Checked in/, flash[:notice]
+      assert_match /has been checked in./, flash[:notice]
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
     end

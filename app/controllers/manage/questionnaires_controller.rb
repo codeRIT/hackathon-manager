@@ -91,12 +91,12 @@ class Manage::QuestionnairesController < Manage::ApplicationController
             return
           end
           check_in_attendee
-          flash[:notice] = "Checked in #{@questionnaire.user.full_name}."
+          flash[:notice] = t(:checked_in, scope: 'messages', user_full_name: @questionnaire.user.full_name)
         elsif params[:check_in] == "false"
           check_out_attendee
-          flash[:notice] = "#{@questionnaire.user.full_name} no longer checked in."
+          flash[:notice] = t(:checked_out, scope: 'messages', user_full_name: @questionnaire.user.full_name)
         else
-          flash[:alert] = "No check-in action provided!"
+          flash[:alert] = t(:missing_check_in, scope: 'messages')
           redirect_to show_redirect_path
           return
         end
