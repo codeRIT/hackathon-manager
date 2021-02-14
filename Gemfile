@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.4.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -25,6 +25,8 @@ gem 'turbolinks', '~> 5'
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
+# CORS support
+gem 'rack-cors'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -39,7 +41,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
 gem 'devise', '~> 4.7'
-gem 'omniauth-mlh', '~> 0.4.1'
+gem 'omniauth-mlh', '~> 0.4.2'
 gem 'doorkeeper', '~> 5.0'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
@@ -55,7 +57,7 @@ gem 'ajax-datatables-rails', '~> 1.0'
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.4'
 gem 'groupdate'
-gem 'font-awesome-rails', '~> 4.0' # needed for icon helpers
+gem 'font-awesome-rails', '~> 4.7' # needed for icon helpers
 gem 'mustache', '~> 1.0'
 
 # Assets
@@ -64,7 +66,9 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.6.0'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # Markdown parsing
 gem 'redcarpet'
@@ -72,11 +76,11 @@ gem 'redcarpet'
 # Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
-gem 'audited', '~> 4.7'
+gem 'audited', '~> 4.10'
 
 # Background job processing
 gem 'sidekiq', '< 7'
-gem 'sidekiq-cron', '~> 1.1'
+gem 'sidekiq-cron', github: 'codeRIT/sidekiq-cron', branch: 'master'
 
 # Misc support gems
 gem 'rails-settings-cached', '~> 0.7.2'
@@ -84,7 +88,7 @@ gem 'blazer'
 gem 'simple_spark'
 gem 'sendgrid-actionmailer'
 gem 'httparty'
-gem 'rollbar', '~> 2.8'
+gem 'rollbar', '~> 3.1'
 gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 
@@ -110,13 +114,13 @@ group :development do
 end
 
 group :test do
-  gem 'test-unit', '~> 3.0'
-  gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'test-unit', '~> 3.4'
+  gem 'shoulda', '~> 4.0.0'
+  gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
-  gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
+  gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
   gem 'webmock', '~> 3.4'
   gem 'timecop'
