@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     stored_location = stored_location_for(resource)
     if stored_location
       stored_location
-    else current_user.questionnaire.nil?
+    elsif current_user.questionnaire.nil?
       new_questionnaires_path
     end
   end
