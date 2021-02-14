@@ -359,13 +359,27 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
-    should "check in the questionnaire" do
-      patch :check_in, params: { id: @questionnaire, check_in: "true" }
+    should "check in the questionnaire through html" do
+      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :html
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
       assert_match /Checked in/, flash[:notice]
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
+    end
+
+    should "check in the questionnaire through api" do
+      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :json
+      assert 1.minute.ago < @questionnaire.reload.checked_in_at
+      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
+      assert_response :success
+    end
+
+    should "check out the questionnaire through api" do
+      patch :check_in, params: { id: @questionnaire, check_in: "false" }, format: :json
+      assert_nil @questionnaire.reload.checked_in_at
+      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
+      assert_response :success
     end
 
     should "check in the questionnaire and update information" do
