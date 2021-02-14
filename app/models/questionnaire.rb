@@ -1,6 +1,8 @@
 class Questionnaire < ApplicationRecord
   audited
 
+  attr_accessor :validate_switch
+
   include ActiveModel::Dirty
   include DeletableAttachment
   before_validation :consolidate_school_names

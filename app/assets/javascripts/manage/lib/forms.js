@@ -32,3 +32,11 @@ var setupManageForms = function() {
     updateMessageForm();
   });
 };
+
+document.addEventListener('turbolinks:load', function () {
+  $('#validateFormSwitch').val($('#validateSwitch').is(':checked'));
+  $('#validateSwitch').on('change', function () {
+    $('#validateFormSwitch').val($('#validateSwitch').is(':checked'));
+  })
+});
+
