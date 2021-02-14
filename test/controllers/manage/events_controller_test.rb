@@ -138,10 +138,9 @@ class Manage::EventsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "not allow access to manage_events#index" do
+    should "allow access to manage_events#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to manage_root_path
+      assert_response :success
     end
 
     should "not allow access to manage_events#show" do
