@@ -54,10 +54,10 @@ class GenerateDataExportJob < ApplicationJob
       resume_paths = []
       questionnaires.each do |q|
         csv_row = [
-          q.first_name,
-          q.last_name,
+          q.user.first_name,
+          q.user.last_name,
+          q.user.email,
           q.school_name,
-          q.email,
           q.vcs_url,
           q.portfolio_url,
         ]
@@ -81,7 +81,7 @@ class GenerateDataExportJob < ApplicationJob
       csvfile_name = "000-Attendees.csv"
       csvfile_path = File.join(folder_path, csvfile_name)
       CSV.open(csvfile_path, "wb") do |csv|
-        csv << ["Fist name", "Last name", "School", "Email", "VCS URL", "Portfolio URL", "Resume filename"]
+        csv << ["Fist name", "Last name", "Email", "School", "VCS URL", "Portfolio URL", "Resume Filename"]
         csv_data.each do |row|
           csv << row
         end
