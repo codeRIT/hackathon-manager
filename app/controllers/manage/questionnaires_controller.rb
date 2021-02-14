@@ -67,14 +67,14 @@ class Manage::QuestionnairesController < Manage::ApplicationController
 
   def check_in
     respond_to do |format|
-      format.json {
+      format.json do
         if params[:check_in] == "true"
           check_in_attendee
         elsif params[:check_in] == "false"
           check_out_attendee
         end
-      }
-      format.html {
+      end
+      format.html do
         redirect_to_checkins = params[:redirect_to_checkins] || false
         show_redirect_path = redirect_to_checkins ? manage_checkin_path(@questionnaire) : manage_questionnaire_path(@questionnaire)
         index_redirect_path = redirect_to_checkins ? manage_checkins_path : manage_questionnaires_path
@@ -101,7 +101,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
           return
         end
         redirect_to index_redirect_path
-      }
+      end
     end
   end
 
