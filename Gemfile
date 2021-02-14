@@ -25,6 +25,8 @@ gem 'turbolinks', '~> 5'
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
+# CORS support
+gem 'rack-cors'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -65,6 +67,8 @@ gem 'jquery-ui-rails'
 gem 'selectize-rails'
 gem 'highcharts-rails', '~> 6.0'
 gem 'bootstrap', '~> 4.3.1'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # Markdown parsing
 gem 'redcarpet'
@@ -76,7 +80,7 @@ gem 'audited', '~> 4.7'
 
 # Background job processing
 gem 'sidekiq', '< 7'
-gem 'sidekiq-cron', '~> 1.1'
+gem 'sidekiq-cron', github: 'codeRIT/sidekiq-cron', branch: 'master'
 
 # Misc support gems
 gem 'rails-settings-cached', '~> 0.7.2'
@@ -111,8 +115,8 @@ end
 
 group :test do
   gem 'test-unit', '~> 3.0'
-  gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda', '~> 4.0.0'
+  gem 'shoulda-matchers', '~> 4.4.0'
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
@@ -124,8 +128,6 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

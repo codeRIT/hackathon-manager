@@ -36,6 +36,8 @@ en:
     registrations:
       user:
         signed_up: Welcome! Your account has been created.
+  errors:
+    my_mlh_null: Some information from MyMLH is missing, please fill in the missing fields.
   simple_form:
     hints:
       bus_list:
@@ -45,7 +47,11 @@ en:
           If many people have already RSVP'd, consider sending a message out to this bus list asking for interest as well.
         notes: Notes are shared with applicants. Supports Markdown and HTML.
       user:
-        role: Limited access prevents the admin from adding, modifying, or deleting any records; modifications through the check-in process are allowed. Event tracking limits to only event tracking.
+        role: |
+          Users can only access and edit their own information <br/>
+          Volunteers can only access the check-in process <br/>
+          Organizers can not modify, add, or delete any records but can view questionnaires and other records <br/>
+          Directors do not have any restrictions and can add, edit, or delete any record or setting <br/>
         is_active: Deactivating a user will prevent them from logging in. Their access will be immediately revoked from the admin and application pages.
         receive_weekly_report: A weekly email report on admissions, bus lists, and messages. Only sent when there are weekly updates up until 7 days past the event. Disabled for inactive staff members.
       message:
@@ -54,8 +60,6 @@ en:
         trigger: Sent automatically when a new or updated applicant matches this criteria. Does not send to anyone already matching this criteria.
       school:
         is_home: The "home" school is separated from all other schools on dashboard metrics.
-      agreement:
-        name: 'Agreements are displayed to applicants as: "I read & accept the [agreement_name] agreement"'
       hackathon_config:
         accepting_questionnaires: Specify and allow questionnaires to be accepted.
         digital_hackathon: Optimize HackathonManager for a digital hackathon. (Removes travel, dietary restrictions, etc.)
@@ -101,7 +105,7 @@ en:
         major: Major
         gender: Female, Male, Non-Binary, Prefer not to say, other
         dietary_restrictions: Allergies, restrictions, etc.
-        special_needs: Any special needs or requests
+        special_needs: Any accessibility requests
         portfolio_url: https://mywebsite.com
         vcs_url: https://github.com/coderit
       user:
@@ -132,13 +136,35 @@ en:
         title: Check-in
       stats:
         title: Statistics
+        id: ID
+        first_name: First Name
+        last_name: Last Name
+        email: Email
+        phone: Phone
+        school: School
+        country: Country
+        checked_in: Checked-in
+        traveling_from: Traveling From
+        questionnaire: Questionnaire
+        questionnaire_status: Questionnaire Status
+        dietary_restrictions: Dietary Restrictions
+        special_needs: Special Needs
+        open_source_link: Open Source Link
+        portfolio_link: Portfolio Link
+        dietary_restrictions_special_needs: Dietary Restrictions or Special Needs
+        attendes_not_traveling_from_their_school: Attendees Not Traveling From Their School
+        attendee_info_for_sponsors: Attendee Info for Sponsors
+        applied_attendees: Applied Attendees
+        checked_in_attendees: Checked-in Attendees
       trackable-tags:
         title: Trackable Tags
+      events:
+        title: Schedule
       bus-lists:
         title: Bus Lists
       schools:
         title: Schools
-      users: 
+      users:
         title: Users & Staff
         users: All Users
         staff: "%{hackathon_name} Staff"
@@ -156,11 +182,13 @@ en:
           previous_signed_in_ip: Previous signed-in IP
           sign_in_count: Sign-in count
         show:
-          title: "%{user_email}"
+          subtitle: "User"
           edit: Edit
           reset_password: Reset Password
           delete: Delete
           user_information: User Information
+          first_name: First name
+          last_name: Last name
           email_address: Email address
           role: Role
           login_access: Login access
@@ -178,10 +206,12 @@ en:
           sign_in_count: Sign-in count
           change_history: Change History
         edit:
-          title: Edit User
-          subtitle: "%{user_email}"
+          subtitle: Edit User
           cancel: Cancel
           delete: Delete
+          reset_password: Reset Password
+          confirm_reset_password: "Are you sure? %{full_name}'s password will be reset and %{first_name} will receive a recovery email."
+          reset_password_success: "Successfully reset password and sent recovery instructions to %{full_name}."
           form:
             active: Active
             inactive: Inactive
@@ -192,7 +222,7 @@ en:
         title: Legal Agreements
         notice: "These are legal agreements that are required to be reviewed and agreed upon by all applicants of %{hackathon_name}."
         name: Name
-        agreement_url: Agreement URL
+        agreement: Agreement
         new: New Agreement
         edit: Edit Agreement
       settings:

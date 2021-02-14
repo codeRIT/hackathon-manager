@@ -6,6 +6,7 @@
 @import general/variables
 @import general/css4
 @import manage/autocomplete
+@import manage/events
 
 $grey-dark: #555
 $grey-med: #999
@@ -15,6 +16,7 @@ $grey-med: #999
 @import vendor/datatables.min
 @import selectize
 @import selectize.default
+@import fullcalendar
 
 .icon-space-r
   margin-right: 0.5em
@@ -57,6 +59,16 @@ $grey-med: #999
   text-align: center
   overflow: auto
   width: 100%
+  @media (max-width: 768px)
+    display: none
+
+.map-button
+  display: none
+  @media (max-width: 768px)
+    display: block
+
+.narrow-icon
+  width: 40px
 
 .dashboard-container-title
   border-bottom: 3px solid #e5e5e5
@@ -69,21 +81,25 @@ $grey-med: #999
   vertical-align: top
   position: absolute
   z-index: 1
-  background: rgba(#ffffff,0.86)
+  background: rgba(#ffffff, 0.86)
   margin-left: 33px
   padding: 0 6%
   height: 136px
+
   h3
     color: $black
     font-weight: 500
     margin: 1.2em 0 0
+
   p
     font-size: 14px
     margin: 0.5em 0 1.2em
+
   &.double-metrics
     h3
       margin-top: 0.45em
       font-size: 21px
+
     p
       font-size: 13px
       margin-top: 0.3em
@@ -92,6 +108,7 @@ $grey-med: #999
   list-style: none
   margin: 0 0 10px
   padding: 0
+
   li
     margin: 0
     padding: 2px
@@ -111,7 +128,8 @@ $grey-med: #999
   height: calc(100% + 20px)
 
 .editor-toolbar.fullscreen
-  z-index: 1031 // in front of the navbar
+  z-index: 1031
+// in front of the navbar
 
 /*
  * Mobile nav
@@ -126,6 +144,7 @@ $grey-med: #999
 
 .navbar-mobile-toggle--active
   background: #eeeeee
+
   .fa
     color: black !important
 
@@ -137,6 +156,10 @@ $grey-med: #999
   height: calc(100vh - 2.25rem)
   overflow: scroll
 
+.calendar-list
+  width: 100%
+  min-width: 500px
+  margin: auto
 
 /*
  * Datatable changes

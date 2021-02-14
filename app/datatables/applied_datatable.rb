@@ -1,4 +1,4 @@
-class MLHCheckedInDatatable < ApplicationDatatable
+class AppliedDatatable < ApplicationDatatable
   def_delegators :@view, :link_to, :manage_stats_path, :bold, :display_datetime
 
   def view_columns
@@ -8,6 +8,7 @@ class MLHCheckedInDatatable < ApplicationDatatable
       last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       phone: { source: "Questionnaire.phone" },
+      country: { source: "Questionnaire.country" },
       school_name: { source: "School.name" }
     }
   end
@@ -22,19 +23,18 @@ class MLHCheckedInDatatable < ApplicationDatatable
         last_name: record.user.last_name,
         email: record.user.email,
         phone: record.phone,
+        country: record.country,
         school_name: record.school_name
       }
     end
   end
 
   def get_raw_records
-    restrictions = "checked_in_at > 0"
-
     q_attributes = [
       :id,
       :phone
     ]
 
-    Questionnaire.includes(:user).references(:user).where(restrictions).select(q_attributes)
+    Questionnaire.includes(:user).references(:user).select(q_attributes)
   end
 end

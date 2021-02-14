@@ -12,6 +12,7 @@ Documentation to get you started:
 - [Questionnaires](questionnaires.md)
 - [Messages](messages.md)
 - [Bus Lists](busses.md)
+- [Users & Staff](users-and-staff.md)
 - _More to come..._
 
 ## Timeline of a hackathon

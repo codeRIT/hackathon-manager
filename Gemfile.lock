@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/codeRIT/sidekiq-cron.git
+  revision: 571d7d74d2828aea2f55381a83f73ac3450e8819
+  branch: master
+  specs:
+    sidekiq-cron (1.2.0)
+      fugit (~> 1.1)
+      sidekiq (>= 4.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,8 +57,6 @@ GEM
       railties (>= 5.0)
       zeitwerk
     ansi (1.5.0)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     arel (9.0.0)
     audited (4.9.0)
       activerecord (>= 4.2, < 6.1)
@@ -102,9 +109,6 @@ GEM
       xpath (~> 3.2)
     chartkick (3.4.0)
     childprocess (3.0.0)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     codeclimate-test-reporter (0.6.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.3)
@@ -134,7 +138,7 @@ GEM
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
     errbase (0.2.0)
-    erubi (1.9.0)
+    erubi (1.10.0)
     erubis (2.7.0)
     et-orbi (1.2.4)
       tzinfo
@@ -154,9 +158,13 @@ GEM
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
     formatador (0.2.5)
-    fugit (1.3.6)
+    fugit (1.4.2)
       et-orbi (~> 1.1, >= 1.1.8)
-      raabro (~> 1.3)
+      raabro (~> 1.4)
+    fullcalendar-rails (3.9.0.0)
+      jquery-rails (>= 4.0.5, < 5.0.0)
+      jquery-ui-rails (>= 5.0.2)
+      momentjs-rails (>= 2.9.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     groupdate (5.0.0)
@@ -197,7 +205,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    io-like (0.3.1)
     jmespath (1.4.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
@@ -211,7 +218,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.7.0)
+    loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.2.6)
@@ -232,6 +239,8 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    momentjs-rails (2.20.1)
+      railties (>= 3.1)
     msgpack (1.3.3)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -239,7 +248,7 @@ GEM
     mustache (1.1.1)
     mysql2 (0.5.3)
     nenv (0.3.0)
-    nio4r (2.5.3)
+    nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.3)
@@ -273,8 +282,10 @@ GEM
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
-    raabro (1.3.1)
+    raabro (1.4.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.0.8.1)
       rack
     rack-test (1.1.0)
@@ -319,7 +330,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.0)
-    redis (4.2.1)
+    redis (4.2.5)
     regexp_parser (1.7.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -361,20 +372,16 @@ GEM
       ruby_http_client (~> 3.4)
     sexp_processor (4.15.0)
     shellany (0.0.1)
-    shoulda (3.5.0)
-      shoulda-context (~> 1.0, >= 1.0.1)
-      shoulda-matchers (>= 1.4.1, < 3.0)
-    shoulda-context (1.2.2)
-    shoulda-matchers (2.8.0)
-      activesupport (>= 3.0.0)
-    sidekiq (6.0.7)
+    shoulda (4.0.0)
+      shoulda-context (~> 2.0)
+      shoulda-matchers (~> 4.0)
+    shoulda-context (2.0.0)
+    shoulda-matchers (4.4.1)
+      activesupport (>= 4.2.0)
+    sidekiq (6.1.3)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      rack-protection (>= 2.0.0)
-      redis (>= 4.1.0)
-    sidekiq-cron (1.2.0)
-      fugit (~> 1.1)
-      sidekiq (>= 4.2.1)
+      redis (>= 4.2.0)
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -392,7 +399,7 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.2.1)
+    sprockets-rails (3.2.2)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
@@ -408,7 +415,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.7)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -449,7 +456,6 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   chartkick (~> 3.4)
-  chromedriver-helper
   codeclimate-test-reporter (~> 0.6.0)
   devise (~> 4.7)
   devise-doorkeeper
@@ -458,6 +464,7 @@ DEPENDENCIES
   factory_bot_rails
   file_validators
   font-awesome-rails (~> 4.0)
+  fullcalendar-rails
   groupdate
   guard
   guard-minitest
@@ -468,11 +475,13 @@ DEPENDENCIES
   jquery-ui-rails
   listen (>= 3.0.5, < 3.2)
   minitest-reporters
+  momentjs-rails
   mustache (~> 1.0)
   mysql2 (>= 0.4.4, < 0.6.0)
   omniauth-mlh (~> 0.4.1)
   omniauth-rails_csrf_protection
   puma (~> 4.3)
+  rack-cors
   rails (~> 5.2.4.4)
   rails-controller-testing
   rails-settings-cached (~> 0.7.2)
@@ -486,10 +495,10 @@ DEPENDENCIES
   selectize-rails
   selenium-webdriver
   sendgrid-actionmailer
-  shoulda (~> 3.5)
-  shoulda-matchers (~> 2.0)
+  shoulda (~> 4.0.0)
+  shoulda-matchers (~> 4.4.0)
   sidekiq (< 7)
-  sidekiq-cron (~> 1.1)
+  sidekiq-cron!
   simple_form
   simple_spark
   simplecov

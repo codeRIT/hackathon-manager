@@ -22,6 +22,7 @@
             = f.input :level_of_study, input_html: { "data-validate" => "presence" }
             = f.input :major, input_html: { "data-validate" => "presence" }
             = f.input :gender, input_html: { "data-validate" => "presence" }
+            = f.input :country, as: :select, collection: Questionnaire::POSSIBLE_COUNTRIES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
 
         - if !HackathonConfig['digital_hackathon']
           .card.mb-4
