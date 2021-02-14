@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
       stored_location
     elsif current_user.questionnaire.nil?
       new_questionnaires_path
+    else
+      questionnaires_path
     end
   end
 end
