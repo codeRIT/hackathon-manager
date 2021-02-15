@@ -72,5 +72,5 @@
       .custom-control.custom-switch.pb-3
         = f.input :validate_switch, as: :hidden, input_html: { id: "validateFormSwitch" }
         %input.custom-control-input{ type: "checkbox", id: "validateSwitch", checked: true }
-        %label.custom-control-label{ for: "validateSwitch" } Enable Validation
+        %label.custom-control-label.switch-input{ for: "validateSwitch" } Enable Validation
       = f.button :submit, value: ( @questionnaire.new_record? ? 'Create' : 'Save' ), class: 'btn-primary'
