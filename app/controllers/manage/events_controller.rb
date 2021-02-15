@@ -1,5 +1,6 @@
 class Manage::EventsController < Manage::ApplicationController
-  before_action :require_director
+  before_action :require_director_or_organizer, only: :index
+  before_action :require_director, except: :index
   respond_to :html, :json
 
   def index
