@@ -124,6 +124,10 @@ en:
         homepage_url: Homepage URL
         thanks_for_rsvp_message: Thanks For RSVP Message
         questionnaires_closed_message: Questionnaires Closed Message
+  messages:
+    checked_in: "%{user_full_name} has been checked in."
+    checked_out: "%{user_full_name} is no longer checked in."
+    missing_check_in: No check-in action provided!
   pages:
     manage:
       dashboard:
