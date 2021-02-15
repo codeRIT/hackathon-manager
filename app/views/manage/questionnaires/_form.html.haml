@@ -36,6 +36,11 @@
               = f.input :boarded_bus, as: :boolean, label: "Boarded bus", input_html: { checked: @questionnaire.boarded_bus_at.present? }
               = f.input :is_bus_captain, label: "Is Bus Captain"
 
+        .card.mb-4
+          .card-header Agreements
+          .card-body
+            = f.association :agreements, as: :check_boxes, label_method: :formatted_agreement, value_method: :id, disabled: true, label: false, hint: "Only account owners can accept legal agreements"
+
       .col-xl-6
         .card.mb-4
           .card-header Special notices
