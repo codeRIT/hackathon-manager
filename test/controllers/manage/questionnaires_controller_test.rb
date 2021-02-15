@@ -359,13 +359,27 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
-    should "check in the questionnaire" do
-      patch :check_in, params: { id: @questionnaire, check_in: "true" }
+    should "check in the questionnaire through html" do
+      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :html
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_match /Checked in/, flash[:notice]
+      assert_match /has been checked in./, flash[:notice]
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
+    end
+
+    should "check in the questionnaire through api" do
+      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :json
+      assert 1.minute.ago < @questionnaire.reload.checked_in_at
+      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
+      assert_response :success
+    end
+
+    should "check out the questionnaire through api" do
+      patch :check_in, params: { id: @questionnaire, check_in: "false" }, format: :json
+      assert_nil @questionnaire.reload.checked_in_at
+      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
+      assert_response :success
     end
 
     should "check in the questionnaire and update information" do
@@ -387,7 +401,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal true, @questionnaire.can_share_info
       assert_equal "1233333333", @questionnaire.phone
       assert_equal "new_email@example.com", @questionnaire.email
-      assert_match /Checked in/, flash[:notice]
+      assert_match /has been checked in./, flash[:notice]
       assert_response :redirect
       assert_redirected_to manage_questionnaires_path
     end
