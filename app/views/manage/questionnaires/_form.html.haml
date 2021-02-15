@@ -17,7 +17,7 @@
               = u.input :last_name, label: "Last Name"
             = f.input :email, input_html: { value: @questionnaire.user.try(:email) }, required: true, hint: 'Can be an existing user (without a questionnaire) or a new user. If this is a new user, they will receive a randomly-generated password that they must request a password reset for.'
             = f.input :phone
-            = f.input :date_of_birth, start_year: Date.today.year - 18, end_year: Date.today.year - 90, order: [:month, :day, :year]
+            = f.input :date_of_birth, start_year: Date.today.year - 5, end_year: Date.today.year - 90, order: [:month, :day, :year]
             = f.input :school_id, as: :school_selection
             = f.input :level_of_study
             = f.input :major
