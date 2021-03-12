@@ -40,8 +40,8 @@ class DataExport < ApplicationRecord
   def enqueue!
     raise "Data export has already been queued" unless status == "created_not_queued"
 
-    GenerateDataExportJob.perform_later(self)
     update_attribute(:queued_at, Time.now)
+    GenerateDataExportJob.perform_later(self)
   end
 
   def status

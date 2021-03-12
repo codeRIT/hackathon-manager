@@ -22,8 +22,7 @@ class Questionnaire < ApplicationRecord
   validates_uniqueness_of :user_id
 
   validates_presence_of :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
-  validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity
-  validates :country, presence:  { message: %[information is missing from application. Please update your <a href="#{Rails.application.routes.url_helpers.edit_questionnaires_path}">Application</a>] }
+  validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity, :country
 
   DIETARY_SPECIAL_NEEDS_MAX_LENGTH = 500
   validates_length_of :dietary_restrictions, maximum: DIETARY_SPECIAL_NEEDS_MAX_LENGTH

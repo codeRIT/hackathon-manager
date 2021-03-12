@@ -42,7 +42,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Authentication
 gem 'devise', '~> 4.7'
 gem 'omniauth-mlh', '~> 0.4.2'
-gem 'doorkeeper', '~> 5.0'
+gem 'doorkeeper', '~> 5.5'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
 
@@ -76,7 +76,7 @@ gem 'redcarpet'
 # Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
-gem 'audited', '~> 4.7'
+gem 'audited', '~> 4.10'
 
 # Background job processing
 gem 'sidekiq', '< 7'
@@ -88,7 +88,7 @@ gem 'blazer'
 gem 'simple_spark'
 gem 'sendgrid-actionmailer'
 gem 'httparty'
-gem 'rollbar', '~> 2.8'
+gem 'rollbar', '~> 3.1'
 gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 
@@ -122,7 +122,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
-  gem 'webmock', '~> 3.4'
+  gem 'webmock', '~> 3.12'
   gem 'timecop'
 
   # Adds support for Capybara system testing and selenium driver

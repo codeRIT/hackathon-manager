@@ -66,34 +66,43 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def check_in
-    redirect_to_checkins = params[:redirect_to_checkins] || false
-    show_redirect_path = redirect_to_checkins ? manage_checkin_path(@questionnaire) : manage_questionnaire_path(@questionnaire)
-    index_redirect_path = redirect_to_checkins ? manage_checkins_path : manage_questionnaires_path
-    if params[:check_in] == "true"
-      if params[:questionnaire]
-        q_params = params.require(:questionnaire).permit(:phone, :can_share_info, :email)
-        email = q_params.delete(:email)
-        @questionnaire.update_attributes(q_params)
-        @questionnaire.user.update_attributes(email: email)
+    respond_to do |format|
+      format.json do
+        if params[:check_in] == "true"
+          check_in_attendee
+        elsif params[:check_in] == "false"
+          check_out_attendee
+        end
       end
-      unless @questionnaire.valid?
-        flash[:alert] = @questionnaire.errors.full_messages.join(", ")
-        redirect_to show_redirect_path
-        return
+      format.html do
+        redirect_to_checkins = params[:redirect_to_checkins] || false
+        show_redirect_path = redirect_to_checkins ? manage_checkin_path(@questionnaire) : manage_questionnaire_path(@questionnaire)
+        index_redirect_path = redirect_to_checkins ? manage_checkins_path : manage_questionnaires_path
+        if params[:check_in] == "true"
+          if params[:questionnaire]
+            q_params = params.require(:questionnaire).permit(:phone, :can_share_info, :email)
+            email = q_params.delete(:email)
+            @questionnaire.update_attributes(q_params)
+            @questionnaire.user.update_attributes(email: email)
+          end
+          unless @questionnaire.valid?
+            flash[:alert] = @questionnaire.errors.full_messages.join(", ")
+            redirect_to show_redirect_path
+            return
+          end
+          check_in_attendee
+          flash[:notice] = t(:checked_in, scope: 'messages', user_full_name: @questionnaire.user.full_name)
+        elsif params[:check_in] == "false"
+          check_out_attendee
+          flash[:notice] = t(:checked_out, scope: 'messages', user_full_name: @questionnaire.user.full_name)
+        else
+          flash[:alert] = t(:missing_check_in, scope: 'messages')
+          redirect_to show_redirect_path
+          return
+        end
+        redirect_to index_redirect_path
       end
-      @questionnaire.update_attribute(:checked_in_at, Time.now)
-      @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
-      flash[:notice] = "Checked in #{@questionnaire.user.full_name}."
-    elsif params[:check_in] == "false"
-      @questionnaire.update_attribute(:checked_in_at, nil)
-      @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
-      flash[:notice] = "#{@questionnaire.user.full_name} no longer checked in."
-    else
-      flash[:alert] = "No check-in action provided!"
-      redirect_to show_redirect_path
-      return
     end
-    redirect_to index_redirect_path
   end
 
   def destroy
@@ -146,6 +155,16 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   private
+
+  def check_in_attendee
+    @questionnaire.update_attribute(:checked_in_at, Time.now)
+    @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
+  end
+
+  def check_out_attendee
+    @questionnaire.update_attribute(:checked_in_at, nil)
+    @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
+  end
 
   def questionnaire_params
     # Note that this ONLY considers parameters for the questionnaire, not the user.
