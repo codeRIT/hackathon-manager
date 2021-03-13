@@ -42,7 +42,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Authentication
 gem 'devise', '~> 4.7'
 gem 'omniauth-mlh', '~> 0.4.2'
-gem 'doorkeeper', '~> 5.0'
+gem 'doorkeeper', '~> 5.5'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
 
@@ -122,7 +122,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
-  gem 'webmock', '~> 3.4'
+  gem 'webmock', '~> 3.12'
   gem 'timecop'
 
   # Adds support for Capybara system testing and selenium driver
