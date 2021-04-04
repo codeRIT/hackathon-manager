@@ -1,0 +1,187 @@
+<%= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.stats') %>
+<div class="row">
+  <div class="col">
+    <h5 class="dashboard-container-title">
+      <%= t(:dietary_restrictions_special_needs, scope: 'pages.manage.stats') %>
+    </h5>
+    <table class="datatable stats-dietary table table-striped table-hover" data-source="<%= dietary_restrictions_special_needs_datatable_manage_stats_path(format: :json) %>">
+      <thead>
+        <tr>
+          <th>
+            <%= t(:id, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:first_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:last_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:email, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:phone, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:questionnaire, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:checked_in, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:dietary_restrictions, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:special_needs, scope: 'pages.manage.stats') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<% if !HackathonConfig['digital_hackathon'] %>
+  <div class="row">
+    <div class="col">
+      <h5 class="dashboard-container-title">
+        <%= t(:attendees_not_traveling_from_their_school, scope: 'pages.manage.stats') %>
+      </h5>
+      <table class="datatable stats-notschooltravel table table-striped table-hover" data-source="<%= alt_travel_datatable_manage_stats_path(format: :json) %>">
+        <thead>
+          <tr>
+            <th>
+              <%= t(:id, scope: 'pages.manage.stats') %>
+            </th>
+            <th>
+              <%= t(:first_name, scope: 'pages.manage.stats') %>
+            </th>
+            <th>
+              <%= t(:last_name, scope: 'pages.manage.stats') %>
+            </th>
+            <th>
+              <%= t(:email, scope: 'pages.manage.stats') %>
+            </th>
+            <th>
+              <%= t(:phone, scope: 'pages.manage.stats') %>
+            </th>
+            <th>
+              <%= t(:questionnaire, scope: 'pages.manage.stats') %>
+            </th>
+            <th>
+              <%= t(:traveling_from, scope: 'pages.manage.stats') %>
+            </th>
+            <th>
+              <%= t(:questionnaire_status, scope: 'pages.manage.stats') %>
+            </th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col">
+    <h5 class="dashboard-container-title">
+      <%= t(:attendee_info_for_sponsors, scope: 'pages.manage.stats') %>
+    </h5>
+    <table class="datatable stats-attendeeinfo table table-striped table-hover" data-source="<%= attendee_sponsor_info_datatable_manage_stats_path(format: :json) %>">
+      <thead>
+        <tr>
+          <th>
+            <%= t(:id, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:first_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:last_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:email, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:school, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:open_source_link, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:portfolio_link, scope: 'pages.manage.stats') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h5 class="dashboard-container-title">
+      <%= t(:applied_attendees, scope: 'pages.manage.stats') %>
+    </h5>
+    <table class="datatable stats-info-applied table table-striped table-hover" data-source="<%= applied_datatable_manage_stats_path(format: :json) %>">
+      <thead>
+        <tr>
+          <th>
+            <%= t(:id, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:first_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:last_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:email, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:phone, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:school, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:country, scope: 'pages.manage.stats') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h5 class="dashboard-container-title">
+      <%= t(:checked_in_attendees, scope: 'pages.manage.stats') %>
+    </h5>
+    <table class="datatable stats-info-checkedin table table-striped table-hover" data-source="<%= checked_in_datatable_manage_stats_path(format: :json) %>">
+      <thead>
+        <tr>
+          <th>
+            <%= t(:id, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:first_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:last_name, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:email, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:phone, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:school, scope: 'pages.manage.stats') %>
+          </th>
+          <th>
+            <%= t(:country, scope: 'pages.manage.stats') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>

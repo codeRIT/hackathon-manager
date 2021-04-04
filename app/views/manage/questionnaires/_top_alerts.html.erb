@@ -1,0 +1,15 @@
+<% if @questionnaire.minor? %>
+  <div class="alert alert-warning">
+    <p class="mb-1">
+      <strong>
+        <span class="fa fa-exclamation-triangle icon-space-r-half"></span>
+        Applicant is a minor
+      </strong>
+    </p>
+    <p class="mb-0">
+      Will be
+      <%= format_age(@questionnaire.age_at_time_of_event) %>
+      old at the start of the event.
+    </p>
+  </div>
+<% end %>

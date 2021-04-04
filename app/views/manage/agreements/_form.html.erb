@@ -1,0 +1,12 @@
+<div class="form-container">
+  <%= bs_horizontal_simple_form_for(@agreement, url: url_for(action: @agreement.new_record? ? "create" : "update", controller: "agreements")) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :name %>
+      <%= f.input :agreement, label: t(:agreement, scope: 'pages.manage.agreements'), input_html: { rows: 10, 'data-simple-mde' => '1' } %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn-primary' %>
+    </div>
+  <% end %>
+</div>

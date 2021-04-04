@@ -1,0 +1,12 @@
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger mt-3">
+    <span class="fa fa-exclamation-triangle icon-space-r-half"></span>
+    <%= flash[:alert].html_safe %>
+  </div>
+<% end %>
+<% if flash[:notice].present? %>
+  <div class="alert alert-info mt-3">
+    <span class="fa fa-info-circle icon-space-r-half"></span>
+    <%= flash[:notice].html_safe %>
+  </div>
+<% end %>

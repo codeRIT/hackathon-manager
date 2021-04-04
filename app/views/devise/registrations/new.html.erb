@@ -1,0 +1,25 @@
+<% title 'Register' %>
+<div class="form-container signup">
+  <h1 class="section-title center">
+    Create an
+    <div class="emphasized text-overflow-center">
+      Account
+    </div>
+  </h1>
+  <% if !HackathonConfig['accepting_questionnaires'] || HackathonConfig['disclaimer_message'].present? %>
+    <div id="disclaimer">
+      <% if !HackathonConfig['accepting_questionnaires'] %>
+        <div class="center">
+          <p>
+            <%= markdown(HackathonConfig['questionnaires_closed_message']) %>
+          </p>
+        </div>
+        <br/>
+      <% end %>
+      <% if HackathonConfig['disclaimer_message'].present? %>
+        <%= markdown(HackathonConfig['disclaimer_message']) %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= render 'form' %>
+</div>

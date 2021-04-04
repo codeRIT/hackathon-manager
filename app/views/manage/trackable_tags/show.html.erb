@@ -1,0 +1,60 @@
+<%= render "layouts/manage/page_title", title: @trackable_tag.name, subtitle: "Trackable Tag" do %>
+  <div class="btn-group">
+    <%= link_to 'Edit', edit_manage_trackable_tag_path(@trackable_tag), class: 'btn btn-sm btn-outline-secondary' %>
+    <%= link_to 'Delete', manage_trackable_tag_path(@trackable_tag), method: :delete, data: { confirm: "Are you sure? The trackable tag \"#{@trackable_tag.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary' %>
+  </div>
+<% end %>
+<p>
+  <b>Name:</b>
+  <%= @trackable_tag.name %>
+</p>
+<p>
+  <b>Allow duplicate band IDs:</b>
+  <% if @trackable_tag.allow_duplicate_band_events %>
+    <span class="text-success">Allow duplicates</span>
+  <% else %>
+    <span class="text-danger">Block duplicates</span>
+  <% end %>
+</p>
+<p>
+  <b>
+    <%= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: @trackable_tag.id) %>
+  </b>
+</p>
+<%= area_chart @trackable_tag.trackable_events.group_by_hour(:created_at).count %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Band</th>
+      <th>Entered by</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @trackable_tag.sorted_events.each do |trackable_event| %>
+      <tr>
+        <td>
+          <%= display_datetime(trackable_event.created_at) %>
+        </td>
+        <td>
+          <%= trackable_event.band_id %>
+        </td>
+        <td>
+          <%= trackable_event.user.email %>
+        </td>
+        <td>
+          <% if current_user.director? || current_user == trackable_event.user %>
+            <%= link_to 'Edit', edit_manage_trackable_event_path(trackable_event) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="row mt-2 mb-4">
+  <div class="col-lg-6">
+    <h4 class="border-bottom pb-2 mb-3">Change History</h4>
+    <%= render "model_history", model: @trackable_tag %>
+  </div>
+</div>

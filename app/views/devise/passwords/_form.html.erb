@@ -1,0 +1,17 @@
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+  </div>
+  <div class="form-actions right">
+    <%= f.button :submit, "Send Reset Instructions" %>
+    <p class="session-link">
+      Remembered it?
+      <%= link_to "Sign in!".html_safe, new_user_session_path %>
+    </p>
+    <p class="session-link">
+      No account?
+      <%= link_to "Register!".html_safe, new_user_registration_path %>
+    </p>
+  </div>
+<% end %>

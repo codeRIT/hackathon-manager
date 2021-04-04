@@ -1,0 +1,160 @@
+<ruby>
+  
+  begin
+    recipient_count = pluralize(BulkMessageJob.build_recipients(@message.recipients).count, "Recipient")
+    number_of_recipients = BulkMessageJob.build_recipients(@message.recipients).count
+    recipient_plural = "Recipient"
+    if number_of_recipients > 1
+      recipient_plural = "Recipients"
+    end
+
+  rescue => recipient_error
+  end
+
+
+</ruby>
+<%= render "layouts/manage/page_title", title: @message.name, subtitle: "Message" do %>
+  <div class="btn-group">
+    <% if @message.can_queue? %>
+      <% if recipient_error.present? %>
+        <button class="btn btn-sm btn-outline-secondary" disabled="disabled" title="Cannot deliver when there is a recipient error; see error above.">Deliver</button>
+      <% else %>
+        <button class="btn btn-sm btn-primary" data-target="#confirm-messages" data-toggle="modal">
+          <span class="fa fa-send icon-space-r-half"></span>
+          <span>Send</span>
+        </button>
+        <div class="modal" id="confirm-messages">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm</h5>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure? The message "#{@message.name}" will be sent to:</p>
+                <h3 class="center">
+                  <span class="font-weight-bold">
+                    <%= number_with_delimiter(number_of_recipients) %>
+                  </span>
+                  <span>
+                    <%= recipient_plural %>
+                  </span>
+                </h3>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <%= link_to deliver_manage_message_path(@message), method: :patch, class: 'btn btn-danger' do %>
+                  <span>Send Message</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <% if @message.can_edit? %>
+      <%= link_to 'Edit', edit_manage_message_path(@message), class: 'btn btn-sm btn-outline-secondary' %>
+      <%= link_to 'Delete', manage_message_path(@message), method: :delete, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary' %>
+    <% end %>
+    <%= link_to 'Duplicate', duplicate_manage_message_path(@message), method: :patch, class: 'btn btn-sm btn-outline-secondary' %>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-lg-6">
+    <dl class="row">
+      <dt class="col-md-3">Name</dt>
+      <dd class="col-md-9">
+        <%= @message.name %>
+      </dd>
+      <dt class="col-md-3">Subject</dt>
+      <dd class="col-md-9">
+        <%= @message.subject %>
+      </dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <% if @message.bulk? %>
+      <p class="mb-1">
+        <b>Recipients</b>
+      </p>
+      <ul class="pl-4 mb-1">
+        <% @message.recipients_list.each do |recipient| %>
+          <li>
+            <%= recipient %>
+          </li>
+        <% end %>
+      </ul>
+      <% if @message.recipients.blank? %>
+        <p class="text-muted">(none)</p>
+      <% end %>
+      <% if @message.recipients.present? %>
+        <p class="small">
+          <% if recipient_error.present? %>
+            <strong style="color: red;">Error parsing recipients:</strong>
+            <%= recipient_error %>
+            <br/>
+          <% else %>
+            <em>#{recipient_count} currently match this query</em>
+          <% end %>
+        </p>
+      <% end %>
+    <% end %>
+    <% if @message.automated? %>
+      <p class="mb-1">
+        <b>Trigger</b>
+        <small>
+          <em>Sent automatically to an applicant upon meeting this criteria</em>
+        </small>
+      </p>
+      <p>
+        <%= Message::POSSIBLE_TRIGGERS[@message.trigger] || "<span class=\"text-muted\">(disabled)</span>".html_safe %>
+      </p>
+    <% end %>
+  </div>
+</div>
+<div>
+  <p>
+    <b>Preview:</b>
+    <%= link_to preview_manage_message_path, target: '_blank' do %>
+      Open full preview
+      <span class="fa fa-external-link icon-space-l-half"></span>
+    <% end %>
+  </p>
+  <iframe class="email-preview" src="<%= preview_manage_message_path(@message) %>"></iframe>
+</div>
+<div class="row mt-3">
+  <div class="col-lg-6">
+    <div class="card mb-3">
+      <div class="card-body pb-1">
+        <h5 class="card-title">Change history</h5>
+        <%= render "model_history", model: @message %>
+      </div>
+    </div>
+  </div>
+  <% if @message.bulk? %>
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Bulk delivery details</h5>
+          <p class="card-text">
+            <b>
+              Status:
+              <%= @message.status.titleize %>
+            </b>
+          </p>
+          <p class="card-text">
+            <b>Queued At:</b>
+            <%= @message.queued_at || "(n/a)" %>
+          </p>
+          <p class="card-text">
+            <b>Started At:</b>
+            <%= @message.started_at || "(n/a)" %>
+          </p>
+          <p class="card-text">
+            <b>Delivered At:</b>
+            <%= @message.delivered_at || "(n/a)" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

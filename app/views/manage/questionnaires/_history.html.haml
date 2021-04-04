@@ -1,6 +1,0 @@
-.row
-  .col-lg
-    .card.mb-3
-      .card-header Recent Changes
-      .card-body.pb-2
-        = render "model_history", model: @questionnaire, audits: @questionnaire.audits + @questionnaire.user.audits

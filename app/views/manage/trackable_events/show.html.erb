@@ -1,0 +1,20 @@
+<%= render "layouts/manage/page_title", title: "Trackable Event", subtitle: @trackable_event.id %>
+<p>
+  <b>Band:</b>
+  <%= @trackable_event.band_id %>
+</p>
+<p>
+  <b>Created:</b>
+  <%= display_datetime(@trackable_event.created_at) %>
+</p>
+<p>
+  <b>Trackable tag:</b>
+  <%= link_to @trackable_event.trackable_tag.name, manage_trackable_tag_path(@trackable_event.trackable_tag) %>
+</p>
+<p>
+  <b>User:</b>
+  <%= link_to @trackable_event.user.email, manage_user_path(@trackable_event.user) %>
+</p>
+<%= link_to 'Edit', edit_manage_trackable_event_path(@trackable_event) %>
+\|
+<%= link_to 'Back', manage_trackable_events_path %>

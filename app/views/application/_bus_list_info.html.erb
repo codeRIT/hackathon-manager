@@ -1,0 +1,29 @@
+<fieldset>
+  <legend>Bus Captains</legend>
+  <% if bus_list.captains.empty? %>
+    <p>
+      <em>TBD</em>
+    </p>
+  <% end %>
+  <% bus_list.captains.each do |p| %>
+    <p>
+      <strong>
+        <%= p.user.full_name %>
+      </strong>
+      <br/>
+      <em>
+        <%= p.school.name %>
+      </em>
+      <br/>
+      Phone:
+      <%= p.phone %>
+      <br/>
+      Email:
+      <%= p.email %>
+    </p>
+  <% end %>
+</fieldset>
+<fieldset>
+  <legend>Bus Notes</legend>
+  <%= bus_list.notes.present? ? markdown(bus_list.notes.html_safe) : "<p>(none)</p>".html_safe %>
+</fieldset>
