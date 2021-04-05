@@ -1,0 +1,108 @@
+:ruby
+  begin
+    recipient_count = pluralize(BulkMessageJob.build_recipients(@message.recipients).count, "Recipient")
+    number_of_recipients = BulkMessageJob.build_recipients(@message.recipients).count
+    recipient_plural = "Recipient"
+    if number_of_recipients > 1
+      recipient_plural = "Recipients"
+    end
+
+  rescue => recipient_error
+  end
+
+= render "layouts/manage/page_title", title: @message.name, subtitle: "Message" do
+  .btn-group
+    - if @message.can_queue?
+      - if recipient_error.present?
+        %button.btn.btn-sm.btn-outline-secondary{disabled: 'disabled', title: 'Cannot deliver when there is a recipient error; see error above.'} Deliver
+      - else
+        %button.btn.btn-sm.btn-primary{"data-toggle"=>"modal", "data-target"=>"#confirm-messages"}
+          %span.fa.fa-send.icon-space-r-half
+          %span Send
+        .modal{:id => "confirm-messages"}
+          .modal-dialog{:role => "document"}
+            .modal-content
+              .modal-header
+                %h5{:class => "modal-title"} Confirm
+              .modal-body
+                %p Are you sure? The message "#{@message.name}" will be sent to:
+                %h3.center
+                  %span.font-weight-bold
+                    = number_with_delimiter(number_of_recipients)
+                  %span
+                    = recipient_plural
+              .modal-footer
+                %button.btn.btn-outline-secondary{'data-dismiss'=>"modal"} Close
+                = link_to deliver_manage_message_path(@message), method: :patch, class: 'btn btn-danger' do
+                  %span Send Message
+    - if @message.can_edit?
+      = link_to 'Edit', edit_manage_message_path(@message), class: 'btn btn-sm btn-outline-secondary'
+      = link_to 'Delete', manage_message_path(@message), method: :delete, data: { confirm: "Are you sure? The message \"#{@message.name}\" will be permanently erased. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary'
+    = link_to 'Duplicate', duplicate_manage_message_path(@message), method: :patch, class: 'btn btn-sm btn-outline-secondary'
+
+.row
+  .col-lg-6
+    %dl.row
+      %dt.col-md-3 Name
+      %dd.col-md-9= @message.name
+      %dt.col-md-3 Subject
+      %dd.col-md-9= @message.subject
+  .col-lg-6
+    - if @message.bulk?
+      %p.mb-1
+        %b Recipients
+      %ul.pl-4.mb-1
+        - @message.recipients_list.each do |recipient|
+          %li= recipient
+      - if @message.recipients.blank?
+        %p.text-muted (none)
+      - if @message.recipients.present?
+        %p.small
+          - if recipient_error.present?
+            %strong{style: 'color: red;'} Error parsing recipients:
+            = recipient_error
+            %br To resolve this, edit & remove the offending recipient.
+          - else
+            %em #{recipient_count} currently match this query
+    - if @message.automated?
+      %p.mb-1
+        %b Trigger
+        %small
+          %em Sent automatically to an applicant upon meeting this criteria
+      %p
+        = Message::POSSIBLE_TRIGGERS[@message.trigger] || "<span class=\"text-muted\">(disabled)</span>".html_safe
+
+%div
+  %p
+    %b Preview:
+    = link_to preview_manage_message_path, target: '_blank' do
+      Open full preview
+      %span.fa.fa-external-link.icon-space-l-half
+
+  %iframe.email-preview{src: preview_manage_message_path(@message)}
+
+.row.mt-3
+  .col-lg-6
+    .card.mb-3
+      .card-body.pb-1
+        %h5.card-title Change history
+        = render "model_history", model: @message
+
+  - if @message.bulk?
+    .col-lg-6
+      .card.mb-3
+        .card-body
+          %h5.card-title Bulk delivery details
+          %p.card-text
+            %b
+              Status:
+              = @message.status.titleize
+          %p.card-text
+            %b Queued At:
+            = @message.queued_at || "(n/a)"
+          %p.card-text
+            %b Started At:
+            = @message.started_at || "(n/a)"
+          %p.card-text
+            %b Delivered At:
+            = @message.delivered_at || "(n/a)"

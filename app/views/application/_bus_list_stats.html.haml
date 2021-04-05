@@ -1,8 +1,9 @@
-<% passengers = Questionnaire.joins(:school).group('schools.name').where(acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id).order("schools.name ASC").count %>
-<%= pie_chart passengers %>
-<br/>
-<ruby>
-  
+- passengers = Questionnaire.joins(:school).group('schools.name').where(acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id).order("schools.name ASC").count
+= pie_chart passengers
+
+%br
+
+:ruby
   school_ids = Questionnaire.where(acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id).distinct.pluck(:school_id)
   schools = Questionnaire.joins(:school).group('schools.name').where(school_id: school_ids, acc_status: 'rsvp_confirmed').order("schools.name ASC").count
   schools_riding = Questionnaire.joins(:school).group('schools.name').where(school_id: school_ids, acc_status: 'rsvp_confirmed', bus_list_id: @bus_list.id).count
@@ -16,6 +17,4 @@
     { name: "Attending but not riding this bus", data: schools.sort_by { |_, no_bus, bus| [bus, no_bus] }.reverse },
     { name: "Riding this bus", data: schools_riding }
   ]
-
-</ruby>
-<%= bar_chart data, stacked: true, height: '400px' %>
+= bar_chart data, stacked: true, height: '400px'

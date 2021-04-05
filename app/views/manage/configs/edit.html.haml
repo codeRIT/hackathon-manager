@@ -1,0 +1,30 @@
+:ruby
+  text_field_vars = %w()
+  markdown_field_vars = %w(bus_captain_notes thanks_for_rsvp_message thanks_for_applying_message questionnaires_closed_message disclaimer_message)
+  css_field_vars = %w(custom_css)
+  form_field_vars = %w(disabled_fields)
+
+= render "layouts/manage/page_title", title: "Edit Configuration", subtitle: @config.var do
+  = link_to 'Cancel', manage_configs_path, class: 'btn btn-sm btn-outline-secondary'
+
+.form-container
+  = bs_horizontal_simple_form_for HackathonConfig, url: manage_config_path(@config.var), method: 'patch', html: { "data-validate" => "form" } do |f|
+    = f.error_notification
+
+    .form-inputs
+      - if [true, false].include? @config.value
+        -# = f.input :value, label: @config.var, as: :boolean, 'yes', 'no'
+        = f.input @config.var.to_sym, as: :radio_buttons, :collection => [['true',true], ['false',false]], label_method: :first, value_method: :last, :prompt => 'Choose one...'
+      - elsif css_field_vars.include? @config.var
+        = f.input @config.var.to_sym, as: :text, input_html: { value: @config.value, 'data-code-mirror-textarea': '1', 'data-code-mirror-mode': 'css' }
+      - elsif markdown_field_vars.include? @config.var
+        = f.input @config.var.to_sym, as: :text, input_html: { value: @config.value, 'data-simple-mde' => '1' }
+      - elsif text_field_vars.include? @config.var
+        = f.input @config.var.to_sym, as: :text, input_html: { value: @config.value }
+      - elsif form_field_vars.include? @config.var
+        = f.input @config.var.to_sym, as: :check_boxes, :collection => ['why_attend']
+      - else
+        = f.input @config.var.to_sym, input_html: { value: @config.value }
+
+    .form-actions
+      = f.button :submit, class: 'btn-primary', value: "Update #{@config.var}"
