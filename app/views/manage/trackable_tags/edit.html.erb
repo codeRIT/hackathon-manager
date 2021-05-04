@@ -1,0 +1,4 @@
+<%= render "layouts/manage/page_title", title: "Edit Trackable Tag", subtitle: @trackable_tag.name do %>
+  <%= link_to 'Cancel', manage_trackable_tag_path(@trackable_tag), class: 'btn btn-sm btn-outline-secondary' %>
+<% end %>
+<%= render 'form' %>

@@ -1,0 +1,15 @@
+<div class="form-container">
+  <%= bs_horizontal_simple_form_for(@bus_list, url: url_for(action: @bus_list.new_record? ? "create" : "update", controller: "bus_lists")) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :name %>
+      <%= f.input :capacity %>
+      <%= f.input :needs_bus_captain %>
+      <%= f.input :notes, input_html: { rows: 15, 'data-simple-mde' => '1' } %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn-primary' %>
+    </div>
+  <% end %>
+</div>
+<div class="mb-4"></div>

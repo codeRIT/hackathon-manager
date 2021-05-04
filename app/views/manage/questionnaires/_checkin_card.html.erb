@@ -1,0 +1,44 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title mb-1">Check-in</h5>
+    <p class="card-text">
+      <%= render 'manage/questionnaires/check_in_badge' %>
+      <% if @questionnaire.checked_in_at %>
+        <small>
+          <% if @questionnaire.checked_in_by_id %>
+            <% if @questionnaire.checked_in_by %>
+              <%= @questionnaire.checked_in_by.email %>
+            <% else %>
+              <%= "(deleted user)" %>
+            <% end %>
+          <% else %>
+            <%= "(never checked in)" %>
+          <% end %>
+          <%= @questionnaire.checked_in_at ? display_datetime(@questionnaire.checked_in_at, in_sentence: true) : "(not checked in)" %>
+        </small>
+      <% end %>
+    </p>
+    <% if !@questionnaire.checked_in_at %>
+      <p class="card-text">
+        Please confirm their phone number and email address before checking in.
+        <% if !@questionnaire.can_rsvp? %>
+          <br/>
+          <span class="text-danger">
+            Note: This applicant has not been accepted.
+          </span>
+        <% end %>
+      </p>
+    <% end %>
+    <%= bs_horizontal_simple_form_for @questionnaire, url: url_for(action: "check_in", controller: "questionnaires", method: :put), html: { "data-validate" => "form" } do |f| %>
+      <% if !@questionnaire.checked_in? %>
+        <%= f.input :phone, input_html: { "data-validate" => "presence" } %>
+        <%= f.input :email, input_html: { "data-validate" => "presence email", value: @questionnaire.user.try(:email) }, required: true %>
+      <% end %>
+      <%= hidden_field_tag("check_in", !@questionnaire.checked_in?) %>
+      <% if defined?(redirect_to_checkins) && redirect_to_checkins %>
+        <%= hidden_field_tag("redirect_to_checkins", "1") %>
+      <% end %>
+      <%= f.button :submit, value: ( @questionnaire.checked_in? ? "Remove check-in" : "Check In" ), class: 'btn-primary' %>
+    <% end %>
+  </div>
+</div>

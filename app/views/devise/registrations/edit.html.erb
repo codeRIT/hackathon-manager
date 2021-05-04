@@ -1,0 +1,26 @@
+<% title 'Edit Account' %>
+<div class="form-container">
+  <h1 class="section-title">
+    Edit
+    <span class="emphasized">Account</span>
+  </h1>
+</div>
+<div class="form-container">
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true, wrapper_html: { class: 'input--half' } %>
+      <%= f.input :current_password, required: true, wrapper_html: { class: 'input--half' } %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>
+          Currently waiting confirmation for: #{resource.unconfirmed_email}
+        </p>
+      <% end %>
+      <%= f.input :password, autocomplete: "off", hint: "Leave blank if you don't want to change it", required: false, label: "New password", wrapper_html: { class: 'input--half' } %>
+      <%= f.input :password_confirmation, required: false, label: "New password confirmation", wrapper_html: { class: 'input--half' } %>
+    </div>
+    <div class="form-actions right">
+      <%= f.button :submit, "Update" %>
+    </div>
+  <% end %>
+</div>

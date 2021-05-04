@@ -1,0 +1,128 @@
+<% blue = "#4886C2" %>
+<% green = "#7FEC8D" %>
+<% red = "#E44646" %>
+<% orange = "#F49C54" %>
+<% grey = "#A6A6A6" %>
+<%= render "layouts/manage/page_title", title: @school.name, subtitle: "School" do %>
+  <div class="btn-group">
+    <%= link_to 'Edit', edit_manage_school_path(@school), class: 'btn btn-sm btn-outline-secondary' %>
+    <%= link_to 'Merge', merge_manage_school_path(@school), class: 'btn btn-sm btn-outline-secondary' %>
+    <div class="btn-group" role="group">
+      <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown" id="title-actions" type="button">
+        <div class="fa fa-envelope-o pr-1"></div>
+        Send email
+      </button>
+      <div aria-labelledby="title-actions" class="dropdown-menu dropdown-menu-right">
+        <%= link_to 'Create message (confirmed or accepted applicants)', new_manage_message_path(type: 'bulk', recipients: ["school::#{@school.id}"]), class: 'dropdown-item' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-md-6">
+    <h4 class="border-bottom pb-2 mb-3">Details</h4>
+    <dl class="row">
+      <dt class="col-md-4">Name</dt>
+      <dd class="col-md-8">
+        <%= @school.name %>
+        <br/>
+        <small>
+          <%= link_to google_maps_link(@school.name), target: '_blank', rel: 'noopener' do %>
+            Search in Google Maps
+            <span class="fa fa-external-link icon-space-l-half"></span>
+          <% end %>
+        </small>
+      </dd>
+      <dt class="col-md-4">Address</dt>
+      <dd class="col-md-8">
+        <% if @school.address.present? %>
+          <%= @school.address %>
+          <br/>
+        <% end %>
+        <%= @school.full_location %>
+        <br/>
+        <small>
+          <% link = google_maps_link(@school.address, @school.city, @school.state) %>
+          <%= link_to link, target: '_blank', rel: 'noopener' do %>
+            Search in Google Maps
+            <span class="fa fa-external-link icon-space-l-half"></span>
+          <% end %>
+        </small>
+      </dd>
+      <dt class="col-md-4">Home school</dt>
+      <dd class="col-md-8">
+        <% if @school.is_home? %>
+          <span class="badge badge-success">Home school</span>
+        <% else %>
+          <span class="badge badge-secondary">Not home school</span>
+        <% end %>
+      </dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <h4 class="pb-0">Duplicate Names</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>School Name</th>
+          <th>Date Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% dupes = SchoolNameDuplicate.where(school_id: @school.id) %>
+        <% dupes.each do |dupe| %>
+          <tr>
+            <td>
+              <%= dupe.name %>
+            </td>
+            <td>
+              <%= display_datetime(dupe.created_at) %>
+            </td>
+          </tr>
+        <% end %>
+        <% if dupes.blank? %>
+          <tr>
+            <td colspan="2">
+              <em>No duplicate names exist for this school.</em>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p class="small text-muted">
+      <span class="fa fa-info-circle icon-space-l icon-space-r-half"></span>
+      If someone attempts to apply using a name above, they'll automatically be converted to this school.
+    </p>
+  </div>
+</div>
+<div class="row mt-2 mb-4">
+  <div class="col-7">
+    <h4 class="border-bottom pb-2 mb-4">Today's Activity</h4>
+    <%= area_chart todays_activity_data_manage_dashboard_index_path(school_id: @school.id), colors: [blue, green, red, grey] %>
+  </div>
+  <div class="col-5">
+    <h4 class="border-bottom pb-2 mb-4">Total Distribution</h4>
+    <%= pie_chart @school.questionnaires.group('acc_status').count %>
+  </div>
+</div>
+<div class="row mt-2 mb-4">
+  <div class="col">
+    <h4 class="border-bottom pb-2 mb-4">Confirmation Activity</h4>
+    <%= area_chart confirmation_activity_data_manage_dashboard_index_path(school_id: @school.id), colors: [green, red], library: { legend: { enabled: false } } %>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col">
+    <h4 class="border-bottom pb-2 mb-3">
+      Questionnaires
+      <small class="text-muted">(#{@school.questionnaires.count} total, #{@school.questionnaires.count { |q| q.checked_in? }} checked in)</small>
+    </h4>
+  </div>
+</div>
+<%= render "questionnaire_datatable", scope_params: { school_id: @school.id }, page_length: 25, columns: %w(link note first_name last_name email acc_status checked_in created_at) %>
+<div class="row mt-4 mb-5">
+  <div class="col-lg-6">
+    <h4 class="border-bottom pb-2 mb-3">Change History</h4>
+    <%= render "model_history", model: @school %>
+  </div>
+</div>

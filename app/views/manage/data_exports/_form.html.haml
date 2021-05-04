@@ -1,9 +1,0 @@
-.form-container
-  = bs_horizontal_simple_form_for @data_export, url: url_for(action: @data_export.new_record? ? "create" : "update", controller: "data_exports") do |f|
-    = f.error_notification
-    .form-inputs
-      = f.input :export_type, as: :select, collection: DataExport::POSSIBLE_TYPES.map { |x| [x.titleize, x] }, include_blank: false
-    .form-actions.mb-3.mt-3
-      = f.button :submit, class: 'btn-primary'
-
-.mb-4

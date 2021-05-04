@@ -1,0 +1,71 @@
+<div class="card mb-3">
+  <div class="card-header">Check-in Compliance</div>
+  <div class="card-body px-0 py-0">
+    <ul class="list-group list-group-flush">
+      <% if ['rsvp_confirmed', 'accepted'].include?(@questionnaire.acc_status) %>
+        <li class="list-group-item">
+          <div class="text-success">
+            <span class="fa fa-check fa-fw icon-space-r"></span>
+            Has been accepted
+          </div>
+        </li>
+      <% else %>
+        <li class="list-group-item list-group-item-danger">
+          <span class="fa fa-exclamation-circle fa-fw icon-space-r"></span>
+          Has not been accepted.
+          Status:
+          <strong>
+            <%= @questionnaire.verbal_status %>
+          </strong>
+        </li>
+      <% end %>
+      <% if 'rsvp_confirmed' == @questionnaire.acc_status %>
+        <li class="list-group-item">
+          <div class="text-success">
+            <span class="fa fa-check fa-fw icon-space-r"></span>
+            RSVP'd as attending
+          </div>
+        </li>
+      <% else %>
+        <li class="list-group-item list-group-item-warning">
+          <span class="fa fa-exclamation-circle fa-fw icon-space-r"></span>
+          Did not RSVP as attending.
+          Status:
+          <strong>
+            <%= @questionnaire.verbal_status %>
+          </strong>
+        </li>
+      <% end %>
+      <% if !@questionnaire.minor? %>
+        <li class="list-group-item">
+          <div class="text-success">
+            <span class="fa fa-check fa-fw icon-space-r"></span>
+            18 years or older
+          </div>
+        </li>
+      <% else %>
+        <li class="list-group-item list-group-item-warning">
+          <span class="fa fa-exclamation-circle fa-fw icon-space-r"></span>
+          18 years or older
+        </li>
+      <% end %>
+      <% if @agreements.any? %>
+        <% if @questionnaire.all_agreements_accepted? %>
+          <li class="list-group-item">
+            <div class="text-success">
+              <span class="fa fa-check fa-fw icon-space-r"></span>
+              <%= @questionnaire.agreements.map(&:name).join(', ') %>
+              accepted.
+            </div>
+          </li>
+        <% else %>
+          <li class="list-group-item list-group-item-danger">
+            <span class="fa fa-close fa-fw icon-space-r"></span>
+            Unaccepted Agreements:
+            <%= @questionnaire.unaccepted_agreements.map(&:name).join(', ') %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

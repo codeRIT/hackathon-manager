@@ -1,0 +1,35 @@
+<%= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.schools') do %>
+  <%= link_to "New School", new_manage_school_path, class: "btn btn-sm btn-outline-secondary" %>
+<% end %>
+<div class="mb-4">
+  <table class="schools datatable table table-striped table-hover" data-source="<%= datatable_manage_schools_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Count</th>
+        <th>Home?</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+      <tr>
+        <th>
+          <input autocomplete="off" class="form-control form-control-sm" placeholder="ID"></input>
+        </th>
+        <th>
+          <input autocomplete="off" class="form-control form-control-sm" placeholder="Name"></input>
+        </th>
+        <th>
+          <input autocomplete="off" class="form-control form-control-sm" placeholder="City"></input>
+        </th>
+        <th>
+          <input autocomplete="off" class="form-control form-control-sm" placeholder="State"></input>
+        </th>
+        <th></th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

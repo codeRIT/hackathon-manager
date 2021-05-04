@@ -1,0 +1,7 @@
+<%= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.questionnaires') do %>
+  <%= link_to "New Questionnaire", new_manage_questionnaire_path, class: "btn btn-sm btn-outline-secondary" %>
+<% end %>
+<%= render "questionnaire_datatable" %>
+<hr/>
+<%= render 'triggered_email_summary' %>
+<%= render 'docs_link', title: 'Questionnaire documentation', url: 'https://coderit.org/hackathon-manager/docs/questionnaires' %>

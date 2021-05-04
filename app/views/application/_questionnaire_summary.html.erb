@@ -1,0 +1,85 @@
+<% if HackathonManager.field_enabled?(:why_attend) %>
+  <p>
+    <b>Why #{HackathonConfig['name']}?</b>
+  </p>
+  <p>
+    <%= @questionnaire.why_attend.presence || "(not provided)" %>
+  </p>
+<% end %>
+<p>
+  <b>Experience:</b>
+  <%= Questionnaire::POSSIBLE_EXPERIENCES[@questionnaire.experience] %>
+</p>
+<p>
+  <b>Portfolio link:</b>
+  <%= @questionnaire.portfolio_url? ? link_to(@questionnaire.portfolio_url, @questionnaire.portfolio_url, target: '_blank', rel: 'noopener') : 'Not provided' %>
+</p>
+<p>
+  <b>GitHub/GitLab/Bitbucket link:</b>
+  <%= @questionnaire.vcs_url? ? link_to(@questionnaire.vcs_url, @questionnaire.vcs_url, target: '_blank', rel: 'noopener') : 'Not provided' %>
+</p>
+<p>
+  <b>Resume:</b>
+  <%= @questionnaire.resume.attached? ? link_to("Download &raquo;".html_safe, @questionnaire.resume) : 'Not provided' %>
+</p>
+<% if !HackathonConfig['digital_hackathon'] %>
+  <p>
+    <b>Traveling from:</b>
+    <%= @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "My school (#{@questionnaire.school.full_name})" %>
+  </p>
+<% end %>
+<p>
+  <b>Shirt size:</b>
+  <%= @questionnaire.shirt_size %>
+</p>
+<% if !HackathonConfig['digital_hackathon'] %>
+  <p>
+    <b>Dietary restrictions</b>
+    <%= @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe %>
+  </p>
+<% end %>
+<p>
+  <b>Special needs</b>
+  <%= @questionnaire.special_needs || "<i>(none)</i>".html_safe %>
+</p>
+<fieldset>
+  <% if @questionnaire.user.provider == 'mlh' %>
+    <legend>Provided by MyMLH</legend>
+  <% end %>
+  <p>
+    <b>First name:</b>
+    <%= @questionnaire.user.first_name %>
+  </p>
+  <p>
+    <b>Last name:</b>
+    <%= @questionnaire.user.last_name %>
+  </p>
+  <p>
+    <b>Email:</b>
+    <%= @questionnaire.email %>
+  </p>
+  <p>
+    <b>Phone:</b>
+    <%= @questionnaire.phone %>
+  </p>
+  <p>
+    <b>Date of birth:</b>
+    <%= @questionnaire.date_of_birth_formatted %>
+  </p>
+  <p>
+    <b>Gender:</b>
+    <%= @questionnaire.gender %>
+  </p>
+  <p>
+    <b>School:</b>
+    <%= @questionnaire.school.full_name %>
+  </p>
+  <p>
+    <b>Major:</b>
+    <%= @questionnaire.major %>
+  </p>
+  <p>
+    <b>Level of study:</b>
+    <%= @questionnaire.level_of_study %>
+  </p>
+</fieldset>

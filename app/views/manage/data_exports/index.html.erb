@@ -1,0 +1,57 @@
+<%= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.data-exports') do %>
+  <%= link_to "New Data Export", new_manage_data_export_path, class: "btn btn-sm btn-outline-secondary" %>
+<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Created</th>
+      <th>Timeline</th>
+      <th>Download</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @data_exports.blank? %>
+      <tr>
+        <td colspan="5">No data exports have been generated.</td>
+      </tr>
+    <% end %>
+    <% @data_exports.each do |data_export| %>
+      <tr>
+        <td>
+          <%= data_export.export_type.titleize %>
+        </td>
+        <td>
+          <%= display_datetime(data_export.created_at) %>
+        </td>
+        <td>
+          <span>
+            Queued: #{data_export.queued_at || "n/a"}
+          </span>
+          <br/>
+          <span>
+            Started: #{data_export.started_at || "n/a"}
+          </span>
+          <br/>
+          <span>
+            Finished: #{data_export.finished_at || "n/a"}
+          </span>
+        </td>
+        <td>
+          <% if data_export.finished? && data_export.file.attached? %>
+            <%= link_to "Download", rails_blob_path(data_export.file) %>
+          <% else %>
+            Not available
+            <br/>
+            <small>Please wait for generation to finish</small>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Delete', manage_data_export_path(data_export), method: :delete, data: { confirm: "Are you sure? The data export \"#{data_export.file_basename}\" will be permanently deleted. This action is irreversible." }, class: 'btn btn-sm btn-outline-secondary' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br/>

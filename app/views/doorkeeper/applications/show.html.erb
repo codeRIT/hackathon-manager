@@ -1,0 +1,66 @@
+<%= render "layouts/manage/page_title", title: @application.name, subtitle: t(:title, scope: 'doorkeeper.applications.show') do %>
+  <div class="btn-group">
+    <%= link_to t('doorkeeper.applications.buttons.edit'), edit_oauth_application_path(@application), class: 'btn btn-sm btn-outline-secondary' %>
+    <%= link_to t('doorkeeper.applications.buttons.destroy'), oauth_application_path(@application), method: :delete, data: { confirm: t('doorkeeper.applications.confirmations.destroy', name: @application.name) }, class: 'btn btn-sm btn-outline-secondary' %>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-lg-6">
+    <h4 class="border-bottom pb-2 mb-3">Details</h4>
+    <dl class="row">
+      <dt class="col-md-4">
+        <%= t('.application_id') %>
+      </dt>
+      <dd class="col-md-8">
+        <code class="bg-light">
+          <%= @application.uid %>
+        </code>
+      </dd>
+      <dt class="col-md-4">
+        <%= t('.secret') %>
+      </dt>
+      <dd class="col-md-8">
+        <code class="bg-light">
+          <%= flash[:application_secret].presence || @application.plaintext_secret %>
+        </code>
+      </dd>
+      <dt class="col-md-4">
+        <%= t('.scopes') %>
+      </dt>
+      <dd class="col-md-8">
+        <% if @application.scopes.present? %>
+          <%= @application.scopes %>
+        <% else %>
+          <bg>-light.font-italic.text-muted
+            <%= t('.not_defined') %>
+          </bg>
+        <% end %>
+      </dd>
+      <dt class="col-md-4">
+        <%= t('.confidential') %>
+      </dt>
+      <dd class="col-md-8">
+        <%= @application.confidential? ? "Yes" : "No" %>
+      </dd>
+    </dl>
+  </div>
+  <div class="col-lg-6">
+    <div class="h4 border-bottom pb-2 mb-3">
+      <%= t('.callback_urls') %>
+    </div>
+    <table class="table table-striped table-hover">
+      <tbody>
+        <% @application.redirect_uri.split.each do |uri| %>
+          <tr>
+            <td>
+              <%= uri %>
+            </td>
+            <td>
+              <%= link_to t('doorkeeper.applications.buttons.authorize'), oauth_authorization_path(client_id: @application.uid, redirect_uri: uri, response_type: 'code', scope: @application.scopes), class: 'btn btn-sm btn-outline-primary', target: '_blank' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<% if current_user.present? %>
+  <div class="account-nav">
+    <div class="account-nav__wrapper">
+      <div class="account-nav__links">
+        <%= active_link_to 'Account', edit_user_registration_path, class: 'account-nav__link', active_class: 'account-nav__link--active' %>
+        <% if current_user.questionnaire.present? && current_user.questionnaire.can_rsvp? %>
+          <%= active_link_to 'RSVP', rsvp_path, class: 'account-nav__link', active_class: 'account-nav__link--active' %>
+        <% end %>
+        <%= active_link_to 'Application', questionnaires_path, class: 'account-nav__link', active_class: 'account-nav__link--active' %>
+        <% if current_user.questionnaire.present? && current_user.questionnaire.bus_list_id && current_user.questionnaire.is_bus_captain? %>
+          <%= active_link_to 'Bus Captain'.html_safe, bus_list_path, class: 'account-nav__link', active_class: 'account-nav__link--active' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

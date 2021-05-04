@@ -1,0 +1,21 @@
+<% if flash[:alert].present? %>
+  <div class="flashes flashes--error">
+    <div class="container">
+      <div class="form-container">
+        <span class="fa fa-info-circle flashes__icon"></span>
+        <%= flash[:alert].html_safe %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if flash[:notice].present? %>
+  <div class="flashes">
+    <div class="container">
+      <div class="form-container">
+        <span class="fa fa-info-circle flashes__icon"></span>
+        <%= flash[:notice].html_safe %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

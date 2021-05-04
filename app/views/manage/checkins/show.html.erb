@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <div class="d-flex align-items-center flex-wrap">
+    <h1 class="h2 mr-3">
+      <%= title @questionnaire.user.full_name %>
+    </h1>
+    <div>
+      <span class="mr-1">
+        <%= render 'manage/questionnaires/acc_status_badge' %>
+      </span>
+      <span>
+        <%= render 'manage/questionnaires/check_in_badge' %>
+      </span>
+    </div>
+  </div>
+  <div class="btn-group" role="group">
+    <%= link_to 'View Full', manage_questionnaire_path(@questionnaire), class: 'btn btn-sm btn-outline-secondary' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= render 'manage/questionnaires/top_alerts' %>
+    <div class="card mb-3">
+      <div class="card-header">Summary</div>
+      <div class="card-body">
+        <div class="row">
+          <dt class="col-md-4">Name</dt>
+          <dd class="col-md-8">
+            <%= @questionnaire.user.full_name %>
+          </dd>
+          <dt class="col-md-4">School</dt>
+          <dd class="col-md-8">
+            <% school = @questionnaire.school %>
+            <%= link_to school.name, manage_school_path(school) %>
+          </dd>
+          <dt class="col-md-4">Email</dt>
+          <dd class="col-md-8">
+            <%= @questionnaire.email %>
+          </dd>
+          <dt class="col-md-4">Phone</dt>
+          <dd class="col-md-8">
+            <%= @questionnaire.phone %>
+          </dd>
+          <dt class="col-md-4">Date of birth</dt>
+          <dd class="col-md-8">
+            <%= @questionnaire.date_of_birth_formatted %>
+            <span class="badge badge-pill badge-dark" data-container="body" data-content="Age at time of event" data-placement="right" data-toggle="popover" data-trigger="hover">
+              <%= @questionnaire.age_at_time_of_event / 1.year %>
+            </span>
+          </dd>
+        </div>
+      </div>
+    </div>
+    <%= render 'manage/questionnaires/checkin_compliance_card' %>
+    <div class="card mb-3">
+      <div class="card-header">Special notices</div>
+      <div class="card-body">
+        <div class="row">
+          <dt class="col-md-4">Dietary restrictions</dt>
+          <dd class="col-md-8">
+            <% if @questionnaire.dietary_restrictions.present? %>
+              <span class="fa fa-exclamation-triangle text-warning icon-space-r-half"></span>
+              <%= @questionnaire.dietary_restrictions %>
+            <% else %>
+              <span class="text-muted">(none)</span>
+            <% end %>
+          </dd>
+          <dt class="col-md-4">Special needs</dt>
+          <dd class="col-md-8">
+            <% if @questionnaire.special_needs.present? %>
+              <span class="fa fa-exclamation-triangle text-warning icon-space-r-half"></span>
+              <%= @questionnaire.special_needs %>
+            <% else %>
+              <span class="text-muted">(none)</span>
+            <% end %>
+          </dd>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <%= render 'manage/questionnaires/checkin_card', redirect_to_checkins: true %>
+  </div>
+</div>

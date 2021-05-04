@@ -1,0 +1,19 @@
+<div class="theming-editor__wrapper" id="theming-editor">
+  <div class="theming-editor__title">Custom CSS Variables</div>
+  <div class="theming-editor__variables">
+    <div class="theming-editor__variable">
+      <small class="theming-editor__variable-name">
+        <code class="theming-editor__variable-name-code">my-variable</code>
+      </small>
+      <div class="theming-editor__input-group">
+        <input class="theming-editor__input" type="text"></input>
+        <div class="theming-editor__color-picker"></div>
+      </div>
+    </div>
+  </div>
+  <div class="theming-editor__button-wrapper">
+    <button class="theming-editor__button-save" type="button">Save</button>
+    <%= link_to 'Cancel', exit_theming_editor_manage_configs_path %>
+  </div>
+</div>
+<%= javascript_include_tag "theming-editor/theming-editor.js", "data-turbolinks-eval": "false" %>

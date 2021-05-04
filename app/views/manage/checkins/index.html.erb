@@ -1,0 +1,15 @@
+<%= render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.check-in') %>
+<div class="mb-4">
+  <table class="checkins datatable table table-striped table-hover" data-source="<%= datatable_manage_checkins_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>About</th>
+        <th>Checked in?</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>

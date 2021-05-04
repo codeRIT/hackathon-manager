@@ -1,0 +1,26 @@
+<% homepage_url = HackathonConfig['homepage_url'].presence || root_path %>
+<div class="header">
+  <div class="header__wrapper account-nav__wrapper">
+    <% if HackathonConfig['logo_asset'].present? %>
+      <div class="header-logo">
+        <%= link_to homepage_url do %>
+          <%= image_tag HackathonConfig['logo_asset'], id: 'logo', alt: "#{HackathonConfig['name']} logo", title: HackathonConfig['name'], class: 'header-logo__image' %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="header-nav start">
+        <%= btn_link_to "Home", homepage_url %>
+      </div>
+    <% end %>
+    <div class="header-nav end">
+      <% if user_signed_in? %>
+        <% if current_user.organizing_staff? %>
+          <%= btn_link_to "Manage", manage_root_path %>
+        <% elsif current_user.volunteer? %>
+          <%= btn_link_to "Manage", manage_checkins_path %>
+        <% end %>
+        <%= btn_link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      <% end %>
+    </div>
+  </div>
+</div>
