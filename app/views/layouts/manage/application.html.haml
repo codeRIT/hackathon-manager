@@ -7,7 +7,6 @@
     - if HackathonConfig['favicon_asset'].present?
       %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
 
-    = stylesheet_link_tag "manage", :media => "all", 'data-turbolinks-track': 'reload'
     = javascript_include_tag "manage/application", 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
 
