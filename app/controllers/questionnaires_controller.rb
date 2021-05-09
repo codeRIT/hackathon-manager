@@ -14,8 +14,8 @@ class QuestionnairesController < ApplicationController
     if current_user.reload.questionnaire.present?
       return head :conflict, notice: 'Application already exists.'
     end
-    
-    if !HackathonConfig['accepting_questionnaires']
+
+    unless HackathonConfig['accepting_questionnaires']
       return head :not_acceptable, notice: 'Not accepting applications.'
     end
 
