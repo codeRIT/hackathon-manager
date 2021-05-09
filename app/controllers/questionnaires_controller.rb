@@ -8,80 +8,25 @@ class QuestionnairesController < ApplicationController
     authenticate_user!
   end
 
-  # GET /apply
-  # GET /apply.json
-  def show
-    flash[:alert] = nil
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @questionnaire }
-    end
-  end
-
-  # GET /apply/new
-  # GET /apply/new.json
-  def new
-    if current_user.questionnaire.present?
-      return redirect_to questionnaires_path
-    end
-    @questionnaire = Questionnaire.new
-    @agreements = Agreement.all
-
-    if session["devise.provider_data"] && session["devise.provider_data"]["info"]
-      info = session["devise.provider_data"]["info"]
-      @skip_my_mlh_fields = true
-      unless all_my_mlh_fields_provided?
-        flash[:notice] = nil
-        flash[:alert] = t(:my_mlh_null, scope: 'errors')
-      end
-      @questionnaire.tap do |q|
-        q.phone          = info["phone_number"]
-        q.level_of_study = info["level_of_study"]
-        q.major          = info["major"]
-        q.date_of_birth  = info["date_of_birth"]
-        q.gender         = info["gender"]
-
-        if info["school"]
-          school = School.where(name: info["school"]["name"]).first_or_create do |s|
-            s.name = info["school"]["name"]
-          end
-          q.school_id = school.id
-        end
-      end
-    end
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @questionnaire }
-    end
-  end
-
-  # GET /apply/edit
-  def edit
-    @agreements = Agreement.all
-  end
-
   # POST /apply
   # POST /apply.json
   def create
     if current_user.reload.questionnaire.present?
-      return redirect_to questionnaires_path, notice: 'Application already exists.'
+      return head :conflict, notice: 'Application already exists.'
     end
-    return unless HackathonConfig['accepting_questionnaires']
+    
+    if !HackathonConfig['accepting_questionnaires']
+      return head :not_acceptable, notice: 'Not accepting applications.'
+    end
 
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
     @questionnaire.user_id = current_user.id
-    @agreements = Agreement.all
 
-    respond_to do |format|
-      if @questionnaire.save
-        @questionnaire.update_attribute(:acc_status, default_acc_status)
-        format.html { redirect_to questionnaires_path }
-        format.json { render json: @questionnaire, status: :created, location: @questionnaire }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
-      end
+    if @questionnaire.save
+      @questionnaire.update_attribute(:acc_status, default_acc_status)
+      render json: @questionnaire, status: :created
+    else
+      render json: @questionnaire.errors, status: :unprocessable_entity
     end
   end
 
@@ -91,15 +36,10 @@ class QuestionnairesController < ApplicationController
     update_params = questionnaire_params
     update_params = convert_school_name_to_id(update_params)
 
-    @agreements = Agreement.all
-    respond_to do |format|
-      if @questionnaire.update_attributes(update_params)
-        format.html { redirect_to questionnaires_path, notice: 'Application was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @questionnaire.errors, status: :unprocessable_entity }
-      end
+    if @questionnaire.update_attributes(update_params)
+      head :accepted
+    else
+      render json: @questionnaire.errors, status: :unprocessable_entity
     end
   end
 
@@ -114,10 +54,7 @@ class QuestionnairesController < ApplicationController
     end
 
     @questionnaire.destroy
-    respond_to do |format|
-      format.html { redirect_to questionnaires_url }
-      format.json { head :no_content }
-    end
+    head :ok
   end
 
   # GET /apply/schools
@@ -132,14 +69,6 @@ class QuestionnairesController < ApplicationController
 
   private
 
-  def all_my_mlh_fields_provided?
-    info = session["devise.provider_data"]["info"]
-
-    return true unless info["phone_number"].blank? || info["level_of_study"].blank? || info["major"].blank? ||
-                       info["date_of_birth"].blank? || info["gender"].blank? || info["school"].blank? ||
-                       info["school"]["name"].blank?
-  end
-
   def questionnaire_params
     params.require(:questionnaire).permit(
       :email, :experience, :gender,
@@ -153,7 +82,7 @@ class QuestionnairesController < ApplicationController
 
   def find_questionnaire
     unless current_user.questionnaire.present?
-      return redirect_to new_questionnaires_path
+      return head :not_found
     end
     @questionnaire = current_user.questionnaire
   end

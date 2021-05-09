@@ -10,14 +10,9 @@ class QuestionnairesControllerTest < ActionController::TestCase
   end
 
   context "while not authenticated" do
-    should "redirect to sign up page on questionnaire#new" do
-      get :new
-      assert_redirected_to new_user_session_path
-    end
-
-    should "redirect to sign up page on questionnaire#edit" do
-      get :edit
-      assert_redirected_to new_user_session_path
+    should "not show questionnaire" do
+      get :show, format: :json
+      assert_response :unauthorized
     end
 
     should "redirect to sign up page on questionnaire#update" do
@@ -40,9 +35,9 @@ class QuestionnairesControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "get new" do
-      get :new
-      assert_response :success
+    should "not get a questionnaire" do
+      get :show, format: :json
+      assert_response :not_found
     end
 
     should "create questionnaire" do
@@ -50,7 +45,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
         post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
       end
 
-      assert_redirected_to questionnaires_path
+      assert_response :created
       if HackathonConfig['auto_late_waitlist']
         assert_equal "late_waitlist", assigns(:questionnaire).acc_status
       else
@@ -64,7 +59,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
         post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
       end
 
-      assert_redirected_to questionnaires_path
+      assert_response :conflict
     end
 
     context "with an invalid questionnaire" do
@@ -89,13 +84,13 @@ class QuestionnairesControllerTest < ActionController::TestCase
       context "on create" do
         should "save existing school name" do
           post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: @school.name, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
-          assert_redirected_to questionnaires_path
+          assert_response :created
           assert_equal 1, School.all.count
         end
 
         should "create a new school when unknown" do
           post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_name: "New School", major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
-          assert_redirected_to questionnaires_path
+          assert_response :created
           assert_equal 2, School.all.count
         end
 
@@ -120,21 +115,20 @@ class QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
-    context "disabled fields are enabled" do
-      should "display why_attend field" do
-        get :new
-        assert_select '#questionnaire_why_attend', 1
+    context "not accepting questionnaires" do
+      setup do
+        HackathonConfig['accepting_questionnaires'] = false
+      end
+
+      should "not allow questionnaire to be created" do
+        assert_difference('Questionnaire.count', 0) do
+          post :create, params: { questionnaire: { experience: @questionnaire.experience, interest: @questionnaire.interest, country: @questionnaire.country, phone: @questionnaire.phone, level_of_study: @questionnaire.level_of_study, date_of_birth: @questionnaire.date_of_birth, shirt_size: @questionnaire.shirt_size, school_id: @school.id, major: @questionnaire.major, gender: @questionnaire.gender, why_attend: @questionnaire.why_attend, graduation_year: @questionnaire.graduation_year, race_ethnicity: @questionnaire.race_ethnicity, agreement_ids: @questionnaire.agreements.map(&:id) } }
+        end
+  
+        assert_response :not_acceptable
       end
     end
 
-    context "disabled fields are disabled" do
-      should "not display why_attend field when disabled" do
-        HackathonManager.stub :field_enabled?, false do
-          get :new
-        end
-        assert_select '#questionnaire_why_attend', 0
-      end
-    end
   end
 
   context "while authenticated with a completed questionnaire" do
@@ -144,25 +138,13 @@ class QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "show questionnaire" do
-      get :show
-      assert_response :success
-    end
-
-    should "get edit" do
-      get :edit
-      assert_response :success
-    end
-
-    should "get edit with questionnaire resume" do
-      @questionnaire.resume = sample_file("sample_pdf.pdf")
-      @questionnaire.save
-      get :edit
+      get :show, format: :json
       assert_response :success
     end
 
     should "update questionnaire" do
       patch :update, params: { questionnaire: { major: "Computer Science" } }
-      assert_redirected_to questionnaires_path
+      assert_response :success
     end
 
     context "destroy questionnaire" do
@@ -172,14 +154,14 @@ class QuestionnairesControllerTest < ActionController::TestCase
         assert_difference('enqueued_jobs.size', User.where(role: :director).size) do
           delete :destroy
         end
+        assert_response :ok
       end
 
       should "user destroy questionnaire" do
         assert_difference('Questionnaire.count', -1) do
           delete :destroy
         end
-
-        assert_redirected_to questionnaires_path
+        assert_response :ok
       end
     end
 
@@ -191,25 +173,17 @@ class QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
-    context "accessing #new after already submitting a questionnaire" do
-      should "redirect to existing questionnaire" do
-        get :new
-        assert_response :redirect
-        assert_redirected_to questionnaires_path
-      end
-    end
-
     context "#school_name" do
       context "on update" do
         should "save existing school name" do
           patch :update, params: { questionnaire: { school_name: @school.name } }
-          assert_redirected_to questionnaires_path
+          assert_response :accepted
           assert_equal 1, School.all.count
         end
 
         should "create a new school when unknown" do
           patch :update, params: { questionnaire: { school_name: "New School" } }
-          assert_redirected_to questionnaires_path
+          assert_response :accepted
           assert_equal 2, School.all.count
         end
       end
