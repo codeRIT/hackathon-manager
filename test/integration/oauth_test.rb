@@ -23,7 +23,6 @@ class OauthTest < ActionDispatch::IntegrationTest
     should "not return data for questionnaire" do
       get questionnaires_path, headers: auth_headers(@token.token)
       assert_response :unauthorized
-      assert_redirected_to new_user_session_url
     end
   end
 
