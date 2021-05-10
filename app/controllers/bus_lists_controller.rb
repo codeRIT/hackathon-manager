@@ -50,7 +50,7 @@ class BusListsController < ApplicationController
 
   def check_user_has_questionnaire
     if current_user.questionnaire.nil?
-      return head :not_found, notice: 'Questionnaire does not exist.'
+      head :not_found, notice: 'Questionnaire does not exist.'
     end
   end
 
