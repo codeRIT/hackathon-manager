@@ -20,9 +20,9 @@ class OauthTest < ActionDispatch::IntegrationTest
       @application.destroy
     end
 
-    should "return data for questionnaire" do
+    should "not return data for questionnaire" do
       get questionnaires_path, headers: auth_headers(@token.token)
-      assert_response :redirect
+      assert_response :unauthorized
       assert_redirected_to new_user_session_url
     end
   end
