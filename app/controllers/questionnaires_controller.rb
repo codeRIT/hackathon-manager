@@ -2,14 +2,17 @@ class QuestionnairesController < ApplicationController
   include QuestionnairesControllable
 
   before_action :logged_in
-  before_action :find_questionnaire, only: [:show, :update, :edit, :destroy]
+  before_action :find_questionnaire, only: [:show, :update, :destroy]
 
   def logged_in
     authenticate_user!
   end
 
-  # POST /apply
-  # POST /apply.json
+  # GET /questionnaire.json
+  def show
+  end
+
+  # POST /questionnaire.json
   def create
     if current_user.reload.questionnaire.present?
       return head :conflict, notice: 'Application already exists.'
@@ -30,8 +33,7 @@ class QuestionnairesController < ApplicationController
     end
   end
 
-  # PUT /apply
-  # PUT /apply.json
+  # PUT /questionnaire.json
   def update
     update_params = questionnaire_params
     update_params = convert_school_name_to_id(update_params)
@@ -43,8 +45,7 @@ class QuestionnairesController < ApplicationController
     end
   end
 
-  # DELETE /apply
-  # DELETE /apply.json
+  # DELETE /questionnaire.json
   def destroy
     if @questionnaire.is_bus_captain
       directors = User.where(role: :director)
@@ -57,7 +58,7 @@ class QuestionnairesController < ApplicationController
     head :ok
   end
 
-  # GET /apply/schools
+  # GET /questionnaire/schools
   def schools
     if params[:name].blank? || params[:name].length < 3
       head :bad_request
