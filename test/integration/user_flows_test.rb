@@ -14,8 +14,6 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     login(FactoryBot.create(:director))
     assert_redirected_to new_questionnaires_path
 
-    get manage_dashboard_index_path
-    assert_response :success
     get manage_questionnaires_path
     assert_response :success
   end
