@@ -16,3 +16,11 @@
     },
   };
 </script>
+
+<style lang="scss">
+
+body {
+  background-color: purple;
+}
+
+</style>
