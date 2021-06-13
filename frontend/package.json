@@ -1,0 +1,14 @@
+{
+  "name": "my-project",
+  "scripts": {
+    "start": "parcel serve ./index.html",
+    "build": "parcel build ./index.html"
+  },
+  "dependencies": {
+    "vue": "^3.1.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-vue": "^2.0.0-beta.3.1",
+    "parcel": "next"
+  }
+}
