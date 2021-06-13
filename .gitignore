@@ -41,3 +41,9 @@
 
 # Redis
 dump.rdb
+
+
+# Vue things
+# Already ignoring node-modules
+.parcel-cache/
+dist/
