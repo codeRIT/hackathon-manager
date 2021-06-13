@@ -44,6 +44,6 @@ dump.rdb
 
 
 # Vue things
-# Already ignoring node-modules
+# Already ignoring node_modules
 .parcel-cache/
 dist/
