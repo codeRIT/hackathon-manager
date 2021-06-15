@@ -6,5 +6,5 @@
       "browser": true
     },
     "extends": "eslint:recommended"
-  }
+}
   
