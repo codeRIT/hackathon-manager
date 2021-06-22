@@ -40,7 +40,7 @@ gem 'rack-cors'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 4.8'
 gem 'omniauth-mlh', '~> 0.4.2'
 gem 'doorkeeper', '~> 5.5'
 gem 'devise-doorkeeper'
