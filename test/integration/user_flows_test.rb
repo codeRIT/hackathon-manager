@@ -1,14 +1,6 @@
 require 'test_helper'
 
 class UserFlowsTest < ActionDispatch::IntegrationTest
-  should "be able to login and browse site as a user" do
-    login(FactoryBot.create(:user))
-    assert_redirected_to new_questionnaires_path
-
-    get new_questionnaires_path
-    assert_response :success
-    assert assigns(:questionnaire)
-  end
 
   should "be able to login and browse site as a director" do
     login(FactoryBot.create(:director))
