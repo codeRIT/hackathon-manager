@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     patch :boarded_bus, on: :collection
   end
 
-  resource :events, only: :show, constraints: ->(req) { req.format == :json }
+  resources :events, only: [:index, :show]
 
   namespace :manage do
     authenticate :user, ->(u) { u.director? } do
