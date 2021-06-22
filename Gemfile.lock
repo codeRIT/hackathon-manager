@@ -154,7 +154,7 @@ GEM
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
     faraday-net_http (1.0.1)
-    ffi (1.14.2)
+    ffi (1.15.3)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -217,10 +217,9 @@ GEM
       railties (>= 3.2.16)
     json (2.3.0)
     jwt (2.2.2)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
+    listen (3.5.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -333,7 +332,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rake (13.0.3)
-    rb-fsevent (0.10.4)
+    rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
@@ -352,7 +351,6 @@ GEM
     rollbar (3.1.2)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
-    ruby_dep (1.5.0)
     ruby_http_client (3.5.2)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
@@ -416,7 +414,7 @@ GEM
     strip_attributes (1.11.0)
       activemodel (>= 3.0, < 7.0)
     temple (0.8.2)
-    test-unit (3.4.0)
+    test-unit (3.4.4)
       power_assert
     thor (1.1.0)
     thread_safe (0.3.6)
@@ -484,7 +482,7 @@ DEPENDENCIES
   httparty
   jquery-rails
   jquery-ui-rails
-  listen (>= 3.0.5, < 3.2)
+  listen (>= 3.0.5, < 3.6)
   minitest-reporters
   momentjs-rails
   mustache (~> 1.0)
