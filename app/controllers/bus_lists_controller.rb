@@ -40,19 +40,21 @@ class BusListsController < ApplicationController
 
   def find_questionnaire
     @questionnaire = current_user.questionnaire
-    redirect_to root_path unless @questionnaire
+    return head :not_found, notice: 'Questionnaire does not exist.' unless @questionnaire
   end
 
   def find_bus_list
     @bus_list = @questionnaire.bus_list
-    redirect_to root_path unless @bus_list
+    return head :not_found, notice: 'Bus List does not exist.' unless @bus_list
   end
 
   def check_user_has_questionnaire
-    redirect_to root_path if current_user.questionnaire.nil?
+    if current_user.questionnaire.nil?
+      head :not_found, notice: 'Questionnaire does not exist.'
+    end
   end
 
   def require_bus_captain
-    redirect_to root_path unless @questionnaire.is_bus_captain?
+    return head :unauthorized unless @questionnaire.is_bus_captain?
   end
 end
