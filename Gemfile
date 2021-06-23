@@ -76,7 +76,7 @@ gem 'redcarpet'
 # Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
-gem 'audited', '~> 4.10'
+gem 'audited', '~> 5.0'
 
 # Background job processing
 gem 'sidekiq', '< 7'
@@ -88,7 +88,7 @@ gem 'blazer'
 gem 'simple_spark'
 gem 'sendgrid-actionmailer'
 gem 'httparty'
-gem 'rollbar', '~> 3.1'
+gem 'rollbar', '~> 3.2'
 gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 

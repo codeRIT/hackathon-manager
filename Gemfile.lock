@@ -58,8 +58,8 @@ GEM
       zeitwerk
     ansi (1.5.0)
     arel (9.0.0)
-    audited (4.10.0)
-      activerecord (>= 4.2, < 6.2)
+    audited (5.0.1)
+      activerecord (>= 5.0, < 6.2)
     autoprefixer-rails (10.2.4.0)
       execjs
     aws-eventstream (1.1.1)
@@ -348,7 +348,7 @@ GEM
     roadie-rails (2.2.0)
       railties (>= 5.1, < 6.2)
       roadie (>= 3.1, < 5.0)
-    rollbar (3.1.2)
+    rollbar (3.2.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
     ruby_http_client (3.5.2)
@@ -455,7 +455,7 @@ PLATFORMS
 
 DEPENDENCIES
   ajax-datatables-rails (~> 1.0)
-  audited (~> 4.10)
+  audited (~> 5.0)
   aws-sdk-s3
   better_errors
   binding_of_caller
@@ -498,7 +498,7 @@ DEPENDENCIES
   redcarpet
   redis (~> 4.0)
   roadie-rails
-  rollbar (~> 3.1)
+  rollbar (~> 3.2)
   rubyzip (>= 1.3.0)
   sass-rails (~> 6.0)
   selectize-rails
