@@ -1,7 +1,16 @@
 class EventsController < ApplicationController
-  respond_to :json
+  before_action :find_event, only: :show
+
+  def index
+    @events = Event.all
+  end
 
   def show
-    render json: Event.all
+  end
+
+  private
+
+  def find_event
+    @event = Event.find_by_id(params[:id])
   end
 end

@@ -96,19 +96,9 @@
   </div>
 </div>
 <div class="row mt-2 mb-4">
-  <div class="col-7">
-    <h4 class="border-bottom pb-2 mb-4">Today's Activity</h4>
-    <%= area_chart todays_activity_data_manage_dashboard_index_path(school_id: @school.id), colors: [blue, green, red, grey] %>
-  </div>
   <div class="col-5">
     <h4 class="border-bottom pb-2 mb-4">Total Distribution</h4>
     <%= pie_chart @school.questionnaires.group('acc_status').count %>
-  </div>
-</div>
-<div class="row mt-2 mb-4">
-  <div class="col">
-    <h4 class="border-bottom pb-2 mb-4">Confirmation Activity</h4>
-    <%= area_chart confirmation_activity_data_manage_dashboard_index_path(school_id: @school.id), colors: [green, red], library: { legend: { enabled: false } } %>
   </div>
 </div>
 <div class="row mt-2">
