@@ -7,6 +7,7 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "build(deps): "
+    vendor: true
 
   - package-ecosystem: "npm"
     directory: "/website"
