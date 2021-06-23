@@ -58,8 +58,8 @@ GEM
       zeitwerk
     ansi (1.5.0)
     arel (9.0.0)
-    audited (4.10.0)
-      activerecord (>= 4.2, < 6.2)
+    audited (5.0.1)
+      activerecord (>= 5.0, < 6.2)
     autoprefixer-rails (10.2.4.0)
       execjs
     aws-eventstream (1.1.1)
@@ -112,7 +112,7 @@ GEM
     codeclimate-test-reporter (1.0.7)
       simplecov
     coderay (1.1.3)
-    concurrent-ruby (1.1.8)
+    concurrent-ruby (1.1.9)
     connection_pool (2.2.3)
     crack (0.4.5)
       rexml
@@ -206,7 +206,7 @@ GEM
     httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
-    i18n (1.8.9)
+    i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
     jquery-rails (4.4.0)
@@ -453,7 +453,7 @@ PLATFORMS
 
 DEPENDENCIES
   ajax-datatables-rails (~> 1.0)
-  audited (~> 4.10)
+  audited (~> 5.0)
   aws-sdk-s3
   better_errors
   binding_of_caller
