@@ -48,3 +48,4 @@ dump.rdb
 dist/
 node_modules/
 
+.cache
