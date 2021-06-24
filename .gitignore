@@ -17,7 +17,6 @@
 /storage/*
 !/storage/.keep
 
-/node_modules
 /yarn-error.log
 
 /public/assets
@@ -41,3 +40,11 @@
 
 # Redis
 dump.rdb
+
+
+# Vue things
+# Already ignoring node_modules
+.parcel-cache/
+dist/
+node_modules/
+
