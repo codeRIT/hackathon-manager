@@ -25,7 +25,7 @@
             </div>
 
             <div class="body">
-                <div class="team-member">
+                <div class="item">
                     <div class="icon"></div>
                     <div>
                         <h2 class="name">John Smith</h2>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <div class="team-member">
+                <div class="item">
                     <div class="icon"></div>
                     <div>
                         <h2 class="name">John Smith</h2>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="team-member">
+                <div class="item">
                     <div class="icon icon-orange"></div>
                     <div>
                         <h2 class="name">Invite a teammate</h2>
@@ -57,7 +57,7 @@
             </div>
 
             <div class="body">
-                <div class="team-member">
+                <div class="item">
                     <div class="icon"></div>
                     <div>
                         <h2 class="name">Arriving at 12:30pm</h2>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                <div class="team-member">
+                <div class="item">
                     <div class="icon icon-orange"></div>
                     <div>
                         <h2 class="name">Contact bus leader</h2>
@@ -156,6 +156,11 @@ header {
     display: flex;
     flex-direction: column;
     border-radius: 0.5rem;
+    transition: background-color 0.25s;
+
+    &:hover {
+        background-color: gray;
+    }
 
     // scuffed pure CSS triangle - please replace this with an inline SVG or something, it's too pointy like this
     &::after {
@@ -191,18 +196,31 @@ header {
     }
 
     .body {
-        background-color: lightgray;
-        padding: 1.5rem 1.25rem;
         display: flex;
         flex-direction: column;
-        border-radius: 0.5rem;
-        gap: 1.25rem;
 
-        .team-member {
+        .item {
+            padding: 0.75rem 1.25rem;
+            background-color: lightgray;
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 1.25rem;
+            transition: background-color 0.25s;
+
+            &:first-child {
+                border-radius: 0.5rem 0.5rem 0 0;
+                padding-top: 1.25rem;
+            }
+
+            &:last-child {
+                border-radius: 0 0 0.5rem 0.5rem;
+                padding-bottom: 1.25rem;
+            }
+
+            &:hover {
+                background-color: gray;
+            }
 
             .icon {
                 background-color: darkgray;
