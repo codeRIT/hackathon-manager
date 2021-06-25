@@ -18,11 +18,54 @@ export default {
 </script>
 
 <style lang="scss">
+// CSS reset largely copied from Tailwind CSS's Preflight: https://tailwindcss.com/docs/preflight
+
 body {
-    margin: 0;
+    font-family: sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
+body,
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
 }
 </style>
