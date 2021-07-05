@@ -1,79 +1,87 @@
 <template>
-    <div id="container">
-        <nav>
-            <a href="#"><div class="icon"></div></a>
-            <a href="#">Logout</a>
-        </nav>
+<div style="position: relative;">
+    <nav>
+        <a href="#"><div class="icon"></div></a>
+        <a href="#">Logout</a>
+    </nav>
 
-        <header>
-            <div class="banner"></div>
-            <div class="icon"></div>
-            
-            <h1 class="username">John Smith <a class="edit"></a></h1>
-            <h4>Rochester Institute of Technology</h4>
-        </header>
+    <header>
+        <div class="banner"></div>
+        <div class="icon"></div>
 
-        <div class="cta-button">
-            <h2>Confirm your attendance</h2>
-            <h4>Awaiting RSVP</h4>
-        </div>
+        <h1 class="username">John Smith <a class="edit"></a></h1>
+        <h4>Rochester Institute of Technology</h4>
+    </header>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="cta-button">
+                    <h2>Confirm your attendance</h2>
+                    <h4>Awaiting RSVP</h4>
+                </div>
 
-        <div class="module">
-            <div class="meta">
-                <h2 class="title">Your Team</h2>
-                <a class="manage" href="#">manage</a>
+                <div class="module">
+                    <div class="meta">
+                        <h2 class="title">Your Team</h2>
+                        <a class="manage" href="#">manage</a>
+                    </div>
+
+                    <div class="body">
+                        <div class="item">
+                            <div class="icon"></div>
+                            <div>
+                                <h2 class="name">John Smith</h2>
+                                <h4 class="school">Rochester Institute of Technology</h4>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="icon"></div>
+                            <div>
+                                <h2 class="name">John Smith</h2>
+                                <h4 class="school">Rochester Institute of Technology</h4>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="icon icon-orange"></div>
+                            <div>
+                                <h2 class="name">Invite a teammate</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="body">
-                <div class="item">
-                    <div class="icon"></div>
-                    <div>
-                        <h2 class="name">John Smith</h2>
-                        <h4 class="school">Rochester Institute of Technology</h4>
+            <div class="col-6">
+                <div class="module">
+                    <div class="meta">
+                        <h2 class="title">Bus</h2>
+                        <a class="manage" href="#">change</a>
                     </div>
-                </div>
 
-                <div class="item">
-                    <div class="icon"></div>
-                    <div>
-                        <h2 class="name">John Smith</h2>
-                        <h4 class="school">Rochester Institute of Technology</h4>
-                    </div>
-                </div>
+                    <div class="body">
+                        <div class="item">
+                            <div class="icon"></div>
+                            <div>
+                                <h2 class="name">Arriving at 12:30pm</h2>
+                                <h4 class="school">5000 Nathaniel Rochester Dr</h4>
+                            </div>
+                        </div>
 
-                <div class="item">
-                    <div class="icon icon-orange"></div>
-                    <div>
-                        <h2 class="name">Invite a teammate</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="module">
-            <div class="meta">
-                <h2 class="title">Bus</h2>
-                <a class="manage" href="#">change</a>
-            </div>
-
-            <div class="body">
-                <div class="item">
-                    <div class="icon"></div>
-                    <div>
-                        <h2 class="name">Arriving at 12:30pm</h2>
-                        <h4 class="school">5000 Nathaniel Rochester Dr</h4>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="icon icon-orange"></div>
-                    <div>
-                        <h2 class="name">Contact bus leader</h2>
+                        <div class="item">
+                            <div class="icon icon-orange"></div>
+                            <div>
+                                <h2 class="name">Contact bus leader</h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -99,19 +107,31 @@ nav {
     }
 }
 
-#container {
+.container {
     position: relative;
-    width: 100%;
+    margin: 0 auto;
+    max-width: 992px;
     min-height: 100%;
+}
+
+.row {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;  // well-supported for single column layouts
-    margin-bottom: 1.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 50%;
+        margin-bottom: 1.5rem;
+    }
 }
 
 header {
     text-align: center;
+    margin-bottom: 1.5rem;
 
     .banner {
         background-color: darkgrey;
@@ -232,6 +252,18 @@ header {
                     background-color: orange;
                 }
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+
+    .row {
+        .col-6 {
+            width: 100%;
         }
     }
 }
