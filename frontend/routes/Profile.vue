@@ -93,8 +93,8 @@ export default {
 <style lang="scss" scoped>
 nav {
     position: absolute;
-    top: 1rem;
-    right: 1.5rem;
+    top: 2rem;
+    right: 10rem;
     display: flex;
     align-items: center;
 
@@ -186,15 +186,15 @@ header {
     &::after {
         content: "";
         box-sizing: border-box;
-        width: 3rem;
-        height: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
         position: absolute;
         right: 1.25rem;
         top: 50%;
-        margin-top: -1.5rem;
+        margin-top: -1.25rem;
         border-style: solid;
         border-color: transparent transparent transparent orange;
-        border-width: 1.5rem 0 1.5rem 3rem;
+        border-width: 1.25rem 0 1.25rem 2.5rem;
         border-radius: 0.5rem;
     }
 }
