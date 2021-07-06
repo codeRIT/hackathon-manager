@@ -89,16 +89,16 @@ nav {
                 padding-bottom: 1.25rem;
             }
 
-            &:hover:not(.active) {
+            &:hover {
                 background-color: gray;
             }
 
             &.active {
                 background-color: orange;
-            }
 
-            &.active:hover {
-                background-color: darkorange;
+                &:hover {
+                    background-color: darkorange;
+                }
             }
         }
     }
