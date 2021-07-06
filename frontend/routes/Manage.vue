@@ -2,12 +2,12 @@
 <div>
     <nav class="container">
         <div class="navbar">
-            <a class="active" href="#">Dashboard</a>
-            <a href="#">Users</a>
-            <a href="#">Schools</a>
-            <a href="#">Questionnaires</a>
-            <a href="#">Schedule</a>
-            <a href="#">Settings</a>
+            <router-link to="/manage">Dashboard</router-link>
+            <router-link to="/manage/users">Users</router-link>
+            <router-link to="/manage/schools">Schools</router-link>
+            <router-link to="/manage/questionnaires">Questionnaires</router-link>
+            <router-link to="/manage/schedule">Schedule</router-link>
+            <router-link to="/manage/settings">Settings</router-link>
         </div>
 
         <div class="user">
