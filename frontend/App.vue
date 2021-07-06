@@ -63,4 +63,9 @@ object {
   display: block;
   vertical-align: middle;
 }
+
+a {
+  color: initial;
+  text-decoration: none;
+}
 </style>
