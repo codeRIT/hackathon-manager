@@ -24,14 +24,14 @@ class BusListsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "redirect to root page on bus_list#show" do
+    should "return not found on bus_list#show" do
       get :show
-      assert_redirected_to root_path
+      assert_response :not_found
     end
 
-    should "redirect to root page on bus_list#boarded_bus" do
+    should "return not found on bus_list#boarded_bus" do
       patch :boarded_bus
-      assert_redirected_to root_path
+      assert_response :not_found
     end
   end
 
@@ -44,12 +44,12 @@ class BusListsControllerTest < ActionController::TestCase
 
     should "redirect to root page on bus_list#show" do
       get :show
-      assert_redirected_to root_path
+      assert_response :not_found
     end
 
     should "redirect to root page on bus_list#boarded_bus" do
       patch :boarded_bus
-      assert_redirected_to root_path
+      assert_response :not_found
     end
   end
 
@@ -63,14 +63,14 @@ class BusListsControllerTest < ActionController::TestCase
     end
 
     context "but is not bus captain" do
-      should "redirect to root page on bus_list#show" do
+      should "return unauthorized on bus_list#show" do
         get :show
-        assert_redirected_to root_path
+        assert_response :unauthorized
       end
 
-      should "redirect to root page on bus_list#boarded_bus" do
+      should "return unauthorized on bus_list#boarded_bus" do
         patch :boarded_bus
-        assert_redirected_to root_path
+        assert_response :unauthorized
       end
     end
 
@@ -80,7 +80,7 @@ class BusListsControllerTest < ActionController::TestCase
       end
 
       should "render bus_list#show" do
-        get :show
+        get :show, format: :json
         assert_response :success
       end
 
