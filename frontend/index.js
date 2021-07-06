@@ -15,6 +15,7 @@ import Schools from './routes/manage/Schools.vue'
 import Questionnaires from './routes/manage/Questionnaires.vue'
 import Schedule from './routes/manage/Schedule.vue'
 import Settings from './routes/manage/Settings.vue'
+import Questionnaire from './routes/manage/Questionnaire.vue'
 
 const routes = [
     { path: "/", component: Home },
@@ -39,6 +40,10 @@ const routes = [
             {
                 path: 'questionnaires',
                 component: Questionnaires
+            },
+            {
+                path: 'questionnaires/:id',
+                component: Questionnaire
             },
             {
                 path: 'schedule',

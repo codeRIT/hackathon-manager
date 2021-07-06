@@ -17,7 +17,7 @@
                 <th>Applied On</th>
             </tr>
             <tr>
-                <td class="hidden"><a class="link" href="#"></a></td>
+                <td class="hidden"><router-link class="link" to="/manage/questionnaires/1"></router-link></td>
                 <td>John</td>
                 <td>Smith</td>
                 <td>johnsmith@example.com</td>
@@ -26,7 +26,7 @@
                 <td>7/5/21</td>
             </tr>
             <tr>
-                <td class="hidden"><a class="link" href="#"></a></td>
+                <td class="hidden"><router-link class="link" to="/manage/questionnaires/2"></router-link></td>
                 <td>John</td>
                 <td>Smith</td>
                 <td>johnsmith@example.com</td>
@@ -35,7 +35,7 @@
                 <td>7/5/21</td>
             </tr>
             <tr>
-                <td class="hidden"><a class="link" href="#"></a></td>
+                <td class="hidden"><router-link class="link" to="/manage/questionnaires/3"></router-link></td>
                 <td>John</td>
                 <td>Smith</td>
                 <td>johnsmith@example.com</td>
