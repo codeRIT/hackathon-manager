@@ -107,28 +107,6 @@ nav {
     }
 }
 
-.container {
-    position: relative;
-    margin: 0 auto;
-    max-width: 992px;
-    min-height: 100%;
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-
-    .col-6 {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        width: 50%;
-        margin-bottom: 1.5rem;
-    }
-}
-
 header {
     text-align: center;
     margin-bottom: 1.5rem;

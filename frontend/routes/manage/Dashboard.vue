@@ -1,6 +1,6 @@
 <template>
 <div>
-    <nav>
+    <nav class="container">
         <div class="navbar">
             <a class="active" href="#">Dashboard</a>
             <a href="#">Users</a>
@@ -27,7 +27,6 @@ export default {
 <style lang="scss" scoped>
 nav {
     display: flex;
-    align-items: flex-end;
     justify-content: space-between;
     padding: 4rem;
 
