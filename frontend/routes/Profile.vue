@@ -233,16 +233,4 @@ header {
         }
     }
 }
-
-@media only screen and (max-width: 768px) {
-    .container {
-        width: 100%;
-    }
-
-    .row {
-        .col-6 {
-            width: 100%;
-        }
-    }
-}
 </style>
