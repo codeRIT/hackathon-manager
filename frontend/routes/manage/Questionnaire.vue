@@ -25,7 +25,7 @@
 
                 <div class="item">
                     <p class="key">Phone</p>
-                    <p class="value">1234567890</p>
+                    <p class="value">{{ questionnaire.phone }}</p>
                 </div>
 
                 <div class="item">
@@ -35,34 +35,40 @@
 
                 <div class="item">
                     <p class="key">Gender</p>
-                    <p class="value">Non-Binary</p>
+                    <p class="value">{{ questionnaire.gender }}</p>
                 </div>
 
                 <div class="item">
                     <p class="key">Country</p>
-                    <p class="value">United States</p>
+                    <p class="value">{{ questionnaire.country }}</p>
                 </div>
             </VerticalGroup>
 
             <VerticalGroup class="dictionary" name="Resume">
                 <div class="item">
                     <p class="key">Why YeetHaw Hacks?</p>
-                    <p class="value">I like to hack</p>
+                    <p class="value" :class="{ light: questionnaire.why_attend === null }">
+                        {{ questionnaire.why_attend || "Not provided" }}
+                    </p>
                 </div>
 
                 <div class="item">
                     <p class="key">Experience</p>
-                    <p class="value">My feet are wet. (1-5 hackathons)</p>
+                    <p class="value">{{ experience }}</p>
                 </div>
 
                 <div class="item">
                     <p class="key">Portfolio</p>
-                    <p class="value light">Not provided</p>
+                    <p class="value" :class="{ light: questionnaire.portfolio_url === null }">
+                        {{ questionnaire.portfolio_url || "Not provided" }}
+                    </p>
                 </div>
 
                 <div class="item">
                     <p class="key">GitHub/GitLab/Bitbucket</p>
-                    <p class="value light">Not provided</p>
+                    <p class="value" :class="{ light: questionnaire.vcs_url === null }">
+                        {{ questionnaire.vcs_url || "Not provided" }}
+                    </p>
                 </div>
 
                 <div class="item">
@@ -75,34 +81,36 @@
         <div class="col-6">
             <VerticalGroup class="action-items" name="Check-in compliance">
                 <div class="item action">
-                    <div class="icon"></div>
-                    <p>Has not been accepted</p>
+                    <div class="icon" :class="{ completed: isAccepted }"></div>
+                    <p>{{ isAccepted ? "Has been accepted" : "Has not been accepted" }}</p>
                     <a href="#">change</a>
                 </div>
                 <div class="item action">
-                    <div class="icon"></div>
-                    <p>Not RSVP'd as attending</p>
+                    <div class="icon" :class="{ completed: isRSVPd }"></div>
+                    <p>{{ isRSVPd ? "RSVP'd as attending" : "Not RSVP'd as attending" }}</p>
                     <a href="#">change</a>
                 </div>
                 <div class="item">
-                    <div class="icon completed"></div>
-                    <p>18 years or older</p>
+                    <div class="icon" :class="{ completed: age >= 18 }"></div>
+                    <p>{{ age >= 18 ? "18 years or older" : "Less than 18 years old" }}</p>
                 </div>
                 <div class="item">
-                    <div class="icon"></div>
-                    <p>Fun agreement, not accepted</p>
+                    <div class="icon" :class="{ completed: questionnaire.all_agreements_accepted }"></div>
+                    <p>{{ questionnaire.all_agreements_accepted ? "All agreements accepted" : "Not all agreements accepted" }}</p>
                 </div>
             </VerticalGroup>
 
             <VerticalGroup class="dictionary" name="Special notices">
                 <div class="item">
                     <p class="key">Shirt size</p>
-                    <p class="value">Unisex M</p>
+                    <p class="value">{{ questionnaire.shirt_size }}</p>
                 </div>
 
                 <div class="item">
                     <p class="key">Dietary restrictions</p>
-                    <p class="value light">(none)</p>
+                    <p class="value" :class="{ light: questionnaire.dietary_restrictions == null }">
+                        {{ questionnaire.dietary_restrictions || "(none)" }}
+                    </p>
                 </div>
 
                 <div class="item">
@@ -112,13 +120,17 @@
 
                 <div class="item">
                     <p class="key">Bus captain</p>
-                    <p class="value light">No</p>
+                    <p class="value" :class="{ light: !questionnaire.is_bus_captain }">
+                        {{ questionnaire.is_bus_captain ? "Yes" : "No" }}
+                    </p>
                 </div>
 
 
                 <div class="item">
                     <p class="key">Travelling from</p>
-                    <p class="value light">My school</p>
+                    <p class="value" :class="{ light: !questionnaire.travel_not_from_school }">
+                        {{ questionnaire.travel_not_from_school ? questionnaire.travel_location : "My school" }}
+                    </p>
                 </div>
             </VerticalGroup>
 
@@ -130,12 +142,12 @@
 
                 <div class="item">
                     <p class="key">Major</p>
-                    <p class="value"><a href="#">BS Packaging Science</a></p>
+                    <p class="value">{{ questionnaire.major }}</p>
                 </div>
 
                 <div class="item">
                     <p class="key">Level of study</p>
-                    <p class="value"><a href="#">University (Undergraduate)</a></p>
+                    <p class="value">{{ questionnaire.level_of_study }}</p>
                 </div>
             </VerticalGroup>
         </div>
@@ -178,7 +190,53 @@ import VerticalGroup from "../../components/VerticalGroup.vue"
 export default {
     components: {
         "VerticalGroup": VerticalGroup
-    }
+    },
+
+    created() {
+        this.loadQuestionnaires(this.$route.params.id)
+    },
+
+    beforeRouteUpdate(to, from) {
+        this.loadQuestionnaires(this.$route.params.id)
+    },
+    
+    data() {
+        return {
+            questionnaire: {},
+            isAccepted: false,
+            isRSVPd: false,
+            age: 0,
+            experience: ""
+        }
+    },
+
+    methods: {
+        loadQuestionnaires(id) {
+            this.questionnaire = this.api.getQuestionnaire(1)
+
+            // process DOB
+            const dob = new Date(this.questionnaire.date_of_birth)
+            const delta = new Date(Date.now() - dob.getTime())
+            this.age = Math.abs(delta.getUTCFullYear() - 1970)
+
+            // process experience
+            const experience = this.questionnaire.experience
+            this.experience = {
+                first: "This is my 1st hackathon!",
+                experienced: "My feet are wet. (1-5 hackathons)",
+                expert: "I'm a veteran hacker. (6+ hackathons)"
+            }[experience]
+
+            // process acceptance/RSVP
+            const accStatus = this.questionnaire.acc_status
+            this.isAccepted = [
+                "rsvp_confirmed", "accepted", "rsvp_denied"
+            ].includes(accStatus)
+            this.isRSVPd = accStatus === "accepted"
+        }
+    },
+
+    inject: ['api']
 }
 </script>
 
