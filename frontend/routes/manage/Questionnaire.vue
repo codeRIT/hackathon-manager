@@ -140,6 +140,35 @@
             </VerticalGroup>
         </div>
     </div>
+
+    <div class="history">
+        <div class="meta">
+            <h2 class="title">History</h2>
+        </div>
+
+        <table class="body list">
+            <tr>
+                <th>Action</th>
+                <th>Modified by</th>
+                <th>Timestamp</th>
+            </tr>
+            <tr>
+                <td>Shirt size changed from Women's L to Unisex M</td>
+                <td>John Smith</td>
+                <td>7/5/21</td>
+            </tr>
+            <tr>
+                <td>Email changed from test@example.com to johnsmith@example.com</td>
+                <td>John Smith</td>
+                <td>7/5/21</td>
+            </tr>
+            <tr>
+                <td>User created</td>
+                <td>John Smith</td>
+                <td>7/5/21</td>
+            </tr>
+        </table>
+    </div>
 </div>
 </template>
 
@@ -224,6 +253,49 @@ export default {
 
         &.completed {
             background-color: orange;
+        }
+    }
+}
+
+// shared w/ Questionnaires.vue
+.history {
+    .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.25rem;
+
+        .action {
+            font-size: 1.17em;  // default h3
+        }
+    }
+
+    table.body.list {
+        border-collapse: collapse;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        width: 100%;
+
+        td, th {
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+            border: none;
+
+            &.hidden {
+                padding: 0;
+            }
+        }
+
+        tr {
+            background: lightgray;
+        }
+
+        tr:first-child th, tr:first-child td {
+            padding-top: 1.5rem;
+        }
+
+        tr:last-child th, tr:last-child td {
+            padding-bottom: 1.5rem;
         }
     }
 }

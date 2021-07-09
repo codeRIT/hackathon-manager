@@ -108,22 +108,6 @@
         tr:last-child th, tr:last-child td {
             padding-bottom: 1.5rem;
         }
-
-        // tr:nth-child(odd) {
-        //     background: lightgray;
-
-        //     &:not(:first-child):hover {
-        //         background: gray;
-        //     }
-        // }
-
-        // tr:nth-child(even) {
-        //     background: gray;
-
-        //     &:not(:first-child):hover {
-        //         background: lightgray;
-        //     }
-        // }
     }
 }
 </style>
