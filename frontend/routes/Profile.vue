@@ -21,37 +21,30 @@
                     <h4>Awaiting RSVP</h4>
                 </div>
 
-                <div class="module">
-                    <div class="meta">
-                        <h2 class="title">Your Team</h2>
-                        <a class="manage" href="#">manage</a>
-                    </div>
-
-                    <div class="body">
-                        <div class="item">
-                            <div class="icon"></div>
-                            <div>
-                                <h2 class="name">John Smith</h2>
-                                <h4 class="school">Rochester Institute of Technology</h4>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="icon"></div>
-                            <div>
-                                <h2 class="name">John Smith</h2>
-                                <h4 class="school">Rochester Institute of Technology</h4>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="icon icon-orange"></div>
-                            <div>
-                                <h2 class="name">Invite a teammate</h2>
-                            </div>
+                <VerticalGroup class="team">
+                    <div class="item">
+                        <div class="icon"></div>
+                        <div>
+                            <h2 class="name">John Smith</h2>
+                            <h4 class="school">Rochester Institute of Technology</h4>
                         </div>
                     </div>
-                </div>
+
+                    <div class="item">
+                        <div class="icon"></div>
+                        <div>
+                            <h2 class="name">John Smith</h2>
+                            <h4 class="school">Rochester Institute of Technology</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon icon-orange"></div>
+                        <div>
+                            <h2 class="name">Invite a teammate</h2>
+                        </div>
+                    </div>
+                </VerticalGroup>
             </div>
 
             <div class="col-6">
@@ -85,8 +78,12 @@
 </template>
 
 <script>
+import VerticalGroup from "../components/VerticalGroup.vue"
+
 export default {
-    // Code? in _my_ VS?
+    components: {
+        "VerticalGroup": VerticalGroup
+    }
 }
 </script>
 
@@ -147,8 +144,6 @@ header {
 
 .cta-button {
     position: relative;
-    margin-left: 1rem;
-    margin-right: 1rem;
     background-color: lightgray;
     padding: 1.5rem 1.25rem;
     display: flex;
@@ -178,59 +173,14 @@ header {
 }
 
 // "Your Team", "Bus", etc.
-.module {
-    margin-left: 1rem;
-    margin-right: 1rem;
+.team .item .icon {
+    background-color: darkgray;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
 
-    .meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 0.25rem;
-
-        .manage {
-            font-size: 1.17em;  // default h3
-        }
-    }
-
-    .body {
-        display: flex;
-        flex-direction: column;
-
-        .item {
-            padding: 0.75rem 1.25rem;
-            background-color: lightgray;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 1.25rem;
-            transition: background-color 0.25s;
-
-            &:first-child {
-                border-radius: 0.5rem 0.5rem 0 0;
-                padding-top: 1.25rem;
-            }
-
-            &:last-child {
-                border-radius: 0 0 0.5rem 0.5rem;
-                padding-bottom: 1.25rem;
-            }
-
-            &:hover {
-                background-color: gray;
-            }
-
-            .icon {
-                background-color: darkgray;
-                width: 3rem;
-                height: 3rem;
-                border-radius: 0.75rem;
-
-                &.icon-orange {
-                    background-color: orange;
-                }
-            }
-        }
+    &.icon-orange {
+        background-color: orange;
     }
 }
 </style>
