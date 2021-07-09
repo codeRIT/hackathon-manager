@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="header">
-        <h1>John Smith (ID #{{ $route.params.id }})</h1>
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
         <a href="#">edit</a>
     </div>
 
@@ -10,17 +10,17 @@
             <VerticalGroup class="dictionary" name="Personal info">
                 <div class="item">
                     <p class="key">First Name</p>
-                    <p class="value">John</p>
+                    <p class="value">{{ user.first_name }}</p>
                 </div>
 
                 <div class="item">
                     <p class="key">Last Name</p>
-                    <p class="value">Smith</p>
+                    <p class="value">{{ user.last_name }}</p>
                 </div>
 
                 <div class="item">
                     <p class="key">Email</p>
-                    <p class="value">johnsmith@example.com</p>
+                    <p class="value">{{ user.email }}</p>
                 </div>
 
                 <div class="item">
@@ -30,7 +30,7 @@
 
                 <div class="item">
                     <p class="key">Date of birth</p>
-                    <p class="value">01/01/1990</p>
+                    <p class="value">{{ questionnaire.date_of_birth }}</p>
                 </div>
 
                 <div class="item">
@@ -193,16 +193,17 @@ export default {
     },
 
     created() {
-        this.loadQuestionnaires(this.$route.params.id)
+        this.loadQuestionnaire(this.$route.params.id)
     },
 
     beforeRouteUpdate(to, from) {
-        this.loadQuestionnaires(this.$route.params.id)
+        this.loadQuestionnaire(this.$route.params.id)
     },
     
     data() {
         return {
             questionnaire: {},
+            user: {},
             isAccepted: false,
             isRSVPd: false,
             age: 0,
@@ -211,8 +212,9 @@ export default {
     },
 
     methods: {
-        loadQuestionnaires(id) {
-            this.questionnaire = this.api.getQuestionnaire(1)
+        loadQuestionnaire(id) {
+            this.questionnaire = this.api.getQuestionnaire(id)
+            this.loadUser(this.questionnaire.user_id)
 
             // process DOB
             const dob = new Date(this.questionnaire.date_of_birth)
@@ -233,6 +235,10 @@ export default {
                 "rsvp_confirmed", "accepted", "rsvp_denied"
             ].includes(accStatus)
             this.isRSVPd = accStatus === "accepted"
+        },
+
+        loadUser(id) {
+            this.user = this.api.getUser(id)
         }
     },
 
