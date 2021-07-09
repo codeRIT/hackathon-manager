@@ -173,14 +173,22 @@ header {
 }
 
 // "Your Team", "Bus", etc.
-.team .item .icon {
-    background-color: darkgray;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.75rem;
+.team .item {
+    transition: background-color 0.25s;
 
-    &.icon-orange {
-        background-color: orange;
+    &:hover {
+        background-color: gray;
+    }
+
+    .icon {
+        background-color: darkgray;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.75rem;
+
+        &.icon-orange {
+            background-color: orange;
+        }
     }
 }
 </style>

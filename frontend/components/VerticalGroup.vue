@@ -49,7 +49,6 @@ export default {
             flex-direction: row;
             align-items: center;
             gap: 1.25rem;
-            transition: background-color 0.25s;
 
             &:first-child {
                 border-radius: 0.5rem 0.5rem 0 0;
@@ -59,10 +58,6 @@ export default {
             &:last-child {
                 border-radius: 0 0 0.5rem 0.5rem;
                 padding-bottom: 1.25rem;
-            }
-
-            &:hover {
-                background-color: gray;
             }
         }
     }
