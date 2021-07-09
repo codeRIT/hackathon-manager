@@ -21,34 +21,40 @@
                     <h4>Awaiting RSVP</h4>
                 </div>
 
-                <VerticalGroup class="team">
-                    <div class="item">
-                        <div class="icon"></div>
-                        <div>
-                            <h2 class="name">John Smith</h2>
-                            <h4 class="school">Rochester Institute of Technology</h4>
-                        </div>
-                    </div>
+                <VerticalGroup class="team" name="My Team">
+                    <template #actions>
+                        <a href="#">manage</a>
+                    </template>
 
-                    <div class="item">
-                        <div class="icon"></div>
-                        <div>
-                            <h2 class="name">John Smith</h2>
-                            <h4 class="school">Rochester Institute of Technology</h4>
+                    <template #default>
+                        <div class="item">
+                            <div class="icon"></div>
+                            <div>
+                                <h2 class="name">John Smith</h2>
+                                <h4 class="school">Rochester Institute of Technology</h4>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="item">
-                        <div class="icon icon-orange"></div>
-                        <div>
-                            <h2 class="name">Invite a teammate</h2>
+                        <div class="item">
+                            <div class="icon"></div>
+                            <div>
+                                <h2 class="name">John Smith</h2>
+                                <h4 class="school">Rochester Institute of Technology</h4>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="item">
+                            <div class="icon icon-orange"></div>
+                            <div>
+                                <h2 class="name">Invite a teammate</h2>
+                            </div>
+                        </div>
+                    </template>
                 </VerticalGroup>
             </div>
 
             <div class="col-6">
-                <div class="module">
+                <!-- <div class="module">
                     <div class="meta">
                         <h2 class="title">Bus</h2>
                         <a class="manage" href="#">change</a>
@@ -70,7 +76,30 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+                <VerticalGroup class="bus" name="Bus">
+                    <template #actions>
+                        <a href="#">change</a>
+                    </template>
+
+                    <template #default>
+                        <div class="item">
+                            <div class="icon"></div>
+                            <div>
+                                <h2 class="name">Arriving at 12:30pm</h2>
+                                <h4 class="school">5000 Nathaniel Rochester Dr</h4>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="icon icon-orange"></div>
+                            <div>
+                                <h2 class="name">Contact bus leader</h2>
+                            </div>
+                        </div>
+                    </template>
+                </VerticalGroup>
             </div>
         </div>
     </div>
@@ -173,7 +202,7 @@ header {
 }
 
 // "Your Team", "Bus", etc.
-.team .item {
+.team .item, .bus .item {
     transition: background-color 0.25s;
 
     &:hover {

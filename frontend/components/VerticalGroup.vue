@@ -25,15 +25,15 @@ export default {
         align-items: baseline;
         margin-bottom: 0.25rem;
 
-        * {
+        :deep(*) {
             padding-bottom: 0;
         }
 
-        *:first-child {
+        :deep(*:first-child) {
             margin-right: auto;
         }
 
-        a {
+        :deep(a) {
             font-size: 1.17em;  // default h3
         }
     }
@@ -42,7 +42,7 @@ export default {
         display: flex;
         flex-direction: column;
 
-        :deep .item {
+        :deep(.item) {
             padding: 0.75rem 1.25rem;
             background-color: lightgray;
             display: flex;
