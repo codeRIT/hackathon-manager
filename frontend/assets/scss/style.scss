@@ -59,9 +59,10 @@ a {
 
 .container {
     position: relative;
-    margin: 0 auto;
-    max-width: 992px;
+    max-width: 1200px;
     min-height: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .row {
@@ -69,24 +70,13 @@ a {
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    gap: 1rem;
 
     .col-6 {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        width: calc(50% - 2rem);
-        margin: 0 1rem 1.5rem;
+        flex: auto;
+        margin-bottom: 1.5rem
     }
-}
-
-@media only screen and (max-width: 768px) {
-  .container {
-      width: 100%;
-  }
-
-  .row {
-      .col-6 {
-          width: calc(100% - 2rem);
-      }
-  }
 }
