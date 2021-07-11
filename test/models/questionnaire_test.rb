@@ -357,6 +357,19 @@ class QuestionnaireTest < ActiveSupport::TestCase
     end
   end
 
+  context "#over_thirteen" do
+    should "valid questionnaire for 13 year old" do
+      questionnaire = create(:questionnaire, date_of_birth: 13.year.ago)
+      assert questionnaire.valid?
+    end
+
+    should "invalid questionnaire for 13 year old" do
+      questionnaire = create(:questionnaire)
+      questionnaire.date_of_birth = 12.year.ago
+      assert_not questionnaire.valid?
+    end
+  end
+
   context "#can_rsvp?" do
     should "return true for accepted questionnaires" do
       questionnaire = create(:questionnaire, acc_status: "accepted")
