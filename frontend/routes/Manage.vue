@@ -3,9 +3,9 @@
     <nav class="container">
         <div class="navbar">
             <router-link to="/manage">Dashboard</router-link>
+            <router-link to="/manage/questionnaires">Questionnaires</router-link>
             <router-link to="/manage/users">Users</router-link>
             <router-link to="/manage/schools">Schools</router-link>
-            <router-link to="/manage/questionnaires">Questionnaires</router-link>
             <router-link to="/manage/schedule">Schedule</router-link>
             <router-link to="/manage/settings">Settings</router-link>
         </div>
