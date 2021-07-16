@@ -1,6 +1,10 @@
 rules:
-  indentation:
-    - 2
-    - size: 4
-  property-sort-order:
-    - 0
+    indentation:
+        - 2
+        - size: 4
+    no-misspelled-properties:
+        - 1
+        - 'extra-properties':
+            - 'gap'
+    property-sort-order:
+        - 0
