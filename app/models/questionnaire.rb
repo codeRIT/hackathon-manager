@@ -40,6 +40,7 @@ class Questionnaire < ApplicationRecord
                      file_content_type: { allow: ['application/pdf'] },
                      if: -> { resume.attached? }
 
+  validate :under_thirteen
   validates :portfolio_url, url: { allow_blank: true }
   validates :vcs_url, url: { allow_blank: true }
   validates_format_of :vcs_url,
@@ -418,6 +419,13 @@ class Questionnaire < ApplicationRecord
   def agreements_present
     if (Agreement.all - agreements).any?
       errors.add(:agreements, "must be accepted.")
+    end
+  end
+
+  def under_thirteen
+    return if date_of_birth.blank?
+    if date_of_birth > 13.year.ago
+      errors.add(:date_of_birth, "must be over the age of 13 to create an application.")
     end
   end
 
