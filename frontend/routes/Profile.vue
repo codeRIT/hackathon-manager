@@ -9,7 +9,7 @@
         <div class="banner"></div>
         <div class="icon"></div>
 
-        <h1 class="username">John Smith <a class="edit"></a></h1>
+        <h1 class="username">John Smith <a class="edit" href="#"></a></h1>
         <h4>Rochester Institute of Technology</h4>
     </header>
     
