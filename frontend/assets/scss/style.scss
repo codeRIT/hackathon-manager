@@ -62,11 +62,23 @@ a {
     width: 100%;
     gap: 1rem;
 
-    .col-6 {
+    [class^="col-"] {  // matches <element class="col-[anything]"></element>
         display: flex;
+        flex: 1 0 0;
         flex-direction: column;
         gap: 1.5rem;
-        flex: auto;
         margin-bottom: 1.5rem;
+    }
+
+    .col-8 {
+        flex: 8 8 0;
+    }
+
+    .col-6 {
+        flex: 6 6 0;
+    }
+
+    .col-4 {
+        flex: 4 4 0;
     }
 }
