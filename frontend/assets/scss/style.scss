@@ -1,0 +1,70 @@
+// CSS reset largely copied from Tailwind CSS's Preflight: https://tailwindcss.com/docs/preflight
+
+body {
+    font-family: sans-serif;
+}
+
+body,
+blockquote,
+dl,
+dd,
+h1, h2, h3, h4, h5, h6,
+hr,
+figure,
+p,
+pre {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: inherit;
+}
+
+ol,
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+    display: block;
+    vertical-align: middle;
+}
+
+a {
+    color: initial;
+    text-decoration: none;
+}
+
+
+// flexbox repsonsive stuff
+
+.container {
+    position: relative;
+    margin: 0 auto;
+    max-width: 992px;
+    min-height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 50%;
+        margin-bottom: 1.5rem;
+    }
+}
