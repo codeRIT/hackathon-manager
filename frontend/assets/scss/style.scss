@@ -8,33 +8,23 @@ body,
 blockquote,
 dl,
 dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3, h4, h5, h6,
 hr,
 figure,
 p,
 pre {
-  margin: 0;
+    margin: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: inherit;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: inherit;
 }
 
 ol,
 ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 img,
@@ -45,13 +35,13 @@ audio,
 iframe,
 embed,
 object {
-  display: block;
-  vertical-align: middle;
+    display: block;
+    vertical-align: middle;
 }
 
 a {
-  color: initial;
-  text-decoration: none;
+    color: initial;
+    text-decoration: none;
 }
 
 
@@ -77,6 +67,6 @@ a {
         flex-direction: column;
         gap: 1.5rem;
         flex: auto;
-        margin-bottom: 1.5rem
+        margin-bottom: 1.5rem;
     }
 }
