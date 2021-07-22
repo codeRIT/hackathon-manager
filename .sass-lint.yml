@@ -8,3 +8,5 @@ rules:
             - 'gap'
     property-sort-order:
         - 0
+    single-line-per-selector:
+        - 0
