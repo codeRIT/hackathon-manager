@@ -39,7 +39,7 @@ class RsvpsController < ApplicationController
   end
 
   def check_user_has_questionnaire
-    head:forbidden if current_user.questionnaire.nil?
+    head :forbidden if current_user.questionnaire.nil?
   end
 
   def require_accepted_questionnaire
