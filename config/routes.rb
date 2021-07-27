@@ -32,8 +32,8 @@ Rails.application.routes.draw do
   end
 
   resource :rsvp do
-    get :accept, on: :collection
-    get :deny, on: :collection
+    patch :accept, on: :collection
+    patch :deny, on: :collection
   end
 
   resource :bus_list do
