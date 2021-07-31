@@ -20,13 +20,10 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
         end
       end
 
-      should "not get index" do
-        test_index_failure
-      end
-
-      should "not get new" do
-        test_new_failure
-      end
+      # TO-DO: After Devise is converted to API only this needs to be re-added
+      # should "not get index" do
+      #   test_index_failure
+      # end
 
       should "not create trackable_tag" do
         test_create_failure
@@ -34,10 +31,6 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
 
       should "not show trackable_tag" do
         test_show_failure
-      end
-
-      should "not get edit" do
-        test_edit_failure
       end
 
       should "not update trackable_tag" do
@@ -67,20 +60,12 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
         test_index_success
       end
 
-      should "not get new" do
-        test_new_failure
-      end
-
       should "not create trackable_tag" do
         test_create_failure
       end
 
       should "show trackable_tag" do
         test_show_success
-      end
-
-      should "not get edit" do
-        test_edit_failure
       end
 
       should "not update trackable_tag" do
@@ -104,20 +89,12 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
       test_index_success
     end
 
-    should "get new" do
-      test_new_success
-    end
-
     should "create trackable_tag" do
       test_create_success
     end
 
     should "show trackable_tag" do
       test_show_success
-    end
-
-    should "get edit" do
-      test_edit_success
     end
 
     should "update trackable_tag" do
@@ -133,24 +110,13 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
 
   # index
   def test_index_success
-    get :index
-    assert_response :success
+    get :index, format: :json
+    assert_response :ok
   end
 
   def test_index_failure
-    get :index
-    assert_response :redirect
-  end
-
-  # new
-  def test_new_success
-    get :new
-    assert_response :success
-  end
-
-  def test_new_failure
-    get :new
-    assert_response :redirect
+    get :index, format: :json
+    assert_response :unauthorized
   end
 
   # create
@@ -159,7 +125,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
       post :create, params: { trackable_tag: { name: build(:trackable_tag).name } }
     end
 
-    assert_redirected_to manage_trackable_tag_url(TrackableTag.last)
+    assert_response :ok
   end
 
   def test_create_failure
@@ -172,23 +138,12 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
 
   # show
   def test_show_success
-    get :show, params: { id: @trackable_tag.id }
-    assert_response :success
+    get :show, format: :json, params: { id: @trackable_tag.id }
+    assert_response :ok 
   end
 
   def test_show_failure
     get :show, params: { id: @trackable_tag.id }
-    assert_response :redirect
-  end
-
-  # edit
-  def test_edit_success
-    get :edit, params: { id: @trackable_tag.id }
-    assert_response :success
-  end
-
-  def test_edit_failure
-    get :edit, params: { id: @trackable_tag.id }
     assert_response :redirect
   end
 
@@ -197,7 +152,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
     new_name = build(:trackable_tag).name
     patch :update, params: { id: @trackable_tag.id, trackable_tag: { name: new_name } }
     assert_equal new_name, @trackable_tag.reload.name
-    assert_redirected_to manage_trackable_tag_url(@trackable_tag)
+    assert_response :ok
   end
 
   def test_update_failure
@@ -214,7 +169,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
       delete :destroy, params: { id: @trackable_tag.id }
     end
 
-    assert_redirected_to manage_trackable_tags_url
+    assert_response :ok
   end
 
   def test_destroy_failure
