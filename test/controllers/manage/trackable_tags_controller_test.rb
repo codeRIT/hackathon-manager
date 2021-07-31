@@ -139,7 +139,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
   # show
   def test_show_success
     get :show, format: :json, params: { id: @trackable_tag.id }
-    assert_response :ok 
+    assert_response :ok
   end
 
   def test_show_failure
