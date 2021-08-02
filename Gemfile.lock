@@ -352,7 +352,7 @@ GEM
     ruby_http_client (3.5.2)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
-    rubyzip (2.3.0)
+    rubyzip (2.3.2)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
     sass-rails (6.0.0)
