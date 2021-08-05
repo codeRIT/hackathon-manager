@@ -51,7 +51,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ajax-datatables-rails (1.2.0)
       railties (>= 5.0)
@@ -339,7 +339,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.2.4)
+    rexml (3.2.5)
     roadie (4.0.0)
       css_parser (~> 1.4)
       nokogiri (~> 1.8)
@@ -436,8 +436,8 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (3.12.1)
-      addressable (>= 2.3.6)
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.3)
@@ -520,7 +520,7 @@ DEPENDENCIES
   valid_attribute
   validate_url
   web-console (>= 3.3.0)
-  webmock (~> 3.12)
+  webmock (~> 3.14)
 
 RUBY VERSION
    ruby 2.6.6p146
