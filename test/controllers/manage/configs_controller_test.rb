@@ -70,7 +70,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_configs#index" do
       get :index
-      assert_response :redirect
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_configs#edit" do

@@ -50,10 +50,6 @@
             - elsif current_user.volunteer?
               %ul.nav.flex-column.mb-2
                 %li.nav-item
-                  = active_link_to manage_checkins_path, class: "nav-link" do
-                    .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
-                    = t(:title, scope: 'pages.manage.check-in')
-                %li.nav-item
                   = active_link_to manage_questionnaires_path, class: "nav-link" do
                     .fa.fa-inbox.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.questionnaires')
@@ -63,10 +59,6 @@
                 %span
                   = t(:logistics, scope: 'layouts.manage.navigation')
               %ul.nav.flex-column.mb-2
-                %li.nav-item
-                  = active_link_to manage_checkins_path, class: "nav-link" do
-                    .fa.fa-drivers-license-o.fa-fw.icon-space-r-half
-                    = t(:title, scope: 'pages.manage.check-in')
                 %li.nav-item
                   = active_link_to manage_events_path, class: "nav-link" do
                     .fa.fa-calendar.fa-fw.icon-space-r-half
