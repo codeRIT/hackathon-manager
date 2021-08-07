@@ -1,12 +1,22 @@
 class UsersController < ApplicationController
-  before_action :logged_in
   respond_to :json
 
-  def logged_in
-    authenticate_user!
+  before_action :authenticate_user!
+  def show
+
   end
 
-  def show
-    @user = current_user
+  def update
+    if current_user.update_attributes(user_params)
+      render :show
+    else
+      render json: { errors: current_user.errors }, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password,
+                                 :password_confirmation, :remember_me, :role, :is_active, :receive_weekly_report)
   end
 end
