@@ -96,7 +96,7 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_agreements#index" do
       get :index
-      assert_response :redirect
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#new" do
