@@ -58,9 +58,6 @@ Rails.application.routes.draw do
       patch :update_acc_status, on: :member
       patch :bulk_apply, on: :collection
     end
-    resources :checkins do
-      post :datatable, on: :collection
-    end
     resources :events do
     end
     resources :messages do
