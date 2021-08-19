@@ -33,14 +33,14 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # Creates a new TrackableEvent object.
   # @endpoint           /manage/trackable_events
   # @http_method        POST
-  # @return [200]       Success if TrackableEvent object was created
+  # @return [200]       OK if TrackableEvent object was created
   # @return [422]       Unprocessable Entity if supplied TrackableEvent data
   #                     did not meet requirements or the saving process failed
   def create
     @trackable_event = TrackableEvent.new(trackable_event_params.merge(user_id: current_user.id))
 
     if @trackable_event.save
-      head :success
+      head :ok
     else
       head :unprocessable_entity
     end
@@ -52,13 +52,13 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # @endpoint             /manage/trackable_events/id
   # @http_method          PATCH
   # @http_method          PUT
-  # @return [200]         Success if TrackableEvent object was updated
+  # @return [200]         OK if TrackableEvent object was updated
   # @return [422]         Unprocessable Entity if supplied TrackableEvent data
   #                       did not meet requirements or the saving process
   #                       failed
   def update
     if @trackable_event.update(trackable_event_params)
-      head :success
+      head :ok
     else
       head :unprocessable_entity
     end
@@ -69,7 +69,7 @@ class Manage::TrackableEventsController < Manage::ApplicationController
   # @!method              destroy(id)
   # @endpoint             /manage/trackable_events/id
   # @http_method          DELETE
-  # @return [200]         Success if TrackableEvent object was destroyed
+  # @return [200]         OK if TrackableEvent object was destroyed
   # @return [422]         Unprocessable Entity if the destroy process failed
   def destroy
     @trackable_event.destroy
