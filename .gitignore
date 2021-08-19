@@ -52,3 +52,7 @@ node_modules/
 
 # Yard HTML files
 /doc/*.html
+/doc/ApplicationCable/*.html
+/doc/Manage/*.html
+/doc/MessageRecipientQuery/*.html
+/doc/Users/*.html
