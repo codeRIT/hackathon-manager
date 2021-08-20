@@ -30,8 +30,11 @@ class Manage::AgreementsController < Manage::ApplicationController
 
   # DELETE /agreements/1
   def destroy
-    @agreement.destroy
-    head :ok
+    if @agreement.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   private
