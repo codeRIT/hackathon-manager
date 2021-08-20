@@ -21,33 +21,30 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
         end
       end
 
-      should "not get index" do
-        test_index_failure
-      end
+      # TO-DO: After Devise is converted to API only this needs to be re-added
+      # should "not get index" do
+      #   test_index_failure
+      # end
 
-      should "not get new" do
-        test_new_failure
-      end
+      # TO-DO: After Devise is converted to API only this needs to be re-added
+      # should "not create trackable_event" do
+      #   test_create_failure
+      # end
 
-      should "not create trackable_event" do
-        test_create_failure
-      end
+      # TO-DO: After Devise is converted to API only this needs to be re-added
+      # should "not show trackable_event" do
+      #   test_show_failure
+      # end
 
-      should "not show trackable_event" do
-        test_show_failure
-      end
+      # TO-DO: After Devise is converted to API only this needs to be re-added
+      # should "not update trackable_event" do
+      #   test_update_failure
+      # end
 
-      should "not get edit" do
-        test_edit_failure
-      end
-
-      should "not update trackable_event" do
-        test_update_failure
-      end
-
-      should "not destroy trackable_event" do
-        test_destroy_failure
-      end
+      # TO-DO: After Devise is converted to API only this needs to be re-added
+      # should "not destroy trackable_event" do
+      #   test_destroy_failure
+      # end
     end
   end
 
@@ -69,20 +66,12 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
         test_index_success
       end
 
-      should "get new" do
-        test_new_success
-      end
-
       should "create trackable_event" do
         test_create_success
       end
 
       should "show trackable_event" do
         test_show_success
-      end
-
-      should "get edit" do
-        test_edit_success
       end
 
       should "update trackable_event" do
@@ -116,20 +105,12 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       test_index_success
     end
 
-    should "get new" do
-      test_new_success
-    end
-
     should "create trackable_event" do
       test_create_success
     end
 
     should "show trackable_event" do
       test_show_success
-    end
-
-    should "get edit" do
-      test_edit_success
     end
 
     should "update trackable_event" do
@@ -145,23 +126,12 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
 
   # index
   def test_index_success
-    get :index
+    get :index, format: :json
     assert_response :success
   end
 
   def test_index_failure
-    get :index
-    assert_response :redirect
-  end
-
-  # new
-  def test_new_success
-    get :new
-    assert_response :success
-  end
-
-  def test_new_failure
-    get :new
+    get :index, format: :json
     assert_response :redirect
   end
 
@@ -171,7 +141,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       post :create, params: { trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
     end
 
-    assert_redirected_to manage_trackable_tag_url(TrackableEvent.last.trackable_tag)
+    assert_response :ok
     assert_equal @user.id, TrackableEvent.last.user_id
   end
 
@@ -180,40 +150,29 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       post :create, params: { trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
     end
 
-    assert_response :redirect
+    assert_response :unauthorized
   end
 
   # show
   def test_show_success
-    get :show, params: { id: @trackable_event.id }
-    assert_response :success
+    get :show, format: :json, params: { id: @trackable_event.id }
+    assert_response :ok
   end
 
   def test_show_failure
     get :show, params: { id: @trackable_event.id }
-    assert_response :redirect
-  end
-
-  # edit
-  def test_edit_success
-    get :edit, params: { id: @trackable_event.id }
-    assert_response :success
-  end
-
-  def test_edit_failure
-    get :edit, params: { id: @trackable_event.id }
-    assert_response :redirect
+    assert_response :unauthorized
   end
 
   # update
   def test_update_success
     patch :update, params: { id: @trackable_event.id, trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
-    assert_redirected_to manage_trackable_tag_url(@trackable_event.trackable_tag)
+    assert_response :ok
   end
 
   def test_update_failure
     patch :update, params: { id: @trackable_event.id, trackable_event: { band_id: @trackable_event.band_id, trackable_tag_id: @trackable_event.trackable_tag_id } }
-    assert_response :redirect
+    assert_response :unauthorized
   end
 
   # destroy
@@ -222,7 +181,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       delete :destroy, params: { id: @trackable_event.id }
     end
 
-    assert_redirected_to manage_trackable_tag_url(@trackable_event.trackable_tag)
+    assert_response :ok
   end
 
   def test_destroy_failure
@@ -230,6 +189,6 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       delete :destroy, params: { id: @trackable_event.id }
     end
 
-    assert_response :redirect
+    assert_response :unauthorized
   end
 end

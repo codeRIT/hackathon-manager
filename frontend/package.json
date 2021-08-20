@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "hackengine",
   "scripts": {
     "start": "parcel serve ./index.html",
     "build": "parcel build ./index.html"
