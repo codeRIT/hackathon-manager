@@ -77,8 +77,6 @@ Rails.application.routes.draw do
       patch :send_update_email, on: :member
     end
     resources :schools do
-      post :datatable, on: :collection
-      get :merge, on: :member
       patch :perform_merge, on: :member
     end
     resources :users do
