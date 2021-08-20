@@ -28,19 +28,24 @@ class Manage::SchoolsController < Manage::ApplicationController
   end
 
   def destroy
-    @school.destroy
-    head :ok
+    if @school.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def perform_merge
     new_school_name = params[:school][:id]
     if new_school_name.blank?
+      # FIXME This might need to be :unprocessable_entity
       head :bad_request
       return
     end
 
     new_school = School.where(name: new_school_name).first
     if new_school.blank?
+      # FIXME This might need to be :unprocessable_entity
       head :bad_request
       return
     end
