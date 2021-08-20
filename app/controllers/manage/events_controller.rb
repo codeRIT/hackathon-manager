@@ -1,49 +1,38 @@
 class Manage::EventsController < Manage::ApplicationController
   before_action :require_director_or_organizer, only: :index
   before_action :require_director, except: :index
-  respond_to :html, :json
+  before_action :set_event, only: [:show, :update, :destroy]
+  respond_to :json
 
   def index
-    @start_date = HackathonConfig['event_start_date']
-    respond_to do |format|
-      format.html
-      format.json { render json: Event.all }
-    end
-  end
-
-  def new
-    @event = ::Event.new
+    @events = Event.all
   end
 
   def create
     @event = ::Event.new(event_params)
     if @event.save
-      redirect_to(manage_events_path)
+      head :ok
     else
-      render('new')
+      head :unprocessable_entity
     end
   end
 
   def show
-    @event = Event.find_by_id(params[:id])
-    respond_with(:manage, @event)
   end
 
   def update
-    @event = Event.find_by_id(params[:id])
     if @event.update(event_params)
-      redirect_to(manage_events_path)
+      head :ok
     else
-      render('show')
+      head :unprocessable_entity
     end
   end
 
   def destroy
-    @event = Event.find_by_id(params[:id])
     if @event.destroy
-      redirect_to(manage_events_path)
+      head :ok
     else
-      render('show')
+      head :unprocessable_entity
     end
   end
 
@@ -51,5 +40,11 @@ class Manage::EventsController < Manage::ApplicationController
     params.require(:event).permit(
       :title, :description, :location, :category, :start, :finish
     )
+  end
+
+  private
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 end
