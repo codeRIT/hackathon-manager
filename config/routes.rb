@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   require "sidekiq/cron/web"
 
-  devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
-  use_doorkeeper
+  # use_doorkeeper
+  scope :api, defaults: { format: :json } do
+    devise_for :users, controllers: { sessions: :sessions }, path_names: { sign_in: :login }
+    resource :user, only: [:show, :update]
+  end
 
   mount MailPreview => "mail_view" if Rails.env.development?
 
