@@ -58,9 +58,6 @@ Rails.application.routes.draw do
       patch :update_acc_status, on: :member
       patch :bulk_apply, on: :collection
     end
-    resources :checkins do
-      post :datatable, on: :collection
-    end
     resources :events do
     end
     resources :messages do
@@ -83,13 +80,6 @@ Rails.application.routes.draw do
       post :datatable, on: :collection
       get :merge, on: :member
       patch :perform_merge, on: :member
-    end
-    resources :stats do
-      post :dietary_restrictions_special_needs_datatable, on: :collection
-      post :alt_travel_datatable, on: :collection
-      post :attendee_sponsor_info_datatable, on: :collection
-      post :applied_datatable, on: :collection
-      post :checked_in_datatable, on: :collection
     end
     resources :users do
       post :user_datatable, on: :collection
