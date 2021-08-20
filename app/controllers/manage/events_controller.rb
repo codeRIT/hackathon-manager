@@ -29,8 +29,11 @@ class Manage::EventsController < Manage::ApplicationController
   end
 
   def destroy
-    @event.destroy
-    head :ok
+    if @event.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def event_params
