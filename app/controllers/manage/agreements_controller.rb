@@ -1,43 +1,40 @@
 class Manage::AgreementsController < Manage::ApplicationController
   before_action :require_director
-  before_action :set_agreement, only: [:show, :edit, :update, :destroy]
+  before_action :set_agreement, only: [:show, :update, :destroy]
 
-  respond_to :html, :json
+  respond_to :json
 
   # GET /agreements
   def index
     @agreements = Agreement.all
   end
 
-  # GET /agreements/new
-  def new
-    @agreement = Agreement.new
-  end
-
-  # GET /agreements/1/edit
-  def edit
-  end
-
   # POST /agreements
   def create
     @agreement = Agreement.new(agreement_params)
-    @agreement.save
-    flash[:notice] = "#{@agreement.name} was successfully created."
-    redirect_to manage_agreements_path
+    if @agreement.save
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /agreements/1
   def update
-    @agreement.update_attributes(agreement_params)
-    flash[:notice] = nil
-    redirect_to manage_agreements_path
+    if @agreement.update_attributes(agreement_params)
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   # DELETE /agreements/1
   def destroy
-    @agreement.destroy
-    flash[:notice] = 'Agreement was successfully destroyed.'
-    respond_with(:manage, @agreement, location: manage_agreements_path)
+    if @agreement.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   private

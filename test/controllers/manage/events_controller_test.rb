@@ -7,15 +7,8 @@ class Manage::EventsControllerTest < ActionController::TestCase
 
   context "while not authenticated" do
     should "redirect to sign in page on manage_events#index" do
-      get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_events#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      get :index, format: :json
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#show" do
@@ -51,13 +44,7 @@ class Manage::EventsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_events#index" do
-      get :index
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_events#new" do
-      get :new
+      get :index, format: :json
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -96,20 +83,12 @@ class Manage::EventsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_events#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#show" do
       get :show, params: { id: @event }
-      assert_response :redirect
-      assert_redirected_to manage_checkins_path
-    end
-
-    should "not allow access to manage_events#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_events_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#create" do
@@ -139,7 +118,7 @@ class Manage::EventsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_events#index" do
-      get :index
+      get :index, format: :json
       assert_response :success
     end
 
@@ -147,12 +126,6 @@ class Manage::EventsControllerTest < ActionController::TestCase
       get :show, params: { id: @event }
       assert_response :redirect
       assert_redirected_to manage_root_path
-    end
-
-    should "not allow access to manage_events#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_events_path
     end
 
     should "not allow access to manage_events#create" do
@@ -182,34 +155,28 @@ class Manage::EventsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_events#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_events#new" do
-      get :new
+      get :index, format: :json
       assert_response :success
     end
 
     should "allow access to manage_events#show" do
-      get :show, params: { id: @event }
+      get :show, params: { id: @event }, format: :json
       assert_response :success
     end
 
     should "allow access to manage_events#create" do
       post :create, params: { event: { title: "test new title", start: Date.today - 1.hour, finish: Date.today } }
-      assert_redirected_to manage_events_path
+      assert_response :ok
     end
 
     should "allow access to manage_events#update" do
       patch :update, params: { id: @event, event: { title: "test update title" } }
-      assert_redirected_to manage_events_path
+      assert_response :ok
     end
 
     should "allow access to manage_events#destroy" do
       patch :destroy, params: { id: @event }
-      assert_response :redirect
-      assert_redirected_to manage_events_path
+      assert_response :ok
     end
   end
 end
