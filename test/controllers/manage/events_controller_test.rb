@@ -82,15 +82,13 @@ class Manage::EventsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_events#index" do
-      get :index, format: :json
-      assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      get :index
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#show" do
       get :show, params: { id: @event }
-      assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#create" do
