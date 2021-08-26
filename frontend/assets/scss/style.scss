@@ -45,6 +45,13 @@ a {
 }
 
 
+// used for accent/contrast colors
+:root {
+    --accent-color: #4D4D4D;
+    --accent-contrast: #FFFFFF;
+}
+
+
 // flexbox repsonsive stuff
 
 .container {

@@ -1,0 +1,13 @@
+@import "../variables.scss";
+
+button {
+    @include border;
+    @include box-shadow;
+    @include clickable-hover;
+
+    padding: 0.5rem;
+
+    &:active {
+        background-color: ;
+    }
+}
