@@ -1,0 +1,14 @@
+.rvmrc
+.ruby-version
+tags
+Gemfile.lock
+*.swp
+dump.rdb
+.rbx
+coverage/
+vendor/
+.bundle/
+.sass-cache/
+Guardfile
+pkg
+.DS_Store
