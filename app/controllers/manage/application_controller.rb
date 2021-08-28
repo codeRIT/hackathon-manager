@@ -1,3 +1,5 @@
+load 'lib/v3/error_response.rb'
+
 class Manage::ApplicationController < ApplicationController
   before_action :logged_in
   before_action :require_director_or_organizer_or_volunteer
