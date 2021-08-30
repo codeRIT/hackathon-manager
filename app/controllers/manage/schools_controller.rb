@@ -38,8 +38,7 @@ class Manage::SchoolsController < Manage::ApplicationController
   def perform_merge
     new_school_name = params[:school][:id]
     if new_school_name.blank?
-      # FIXME: This might need to be :unprocessable_entity
-      head :bad_request
+      render json: ErrorResponse.new(:login_merge_newSchoolNameMissing), status: :bad_request
       return
     end
 
