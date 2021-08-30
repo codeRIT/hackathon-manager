@@ -11,7 +11,8 @@ import Profile from "./routes/Profile.vue"
 import Dashboard from "./routes/manage/Dashboard.vue"
 
 // TODO: pull from server when in production
-import enLocales from "./assets/locales/en.json"
+import enLocales from "./assets/locales/en-US.json"
+import { loadLocaleMessage, setI18nLangauge } from "./i18n";
 
 const routes = [
     { path: "/", component: Home },
@@ -30,10 +31,16 @@ const router = createRouter({
 // i18n code
 let messages = { "en-US": enLocales }
 const i18n = createI18n({
-    locale: navigator.languages[0],
-    fallbackLocale: 'en',
+    locale: 'en-US',
+    fallbackLocale: 'en-US',
     messages
 })
+
+const desiredLocale = navigator.languages[0]
+if (!i18n.global.availableLocales.includes(desiredLocale)) {
+    loadLocaleMessage(i18n, desiredLocale)
+}
+setI18nLangauge(i18n, desiredLocale)
 
 const app = createApp(App)
 app.use(router)
