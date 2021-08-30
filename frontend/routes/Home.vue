@@ -15,22 +15,17 @@
 
     <input type="text" class="input-text" placeholder="Password please"/>
 
-    <br><br><br>
-
-    <label class="checkbox-container">
+    <label class="checkbox-container">Hello
         <input type="checkbox">
         <span class="checkbox"></span>
     </label>
 
-    <br><br><br>
-
-    <label class="radio-container">
+    <label class="radio-container">Hello
         <input type="radio" name="asdf" value="123" checked>
         <span class="checkbox radio"></span>
     </label>
 
-    <br><br>
-    <label class="radio-container">
+    <label class="radio-container">World
         <input type="radio" name="asdf" value="144;">
         <span class="checkbox radio"></span>
     </label>
@@ -40,7 +35,8 @@
 </template>
 
 <script>
-    export default {        data() {
+    export default {
+        data() {
             return {
                 name: "Home",
             };
@@ -127,13 +123,15 @@ $duration: 0.1s;
     position: relative;
     cursor: pointer;
     user-select: none;
+    padding-left: 20px + 10px;
+    padding-top: 5px;
+    margin-top: 10px;
 
     // Hide default checkbox
     input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
-
     }
 
     // Hover state
@@ -191,7 +189,6 @@ $duration: 0.1s;
     input:checked ~ .radio::before {
         border-radius: 50%;
     }
-
 }
 
 
