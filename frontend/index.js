@@ -28,7 +28,7 @@ const router = createRouter({
 
 
 // i18n code
-let messages = { en: enLocales }
+let messages = { "en-US": enLocales }
 const i18n = createI18n({
     locale: navigator.languages[0],
     fallbackLocale: 'en',
