@@ -1,62 +1,55 @@
 class Manage::MessagesController < Manage::ApplicationController
   before_action :require_director_or_organizer
-  before_action :set_message, only: [:show, :edit, :update, :destroy, :deliver, :preview, :duplicate]
+  before_action :set_message, only: [:show, :update, :destroy, :deliver, :preview, :duplicate]
   before_action :check_message_access, only: [:edit, :update, :destroy]
   before_action :limit_template_access_to_directors, only: [:template, :template_preview, :template_update, :template_replace_with_default]
 
-  respond_to :html, :json
+  respond_to :json
 
   def index
-    respond_with(:manage, Message.all)
-  end
-
-  def datatable
-    render json: BulkMessageDatatable.new(params, view_context: view_context)
+    @messages = Message.all
   end
 
   def show
-    respond_with(:manage, @message)
-  end
-
-  def new
-    type = params[:type]
-    recipients = params[:recipients]
-    @message = Message.new(type: type, recipients: recipients)
-    respond_with(:manage, @message)
-  end
-
-  def edit
   end
 
   def create
     @message = Message.new(message_params)
-    @message.save
-    respond_with(:manage, @message)
+    if @message.save
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def update
-    @message.update_attributes(message_params)
-    respond_with(:manage, @message)
+    if @message.update_attributes(message_params)
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def destroy
-    @message.destroy
-    respond_with(:manage, @message)
+    if @message.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def deliver
     if @message.automated?
-      flash[:alert] = "Automated messages cannot be manually delivered. Only bulk messages can."
-      return redirect_to manage_message_path(@message)
+      render json: ErrorResponse.new(:messages_deliever_cannotDeliverAutomated), status: :bad_request
+      return
     end
     if @message.status != "drafted"
-      flash[:alert] = "Message cannot be re-delivered"
-      return redirect_to manage_messages_path
+      render json: ErrorResponse.new(:messages_deliever_cannotDeliverNonDrafted), status: :bad_request
+      return
     end
     @message.update_attribute(:queued_at, Time.now)
     BulkMessageJob.perform_later(@message)
-    flash[:notice] = "Message queued for delivery"
-    redirect_to manage_message_path(@message)
+    head :ok
   end
 
   def preview
@@ -79,8 +72,12 @@ class Manage::MessagesController < Manage::ApplicationController
       queued_at: nil,
       name: "Copy of #{@message.name}",
     )
-    new_message.save
-    redirect_to edit_manage_message_path(new_message.reload)
+
+    if new_message.save
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def template
@@ -96,13 +93,17 @@ class Manage::MessagesController < Manage::ApplicationController
   def template_update
     message_template = MessageTemplate.uncached_instance
     message_template_params = params.require(:message_template).permit(:html)
-    message_template.update_attributes(message_template_params)
-    redirect_to template_manage_messages_path
+
+    if message_template.update_attributes(message_template_params)
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def template_replace_with_default
     MessageTemplate.replace_with_default
-    redirect_to template_manage_messages_path
+    head :ok
   end
 
   private
