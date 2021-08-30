@@ -1,0 +1,19 @@
+{
+    "message": {
+        "hello": "Hello world!"
+    },
+    "pages": {
+        "manage": {
+            "navbar": {
+                "dashboard": "Dashboard",
+                "users": "Users",
+                "schools": "Schools",
+                "questionnaires": "Questionnaires",
+                "schedule": "Schedule",
+                "settings": "Settings",
+                "logout": "Logout",
+                "login": "Login"
+            }
+        }
+    }
+}
