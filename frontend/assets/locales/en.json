@@ -1,8 +1,13 @@
 {
-    "message": {
-        "hello": "Hello world!"
-    },
     "pages": {
+        "home": {
+            "component": "Home component",
+            "hello": "Hello world!"
+        },
+        "about": {
+            "component": "About component",
+            "hello": "Hello world!"
+        },
         "manage": {
             "navbar": {
                 "dashboard": "Dashboard",
