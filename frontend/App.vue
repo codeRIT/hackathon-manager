@@ -21,7 +21,6 @@
 </script>
 
 <style lang="scss">
-@import './assets/scss/style.scss';
 
 nav {
     display: inline-block;

@@ -1,9 +1,7 @@
 <template>
     <h1>Component Test</h1>
 
-    <div class="card">
-        <p>This is some cool content.</p>
-    </div>
+    <Card :content="asdf"></Card>
 
     <br><br><br>
 
@@ -30,12 +28,15 @@
         <span class="checkbox radio"></span>
     </label>
 
-
-
 </template>
 
 <script>
+    import Card from "../components/Card.vue";
+
     export default {
+        components: {
+            Card
+        },
         data() {
             return {
                 name: "Home",
@@ -46,24 +47,10 @@
 
 <style lang="scss" scoped>
 
-// FIXME: https://github.com/vuejs/vue-loader/issues/1601
-$dark-color: #4D4D4D;
-$shadow-length: 4px;
-$shadow-length-control: $shadow-length / 2;
-$border-radius: 6px;
-$border-size: 2px;
-$orange: #F76901;
-$duration: 0.1s;
+@use "sass:math";
 
-.card {
-    display: inline-block;
-    background-color: white;
-    padding: 20px;
-    color: $dark-color;
-    border: 2px solid $dark-color;
-    border-radius: $border-radius;
-    box-shadow: $shadow-length $shadow-length $dark-color;
-}
+// FIXME: https://github.com/vuejs/vue-loader/issues/1601
+
 
 .button {
     text-decoration: none;
@@ -71,11 +58,11 @@ $duration: 0.1s;
     background-color: white;
     padding: 5px 10px;
     margin-right: 10px;
-    color: $dark-color;
-    border: $border-size solid $dark-color;
-    border-radius: $border-radius;
-    box-shadow: $shadow-length $shadow-length $dark-color;
-    transition: $duration all;
+    color: var(--dark-color);
+    border: var(--border-size) solid var(--dark-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-length) var(--shadow-length) var(--dark-color);
+    transition: var(--duration) all;
 
     &:hover {
         @extend .button-hover;
@@ -89,20 +76,20 @@ $duration: 0.1s;
 
 .button-hover {
     @extend .button;
-    background-color: $orange;
+    background-color: var(--orange);
     color: white;
     // font-weight: bold;
 }
 
 .button-active {
     @extend .button-hover;
-    box-shadow: 0 0 $dark-color;
-    transform: translate($shadow-length, $shadow-length);
+    box-shadow: 0 0 var(--dark-color);
+    transform: translate(var(--shadow-length), var(--shadow-length));
 }
 
 .input-text {
-    border-radius: $border-radius;
-    border: $border-size solid $dark-color;
+    border-radius: var(--border-radius);
+    border: var(--border-size) solid var(--dark-color);
     padding: 6px;
 
     &:focus {
@@ -112,7 +99,7 @@ $duration: 0.1s;
 
 .input-text-focus {
     @extend .input-text;
-    border-color: $orange;
+    border-color: var(--orange);
 }
 
 
@@ -137,7 +124,7 @@ $duration: 0.1s;
     // Hover state
     &:hover input ~ .checkbox {
         // background-color: yellow;
-        background-color: $orange;
+        background-color: var(--orange);
     }
 
     input:checked ~ .checkbox {
@@ -147,21 +134,21 @@ $duration: 0.1s;
             $size: 70%;
             width: $size;
             height: $size;
-            top: (100% - $size) / 2;
-            left: (100% - $size) / 2;
+            top: math.div((100% - $size), 2);
+            left: math.div((100% - $size), 2);
             position: absolute;
-            background-color: $dark-color;
-            border-radius: $border-radius / 2;
+            background-color: var(--dark-color);
+            border-radius: math.div(var(--border-radius), 2);
         }
     }
 
     input ~ .checkbox {
-        transition: $duration all;
+        transition: var(--duration) all;
     }
 
     &:active input ~ .checkbox {
-        box-shadow: 0 0 $dark-color;
-        transform: translate($shadow-length-control, $shadow-length-control);
+        box-shadow: 0 0 var(--dark-color);
+        transform: translate(var(--shadow-length-control), var(--shadow-length-control));
     }
 }
 
@@ -172,9 +159,9 @@ $duration: 0.1s;
     height: 20px;
     width: 20px;
     background-color: white;
-    box-shadow: $shadow-length-control $shadow-length-control $dark-color;
-    border: $border-size solid $dark-color;
-    border-radius: $border-radius;
+    box-shadow: var(--shadow-length-control) var(--shadow-length-control) var(--dark-color);
+    border: var(--border-size) solid var(--dark-color);
+    border-radius: var(--border-radius);
 
     &:after {
         content: "";
