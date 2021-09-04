@@ -1,10 +1,8 @@
 
-
-
 :root {
     --dark-color: #333;
     --shadow-length: 4px;
-    --shadow-length-control: math.div($shadow-length, 2);
+    --shadow-length-control: calc(var(--shadow-length) / 2);
     --border-radius: 6px;
     --border-size: 2px;
     --orange: #F76901;

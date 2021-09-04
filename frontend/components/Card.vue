@@ -11,9 +11,7 @@
             content: String
         },
         data () {
-            return {
-                content: this.content
-            }
+            return {}
         },
     }
 </script>

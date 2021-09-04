@@ -1,0 +1,66 @@
+
+@use "sass:math";
+
+.control-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    padding-left: 20px + 10px;
+    padding-top: 5px;
+    margin-top: 10px;
+
+    // Hide default <input>
+    // Hidden like this for accessibility reasons
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    // Hover state
+    &:hover input ~ .control {
+        background-color: var(--orange);
+    }
+
+    input:checked ~ .control {
+        &::before {
+            content: "";
+            $size: 70%;
+            width: $size;
+            height: $size;
+            top: math.div((100% - $size), 2);
+            left: math.div((100% - $size), 2);
+            position: absolute;
+            background-color: var(--dark-color);
+            border-radius: calc(var(--border-radius) / 2);
+        }
+    }
+
+    input ~ .control {
+        transition: var(--duration) all;
+    }
+
+    &:active input ~ .control {
+        box-shadow: 0 0 var(--dark-color);
+        transform: translate(var(--shadow-length-control), var(--shadow-length-control));
+    }
+}
+
+.control {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    box-shadow: var(--shadow-length-control) var(--shadow-length-control) var(--dark-color);
+    border: var(--border-size) solid var(--dark-color);
+    border-radius: var(--border-radius);
+
+    &:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+}
