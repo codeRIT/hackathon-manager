@@ -4,12 +4,11 @@
 
 <script>
 	export default {
-
-		name: "Button",
+		name: 'Button',
         props: {
             content: String
         },
-		data () {
+		data() {
 			return {}
 		}
 	}

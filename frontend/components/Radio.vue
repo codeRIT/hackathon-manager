@@ -9,12 +9,11 @@
 
 <script>
     export default {
-
-        name: "Checkbox",
+        name: 'Radio',
         props: {
             content: String
         },
-        data () {
+        data() {
             return {}
         }
     }

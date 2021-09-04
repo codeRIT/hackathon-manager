@@ -8,12 +8,11 @@
 
 <script>
 	export default {
-
-		name: "Checkbox",
+		name: 'Checkbox',
         props: {
             content: String
         },
-		data () {
+		data() {
 			return {}
 		}
 	}
