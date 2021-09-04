@@ -1,0 +1,47 @@
+{
+    "#README": "These are *not* complete translations. This is only currently used for testing.",
+    
+    "pages": {
+        "home": {
+            "component": "Home component",
+            "hello": "Hallo Welt!"
+        },
+        "about": {
+            "component": "About component",
+            "hello": "Hello world!"
+        },
+        "manage": {
+            "navbar": {
+                "dashboard": "Dashboard",
+                "users": "Users",
+                "schools": "Schools",
+                "questionnaires": "Questionnaires",
+                "schedule": "Schedule",
+                "settings": "Settings",
+                "logout": "Logout",
+                "login": "Login"
+            }
+        },
+        "profile": {
+            "logout": "Logout",
+            "login": "Login",
+            "cta": {
+                "needRSVP": {
+                    "heading": "Confirm your attendance",
+                    "subheading": "Awaiting RSVP"
+                }
+            },
+            "team": {
+                "title": "Your Team",
+                "action": "manage",
+                "invite": "Invite a teammate"
+            },
+            "bus": {
+                "title": "Bus",
+                "action": "change",
+                "arrivalTime": "Arriving at {time}",
+                "contact": "Contact bus leader"
+            }
+        }
+    }
+}
