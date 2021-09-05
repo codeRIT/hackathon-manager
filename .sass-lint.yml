@@ -10,3 +10,11 @@ rules:
         - 0
     single-line-per-selector:
         - 0
+    no-transition-all: 0
+    hex-notation:
+        - 1
+        - style: uppercase
+    quotes:
+        - 1
+        - style: double
+

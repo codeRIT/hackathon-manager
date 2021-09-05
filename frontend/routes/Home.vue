@@ -23,11 +23,11 @@
 </template>
 
 <script>
-    import Card from "../components/Card.vue";
-    import Button from "../components/Button.vue";
+    import Card      from "../components/Card.vue";
+    import Button    from "../components/Button.vue";
     import TextInput from "../components/TextInput.vue";
-    import Checkbox from "../components/Checkbox.vue";
-    import Radio from "../components/Radio.vue";
+    import Checkbox  from "../components/Checkbox.vue";
+    import Radio     from "../components/Radio.vue";
 
     export default {
         components: {
