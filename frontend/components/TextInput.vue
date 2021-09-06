@@ -20,6 +20,7 @@
     border-radius: var(--border-radius);
     border: var(--border-size) solid var(--dark-color);
     padding: 6px;
+    outline: none;
 
     &:focus {
        border-color: var(--orange);

@@ -17,4 +17,6 @@ rules:
     quotes:
         - 1
         - style: double
+    clean-import-paths:
+        -0
 
