@@ -1,7 +1,31 @@
 class UsersController < ApplicationController
   respond_to :json
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:login, :register]
+  skip_before_action :authenticate_user, only: [:login, :register]
+
+  def login
+    user = User.find_by_email(params[:email])
+
+    if user && user.valid_password?(params[:password])
+      @current_user = user
+      render json: user.generate_jwt
+    else
+      render json: { errors: { 'email or password' => ['is invalid'] } }, status: :unprocessable_entity
+    end
+  end
+
+  def register
+    user = ::User.new(user_params);
+    if user.save
+      head :ok
+    else
+      head :unprocessable_entity
+    end
+
+  end
+
+
   def show
 
   end

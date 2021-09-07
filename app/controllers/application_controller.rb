@@ -29,7 +29,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    @current_user ||= super || User.find(@current_user_id)
+    @current_user ||= super || User.find_by(id: @current_user_id)
   end
 
   def signed_in?
@@ -47,6 +47,8 @@ class ApplicationController < ActionController::API
           head :unauthorized
         end
       end
+    else 
+      head :unauthorized
     end
   end
 end
