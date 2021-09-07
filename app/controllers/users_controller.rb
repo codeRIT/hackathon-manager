@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def login
     user = User.find_by_email(params[:email])
 
-    if user && user.valid_password?(params[:password])
+    if user&.valid_password?(params[:password])
       @current_user = user
       render json: user.generate_jwt
     else
@@ -16,18 +16,15 @@ class UsersController < ApplicationController
   end
 
   def register
-    user = ::User.new(user_params);
+    user = ::User.new(user_params)
     if user.save
       head :ok
     else
       head :unprocessable_entity
     end
-
   end
 
-
   def show
-
   end
 
   def update
@@ -39,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   private
+  
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password,
                                  :password_confirmation, :remember_me, :role, :is_active, :receive_weekly_report)
