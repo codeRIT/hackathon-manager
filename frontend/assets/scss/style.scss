@@ -3,7 +3,7 @@
 @use "sass:math";
 
 // Partials
-@import "variables.scss";
+@import "_variables.scss";
 
 // CSS reset largely copied from Tailwind CSS's Preflight: https://tailwindcss.com/docs/preflight
 body {

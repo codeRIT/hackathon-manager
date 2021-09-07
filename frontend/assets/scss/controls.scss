@@ -58,7 +58,7 @@
     border: var(--border-size) solid var(--dark-color);
     border-radius: var(--border-radius);
 
-    &:after {
+    &::after {
         content: "";
         position: absolute;
         display: none;
