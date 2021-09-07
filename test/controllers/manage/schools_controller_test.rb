@@ -205,12 +205,21 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
       assert_response :ok
     end
 
-    should "not merge into an invalid school" do
-      ["Nonexistent School", ""].each do |name|
+    should "not merge into a nonexistent school" do
+      ["Nonexistent School"].each do |name|
         assert_difference('School.count', 0) do
           patch :perform_merge, params: { id: @school, school: { id: name } }
         end
       end
+    end
+
+    should "not merge into a missing school" do
+      assert_difference('School.count', 0) do
+        patch :perform_merge, params: { id: @school, school: { id: "" } }
+      end
+      json = ActiveSupport::JSON.decode response.body
+      assert_equal json["error_identifier"], :login_merge_newSchoolNameMissing.to_s
+      assert_response :bad_request
     end
 
     should "merge schools" do

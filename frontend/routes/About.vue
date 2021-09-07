@@ -1,6 +1,8 @@
 <template>
-  <div>About component</div>
-  <p>Hello about!!</p>
+  <div>
+    <p>{{ $t("pages.about.component") }}</p>
+    <p>{{ $t("pages.about.hello") }}</p>
+  </div>
 </template>
 
 <script>

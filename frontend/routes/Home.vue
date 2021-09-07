@@ -1,6 +1,8 @@
 <template>
-  <div>Home component</div>
-  <p>Hello home!!</p>
+  <div>
+    <p>{{ $t("pages.home.component") }}</p>
+    <p>{{ $t("pages.home.hello") }}</p>
+  </div>
 </template>
 
 <script>

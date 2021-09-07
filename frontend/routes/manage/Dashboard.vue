@@ -2,17 +2,17 @@
 <div>
     <nav class="container">
         <div class="navbar">
-            <a class="active" href="#">Dashboard</a>
-            <a href="#">Users</a>
-            <a href="#">Schools</a>
-            <a href="#">Questionnaires</a>
-            <a href="#">Schedule</a>
-            <a href="#">Settings</a>
+            <a class="active" href="#">{{ $t("pages.manage.navbar.dashboard") }}</a>
+            <a href="#">{{ $t("pages.manage.navbar.users") }}</a>
+            <a href="#">{{ $t("pages.manage.navbar.schools") }}</a>
+            <a href="#">{{ $t("pages.manage.navbar.questionnaires") }}</a>
+            <a href="#">{{ $t("pages.manage.navbar.schedule") }}</a>
+            <a href="#">{{ $t("pages.manage.navbar.settings") }}</a>
         </div>
 
         <div class="user">
             <a href="#"><div class="icon"></div> User</a>
-            <a href="#">Logout</a>
+            <a href="#">{{ $t("pages.manage.navbar.logout") }}</a>
         </div>
     </nav>
 </div>
