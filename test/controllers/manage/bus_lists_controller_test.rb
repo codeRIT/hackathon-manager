@@ -9,27 +9,13 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
   context "while not authenticated" do
     should "redirect to sign in page on manage_bus_lists#index" do
-      get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_bus_lists#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      get :index, as: :json
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_bus_lists#show" do
-      get :show, params: { id: @bus_list }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_bus_lists#edit" do
-      get :edit, params: { id: @bus_list }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      get :show, params: { id: @bus_list }, as: :json
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_bus_lists#create" do
@@ -77,25 +63,13 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_bus_lists#index" do
-      get :index
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_bus_lists#new" do
-      get :new
+      get :index, as: :json
       assert_response :redirect
       assert_redirected_to root_path
     end
 
     should "not allow access to manage_bus_lists#show" do
-      get :show, params: { id: @bus_list }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_bus_lists#edit" do
-      get :edit, params: { id: @bus_list }
+      get :show, params: { id: @bus_list }, as: :json
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -145,25 +119,13 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_bus_lists#index" do
-      get :index
+      get :index, as: :json
       assert_response :success
     end
 
     should "allow access to manage_bus_lists#show" do
-      get :show, params: { id: @bus_list }
+      get :show, params: { id: @bus_list }, as: :json
       assert_response :success
-    end
-
-    should "not allow access to manage_bus_lists#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_bus_lists_path
-    end
-
-    should "not allow access to manage_bus_lists#edit" do
-      get :edit, params: { id: @bus_list }
-      assert_response :redirect
-      assert_redirected_to manage_bus_lists_path
     end
 
     should "not allow access to manage_bus_lists#create" do
@@ -211,25 +173,13 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_bus_lists#index" do
-      get :index
+      get :index, as: :json
       assert_response :success
     end
 
     should "allow access to manage_bus_lists#show" do
-      get :show, params: { id: @bus_list }
+      get :show, params: { id: @bus_list }, as: :json
       assert_response :success
-    end
-
-    should "not allow access to manage_bus_lists#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_bus_lists_path
-    end
-
-    should "not allow access to manage_bus_lists#edit" do
-      get :edit, params: { id: @bus_list }
-      assert_response :redirect
-      assert_redirected_to manage_bus_lists_path
     end
 
     should "not allow access to manage_bus_lists#create" do
@@ -277,56 +227,30 @@ class Manage::BusListsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_bus_lists#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_bus_lists#new" do
-      get :new
+      get :index, as: :json
       assert_response :success
     end
 
     should "create a new bus_list" do
       post :create, params: { bus_list: { name: "New bus_list Name" } }
-      assert_response :redirect
-      assert_redirected_to manage_bus_list_path(assigns(:bus_list))
+      assert_response :ok
     end
 
     should "allow access to manage_bus_lists#show" do
-      get :show, params: { id: @bus_list }
-      assert_response :success
-    end
-
-    should "render markdown in manage_bus_lists#show" do
-      @bus_list.update_attribute(:notes, "### This is a title")
-      get :show, params: { id: @bus_list }
-      assert_response :success
-      assert_select "fieldset h3", "This is a title"
-    end
-
-    should "render html in manage_bus_lists#show" do
-      @bus_list.update_attribute(:notes, "<h3>This is a title</h3>")
-      get :show, params: { id: @bus_list }
-      assert_response :success
-      assert_select "fieldset h3", "This is a title"
-    end
-
-    should "allow access to manage_bus_lists#edit" do
-      get :edit, params: { id: @bus_list }
+      get :show, params: { id: @bus_list }, as: :json
       assert_response :success
     end
 
     should "update bus_list" do
       patch :update, params: { id: @bus_list, bus_list: { name: "New bus_list Name" } }
-      assert_redirected_to manage_bus_list_path(assigns(:bus_list))
+      assert_response :ok
     end
 
     should "make questionnaire a bus captain" do
       questionnaire = create(:questionnaire)
       patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       assert_equal true, questionnaire.reload.is_bus_captain
-      assert_response :redirect
-      assert_redirected_to manage_bus_list_path(@bus_list)
+      assert_response :ok
     end
 
     should "send message to notify bus captain" do
@@ -335,6 +259,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
       assert_difference "enqueued_jobs.size", 1 do
         patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       end
+      assert_response :ok
     end
 
     should "remove questionnaire from being a bus captain" do
@@ -343,8 +268,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
         patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "0" }
       end
       assert_equal false, questionnaire.reload.is_bus_captain
-      assert_response :redirect
-      assert_redirected_to manage_bus_list_path(@bus_list)
+      assert_response :ok
     end
 
     should "send email upon manage_bus_lists#send_update_email" do
@@ -353,8 +277,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
       assert_difference "enqueued_jobs.size", 1 do
         patch :send_update_email, params: { id: @bus_list }
       end
-      assert_response :redirect
-      assert_redirected_to manage_bus_list_path(@bus_list)
+      assert_response :ok
     end
 
     context "#destroy" do
@@ -362,7 +285,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
         assert_difference("BusList.count", -1) do
           patch :destroy, params: { id: @bus_list }
         end
-        assert_redirected_to manage_bus_lists_path
+        assert_response :ok
       end
 
       should "reset everyone's bus_list_id" do
@@ -371,6 +294,7 @@ class Manage::BusListsControllerTest < ActionController::TestCase
         patch :destroy, params: { id: @bus_list }
         assert_equal false, questionnaire.reload.bus_list_id?
         assert_equal false, questionnaire2.reload.bus_list_id?
+        assert_response :ok
       end
     end
   end
