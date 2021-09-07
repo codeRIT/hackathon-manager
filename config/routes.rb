@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :login
       post :register
     end
+    devise_for :users, only: []
   end
 
   mount MailPreview => "mail_view" if Rails.env.development?
