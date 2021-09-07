@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   respond_to :json
 
   before_action :authenticate_user!, except: [:login, :register]
+  before_action :find_user
   skip_before_action :authenticate_user, only: [:login, :register]
 
   def login
@@ -36,7 +37,11 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
+  def find_user
+    @user = current_user
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password,
                                  :password_confirmation, :remember_me, :role, :is_active, :receive_weekly_report)
