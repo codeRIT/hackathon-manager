@@ -3,19 +3,18 @@
 </template>
 
 <script>
-    export default {
-        name: 'TextInput',
-        props: {
-            placeholder: String
-        },
-        data() {
-            return {}
-        }
+export default {
+    name: 'TextInput',
+    props: {
+        placeholder: String
+    },
+    data() {
+        return {}
     }
+}
 </script>
 
 <style lang="scss" scoped>
-
 .input-text {
     border-radius: var(--border-radius);
     border: var(--border-size) solid var(--dark-color);
@@ -26,5 +25,4 @@
        border-color: var(--orange);
     }
 }
-
 </style>

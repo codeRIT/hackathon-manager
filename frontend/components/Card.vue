@@ -5,19 +5,18 @@
 </template>
 
 <script>
-    export default {
-        name: 'Card',
-        props: {
-            content: String
-        },
-        data () {
-            return {}
-        },
-    }
+export default {
+    name: 'Card',
+    props: {
+        content: String
+    },
+    data () {
+        return {}
+    },
+}
 </script>
 
 <style lang="scss" scoped>
-
 .card {
     display: inline-block;
     background-color: white;
@@ -27,5 +26,4 @@
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-length) var(--shadow-length) var(--dark-color);
 }
-
 </style>

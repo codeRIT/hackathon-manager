@@ -3,15 +3,15 @@
 </template>
 
 <script>
-	export default {
-		name: 'Button',
-        props: {
-            content: String
-        },
-		data() {
-			return {}
-		}
-	}
+export default {
+    name: 'Button',
+    props: {
+        content: String
+    },
+    data() {
+        return {}
+    }
+}
 </script>
 
 <style lang="scss" scoped>
