@@ -1,5 +1,5 @@
 <template>
-    <input type="text" class="input-text" placeholder="Password please"/>
+    <input type="text" class="input-text" :placeholder="placeholder"/>
 </template>
 
 <script>
