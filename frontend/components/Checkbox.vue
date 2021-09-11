@@ -1,7 +1,7 @@
 <template>
 
     <label class="control-container">{{content}}
-        <input type="checkbox">
+        <input type="checkbox" :name="name" :value="value">
         <span class="control"></span>
     </label>
 </template>
@@ -10,7 +10,9 @@
 export default {
     name: 'Checkbox',
     props: {
-        content: String
+        content: String,
+        name: String,
+        value: String
     },
     data() {
         return {}

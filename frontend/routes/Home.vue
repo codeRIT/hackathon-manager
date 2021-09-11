@@ -11,10 +11,10 @@
 
         <TextInput placeholder="Give password"></TextInput>
 
-        <Checkbox content="Hello"></Checkbox>
+        <Checkbox content="Hello" name="checkbox-test" value="test"></Checkbox>
 
-        <Radio content="Hello" name="asdf" value="1234"></Radio>
-        <Radio content="Hello" name="asdf" value="5678"></Radio>
+        <Radio content="Hello" name="radio-test" value="asdf"></Radio>
+        <Radio content="Hello" name="radio-test" value="1234"></Radio>
     </div>
     <div>
         <p>{{ $t("pages.home.component") }}</p>
