@@ -1,5 +1,5 @@
 <template>
-    <label class="control-container">Hello
+    <label class="control-container">{{ content }}
         <input type="radio" name="asdf" value="123" checked>
         <span class="control"></span>
     </label>
