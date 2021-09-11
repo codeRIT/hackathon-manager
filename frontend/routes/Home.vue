@@ -13,8 +13,8 @@
 
         <Checkbox content="Hello"></Checkbox>
 
-        <Radio content="Hello"></Radio>
-        <Radio content="Hello"></Radio>
+        <Radio content="Hello" name="asdf" value="1234"></Radio>
+        <Radio content="Hello" name="asdf" value="5678"></Radio>
     </div>
     <div>
         <p>{{ $t("pages.home.component") }}</p>

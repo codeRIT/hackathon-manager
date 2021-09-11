@@ -1,6 +1,6 @@
 <template>
     <label class="control-container">{{ content }}
-        <input type="radio" name="asdf" value="123" checked>
+        <input type="radio" :name="name" :value="value" checked>
         <span class="control"></span>
     </label>
 </template>
@@ -9,7 +9,9 @@
 export default {
     name: 'Radio',
     props: {
-        content: String
+        content: String,
+        name: String,
+        value: String
     },
     data() {
         return {}
