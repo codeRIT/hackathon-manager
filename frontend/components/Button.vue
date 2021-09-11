@@ -29,7 +29,6 @@ export default {
     transition: var(--duration) all;
 
     &:hover {
-        @extend .button;
         background-color: var(--orange);
         color: white;
     }
