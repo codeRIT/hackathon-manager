@@ -2,7 +2,7 @@
 <div style="position: relative;">
     <nav>
         <a href="#"><div class="icon"></div></a>
-        <a href="#">Logout</a>
+        <a href="#">{{ $t("pages.profile.logout") }}</a>
     </nav>
 
     <header>
@@ -17,14 +17,14 @@
         <div class="row">
             <div class="col-6">
                 <div class="cta-button">
-                    <h2>Confirm your attendance</h2>
-                    <h4>Awaiting RSVP</h4>
+                    <h2>{{ $t("pages.profile.cta.needRSVP.heading") }}</h2>
+                    <h4>{{ $t("pages.profile.cta.needRSVP.subheading") }}</h4>
                 </div>
 
                 <div class="module">
                     <div class="meta">
-                        <h2 class="title">Your Team</h2>
-                        <a class="manage" href="#">manage</a>
+                        <h2 class="title">{{ $t("pages.profile.team.title") }}</h2>
+                        <a class="manage" href="#">{{ $t("pages.profile.team.action") }}</a>
                     </div>
 
                     <div class="body">
@@ -47,7 +47,7 @@
                         <div class="item">
                             <div class="icon icon-orange"></div>
                             <div>
-                                <h2 class="name">Invite a teammate</h2>
+                                <h2 class="name">{{ $t("pages.profile.team.invite") }}</h2>
                             </div>
                         </div>
                     </div>
@@ -57,15 +57,15 @@
             <div class="col-6">
                 <div class="module">
                     <div class="meta">
-                        <h2 class="title">Bus</h2>
-                        <a class="manage" href="#">change</a>
+                        <h2 class="title">{{ $t("pages.profile.bus.title") }}</h2>
+                        <a class="manage" href="#">{{ $t("pages.profile.bus.action") }}</a>
                     </div>
 
                     <div class="body">
                         <div class="item">
                             <div class="icon"></div>
                             <div>
-                                <h2 class="name">Arriving at 12:30pm</h2>
+                                <h2 class="name">{{ $t("pages.profile.bus.arrivalTime", { time: "12:30pm" }) }}</h2>
                                 <h4 class="school">5000 Nathaniel Rochester Dr</h4>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         <div class="item">
                             <div class="icon icon-orange"></div>
                             <div>
-                                <h2 class="name">Contact bus leader</h2>
+                                <h2 class="name">{{ $t("pages.profile.bus.contact") }}</h2>
                             </div>
                         </div>
                     </div>
