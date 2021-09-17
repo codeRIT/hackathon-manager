@@ -3,7 +3,7 @@ class Manage::DataExportsController < Manage::ApplicationController
 
   before_action :set_data_export, only: [:destroy]
 
-  respond_to :html, :json
+  respond_to :json
 
   # GET /manage/data_exports
   def index
@@ -13,14 +13,6 @@ class Manage::DataExportsController < Manage::ApplicationController
       @params = params.require(:data_export).permit(:export_type).reject { |_, v| v.blank? }
       @data_exports = @data_exports.where(@params)
     end
-    respond_with(:manage, @data_exports)
-  end
-
-  # GET /manage/data_exports/new
-  def new
-    export_type = params[:export_type]
-    @data_export = DataExport.new(export_type: export_type)
-    respond_with(:manage, @data_export)
   end
 
   # POST /manage/data_exports
@@ -29,21 +21,18 @@ class Manage::DataExportsController < Manage::ApplicationController
 
     if @data_export.save
       @data_export.reload.enqueue!
-      respond_to do |format|
-        format.html { redirect_to manage_data_exports_path, notice: "Data export was successfully created." }
-        format.json { render json: @data_export }
-      end
+      head :ok
     else
-      response_view_or_errors :new, @data_export
+      head :unprocessable_entity
     end
   end
 
   # DELETE /manage/data_exports/1
   def destroy
-    @data_export.destroy
-    respond_to do |format|
-      format.html { redirect_to manage_data_exports_path, notice: "Data export was successfully destroyed." }
-      format.json { render json: @data_export }
+    if @data_export.destroy
+      head :ok
+    else
+      head :unprocessable_entity
     end
   end
 
