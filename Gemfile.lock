@@ -58,8 +58,8 @@ GEM
       zeitwerk
     ansi (1.5.0)
     arel (9.0.0)
-    audited (5.0.1)
-      activerecord (>= 5.0, < 6.2)
+    audited (5.0.2)
+      activerecord (>= 5.0, < 7.1)
     autoprefixer-rails (10.2.4.0)
       execjs
     aws-eventstream (1.2.0)
