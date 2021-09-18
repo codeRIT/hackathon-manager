@@ -218,7 +218,7 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
         patch :perform_merge, params: { id: @school, school: { id: "" } }
       end
       json = ActiveSupport::JSON.decode response.body
-      assert_equal json["error_identifier"], :login_merge_newSchoolNameMissing.to_s
+      assert_equal json["error_identifier"], :schools_merge_newSchoolNameMissing.to_s
       assert_response :bad_request
     end
 
