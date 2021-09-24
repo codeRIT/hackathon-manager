@@ -1,5 +1,10 @@
-// CSS reset largely copied from Tailwind CSS's Preflight: https://tailwindcss.com/docs/preflight
+// General Imports
+@use "sass:math";
 
+// Partials
+@import "_variables.scss";
+
+// CSS reset largely copied from Tailwind CSS's Preflight: https://tailwindcss.com/docs/preflight
 body {
     font-family: sans-serif;
 }
@@ -36,7 +41,6 @@ iframe,
 embed,
 object {
     display: block;
-    vertical-align: middle;
 }
 
 a {
@@ -45,7 +49,7 @@ a {
 }
 
 
-// flexbox repsonsive stuff
+// Flexbox repsonsive stuff
 
 .container {
     position: relative;

@@ -14,25 +14,8 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response 401
-    end
-
-    should "not allow access to manage_messages#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
     should "not allow access to manage_messages#show" do
       get :show, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_messages#edit" do
-      get :edit, params: { id: @message }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
@@ -114,26 +97,8 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
-    should "not allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_messages#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
     should "not allow access to manage_messages#show" do
       get :show, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_messages#edit" do
-      get :edit, params: { id: @message }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -214,26 +179,9 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_response :unauthorized
     end
 
-    should "not allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_messages#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
-    end
-
     should "not allow access to manage_messages#show" do
       get :show, params: { id: @message }
       assert_response :unauthorized
-    end
-
-    should "not allow access to manage_messages#edit" do
-      get :edit, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
     end
 
     should "not allow access to manage_messages#create" do
@@ -307,30 +255,13 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_messages#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      get :index, as: :json
       assert_response :success
     end
 
     should "allow access to manage_messages#show" do
-      get :show, params: { id: @message }
+      get :show, params: { id: @message }, as: :json
       assert_response :success
-    end
-
-    should "not allow access to manage_messages#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
-    end
-
-    should "not allow access to manage_messages#edit" do
-      get :edit, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
     end
 
     should "not allow access to manage_messages#create" do
@@ -404,48 +335,36 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_messages#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_messages#new" do
-      get :new
+      get :index, as: :json
       assert_response :success
     end
 
     should "create a new message" do
       post :create, params: { message: { type: "bulk", name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "foo" } }
-      assert_response :redirect
-      assert_redirected_to manage_message_path(assigns(:message))
+      assert_response :success
     end
 
     should "allow access to manage_messages#show" do
-      get :show, params: { id: @message }
+      get :show, params: { id: @message }, as: :json
       assert_response :success
     end
 
     should "render manage_messages#show even if recipient is no longer valid" do
       message = create(:message, recipients: ["bus-list::9999"])
-      get :show, params: { id: message }
-      assert_response :success
-    end
-
-    should "allow access to manage_messages#edit" do
-      get :edit, params: { id: @message }
+      get :show, params: { id: message }, as: :json
       assert_response :success
     end
 
     should "update message" do
       patch :update, params: { id: @message, message: { name: "New Message Name", subject: "Subject", recipients: ["abc"], body: "Example", trigger: "bar" } }
-      assert_redirected_to manage_message_path(assigns(:message))
+      assert_response :ok
     end
 
     should "deliver a bulk message" do
       assert_difference("enqueued_jobs.size", 1) do
         patch :deliver, params: { id: @message }
       end
-      assert_match /queued/, flash[:notice]
-      assert_redirected_to manage_message_path(assigns(:message))
+      assert_response :ok
     end
 
     should "not deliver an automated message" do
@@ -453,15 +372,18 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
-      assert_match /cannot be manually delivered/, flash[:alert]
-      assert_redirected_to manage_message_path(assigns(:message))
+      json = ActiveSupport::JSON.decode response.body
+      assert_equal json["error_identifier"], :messages_deliever_cannotDeliverAutomated.to_s
+      assert_response :bad_request
     end
 
     should "not allow multiple deliveries" do
       patch :deliver, params: { id: @message }
-      assert_match /queued/, flash[:notice]
+      assert_response :ok
       patch :deliver, params: { id: @message }
-      assert_match /cannot/, flash[:alert]
+      json = ActiveSupport::JSON.decode response.body
+      assert_equal json["error_identifier"], :messages_deliever_cannotDeliverNonDrafted.to_s
+      assert_response :bad_request
     end
 
     should "not be able to modify message after delivery" do
@@ -476,7 +398,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_difference("Message.count", -1) do
         patch :destroy, params: { id: @message }
       end
-      assert_redirected_to manage_messages_path
+      assert_response :ok
     end
 
     should "allow access to manage_messages#preview" do
@@ -526,8 +448,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
         assert_difference("Message.count", 1) do
           patch :duplicate, params: { id: @message }
         end
-        assert_response :redirect
-        assert_redirected_to edit_manage_message_path(Message.last)
+        assert_response :ok
       end
 
       should "reset status" do
@@ -554,7 +475,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_messages#template" do
-      get :template
+      get :template, as: :json
       assert_response :success
     end
 
@@ -609,7 +530,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     MessageTemplate.load_singleton
     patch :template_update, params: { message_template: { html: "foo" } }
     assert_equal "foo", MessageTemplate.uncached_instance.html, "should replace contents"
-    assert_response :redirect
+    assert_response :ok
     MessageTemplate.replace_with_default # clean up
   end
 
@@ -628,7 +549,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     MessageTemplate.instance.update_attribute(:html, "foo")
     post :template_replace_with_default
     assert_not_equal "foo", MessageTemplate.uncached_instance.html, "should replace contents"
-    assert_response :redirect
+    assert_response :ok
     MessageTemplate.replace_with_default # clean up
   end
 end
