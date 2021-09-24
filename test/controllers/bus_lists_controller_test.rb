@@ -8,12 +8,12 @@ class BusListsControllerTest < ActionController::TestCase
   context "while not authenticated" do
     should "redirect to sign in page on bus_list#show" do
       get :show
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "redirect to sign in page on bus_list#boarded_bus" do
       patch :boarded_bus
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 

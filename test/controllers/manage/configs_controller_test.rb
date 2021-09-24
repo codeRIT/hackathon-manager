@@ -18,7 +18,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       HackathonConfig["registration_is_open"] = false
       patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
       assert_equal false, HackathonConfig["registration_is_open"]
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not update css config" do

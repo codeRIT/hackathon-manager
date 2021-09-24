@@ -11,8 +11,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
   context "while not authenticated" do
     should "redirect to sign in page on manage_questionnaires#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires datatables api" do
@@ -22,50 +21,42 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_questionnaires#new" do
       get :new
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#show" do
       get :show, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#create" do
       post :create, params: { questionnaire: { major: "Computer Science" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update" do
       patch :update, params: { id: @questionnaire, questionnaire: { major: "Human Centered Computing" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#destroy" do
       patch :destroy, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update_acc_status" do
       patch :update_acc_status, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#bulk_apply" do
       patch :bulk_apply, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 
@@ -77,62 +68,52 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_questionnaires#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires datatables api" do
       post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#new" do
       get :new
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#show" do
       get :show, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#create" do
       post :create, params: { questionnaire: { major: "Best Major" } }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update" do
       patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#destroy" do
       patch :destroy, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update_acc_status" do
       patch :update_acc_status, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#bulk_apply" do
       patch :bulk_apply, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
   end
 
@@ -160,38 +141,32 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_questionnaires#new" do
       get :new, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#create" do
       post :create, params: { questionnaire: { major: "Best Major" } }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update" do
       patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#destroy" do
       patch :destroy, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not access to manage_questionnaires#update_acc_status" do
       patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "accepted" } }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "allow access to manage_questionnaires#bulk_apply" do
@@ -224,38 +199,32 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_questionnaires#new" do
       get :new, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#edit" do
       get :edit, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#create" do
       post :create, params: { questionnaire: { major: "Best Major" } }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update" do
       patch :update, params: { id: @questionnaire, questionnaire: { major: "Best Major" } }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#destroy" do
       patch :destroy, params: { id: @questionnaire }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "not access to manage_questionnaires#update_acc_status" do
       patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "accepted" } }
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "allow access to manage_questionnaires#bulk_apply" do
@@ -364,8 +333,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
       assert_match /has been checked in./, flash[:notice]
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "check in the questionnaire through api" do
@@ -402,8 +370,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal "1233333333", @questionnaire.phone
       assert_equal "new_email@example.com", @questionnaire.email
       assert_match /has been checked in./, flash[:notice]
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "require a new action to check in" do
@@ -431,8 +398,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal "", @questionnaire.phone
       assert_equal "old_email@example.com", @questionnaire.email
       assert_match /No check-in action provided/, flash[:alert]
-      assert_response :redirect
-      assert_redirected_to manage_questionnaire_path(@questionnaire)
+      assert_response :unauthorized
     end
 
     should "require all agreements to be accepted to check in" do
@@ -440,8 +406,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :check_in, params: { id: @questionnaire, check_in: "true" }
       assert_nil @questionnaire.reload.checked_in_at
       assert_nil @questionnaire.reload.checked_in_by_id
-      assert_response :redirect
-      assert_redirected_to manage_questionnaire_path(@questionnaire)
+      assert_response :unauthorized
     end
 
     should "accept all agreements and check in" do
@@ -449,8 +414,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :check_in, params: { id: @questionnaire, check_in: "true", questionnaire: { agreement_accepted: 1 } }
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :unauthorized
     end
 
     should "undo check in of the questionnaire" do
@@ -467,8 +431,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal "accepted", @questionnaire.reload.acc_status
       assert_equal @user.id, @questionnaire.reload.acc_status_author_id
       assert_not_equal nil, @questionnaire.reload.acc_status_date
-      assert_response :redirect
-      assert_redirected_to manage_questionnaire_path @questionnaire
+      assert_response :unauthorized
     end
 
     should "allow access to manage_questionnaires#bulk_apply" do

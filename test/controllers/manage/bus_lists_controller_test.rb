@@ -20,14 +20,12 @@ class Manage::BusListsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_bus_lists#create" do
       post :create, params: { bus_list: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_bus_lists#update" do
       patch :update, params: { id: @bus_list, bus_list: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_bus_lists#toggle_bus_captain" do
@@ -36,22 +34,19 @@ class Manage::BusListsControllerTest < ActionController::TestCase
         patch :toggle_bus_captain, params: { id: @bus_list, questionnaire_id: questionnaire.id, bus_captain: "1" }
       end
       assert_equal false, questionnaire.reload.is_bus_captain
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_bus_lists#send_update_email" do
       assert_difference "enqueued_jobs.size", 0 do
         patch :send_update_email, params: { id: @bus_list }
       end
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_bus_lists#destroy" do
       patch :destroy, params: { id: @bus_list }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 

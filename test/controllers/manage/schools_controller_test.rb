@@ -18,26 +18,22 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_schools#create" do
       post :create, params: { school: { name: "My Test School" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_schools#update" do
       patch :update, params: { id: @school, school: { name: "My Test School" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_schools#destroy" do
       patch :destroy, params: { id: @school }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_schools#perform_merge" do
       patch :perform_merge, params: { id: @school, school: { id: "My Test School" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 

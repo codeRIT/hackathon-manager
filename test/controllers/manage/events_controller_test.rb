@@ -13,26 +13,22 @@ class Manage::EventsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_events#show" do
       get :show, params: { id: @event }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#create" do
       post :create, params: { event: { title: "should not exist title" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#update" do
       patch :update, params: { id: @event, title: "not allowed altered title" }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_events#destroy" do
       patch :destroy, params: { id: @event }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 
