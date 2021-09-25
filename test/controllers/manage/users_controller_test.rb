@@ -15,22 +15,22 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to user_datatable" do
       get :user_datatable
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to staff_datatable" do
       get :staff_datatable
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users user datatables api" do
       post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response 401
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users staff datatables api" do
       post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response 401
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#show" do

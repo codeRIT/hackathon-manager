@@ -17,14 +17,14 @@ class QuestionnairesControllerTest < ActionController::TestCase
 
     should "redirect to sign up page on questionnaire#update" do
       patch :update, params: { questionnaire: { major: "different" } }
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "redirect to sign up page on questionnaire#destroy" do
       assert_difference('Questionnaire.count', 0) do
         delete :destroy
       end
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 
