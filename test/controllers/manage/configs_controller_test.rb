@@ -4,8 +4,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
   context "while not authenticated" do
     should "redirect to sign in page on manage_configs#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_configs#edit" do

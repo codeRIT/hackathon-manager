@@ -10,8 +10,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
   context "while not authenticated" do
     should "redirect to sign in page on manage_users#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to user_datatable" do
@@ -36,26 +35,22 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 
@@ -102,8 +97,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#update" do
@@ -159,8 +153,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#update" do
@@ -216,8 +209,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#update" do
