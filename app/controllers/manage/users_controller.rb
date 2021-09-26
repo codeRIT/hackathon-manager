@@ -31,18 +31,13 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def destroy
-    # transaction is used so that if either database action fails
-    # both actions are rolled back
-    User.transaction do
-      begin
-        if @user.questionnaire.present?
-          @user.questionnaire.destroy!
-        end
-        @user.destroy!
-        head :success
-      rescue => exception
-        head :unprocessable_entity
-      end
+    if @user.questionnaire.present? && !@user.questionnaire.destroy
+        return head :unprocessable_entity
+    end
+    if @user.destroy
+      head :success
+    else
+      head :unprocessable_entity
     end
   end
 
