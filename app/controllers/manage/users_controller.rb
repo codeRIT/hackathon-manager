@@ -2,18 +2,10 @@ class Manage::UsersController < Manage::ApplicationController
   before_action :require_director
   before_action :find_user, only: [:show, :edit, :update, :reset_password, :destroy]
 
-  respond_to :html, :json
+  respond_to :json
 
   def index
-    respond_with(:manage, User.where(role: [:director, :organizer, :volunteer]))
-  end
-
-  def user_datatable
-    render json: UserDatatable.new(params, view_context: view_context)
-  end
-
-  def staff_datatable
-    render json: StaffDatatable.new(params, view_context: view_context)
+    @users = User.all
   end
 
   def reset_password
@@ -25,23 +17,33 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def show
-    respond_with(:manage, @user)
   end
 
   def edit
   end
 
   def update
-    @user.update_attributes(user_params)
-    respond_with(:manage, @user, location: manage_users_path)
+    if @user.update_attributes(user_params)
+      head :accepted
+    else
+      head :unprocessable_entity
+    end
   end
 
   def destroy
-    if @user.questionnaire.present?
-      @user.questionnaire.destroy
+    # transaction is used so that if either database action fails
+    # both actions are rolled back
+    User.transaction do
+      begin
+        if @user.questionnaire.present?
+          @user.questionnaire.destroy!
+        end
+        @user.destroy!
+        head :success
+      rescue => exception
+        head :unprocessable_entity
+      end
     end
-    @user.destroy
-    respond_with(:manage, @user, location: manage_users_path)
   end
 
   def user_params
