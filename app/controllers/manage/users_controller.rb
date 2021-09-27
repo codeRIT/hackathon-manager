@@ -10,10 +10,12 @@ class Manage::UsersController < Manage::ApplicationController
 
   def reset_password
     new_password = Devise.friendly_token(50)
-    @user.reset_password(new_password, new_password)
-    @user.send_reset_password_instructions
-    flash[:notice] = t(:reset_password_success, scope: 'pages.manage.users.edit', full_name: @user.full_name)
-    respond_with(:manage, @user, location: manage_users_path)
+    if @user.reset_password(new_password, new_password)
+      @user.send_reset_password_instructions
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def show
@@ -31,14 +33,20 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def destroy
-    if @user.questionnaire.present? && !@user.questionnaire.destroy
-        return head :unprocessable_entity
+    User.transaction do
+      if @user.questionnaire.present?
+        @user.questionnaire.destroy
+      end
+
+      if @user.destroy
+        head :success
+      else
+        raise ActiveRecord::Rollback
+        head :unprocessable_entity
+      end
     end
-    if @user.destroy
-      head :success
-    else
-      head :unprocessable_entity
-    end
+    
+    
   end
 
   def user_params
