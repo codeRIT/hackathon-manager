@@ -33,5 +33,4 @@ json.array! @questionnaires do |questionnaire|
     json.checked_in_at          questionnaire.checked_in_at
     json.created_at             questionnaire.created_at
     json.updated_at             questionnaire.updated_at
-  end
-  
+end
