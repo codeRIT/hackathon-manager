@@ -63,7 +63,6 @@ Rails.application.routes.draw do
     resources :messages do
       get :preview, on: :member
       get :live_preview, on: :collection
-      post :datatable, on: :collection
       patch :deliver, on: :member
       patch :duplicate, on: :member
       # Message template
