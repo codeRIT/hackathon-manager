@@ -26,7 +26,7 @@ class Manage::UsersController < Manage::ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      head :accepted
+      head :ok
     else
       head :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class Manage::UsersController < Manage::ApplicationController
       end
 
       if @user.destroy
-        head :success
+        head :ok
       else
         raise ActiveRecord::Rollback
         head :unprocessable_entity
