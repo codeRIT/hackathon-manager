@@ -34,19 +34,13 @@ class Manage::UsersController < Manage::ApplicationController
 
   def destroy
     User.transaction do
-      if @user.questionnaire.present?
-        @user.questionnaire.destroy
-      end
-
-      if @user.destroy
+      if @user.destroy && (!@user.questionnaire.present? || @user.questionnaire.destroy)
         head :ok
       else
-        raise ActiveRecord::Rollback
         head :unprocessable_entity
+        raise ActiveRecord::Rollback
       end
     end
-    
-    
   end
 
   def user_params
