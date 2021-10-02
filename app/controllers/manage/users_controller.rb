@@ -33,6 +33,8 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def destroy
+    # used transaction so that if questionnaire is successfully deleted but
+    # user deletion runs into a error the questionnaire deletion is rolled back
     User.transaction do
       if @user.destroy && (!@user.questionnaire.present? || @user.questionnaire.destroy)
         head :ok
