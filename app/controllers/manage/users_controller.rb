@@ -1,6 +1,6 @@
 class Manage::UsersController < Manage::ApplicationController
   before_action :require_director
-  before_action :find_user, only: [:show, :edit, :update, :reset_password, :destroy]
+  before_action :find_user, only: [:show, :update, :reset_password, :destroy]
 
   respond_to :json
 
@@ -19,9 +19,6 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def show
-  end
-
-  def edit
   end
 
   def update
