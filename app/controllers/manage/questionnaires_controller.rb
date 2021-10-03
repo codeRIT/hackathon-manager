@@ -46,6 +46,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       head :ok
     else
       head :unprocessable_entity
+    end
   end
 
   def update_acc_status
