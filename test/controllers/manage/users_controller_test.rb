@@ -21,12 +21,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
       assert_response :redirect
@@ -54,12 +48,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -94,12 +82,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_response :unauthorized
     end
 
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
-    end
-
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
       assert_response :redirect
@@ -130,11 +112,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to manage_root_path
     end
 
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
-    end
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
@@ -170,11 +147,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "allow access to manage_users#show" do
       get :show, params: { id: @user }, format: :json
-      assert_response :success
-    end
-
-    should "allow access to manage_users#edit" do
-      get :edit, params: { id: @user }, format: :json
       assert_response :success
     end
 
