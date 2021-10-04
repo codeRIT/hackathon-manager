@@ -206,14 +206,14 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "check in the questionnaire through api" do
-      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :json
+      patch :check_in, params: { id: @questionnaire, check_in: "true" }
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
       assert_response :success
     end
 
     should "check out the questionnaire through api" do
-      patch :check_in, params: { id: @questionnaire, check_in: "false" }, format: :json
+      patch :check_in, params: { id: @questionnaire, check_in: "false" }
       assert_nil @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
       assert_response :success
@@ -249,8 +249,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal "accepted", @questionnaire.reload.acc_status
       assert_equal @user.id, @questionnaire.reload.acc_status_author_id
       assert_not_equal nil, @questionnaire.reload.acc_status_date
-      assert_response :redirect
-      assert_redirected_to manage_questionnaire_path @questionnaire
+      assert_response :success
     end
 
     should "allow access to manage_questionnaires#bulk_apply" do
