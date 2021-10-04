@@ -205,15 +205,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       end
     end
 
-    should "check in the questionnaire through html" do
-      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :html
-      assert 1.minute.ago < @questionnaire.reload.checked_in_at
-      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_match /has been checked in./, flash[:notice]
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
-    end
-
     should "check in the questionnaire through api" do
       patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :json
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
@@ -233,7 +224,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :check_in, params: { id: @questionnaire, check_in: "true" }
       assert_nil @questionnaire.reload.checked_in_at
       assert_nil @questionnaire.reload.checked_in_by_id
-      assert_response :redirect
+      assert_response :unprocessable_entity
     end
 
     should "accept all agreements and check in" do
@@ -241,8 +232,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :check_in, params: { id: @questionnaire, check_in: "true", questionnaire: { agreement_accepted: 1 } }
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_response :redirect
-      assert_redirected_to manage_questionnaires_path
+      assert_response :ok
     end
 
     should "undo check in of the questionnaire" do
@@ -273,14 +263,14 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_difference "enqueued_jobs.size", 0 do
         patch :bulk_apply, params: { bulk_ids: [@questionnaire.id] }
       end
-      assert_response 400
+      assert_response :bad_request
     end
 
     should "fail manage_questionnaires#bulk_apply when missing ids" do
       assert_difference "enqueued_jobs.size", 0 do
         patch :bulk_apply, params: { id: @questionnaire }
       end
-      assert_response 400
+      assert_response :bad_request
     end
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
@@ -296,7 +286,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_difference "enqueued_jobs.size", 0 do
         patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "" } }
       end
-      assert_response :redirect
+      assert_response :unprocessable_entity
     end
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
