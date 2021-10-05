@@ -11,22 +11,19 @@ class Manage::ApplicationController < ApplicationController
   end
 
   def require_director
-    return head :unauthorized if current_user.volunteer?
-    return redirect_to manage_root_path if current_user.organizer?
-    return redirect_to root_path unless current_user.try(:director?)
+    return head :unauthorized unless current_user.director?
   end
 
   def require_director_or_organizer
-    return head :unauthorized if current_user.volunteer?
-    return redirect_to root_path unless current_user.organizing_staff?
+    return head :unauthorized unless current_user.organizing_staff?
   end
 
   def require_director_or_organizer_or_volunteer
-    redirect_to root_path unless current_user.staff?
+    return head :unauthorized unless current_user.staff?
   end
 
   def limit_write_access_to_directors
-    redirect_to url_for(controller: controller_name, action: :index) unless current_user.try(:director?)
+    return head :unauthorized unless current_user.director?
   end
 
   def json_request?
