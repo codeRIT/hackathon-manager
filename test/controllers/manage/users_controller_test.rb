@@ -39,26 +39,22 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
   end
 
@@ -82,14 +78,12 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
+      assert_response :unauthorized
     end
   end
 
@@ -103,25 +97,23 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#index" do
       get :index
-      assert_redirected_to manage_root_path
+      assert_response :unauthorized
     end
 
     should "allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_redirected_to manage_root_path
+      assert_response :unauthorized
     end
 
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
-      assert_response :redirect
-      assert_redirected_to manage_users_path
+      assert_response :unauthorized
     end
   end
 

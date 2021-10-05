@@ -37,24 +37,22 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_agreements#index" do
       get :index, format: :json
-      assert_response :redirect
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#create" do
       post :create, params: { agreement: { name: "Fun Agreement", agreement_fun: "https://bar.edu" } }
-      assert_response :redirect
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#update" do
       patch :update, params: { id: @agreement, agreement: { name: "Not fun agreement" } }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#destroy" do
       patch :destroy, params: { id: @agreement }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
   end
 
@@ -73,20 +71,17 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_agreements#create" do
       post :create, params: { agreement: { name: "Fun Agreement", agreement_fun: "https://bar.edu" } }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#update" do
       patch :update, params: { id: @agreement, agreement: { name: "Not fun agreement" } }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#destroy" do
       patch :destroy, params: { id: @agreement }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
+      assert_response :unauthorized
     end
   end
 
@@ -100,24 +95,22 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_agreements#index" do
       get :index, format: :json
-      assert_response :redirect
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#create" do
       post :create, params: { agreement: { name: "Fun Agreement", agreement_fun: "https://bar.edu" } }
-      assert_response :redirect
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#update" do
       patch :update, params: { id: @agreement, agreement: { name: "Not fun agreement" } }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#destroy" do
       patch :destroy, params: { id: @agreement }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
+      assert_response :unauthorized
     end
   end
 

@@ -56,22 +56,6 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       end
       assert_response :unauthorized
     end
-
-    # should "not allow access to manage_messages#template" do
-    #   test_template_failure
-    # end
-
-    # should "not allow access to manage_messages#template_preview" do
-    #   test_template_preview_failure
-    # end
-
-    # should "not allow access to manage_messages#template_update" do
-    #   test_template_update_failure
-    # end
-
-    # should "not allow access to manage_messages#template_replace_with_default" do
-    #   test_template_replace_with_default_failure
-    # end
   end
 
   context "while authenticated as a user" do
@@ -84,77 +68,52 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_messages#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#show" do
       get :show, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#create" do
       post :create, params: { message: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#update" do
       patch :update, params: { id: @message, message: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#destroy" do
       patch :destroy, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not deliver message" do
       assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#preview" do
       get :preview, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#live_preview" do
       get :live_preview, params: { body: "foo bar" }
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#duplicate" do
       assert_difference("Message.count", 0) do
         patch :duplicate, params: { id: @message }
       end
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
-
-    # should "not allow access to manage_messages#template" do
-    #   test_template_failure
-    # end
-
-    # should "not allow access to manage_messages#template_preview" do
-    #   test_template_preview_failure
-    # end
-
-    # should "not allow access to manage_messages#template_update" do
-    #   test_template_update_failure
-    # end
-
-    # should "not allow access to manage_messages#template_replace_with_default" do
-    #   test_template_replace_with_default_failure
-    # end
   end
 
   context "while authenticated as a volunteer" do
@@ -177,28 +136,24 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_messages#create" do
       post :create, params: { message: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#update" do
       patch :update, params: { id: @message, message: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#destroy" do
       patch :destroy, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not deliver message" do
       assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#preview" do
@@ -208,33 +163,15 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_messages#live_preview" do
       get :live_preview, params: { body: "foo bar" }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#duplicate" do
       assert_difference("Message.count", 0) do
         patch :duplicate, params: { id: @message }
       end
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
-
-    # should "not allow access to manage_messages#template" do
-    #   test_template_failure
-    # end
-
-    # should "not allow access to manage_messages#template_preview" do
-    #   test_template_preview_failure
-    # end
-
-    # should "not allow access to manage_messages#template_update" do
-    #   test_template_update_failure
-    # end
-
-    # should "not allow access to manage_messages#template_replace_with_default" do
-    #   test_template_replace_with_default_failure
-    # end
   end
 
   context "while authenticated as an organizer" do
@@ -257,28 +194,24 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_messages#create" do
       post :create, params: { message: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#update" do
       patch :update, params: { id: @message, message: { email: "test@example.com" } }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#destroy" do
       patch :destroy, params: { id: @message }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not deliver message" do
       assert_difference("enqueued_jobs.size", 0) do
         patch :deliver, params: { id: @message }
       end
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "allow access to manage_messages#preview" do
@@ -288,33 +221,15 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_messages#live_preview" do
       get :live_preview, params: { body: "foo bar" }
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_messages#duplicate" do
       assert_difference("Message.count", 0) do
         patch :duplicate, params: { id: @message }
       end
-      assert_response :redirect
-      assert_redirected_to manage_messages_path
+      assert_response :unauthorized
     end
-
-    # should "not allow access to manage_messages#template" do
-    #   test_template_failure
-    # end
-
-    # should "not allow access to manage_messages#template_preview" do
-    #   test_template_preview_failure
-    # end
-
-    # should "not allow access to manage_messages#template_update" do
-    #   test_template_update_failure
-    # end
-
-    # should "not allow access to manage_messages#template_replace_with_default" do
-    #   test_template_replace_with_default_failure
-    # end
   end
 
   context "while authenticated as a director" do

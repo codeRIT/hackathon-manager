@@ -13,14 +13,12 @@ class Manage::DataExportsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_data_exports#create" do
       post :create, params: { export_type: "sponsor_dump_rsvp_confirmed" }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_data_exports#destroy" do
       patch :destroy, params: { id: @data_export }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 end
