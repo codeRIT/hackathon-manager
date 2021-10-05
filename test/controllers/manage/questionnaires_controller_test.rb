@@ -235,15 +235,6 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :ok
     end
 
-    should "undo check in of the questionnaire" do
-      patch :check_in, params: { id: @questionnaire, check_in: "false" }
-      assert_nil @questionnaire.reload.checked_in_at
-      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_response :redirect
-      assert_match /no longer/, flash[:notice]
-      assert_redirected_to manage_questionnaires_path
-    end
-
     should "allow access to manage_questionnaires#update_acc_status" do
       patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "accepted" } }
       assert_equal "accepted", @questionnaire.reload.acc_status
