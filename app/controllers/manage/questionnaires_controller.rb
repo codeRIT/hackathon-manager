@@ -31,7 +31,7 @@ class Manage::QuestionnairesController < Manage::ApplicationController
         head :unprocessable_entity
       end
     else
-      if @questionnaire.update_attributes(checked_in_at: 'nil', :checked_in_by_id: current_user.id)
+      if @questionnaire.update_attributes(checked_in_at: 'nil', checked_in_by_id: current_user.id)
         head :ok
       else
         head :unprocessable_entity
