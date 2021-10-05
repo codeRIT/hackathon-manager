@@ -24,17 +24,17 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   end
 
   def check_in
-    if params[:check_in] == "true" 
-      if @questionnaire.update_attributes(:checked_in_at => Time.now, :checked_in_by_id => current_user.id )
+    if params[:check_in] == "true"
+      if @questionnaire.update_attributes(checked_in_at: Time.now, checked_in_by_id: current_user.id)
         head :ok
-      else 
+      else
         head :unprocessable_entity
       end
     else
-      if @questionnaire.update_attributes(:checked_in_at => 'nil', :checked_in_by_id => current_user.id)
-        head :ok 
-      else 
-        head :unprocessable_entity      
+      if @questionnaire.update_attributes(checked_in_at: 'nil', :checked_in_by_id: current_user.id)
+        head :ok
+      else
+        head :unprocessable_entity
       end
     end
   end
