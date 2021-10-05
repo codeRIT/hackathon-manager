@@ -13,33 +13,9 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_response :unauthorized
     end
 
-    should "not allow access to user_datatable" do
-      get :user_datatable
-      assert_response :unauthorized
-    end
-
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_users user datatables api" do
-      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :unauthorized
-    end
 
     should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
       assert_response :unauthorized
     end
 
@@ -67,37 +43,10 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to root_path
     end
 
-    should "not allow access to user_datatable" do
-      get :user_datatable
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_users users datatables api" do
-      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
     should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
       assert_response :redirect
       assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
-      assert_response :unauthorized
     end
 
     should "not allow access to manage_users#update" do
@@ -126,33 +75,8 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_response :unauthorized
     end
 
-    should "not allow access to user_datatable" do
-      get :user_datatable
-      assert_response :unauthorized
-    end
-
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_users users datatables api" do
-      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :unauthorized
-    end
-
     should "allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
       assert_response :unauthorized
     end
 
@@ -182,35 +106,11 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to manage_root_path
     end
 
-    should "not allow access to user_datatable" do
-      get :user_datatable
-      assert_redirected_to manage_root_path
-    end
-
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_redirected_to manage_root_path
-    end
-
-    should "not allow access to manage_users users datatables api" do
-      post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to manage_root_path
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to manage_root_path
-    end
-
     should "allow access to manage_users#show" do
       get :show, params: { id: @user }
       assert_redirected_to manage_root_path
     end
 
-    should "not allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
-      assert_response :unauthorized
-    end
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
@@ -234,17 +134,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_users#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to user_datatable" do
-      get :user_datatable
-      assert_response :success
-    end
-
-    should "allow access to staff_datatable" do
-      get :staff_datatable
+      get :index, format: :json
       assert_response :success
     end
 
@@ -252,29 +142,24 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_difference "enqueued_jobs.size", 1 do
         patch :reset_password, params: { id: @user }
       end
-      assert_redirected_to manage_users_path
+      assert :success
     end
 
     should "allow access to manage_users#show" do
-      get :show, params: { id: @user }
-      assert_response :success
-    end
-
-    should "allow access to manage_users#edit" do
-      get :edit, params: { id: @user }
+      get :show, params: { id: @user }, format: :json
       assert_response :success
     end
 
     should "update user" do
       patch :update, params: { id: @user, user: { email: "test@example.coma" } }
-      assert_redirected_to manage_users_path
+      assert :success
     end
 
     should "destroy user" do
       assert_difference('User.count', -1) do
         patch :destroy, params: { id: @user }
       end
-      assert_redirected_to manage_users_path
+      assert :success
     end
 
     should "destroy user and user's questionnaire" do
@@ -282,7 +167,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_difference('Questionnaire.count', -1) do
         patch :destroy, params: { id: @user }
       end
-      assert_redirected_to manage_users_path
+      assert :success
     end
   end
 end

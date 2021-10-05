@@ -2,47 +2,46 @@ class Manage::UsersController < Manage::ApplicationController
   before_action :require_director
   before_action :authenticate_user!
   before_action :find_user, only: [:show, :edit, :update, :reset_password, :destroy]
+  before_action :find_user, only: [:show, :update, :reset_password, :destroy]
 
   respond_to :json
 
   def index
-  end
-
-  def user_datatable
-    render json: UserDatatable.new(params, view_context: view_context)
-  end
-
-  def staff_datatable
-    render json: StaffDatatable.new(params, view_context: view_context)
+    @users = User.all
   end
 
   def reset_password
     new_password = Devise.friendly_token(50)
-    @user.reset_password(new_password, new_password)
-    @user.send_reset_password_instructions
-    head :ok
+    if @user.reset_password(new_password, new_password)
+      @user.send_reset_password_instructions
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def show
   end
 
-  def edit
-  end
-
   def update
-    if current_user.update_attributes(user_params)
-      render :show
+    if @user.update_attributes(user_params)
+      head :ok
     else
-      render json: { errors: current_user.errors }, status: :unprocessable_entity
+      head :unprocessable_entity
     end
   end
 
   def destroy
-    if @user.questionnaire.present?
-      @user.questionnaire.destroy
+    # used transaction so that if questionnaire is successfully deleted but
+    # user deletion runs into a error the questionnaire deletion is rolled back
+    User.transaction do
+      if @user.destroy && (!@user.questionnaire.present? || @user.questionnaire.destroy)
+        head :ok
+      else
+        head :unprocessable_entity
+        raise ActiveRecord::Rollback
+      end
     end
-    @user.destroy
-    head :ok
   end
 
   def user_params

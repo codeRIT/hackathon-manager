@@ -1,106 +1,40 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :update_acc_status]
+  before_action :set_questionnaire, only: [:show, :update, :destroy, :check_in, :update_acc_status]
 
-  respond_to :html, :json
+  respond_to :json
 
   def index
-    respond_with(:manage, Questionnaire.all)
-  end
-
-  def datatable
-    render json: QuestionnaireDatatable.new(params, view_context: view_context)
+    @questionnaires = Questionnaire.all
   end
 
   def show
-    @agreements = Agreement.all
-    respond_with(:manage, @questionnaire)
-  end
-
-  def new
-    @questionnaire = ::Questionnaire.new
-    respond_with(:manage, @questionnaire)
-  end
-
-  def edit
-  end
-
-  def create
-    create_params = questionnaire_params
-    email = create_params.delete(:email)
-    create_params = convert_school_name_to_id(create_params)
-    create_params = convert_boarded_bus_param(create_params)
-    @questionnaire = ::Questionnaire.new(create_params)
-    users = User.where(email: email)
-    user = users.count == 1 ? users.first : User.new(email: email, password: Devise.friendly_token.first(10))
-    @questionnaire.user = user
-    if @questionnaire.valid?
-      if user.save
-        @questionnaire.save
-      else
-        flash[:alert] = user.errors.full_messages.join(", ")
-        if user.errors.include?(:email)
-          @questionnaire.errors.add(:email, user.errors[:email].join(", "))
-        end
-        return render "new"
-      end
-    end
-    respond_with(:manage, @questionnaire)
   end
 
   def update
     update_params = questionnaire_params
-    email = update_params.delete(:email)
-    # Take our nested user object out as a whole
-    user_params = params[:questionnaire][:user]
-    if user_params
-      @questionnaire.user.update_attributes(first_name: user_params[:first_name])
-      @questionnaire.user.update_attributes(last_name: user_params[:last_name])
-    end
-    @questionnaire.user.update_attributes(email: email) if email.present?
     update_params = convert_school_name_to_id(update_params)
     update_params = convert_boarded_bus_param(update_params, @questionnaire)
-    @questionnaire.update_attributes(update_params)
-    respond_with(:manage, @questionnaire)
+    if @questionnaire.update_attributes(update_params)
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def check_in
-    respond_to do |format|
-      format.json do
-        if params[:check_in] == "true"
-          check_in_attendee
-        elsif params[:check_in] == "false"
-          check_out_attendee
-        end
+    if params[:check_in] == "true"
+      if @questionnaire.update_attributes(checked_in_at: Time.now, checked_in_by_id: current_user.id)
+        head :ok
+      else
+        head :unprocessable_entity
       end
-      format.html do
-        redirect_to_checkins = params[:redirect_to_checkins] || false
-        show_redirect_path = redirect_to_checkins ? manage_checkin_path(@questionnaire) : manage_questionnaire_path(@questionnaire)
-        index_redirect_path = redirect_to_checkins ? manage_checkins_path : manage_questionnaires_path
-        if params[:check_in] == "true"
-          if params[:questionnaire]
-            q_params = params.require(:questionnaire).permit(:phone, :can_share_info, :email)
-            email = q_params.delete(:email)
-            @questionnaire.update_attributes(q_params)
-            @questionnaire.user.update_attributes(email: email)
-          end
-          unless @questionnaire.valid?
-            flash[:alert] = @questionnaire.errors.full_messages.join(", ")
-            redirect_to show_redirect_path
-            return
-          end
-          check_in_attendee
-          flash[:notice] = t(:checked_in, scope: 'messages', user_full_name: @questionnaire.user.full_name)
-        elsif params[:check_in] == "false"
-          check_out_attendee
-          flash[:notice] = t(:checked_out, scope: 'messages', user_full_name: @questionnaire.user.full_name)
-        else
-          flash[:alert] = t(:missing_check_in, scope: 'messages')
-          redirect_to show_redirect_path
-          return
-        end
-        redirect_to index_redirect_path
+    else
+      if @questionnaire.update_attributes(checked_in_at: 'nil', checked_in_by_id: current_user.id)
+        head :ok
+      else
+        head :unprocessable_entity
       end
     end
   end
@@ -113,15 +47,17 @@ class Manage::QuestionnairesController < Manage::ApplicationController
       end
     end
 
-    @questionnaire.destroy
-    respond_with(:manage, @questionnaire)
+    if @questionnaire.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def update_acc_status
     new_status = params[:questionnaire][:acc_status]
     if new_status.blank?
-      flash[:alert] = "No status provided"
-      redirect_to(manage_questionnaire_path(@questionnaire))
+      render json: ErrorResponse.new(:questionnaire_updateAccStatus_blankStatus), status: :unprocessable_entity
       return
     end
 
@@ -130,12 +66,10 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     @questionnaire.acc_status_date = Time.now
 
     if @questionnaire.save(validate: false)
-      flash[:notice] = "Updated acceptance status to \"#{Questionnaire::POSSIBLE_ACC_STATUS[new_status]}\""
+      head :ok
     else
-      flash[:alert] = "Failed to update acceptance status"
+      head :unprocessable_entity
     end
-
-    redirect_to manage_questionnaire_path(@questionnaire)
   end
 
   def bulk_apply
@@ -156,21 +90,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
 
   private
 
-  def check_in_attendee
-    @questionnaire.update_attribute(:checked_in_at, Time.now)
-    @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
-  end
-
-  def check_out_attendee
-    @questionnaire.update_attribute(:checked_in_at, nil)
-    @questionnaire.update_attribute(:checked_in_by_id, current_user.id)
-  end
 
   def questionnaire_params
     # Note that this ONLY considers parameters for the questionnaire, not the user.
-    # TODO: Refactor "email" out to user as first_name and last_name were
     params.require(:questionnaire).permit(
-      :email, :experience, :gender,
+      :experience, :gender,
       :date_of_birth, :interest, :school_id, :school_name, :major, :level_of_study,
       :shirt_size, :dietary_restrictions, :special_needs, :international,
       :portfolio_url, :vcs_url, :bus_captain_interest, :phone, :can_share_info,

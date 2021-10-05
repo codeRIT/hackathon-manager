@@ -14,28 +14,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :unauthorized
     end
 
-    should "not allow access to manage_questionnaires datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response 401
-    end
-
-    should "not allow access to manage_questionnaires#new" do
-      get :new
-      assert_response :unauthorized
-    end
-
     should "not allow access to manage_questionnaires#show" do
       get :show, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#edit" do
-      get :edit, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#create" do
-      post :create, params: { questionnaire: { major: "Computer Science" } }
       assert_response :unauthorized
     end
 
@@ -71,28 +51,8 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_response :unauthorized
     end
 
-    should "not allow access to manage_questionnaires datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#new" do
-      get :new
-      assert_response :unauthorized
-    end
-
     should "not allow access to manage_questionnaires#show" do
       get :show, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#edit" do
-      get :edit, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#create" do
-      post :create, params: { questionnaire: { major: "Best Major" } }
       assert_response :unauthorized
     end
 
@@ -125,33 +85,13 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_questionnaires#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_questionnaires datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      get :index, format: :json
       assert_response :success
     end
 
     should "allow access to manage_questionnaires#show" do
-      get :show, params: { id: @questionnaire }
+      get :show, params: { id: @questionnaire }, format: :json
       assert_response :success
-    end
-
-    should "not allow access to manage_questionnaires#new" do
-      get :new, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#edit" do
-      get :edit, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#create" do
-      post :create, params: { questionnaire: { major: "Best Major" } }
-      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update" do
@@ -183,33 +123,13 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_questionnaires#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_questionnaires datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      get :index, format: :json
       assert_response :success
     end
 
     should "allow access to manage_questionnaires#show" do
-      get :show, params: { id: @questionnaire }
+      get :show, params: { id: @questionnaire }, format: :json
       assert_response :success
-    end
-
-    should "not allow access to manage_questionnaires#new" do
-      get :new, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#edit" do
-      get :edit, params: { id: @questionnaire }
-      assert_response :unauthorized
-    end
-
-    should "not allow access to manage_questionnaires#create" do
-      post :create, params: { questionnaire: { major: "Best Major" } }
-      assert_response :unauthorized
     end
 
     should "not allow access to manage_questionnaires#update" do
@@ -241,74 +161,13 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_questionnaires#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_questionnaires#new" do
-      get :new
+      get :index, format: :json
       assert_response :success
     end
 
     should "allow access to manage_questionnaires#show" do
-      get :show, params: { id: @questionnaire }
+      get :show, params: { id: @questionnaire }, format: :json
       assert_response :success
-    end
-
-    should "allow access to manage_questionnaires#edit" do
-      get :edit, params: { id: @questionnaire }
-      assert_response :success
-    end
-
-    should "not create a duplicate questionnaire for a user" do
-      user = create(:user, email: "existing@example.com")
-      create(:questionnaire, user_id: user.id, agreements: Agreement.all)
-      assert_difference("User.count", 0) do
-        assert_difference("Questionnaire.count", 0) do
-          post :create, params: {
-            questionnaire: {
-              experience: @questionnaire.experience,
-              interest: @questionnaire.interest,
-              first_name: @questionnaire.user.first_name,
-              last_name: @questionnaire.user.last_name,
-              phone: @questionnaire.phone,
-              level_of_study: @questionnaire.level_of_study,
-              date_of_birth: @questionnaire.date_of_birth,
-              shirt_size: @questionnaire.shirt_size,
-              school_id: @questionnaire.school_id,
-              email: "existing@example.com",
-              gender: @questionnaire.gender,
-              major: @questionnaire.major,
-              why_attend: @questionnaire.why_attend,
-              graduation_year: @questionnaire.graduation_year,
-              race_ethnicity: @questionnaire.race_ethnicity
-            }
-          }
-        end
-      end
-      assert_response :success
-    end
-
-    # This and email are seaparte as they are still implemented separately.
-    should "update questionnaire's user's first and last name" do
-      patch :update, params: {
-        id: @questionnaire,
-        questionnaire: {
-          user: {
-            "first_name": "firstnametest",
-            "last_name": "lastnametest"
-          }
-        }
-      }
-      assert_equal "firstnametest", assigns(:questionnaire).user.first_name
-      assert_equal "lastnametest", assigns(:questionnaire).user.last_name
-      assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
-    end
-
-    should "update questionnaire's user email" do
-      patch :update, params: { id: @questionnaire, questionnaire: { email: "update@example.com" } }
-      assert_equal "update@example.com", assigns(:questionnaire).email
-      assert_redirected_to manage_questionnaire_path(assigns(:questionnaire))
     end
 
     context "destroy questionnaire" do
@@ -324,81 +183,22 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
         assert_difference('Questionnaire.count', -1) do
           delete :destroy, params: { id: @questionnaire }
         end
-        assert_redirected_to manage_questionnaires_path
+        assert_response :success
       end
     end
 
-    should "check in the questionnaire through html" do
-      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :html
-      assert 1.minute.ago < @questionnaire.reload.checked_in_at
-      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_match /has been checked in./, flash[:notice]
-      assert_response :unauthorized
-    end
-
     should "check in the questionnaire through api" do
-      patch :check_in, params: { id: @questionnaire, check_in: "true" }, format: :json
+      patch :check_in, params: { id: @questionnaire, check_in: "true" }
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
       assert_response :success
     end
 
     should "check out the questionnaire through api" do
-      patch :check_in, params: { id: @questionnaire, check_in: "false" }, format: :json
+      patch :check_in, params: { id: @questionnaire, check_in: "false" }
       assert_nil @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
       assert_response :success
-    end
-
-    should "check in the questionnaire and update information" do
-      @questionnaire.update_attribute(:can_share_info, false)
-      @questionnaire.update_attribute(:phone, "")
-      patch :check_in, params: {
-        id: @questionnaire,
-        check_in: "true",
-        questionnaire: {
-          can_share_info: 1,
-          phone: "(123) 333-3333",
-          email: "new_email@example.com"
-        }
-      }
-      @questionnaire.reload
-      assert 1.minute.ago < @questionnaire.checked_in_at
-      assert_equal @user.id, @questionnaire.checked_in_by_id
-      assert_equal true, @questionnaire.all_agreements_accepted?
-      assert_equal true, @questionnaire.can_share_info
-      assert_equal "1233333333", @questionnaire.phone
-      assert_equal "new_email@example.com", @questionnaire.email
-      assert_match /has been checked in./, flash[:notice]
-      assert_response :unauthorized
-    end
-
-    should "require a new action to check in" do
-      @questionnaire.update_attribute(:agreements, [])
-      @questionnaire.update_attribute(:can_share_info, false)
-      @questionnaire.update_attribute(:phone, "")
-      @questionnaire.user.update_attribute(:email, "old_email@example.com")
-      @questionnaire.update_attribute(:checked_in_at, nil)
-      @questionnaire.update_attribute(:checked_in_by_id, nil)
-      patch :check_in, params: {
-        id: @questionnaire,
-        check_in: "",
-        questionnaire: {
-          agreement_accepted: 1,
-          can_share_info: 1,
-          phone: "(123) 333-3333",
-          email: "new_email@example.com"
-        }
-      }
-      @questionnaire.reload
-      assert_nil @questionnaire.checked_in_at
-      assert_nil @questionnaire.checked_in_by_id
-      assert_equal false, @questionnaire.all_agreements_accepted?
-      assert_equal false, @questionnaire.can_share_info
-      assert_equal "", @questionnaire.phone
-      assert_equal "old_email@example.com", @questionnaire.email
-      assert_match /No check-in action provided/, flash[:alert]
-      assert_response :unauthorized
     end
 
     should "require all agreements to be accepted to check in" do
@@ -406,7 +206,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :check_in, params: { id: @questionnaire, check_in: "true" }
       assert_nil @questionnaire.reload.checked_in_at
       assert_nil @questionnaire.reload.checked_in_by_id
-      assert_response :unauthorized
+      assert_response :unprocessable_entity
     end
 
     should "accept all agreements and check in" do
@@ -414,16 +214,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       patch :check_in, params: { id: @questionnaire, check_in: "true", questionnaire: { agreement_accepted: 1 } }
       assert 1.minute.ago < @questionnaire.reload.checked_in_at
       assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_response :unauthorized
-    end
-
-    should "undo check in of the questionnaire" do
-      patch :check_in, params: { id: @questionnaire, check_in: "false" }
-      assert_nil @questionnaire.reload.checked_in_at
-      assert_equal @user.id, @questionnaire.reload.checked_in_by_id
-      assert_response :redirect
-      assert_match /no longer/, flash[:notice]
-      assert_redirected_to manage_questionnaires_path
+      assert_response :ok
     end
 
     should "allow access to manage_questionnaires#update_acc_status" do
@@ -431,7 +222,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_equal "accepted", @questionnaire.reload.acc_status
       assert_equal @user.id, @questionnaire.reload.acc_status_author_id
       assert_not_equal nil, @questionnaire.reload.acc_status_date
-      assert_response :unauthorized
+      assert_response :success
     end
 
     should "allow access to manage_questionnaires#bulk_apply" do
@@ -444,14 +235,14 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_difference "enqueued_jobs.size", 0 do
         patch :bulk_apply, params: { bulk_ids: [@questionnaire.id] }
       end
-      assert_response 400
+      assert_response :bad_request
     end
 
     should "fail manage_questionnaires#bulk_apply when missing ids" do
       assert_difference "enqueued_jobs.size", 0 do
         patch :bulk_apply, params: { id: @questionnaire }
       end
-      assert_response 400
+      assert_response :bad_request
     end
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|
@@ -467,7 +258,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       assert_difference "enqueued_jobs.size", 0 do
         patch :update_acc_status, params: { id: @questionnaire, questionnaire: { acc_status: "" } }
       end
-      assert_response :redirect
+      assert_response :unprocessable_entity
     end
 
     ["accepted", "denied", "rsvp_confirmed"].each do |status|

@@ -85,8 +85,6 @@ Rails.application.routes.draw do
       patch :perform_merge, on: :member
     end
     resources :users do
-      post :user_datatable, on: :collection
-      post :staff_datatable, on: :collection
       patch :reset_password, on: :member
     end
     resources :agreements
