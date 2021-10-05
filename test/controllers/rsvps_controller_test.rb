@@ -14,12 +14,12 @@ class RsvpsControllerTest < ActionController::TestCase
   context "while not authenticated" do
     should "redirect to sign in page on rsvp#accept" do
       patch :accept
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "redirect to sign in page on rsvp#deny" do
       patch :deny
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
   end
 
@@ -27,6 +27,7 @@ class RsvpsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
       sign_in @user
     end
 
@@ -44,6 +45,7 @@ class RsvpsControllerTest < ActionController::TestCase
   context "while authenticated with a non-accepted questionnaire" do
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
+      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
       sign_in @questionnaire.user
       @questionnaire.acc_status = "denied"
     end
@@ -62,8 +64,8 @@ class RsvpsControllerTest < ActionController::TestCase
   context "while authenticated with an accepted questionnaire" do
     setup do
       clear_enqueued_jobs
-
       @request.env["devise.mapping"] = Devise.mappings[:director]
+      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")
     end
