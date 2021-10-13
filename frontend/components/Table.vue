@@ -1,7 +1,7 @@
 <template>
     <table>
         <tr>
-            <th v-if="editLink"><th>
+            <th v-if="editLink !== null"></th>
 
             <th v-for="columnName in tableHeader" :key="columnName">
                 {{ columnName }}
@@ -47,7 +47,8 @@ export default {
 <style lang="scss" scoped>
 table {
     background-color: white;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     color: var(--dark-color);
     border: 2px solid var(--dark-color);
     border-radius: var(--border-radius);
@@ -55,15 +56,18 @@ table {
     width: 100%;
 }
 
-tr {
-    border-bottom: 2px solid var(--dark-color);
-}
-
 th {
     text-align: left;
 }
 
 th, td {
+    border-bottom: 2px solid var(--dark-color);
     padding: 15px 20px;
+}
+
+tr:last-child {
+    th, td {
+        border-bottom: unset;
+    }
 }
 </style>
