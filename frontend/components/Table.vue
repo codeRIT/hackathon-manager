@@ -1,7 +1,7 @@
 <template>
     <table>
         <tr>
-            <th v-if="editLink !== null"></th>
+            <th v-if="editLink"></th>
 
             <th v-for="columnName in tableHeader" :key="columnName">
                 {{ columnName }}
@@ -10,10 +10,26 @@
 
         <tr v-for="(row, index) in rows" :key="index">
             <!-- TODO: add prop for Font Awesome icons here - related to issue #731 -->
-            <td v-if="editLink !== null"><a :href="editLink">X</a></td>
+            <td v-if="editLink"><a :href="editLink">X</a></td>
 
             <td v-for="(value, name) in row" :key="name">
                 {{ value }}
+            </td>
+        </tr>
+
+        <tr v-if="showPagination">
+            <td class="action-row" :colspan="numColumns">
+                <div>
+                    <div class="pagination">
+                        <p class="arrow" v-on:click="goToPage(1)">&lt;</p>
+                        <p class="current-page" v-on:click="goToPage(1)">1</p>
+                        <p v-on:click="goToPage(2)">2</p>
+                        <p v-on:click="goToPage(3)">3</p>
+                        <p v-on:click="goToPage(4)">4</p>
+                        <p v-on:click="goToPage(5)">5</p>
+                        <p class="arrow" v-on:click="goToPage(2)">&gt;</p>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>
@@ -24,10 +40,14 @@ export default {
     name: 'Table',
     props: {
         rows: Array,
-        editLink: String
+        editLink: String,
+        showPagination: Boolean,
+        pageSize: Number
     },
     data () {
-        return {}
+        return {
+            pageNumber: 0
+        }
     },
     computed: {
         tableHeader: function() {
@@ -40,6 +60,23 @@ export default {
                 }
                 return row
             }
+        },
+
+        numColumns: function() {
+            let num = this.tableHeader.length
+            if (this.editLink) {
+                num++
+            }
+            return num
+        },
+
+        numPages: function() {
+            return Math.ceil(this.rows.length / pageSize)
+        }
+    },
+    methods: {
+        goToPage: function(pageNumber) {
+            alert(`going to page #${pageNumber}\nto be implemented later!`)
         }
     }
 }
@@ -70,5 +107,30 @@ tr:last-child {
     th, td {
         border-bottom: unset;
     }
+}
+
+.action-row {
+    padding: 0;
+
+    & > div {
+        display: flex;
+        width: 100%;
+    }
+}
+
+.pagination {
+    border-left: 2px solid var(--dark-color);
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+    padding: 15px 20px;
+
+    & > span {
+        cursor: pointer;
+    }
+}
+
+.current-page {
+    font-weight: bold;
 }
 </style>
