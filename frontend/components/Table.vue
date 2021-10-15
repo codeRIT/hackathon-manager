@@ -20,6 +20,12 @@
         <tr v-if="showPagination">
             <td class="action-row" :colspan="numColumns">
                 <div>
+                    <!-- TODO: add prop for Font Awesome icons here -->
+                    <div class="filters">
+                        filter <span class="arrow">v</span>
+                    </div>
+
+                    <!-- TODO: add prop for Font Awesome icons here -->
                     <div class="pagination">
                         <p class="arrow" v-on:click="goToPage(1)">&lt;</p>
                         <p class="current-page" v-on:click="goToPage(1)">1</p>
@@ -128,6 +134,14 @@ tr:last-child {
     & > span {
         cursor: pointer;
     }
+}
+
+.filters {
+    border-right: 2px solid var(--dark-color);
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    padding: 15px 20px;
 }
 
 .current-page {
