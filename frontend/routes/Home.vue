@@ -17,7 +17,7 @@
             <Radio content="Hello" name="radio-test" value="asdf"></Radio>
             <Radio content="Hello" name="radio-test" value="1234"></Radio>
 
-            <Table :rows="tableRows" :showPagination="true"></Table>
+            <Table :rows="tableRows" :showPagination="true" editLink="/test"></Table>
         </div>
 
         <div>

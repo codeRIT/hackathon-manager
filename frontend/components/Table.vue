@@ -1,5 +1,5 @@
 <template>
-    <table>
+    <table :style="{ minWidth: numColumns * 125 + 'px' }">
         <tr>
             <th v-if="editLink"></th>
 
@@ -10,7 +10,7 @@
 
         <tr v-for="(row, index) in rows" :key="index">
             <!-- TODO: add prop for Font Awesome icons here - related to issue #731 -->
-            <td v-if="editLink"><a :href="editLink">X</a></td>
+            <td v-if="editLink"><a :href="editLink">Edit</a></td>
 
             <td v-for="(value, name) in row" :key="name">
                 {{ value }}
