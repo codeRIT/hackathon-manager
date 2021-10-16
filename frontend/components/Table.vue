@@ -1,44 +1,54 @@
 <template>
-    <table :style="{ minWidth: numColumns * 125 + 'px' }">
-        <tr>
-            <th v-if="editLink"></th>
+    <!--
+        We need to use two containers here to make the drop shadow work because the table's drop shadow is not part of
+        its bounding box, so the `overflow-y: scroll` on the outer container cuts it off. The inner container has
+        padding so that the padding needed for the drop shadow to remain visible doesn't get cut off by overflow
+        either. It's admittedly scuffed, but it works, so :shrug:.
+    -->
+    <div class="table-container">
+        <div class="table-inner-container">
+            <table :style="{ minWidth: numColumns * 125 + 'px' }">
+                <tr>
+                    <th v-if="editLink"></th>
 
-            <th v-for="columnName in tableHeader" :key="columnName">
-                {{ columnName }}
-            </th>
-        </tr>
+                    <th v-for="columnName in tableHeader" :key="columnName">
+                        {{ columnName }}
+                    </th>
+                </tr>
 
-        <tr v-for="(row, index) in rows" :key="index">
-            <!-- TODO: add prop for Font Awesome icons here - related to issue #731 -->
-            <td v-if="editLink"><a :href="editLink">Edit</a></td>
+                <tr v-for="(row, index) in rows" :key="index">
+                    <!-- TODO: add prop for Font Awesome icons here - related to issue #731 -->
+                    <td v-if="editLink"><a :href="editLink">Edit</a></td>
 
-            <td v-for="(value, name) in row" :key="name">
-                {{ value }}
-            </td>
-        </tr>
+                    <td v-for="(value, name) in row" :key="name">
+                        {{ value }}
+                    </td>
+                </tr>
 
-        <tr v-if="showPagination">
-            <td class="action-row" :colspan="numColumns">
-                <div>
-                    <!-- TODO: add prop for Font Awesome icons here -->
-                    <div class="filters">
-                        filter <span class="arrow">v</span>
-                    </div>
+                <tr v-if="showPagination">
+                    <td class="action-row" :colspan="numColumns">
+                        <div>
+                            <!-- TODO: add prop for Font Awesome icons here -->
+                            <div class="filters">
+                                filter <span class="arrow">v</span>
+                            </div>
 
-                    <!-- TODO: add prop for Font Awesome icons here -->
-                    <div class="pagination">
-                        <p class="arrow" v-on:click="goToPage(1)">&lt;</p>
-                        <p class="current-page" v-on:click="goToPage(1)">1</p>
-                        <p v-on:click="goToPage(2)">2</p>
-                        <p v-on:click="goToPage(3)">3</p>
-                        <p v-on:click="goToPage(4)">4</p>
-                        <p v-on:click="goToPage(5)">5</p>
-                        <p class="arrow" v-on:click="goToPage(2)">&gt;</p>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                            <!-- TODO: add prop for Font Awesome icons here -->
+                            <div class="pagination">
+                                <p class="arrow" v-on:click="goToPage(1)">&lt;</p>
+                                <p class="current-page" v-on:click="goToPage(1)">1</p>
+                                <p v-on:click="goToPage(2)">2</p>
+                                <p v-on:click="goToPage(3)">3</p>
+                                <p v-on:click="goToPage(4)">4</p>
+                                <p v-on:click="goToPage(5)">5</p>
+                                <p class="arrow" v-on:click="goToPage(2)">&gt;</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -89,6 +99,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.table-container {
+    overflow-x: scroll;
+}
+
+.table-inner-container {
+    padding: var(--shadow-length);
+    min-width: min-content;
+}
+
 table {
     background-color: white;
     border-collapse: separate;
