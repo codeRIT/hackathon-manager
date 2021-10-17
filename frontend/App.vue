@@ -23,7 +23,8 @@ export default {
     },
     provide() {
         return {
-            api: new API()  // Other pages/components can inject this object: `inject: ['api']`
+            api: new API()  // TODO: pull JWT token from cookies
+            // Other pages/components can now inject the API object: `inject: ['api']`
         }
     }
 }
