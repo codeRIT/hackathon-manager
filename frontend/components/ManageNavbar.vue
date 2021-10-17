@@ -1,8 +1,9 @@
 <template>
     <nav>
         <!-- TODO: use HorizontalGroup base component, once it exists -->
+        <!-- TODO: replace <a>s with <router-links> as we add routes -->
         <div class="navbar">
-            <a class="active" href="#">{{ $t("pages.manage.navbar.dashboard") }}</a>
+            <router-link to="/manage">{{ $t("pages.manage.navbar.dashboard") }}</router-link>
             <a href="#">{{ $t("pages.manage.navbar.questionnaire") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.admissions") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.users") }}</a>
