@@ -2,19 +2,7 @@ class Manage::ConfigsController < Manage::ApplicationController
   before_action :require_director
   before_action :get_config, only: [:edit, :update, :update_only_css_variables]
 
-  respond_to :html, :json
-
-  def index
-    @config = HackathonConfig.get_all
-    @basics = ['name', 'event_start_date', 'digital_hackathon'].freeze
-    @questionnaire_settings = ['accepting_questionnaires', 'last_day_to_apply', 'auto_late_waitlist', 'disabled_fields'].freeze
-    @styling = ['default_page_title', 'homepage_url', 'logo_asset', 'email_banner_asset', 'favicon_asset', 'custom_css'].freeze
-    @communications = ['email_from', 'disclaimer_message', 'thanks_for_applying_message', 'thanks_for_rsvp_message', 'questionnaires_closed_message', 'bus_captain_notes']
-    respond_with(HackathonConfig.get_all)
-  end
-
-  def edit
-  end
+  respond_to :json
 
   def update
     key = @config.var.to_sym
@@ -22,14 +10,16 @@ class Manage::ConfigsController < Manage::ApplicationController
     value = true if value == "true"
     value = false if value == "false"
     if @config.var.start_with?("agreement_") && !value.start_with?('http://', 'https://')
-      flash[:alert] = "Config \"#{key}\" must start with http:// or https://"
-      render :edit
+      render ErrorResponse.new(:config_update_agreementMustStartHTTP), status: :unprocessable_entity
     elsif @config.value != value
       @config.value = value
-      @config.save
-      redirect_to manage_configs_path, notice: "Config \"#{key}\" has been updated."
+      if @config.save
+        head :ok
+      else
+        head :unprocessable_entity
+      end
     else
-      redirect_to manage_configs_path, notice: "Config \"#{key}\" was not changed"
+      head :ok
     end
   end
 
@@ -50,16 +40,6 @@ class Manage::ConfigsController < Manage::ApplicationController
     end
     params[:hackathon_config][key] = new_value
     update
-  end
-
-  def enter_theming_editor
-    cookies[:theming_editor] = true
-    redirect_to root_path
-  end
-
-  def exit_theming_editor
-    cookies.delete :theming_editor
-    redirect_to manage_configs_path
   end
 
   private

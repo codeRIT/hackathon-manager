@@ -2,11 +2,6 @@ require "test_helper"
 
 class Manage::ConfigsControllerTest < ActionController::TestCase
   context "while not authenticated" do
-    should "redirect to sign in page on manage_configs#index" do
-      get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
 
     should "not allow access to manage_configs#edit" do
       get :edit, params: { id: "registration_is_open" }
@@ -33,12 +28,6 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       @user = create(:user)
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
-    end
-
-    should "not allow access to manage_configs#index" do
-      get :index
-      assert_response :redirect
-      assert_redirected_to root_path
     end
 
     should "not allow access to manage_configs#edit" do
@@ -68,11 +57,6 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "not allow access to manage_configs#index" do
-      get :index
-      assert_response :unauthorized
-    end
-
     should "not allow access to manage_configs#edit" do
       get :edit, params: { id: "registration_is_open" }
       assert_response :redirect
@@ -96,11 +80,6 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       @user = create(:organizer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-    end
-
-    should "not allow access to manage_configs#index" do
-      get :index
-      assert_response :redirect
     end
 
     should "not allow access to manage_configs#edit" do
@@ -128,11 +107,6 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "allow access to manage_configs#index" do
-      get :index
-      assert_response :success
-    end
-
     should "allow access to manage_configs#edit" do
       get :edit, params: { id: "registration_is_open" }
       assert_response :success
@@ -142,14 +116,14 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
       HackathonConfig["registration_is_open"] = false
       patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
       assert_equal true, HackathonConfig["registration_is_open"]
-      assert_redirected_to manage_configs_path
+      assert_response :success
     end
 
     should "update logo_asset with a url" do
       HackathonConfig["logo_asset"] = ""
       patch :update, params: { id: "logo_asset", hackathon_config: { logo_asset: "https://picsum.photos/200" } }
       assert_equal "https://picsum.photos/200", HackathonConfig["logo_asset"]
-      assert_redirected_to manage_configs_path
+      assert_response :success
     end
 
     should "update config CSS variables when custom_css is blank" do
