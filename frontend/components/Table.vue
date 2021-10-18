@@ -25,15 +25,15 @@
                     </td>
                 </tr>
 
-                <tr v-if="showPagination">
+                <!-- <tr v-if="paginated">
                     <td class="action-row" :colspan="numColumns">
                         <div>
-                            <!-- TODO: add prop for Font Awesome icons here -->
+                            !-- TODO: add prop for Font Awesome icons here --
                             <div class="filters">
                                 filter <span class="arrow">v</span>
                             </div>
 
-                            <!-- TODO: add prop for Font Awesome icons here -->
+                            !-- TODO: add prop for Font Awesome icons here --
                             <div class="pagination">
                                 <p class="arrow" v-on:click="goToPage(1)">&lt;</p>
                                 <p class="current-page" v-on:click="goToPage(1)">1</p>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </td>
-                </tr>
+                </tr> -->
             </table>
         </div>
     </div>
@@ -57,7 +57,7 @@ export default {
     props: {
         rows: Array,
         editLink: String,
-        showPagination: Boolean,
+        paginated: Boolean,
         pageSize: Number
     },
     data () {
