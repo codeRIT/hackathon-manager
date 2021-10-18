@@ -23,7 +23,7 @@ export default {
 // These are styled in the controls.sass partial
 // because the style for checkboxes and radios
 // are nearly identical.
-@import "../assets/scss/controls.scss";
+@import "../../assets/scss/controls.scss";
 
 // The "nearly" in "nearly identical" styling...
 .control-container input:checked ~ .control::before {
