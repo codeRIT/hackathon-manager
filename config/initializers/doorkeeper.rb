@@ -20,7 +20,7 @@ Doorkeeper.configure do
     if current_user
       head :forbidden unless current_user.director? || current_user.organizer?
     else
-      redirect_to new_user_session_url
+      head :unauthorized
     end
   end
 

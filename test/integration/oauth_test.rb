@@ -10,7 +10,7 @@ class OauthTest < ActionDispatch::IntegrationTest
   context "access without API key" do
     should "error on questionnaire data" do
       get questionnaires_path, headers: json_headers
-      assert_redirected_to new_user_session_url
+      assert_response :unauthorized
     end
   end
 
