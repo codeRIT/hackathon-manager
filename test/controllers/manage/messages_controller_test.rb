@@ -296,8 +296,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       @message.update_attribute(:delivered_at, 1.minute.ago)
       old_message_name = @message.name
       patch :update, params: { id: @message, message: { name: "New Message Name" } }
-      assert_match /can no longer/, flash[:alert]
-      assert_equal old_message_name, @message.reload.name
+      assert_response :forbidden
     end
 
     should "destroy message" do
