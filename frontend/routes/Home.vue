@@ -16,7 +16,10 @@
 
             <Radio content="Hello" name="radio-test" value="asdf"></Radio>
             <Radio content="Hello" name="radio-test" value="1234"></Radio>
+
+            <Table :rows="tableRows" :showPagination="true" editLink="/test"></Table>
         </div>
+
         <div>
             <p>{{ $t("pages.home.component") }}</p>
             <p>{{ $t("pages.home.hello") }}</p>
@@ -30,6 +33,7 @@
     import TextInput from "../components/base/TextInput.vue";
     import Checkbox  from "../components/base/Checkbox.vue";
     import Radio     from "../components/base/Radio.vue";
+    import Table     from "../components/base/Table.vue";
 
     export default {
         components: {
@@ -37,11 +41,39 @@
             Button,
             Checkbox,
             Radio,
-            TextInput
+            TextInput,
+            Table
         },
         data() {
             return {
                 name: "Home",
+                tableRows: [
+                    {
+                        "Column 1": "lorem ipsum",
+                        "Column 2": "lorem ipsum",
+                        "Column 3": "lorem ipsum"
+                    },
+                    {
+                        "Column 1": "lorem ipsum",
+                        "Column 2": "lorem ipsum",
+                        "Column 3": "lorem ipsum"
+                    },
+                    {
+                        "Column 1": "lorem ipsum",
+                        "Column 2": "lorem ipsum",
+                        "Column 3": "lorem ipsum"
+                    },
+                    {
+                        "Column 1": "lorem ipsum",
+                        "Column 2": "lorem ipsum",
+                        "Column 3": "lorem ipsum"
+                    },
+                    {
+                        "Column 1": "lorem ipsum",
+                        "Column 2": "lorem ipsum",
+                        "Column 3": "lorem ipsum"
+                    }
+                ]
             }
         },
     };
