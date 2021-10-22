@@ -2,10 +2,9 @@ require "test_helper"
 
 class Manage::ConfigsControllerTest < ActionController::TestCase
   context "while not authenticated" do
-    should "redirect to sign in page on manage_configs#index" do
+    should "not allow access to manage_configs#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      assert_response :unauthorized
     end
 
     should "not update config" do
@@ -32,8 +31,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_configs#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to root_path
+      assert_response :unauthorized
     end
 
     should "not update config" do
@@ -86,7 +84,7 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_configs#index" do
       get :index
-      assert_response :redirect
+      assert_response :unauthorized
     end
 
     should "not update config" do
