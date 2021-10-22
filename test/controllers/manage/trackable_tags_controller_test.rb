@@ -17,7 +17,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
           @user = create(:user)
           @request.env["devise.mapping"] = Devise.mappings[:director]
           sign_in @user
-			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
         end
       end
 
@@ -55,7 +55,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
         @user = create(:user, role: user_role)
         @request.env["devise.mapping"] = Devise.mappings[:user]
         sign_in @user
-			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
       end
 
       should "get index" do
@@ -85,7 +85,7 @@ class Manage::TrackableTagsControllerTest < ActionController::TestCase
       @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
     should "get index" do

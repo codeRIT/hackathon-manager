@@ -34,7 +34,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
     should "not allow access to manage_users#index" do
@@ -63,7 +63,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
       @user = create(:volunteer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
     should "not allow access to manage_users#index" do
@@ -92,7 +92,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
       @user = create(:organizer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
     should "not allow access to manage_users#index" do
@@ -122,7 +122,7 @@ class Manage::UsersControllerTest < ActionController::TestCase
       @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
     should "allow access to manage_users#index" do
