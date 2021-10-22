@@ -2,6 +2,11 @@ require "test_helper"
 
 class Manage::ConfigsControllerTest < ActionController::TestCase
   context "while not authenticated" do
+    should "redirect to sign in page on manage_configs#index" do
+      get :index
+      assert_response :redirect
+      assert_redirected_to new_user_session_path
+    end
 
     should "not update config" do
       HackathonConfig["registration_is_open"] = false
@@ -25,6 +30,11 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
+    should "not allow access to manage_configs#index" do
+      get :index
+      assert_response :redirect
+      assert_redirected_to root_path
+    end
 
     should "not update config" do
       HackathonConfig["registration_is_open"] = false
@@ -48,6 +58,11 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
+    should "not allow access to manage_configs#index" do
+      get :index
+      assert_response :unauthorized
+    end
+
     should "not update config" do
       HackathonConfig["registration_is_open"] = false
       patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
@@ -69,6 +84,10 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
+    should "not allow access to manage_configs#index" do
+      get :index
+      assert_response :redirect
+    end
 
     should "not update config" do
       HackathonConfig["registration_is_open"] = false
@@ -91,6 +110,10 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
 			@request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
+    should "allow access to manage_configs#index" do
+      get :index, format: :json
+      assert_response :success
+    end
 
     should "update config" do
       HackathonConfig["registration_is_open"] = false

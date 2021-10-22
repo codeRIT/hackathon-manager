@@ -4,14 +4,16 @@ class Manage::ConfigsController < Manage::ApplicationController
 
   respond_to :json
 
+  def index
+    @config = HackathonConfig.get_all
+  end
+
   def update
     key = @config.var.to_sym
     value = params[:hackathon_config][key]
     value = true if value == "true"
     value = false if value == "false"
-    if @config.var.start_with?("agreement_") && !value.start_with?('http://', 'https://')
-      render ErrorResponse.new(:config_update_agreementMustStartHTTP), status: :unprocessable_entity
-    elsif @config.value != value
+    if @config.value != value
       @config.value = value
       if @config.save
         head :ok
