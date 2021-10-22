@@ -9,6 +9,9 @@ jobs:
     name: Push
     runs-on: ubuntu-latest
     steps:
-    - name: Update and install packages
+    - name: Install yardoc
+      run: |
+        gem install yard
+    - name: Run yardoc
       run: yardoc
     
