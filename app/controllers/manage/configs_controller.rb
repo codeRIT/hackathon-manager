@@ -4,6 +4,10 @@ class Manage::ConfigsController < Manage::ApplicationController
 
   respond_to :json
 
+  def index
+    @config = HackathonConfig.get_all
+  end
+
   def update
     key = @config.var.to_sym
     value = params[:hackathon_config][key]
