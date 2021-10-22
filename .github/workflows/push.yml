@@ -1,0 +1,13 @@
+# This workflow runs on push to the HackEngine Github repo
+
+name: Push - 3.0
+
+on: push
+
+jobs:
+  build:
+    name: Push
+    steps:
+    - name: Update and install packages
+      run: echo I have run!
+    
