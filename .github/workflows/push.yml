@@ -7,6 +7,7 @@ on: push
 jobs:
   build:
     name: Push
+    runs-on: ubuntu-latest
     steps:
     - name: Update and install packages
       run: echo I have run!
