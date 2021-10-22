@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   include ActionController::HttpAuthentication::Token::ControllerMethods
   protect_from_forgery with: :null_session
-  
+
   respond_to :json
 
   before_action :authenticate_user
