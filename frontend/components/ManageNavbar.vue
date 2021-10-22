@@ -4,7 +4,7 @@
         <!-- TODO: replace <a>s with <router-links> as we add routes -->
         <div class="navbar">
             <router-link to="/manage">{{ $t("pages.manage.navbar.dashboard") }}</router-link>
-            <a href="#">{{ $t("pages.manage.navbar.questionnaire") }}</a>
+            <router-link to="/manage/questionnaire">{{ $t("pages.manage.navbar.questionnaire") }}</router-link>
             <a href="#">{{ $t("pages.manage.navbar.admissions") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.users") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.schools") }}</a>
