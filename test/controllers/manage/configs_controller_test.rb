@@ -2,7 +2,6 @@ require "test_helper"
 
 class Manage::ConfigsControllerTest < ActionController::TestCase
   context "while not authenticated" do
-
     should "redirect to sign in page on manage_configs#index" do
       get :index
       assert_response :redirect
