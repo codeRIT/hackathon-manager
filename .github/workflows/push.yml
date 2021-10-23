@@ -27,9 +27,9 @@ jobs:
         run: |
           yardoc --output-dir docs
       - name: Commit & Push changes
-        uses: actions-js/push@master
+        uses: actions-js/push@${{ steps.extract_branch.outputs.branch }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ steps.extract_branch.outputs.branch }}
+         
           
     
