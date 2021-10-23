@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Install yardoc
       run: |
-        gem install yard
+        sudo gem install yard
     - name: Run yardoc
       run: yardoc
     
