@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-HackathonManager">HackathonManager</h1>
+
+<p><a href="https://travis-ci.org/codeRIT/hackathon-manager"><img src="https://travis-ci.org/codeRIT/hackathon-manager.svg?branch=master"></a> <a href="https://codeclimate.com/github/codeRIT/hackathon-manager"><img src="https://codeclimate.com/github/codeRIT/hackathon-manager/badges/gpa.svg"></a> <a href="https://codeclimate.com/github/codeRIT/hackathon-manager/coverage"><img src="https://codeclimate.com/github/codeRIT/hackathon-manager/badges/coverage.svg"></a> <a href="https://hakiri.io/github/codeRIT/hackathon-manager/master"><img src="https://hakiri.io/github/codeRIT/hackathon-manager/master.svg"></a></p>
+
+<p>An all-in-one platform for managing hackathon registration &amp; logistics, originally developed for <a href="https://github.com/codeRIT/brickhack.io">BrickHack</a>.</p>
+
+<p>Read more at <strong><a href="https://coderit.org/hackathon-manager/">coderit.org/hackathon-manager/</a></strong></p>
+<ul><li>
+<p><strong>Hacker applications:</strong> Enable hackers to apply to your hackathon while providing all relevant information (contact info, school, demographics, etc)</p>
+</li><li>
+<p><strong>MyMLH support:</strong> Streamline the application process when users log in with <a href="https://my.mlh.io/">MyMLH</a>, a common platform for applying to any MLH hackathon. Basic info is pre-filled based on a common application, so hackers don&#39;t have to re-type it every time.</p>
+</li><li>
+<p><strong>Admissions &amp; RSVPs</strong>: Facilitate accepting hackers to your hackathon &amp; enable them to RSVP</p>
+</li><li>
+<p><strong>Bus Lists:</strong> Coordinate bus sign-ups during the RSVP process while communicating important information to riders &amp; captains</p>
+</li><li>
+<p><strong>Email communication</strong>: Ensure hackers get consistent, timely information throughout their application process, while enabling your organizing team to communicate important information at any time.</p>
+</li><li>
+<p><strong>Statistics &amp; Visualization:</strong> Surface key analytics about your admissions, distribution of applicants, progress towards attendance, etc.</p>
+</li></ul>
+
+<h2 id="label-Usage">Usage</h2>
+
+<p>HackathonManager is a standalone web app separate from your regular marketing website/public homepage.</p>
+
+<p>A typical setup would be:</p>
+<ul><li>
+<p><strong>brickhack.io</strong> — Marketing site with event info, schedule, sponsors, etc and a button to apply</p>
+</li><li>
+<p><strong>apply.brickhack.io</strong> — HackathonManager deployment to accept hacker applications + host management dashboard</p>
+</li></ul>
+
+<p>This allows your public marketing site to operate however you want it (e.g. GitHub pages) while HackathonManager lives in an isolated, consistent environment.</p>
+
+<p>HackathonManager makes use of a few different third-party services &amp; Ruby gems:</p>
+<ul><li>
+<p><a href="https://github.com/plataformatec/devise">Devise</a> + <a href="https://my.mlh.io/">MyMLH</a> (authentication &amp; attendee identity)</p>
+</li><li>
+<p><a href="https://github.com/mperham/sidekiq">Sidekiq</a> (background jobs)</p>
+</li><li>
+<p><a href="https://sendgrid.com">SendGrid</a> (email)</p>
+</li><li>
+<p><a href="https://aws.amazon.com/s3">Amazon S3</a> (resume storage)</p>
+</li><li>
+<p><a href="http://chartkick.com">Chartkick</a> (management UI charts)</p>
+</li><li>
+<p><a href="https://github.com/ankane/blazer">Blazer</a> (custom SQL queries, analytics, and charts)</p>
+</li><li>
+<p><a href="https://github.com/doorkeeper-gem/doorkeeper">Doorkeeper</a> (authentication via OAuth for API usage)</p>
+</li></ul>
+
+<h2 id="label-Get+Started">Get Started</h2>
+
+<p><strong><a href="https://coderit.org/hackathon-manager/docs/deployment">Deploy HackathonManager for your hackathon »</a></strong></p>
+
+<p><a href="https://heroku.com/deploy"><img src="https://www.herokucdn.com/deploy/button.svg"></a></p>
+
+<h2 id="label-Documentation">Documentation</h2>
+
+<p>Documentation is available at <a href="https://coderit.org/hackathon-manager">coderit.org/hackathon-manager</a>/</p>
+
+<p>Docs are maintained as markdown files in the <code>docs/</code> folder, with the website configuration &amp; tooling stored in <code>website/</code>.</p>
+
+<p>Doc &amp; website changes are auto-built and deployed via <a href="https://travis-ci.org/codeRIT/hackathon-manager">Travis CI</a> once merged into master.</p>
+
+<h2 id="label-Commits+-2B+Releases">Commits + Releases</h2>
+
+<p>Releases are automatically generated by <a href="https://github.com/semantic-release/semantic-release">semantic-release</a> using commit messages.</p>
+
+<p>Commit messages should follow the standard <code>type(scope): subject</code> format. For example:</p>
+<ul><li>
+<p><code>feat: Improve form typography</code></p>
+</li><li>
+<p><code>deploy(heroku): Ensure db:migrate is run after each deploy</code></p>
+</li><li>
+<p><code>fix: Support HTTPS in questionnaire portfolio URL</code></p>
+</li></ul>
+
+<p>For more information, see semantic-release&#39;s <a href="https://github.com/semantic-release/semantic-release#how-does-it-work">how does it work</a>.</p>
+
+<h2 id="label-Contributing">Contributing</h2>
+
+<p>GitHub issues and pull requests welcome!</p>
+
+<p>All documentation is easily editable using the GitHub UI. Click the “Edit” button at the top of any documentation page to get started.</p>
+
+<p>If there&#39;s a new feature you&#39;re looking to implement, <strong>please</strong> file an issue to open discussion on the feature before starting work or opening a pull request.</p>
+
+<h2 id="label-Local+Development">Local Development</h2>
+<ol><li>
+<p>Setup Ruby + MySQL for local development</p>
+</li></ol>
+
+<p>If you don&#39;t already have Ruby + MySQL set up, see <a href="https://gorails.com/setup">this guide by GoRails</a> for pointers.</p>
+<ul><li>
+<p>Select your computer&#39;s operating system &amp; version</p>
+</li><li>
+<p>If given the choice, use <code>rbenv</code> -- this will ensure a clean, sustainable Ruby dev environment</p>
+</li><li>
+<p>SQLite and PostgreSQL steps are optional</p>
+</li><li>
+<p>Clone the repo</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby">$ git clone git@github.com:codeRIT/hackathon-manager
+$ cd hackathon-manager
+</code></pre>
+<ol><li>
+<p>Install dependencies</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby">$ bundle install
+</code></pre>
+<ol><li>
+<p>Setup databse</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby">$ bin/rails db:setup
+</code></pre>
+<ol><li>
+<p>Start up the server</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby">$ bin/rails s  # short for bin/rails server
+</code></pre>
+<ol><li>
+<p>Visit <a href="http://localhost:3000/apply">localhost:3000/apply</a>, create an account, and complete an application</p>
+</li><li>
+<p>In another bash window, promote your user to a director</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby">$ cd hackathon-manager
+$ bin/rails c  # short for bin/rails console
+# Wait for the console to start...
+Loading development environment (Rails 5.1.1)
+irb(main):001:0&gt; User.last.update_attribute(:role, :director)
+</code></pre>
+<ol><li>
+<p>Visit <a href="http://localhost:3000/manage">localhost:3000/manage</a> and set up the hackathon as needed</p>
+</li></ol>
+
+<p><em>See <a href="https://coderit.org/hackathon-manager">coderit.org/hackathon-manager</a>/ for docs on regular hackathon setup</em></p>
+
+<h3 id="label-Local+Development+Utilities">Local Development Utilities</h3>
+<ul><li>
+<p><strong>Mail View</strong> - Email templates can be previewed at <a href="http://localhost:3000/rails/mailers">localhost:3000/rails/mailers</a></p>
+</li><li>
+<p><strong>Mail Catcher</strong> - When active, emails will be captured by MailCatcher instead of slipping into a black hole (no emails are ever sent in development). Visit <a href="http://mailcatcher.me/">mailcatcher.me</a> and follow instructions under “How” to get setup.</p>
+</li><li>
+<p><strong>Guard</strong> - Automatically runs tests based on the files you edit. <code>bundle exec guard</code></p>
+</li><li>
+<p><strong>Coverage</strong> - Test coverage can be manually generated via the <code>bin/rails coverage:run</code> command. Results are then made available in the <code>coverage/</code> directory.</p>
+</li><li>
+<p><strong>Sidekiq</strong> - Run background jobs (such as emails) and view active &amp; completed jobs. Sidekiq is automatically started with Docker - a dashboard is available at <a href="http://localhost:3000/sidekiq">localhost:3000/sidekiq</a> (<em>also available in production</em>).</p>
+</li></ul>
+
+<h2 id="label-License">License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+</div></div>
+
+      <div id="footer">
+  Generated on Sat Oct 23 02:54:51 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.6).
+</div>
+
+    </div>
+  </body>
+</html>
