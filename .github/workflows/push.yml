@@ -23,10 +23,7 @@ jobs:
         run: gem install yard --no-document
       - name: Build YARD Ruby Documentation 
         run: |
-          cd ./docs
-          mkdir autodocs
-          cd autodocs
-          yardoc --output-dir autodocs
+          yardoc --output-dir docs
           ls ./docs
           git add .
           git commit -m "generated auto docs"
