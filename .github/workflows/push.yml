@@ -11,19 +11,23 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Print branch name
-        run: echo  ${{ steps.extract_branch.outputs.branch }}
-      # - name: Checkout this repo 
-      #   uses: actions/checkout@v2
-      #     with:
-      #       ref: 
-      # - name: Set up Ruby
-      #   uses: actions/setup-ruby@v1
-      #   with:
-      #     ruby-version: "2.6.6"
-      # - name: Install required gem dependencies
-      #   run: gem install yard --no-document
-      # - name: Build YARD Ruby Documentation 
-      #   run: yardoc --output-dir docs
+      - name: Checkout this repo 
+        uses: actions/checkout@v2
+          with:
+            ref: ${{ steps.extract_branch.outputs.branch }}
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.6.6"
+      - name: Install required gem dependencies
+        run: gem install yard --no-document
+      - name: Build YARD Ruby Documentation 
+        run: yardoc --output-dir docs
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          allow_empty_commit: true
 
     
