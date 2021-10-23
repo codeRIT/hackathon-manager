@@ -1,19 +1,21 @@
 # This workflow runs on push to the HackEngine Github repo
-
-name: Push - 3.0
-
+name: Build & deploy documentation
 on: push
 
 jobs:
   build:
-    name: Push
     runs-on: ubuntu-latest
+    name: Update gh-pages with docs
     steps:
-    - name: Install yardoc
-      run: |
-        sudo gem install yard
-    - name: Run yardoc
-      run: yardoc
-    - name: View files
-      run: ls -R
+      - name: Checkout this repo # 2
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+      - name: Install required gem dependencies
+        run: gem install yard --no-document
+      - name: Build YARD Ruby Documentation # 3
+        run: yardoc --output-dir docs
+
     
