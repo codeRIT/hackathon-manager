@@ -22,12 +22,8 @@ jobs:
       - name: Install required gem dependencies
         run: gem install yard --no-document
       - name: Build YARD Ruby Documentation 
-        run: yardoc --output-dir docs
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          allow_empty_commit: true
-
+        run: |
+          yardoc --output-dir docs
+          ls 
+          git status
     
