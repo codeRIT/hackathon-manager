@@ -14,4 +14,6 @@ jobs:
         sudo gem install yard
     - name: Run yardoc
       run: yardoc
+    - name: View files
+      run: ls
     
