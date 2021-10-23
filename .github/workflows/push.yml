@@ -24,6 +24,6 @@ jobs:
       - name: Build YARD Ruby Documentation 
         run: |
           yardoc --output-dir docs
-          ls 
+          ls ./docs
           git status
     
