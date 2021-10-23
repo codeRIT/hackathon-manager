@@ -15,5 +15,5 @@ jobs:
     - name: Run yardoc
       run: yardoc
     - name: View files
-      run: ls
+      run: ls -R
     
