@@ -16,9 +16,9 @@ jobs:
         with:
           ref: ${{ steps.extract_branch.outputs.branch }}
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@21351ecc0a7c196081abca5dc55b08f085efe09a
         with:
-          ruby-version: "2.7.6"
+          ruby-version: "2.6.6"
       - name: Install required gem dependencies
         run: gem install yard --no-document
       - name: Build YARD Ruby Documentation 
