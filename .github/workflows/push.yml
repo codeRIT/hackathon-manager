@@ -14,6 +14,8 @@ jobs:
       - name: Checkout this repo 
         uses: actions/checkout@v2
         with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
           ref: ${{ steps.extract_branch.outputs.branch }}
       - name: Set up Ruby
         uses: ruby/setup-ruby@21351ecc0a7c196081abca5dc55b08f085efe09a
@@ -24,6 +26,9 @@ jobs:
       - name: Build YARD Ruby Documentation 
         run: |
           yardoc --output-dir docs
-          ls -R
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           
     
