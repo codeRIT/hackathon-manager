@@ -49,3 +49,6 @@ dist/
 node_modules/
 
 .cache
+
+# Don't commit locally generated vars
+/doc

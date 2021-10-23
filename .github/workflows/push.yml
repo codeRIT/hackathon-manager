@@ -24,8 +24,6 @@ jobs:
       - name: Build YARD Ruby Documentation 
         run: |
           yardoc --output-dir docs
-          ls ./docs
-          git add .
-          git commit -m "generated auto docs"
-          git push
+          ls -R
+          
     
