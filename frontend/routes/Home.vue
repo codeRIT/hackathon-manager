@@ -24,6 +24,12 @@
                 <a href="#">Item 2</a>
                 <a href="#">Item 3</a>
             </VerticalGroup>
+
+            <HorizontalGroup>
+                <a href="#">Item 1</a>
+                <a href="#">Item 2</a>
+                <a href="#">Item 3</a>
+            </HorizontalGroup>
         </div>
 
         <div>
@@ -34,13 +40,14 @@
 </template>
 
 <script>
-    import Card          from "../components/base/Card.vue";
-    import Button        from "../components/base/Button.vue";
-    import TextInput     from "../components/base/TextInput.vue";
-    import Checkbox      from "../components/base/Checkbox.vue";
-    import Radio         from "../components/base/Radio.vue";
-    import Table         from "../components/base/Table.vue";
-    import VerticalGroup from "../components/base/VerticalGroup.vue";
+    import Card            from "../components/base/Card.vue";
+    import Button          from "../components/base/Button.vue";
+    import TextInput       from "../components/base/TextInput.vue";
+    import Checkbox        from "../components/base/Checkbox.vue";
+    import Radio           from "../components/base/Radio.vue";
+    import Table           from "../components/base/Table.vue";
+    import VerticalGroup   from "../components/base/VerticalGroup.vue";
+    import HorizontalGroup from "../components/base/HorizontalGroup.vue";
 
     export default {
         components: {
@@ -50,7 +57,8 @@
             Radio,
             TextInput,
             Table,
-            VerticalGroup
+            VerticalGroup,
+            HorizontalGroup
         },
         data() {
             return {
