@@ -13,8 +13,8 @@ jobs:
         id: extract_branch
       - name: Checkout this repo 
         uses: actions/checkout@v2
-          with:
-            ref: ${{ steps.extract_branch.outputs.branch }}
+        with:
+          ref: ${{ steps.extract_branch.outputs.branch }}
       - name: Set up Ruby
         uses: actions/setup-ruby@v1
         with:
