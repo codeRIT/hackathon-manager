@@ -18,7 +18,7 @@ jobs:
       - name: Set up Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: "2.6.6"
+          ruby-version: "2.7.6"
       - name: Install required gem dependencies
         run: gem install yard --no-document
       - name: Build YARD Ruby Documentation 
