@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Send a Message</h1>
+        <h1>Send a message</h1>
         <hr>
         <br>
         <TextInput placeholder="Subject"></TextInput>
@@ -13,16 +13,12 @@
 </template>
 
 <script>
-    import Card      from "../../components/base/Card.vue";
     import Button    from "../../components/base/Button.vue";
     import TextInput from "../../components/base/TextInput.vue";
-    import Checkbox  from "../../components/base/Checkbox.vue";
 
     export default {
         components: {
-            Card,
             Button,
-            Checkbox,
             TextInput,
         },
     };

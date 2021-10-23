@@ -21,19 +21,13 @@
 </template>
 
 <script>
-    import Card      from "../../components/base/Card.vue";
     import Button    from "../../components/base/Button.vue";
     import TextInput from "../../components/base/TextInput.vue";
-    import Checkbox  from "../../components/base/Checkbox.vue";
-    import Radio     from "../../components/base/Radio.vue";
     import Table     from "../../components/base/Table.vue";
 
     export default {
         components: {
-            Card,
             Button,
-            Checkbox,
-            Radio,
             TextInput,
             Table
         },
