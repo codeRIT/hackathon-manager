@@ -6,10 +6,7 @@
 
 <script>
 export default {
-    name: 'VerticalGroup',
-    props: {
-        items: Array
-    }
+    name: 'VerticalGroup'
 }
 </script>
 
