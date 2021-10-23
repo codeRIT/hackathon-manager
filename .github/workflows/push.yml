@@ -7,15 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     name: Update gh-pages with docs
     steps:
-      - name: Checkout this repo # 2
-        uses: actions/checkout@v2
-      - name: Set up Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: "2.7"
-      - name: Install required gem dependencies
-        run: gem install yard --no-document
-      - name: Build YARD Ruby Documentation # 3
-        run: yardoc --output-dir docs
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Print branch name
+        run: echo  ${{ steps.extract_branch.outputs.branch }}
+      # - name: Checkout this repo 
+      #   uses: actions/checkout@v2
+      #     with:
+      #       ref: 
+      # - name: Set up Ruby
+      #   uses: actions/setup-ruby@v1
+      #   with:
+      #     ruby-version: "2.6.6"
+      # - name: Install required gem dependencies
+      #   run: gem install yard --no-document
+      # - name: Build YARD Ruby Documentation 
+      #   run: yardoc --output-dir docs
 
     
