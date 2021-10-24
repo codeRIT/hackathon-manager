@@ -7,21 +7,8 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
 
   context "while not authenticated" do
     should "redirect to sign in page on manage_agreements_#index" do
-      get :index
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_agreements#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_agreements#edit" do
-      get :edit, params: { id: @agreement }
-      assert_response :redirect
-      assert_redirected_to new_user_session_path
+      get :index, format: :json
+      assert_response :unauthorized
     end
 
     should "not allow access to manage_agreements#create" do
@@ -51,27 +38,13 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_agreements#index" do
-      get :index
+      get :index, format: :json
       assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_agreements#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_agreements#edit" do
-      get :edit, params: { id: @agreement }
-      assert_response :redirect
-      assert_redirected_to root_path
     end
 
     should "not allow access to manage_agreements#create" do
       post :create, params: { agreement: { name: "Fun Agreement", agreement_fun: "https://bar.edu" } }
       assert_response :redirect
-      assert_redirected_to root_path
     end
 
     should "not allow access to manage_agreements#update" do
@@ -97,18 +70,6 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
     should "not allow access to manage_agreements#index" do
       get :index
       assert_response :unauthorized
-    end
-
-    should "not allow access to manage_agreements#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
-    end
-
-    should "not allow access to manage_agreements#edit" do
-      get :edit, params: { id: @agreement }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
     end
 
     should "not allow access to manage_agreements#create" do
@@ -137,27 +98,14 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    should "allow access to manage_agreements#index" do
-      get :index
+    should "not allow access to manage_agreements#index" do
+      get :index, format: :json
       assert_response :redirect
-    end
-
-    should "not allow access to manage_agreements#new" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
-    end
-
-    should "not allow access to manage_agreements#edit" do
-      get :edit, params: { id: @agreement }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
     end
 
     should "not allow access to manage_agreements#create" do
       post :create, params: { agreement: { name: "Fun Agreement", agreement_fun: "https://bar.edu" } }
       assert_response :redirect
-      assert_redirected_to manage_agreements_path
     end
 
     should "not allow access to manage_agreements#update" do
@@ -181,29 +129,18 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_agreements#index" do
-      get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_agreements#new" do
-      get :new
-      assert_response :success
+      get :index, format: :json
+      assert_response :ok
     end
 
     should "create a new agreement" do
       post :create, params: { agreement: { name: "Fun Agreement", agreement: "Please read and accept https://foo.com" } }
-      assert_response :redirect
-    end
-
-    should "allow access to manage_agreements#edit" do
-      get :edit, params: { id: @agreement }
-      assert_response :success
+      assert_response :ok
     end
 
     should "update agreement" do
       patch :update, params: { id: @agreement, agreement: { name: "New agreement Name" } }
-      assert_response :redirect
-      assert_redirected_to manage_agreements_path
+      assert_response :ok
     end
 
     context "#destroy" do
@@ -211,7 +148,7 @@ class Manage::AgreementsControllerTest < ActionController::TestCase
         assert_difference("Agreement.count", -1) do
           patch :destroy, params: { id: @agreement }
         end
-        assert_redirected_to manage_agreements_path
+        assert_response :ok
       end
     end
   end

@@ -1,47 +1,45 @@
 class Manage::UsersController < Manage::ApplicationController
   before_action :require_director
-  before_action :find_user, only: [:show, :edit, :update, :reset_password, :destroy]
+  before_action :find_user, only: [:show, :update, :reset_password, :destroy]
 
-  respond_to :html, :json
+  respond_to :json
 
   def index
-    respond_with(:manage, User.where(role: [:director, :organizer, :volunteer]))
-  end
-
-  def user_datatable
-    render json: UserDatatable.new(params, view_context: view_context)
-  end
-
-  def staff_datatable
-    render json: StaffDatatable.new(params, view_context: view_context)
+    @users = User.all
   end
 
   def reset_password
     new_password = Devise.friendly_token(50)
-    @user.reset_password(new_password, new_password)
-    @user.send_reset_password_instructions
-    flash[:notice] = t(:reset_password_success, scope: 'pages.manage.users.edit', full_name: @user.full_name)
-    respond_with(:manage, @user, location: manage_users_path)
+    if @user.reset_password(new_password, new_password)
+      @user.send_reset_password_instructions
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def show
-    respond_with(:manage, @user)
-  end
-
-  def edit
   end
 
   def update
-    @user.update_attributes(user_params)
-    respond_with(:manage, @user, location: manage_users_path)
+    if @user.update_attributes(user_params)
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def destroy
-    if @user.questionnaire.present?
-      @user.questionnaire.destroy
+    # used transaction so that if questionnaire is successfully deleted but
+    # user deletion runs into a error the questionnaire deletion is rolled back
+    User.transaction do
+      if @user.destroy && (!@user.questionnaire.present? || @user.questionnaire.destroy)
+        head :ok
+      else
+        head :unprocessable_entity
+        raise ActiveRecord::Rollback
+      end
     end
-    @user.destroy
-    respond_with(:manage, @user, location: manage_users_path)
   end
 
   def user_params

@@ -63,7 +63,6 @@ Rails.application.routes.draw do
     resources :messages do
       get :preview, on: :member
       get :live_preview, on: :collection
-      post :datatable, on: :collection
       patch :deliver, on: :member
       patch :duplicate, on: :member
       # Message template
@@ -77,20 +76,9 @@ Rails.application.routes.draw do
       patch :send_update_email, on: :member
     end
     resources :schools do
-      post :datatable, on: :collection
-      get :merge, on: :member
       patch :perform_merge, on: :member
     end
-    resources :stats do
-      post :dietary_restrictions_special_needs_datatable, on: :collection
-      post :alt_travel_datatable, on: :collection
-      post :attendee_sponsor_info_datatable, on: :collection
-      post :applied_datatable, on: :collection
-      post :checked_in_datatable, on: :collection
-    end
     resources :users do
-      post :user_datatable, on: :collection
-      post :staff_datatable, on: :collection
       patch :reset_password, on: :member
     end
     resources :agreements
