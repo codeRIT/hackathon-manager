@@ -30,6 +30,12 @@
                 <a href="#">Item 2</a>
                 <a href="#">Item 3</a>
             </HorizontalGroup>
+
+            <Dropdown name="Dropdown">
+                <option selected>Item 1</option>
+                <option>Item 2</option>
+                <option>Item 3</option>
+            </Dropdown>
         </div>
 
         <div>
@@ -48,6 +54,7 @@
     import Table           from "../components/base/Table.vue";
     import VerticalGroup   from "../components/base/VerticalGroup.vue";
     import HorizontalGroup from "../components/base/HorizontalGroup.vue";
+    import Dropdown        from "../components/base/Dropdown.vue";
 
     export default {
         components: {
@@ -58,7 +65,8 @@
             TextInput,
             Table,
             VerticalGroup,
-            HorizontalGroup
+            HorizontalGroup,
+            Dropdown
         },
         data() {
             return {
