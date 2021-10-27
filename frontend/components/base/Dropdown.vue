@@ -5,7 +5,7 @@
             <slot></slot>
         </select>
 
-        <div class="dropdown" :class="{ 'opened': isOpen }" @click="toggleOpen" aria-hidden="false">
+        <div class="dropdown" :class="{ 'opened': isOpen }" @click="toggleOpen" aria-hidden="true">
             <div class="name">
                 <p>{{ name }}</p>
             </div>
