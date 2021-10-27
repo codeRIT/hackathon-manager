@@ -12,6 +12,8 @@
 
             <TextInput placeholder="Give password"></TextInput>
 
+            <TextArea placeholder="Does the black moon howl?"></TextArea>
+
             <Checkbox content="Hello" name="checkbox-test" value="test"></Checkbox>
 
             <Radio content="Hello" name="radio-test" value="asdf"></Radio>
@@ -34,6 +36,7 @@
     import Checkbox  from "../components/base/Checkbox.vue";
     import Radio     from "../components/base/Radio.vue";
     import Table     from "../components/base/Table.vue";
+    import TextArea  from "../components/base/TextArea.vue";
 
     export default {
         components: {
@@ -42,7 +45,8 @@
             Checkbox,
             Radio,
             TextInput,
-            Table
+            Table,
+            TextArea
         },
         data() {
             return {
