@@ -38,8 +38,8 @@ export default {
         }
     },
     mounted() {
-        this.options = [...this.$refs.select.getElementsByTagName("option")];  // convert HTMLCollection to array...
-        console.log(this.options);
+        this.options = [...this.$refs.select.getElementsByTagName("option")];  // convert HTMLCollection to array
+        this.currentSelection = this.$refs.select.value;  // pull default vaclue from <select> element
     },
     methods: {
         toggleOpen() {
