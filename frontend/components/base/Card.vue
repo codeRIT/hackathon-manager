@@ -1,15 +1,12 @@
 <template>
     <div class="card">
-        {{ content }}
+        <slot></slot>
     </div>
 </template>
 
 <script>
 export default {
     name: 'Card',
-    props: {
-        content: String
-    },
     data () {
         return {}
     },

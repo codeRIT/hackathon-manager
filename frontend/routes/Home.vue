@@ -3,8 +3,9 @@
         <h1>Component Test</h1>
 
         <div class="test">
-            <Card content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua."></Card>
+            <Card>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </Card>
 
             <Button content="Button"></Button>
             <Button content="Button"></Button>
