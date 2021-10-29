@@ -63,7 +63,7 @@ export default {
     .name, .item {
         box-shadow: var(--shadow-length) var(--shadow-length) var(--dark-color);
         padding: 6px;
-        transition: var(--duration) box-shadow, var(--duration) transform;
+        transition: var(--duration) box-shadow, var(--duration) transform, var(--duration) background-color, var(--duration) color;
     }
 
     .name {
@@ -81,6 +81,12 @@ export default {
         width: max-content;
 
         &:hover {
+            background-color: var(--orange);
+            color: white;
+            filter: brightness(1.2);
+        }
+
+        &:active {
             box-shadow: 0 0 var(--dark-color);
             transform: translate(var(--shadow-length), var(--shadow-length));
         }
@@ -100,6 +106,11 @@ export default {
         border-bottom-right-radius: var(--border-radius);
 
         &:hover {
+            background-color: var(--orange);
+            color: white;
+        }
+
+        &:active {
             box-shadow: 0 0 var(--dark-color);
             transform: translate(var(--shadow-length), var(--shadow-length));
         }
