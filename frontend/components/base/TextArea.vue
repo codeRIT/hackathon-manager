@@ -9,7 +9,7 @@ export default {
         placeholder: String,
         cols: {
             type: Number,
-            default: 3
+            default: 20
         }
     }
 }
