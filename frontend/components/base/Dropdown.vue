@@ -62,7 +62,9 @@ export default {
 
     .name, .item {
         box-shadow: var(--shadow-length) var(--shadow-length) var(--dark-color);
+        cursor: pointer;
         padding: 6px;
+        user-select: none;
         transition: var(--duration) box-shadow, var(--duration) transform, var(--duration) background-color, var(--duration) color;
     }
 
