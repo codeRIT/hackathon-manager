@@ -12,6 +12,8 @@
 
             <TextInput placeholder="Give password"></TextInput>
 
+            <TextArea placeholder="Does the black moon howl?"></TextArea>
+
             <Checkbox content="Hello" name="checkbox-test" value="test"></Checkbox>
 
             <Radio content="Hello" name="radio-test" value="asdf"></Radio>
@@ -55,6 +57,7 @@
     import VerticalGroup   from "../components/base/VerticalGroup.vue";
     import HorizontalGroup from "../components/base/HorizontalGroup.vue";
     import Dropdown        from "../components/base/Dropdown.vue";
+    import TextArea  from "../components/base/TextArea.vue";
 
     export default {
         components: {
@@ -66,7 +69,8 @@
             Table,
             VerticalGroup,
             HorizontalGroup,
-            Dropdown
+            Dropdown,
+            TextArea
         },
         data() {
             return {
