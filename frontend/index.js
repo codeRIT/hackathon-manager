@@ -4,6 +4,7 @@ import { createI18n } from "vue-i18n"
 
 import App from "./App"
 
+import Signin from "./routes/Signin.vue"
 import Home from "./routes/Home.vue"
 import About from "./routes/About.vue"
 import Profile from "./routes/Profile.vue"
@@ -18,6 +19,7 @@ import { loadLocaleMessage, setI18nLangauge } from "./i18n"
 
 const routes = [
     { path: "/", component: Home },
+    { path: "/signin", component: Signin },
     { path: "/about", component: About },
     // { path: "/application", component: Application},
     { path: "/profile", component: Profile },
