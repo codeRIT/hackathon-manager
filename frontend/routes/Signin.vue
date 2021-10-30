@@ -1,11 +1,17 @@
 <template>
-    <div class="centerer">
-        <Card class="form">
+    <div class="container">
+        <Card class="stack">
             <h1>Sign in to {{name}}</h1>
-            <TextInput class="input" placeholder="Email" />
-            <TextInput class="input" placeholder="Password" />
+            <TextInput id="email" placeholder="Email" />
+            <TextInput id="password" placeholder="Password" />
             <Checkbox class="checkbox" content="Hello" name="checkbox-test" value="test"></Checkbox>
-            <Button class="button" content="Sign in"></Button>
+            <Button class="signin" content="Sign in"></Button>
+        </Card>
+        <br />
+        <Card class="stack">
+            <h1>Other sign-in options</h1>
+            <Button content="Sign in with MyMLH"></Button>
+            <Button content="Sign in with Google"></Button>
         </Card>
     </div>
 </template>
@@ -25,30 +31,37 @@
         },
         data() {
             return {
-                name: "BrickHack 7",
+                name: "VeryLongHackathonName",
             }
         },
     };
 </script>
 
 <style lang="scss" scoped>
-.centerer {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    width: 100%;
-}
-.form {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-}
-.input {
-    width: 95%;
-}
-.checkbox {
-    align-self: flex-start;
-    margin: 0;
+
+    .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 400px;
+        /* my brain is too small to figure out how to match the oauth stack
+        with the form stack
+        */
+
+        h1 {
+            text-align: center;
+        }
+        .checkbox {
+            margin: 0;
+        }
+        .signin {
+            align-self: center; // disable fullwidth behavior
+            align-self: flex-start;
+        }
+    }
 }
 </style>
