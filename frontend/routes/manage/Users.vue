@@ -2,8 +2,10 @@
     <div>
         <div id="title-bar">
             <h1>Users and Staff</h1>
-            <Button content="Add User"></Button>
-            <TextInput placeholder="Search..."></TextInput>
+            <div id="right">
+                <Button content="Add User"></Button>
+                <TextInput placeholder="Search..."></TextInput>
+            </div>
         </div>
         <Table :rows="tableRows"></Table>
     </div>
@@ -13,13 +15,15 @@
 import Table        from '../../components/base/Table.vue'
 import ManageNavbar from '../../components/ManageNavbar.vue'
 import Button       from '../../components/base/Button.vue';
+import TextInput       from '../../components/base/TextInput.vue';
 
 export default {
     name: 'Users',
     components: {
         ManageNavbar,
         Button,
-        Table
+        Table,
+        TextInput
     },
     props: {
         rows: Array,
@@ -59,6 +63,11 @@ export default {
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
+    }
+
+    #right {
+        display: flex;
+        align-items: flex-start;
     }
 
 </style>
