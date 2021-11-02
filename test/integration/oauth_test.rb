@@ -33,7 +33,7 @@ class OauthTest < ActionDispatch::IntegrationTest
     end
 
     should "return data for questionnaire" do
-      get questionnaires_path, params: { format: :json }, headers: auth_headers(@token.token)
+      get '/users/auth/mlh', params: { format: :json }, headers: auth_headers(@token.token)
       assert_response :success
     end
   end

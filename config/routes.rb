@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   require "sidekiq/cron/web"
 
-  # use_doorkeeper
+  devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
+  use_doorkeeper
   scope :api, defaults: { format: :json } do
     resource :user do
       get :login
