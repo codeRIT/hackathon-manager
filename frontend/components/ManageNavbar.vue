@@ -5,7 +5,7 @@
             <router-link to="/manage">{{ $t("pages.manage.navbar.dashboard") }}</router-link>
             <a href="#">{{ $t("pages.manage.navbar.questionnaire") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.admissions") }}</a>
-            <a href="#">{{ $t("pages.manage.navbar.users") }}</a>
+            <router-link to="/manage/users">{{ $t("pages.manage.navbar.users") }}</router-link>
             <a href="#">{{ $t("pages.manage.navbar.schools") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.schedule") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.settings") }}</a>

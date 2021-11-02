@@ -35,6 +35,10 @@ export default {
             border-bottom-right-radius: var(--border-radius);
             border-top-right-radius: var(--border-radius);
         }
+
+        &:hover {
+            background-color: var(--orange);
+        }
     }
 }
 </style>
