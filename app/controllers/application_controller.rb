@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
 
   respond_to :json
 
-  before_action :authenticate_user
+  before_action :authenticate_user!
 
   def after_sign_in_path_for(resource)
     stored_location = stored_location_for(resource)
@@ -21,11 +21,28 @@ class ApplicationController < ActionController::API
     end
   end
 
-  private
-
-  def authenticate_user!
-    head :unauthorized unless signed_in?
+  def render_resource(resource)
+    if resource.errors.empty?
+      render json: resource
+    else
+      validation_error(resource)
+    end
   end
+
+  def validation_error(resource)
+    render json: {
+      errors: [
+        {
+          status: '400',
+          title: 'Bad Request',
+          detail: resource.errors,
+          code: '100'
+        }
+      ]
+    }, status: :bad_request
+  end
+
+  private
 
   def current_user
     @current_user ||= User.find_by(id: @current_user_id)
@@ -33,16 +50,5 @@ class ApplicationController < ActionController::API
 
   def signed_in?
     @current_user_id.present?
-  end
-
-  def authenticate_user
-    if request.headers['Authorization'].present?
-      authenticate_or_request_with_http_token do |token|
-        jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
-        @current_user_id = jwt_payload['id']
-      rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-        head :unauthorized
-      end
-    end
   end
 end

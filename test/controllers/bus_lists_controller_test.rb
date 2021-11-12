@@ -21,8 +21,8 @@ class BusListsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
+      test = jwt_for(@user)
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
     should "return not found on bus_list#show" do
@@ -40,7 +40,6 @@ class BusListsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
-      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
       @questionnaire.update_attribute(:acc_status, "accepted")
     end
 
