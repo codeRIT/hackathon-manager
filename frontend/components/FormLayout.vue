@@ -19,7 +19,7 @@ export default {
     flex-direction: column;
     align-items: center;
 
-    .card {
+    .card, form {
         display: flex !important;
         flex-direction: column;
         gap: 20px;

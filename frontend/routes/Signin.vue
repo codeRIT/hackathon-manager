@@ -1,11 +1,13 @@
 <template>
     <FormLayout>
         <Card>
-            <h1>Sign in to {{name}}</h1>
-            <TextInput id="email" placeholder="Email" />
-            <TextInput id="password" placeholder="Password" />
-            <Checkbox class="checkbox" content="Hello" name="checkbox-test" value="test"></Checkbox>
-            <Button class="center" content="Sign in"></Button>
+            <form>
+                <h1>Sign in to {{name}}</h1>
+                <TextInput id="email" placeholder="Email" type="email" required />
+                <TextInput id="password" placeholder="Password" type="password" required/>
+                <Checkbox id="remember" class="checkbox" content="Remember Me" name="checkbox-test" value="remember"></Checkbox>
+                <Button class="center" content="Sign in" type="submit"></Button>
+            </form>
         </Card>
         <br />
         <Card class="stack">

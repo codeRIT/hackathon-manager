@@ -1,14 +1,17 @@
 <template>
     <FormLayout>
         <Card>
-            <h1>Create an account</h1>
-            <TextInput id="fname" placeholder="First name" />
-            <TextInput id="lname" placeholder="Last name" />
-            <TextInput id="email" placeholder="Email" />
-            <TextInput id="password" placeholder="Password" />
-            <TextInput id="confirm" placeholder="Confirm password" />
-            <Button class="center" content="Register"></Button>
+            <form>
+                <h1>Create an account</h1>
+                <TextInput id="fname" placeholder="First name" required />
+                <TextInput id="lname" placeholder="Last name" required />
+                <TextInput id="email" placeholder="Email" type="email" required />
+                <TextInput id="password" placeholder="Password" type="password" required />
+                <TextInput id="confirm" placeholder="Confirm password" type="password" required />
+                <Button class="center" content="Register" type="submit"></Button>
+            </form>
         </Card>
+
         <br />
         <Card class="stack">
             <h1>Other registration options</h1>
