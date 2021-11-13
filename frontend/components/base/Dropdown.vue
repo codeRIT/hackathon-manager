@@ -1,7 +1,7 @@
 <template>
     <div class="input-dropdown">
         <!-- making this invisible so that screen readers can ignore the "pretty" version -->
-        <select class="invisible" ref="select">
+        <select class="invisible" :id="id" ref="select">
             <slot></slot>
         </select>
 
@@ -28,6 +28,7 @@
 export default {
     name: 'Dropdown',
     props: {
+        id: String,
         name: String
     },
     data() {

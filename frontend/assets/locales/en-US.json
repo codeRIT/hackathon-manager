@@ -8,6 +8,17 @@
             "component": "About component",
             "hello": "Hello world!"
         },
+        "application": {
+            "navbar": {
+                "accessibility": "Accessibility",
+                "agreements": "Agreements",
+                "application": "Application",
+                "personalInfo": "Personal info"
+            },
+            "personalInfo": {
+                "dateOfBirth": "Date of birth"
+            }
+        },
         "manage": {
             "navbar": {
                 "dashboard": "Dashboard",
