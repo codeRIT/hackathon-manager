@@ -8,6 +8,12 @@
             </div>
         </div>
         <Table :rows="tableRows" :showPagination="true" editLink="./edit"></Table>
+        <div class="space-between">
+            <Dropdown name="Show n rows">
+                <option selected>5</option>
+                <option>20</option>
+            </Dropdown>
+        </div>
         <br>
         <div class="space-between">
             <h1>Questions</h1>
@@ -16,18 +22,27 @@
         <hr>
         <br>
         <p>Warning: this affects all hackers...</p>
-        <p>[big text input]</p>
+        <br>
+        <h2>Default questions</h2>
+        <TextArea placeholder="Bee"></TextArea>
+        <br>
+        <h2>Optional questions</h2>
+        <TextArea placeholder="Bee"></TextArea>
     </div>
 </template>
 
 <script>
     import Button    from "../../components/base/Button.vue";
+    import Dropdown  from "../../components/base/Dropdown.vue";
+    import TextArea  from "../../components/base/TextArea.vue";
     import TextInput from "../../components/base/TextInput.vue";
     import Table     from "../../components/base/Table.vue";
 
     export default {
         components: {
             Button,
+            Dropdown,
+            TextArea,
             TextInput,
             Table
         },
