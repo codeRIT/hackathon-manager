@@ -1,17 +1,19 @@
 <template>
     <FormLayout>
         <Card>
-            <h1>Sign in to {{name}}</h1>
+            <h1>Create an account</h1>
+            <TextInput id="fname" placeholder="First name" />
+            <TextInput id="lname" placeholder="Last name" />
             <TextInput id="email" placeholder="Email" />
             <TextInput id="password" placeholder="Password" />
-            <Checkbox class="checkbox" content="Hello" name="checkbox-test" value="test"></Checkbox>
-            <Button class="center" content="Sign in"></Button>
+            <TextInput id="confirm" placeholder="Confirm password" />
+            <Button class="center" content="Register"></Button>
         </Card>
         <br />
         <Card class="stack">
-            <h1>Other sign-in options</h1>
-            <Button content="Sign in with MyMLH"></Button>
-            <Button content="Sign in with Google"></Button>
+            <h1>Other registration options</h1>
+            <Button content="Continue with MyMLH"></Button>
+            <Button content="Continue with Google"></Button>
         </Card>
     </FormLayout>
 </template>

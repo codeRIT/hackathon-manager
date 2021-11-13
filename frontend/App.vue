@@ -2,6 +2,7 @@
     <div>
         <nav>
             <router-link class="router-link" to="/signin">Signin</router-link>
+            <router-link class="router-link" to="/register">Register</router-link>
             <router-link class="router-link" to="/">Home</router-link>
             <router-link class="router-link" to="/about">About</router-link>
             <router-link class="router-link" to="/profile">Profile</router-link>
