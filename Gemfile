@@ -44,7 +44,6 @@ gem 'devise', '~> 4.7'
 gem 'omniauth-mlh', '~> 0.4.2'
 gem 'doorkeeper', '~> 5.5'
 gem 'devise-jwt'
-gem 'rack-cors'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
 

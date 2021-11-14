@@ -21,7 +21,6 @@ class BusListsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
-      test = jwt_for(@user)
       sign_in @user
     end
 
