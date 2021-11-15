@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="banner">
-            <h1>Apply to &lt;HackathonName&gt;</h1>
+            <h1>{{ $t("pages.application.bannerText", { hackathonName: "<HackathonName>" }) }}</h1>
         </div>
 
         <main class="container">

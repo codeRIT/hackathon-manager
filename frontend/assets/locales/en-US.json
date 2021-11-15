@@ -44,6 +44,7 @@
                     "placeholder": "I love hacking..."
                 }
             },
+            "bannerText": "Apply to {hackathonName}!",
             "navbar": {
                 "accessibility": "Accessibility",
                 "agreements": "Agreements",
