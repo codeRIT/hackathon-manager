@@ -40,20 +40,14 @@
 <script>
 import Card from "../../components/base/Card.vue"
 import Checkbox from "../../components/base/Checkbox.vue"
-import Dropdown from "../../components/base/Dropdown.vue"
-import Radio from "../../components/base/Radio.vue"
 import TextArea from "../../components/base/TextArea.vue"
-import TextInput from "../../components/base/TextInput.vue"
 
 export default {
     name: "AccessibilityPage",
     components: {
         Card,
         Checkbox,
-        Dropdown,
-        Radio,
-        TextArea,
-        TextInput
+        TextArea
     }
 }
 </script>
