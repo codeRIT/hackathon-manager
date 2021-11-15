@@ -1,7 +1,9 @@
 <template>
     <Card>
-        <h1>wake me up</h1>
-        <p>wake me up inside</p>
+        <div class="intro">
+            <h1>{{ $t("pages.application.personalInfo.title") }}</h1>
+            <p>{{ $t("pages.application.personalInfo.subtitle") }}</p>
+        </div>
 
         <div class="row">
             <div class="col-6">
@@ -45,5 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.intro {
+    padding-bottom: 1rem;
+}
 </style>

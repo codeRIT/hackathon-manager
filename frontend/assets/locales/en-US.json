@@ -12,11 +12,12 @@
             "navbar": {
                 "accessibility": "Accessibility",
                 "agreements": "Agreements",
-                "application": "Application",
-                "personalInfo": "Personal info"
+                "application": "Application"
             },
             "personalInfo": {
-                "dateOfBirth": "Date of birth"
+                "dateOfBirth": "Date of birth",
+                "subtitle": "First, we'll need to collect a bit more personal information:",
+                "title": "Personal info"
             }
         },
         "manage": {

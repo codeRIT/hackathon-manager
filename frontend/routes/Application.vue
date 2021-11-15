@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <HorizontalGroup class="nav">
-                        <router-link to="/application/personalInfo">{{ $t("pages.application.navbar.personalInfo") }}</router-link>
+                        <router-link to="/application/personalInfo">{{ $t("pages.application.personalInfo.title") }}</router-link>
                         <router-link to="/application/application">{{ $t("pages.application.navbar.application") }}</router-link>
                         <a href="#">{{ $t("pages.application.navbar.accessibility") }}</a>
                         <a href="#">{{ $t("pages.application.navbar.agreements") }}</a>
