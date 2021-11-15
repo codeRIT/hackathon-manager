@@ -5,9 +5,11 @@
             <slot></slot>
         </select>
 
+        <label v-if="withLabel" :for="id">{{ label }}</label>
         <div class="dropdown" :class="{ 'opened': isOpen }" @click="toggleOpen" aria-hidden="true">
             <div class="name">
-                <p>{{ name }}</p>
+                <p v-if="withLabel">{{ currentSelection }}</p>
+                <p v-else>{{ label }}</p>
             </div>
 
             <div
@@ -29,7 +31,11 @@ export default {
     name: 'Dropdown',
     props: {
         id: String,
-        name: String
+        label: String,
+        withLabel: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
@@ -56,6 +62,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+label {
+    display: block;
+}
+
 .dropdown {
     align-items: end;
     display: inline-flex;

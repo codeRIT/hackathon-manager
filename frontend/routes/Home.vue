@@ -34,7 +34,7 @@
                 <a href="#">Item 3</a>
             </HorizontalGroup>
 
-            <Dropdown name="Dropdown">
+            <Dropdown label="Dropdown" :withLabel="false">
                 <option selected>Item 1</option>
                 <option>Item 2</option>
                 <option>Item 3</option>
