@@ -12,6 +12,7 @@ import Application from "./routes/Application.vue"
 import PersonalInfoPage from "./routes/application/PersonalInfoPage.vue"
 import ApplicationPage from "./routes/application/ApplicationPage.vue"
 import AccessibilityPage from "./routes/application/AccessibilityPage.vue"
+import AgreementsPage from "./routes/application/AgreementsPage.vue"
 
 import Manage from "./routes/manage/Manage.vue"
 import Dashboard from "./routes/manage/Dashboard.vue"
@@ -30,7 +31,8 @@ const routes = [
             { path: "", redirect: "/application/personalInfo" },
             { path: "personalInfo", component: PersonalInfoPage },
             { path: "application", component: ApplicationPage },
-            { path: "accessibility", component: AccessibilityPage }
+            { path: "accessibility", component: AccessibilityPage },
+            { path: "agreements", component: AgreementsPage }
         ]
     },
     { path: "/profile", component: Profile },

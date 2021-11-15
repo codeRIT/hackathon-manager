@@ -11,14 +11,14 @@
                         <router-link to="/application/personalInfo">{{ $t("pages.application.personalInfo.title") }}</router-link>
                         <router-link to="/application/application">{{ $t("pages.application.application.title") }}</router-link>
                         <router-link to="/application/accessibility">{{ $t("pages.application.accessibility.title") }}</router-link>
-                        <a href="#">{{ $t("pages.application.navbar.agreements") }}</a>
+                        <router-link to="/application/agreements">{{ $t("pages.application.agreements.title") }}</router-link>
                     </HorizontalGroup>
 
                     <router-view></router-view>
                 </div>
 
                 <div class="col-12">
-                    <Button content="Next" class="right-align" :onclick="nextPage"></Button>
+                    <Button :content="nextButtonText" class="right-align" :onclick="nextPage"></Button>
                 </div>
             </div>
         </main>
@@ -35,6 +35,15 @@ export default {
         Button,
         HorizontalGroup
     },
+    computed: {
+        nextButtonText() {
+            if (this.$route.fullPath.endsWith("agreements")) {
+                return this.$t("pages.application.nextButton.apply")
+            } else {
+                return this.$t("pages.application.nextButton.next")
+            }
+        }
+    },
     methods: {
         nextPage() {
             let currentRoute = this.$route;
@@ -43,6 +52,10 @@ export default {
                 this.$router.push({ path: "/application/application" })
             } else if (currentRoute.fullPath.endsWith("application")) {
                 this.$router.push({ path: "/application/accessibility" })
+            } else if (currentRoute.fullPath.endsWith("accessibility")) {
+                this.$router.push({ path: "/application/agreements" })
+            } else {
+                alert("TODO: submit data")
             }
         }
     }

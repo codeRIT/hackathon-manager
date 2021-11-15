@@ -23,6 +23,10 @@
                 "subtitle": "We strive to make our hackathon as accessibile as possible. Let us know how we can help:",
                 "title": "Accessibility"
             },
+            "agreements": {
+                "subtitle": "You must agree to the following terms and conditions (unless specified as optional) to participate in our hackathon:",
+                "title": "Agreements"
+            },
             "application": {
                 "experience": {
                     "few": "I've attended a few hackathons before (1-5)",
@@ -59,8 +63,9 @@
                 }
             },
             "bannerText": "Apply to {hackathonName}!",
-            "navbar": {
-                "agreements": "Agreements"
+            "nextButton": {
+                "apply": "Apply",
+                "next": "Next"
             },
             "personalInfo": {
                 "country": "Country",
