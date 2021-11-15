@@ -1,7 +1,7 @@
 <template>
     <div class="input-dropdown">
         <!-- making this invisible so that screen readers can ignore the "pretty" version -->
-        <select class="invisible" :id="id" ref="select">
+        <select class="invisible" :id="id" ref="select" :aria-label="withLabel ? null : label">
             <slot></slot>
         </select>
 
