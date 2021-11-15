@@ -9,6 +9,20 @@
             "hello": "Hello world!"
         },
         "application": {
+            "accessibility": {
+                "captioning": "Will you require captioning for this event?",
+                "dietaryRestrictions": {
+                    "label": "Do you have any dietary restrictions that we should keep in mind?",
+                    "placeholder": "Peanut allergy"
+                },
+                "interpreter": "Will you need an interpreter for this event?",
+                "specialNeeds": {
+                    "label": "Do you have any other special needs that we should know about?",
+                    "placeholder": "I use a wheelchair, so I may need assistance with elevators"
+                },
+                "subtitle": "We strive to make our hackathon as accessibile as possible. Let us know how we can help:",
+                "title": "Accessibility"
+            },
             "application": {
                 "experience": {
                     "few": "I've attended a few hackathons before (1-5)",
@@ -46,9 +60,7 @@
             },
             "bannerText": "Apply to {hackathonName}!",
             "navbar": {
-                "accessibility": "Accessibility",
-                "agreements": "Agreements",
-                "application": "Application"
+                "agreements": "Agreements"
             },
             "personalInfo": {
                 "country": "Country",

@@ -9,8 +9,8 @@
                 <div class="col-12">
                     <HorizontalGroup class="nav">
                         <router-link to="/application/personalInfo">{{ $t("pages.application.personalInfo.title") }}</router-link>
-                        <router-link to="/application/application">{{ $t("pages.application.navbar.application") }}</router-link>
-                        <a href="#">{{ $t("pages.application.navbar.accessibility") }}</a>
+                        <router-link to="/application/application">{{ $t("pages.application.application.title") }}</router-link>
+                        <router-link to="/application/accessibility">{{ $t("pages.application.accessibility.title") }}</router-link>
                         <a href="#">{{ $t("pages.application.navbar.agreements") }}</a>
                     </HorizontalGroup>
 
@@ -41,6 +41,8 @@ export default {
 
             if (currentRoute.fullPath.endsWith("personalInfo")) {
                 this.$router.push({ path: "/application/application" })
+            } else if (currentRoute.fullPath.endsWith("application")) {
+                this.$router.push({ path: "/application/accessibility" })
             }
         }
     }
