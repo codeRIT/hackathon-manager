@@ -9,6 +9,41 @@
             "hello": "Hello world!"
         },
         "application": {
+            "application": {
+                "experience": {
+                    "few": "I've attended a few hackathons before (1-5)",
+                    "label": "How many hackathons have you attended before?",
+                    "many": "I'm a hackathon veteran (6+)",
+                    "none": "None"
+                },
+                "interest": {
+                    "label": "What type of work are you interested in doing during our hackathon?",
+                    "placeholder": "Mobile app development"
+                },
+                "portfolioURL": {
+                    "label": "Link to portfoilio",
+                    "placeholder": "https://myportfolio.github.io"
+                },
+                "shirtSize": {
+                    "label": "Shirt size",
+                    "unisexL": "Unisex L",
+                    "unisexM": "Unisex M",
+                    "unisexS": "Unisex S",
+                    "unisexXL": "Unisex XL",
+                    "unisexXS": "Unisex XS",
+                    "unisexXXL": "Unisex XXL"
+                },
+                "subtitle": "Here's what we'll use to determine if you get accepted, waitlisted, or rejected - no pressure!",
+                "title": "Application",
+                "vcsURL": {
+                    "label": "Link to GitHub, GitLab, Bitbucket, etc.",
+                    "placeholder": "https://github.com/..."
+                },
+                "whyAttend": {
+                    "label": "Why do you want to attend {hackathonName}?",
+                    "placeholder": "I love hacking..."
+                }
+            },
             "navbar": {
                 "accessibility": "Accessibility",
                 "agreements": "Agreements",
