@@ -24,6 +24,7 @@ export default {
 .input-textarea {
     border-radius: var(--border-radius);
     border: var(--border-size) solid var(--dark-color);
+    box-sizing: border-box;
     display: block;
     font-family: unset;
     padding: 6px;
