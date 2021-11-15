@@ -15,7 +15,29 @@
                 "application": "Application"
             },
             "personalInfo": {
-                "dateOfBirth": "Date of birth",
+                "country": "Country",
+                "dateOfBirth": {
+                    "label": "Date of birth",
+                    "placeholder": "01/01/2000"
+                },
+                "gender": {
+                    "label": "Gender",
+                    "placeholder": "Non-binary"
+                },
+                "major": {
+                    "label": "Major",
+                    "placeholder": "New Media Design"
+                },
+                "phone": {
+                    "label": "Phone number",
+                    "placeholder": "(123) 456-7890"
+                },
+                "raceEthnicity": {
+                    "hispanic": "Hispanic",
+                    "label": "Race / ethnicity",
+                    "whiteCaucasian": "White / Caucasian"
+                },
+                "school": "School",
                 "subtitle": "First, we'll need to collect a bit more personal information:",
                 "title": "Personal info"
             }
