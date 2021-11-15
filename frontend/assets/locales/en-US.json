@@ -24,6 +24,8 @@
                 "title": "Accessibility"
             },
             "agreements": {
+                "fun": "I agree to have fun",
+                "infoReleaseConsent": "(optional) I consent to sharing my name, email, resume, portfolio URL, and version control URL to this event's sponsors. These sponsors may contact me with job opportunities following the event.",
                 "subtitle": "You must agree to the following terms and conditions (unless specified as optional) to participate in our hackathon:",
                 "title": "Agreements"
             },

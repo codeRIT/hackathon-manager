@@ -7,7 +7,19 @@
 
         <div class="row">
             <div class="col-12">
+                <div>
+                    <Checkbox
+                            name="info_release_consent"
+                            value="true"
+                            :content="$t('pages.application.agreements.infoReleaseConsent')"
+                    ></Checkbox>
 
+                    <Checkbox
+                            name="fun"
+                            value="true"
+                            :content="$t('pages.application.agreements.fun')"
+                    ></Checkbox>
+                </div>
             </div>
         </div>
     </Card>
