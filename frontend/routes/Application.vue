@@ -74,7 +74,7 @@ export default {
 }
 
 .nav {
-    margin: 0 auto;
+    margin: 1.5rem auto 0 auto;
 
     .router-link-active {
         background-color: var(--orange);
