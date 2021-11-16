@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   respond_to :json
+
+  before_action :authenticate_user!, except: [:login, :register]
   before_action :find_user
+  skip_before_action :authenticate_user, only: [:login, :register]
 
   def login
     user = User.find_by_email(params[:email])
