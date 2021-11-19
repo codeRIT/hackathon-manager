@@ -21,6 +21,7 @@ class BusListsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
       sign_in @user
     end
 
@@ -39,6 +40,7 @@ class BusListsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
+      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
       @questionnaire.update_attribute(:acc_status, "accepted")
     end
 

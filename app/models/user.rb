@@ -26,9 +26,9 @@ class User < ApplicationRecord
   enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
 
   def generate_jwt
-    # JWT.encode({ id: id,
-    #              exp: 30.days.from_now.to_i },
-    #            Rails.application.secrets.secret_key_base)
+    JWT.encode({ id: id,
+                 exp: 30.days.from_now.to_i },
+                 ENV['JWT_SECRET'])
   end
 
   def set_default_role

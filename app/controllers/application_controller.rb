@@ -6,7 +6,8 @@ class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
   respond_to :json
 
-  before_action :authenticate_user!
+  before_action :authenticate_user
+  # skip_before_action :verify_authenticity_token
 
   def after_sign_in_path_for(resource)
     stored_location = stored_location_for(resource)
@@ -42,11 +43,28 @@ class ApplicationController < ActionController::API
 
   private
 
+  def authenticate_user!
+    head :unauthorized unless signed_in?
+  end
+
   def current_user
     @current_user ||= User.find_by(id: @current_user_id)
   end
 
   def signed_in?
     @current_user_id.present?
+  end
+
+  def authenticate_user
+    if request.headers['Authorization'].present?
+      authenticate_or_request_with_http_token do |token|
+        jwt_payload = JWT.decode(token, ENV['JWT_SECRET']).first
+        @current_user_id = jwt_payload['id']
+      rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+        head :unauthorized
+      end
+    else
+      head :unauthorized
+    end
   end
 end
