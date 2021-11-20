@@ -41,7 +41,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.intro {
-    padding-bottom: 1rem;
-}
+@import "../../assets/scss/application.scss";
 </style>

@@ -17,7 +17,7 @@
                 ></TextArea>
 
                 <div>
-                    <p>{{ $t('pages.application.application.experience.label') }}</p>
+                    <p class="question-label">{{ $t('pages.application.application.experience.label') }}</p>
                     <Radio
                         name="experience"
                         value="none"
@@ -98,7 +98,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.intro {
-    padding-bottom: 1rem;
-}
+@import "../../assets/scss/application.scss";
 </style>

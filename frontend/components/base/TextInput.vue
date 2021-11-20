@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label :for="id">{{ label }}</label>
+        <label class="control-label" :for="id">{{ label }}</label>
         <input type="text" :id="id" class="input-text" :placeholder="placeholder"/>
     </div>
 </template>
@@ -20,9 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-label {
-    display: block;
-}
+@import "../../assets/scss/controls.scss";
 
 .input-text {
     border-radius: var(--border-radius);

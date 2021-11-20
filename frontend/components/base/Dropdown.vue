@@ -5,7 +5,7 @@
             <slot></slot>
         </select>
 
-        <label v-if="withLabel" :for="id">{{ label }}</label>
+        <label v-if="withLabel" class="control-label" :for="id">{{ label }}</label>
         <div class="dropdown" :class="{ 'opened': isOpen }" @click="toggleOpen" aria-hidden="true">
             <div class="name">
                 <p v-if="withLabel">{{ currentSelection?.textContent }}</p>
@@ -62,9 +62,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-label {
-    display: block;
-}
+@import "../../assets/scss/controls.scss";
 
 .dropdown {
     display: inline-flex;

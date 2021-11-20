@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label v-if="label" :for="id">{{ label }}</label>
+        <label class="control-label" v-if="label" :for="id">{{ label }}</label>
         <textarea class="input-textarea" :id="id" :cols="cols" :placeholder="placeholder"></textarea>
     </div>
 </template>
@@ -21,6 +21,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/controls.scss";
+
 .input-textarea {
     border-radius: var(--border-radius);
     border: var(--border-size) solid var(--dark-color);

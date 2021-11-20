@@ -1,8 +1,8 @@
 <template>
     <Card>
         <div class="intro">
-            <h1>{{ $t("pages.application.personalInfo.title") }}</h1>
-            <p>{{ $t("pages.application.personalInfo.subtitle") }}</p>
+            <h1 class="title">{{ $t("pages.application.personalInfo.title") }}</h1>
+            <p class="subtitle">{{ $t("pages.application.personalInfo.subtitle") }}</p>
         </div>
 
         <div class="row">
@@ -63,7 +63,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.intro {
-    padding-bottom: 1rem;
-}
+@import "../../assets/scss/application.scss";
 </style>
