@@ -18,7 +18,10 @@
                 </div>
 
                 <div class="col-12">
-                    <Button :content="nextButtonText" class="right-align" :onclick="nextPage"></Button>
+                    <div class="buttons">
+                        <Button v-if="prevButtonVisible()" :content="$t('pages.application.prevButton')" :onclick="prevPage"></Button>
+                        <Button class="always-right" :content="nextButtonText()" :onclick="nextPage"></Button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -29,34 +32,56 @@
 import Button from "../components/base/Button.vue"
 import HorizontalGroup from "../components/base/HorizontalGroup.vue"
 
+const pages = ["personalInfo", "application", "accessibility", "agreements"];
+
 export default {
     name: 'Application',
     components: {
         Button,
         HorizontalGroup
     },
-    computed: {
+    data() {
+        return {
+            currentPage: this.currentPageIndex()
+        }
+    },
+    methods: {
+        currentPageIndex() {
+            let route = this.$route.fullPath.split('/').slice(-1)[0];
+            return pages.findIndex(x => x === route);
+        },
+
         nextButtonText() {
-            if (this.$route.fullPath.endsWith("agreements")) {
+            if (this.currentPage === pages.length - 1) {
                 return this.$t("pages.application.nextButton.apply")
             } else {
                 return this.$t("pages.application.nextButton.next")
             }
+        },
+
+        nextPage() {
+            if (this.currentPage === pages.length - 1) {  // at last page
+                alert("TODO: submit data");
+            } else {
+                this.currentPage++;
+                this.$router.push({ path: "/application/" + pages[this.currentPage] });
+            }
+        },
+
+        prevButtonVisible() {
+            return this.currentPage !== 0;
+        },
+
+        prevPage() {
+            if (this.currentPage > 0) {
+                this.currentPage--;
+                this.$router.push({ path: "/application/" + pages[this.currentPage] });
+            }
         }
     },
-    methods: {
-        nextPage() {
-            let currentRoute = this.$route;
-
-            if (currentRoute.fullPath.endsWith("personalInfo")) {
-                this.$router.push({ path: "/application/application" })
-            } else if (currentRoute.fullPath.endsWith("application")) {
-                this.$router.push({ path: "/application/accessibility" })
-            } else if (currentRoute.fullPath.endsWith("accessibility")) {
-                this.$router.push({ path: "/application/agreements" })
-            } else {
-                alert("TODO: submit data")
-            }
+    watch: {
+        $route(oldRoute, newRoute) {
+            this.currentPage = this.currentPageIndex();
         }
     }
 }
@@ -82,7 +107,13 @@ export default {
     }
 }
 
-.right-align {
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.always-right {
     margin-left: auto;
 }
 

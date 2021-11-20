@@ -95,7 +95,8 @@
                 "school": "School",
                 "subtitle": "First, we'll need to collect a bit more personal information:",
                 "title": "Personal info"
-            }
+            },
+            "prevButton": "Back"
         },
         "manage": {
             "navbar": {
