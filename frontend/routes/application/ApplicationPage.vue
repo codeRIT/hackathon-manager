@@ -2,7 +2,7 @@
     <Card>
         <div class="intro">
             <h1>{{ $t("pages.application.application.title") }}</h1>
-            <p>{{ $t("pages.application.application.subtitle") }}</p>
+            <p class="subtitle">{{ $t("pages.application.application.subtitle") }}</p>
         </div>
 
         <div class="row">

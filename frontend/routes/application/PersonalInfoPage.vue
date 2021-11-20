@@ -1,7 +1,7 @@
 <template>
     <Card>
         <div class="intro">
-            <h1 class="title">{{ $t("pages.application.personalInfo.title") }}</h1>
+            <h1>{{ $t("pages.application.personalInfo.title") }}</h1>
             <p class="subtitle">{{ $t("pages.application.personalInfo.subtitle") }}</p>
         </div>
 
