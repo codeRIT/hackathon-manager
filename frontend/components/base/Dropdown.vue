@@ -8,8 +8,8 @@
         <label v-if="withLabel" class="control-label" :for="id">{{ label }}</label>
         <div class="dropdown" :class="{ 'opened': isOpen }" @click="toggleOpen" aria-hidden="true">
             <div class="name">
-                <p v-if="withLabel">{{ currentSelection?.textContent }}</p>
-                <p v-else>{{ label }}</p>
+                <p v-if="withLabel">{{ currentSelection?.textContent }} <font-awesome-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'"></font-awesome-icon></p>
+                <p v-else>{{ label }} <font-awesome-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'"></font-awesome-icon></p>
             </div>
 
             <div
@@ -27,8 +27,13 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+
 export default {
     name: 'Dropdown',
+    components: {
+        FontAwesomeIcon
+    },
     props: {
         id: String,
         label: String,
