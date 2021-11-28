@@ -7,7 +7,7 @@
             <a href="#">{{ $t("pages.manage.navbar.admissions") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.users") }}</a>
             <a href="#">{{ $t("pages.manage.navbar.schools") }}</a>
-            <a href="#">{{ $t("pages.manage.navbar.schedule") }}</a>
+            <router-link to="/manage/schedule">{{ $t("pages.manage.navbar.schedule") }}</router-link>
             <a href="#">{{ $t("pages.manage.navbar.settings") }}</a>
         </HorizontalGroup>
 
