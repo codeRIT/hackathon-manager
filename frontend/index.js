@@ -16,6 +16,7 @@ import Manage from "./routes/manage/Manage.vue"
 import Dashboard from "./routes/manage/Dashboard.vue"
 
 import Schedule from "./routes/manage/schedule/Schedule.vue"
+import EditEvent from "./routes/manage/schedule/EditEvent.vue"
 
 // TODO: pull from server when in production
 import enLocales from "./assets/locales/en-US.json"
@@ -31,7 +32,8 @@ const routes = [
         component: Manage,
         children: [
             { path: "", component: Dashboard },
-            { path: "schedule", component: Schedule }
+            { path: "schedule", component: Schedule },
+            { path: "schedule/edit/:id", component: EditEvent }
         ]
     }
 ]
