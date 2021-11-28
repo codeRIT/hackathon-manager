@@ -4,7 +4,7 @@
 
         <div class="day" v-for="(events, day) in days" :key="day">
             <h2>{{ day }}</h2>  <!-- TODO: cleaner date formatting and structure -->
-            <Table v-for="(events, day) in days" :key="day" :rows="events" editLink="edit"></Table>
+            <Table :rows="events" :showEditLink="true" @go-to-edit="goToEdit"></Table>
         </div>
     </div>
 </template>
@@ -73,6 +73,11 @@ export default {
                     }
                 ]
             }
+        }
+    },
+    methods: {
+        goToEdit(event) {
+            this.$router.push('/manage/schedule/edit/' + event["Title"]);
         }
     }
 }

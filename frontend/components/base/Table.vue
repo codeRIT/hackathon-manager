@@ -9,7 +9,7 @@
         <div class="table-inner-container">
             <table :style="{ minWidth: numColumns * 125 + 'px' }">
                 <tr>
-                    <th v-if="editLink"></th>
+                    <th v-if="showEditLink"></th>
 
                     <th v-for="columnName in tableHeader" :key="columnName">
                         {{ columnName }}
@@ -17,7 +17,9 @@
                 </tr>
 
                 <tr v-for="(row, index) in rows" :key="index">
-                    <td v-if="editLink"><a :href="editLink"><font-awesome-icon icon="edit"></font-awesome-icon></a></td>
+                    <td v-if="showEditLink">
+                        <font-awesome-icon icon="edit" @click="$emit('goToEdit', row)"></font-awesome-icon>
+                    </td>
 
                     <td v-for="(value, name) in row" :key="name">
                         {{ value }}
@@ -58,11 +60,12 @@ export default {
     components: {
         FontAwesomeIcon
     },
+    emits: ['goToEdit'],
     props: {
         rows: Array,
-        editLink: String,
         paginated: Boolean,
-        pageSize: Number
+        pageSize: Number,
+        showEditLink: Boolean
     },
     data () {
         return {
@@ -84,7 +87,7 @@ export default {
 
         numColumns: function() {
             let num = this.tableHeader.length
-            if (this.editLink) {
+            if (this.showEditLink) {
                 num++
             }
             return num
