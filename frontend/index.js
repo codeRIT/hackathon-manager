@@ -12,6 +12,8 @@ import Profile from "./routes/Profile.vue"
 import Manage from "./routes/manage/Manage.vue"
 import Dashboard from "./routes/manage/Dashboard.vue"
 import Users from "./routes/manage/Users.vue"
+    import AddUser from "./routes/manage/AddUser.vue"
+    import EditUser from "./routes/manage/EditUser.vue"
 
 // TODO: pull from server when in production
 import enLocales from "./assets/locales/en-US.json"
@@ -27,7 +29,14 @@ const routes = [
         component: Manage,
         children: [
             { path: "", component: Dashboard }
-            { path: "users", component: Users}
+            {
+                path: "users",
+                component: Users,
+                children: [
+                    { path: "add",  component: "AddUser"  },
+                    { path: "user", component: "EditUser" }
+                ]
+            }
         ]
     }
 ]

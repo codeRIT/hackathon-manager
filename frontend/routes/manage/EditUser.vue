@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="title-bar">
-            <h1>Users and Staff</h1>
+            <h1>EditUser</h1>
             <div id="right">
                 <Button content="Add User"></Button>
                 <TextInput placeholder="Search..."></TextInput>
@@ -18,7 +18,7 @@ import Button       from '../../components/base/Button.vue';
 import TextInput    from '../../components/base/TextInput.vue';
 
 export default {
-    name: 'Users',
+    name: 'EditUser',
     components: {
         ManageNavbar,
         Button,
