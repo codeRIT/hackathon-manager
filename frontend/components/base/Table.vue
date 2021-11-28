@@ -9,7 +9,7 @@
         <div class="table-inner-container">
             <table :style="{ minWidth: numColumns * 125 + 'px' }">
                 <tr>
-                    <th v-if="editLink"></th>
+                    <th v-if="showEditLink"></th>
 
                     <th v-for="columnName in tableHeader" :key="columnName">
                         {{ columnName }}
@@ -17,8 +17,9 @@
                 </tr>
 
                 <tr v-for="(row, index) in rows" :key="index">
-                    <!-- TODO: add prop for Font Awesome icons here - related to issue #731 -->
-                    <td v-if="editLink"><a :href="editLink">Edit</a></td>
+                    <td v-if="showEditLink">
+                        <font-awesome-icon icon="edit" @click="$emit('goToEdit', row)"></font-awesome-icon>
+                    </td>
 
                     <td v-for="(value, name) in row" :key="name">
                         {{ value }}
@@ -52,19 +53,25 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+
 export default {
     name: 'Table',
+    components: {
+        FontAwesomeIcon
+    },
     props: {
         rows: Array,
-        editLink: String,
         paginated: Boolean,
-        pageSize: Number
+        pageSize: Number,
+        showEditLink: Boolean
     },
     data () {
         return {
             pageNumber: 0
         }
     },
+    emits: ["goToEdit"],
     computed: {
         tableHeader: function() {
             if (this.rows.length == 0) {
@@ -80,7 +87,7 @@ export default {
 
         numColumns: function() {
             let num = this.tableHeader.length
-            if (this.editLink) {
+            if (this.showEditLink) {
                 num++
             }
             return num
