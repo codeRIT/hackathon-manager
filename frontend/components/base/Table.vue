@@ -17,8 +17,7 @@
                 </tr>
 
                 <tr v-for="(row, index) in rows" :key="index">
-                    <!-- TODO: add prop for Font Awesome icons here - related to issue #731 -->
-                    <td v-if="editLink"><a :href="editLink">Edit</a></td>
+                    <td v-if="editLink"><a :href="editLink"><font-awesome-icon icon="edit"></font-awesome-icon></a></td>
 
                     <td v-for="(value, name) in row" :key="name">
                         {{ value }}
@@ -52,8 +51,13 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+
 export default {
     name: 'Table',
+    components: {
+        FontAwesomeIcon
+    },
     props: {
         rows: Array,
         editLink: String,
