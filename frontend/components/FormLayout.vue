@@ -18,15 +18,16 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 25px;
 
     .card, form {
-        display: flex !important;
+        display: flex;
         flex-direction: column;
         gap: 20px;
         width: 100%;
-        max-width: 375px;
+        max-width: 300px;
 
-        h1 {
+        h1, h2 {
             text-align: center;
         }
         .control-container {

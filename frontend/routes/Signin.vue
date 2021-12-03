@@ -5,13 +5,12 @@
                 <h1>Sign in to {{name}}</h1>
                 <TextInput id="email" placeholder="Email" type="email" required />
                 <TextInput id="password" placeholder="Password" type="password" required/>
-                <Checkbox id="remember" class="checkbox" content="Remember Me" name="checkbox-test" value="remember"></Checkbox>
+                <Checkbox id="remember" class="checkbox" content="Remember me" name="checkbox-test" value="remember"></Checkbox>
                 <Button class="center" content="Sign in" type="submit"></Button>
             </form>
         </Card>
-        <br />
-        <Card class="stack">
-            <h1>Other sign-in options</h1>
+        <Card>
+            <h2>Other sign-in options</h2>
             <Button content="Sign in with MyMLH"></Button>
             <Button content="Sign in with Google"></Button>
         </Card>

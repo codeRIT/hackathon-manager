@@ -11,10 +11,8 @@
                 <Button class="center" content="Register" type="submit"></Button>
             </form>
         </Card>
-
-        <br />
-        <Card class="stack">
-            <h1>Other registration options</h1>
+        <Card>
+            <h2>Other registration options</h2>
             <Button content="Continue with MyMLH"></Button>
             <Button content="Continue with Google"></Button>
         </Card>
