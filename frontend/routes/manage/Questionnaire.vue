@@ -7,7 +7,7 @@
                 <TextInput placeholder="Search bar..."></TextInput>
             </div>
         </div>
-        <Table :rows="tableRows" :showPagination="true" editLink="./edit"></Table>
+        <Table :rows="tableRows" :shownColumns="tableColumns"></Table>
         <div class="space-between">
             <Dropdown name="Show n rows">
                 <option selected>5</option>
@@ -51,46 +51,35 @@
                 name: "Questionnaire",
                 tableRows: [
                     {
-                        "First Name": "Claire",
-                        "Last Name": "Gallup",
-                        "Email": "claire.j.gallup@gmail.com",
-                        "Status": "Confirmed",
-                        "Checked In?": "Yes",
-                        "Applied On": "7/5/21",
+                        id: 1,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "First Name": "Claire",
-                        "Last Name": "Gallup",
-                        "Email": "claire.j.gallup@gmail.com",
-                        "Status": "Confirmed",
-                        "Checked In?": "Yes",
-                        "Applied On": "7/5/21",
+                        id: 2,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "First Name": "Claire",
-                        "Last Name": "Gallup",
-                        "Email": "claire.j.gallup@gmail.com",
-                        "Status": "Confirmed",
-                        "Checked In?": "Yes",
-                        "Applied On": "7/5/21",
+                        id: 3,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "First Name": "Claire",
-                        "Last Name": "Gallup",
-                        "Email": "claire.j.gallup@gmail.com",
-                        "Status": "Confirmed",
-                        "Checked In?": "Yes",
-                        "Applied On": "7/5/21",
+                        id: 4,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "First Name": "Claire",
-                        "Last Name": "Gallup",
-                        "Email": "claire.j.gallup@gmail.com",
-                        "Status": "Confirmed",
-                        "Checked In?": "Yes",
-                        "Applied On": "7/5/21",
+                        id: 5,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     }
-                ]
+                ],
+                tableColumns: {
+                    description: "Description",
+                    title: "Title"
+                }
             }
         },
     };
