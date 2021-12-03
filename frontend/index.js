@@ -2,6 +2,9 @@ import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router"
 import { createI18n } from "vue-i18n"
 
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faChevronUp, faChevronDown, faEdit } from "@fortawesome/free-solid-svg-icons"
+
 import App from "./App"
 
 import Signin from "./routes/Signin.vue"
@@ -54,6 +57,11 @@ if (!i18n.global.availableLocales.includes(desiredLocale)) {
     loadLocaleMessage(i18n, desiredLocale)
 }
 setI18nLangauge(i18n, desiredLocale)
+
+
+// needed for vue-fontawesome
+library.add(faChevronUp, faChevronDown, faEdit)
+
 
 const app = createApp(App)
 app.use(router)
