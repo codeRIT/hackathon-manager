@@ -7,7 +7,7 @@
 
         <div class="dropdown" :class="{ 'opened': isOpen }" @click="toggleOpen" aria-hidden="true">
             <div class="name">
-                <p>{{ name }}</p>
+                <p>{{ name }} <font-awesome-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'"></font-awesome-icon></p>
             </div>
 
             <div
@@ -25,8 +25,13 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+
 export default {
     name: 'Dropdown',
+    components: {
+        FontAwesomeIcon
+    },
     props: {
         name: String
     },
