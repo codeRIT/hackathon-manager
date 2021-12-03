@@ -17,10 +17,9 @@
         <br>
         <div class="space-between">
             <h1>Questions</h1>
-            <p>(un)lock</p>
+            <h1>(un)lock</h1>
         </div>
         <hr>
-        <br>
         <p>Warning: this affects all hackers...</p>
         <br>
         <h2>Default questions</h2>
@@ -52,33 +51,57 @@
                 tableRows: [
                     {
                         id: 1,
-                        title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        firstName: "Claire",
+                        lastName: "Gallup",
+                        email: "claire.j.gallup@gmail.com",
+                        status: "Confirmed",
+                        checkedIn: "Yes",
+                        appliedOn: "7/5/21",
                     },
                     {
                         id: 2,
-                        title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        firstName: "Claire",
+                        lastName: "Gallup",
+                        email: "claire.j.gallup@gmail.com",
+                        status: "Confirmed",
+                        checkedIn: "Yes",
+                        appliedOn: "7/5/21",
                     },
                     {
                         id: 3,
-                        title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        firstName: "Claire",
+                        lastName: "Gallup",
+                        email: "claire.j.gallup@gmail.com",
+                        status: "Confirmed",
+                        checkedIn: "Yes",
+                        appliedOn: "7/5/21",
                     },
                     {
                         id: 4,
-                        title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        firstName: "Claire",
+                        lastName: "Gallup",
+                        email: "claire.j.gallup@gmail.com",
+                        status: "Confirmed",
+                        checkedIn: "Yes",
+                        appliedOn: "7/5/21",
                     },
                     {
                         id: 5,
-                        title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        firstName: "Claire",
+                        lastName: "Gallup",
+                        email: "claire.j.gallup@gmail.com",
+                        status: "Confirmed",
+                        checkedIn: "Yes",
+                        appliedOn: "7/5/21",
                     }
                 ],
                 tableColumns: {
-                    description: "Description",
-                    title: "Title"
+                    firstName: "First Name",
+                    lastName: "Last Name",
+                    email: "Email",
+                    status: "Status",
+                    checkedIn: "Checked In?",
+                    appliedOn: "Applied On",
                 }
             }
         },

@@ -34,7 +34,7 @@ const routes = [
             { path: "", component: Dashboard },
             { path: "/manage/questionnaire", component: Questionnaire },
             { path: "/manage/message", component: Message },
-            { path: "/manage/edit", component: Edit },
+            { path: "/manage/questionnaire/edit", component: Edit },
         ]
     }
 ]

@@ -2,7 +2,6 @@
     <div>
         <h1>Send a message</h1>
         <hr>
-        <br>
         <TextInput placeholder="Subject"></TextInput>
         <Dropdown name="Recipient dropdown">
             <option selected>Bee</option>

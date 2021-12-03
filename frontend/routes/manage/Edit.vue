@@ -2,18 +2,20 @@
     <div>
         <div class="space-between">
             <h1>{{applicant}}</h1>
-            <p>Edit</p>
+            <h1>Edit</h1>
         </div>
         <hr>
-        <br>
-        <p>Check in Compliance</p>
-        <p>[big text input]</p>
+        <h2>Check in Compliance</h2>
+        <TextArea></TextArea>
     </div>
 </template>
 
 <script>
+    import TextArea from "../../components/base/TextArea.vue";
+
     export default {
         components: {
+            TextArea,
         },
         data() {
             return {
