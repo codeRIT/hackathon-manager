@@ -4,7 +4,7 @@
 
         <div class="day" v-for="(events, day) in days" :key="day">
             <h2>{{ day }}</h2>  <!-- TODO: cleaner date formatting and structure -->
-            <Table :rows="events" :showEditLink="true" @go-to-edit="goToEdit"></Table>
+            <Table :rows="events" :shownColumns="tableColumns" :showEditLink="true" @go-to-edit="goToEdit"></Table>
         </div>
     </div>
 </template>
@@ -22,62 +22,76 @@ export default {
             days: {
                 "2021-11-27": [
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 1,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     },
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 2,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     },
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 3,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     },
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 4,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     }
                 ],
                 "2021-11-28": [
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 5,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     },
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 6,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     },
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 7,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     },
                     {
-                        "Title": "Opening Ceremony",
-                        "Description": "lorem ipsum",
-                        "Start time": "9:30am",
-                        "End time": "10:00am"
+                        id: 8,
+                        title: "Opening Ceremony",
+                        description: "lorem ipsum",
+                        start: "9:30am",
+                        end: "10:00am"
                     }
                 ]
+            },
+            tableColumns: {
+                description: "Description",
+                end: "End time",
+                start: "Start time",
+                title: "Title"
             }
         }
     },
     methods: {
         goToEdit(event) {
-            this.$router.push('/manage/schedule/edit/' + event["Title"]);
+            this.$router.push('/manage/schedule/edit/' + event.id);
         }
     }
 }
