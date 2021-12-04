@@ -20,7 +20,7 @@
             <Radio content="Hello" name="radio-test" value="asdf"></Radio>
             <Radio content="Hello" name="radio-test" value="1234"></Radio>
 
-            <Table :rows="tableRows" :showPagination="true"></Table>
+            <Table :rows="tableRows" :shownColumns="tableColumns"></Table>
 
             <VerticalGroup>
                 <a href="#">Item 1</a>
@@ -78,31 +78,35 @@
                 name: "Home",
                 tableRows: [
                     {
-                        "Column 1": "lorem ipsum",
-                        "Column 2": "lorem ipsum",
-                        "Column 3": "lorem ipsum"
+                        id: 1,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "Column 1": "lorem ipsum",
-                        "Column 2": "lorem ipsum",
-                        "Column 3": "lorem ipsum"
+                        id: 2,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "Column 1": "lorem ipsum",
-                        "Column 2": "lorem ipsum",
-                        "Column 3": "lorem ipsum"
+                        id: 3,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "Column 1": "lorem ipsum",
-                        "Column 2": "lorem ipsum",
-                        "Column 3": "lorem ipsum"
+                        id: 4,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     },
                     {
-                        "Column 1": "lorem ipsum",
-                        "Column 2": "lorem ipsum",
-                        "Column 3": "lorem ipsum"
+                        id: 5,
+                        title: "lorem ipsum",
+                        description: "dolor sit amet"
                     }
-                ]
+                ],
+                tableColumns: {
+                    description: "Description",
+                    title: "Title"
+                }
             }
         },
     };

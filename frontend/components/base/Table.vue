@@ -11,7 +11,7 @@
                 <tr>
                     <th v-if="showEditLink"></th>
 
-                    <th v-for="columnName in tableHeader" :key="columnName">
+                    <th v-for="columnName in shownColumns" :key="columnName">
                         {{ columnName }}
                     </th>
                 </tr>
@@ -21,7 +21,7 @@
                         <font-awesome-icon icon="edit" @click="$emit('goToEdit', row)"></font-awesome-icon>
                     </td>
 
-                    <td v-for="(value, name) in row" :key="name">
+                    <td v-for="(value, name) in filterRow(row)" :key="name">
                         {{ value }}
                     </td>
                 </tr>
@@ -65,28 +65,18 @@ export default {
         rows: Array,
         paginated: Boolean,
         pageSize: Number,
-        showEditLink: Boolean
+        showEditLink: Boolean,
+        shownColumns: Object
     },
     data () {
         return {
             pageNumber: 0
         }
     },
+    emits: ["goToEdit"],
     computed: {
-        tableHeader: function() {
-            if (this.rows.length == 0) {
-                return []
-            } else {
-                const row = []
-                for (let key of Object.keys(this.rows[0])) {
-                    row.push(key)
-                }
-                return row
-            }
-        },
-
         numColumns: function() {
-            let num = this.tableHeader.length
+            let num = Object.keys(this.shownColumns).length;
             if (this.showEditLink) {
                 num++
             }
@@ -100,6 +90,17 @@ export default {
     methods: {
         goToPage: function(pageNumber) {
             alert(`going to page #${pageNumber}\nto be implemented later!`)
+        },
+
+        filterRow: function(row) {
+            let shownColumnKeys = Object.keys(this.shownColumns)
+
+            // filter columns in row and sort by order specified in this.shownColumns
+            return Object.fromEntries(
+                Object.entries(row)
+                    .filter(([key, value]) => shownColumnKeys.includes(key))
+                    .sort((x, y) => shownColumnKeys.indexOf(x[0]) < shownColumnKeys.indexOf(y[0]))
+            )
         }
     }
 }
