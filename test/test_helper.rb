@@ -16,6 +16,7 @@ end
 # This must be AFTER SimpleCov is required, or it won't work
 require_relative '../config/environment'
 require 'rails/test_help'
+require 'devise/jwt/test_helpers'
 
 require "strip_attributes/matchers"
 require "minitest/reporters"

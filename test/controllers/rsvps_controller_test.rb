@@ -27,7 +27,7 @@ class RsvpsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
       sign_in @user
     end
 
@@ -45,7 +45,7 @@ class RsvpsControllerTest < ActionController::TestCase
   context "while authenticated with a non-accepted questionnaire" do
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
-      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @questionnaire.user)["Authorization"]
       sign_in @questionnaire.user
       @questionnaire.acc_status = "denied"
     end
@@ -65,7 +65,7 @@ class RsvpsControllerTest < ActionController::TestCase
     setup do
       clear_enqueued_jobs
       @request.env["devise.mapping"] = Devise.mappings[:director]
-      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @questionnaire.user)["Authorization"]
       sign_in @questionnaire.user
       @questionnaire.update_attribute(:acc_status, "accepted")
     end

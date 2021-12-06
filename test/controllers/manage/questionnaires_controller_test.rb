@@ -44,7 +44,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
-      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @questionnaire.user)["Authorization"]
     end
 
     should "not allow access to manage_questionnaires#index" do
@@ -83,7 +83,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @user = create(:volunteer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "allow access to manage_questionnaires#index" do
@@ -122,7 +122,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @user = create(:organizer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "allow access to manage_questionnaires#index" do
@@ -161,7 +161,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
       @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "allow access to manage_questionnaires#index" do

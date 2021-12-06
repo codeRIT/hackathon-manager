@@ -35,6 +35,9 @@
 
 .generators
 
+# Ignore Vscode debuge
+launch.json
+
 # macOS
 .DS_Store
 

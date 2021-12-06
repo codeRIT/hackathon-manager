@@ -37,7 +37,7 @@ class Manage::EventsControllerTest < ActionController::TestCase
       @user = create(:user)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "not allow access to manage_events#index" do
@@ -71,7 +71,7 @@ class Manage::EventsControllerTest < ActionController::TestCase
       @user = create(:volunteer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "not allow access to manage_events#index" do
@@ -105,7 +105,7 @@ class Manage::EventsControllerTest < ActionController::TestCase
       @user = create(:organizer)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "allow access to manage_events#index" do
@@ -139,7 +139,7 @@ class Manage::EventsControllerTest < ActionController::TestCase
       @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "allow access to manage_events#index" do

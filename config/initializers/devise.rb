@@ -9,7 +9,9 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = ENV['DEVISE_SECRET_KEY'] || '5acabf34c8645a0f699bb6a60cdc9fcf8f7eb414cf1a27ba5ee45b162362e9b1726fb745d885b5070f69a91dc2cf1c6b61b4c126bca808d0f23723e1c421b51c'
+  config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_SECRET_KEY']
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -84,6 +86,7 @@ Devise.setup do |config|
   # passing skip: :sessions to `devise_for` in your config/routes.rb
   config.skip_session_storage = [:http_auth] # this is the default devise config
   config.skip_session_storage << :doorkeeper # disable session storage for oauth requests
+  config.skip_session_storage << :params_auth # devise_jwt reccomendation
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX

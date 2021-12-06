@@ -17,7 +17,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
           @user = create(:user)
           @request.env["devise.mapping"] = Devise.mappings[:director]
           sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
           @trackable_event.update_attribute(:user, @user)
         end
       end
@@ -60,7 +60,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
         @user = create(:user, role: user_role)
         @request.env["devise.mapping"] = Devise.mappings[:user]
         sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
         @trackable_event.update_attribute(:user, @user)
       end
 
@@ -101,7 +101,7 @@ class Manage::TrackableEventsControllerTest < ActionController::TestCase
       @user = create(:director)
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "get index" do

@@ -4,8 +4,9 @@ class User < ApplicationRecord
   strip_attributes
 
   devise :database_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:mlh]
+         :recoverable, :rememberable, :trackable, :validatable, :doorkeeper,
+         :jwt_authenticatable, :omniauthable, omniauth_providers: [:mlh],
+         jwt_revocation_strategy: self
 
   has_one :questionnaire
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant",
@@ -26,9 +27,13 @@ class User < ApplicationRecord
   enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
 
   def generate_jwt
-    JWT.encode({ id: id,
-                 exp: 30.days.from_now.to_i },
-               Rails.application.secrets.secret_key_base)
+    JWT.encode({  id: id,
+                  exp: 30.days.from_now.to_i },
+                  ENV['DEVISE_SECRET_KEY'])
+  end
+
+  def jwt_payload
+    { id: id }
   end
 
   def set_default_role

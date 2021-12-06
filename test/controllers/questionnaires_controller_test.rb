@@ -33,7 +33,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
       @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user)
       sign_in @user
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @user)["Authorization"]
     end
 
     should "not get a questionnaire" do
@@ -148,7 +148,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @questionnaire.user
-      @request.headers["Authorization"] = "Bearer " + @questionnaire.user.generate_jwt
+      @request.headers["Authorization"] = Devise::JWT::TestHelpers.auth_headers(@request.headers, @questionnaire.user)["Authorization"]
     end
 
     should "show questionnaire" do
