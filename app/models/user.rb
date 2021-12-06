@@ -6,9 +6,8 @@ class User < ApplicationRecord
   strip_attributes
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :doorkeeper, :omniauthable, omniauth_providers: [:mlh],
-         jwt_revocation_strategy: self
+         :recoverable, :rememberable, :trackable, :validatable, :doorkeeper,
+         :omniauthable, omniauth_providers: [:mlh], jwt_revocation_strategy: self
 
   has_one :questionnaire
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant",
