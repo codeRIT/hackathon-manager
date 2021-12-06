@@ -1,3 +1,4 @@
+load 'lib/devise/api_failure_app.rb'
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -7,7 +8,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = ENV['DEVISE_SECRET_KEY'] || '5acabf34c8645a0f699bb6a60cdc9fcf8f7eb414cf1a27ba5ee45b162362e9b1726fb745d885b5070f69a91dc2cf1c6b61b4c126bca808d0f23723e1c421b51c'
+  config.secret_key = ENV['DEVISE_SECRET_KEY']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -80,8 +81,9 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth] # this is the default devise config
-  config.skip_session_storage << :doorkeeper # disable session storage for oauth requests
+  config.skip_session_storage = [:http_auth]  # this is the default devise config
+  config.skip_session_storage << :doorkeeper  # disable session storage for oauth requests
+  config.skip_session_storage << :params_auth # devise_jwt reccomendation
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -242,10 +244,9 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    manager.failure_app = ApiFailureApp
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
@@ -264,5 +265,9 @@ Devise.setup do |config|
   # Devise
   Rails.application.config.to_prepare do
     Devise::Mailer.layout "user_mailer"
+  end
+
+  config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
   end
 end

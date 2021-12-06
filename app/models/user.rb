@@ -1,11 +1,14 @@
 class User < ApplicationRecord
+  include Devise::JWT::RevocationStrategies::JTIMatcher
+
   audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
 
   strip_attributes
 
-  devise :database_authenticatable, :registerable, :timeoutable,
+  devise :database_authenticatable, :jwt_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :doorkeeper, :omniauthable, omniauth_providers: [:mlh]
+         :doorkeeper, :omniauthable, omniauth_providers: [:mlh],
+         jwt_revocation_strategy: self
 
   has_one :questionnaire
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant",
