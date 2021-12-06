@@ -1,12 +1,12 @@
 class QuestionnairesController < ApplicationController
   include QuestionnairesControllable
 
-  # before_action :logged_in
+  before_action :logged_in
   before_action :find_questionnaire, only: [:show, :update, :destroy]
 
-  # def logged_in
-  #   authenticate_user!
-  # end
+  def logged_in
+    authenticate_user!
+  end
 
   # GET /questionnaire.json
   def show

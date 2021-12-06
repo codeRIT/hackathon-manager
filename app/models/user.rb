@@ -5,8 +5,8 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :doorkeeper, :omniauthable, omniauth_providers: [:mlh]
-         :jwt_authenticatable
+         :omniauthable, omniauth_providers: [:mlh]
+
   has_one :questionnaire
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant",
                            foreign_key: :resource_owner_id,
@@ -28,7 +28,7 @@ class User < ApplicationRecord
   def generate_jwt
     JWT.encode({ id: id,
                  exp: 30.days.from_now.to_i },
-                 ENV['JWT_SECRET'])
+               Rails.application.secrets.secret_key_base)
   end
 
   def set_default_role

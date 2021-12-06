@@ -4,10 +4,11 @@ class ApplicationController < ActionController::API
   include ActionController::RequestForgeryProtection
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  protect_from_forgery with: :null_session
+
   respond_to :json
 
   before_action :authenticate_user
-  # skip_before_action :verify_authenticity_token
 
   def after_sign_in_path_for(resource)
     stored_location = stored_location_for(resource)
@@ -18,27 +19,6 @@ class ApplicationController < ActionController::API
     else
       questionnaires_path
     end
-  end
-
-  def render_resource(resource)
-    if resource.errors.empty?
-      render json: resource
-    else
-      validation_error(resource)
-    end
-  end
-
-  def validation_error(resource)
-    render json: {
-      errors: [
-        {
-          status: '400',
-          title: 'Bad Request',
-          detail: resource.errors,
-          code: '100'
-        }
-      ]
-    }, status: :bad_request
   end
 
   private
@@ -58,13 +38,11 @@ class ApplicationController < ActionController::API
   def authenticate_user
     if request.headers['Authorization'].present?
       authenticate_or_request_with_http_token do |token|
-        jwt_payload = JWT.decode(token, ENV['JWT_SECRET']).first
+        jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
         @current_user_id = jwt_payload['id']
       rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
         head :unauthorized
       end
-    else
-      head :unauthorized
     end
   end
 end

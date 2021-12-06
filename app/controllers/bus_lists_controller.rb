@@ -1,13 +1,13 @@
 class BusListsController < ApplicationController
-  # before_action :logged_in
+  before_action :logged_in
   before_action :check_user_has_questionnaire
   before_action :find_questionnaire
   before_action :find_bus_list
   before_action :require_bus_captain
 
-  # def logged_in
-  #   authenticate_user!
-  # end
+  def logged_in
+    authenticate_user!
+  end
 
   # GET /bus_list
   def show

@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_010030) do
+ActiveRecord::Schema.define(version: 2021_01_30_175752) do
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,20 +33,20 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "agreements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "agreement"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "agreements_questionnaires", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "agreements_questionnaires", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "agreement_id"
     t.integer "questionnaire_id"
     t.index ["agreement_id", "questionnaire_id"], name: "index_agreements_questionnaires"
   end
 
-  create_table "audits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "audits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
     t.integer "associated_id"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
-  create_table "blazer_audits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "blazer_audits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "query_id"
     t.text "statement"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["user_id"], name: "index_blazer_audits_on_user_id"
   end
 
-  create_table "blazer_checks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "blazer_checks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "creator_id"
     t.integer "query_id"
     t.string "state"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["query_id"], name: "index_blazer_checks_on_query_id"
   end
 
-  create_table "blazer_dashboard_queries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "blazer_dashboard_queries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "dashboard_id"
     t.integer "query_id"
     t.integer "position"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["query_id"], name: "index_blazer_dashboard_queries_on_query_id"
   end
 
-  create_table "blazer_dashboards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "blazer_dashboards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "creator_id"
     t.text "name"
     t.datetime "created_at", null: false
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["creator_id"], name: "index_blazer_dashboards_on_creator_id"
   end
 
-  create_table "blazer_queries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "blazer_queries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "creator_id"
     t.string "name"
     t.text "description"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["creator_id"], name: "index_blazer_queries_on_creator_id"
   end
 
-  create_table "bus_lists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "bus_lists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.boolean "needs_bus_captain", default: false
   end
 
-  create_table "data_exports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "data_exports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "export_type", null: false
     t.datetime "queued_at"
     t.datetime "started_at"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.string "location"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.string "category"
   end
 
-  create_table "fips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "fips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "fips_code"
     t.string "city"
     t.string "state"
@@ -159,13 +159,13 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.datetime "updated_at"
   end
 
-  create_table "message_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "message_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "messages", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "subject"
     t.string "recipients"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.string "type"
   end
 
-  create_table "oauth_access_grants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "oauth_access_grants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
     t.bigint "application_id", null: false
     t.string "token", null: false
@@ -196,10 +196,10 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true
   end
 
-  create_table "oauth_access_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "oauth_access_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "resource_owner_id"
     t.bigint "application_id"
-    t.text "token", null: false
+    t.string "token", null: false
     t.string "refresh_token"
     t.integer "expires_in"
     t.datetime "revoked_at"
@@ -209,9 +209,10 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["application_id"], name: "index_oauth_access_tokens_on_application_id"
     t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
     t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
+    t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
   end
 
-  create_table "oauth_applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "oauth_applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "uid", null: false
     t.string "secret", null: false
@@ -223,7 +224,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "questionnaires", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "questionnaires", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date_of_birth"
     t.string "experience"
     t.string "school_id"
@@ -261,7 +262,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["user_id"], name: "index_questionnaires_on_user_id"
   end
 
-  create_table "school_name_duplicates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "school_name_duplicates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "school_id"
     t.datetime "created_at", null: false
@@ -269,7 +270,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["school_id"], name: "index_school_name_duplicates_on_school_id"
   end
 
-  create_table "schools", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "schools", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "city"
@@ -280,7 +281,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.boolean "is_home", default: false
   end
 
-  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
     t.integer "thing_id"
@@ -290,7 +291,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
-  create_table "trackable_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "trackable_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "band_id"
     t.bigint "trackable_tag_id"
     t.integer "user_id"
@@ -300,7 +301,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["user_id"], name: "index_trackable_events_on_user_id"
   end
 
-  create_table "trackable_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "trackable_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -308,7 +309,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_010030) do
     t.index ["name"], name: "index_trackable_tags_on_name", unique: true
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "email", default: "", null: false

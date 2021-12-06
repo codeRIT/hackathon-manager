@@ -21,8 +21,8 @@ class BusListsControllerTest < ActionController::TestCase
     setup do
       @request.env["devise.mapping"] = Devise.mappings[:director]
       @user = create(:user, email: "newabc@example.com")
-      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
       sign_in @user
+      @request.headers["Authorization"] = "Bearer " + @user.generate_jwt
     end
 
     should "return not found on bus_list#show" do
