@@ -1,24 +1,26 @@
 <template>
     <div class="input-dropdown">
         <!-- making this invisible so that screen readers can ignore the "pretty" version -->
-        <select class="invisible" ref="select">
+        <select class="invisible" :id="id" ref="select" :aria-label="withLabel ? null : label">
             <slot></slot>
         </select>
 
+        <label v-if="withLabel" class="control-label" :for="id">{{ label }}</label>
         <div class="dropdown" :class="{ 'opened': isOpen }" @click="toggleOpen" aria-hidden="true">
             <div class="name">
-                <p>{{ name }} <font-awesome-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'"></font-awesome-icon></p>
+                <p v-if="withLabel">{{ currentSelection?.textContent }} <font-awesome-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'"></font-awesome-icon></p>
+                <p v-else>{{ label }} <font-awesome-icon :icon="isOpen ? 'chevron-up' : 'chevron-down'"></font-awesome-icon></p>
             </div>
 
             <div
                 v-for="(option, index) in options"
                 :key="option"
-                @click="select(option.value)"
+                @click="select(option)"
                 class="item"
-                :class="{ 'selected': currentSelection === option.value }"
+                :class="{ 'selected': currentSelection?.value === option.value }"
                 :style="{ 'z-index': index + 1 }"
             >
-                <p>{{ option.value }}</p>
+                <p>{{ option.textContent }}</p>
             </div>
         </div>
     </div>
@@ -33,35 +35,41 @@ export default {
         FontAwesomeIcon
     },
     props: {
-        name: String
+        id: String,
+        label: String,
+        withLabel: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
-            currentSelection: "",
+            currentSelection: null,
             isOpen: false,
             options: [],  // populated in mounted()
         }
     },
     mounted() {
         this.options = [...this.$refs.select.getElementsByTagName("option")];  // convert HTMLCollection to array
-        this.currentSelection = this.$refs.select.value;  // pull default vaclue from <select> element
+        this.currentSelection = this.options.filter(x => x.value === this.$refs.select.value)[0] || this.options[0];  // pull default vaclue from <select> element
     },
     methods: {
         toggleOpen() {
             this.isOpen = !this.isOpen;
         },
 
-        select(value) {
-            this.currentSelection = value;
-            this.$refs.select.value = value;
+        select(option) {
+            this.currentSelection = option;
+            this.$refs.select.value = option.value;
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/controls.scss";
+
 .dropdown {
-    align-items: end;
     display: inline-flex;
     flex-direction: column;
 
@@ -75,7 +83,6 @@ export default {
 
     .name {
         border: var(--border-size) solid var(--dark-color);
-        border-bottom-left-radius: var(--border-radius);
         border-top-left-radius: var(--border-radius);
         border-top-right-radius: var(--border-radius);
     }
@@ -110,6 +117,7 @@ export default {
     }
 
     &:not(.opened) .name {
+        border-bottom-left-radius: var(--border-radius);
         border-bottom-right-radius: var(--border-radius);
 
         &:hover {
