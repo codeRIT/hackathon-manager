@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <ManageNavbar></ManageNavbar>
 
         <router-view></router-view>
@@ -16,3 +16,9 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+nav {
+    padding: 3rem 0;
+}
+</style>

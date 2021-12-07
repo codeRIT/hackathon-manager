@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import { createI18n } from "vue-i18n"
 
 import { library } from "@fortawesome/fontawesome-svg-core"
-import { faChevronUp, faChevronDown, faEdit } from "@fortawesome/free-solid-svg-icons"
+import { faChevronUp, faChevronDown, faEdit, faUser } from "@fortawesome/free-solid-svg-icons"
 
 import App from "./App"
 
@@ -76,7 +76,7 @@ setI18nLangauge(i18n, desiredLocale)
 
 
 // needed for vue-fontawesome
-library.add(faChevronUp, faChevronDown, faEdit)
+library.add(faChevronUp, faChevronDown, faEdit, faUser)
 
 
 const app = createApp(App)

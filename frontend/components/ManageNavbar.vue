@@ -12,18 +12,20 @@
         </HorizontalGroup>
 
         <HorizontalGroup>
-            <a href="#">User</a>
+            <a href="#"><font-awesome-icon icon="user"></font-awesome-icon></a>
             <a href="#">{{ $t("pages.manage.navbar.logout") }}</a>
         </HorizontalGroup>
     </nav>
 </template>
 
 <script>
-import HorizontalGroup from "./base/HorizontalGroup.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+import HorizontalGroup from "./base/HorizontalGroup.vue"
 
 export default {
     name: 'ManageNavbar',
     components: {
+        FontAwesomeIcon,
         HorizontalGroup
     }
 }
