@@ -14,9 +14,9 @@ import Profile from "./routes/Profile.vue"
 
 import Manage from "./routes/manage/Manage.vue"
 import Dashboard from "./routes/manage/Dashboard.vue"
-import Questionnaire from "./routes/manage/Questionnaire.vue"
-import Message from "./routes/manage/Message.vue"
-import Edit from "./routes/manage/Edit.vue"
+import Questionnaire from "./routes/manage/questionnaire/Questionnaire.vue"
+import EditApplicant from "./routes/manage/questionnaire/EditApplicant.vue"
+import Message from "./routes/manage/questionnaire/Message.vue"
 
 // TODO: pull from server when in production
 import enLocales from "./assets/locales/en-US.json"
@@ -32,9 +32,9 @@ const routes = [
         component: Manage,
         children: [
             { path: "", component: Dashboard },
-            { path: "/manage/questionnaire", component: Questionnaire },
-            { path: "/manage/message", component: Message },
-            { path: "/manage/questionnaire/edit", component: Edit },
+            { path: "questionnaire", component: Questionnaire },
+            { path: "questionnaire/:id", component: EditApplicant },
+            { path: "message", component: Message },
         ]
     }
 ]

@@ -2,7 +2,7 @@
     <div>
         <div class="space-between">
             <h1>{{applicant}}</h1>
-            <h1>Edit</h1>
+            <h3>Edit</h3>
         </div>
         <hr>
         <h2>Check in Compliance</h2>
@@ -11,19 +11,19 @@
 </template>
 
 <script>
-    import TextArea from "../../components/base/TextArea.vue";
+import TextArea from "../../../components/base/TextArea.vue";
 
-    export default {
-        components: {
-            TextArea,
-        },
-        data() {
-            return {
-                name: "Edit",
-                applicant: "Claire Gallup",
-            }
-        },
-    };
+export default {
+    components: {
+        TextArea,
+    },
+    data() {
+        return {
+            name: "Edit",
+            applicant: "Claire Gallup",
+        }
+    },
+};
 </script>
 
 <style lang="scss" scoped>
