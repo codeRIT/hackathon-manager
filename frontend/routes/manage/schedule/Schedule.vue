@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Schedule</h1>
+        <h1>{{ $t("pages.manage.schedule.title") }}</h1>
 
         <div class="day" v-for="(events, day) in days" :key="day">
             <h2>{{ day }}</h2>  <!-- TODO: cleaner date formatting and structure -->
@@ -82,10 +82,10 @@ export default {
                 ]
             },
             tableColumns: {
-                description: "Description",
-                end: "End time",
+                title: "Title",
                 start: "Start time",
-                title: "Title"
+                end: "End time",
+                description: "Description"
             }
         }
     },

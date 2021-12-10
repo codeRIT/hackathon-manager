@@ -105,10 +105,22 @@
                 "schools": "Schools",
                 "questionnaire": "Questionnaire",
                 "admissions": "Admissions",
-                "schedule": "Schedule",
                 "settings": "Settings",
                 "logout": "Logout",
                 "login": "Login"
+            },
+            "schedule": {
+                "edit": {
+                    "description": {
+                        "label": "Description",
+                        "placeholder": "Welcome our attendees, introduce our sponsors..."
+                    },
+                    "title": {
+                        "label": "Title",
+                        "placeholder": "Opening Ceremony"
+                    }
+                },
+                "title": "Schedule"
             }
         },
         "profile": {
