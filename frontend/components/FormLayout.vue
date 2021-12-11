@@ -6,10 +6,7 @@
 
 <script>
 export default {
-    name: 'FormLayout',
-    data () {
-        return {}
-    },
+    name: 'FormLayout'
 }
 </script>
 
@@ -30,9 +27,11 @@ export default {
         h1, h2 {
             text-align: center;
         }
+        
         .control-container {
             margin: 0;
         }
+        
         .center {
             align-self: center; // disable fullwidth behavior
         }

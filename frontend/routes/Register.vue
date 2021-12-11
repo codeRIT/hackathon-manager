@@ -21,10 +21,10 @@
 
 <script>
     import FormLayout from "../components/FormLayout.vue"
-    import Card      from "../components/base/Card.vue";
-    import Button    from "../components/base/Button.vue";
-    import TextInput from "../components/base/TextInput.vue";
-    import Checkbox from "../components/base/Checkbox.vue";
+    import Card       from "../components/base/Card.vue";
+    import Button     from "../components/base/Button.vue";
+    import TextInput  from "../components/base/TextInput.vue";
+    import Checkbox   from "../components/base/Checkbox.vue";
 
     export default {
         components: {
@@ -41,6 +41,3 @@
         },
     };
 </script>
-
-<style lang="scss" scoped>
-</style>
