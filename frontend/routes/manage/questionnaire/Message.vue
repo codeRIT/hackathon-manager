@@ -21,6 +21,7 @@ import TextArea from "../../../components/base/TextArea.vue";
 import TextInput from "../../../components/base/TextInput.vue";
 
 export default {
+    name: 'Message',
     components: {
         Button,
         Dropdown,

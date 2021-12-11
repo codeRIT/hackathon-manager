@@ -38,6 +38,7 @@ import TextInput from "../../../components/base/TextInput.vue";
 import Table     from "../../../components/base/Table.vue";
 
 export default {
+    name: 'Questionnaire',
     components: {
         Button,
         Dropdown,

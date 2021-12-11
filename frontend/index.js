@@ -33,7 +33,7 @@ const routes = [
         children: [
             { path: "", component: Dashboard },
             { path: "questionnaire", component: Questionnaire },
-            { path: "questionnaire/:id", component: EditApplicant },
+            { path: "questionnaire/edit/:id", component: EditApplicant },
             { path: "message", component: Message },
         ]
     }

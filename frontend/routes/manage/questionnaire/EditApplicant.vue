@@ -14,6 +14,7 @@
 import TextArea from "../../../components/base/TextArea.vue";
 
 export default {
+    name: 'EditApplicant',
     components: {
         TextArea,
     },
