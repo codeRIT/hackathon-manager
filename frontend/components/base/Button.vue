@@ -1,12 +1,13 @@
 <template>
-    <button class="button">{{ content }}</button>
+    <button class="button" @click="onclick()">{{ content }}</button>
 </template>
 
 <script>
 export default {
     name: 'Button',
     props: {
-        content: String
+        content: String,
+        onclick: Function
     },
     data() {
         return {}

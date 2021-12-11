@@ -10,7 +10,12 @@ import App from "./App"
 import Home from "./routes/Home.vue"
 import About from "./routes/About.vue"
 import Profile from "./routes/Profile.vue"
-// import Application from "./routes/Application.vue"
+
+import Application from "./routes/Application.vue"
+import PersonalInfoPage from "./routes/application/PersonalInfoPage.vue"
+import ApplicationPage from "./routes/application/ApplicationPage.vue"
+import AccessibilityPage from "./routes/application/AccessibilityPage.vue"
+import AgreementsPage from "./routes/application/AgreementsPage.vue"
 
 import Manage from "./routes/manage/Manage.vue"
 import Dashboard from "./routes/manage/Dashboard.vue"
@@ -25,7 +30,17 @@ import { loadLocaleMessage, setI18nLangauge } from "./i18n"
 const routes = [
     { path: "/", component: Home },
     { path: "/about", component: About },
-    // { path: "/application", component: Application},
+    {
+        path: "/application",
+        component: Application,
+        children: [
+            { path: "", redirect: "/application/personalInfo" },
+            { path: "personalInfo", component: PersonalInfoPage },
+            { path: "application", component: ApplicationPage },
+            { path: "accessibility", component: AccessibilityPage },
+            { path: "agreements", component: AgreementsPage }
+        ]
+    },
     { path: "/profile", component: Profile },
     {
         path: "/manage",

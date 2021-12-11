@@ -8,6 +8,96 @@
             "component": "About component",
             "hello": "Hello world!"
         },
+        "application": {
+            "accessibility": {
+                "captioning": "Will you require captioning for this event?",
+                "dietaryRestrictions": {
+                    "label": "Do you have any dietary restrictions that we should keep in mind?",
+                    "placeholder": "Peanut allergy"
+                },
+                "interpreter": "Will you need an interpreter for this event?",
+                "specialNeeds": {
+                    "label": "Do you have any other special needs that we should know about?",
+                    "placeholder": "I use a wheelchair, so I may need assistance with elevators"
+                },
+                "subtitle": "We strive to make our hackathon as accessibile as possible. Let us know how we can help:",
+                "title": "Accessibility"
+            },
+            "agreements": {
+                "fun": "I agree to have fun",
+                "infoReleaseConsent": "(optional) I consent to sharing my name, email, resume, portfolio URL, and version control URL to this event's sponsors. These sponsors may contact me with job opportunities following the event.",
+                "subtitle": "You must agree to the following terms and conditions (unless specified as optional) to participate in our hackathon:",
+                "title": "Agreements"
+            },
+            "application": {
+                "experience": {
+                    "few": "I've attended a few hackathons before (1-5)",
+                    "label": "How many hackathons have you attended before?",
+                    "many": "I'm a hackathon veteran (6+)",
+                    "none": "None"
+                },
+                "interest": {
+                    "label": "What type of work are you interested in doing during our hackathon?",
+                    "placeholder": "Mobile app development"
+                },
+                "portfolioURL": {
+                    "label": "Link to portfoilio",
+                    "placeholder": "https://myportfolio.github.io"
+                },
+                "shirtSize": {
+                    "label": "Shirt size",
+                    "unisexL": "Unisex L",
+                    "unisexM": "Unisex M",
+                    "unisexS": "Unisex S",
+                    "unisexXL": "Unisex XL",
+                    "unisexXS": "Unisex XS",
+                    "unisexXXL": "Unisex XXL"
+                },
+                "subtitle": "Here's what we'll use to determine if you get accepted, waitlisted, or rejected - no pressure!",
+                "title": "Application",
+                "vcsURL": {
+                    "label": "Link to GitHub, GitLab, Bitbucket, etc.",
+                    "placeholder": "https://github.com/..."
+                },
+                "whyAttend": {
+                    "label": "Why do you want to attend {hackathonName}?",
+                    "placeholder": "I love hacking..."
+                }
+            },
+            "bannerText": "Apply to {hackathonName}!",
+            "nextButton": {
+                "apply": "Apply",
+                "next": "Next"
+            },
+            "personalInfo": {
+                "country": "Country",
+                "dateOfBirth": {
+                    "label": "Date of birth",
+                    "placeholder": "01/01/2000"
+                },
+                "gender": {
+                    "label": "Gender",
+                    "placeholder": "Non-binary"
+                },
+                "major": {
+                    "label": "Major",
+                    "placeholder": "New Media Design"
+                },
+                "phone": {
+                    "label": "Phone number",
+                    "placeholder": "(123) 456-7890"
+                },
+                "raceEthnicity": {
+                    "hispanic": "Hispanic",
+                    "label": "Race / ethnicity",
+                    "whiteCaucasian": "White / Caucasian"
+                },
+                "school": "School",
+                "subtitle": "First, we'll need to collect a bit more personal information:",
+                "title": "Personal info"
+            },
+            "prevButton": "Back"
+        },
         "manage": {
             "navbar": {
                 "dashboard": "Dashboard",
