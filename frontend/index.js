@@ -12,7 +12,12 @@ import Register from "./routes/Register.vue"
 import Home from "./routes/Home.vue"
 import About from "./routes/About.vue"
 import Profile from "./routes/Profile.vue"
-// import Application from "./routes/Application.vue"
+
+import Application from "./routes/Application.vue"
+import PersonalInfoPage from "./routes/application/PersonalInfoPage.vue"
+import ApplicationPage from "./routes/application/ApplicationPage.vue"
+import AccessibilityPage from "./routes/application/AccessibilityPage.vue"
+import AgreementsPage from "./routes/application/AgreementsPage.vue"
 
 import Manage from "./routes/manage/Manage.vue"
 import Dashboard from "./routes/manage/Dashboard.vue"
@@ -26,7 +31,17 @@ const routes = [
     { path: "/signin", component: Signin },
     { path: "/register", component: Register },
     { path: "/about", component: About },
-    // { path: "/application", component: Application},
+    {
+        path: "/application",
+        component: Application,
+        children: [
+            { path: "", redirect: "/application/personalInfo" },
+            { path: "personalInfo", component: PersonalInfoPage },
+            { path: "application", component: ApplicationPage },
+            { path: "accessibility", component: AccessibilityPage },
+            { path: "agreements", component: AgreementsPage }
+        ]
+    },
     { path: "/profile", component: Profile },
     {
         path: "/manage",
