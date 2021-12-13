@@ -20,7 +20,7 @@
             <Radio content="Hello" name="radio-test" value="asdf"></Radio>
             <Radio content="Hello" name="radio-test" value="1234"></Radio>
 
-            <Table :rows="tableRows" :shownColumns="tableColumns"></Table>
+            <Table :rows="tableRows" :shownColumns="tableColumns" :showEditLink="true" @go-to-edit="tableEditRow"></Table>
 
             <VerticalGroup>
                 <a href="#">Item 1</a>
@@ -109,6 +109,11 @@
                 }
             }
         },
+        methods: {
+            tableEditRow(row) {
+                alert("clicked edit on row #" + row.id)
+            }
+        }
     };
 </script>
 
