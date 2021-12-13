@@ -11,16 +11,16 @@
             <Button content="Button"></Button>
             <Button content="Button"></Button>
 
-            <TextInput placeholder="Give password"></TextInput>
+            <TextInput placeholder="Give password" v-model="textInputVal"></TextInput>
 
-            <TextArea placeholder="Does the black moon howl?"></TextArea>
+            <TextArea placeholder="Does the black moon howl?" v-model="textAreaVal"></TextArea>
 
-            <Checkbox content="Hello 1" value="test 1"></Checkbox>
-            <Checkbox content="Hello 2" value="test 2"></Checkbox>
-            <Checkbox content="Hello 3" value="test 3"></Checkbox>
+            <Checkbox content="Hello 1" value="test 1" v-model="checkboxVal"></Checkbox>
+            <Checkbox content="Hello 2" value="test 2" v-model="checkboxVal"></Checkbox>
+            <Checkbox content="Hello 3" value="test 3" v-model="checkboxVal"></Checkbox>
 
-            <Radio content="Hello" name="radio-test" value="asdf"></Radio>
-            <Radio content="Hello" name="radio-test" value="1234"></Radio>
+            <Radio content="Hello" name="radio-test" value="asdf" v-model="radioVal"></Radio>
+            <Radio content="Hello" name="radio-test" value="1234" v-model="radioVal"></Radio>
 
             <Table :rows="tableRows" :shownColumns="tableColumns"></Table>
 
@@ -36,7 +36,7 @@
                 <a href="#">Item 3</a>
             </HorizontalGroup>
 
-            <Dropdown label="Dropdown" :withLabel="false" v-model="testValue">
+            <Dropdown label="Dropdown" :withLabel="false" v-model="dropdownVal">
                 <option selected>Item 1</option>
                 <option>Item 2</option>
                 <option>Item 3</option>
@@ -76,20 +76,70 @@
             TextArea
         },
         computed: {
-            testValue: {
+            // simplest way to verify model bindings for input components
+
+            textInputVal: {
                 get() {
-                    return this.testValueInternal
+                    return this._textInputVal
                 },
                 set(value) {
-                    this.testValueInternal = value
+                    this._textInputVal = value
+                    alert(value)
+                }
+            },
+
+            textAreaVal: {
+                get() {
+                    return this._textAreaVal
+                },
+                set(value) {
+                    this._textAreaVal = value
+                    alert(value)
+                }
+            },
+
+            checkboxVal: {
+                get() {
+                    return this._checkboxVal
+                },
+                set(value) {
+                    this._checkboxVal = value
+                    alert(value)
+                }
+            },
+
+            radioVal: {
+                get() {
+                    return this._radioVal
+                },
+                set(value) {
+                    this._radioVal = value
+                    alert(value)
+                }
+            },
+
+            dropdownVal: {
+                get() {
+                    return this._dropdownVal
+                },
+                set(value) {
+                    this._dropdownVal = value
                     alert(value)
                 }
             }
         },
         data() {
             return {
-                testValueInternal: "Item 1",
                 name: "Home",
+
+                // input component models
+                _textInputVal: "",
+                _textAreaVal: "",
+                _checkboxVal: [],
+                _radioVal: "",
+                _dropdownVal: "",
+
+                // table setup
                 tableRows: [
                     {
                         id: 1,
