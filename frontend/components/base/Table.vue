@@ -11,7 +11,7 @@
                 <tr>
                     <th v-if="showEditLink"></th>
 
-                    <th v-for="columnName in Object.values(shownColumns)" :key="columnName">
+                    <th v-for="columnName in shownColumns" :key="columnName">
                         {{ columnName }}
                     </th>
                 </tr>
@@ -98,7 +98,7 @@ export default {
             return Object.fromEntries(
                 Object.entries(row)
                     .filter(([key, value]) => shownColumnKeys.includes(key))
-                    .sort((x, y) => shownColumnKeys.indexOf(x[0]) < shownColumnKeys.indexOf(y[0]))
+                    .sort((x, y) => shownColumnKeys.indexOf(x[0]) > shownColumnKeys.indexOf(y[0]))
             )
         }
     }
