@@ -11,7 +11,7 @@
             <Button content="Button"></Button>
             <Button content="Button"></Button>
 
-            <TextInput placeholder="Give password"></TextInput>
+            <TextInput placeholder="Give password" v-model="testValue"></TextInput>
 
             <TextArea placeholder="Does the black moon howl?"></TextArea>
 
@@ -73,8 +73,20 @@
             Dropdown,
             TextArea
         },
+        computed: {
+            testValue: {
+                get() {
+                    return this.testValueInternal
+                },
+                set(value) {
+                    this.testValueInternal = value
+                    alert(value)
+                }
+            }
+        },
         data() {
             return {
+                testValueInternal: "test",
                 name: "Home",
                 tableRows: [
                     {
