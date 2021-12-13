@@ -11,7 +11,7 @@
                 <tr>
                     <th v-if="showEditLink"></th>
 
-                    <th v-for="columnName in shownColumns" :key="columnName">
+                    <th v-for="columnName in Object.values(shownColumns)" :key="columnName">
                         {{ columnName }}
                     </th>
                 </tr>
