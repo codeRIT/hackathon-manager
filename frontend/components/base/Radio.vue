@@ -1,6 +1,11 @@
 <template>
     <label class="control-container">{{ content }}
-        <input type="radio" :name="name" :value="value" checked>
+        <input
+            type="radio"
+            :name="name"
+            :value="value"
+            :checked="modelValue == value"
+            @input="$emit('update:modelValue', $event.target.value)">
         <span class="control"></span>
     </label>
 </template>
@@ -10,11 +15,9 @@ export default {
     name: 'Radio',
     props: {
         content: String,
+        modelValue: String,
         name: String,
         value: String
-    },
-    data() {
-        return {}
     }
 }
 </script>

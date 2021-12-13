@@ -15,12 +15,12 @@
 
             <TextArea placeholder="Does the black moon howl?"></TextArea>
 
-            <Checkbox content="Hello 1" value="test 1" v-model="testValue"></Checkbox>
-            <Checkbox content="Hello 2" value="test 2" v-model="testValue"></Checkbox>
-            <Checkbox content="Hello 3" value="test 3" v-model="testValue"></Checkbox>
+            <Checkbox content="Hello 1" value="test 1"></Checkbox>
+            <Checkbox content="Hello 2" value="test 2"></Checkbox>
+            <Checkbox content="Hello 3" value="test 3"></Checkbox>
 
-            <Radio content="Hello" name="radio-test" value="asdf"></Radio>
-            <Radio content="Hello" name="radio-test" value="1234"></Radio>
+            <Radio content="Hello" name="radio-test" value="asdf" v-model="testValue"></Radio>
+            <Radio content="Hello" name="radio-test" value="1234" v-model="testValue"></Radio>
 
             <Table :rows="tableRows" :shownColumns="tableColumns"></Table>
 
@@ -88,7 +88,7 @@
         },
         data() {
             return {
-                testValueInternal: [],
+                testValueInternal: "asdf",
                 name: "Home",
                 tableRows: [
                     {
