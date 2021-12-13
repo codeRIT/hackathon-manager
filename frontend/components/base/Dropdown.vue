@@ -1,7 +1,12 @@
 <template>
     <div class="input-dropdown">
         <!-- making this invisible so that screen readers can ignore the "pretty" version -->
-        <select class="invisible" :id="id" ref="select" :aria-label="withLabel ? null : label">
+        <select
+            class="invisible"
+            :id="id" ref="select"
+            :aria-label="withLabel ? null : label"
+            :value="modelValue"
+        >
             <slot></slot>
         </select>
 
@@ -37,6 +42,7 @@ export default {
     props: {
         id: String,
         label: String,
+        modelValue: String,
         withLabel: {
             type: Boolean,
             default: true
@@ -61,6 +67,7 @@ export default {
         select(option) {
             this.currentSelection = option;
             this.$refs.select.value = option.value;
+            this.$emit('update:modelValue', option.value)
         }
     }
 }

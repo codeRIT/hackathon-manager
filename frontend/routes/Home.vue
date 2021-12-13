@@ -19,8 +19,8 @@
             <Checkbox content="Hello 2" value="test 2"></Checkbox>
             <Checkbox content="Hello 3" value="test 3"></Checkbox>
 
-            <Radio content="Hello" name="radio-test" value="asdf" v-model="testValue"></Radio>
-            <Radio content="Hello" name="radio-test" value="1234" v-model="testValue"></Radio>
+            <Radio content="Hello" name="radio-test" value="asdf"></Radio>
+            <Radio content="Hello" name="radio-test" value="1234"></Radio>
 
             <Table :rows="tableRows" :shownColumns="tableColumns"></Table>
 
@@ -36,7 +36,7 @@
                 <a href="#">Item 3</a>
             </HorizontalGroup>
 
-            <Dropdown label="Dropdown" :withLabel="false">
+            <Dropdown label="Dropdown" :withLabel="false" v-model="testValue">
                 <option selected>Item 1</option>
                 <option>Item 2</option>
                 <option>Item 3</option>
@@ -88,7 +88,7 @@
         },
         data() {
             return {
-                testValueInternal: "asdf",
+                testValueInternal: "Item 1",
                 name: "Home",
                 tableRows: [
                     {
