@@ -18,7 +18,7 @@
 
                 <tr v-for="(row, index) in rows" :key="index">
                     <td v-if="showEditLink">
-                        <font-awesome-icon icon="edit" @click="$emit('goToEdit', row)"></font-awesome-icon>
+                        <font-awesome-icon icon="edit" @click="$emit('goToEdit', row)" class="edit-icon"></font-awesome-icon>
                     </td>
 
                     <td v-for="(value, name) in filterRow(row)" :key="name">
@@ -148,6 +148,10 @@ tr:last-child {
         display: flex;
         width: 100%;
     }
+}
+
+.edit-icon {
+    cursor: pointer;
 }
 
 .pagination {
