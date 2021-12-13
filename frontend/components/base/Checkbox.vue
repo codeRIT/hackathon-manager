@@ -1,7 +1,11 @@
 <template>
 
     <label class="control-container">{{content}}
-        <input type="checkbox" :name="name" :value="value">
+        <input
+            type="checkbox"
+            :value="value"
+            @input="onChange($event.target)"
+        >
         <span class="control"></span>
     </label>
 </template>
@@ -9,13 +13,22 @@
 <script>
 export default {
     name: 'Checkbox',
+    methods: {
+        // inspired by https://stackoverflow.com/a/58201070
+        onChange(target) {
+            let currentValue = [...this.modelValue]
+            if (target.checked) {
+                currentValue.push(target.value)
+            } else {
+                currentValue = currentValue.filter(item => item !== target.value)
+            }
+            this.$emit('update:modelValue', currentValue);
+        }
+    },
     props: {
         content: String,
-        name: String,
+        modelValue: Boolean,
         value: String
-    },
-    data() {
-        return {}
     }
 }
 </script>

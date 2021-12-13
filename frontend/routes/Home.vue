@@ -13,9 +13,11 @@
 
             <TextInput placeholder="Give password"></TextInput>
 
-            <TextArea placeholder="Does the black moon howl?" v-model="testValue"></TextArea>
+            <TextArea placeholder="Does the black moon howl?"></TextArea>
 
-            <Checkbox content="Hello" name="checkbox-test" value="test"></Checkbox>
+            <Checkbox content="Hello 1" value="test 1" v-model="testValue"></Checkbox>
+            <Checkbox content="Hello 2" value="test 2" v-model="testValue"></Checkbox>
+            <Checkbox content="Hello 3" value="test 3" v-model="testValue"></Checkbox>
 
             <Radio content="Hello" name="radio-test" value="asdf"></Radio>
             <Radio content="Hello" name="radio-test" value="1234"></Radio>
@@ -86,7 +88,7 @@
         },
         data() {
             return {
-                testValueInternal: "test",
+                testValueInternal: [],
                 name: "Home",
                 tableRows: [
                     {
