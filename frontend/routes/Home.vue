@@ -11,9 +11,9 @@
             <Button content="Button"></Button>
             <Button content="Button"></Button>
 
-            <TextInput placeholder="Give password" v-model="testValue"></TextInput>
+            <TextInput placeholder="Give password"></TextInput>
 
-            <TextArea placeholder="Does the black moon howl?"></TextArea>
+            <TextArea placeholder="Does the black moon howl?" v-model="testValue"></TextArea>
 
             <Checkbox content="Hello" name="checkbox-test" value="test"></Checkbox>
 

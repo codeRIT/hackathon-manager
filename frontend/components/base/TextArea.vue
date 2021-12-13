@@ -1,7 +1,14 @@
 <template>
     <div>
         <label class="control-label" v-if="label" :for="id">{{ label }}</label>
-        <textarea class="input-textarea" :id="id" :cols="cols" :placeholder="placeholder"></textarea>
+        <textarea
+            class="input-textarea"
+            :id="id"
+            :cols="cols"
+            :placeholder="placeholder"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
+        ></textarea>
     </div>
 </template>
 
@@ -11,6 +18,7 @@ export default {
     props: {
         id: String,
         label: String,
+        modelValue: String,
         placeholder: String,
         cols: {
             type: Number,
