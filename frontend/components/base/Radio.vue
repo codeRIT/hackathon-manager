@@ -5,7 +5,8 @@
             :name="name"
             :value="value"
             :checked="modelValue == value"
-            @input="$emit('update:modelValue', $event.target.value)">
+            @input="$emit('update:modelValue', $event.target.value)"
+        >
         <span class="control"></span>
     </label>
 </template>
