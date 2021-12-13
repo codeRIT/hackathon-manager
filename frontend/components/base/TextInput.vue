@@ -1,7 +1,14 @@
 <template>
     <div>
         <label class="control-label" :for="id">{{ label }}</label>
-        <input type="text" :id="id" class="input-text" :placeholder="placeholder"/>
+        <input
+            type="text"
+            :id="id"
+            class="input-text"
+            :placeholder="placeholder"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
+        />
     </div>
 </template>
 
@@ -11,6 +18,7 @@ export default {
     props: {
         id: String,
         label: String,
+        modelValue: String,
         placeholder: String
     },
     data() {
