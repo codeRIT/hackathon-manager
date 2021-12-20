@@ -1,5 +1,35 @@
 {
     "pages": {
+        "signin": {
+            "main": {
+                "title": "Sign in to {hackathonName}",
+                "email": "Email",
+                "password": "Password",
+                "remember": "Remember me",
+                "signin": "Sign in"
+            },
+            "alternatives": {
+                "title": "Other sign-in options",
+                "myMLH": "Sign in with myMLH",
+                "google": "Sign in with Google"
+            }
+        },
+        "register": {
+            "main": {
+                "title": "Create an account",
+                "firstName": "First name",
+                "lastName": "Last name",
+                "email": "Email",
+                "password": "Password",
+                "confirmPassword": "Confirm password",
+                "register": "Register"
+            },
+            "alternatives": {
+                "title": "Other registration options",
+                "myMLH": "Register with myMLH",
+                "google": "Sign in with Google"
+            }
+        },
         "home": {
             "component": "Home component",
             "hello": "Hello world!"
