@@ -5,10 +5,9 @@ class User < ApplicationRecord
 
   strip_attributes
 
-  devise :database_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable, :doorkeeper,
-         :jwt_authenticatable, :omniauthable, omniauth_providers: [:mlh],
-         jwt_revocation_strategy: self
+  devise  :database_authenticatable, :registerable, :timeoutable, :recoverable,
+          :rememberable, :trackable, :validatable, :doorkeeper, :jwt_authenticatable,
+          :omniauthable, omniauth_providers: [:mlh], jwt_revocation_strategy: self
 
   has_one :questionnaire
   has_many :access_grants, class_name: "Doorkeeper::AccessGrant",
@@ -33,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def jwt_payload
-    {  id: id}
+    { id: id }
   end
 
   def set_default_role
