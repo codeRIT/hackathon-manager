@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       @current_user = user
       render json: user.generate_jwt
     else
-      render json: { errors: { 'email or password' => ['is invalid'] } }, status: :unprocessable_entity
+      head :unprocessable_entity
     end
   end
 

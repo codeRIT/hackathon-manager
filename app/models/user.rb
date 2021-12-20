@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Devise::JWT::RevocationStrategies::JTIMatcher
+
   audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
 
   strip_attributes
@@ -27,13 +29,11 @@ class User < ApplicationRecord
   enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
 
   def generate_jwt
-    JWT.encode({  id: id,
-                  exp: 30.days.from_now.to_i },
-                  ENV['DEVISE_SECRET_KEY'])
+    JWT.encode(jwt_payload, ENV['DEVISE_SECRET_KEY'])
   end
 
   def jwt_payload
-    { id: id }
+    {  id: id}
   end
 
   def set_default_role

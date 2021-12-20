@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   include ActionController::RequestForgeryProtection
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   include ActionController::HttpAuthentication::Token::ControllerMethods
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
   respond_to :json
 
