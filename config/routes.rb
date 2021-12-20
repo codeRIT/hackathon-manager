@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
   use_doorkeeper
   scope :api, defaults: { format: :json } do
-    resource :user do
+    resource :users do
       get :login
       post :register
     end
