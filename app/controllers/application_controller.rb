@@ -23,10 +23,6 @@ class ApplicationController < ActionController::API
 
   private
 
-  def authenticate_user!
-    head :unauthorized unless signed_in?
-  end
-
   def current_user
     @current_user ||= User.find_by(id: @current_user_id)
   end

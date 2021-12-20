@@ -1,6 +1,5 @@
 class Manage::UsersController < Manage::ApplicationController
   before_action :require_director
-  before_action :authenticate_user!
   before_action :find_user, only: [:show, :update, :reset_password, :destroy]
 
   respond_to :json

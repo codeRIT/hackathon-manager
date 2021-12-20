@@ -1,12 +1,7 @@
 class RsvpsController < ApplicationController
-  before_action :logged_in
   before_action :check_user_has_questionnaire
   before_action :find_questionnaire
   before_action :require_accepted_questionnaire
-
-  def logged_in
-    authenticate_user!
-  end
 
   # PATCH /rsvp/accept
   def accept
