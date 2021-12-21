@@ -1,18 +1,38 @@
+#
+# This class represents the interaction with the questionare model, in terms of making any changes to the model.
+#
 class QuestionnairesController < ApplicationController
   include QuestionnairesControllable
 
   before_action :logged_in
   before_action :find_questionnaire, only: [:show, :update, :destroy]
 
+  #
+  # Calls authenticate_user. Checks if you are logged in and throws autentication error if task fails.
+  #
+  # @return [<Type>] <description>
+  #
   def logged_in
     authenticate_user!
   end
 
   # GET /questionnaire.json
+
+  #
+  # <Description>
+  #
+  # @return [<Type>] <description>
+  #
   def show
   end
 
   # POST /questionnaire.json
+
+  #
+  # Saves/updates user questionare. Checks that the questionare doesn't exist and is being accepted.
+  #
+  # @return [HTTP Code] 409 if questionnaire already exist; 406 if questionaire is not be accepted.
+  #
   def create
     if current_user.reload.questionnaire.present?
       return head :conflict, notice: 'Application already exists.'
@@ -34,6 +54,12 @@ class QuestionnairesController < ApplicationController
   end
 
   # PUT /questionnaire.json
+
+  #
+  # Gets the corresponding id of given schhol name and updates the attribute in user's questianaire.
+  #
+  # @return [<Type>] <description>
+  #
   def update
     update_params = questionnaire_params
     update_params = convert_school_name_to_id(update_params)
@@ -46,6 +72,12 @@ class QuestionnairesController < ApplicationController
   end
 
   # DELETE /questionnaire.json
+
+  #
+  # Checks if owner of the questionare is a bus captain ,informs all directors that the bus captain left, and deletes.
+  #
+  # @return [<Type>] <description>
+  #
   def destroy
     if @questionnaire.is_bus_captain
       directors = User.where(role: :director)
@@ -59,6 +91,12 @@ class QuestionnairesController < ApplicationController
   end
 
   # GET /questionnaire/schools
+
+  #
+  # This function provides options of various schools based on the users providing at least 3 characters of their school.
+  #
+  # @return [<Type>] <description>
+  #
   def schools
     if params[:name].blank? || params[:name].length < 3
       head :bad_request
@@ -70,6 +108,11 @@ class QuestionnairesController < ApplicationController
 
   private
 
+  #
+  # Identifies the required parameter in each questionarire that need to be filled.
+  #
+  # @return [<Type>] <description>
+  #
   def questionnaire_params
     params.require(:questionnaire).permit(
       :email, :experience, :gender,
@@ -81,6 +124,11 @@ class QuestionnairesController < ApplicationController
     )
   end
 
+  #
+  # Checks if current users questionare exist.
+  #
+  # @return [HTTP code] HTTP code 404 Not found.
+  #
   def find_questionnaire
     unless current_user.questionnaire.present?
       return head :not_found
@@ -88,6 +136,11 @@ class QuestionnairesController < ApplicationController
     @questionnaire = current_user.questionnaire
   end
 
+  #
+  # Checks if the wait list is active, when user submit questionare.
+  #
+  # @return [String] string of "late_waitlist" if the line "auto_late_waitlist" is set to true
+  #
   def default_acc_status
     return "late_waitlist" if HackathonConfig['auto_late_waitlist']
     "pending"
