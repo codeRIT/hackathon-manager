@@ -1,3 +1,6 @@
+#
+# This class represents the management of the questionaire model.
+#
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
 
@@ -5,13 +8,28 @@ class Manage::QuestionnairesController < Manage::ApplicationController
 
   respond_to :json
 
+  #
+  # Gets all the questionaire currently available.
+  #
+  # @return [<Type>] <description>
+  #
   def index
     @questionnaires = Questionnaire.all
   end
 
+  #
+  # <Description>
+  #
+  # @return [<Type>] <description>
+  #
   def show
   end
 
+  #
+  # Updates the parameters in the questionaire and checks if the prameters were successfully change.
+  #
+  # @return [<Type>] <description>
+  #
   def update
     update_params = questionnaire_params
     update_params = convert_school_name_to_id(update_params)
@@ -23,6 +41,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     end
   end
 
+  #
+  # Updates the time and user id of the questionare submitted if check in is true else throws HTTP error.
+  #
+  # @return [<Type>] <description>
+  #
   def check_in
     if params[:check_in] == "true"
       if @questionnaire.update_attributes(checked_in_at: Time.now, checked_in_by_id: current_user.id)
@@ -39,6 +62,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     end
   end
 
+  #
+  # Checks if questionnaire is a bus captain and notifies staff that bus captian left, then deletes questionnaire.
+  #
+  # @return [<Type>] <description>
+  #
   def destroy
     if @questionnaire.is_bus_captain
       directors = User.where(role: :director)
@@ -54,6 +82,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     end
   end
 
+  #
+  # Updates the status of questionnare, if no status is present an error is thrown.
+  #
+  # @return [<Type>] <description>
+  #
   def update_acc_status
     new_status = params[:questionnaire][:acc_status]
     if new_status.blank?
@@ -72,6 +105,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     end
   end
 
+  #
+  # Gets both list of action and ids.
+  #
+  # @return [<Type>] <description>
+  #
   def bulk_apply
     action = params[:bulk_action]
     ids = params[:bulk_ids]
@@ -91,6 +129,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   private
 
 
+  #
+  # Checks if all the reqired params in a questionnaire are filled.
+  #
+  # @return [<Type>] <description>
+  #
   def questionnaire_params
     # Note that this ONLY considers parameters for the questionnaire, not the user.
     params.require(:questionnaire).permit(
@@ -104,6 +147,14 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     )
   end
 
+  #
+  # Deletes boarded_bus param in questionnaire and updates the time when the bus was boarded.
+  #
+  # @param [<Type>] values list of parameter values from the user questinnaire.
+  # @param [<Type>] questionnaire User questionnaire.
+  #
+  # @return [<Type>] list of updated values in user questionnaire.
+  #
   def convert_boarded_bus_param(values, questionnaire = nil)
     boarded_bus = values.delete(:boarded_bus)
     current_value = questionnaire&.boarded_bus_at
@@ -111,6 +162,11 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     values
   end
 
+  #
+  # Takes user parameter values and inserts them into a questionnaire.
+  #
+  # @return [<Type>] <description>
+  #
   def set_questionnaire
     @questionnaire = ::Questionnaire.find(params[:id])
   end
