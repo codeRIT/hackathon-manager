@@ -2,7 +2,7 @@
     <div>
         <div class="space-between">
             <h2>Responses</h2>
-            <div>
+            <div class="row">
                 <router-link to="./message"><Button content="Message"></Button></router-link>
                 <TextInput placeholder="Search bar..."></TextInput>
             </div>
@@ -17,7 +17,9 @@
         <br>
         <div class="space-between">
             <h1>Questions</h1>
-            <h2>(un)lock</h2>
+            <div>
+                <h2>(un)lock</h2>
+            </div>
         </div>
         <hr>
         <p>Warning: this affects all hackers...</p>
@@ -117,5 +119,9 @@ export default {
 .space-between {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+}
+.space-between .row {
+    width: auto;
 }
 </style>
