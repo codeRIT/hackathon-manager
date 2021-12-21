@@ -6,7 +6,7 @@
 <title>
   Class: Manage::QuestionnairesController
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.27
   
 </title>
 
@@ -110,7 +110,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class represents the management of the questionaire model.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -128,7 +139,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#bulk_apply-instance_method" title="#bulk_apply (instance method)">#<strong>bulk_apply</strong>  &#x21d2; Object </a>
+      <a href="#bulk_apply-instance_method" title="#bulk_apply (instance method)">#<strong>bulk_apply</strong>  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -142,7 +153,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Gets both list of action and ids.</p>
+</div></span>
   
 </li>
 
@@ -150,7 +163,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#check_in-instance_method" title="#check_in (instance method)">#<strong>check_in</strong>  &#x21d2; Object </a>
+      <a href="#check_in-instance_method" title="#check_in (instance method)">#<strong>check_in</strong>  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -164,7 +177,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Updates the time and user id of the questionare submitted if check in is true else throws HTTP error.</p>
+</div></span>
   
 </li>
 
@@ -172,7 +187,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#destroy-instance_method" title="#destroy (instance method)">#<strong>destroy</strong>  &#x21d2; Object </a>
+      <a href="#destroy-instance_method" title="#destroy (instance method)">#<strong>destroy</strong>  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -186,7 +201,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if questionnaire is a bus captain and notifies staff that bus captian left, then deletes questionnaire.</p>
+</div></span>
   
 </li>
 
@@ -194,7 +211,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Object </a>
+      <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -208,7 +225,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Gets all the questionaire currently available.</p>
+</div></span>
   
 </li>
 
@@ -216,7 +235,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#show-instance_method" title="#show (instance method)">#<strong>show</strong>  &#x21d2; Object </a>
+      <a href="#show-instance_method" title="#show (instance method)">#<strong>show</strong>  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -230,7 +249,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>&lt;Description&gt;.</p>
+</div></span>
   
 </li>
 
@@ -238,7 +259,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update-instance_method" title="#update (instance method)">#<strong>update</strong>  &#x21d2; Object </a>
+      <a href="#update-instance_method" title="#update (instance method)">#<strong>update</strong>  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -252,7 +273,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Updates the parameters in the questionaire and checks if the prameters were successfully change.</p>
+</div></span>
   
 </li>
 
@@ -260,7 +283,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update_acc_status-instance_method" title="#update_acc_status (instance method)">#<strong>update_acc_status</strong>  &#x21d2; Object </a>
+      <a href="#update_acc_status-instance_method" title="#update_acc_status (instance method)">#<strong>update_acc_status</strong>  &#x21d2; &lt;Type&gt; </a>
     
 
     
@@ -274,7 +297,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Updates the status of questionnare, if no status is present an error is thrown.</p>
+</div></span>
   
 </li>
 
@@ -321,36 +346,65 @@
       <div class="method_details first">
   <h3 class="signature first" id="bulk_apply-instance_method">
   
-    #<strong>bulk_apply</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>bulk_apply</strong>  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets both list of action and ids.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bulk_apply'>bulk_apply</span>
   <span class='id identifier rubyid_action'>action</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:bulk_action</span><span class='rbracket'>]</span>
@@ -375,36 +429,65 @@
       <div class="method_details ">
   <h3 class="signature " id="check_in-instance_method">
   
-    #<strong>check_in</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>check_in</strong>  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Updates the time and user id of the questionare submitted if check in is true else throws HTTP error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40</pre>
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_in'>check_in</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:check_in</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
@@ -429,35 +512,64 @@
       <div class="method_details ">
   <h3 class="signature " id="destroy-instance_method">
   
-    #<strong>destroy</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>destroy</strong>  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if questionnaire is a bus captain and notifies staff that bus captian left, then deletes questionnaire.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55</pre>
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
   <span class='kw'>if</span> <span class='ivar'>@questionnaire</span><span class='period'>.</span><span class='id identifier rubyid_is_bus_captain'>is_bus_captain</span>
@@ -481,24 +593,53 @@
       <div class="method_details ">
   <h3 class="signature " id="index-instance_method">
   
-    #<strong>index</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>index</strong>  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets all the questionaire currently available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-8
-9
-10</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='ivar'>@questionnaires</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Questionnaire.html" title="Questionnaire (class)">Questionnaire</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
@@ -511,23 +652,52 @@
       <div class="method_details ">
   <h3 class="signature " id="show-instance_method">
   
-    #<strong>show</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>show</strong>  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>&lt;Description&gt;</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-12
-13</pre>
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
 <span class='kw'>end</span></pre>
@@ -539,31 +709,60 @@
       <div class="method_details ">
   <h3 class="signature " id="update-instance_method">
   
-    #<strong>update</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>update</strong>  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Updates the parameters in the questionaire and checks if the prameters were successfully change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24</pre>
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='id identifier rubyid_update_params'>update_params</span> <span class='op'>=</span> <span class='id identifier rubyid_questionnaire_params'>questionnaire_params</span>
@@ -583,38 +782,67 @@
       <div class="method_details ">
   <h3 class="signature " id="update_acc_status-instance_method">
   
-    #<strong>update_acc_status</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>update_acc_status</strong>  &#x21d2; <tt>&lt;Type&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Updates the status of questionnare, if no status is present an error is thrown.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>&lt;Type&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>&lt;description&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73</pre>
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/manage/questionnaires_controller.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_acc_status'>update_acc_status</span>
   <span class='id identifier rubyid_new_status'>new_status</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:questionnaire</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:acc_status</span><span class='rbracket'>]</span>
@@ -643,9 +871,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 24 02:28:47 2021 by
+  Generated on Tue Dec 21 04:34:51 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.6.6).
+  0.9.27 (ruby-2.6.6).
 </div>
 
     </div>
