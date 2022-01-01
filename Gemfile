@@ -54,7 +54,7 @@ gem "file_validators"
 # Templating utilities
 gem 'haml-rails', '~> 2.0'
 gem 'simple_form'
-gem 'ajax-datatables-rails', '~> 1.0'
+gem 'ajax-datatables-rails', '~> 1.2.0'
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.4'
 gem 'groupdate'

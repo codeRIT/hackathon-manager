@@ -1,4 +1,7 @@
+
+
 class Manage::AgreementsController < Manage::ApplicationController
+  include Secured
   before_action :require_director
   before_action :set_agreement, only: [:show, :update, :destroy]
 
@@ -36,6 +39,15 @@ class Manage::AgreementsController < Manage::ApplicationController
       head :unprocessable_entity
     end
   end
+
+  def private
+      render json: 'HEY! YOU NEED TO BE AUTHED TO SEE THIS, FUCKER!'
+  end
+
+  def private_scoped
+      render json: 'HEY! YOU NEED AUTH **AND** read:messages SCOPE YOU SNOWFLAKE'
+  end
+
 
   private
 

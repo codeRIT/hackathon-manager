@@ -439,7 +439,7 @@ PLATFORMS
   x86_64-darwin
 
 DEPENDENCIES
-  ajax-datatables-rails (~> 1.0)
+  ajax-datatables-rails (~> 1.2.0)
   audited (~> 4.10)
   aws-sdk-s3
   better_errors
