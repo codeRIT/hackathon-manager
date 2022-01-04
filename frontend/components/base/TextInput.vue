@@ -1,7 +1,7 @@
 <template>
     <div>
         <label class="control-label" :for="id">{{ label }}</label>
-        <input type="text" :id="id" class="input-text" :placeholder="placeholder"/>
+        <input :type="[type == null ? 'text' : type]" :id="id" class="input-text" :class="{'full-width': fullWidth}" :placeholder="placeholder"/>
     </div>
 </template>
 
@@ -11,7 +11,9 @@ export default {
     props: {
         id: String,
         label: String,
-        placeholder: String
+        placeholder: String,
+        type: String,
+        fullWidth: Boolean
     },
     data() {
         return {}
@@ -28,8 +30,13 @@ export default {
     padding: 6px;
     outline: none;
 
+    &.full-width {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     &:focus {
-       border-color: var(--orange);
+        border-color: var(--orange);
     }
 }
 </style>
