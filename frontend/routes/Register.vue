@@ -3,11 +3,11 @@
         <Card>
             <form>
                 <h1>{{ $t("pages.register.main.title") }}</h1>
-                <TextInput id="fname" :placeholder="$t('pages.register.main.firstName')" required />
-                <TextInput id="lname" :placeholder="$t('pages.register.main.lastName')" required />
-                <TextInput id="email" :placeholder="$t('pages.register.main.email')" type="email" required />
-                <TextInput id="password" :placeholder="$t('pages.register.main.password')" type="password" required />
-                <TextInput id="confirm" :placeholder="$t('pages.register.main.confirmPassword')" type="password" required />
+                <TextInput id="fname" :placeholder="$t('pages.register.main.firstName')" />
+                <TextInput id="lname" :placeholder="$t('pages.register.main.lastName')" />
+                <TextInput id="email" :placeholder="$t('pages.register.main.email')" type="email" />
+                <TextInput id="password" :placeholder="$t('pages.register.main.password')" type="password" />
+                <TextInput id="confirm" :placeholder="$t('pages.register.main.confirmPassword')" type="password" />
                 <Button class="center" :content="$t('pages.register.main.register')" type="submit"></Button>
             </form>
         </Card>

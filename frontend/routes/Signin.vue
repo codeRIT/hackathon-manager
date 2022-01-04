@@ -3,8 +3,8 @@
         <Card>
             <form>
                 <h1>{{ $t("pages.signin.main.title", { hackathonName: "<HackathonName>"}) }}</h1>
-                <TextInput id="email" :placeholder="$t('pages.signin.main.email')" type="email" required />
-                <TextInput id="password" :placeholder="$t('pages.signin.main.password')" type="password" required/>
+                <TextInput id="email" :placeholder="$t('pages.signin.main.email')" type="email" />
+                <TextInput id="password" :placeholder="$t('pages.signin.main.password')" type="password" />
                 <Checkbox id="remember" class="checkbox" :content="$t('pages.signin.main.remember')" name="checkbox-test" value="remember"></Checkbox>
                 <Button class="center" :content="$t('pages.signin.main.signin')" type="submit"></Button>
             </form>
