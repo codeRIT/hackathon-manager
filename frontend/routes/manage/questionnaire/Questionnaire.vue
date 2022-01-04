@@ -1,33 +1,33 @@
 <template>
     <div>
         <div class="space-between">
-            <h2>Responses</h2>
+            <h2>{{ $t("pages.manage.questionnaire.responses") }}</h2>
             <div class="row">
-                <router-link to="./message"><Button content="Message"></Button></router-link>
-                <TextInput placeholder="Search bar..."></TextInput>
+                <router-link to="./message"><Button :content="$t('pages.manage.questionnaire.message')"></Button></router-link>
+                <TextInput :placeholder="$t('pages.manage.questionnaire.searchbar')"></TextInput>
             </div>
         </div>
         <Table :rows="tableRows" :shownColumns="tableColumns" :showEditLink="true" @go-to-edit="goToEdit"></Table>
         <div class="space-between">
-            <Dropdown name="Show n rows">
+            <Dropdown name="rows">
                 <option selected>5</option>
                 <option>20</option>
             </Dropdown>
         </div>
         <br>
         <div class="space-between">
-            <h1>Questions</h1>
+            <h1>{{ $t("pages.manage.questionnaire.questions.title") }}</h1>
             <div>
-                <h2>(un)lock</h2>
+                <h2>{{ $t("pages.manage.questionnaire.questions.unlock") }}</h2>
             </div>
         </div>
         <hr>
-        <p>Warning: this affects all hackers...</p>
+        <p>{{ $t("pages.manage.questionnaire.questions.warning") }}</p>
         <br>
-        <h2>Default questions</h2>
+        <h2>{{ $t("pages.manage.questionnaire.questions.defaultQuestions") }}</h2>
         <TextArea placeholder="Bee"></TextArea>
         <br>
-        <h2>Optional questions</h2>
+        <h2>{{ $t("pages.manage.questionnaire.questions.optionalQuestions") }}</h2>
         <TextArea placeholder="Bee"></TextArea>
     </div>
 </template>

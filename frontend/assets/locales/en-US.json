@@ -109,6 +109,27 @@
                 "settings": "Settings",
                 "logout": "Logout",
                 "login": "Login"
+            },
+            "questionnaire": {
+                "responses": "Responses",
+                "message": "Message",
+                "searchbar": "Search bar...",
+                "questions": {
+                    "title": "Questions",
+                    "unlock": "(un)lock",
+                    "warning": "Warning: this affects all hackers...",
+                    "defaultQuestions": "Default questions",
+                    "optionalQuestions": "Optional questions"
+                }
+            },
+            "message": {
+                "title": "Send a message",
+                "subject": "Subject",
+                "send": "Send"
+            },
+            "editApplicant": {
+                "title": "Edit"
+
             }
         },
         "profile": {

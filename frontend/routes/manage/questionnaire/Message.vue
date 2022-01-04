@@ -1,16 +1,16 @@
 <template>
     <div>
-        <h1>Send a message</h1>
+        <h1>{{ $t("pages.manage.message.title") }}</h1>
         <hr>
-        <TextInput placeholder="Subject"></TextInput>
-        <Dropdown name="Recipient dropdown">
+        <TextInput :placeholder="$t('pages.manage.message.subject')"></TextInput>
+        <Dropdown>
             <option selected>Bee</option>
             <option>2</option>
         </Dropdown>
         <br>
         <TextArea></TextArea>
         <br>
-        <Button content="Send"></Button>
+        <Button :content="$t('pages.manage.message.send')"></Button>
     </div>
 </template>
 

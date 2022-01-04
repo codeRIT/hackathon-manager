@@ -2,7 +2,7 @@
     <div>
         <div class="space-between">
             <h1>{{applicant}}</h1>
-            <h3>Edit</h3>
+            <h3>{{ $t("pages.manage.editApplicant.title") }}</h3>
         </div>
         <hr>
         <h2>Check in Compliance</h2>
@@ -31,5 +31,6 @@ export default {
 .space-between {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 }
 </style>
