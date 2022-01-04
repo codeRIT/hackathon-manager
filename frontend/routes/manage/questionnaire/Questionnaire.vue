@@ -121,7 +121,4 @@ export default {
     justify-content: space-between;
     align-items: flex-end;
 }
-.space-between .row {
-    width: auto;
-}
 </style>
