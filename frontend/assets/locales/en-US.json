@@ -112,7 +112,6 @@
             },
             "questionnaire": {
                 "responses": "Responses",
-                "message": "Message",
                 "searchbar": "Search bar...",
                 "questions": {
                     "title": "Questions",
@@ -120,15 +119,16 @@
                     "warning": "Warning: this affects all hackers...",
                     "defaultQuestions": "Default questions",
                     "optionalQuestions": "Optional questions"
+                },
+                "messageButton": "Message",
+                "message": {
+                    "title": "Send a message",
+                    "subject": "Subject",
+                    "send": "Send"
+                },
+                "editApplicant": {
+                    "title": "Edit"
                 }
-            },
-            "message": {
-                "title": "Send a message",
-                "subject": "Subject",
-                "send": "Send"
-            },
-            "editApplicant": {
-                "title": "Edit"
             }
         },
         "profile": {

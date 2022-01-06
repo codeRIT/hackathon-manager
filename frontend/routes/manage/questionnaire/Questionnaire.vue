@@ -2,8 +2,8 @@
     <div>
         <div class="space-between">
             <h2>{{ $t("pages.manage.questionnaire.responses") }}</h2>
-            <div class="row">
-                <router-link to="./message"><Button :content="$t('pages.manage.questionnaire.message')"></Button></router-link>
+            <div class="row width-auto">
+                <router-link to="./message"><Button :content="$t('pages.manage.questionnaire.messageButton')"></Button></router-link>
                 <TextInput :placeholder="$t('pages.manage.questionnaire.searchbar')"></TextInput>
             </div>
         </div>
@@ -116,9 +116,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.space-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.width-auto {
+    width: auto;
 }
 </style>

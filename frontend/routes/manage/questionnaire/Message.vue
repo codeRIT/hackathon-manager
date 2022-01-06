@@ -1,16 +1,18 @@
 <template>
     <div>
-        <h1>{{ $t("pages.manage.message.title") }}</h1>
+        <h1>{{ $t("pages.manage.questionnaire.message.title") }}</h1>
         <hr>
-        <TextInput :placeholder="$t('pages.manage.message.subject')"></TextInput>
-        <Dropdown>
-            <option selected>Bee</option>
-            <option>2</option>
-        </Dropdown>
-        <br>
-        <TextArea></TextArea>
-        <br>
-        <Button :content="$t('pages.manage.message.send')"></Button>
+        <TextInput :placeholder="$t('pages.manage.questionnaire.message.subject')"></TextInput>
+        <div class="row">
+            <div class="col-12">
+                <Dropdown>
+                    <option selected>Bee</option>
+                    <option>2</option>
+                </Dropdown>
+                <TextArea></TextArea>
+                <Button :content="$t('pages.manage.questionnaire.message.send')"></Button>
+            </div>
+        </div>
     </div>
 </template>
 
