@@ -10,7 +10,7 @@
             },
             "alternatives": {
                 "title": "Other sign-in options",
-                "myMLH": "Sign in with myMLH",
+                "myMLH": "Sign in with MyMLH",
                 "google": "Sign in with Google"
             }
         },
@@ -26,8 +26,8 @@
             },
             "alternatives": {
                 "title": "Other registration options",
-                "myMLH": "Register with myMLH",
-                "google": "Sign in with Google"
+                "myMLH": "Continue with MyMLH",
+                "google": "Continue with Google"
             }
         },
         "home": {
