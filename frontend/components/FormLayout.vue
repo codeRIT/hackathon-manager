@@ -1,6 +1,8 @@
 <template>
-    <div class="formlayout">
-        <slot></slot>
+    <div class="form-wrapper">
+        <div class="form-column">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -11,25 +13,36 @@ export default {
 </script>
 
 <style lang="scss">
-.formlayout {
+.form-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
+    min-height: calc(100vh - 50px);
+    margin: 25px 50px;
+    overflow-wrap: break-word;
 
-    .card, form {
+    .form-column {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        align-items: center;
+        gap: 25px;
         width: 100%;
         max-width: 300px;
+        margin: auto;
 
-        h1, h2 {
-            text-align: center;
+        .card {
+            width: 100%;
+
+            h1, h2 {
+                text-align: center;
+            }
         }
+        .card, form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
 
-        .control-container {
-            margin: 0;
+            .control-container {
+                margin: 0;
+            }
         }
     }
 }
