@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="space-between">
-            <h1>{{applicant}}</h1>
+            <h1>{{ applicant }}</h1>
             <h3>{{ $t("pages.manage.editApplicant.title") }}</h3>
         </div>
         <hr>
