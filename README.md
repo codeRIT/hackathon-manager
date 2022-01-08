@@ -1,7 +1,5 @@
 # HackathonManager
 
-Test
-
 [![Build Status](https://travis-ci.org/codeRIT/hackathon-manager.svg?branch=master)](https://travis-ci.org/codeRIT/hackathon-manager)
 [![Code Climate](https://codeclimate.com/github/codeRIT/hackathon-manager/badges/gpa.svg)](https://codeclimate.com/github/codeRIT/hackathon-manager)
 [![Test Coverage](https://codeclimate.com/github/codeRIT/hackathon-manager/badges/coverage.svg)](https://codeclimate.com/github/codeRIT/hackathon-manager/coverage)
