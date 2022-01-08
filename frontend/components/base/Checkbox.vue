@@ -4,7 +4,7 @@
         <input
             type="checkbox"
             :value="value"
-            @input="onChange($event.target)"
+            v-model="computedValue"
         >
         <span class="control"></span>
     </label>
@@ -13,21 +13,20 @@
 <script>
 export default {
     name: 'Checkbox',
-    methods: {
-        // inspired by https://stackoverflow.com/a/58201070
-        onChange(target) {
-            let currentValue = [...this.modelValue]
-            if (target.checked) {
-                currentValue.push(target.value)
-            } else {
-                currentValue = currentValue.filter(item => item !== target.value)
+    computed: {
+        computedValue: {
+            get() {
+                return this.modelValue
+            },
+            set(value) {
+                this.$emit('update:modelValue', value)
             }
-            this.$emit('update:modelValue', currentValue);
         }
     },
+    emits: ['update:modelValue'],
     props: {
         content: String,
-        modelValue: Boolean,
+        modelValue: Array,
         value: String
     }
 }
