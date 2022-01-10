@@ -1,5 +1,5 @@
 <template>
-    <button class="button" @click="onclick()">{{ content }}</button>
+    <button class="button" @click="onclick != null ? onclick() : ''">{{ content }}</button>
 </template>
 
 <script>
