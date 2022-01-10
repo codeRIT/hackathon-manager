@@ -98,7 +98,7 @@ export default {
             return Object.fromEntries(
                 Object.entries(row)
                     .filter(([key, value]) => shownColumnKeys.includes(key))
-                    .sort((x, y) => shownColumnKeys.indexOf(x[0]) < shownColumnKeys.indexOf(y[0]))
+                    .sort((x, y) => shownColumnKeys.indexOf(x[0]) - shownColumnKeys.indexOf(y[0]))
             )
         }
     }
