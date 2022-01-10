@@ -80,30 +80,36 @@
                     {
                         id: 1,
                         title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        description: "dolor sit amet",
+                        features: "test test"
                     },
                     {
                         id: 2,
                         title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        description: "dolor sit amet",
+                        features: "test test"
                     },
                     {
                         id: 3,
                         title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        description: "dolor sit amet",
+                        features: "test test"
                     },
                     {
                         id: 4,
                         title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        description: "dolor sit amet",
+                        features: "test test"
                     },
                     {
                         id: 5,
                         title: "lorem ipsum",
-                        description: "dolor sit amet"
+                        description: "dolor sit amet",
+                        features: "test test"
                     }
                 ],
                 tableColumns: {
+                    features: "Features",
                     description: "Description",
                     title: "Title"
                 }
