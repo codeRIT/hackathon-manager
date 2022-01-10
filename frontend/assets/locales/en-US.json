@@ -6,7 +6,8 @@
                 "email": "Email",
                 "password": "Password",
                 "remember": "Remember me",
-                "signin": "Sign in"
+                "signin": "Sign in",
+                "register": "Register"
             },
             "alternatives": {
                 "title": "Other sign-in options",
@@ -22,7 +23,8 @@
                 "email": "Email",
                 "password": "Password",
                 "confirmPassword": "Confirm password",
-                "register": "Register"
+                "register": "Register",
+                "signin": "Sign in"
             },
             "alternatives": {
                 "title": "Other registration options",

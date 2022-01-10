@@ -8,7 +8,8 @@
                 <TextInput id="email" :placeholder="$t('pages.register.main.email')" type="email" fullWidth />
                 <TextInput id="password" :placeholder="$t('pages.register.main.password')" type="password" fullWidth />
                 <TextInput id="confirm" :placeholder="$t('pages.register.main.confirmPassword')" type="password" fullWidth />
-                <Button class="center" :content="$t('pages.register.main.register')" type="submit"></Button>
+                <Button :content="$t('pages.register.main.register')" type="submit"></Button>
+                <router-link to="/signin"><Button :content="$t('pages.signin.main.signin')"></Button></router-link>
             </form>
         </Card>
         <Card>

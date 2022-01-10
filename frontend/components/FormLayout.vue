@@ -40,6 +40,16 @@ export default {
             flex-direction: column;
             gap: 20px;
 
+            a {
+                display: flex;
+
+                .button {
+                    flex: 1;
+                }
+            }
+            .button: {
+                flex: 1;
+            }
             .control-container {
                 margin: 0;
             }

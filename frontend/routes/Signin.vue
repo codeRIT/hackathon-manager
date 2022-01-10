@@ -6,7 +6,8 @@
                 <TextInput id="email" :placeholder="$t('pages.signin.main.email')" type="email" fullWidth />
                 <TextInput id="password" :placeholder="$t('pages.signin.main.password')" type="password" fullWidth />
                 <Checkbox id="remember" class="checkbox" :content="$t('pages.signin.main.remember')" name="checkbox-test" value="remember"></Checkbox>
-                <Button class="center" :content="$t('pages.signin.main.signin')" type="submit"></Button>
+                <Button :content="$t('pages.signin.main.signin')" type="submit"></Button>
+                <router-link to="/register"><Button :content="$t('pages.signin.main.register')"></Button></router-link>
             </form>
         </Card>
         <Card>
