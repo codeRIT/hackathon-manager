@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Testing Setup · HackathonManager</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This page will show you how to simulate API requests with [Postman](https://www.postman.com/) or [Paw](https://paw.cloud/)."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Testing Setup · HackathonManager"/><meta property="og:type" content="website"/><meta property="og:url" content="https://codeRIT.org/hackathon-manager/"/><meta property="og:description" content="This page will show you how to simulate API requests with [Postman](https://www.postman.com/) or [Paw](https://paw.cloud/)."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/hackathon-manager/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/hackathon-manager/js/scrollSpy.js"></script><link rel="stylesheet" href="/hackathon-manager/css/main.css"/><script src="/hackathon-manager/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/hackathon-manager/"><img class="logo" src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager"/><h2 class="headerTitleWithLogo">HackathonManager</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/hackathon-manager/docs/deployment" target="_self">Get Started</a></li><li class="siteNavGroupActive"><a href="/hackathon-manager/docs/docs-overview" target="_self">Docs</a></li><li class=""><a href="https://github.com/codeRIT/hackathon-manager" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>API</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-heroku">Heroku Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-dokku">Dokku Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-okd">OKD Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-environment-variables">Environment Variables</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/customization">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Maintenance</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/updating-hm">Updating HackathonManager</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/2.0-whats-new">What&#x27;s New in v2.0</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Docs</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/docs-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/questionnaires">Questionnaires</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/messages">Messages</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/busses">Bus Lists</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/api-overview">Overview</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/hackathon-manager/docs/api-testing-setup">Testing Setup</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Help</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/resources">Resources</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/codeRIT/hackathon-manager/edit/master/docs/api-testing-setup.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Testing Setup</h1></header><article><div><span><p>This page will show you how to simulate API requests with <a href="https://www.postman.com/">Postman</a> or <a href="https://paw.cloud/">Paw</a>.</p>
+<p>These programs allow you to run API requests (<code>GET</code>, <code>POST</code>, and so on) in an isolated environment, which is much easier to debug in compared to an iOS or Android app, for example.</p>
+<p>In order to make requests in either Postman or Paw, you need to setup <em>OAuth 2 authorization</em>, as in HackathonManager, each request needs to be authorized first. This guide discusses how to enable OAuth 2 for these apps.</p>
+<p>This guide assumes you have already setup an account with Director status on a local HackathonManager instance. For more details on this, see the <a href="https://github.com/codeRIT/hackathon-manager#local-development">main README</a>.</p>
+<blockquote>
+<p>To make API requests on a live/remote instance, simply replace <code>localhost</code> in all following commands with your HackathonManager's URL.</p>
+</blockquote>
+<p>Select an app below to jump directly to its guide:</p>
+<ul>
+<li><a href="#initial-setup-with-postman">Connecting with Postman</a></li>
+<li><a href="#initial-setup-with-paw">Connecting with Paw</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="oauth2-notes"></a><a href="#oauth2-notes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OAuth2 Notes</h2>
+<ul>
+<li>The application only supports <code>Authorization Code</code> and <code>Implicit Grant</code> authorization methods. It's suggested to use an <code>implicit</code> grant for native apps, as they are inherently trusted.</li>
+<li>In a real application, the callback URL should have a specific scope that's not just <code>http://</code>, i.e., <code>brickhack-ios://</code> (for BrickHack's iOS application). However Postman would really be confused with that scheme, so for local development, it's not advised.</li>
+<li>Client credentials must be sent in the body.</li>
+<li>Browser authorization is currently not supported, at least in Postman. Not sure why! If you discover a reason, please open an Issue on the <a href="https://github.com/codeRIT/hackathon-manager">Hackathon Manager</a> repo.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="connecting-with-postman"></a><a href="#connecting-with-postman" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connecting with Postman</h2>
+<p>In HackathonManager, sign in to your staff account and click &quot;Manage&quot;. Then, at the bottom left of the sidebar, click the <strong>Doorkeeper</strong> tab.</p>
+<p><img src="assets/api-setup/doorkeeper.png" width="300px" /></p>
+<p>On this screen, click <code>New Application</code>.</p>
+<p>Name it whatever you wish. Set the Redirect URI to <code>http://localhost:3000/apply</code>, uncheck <code>Confidential</code>, and set a scope to <code>main</code>. Then, click <code>Submit</code>.</p>
+<blockquote>
+<p>Note: There is <a href="https://github.com/doorkeeper-gem/doorkeeper/issues/1307">a bug</a> in the current version of doorkeeper (5.0), where if you do not put a scope, all OAuth requests fail. This scope can be anything as long as it is not empty.</p>
+</blockquote>
+<p>Now, go to Postman and configure the initial request as follows:</p>
+<p><img src="assets/api-setup/postman1.png" width="500px" /></p>
+<p>Then, click the <code>Get Access Token</code> button.</p>
+<p>On this screen, fill out the information but with your own keys from the image above.</p>
+<p><img src="assets/api-setup/postman2.png" width="500px" /></p>
+<p>You should get a popup with your hackathon's sign in screen. Type in your staff credentials and log in.</p>
+<p>On the next screen, select <code>Authorize</code>:</p>
+<p><img src="assets/api-setup/postman3.png" width="500px" /></p>
+<p>You should see this resulting screen. On here, select <code>Use Token</code>:</p>
+<p><img src="assets/api-setup/postman4.png" width="600px" /></p>
+<p>That's it! Now you can make authorized requests at whatever permission level your account has.</p>
+<p><img src="assets/api-setup/postman5.png" /></p>
+<h2><a class="anchor" aria-hidden="true" id="connecting-with-paw"></a><a href="#connecting-with-paw" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connecting with Paw</h2>
+<p>The process is very similar to above. To save time, here is a screenshot of the <code>auth</code> config screen:</p>
+<p><img src="assets/api-setup/paw1.png" /></p>
+<p>To reset your login, remove the dynamic fields in <code>Refresh Token</code> and <code>Token</code>. If your web login is still cached, try clearing cookies (<code>Paw &gt; Web Views &gt; Clear Cookies</code>) and Cache (<code>Paw &gt; Web Views &gt; Clear Cache</code>).</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/hackathon-manager/docs/api-overview"><span class="arrow-prev">← </span><span>Overview</span></a><a class="docs-next button" href="/hackathon-manager/docs/resources"><span>Resources</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#oauth2-notes">OAuth2 Notes</a></li><li><a href="#connecting-with-postman">Connecting with Postman</a></li><li><a href="#connecting-with-paw">Connecting with Paw</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/hackathon-manager/" class="nav-home"><img src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager" width="66" height="58"/></a><div><h5>Docs</h5><a href="/hackathon-manager/docs/running-a-hackathon.html">Running a hackathon</a><a href="/hackathon-manager/docs/api.html">API Usage</a><a href="/hackathon-manager/docs/deployment.html">Deployment</a></div><div></div><div><h5>More</h5><a href="https://github.com/codeRIT/hackathon-manager" target="_blank">GitHub Repo</a><a class="github-button" href="https://github.com/codeRIT/hackathon-manager" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 codeRIT</section></footer></div></body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Bus Lists · HackathonManager</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="HackathonManager enables you to facilitate bus sign-ups for attendees during the RSVP process."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Bus Lists · HackathonManager"/><meta property="og:type" content="website"/><meta property="og:url" content="https://codeRIT.org/hackathon-manager/"/><meta property="og:description" content="HackathonManager enables you to facilitate bus sign-ups for attendees during the RSVP process."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/hackathon-manager/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/hackathon-manager/js/scrollSpy.js"></script><link rel="stylesheet" href="/hackathon-manager/css/main.css"/><script src="/hackathon-manager/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/hackathon-manager/"><img class="logo" src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager"/><h2 class="headerTitleWithLogo">HackathonManager</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/hackathon-manager/docs/deployment" target="_self">Get Started</a></li><li class="siteNavGroupActive"><a href="/hackathon-manager/docs/docs-overview" target="_self">Docs</a></li><li class=""><a href="https://github.com/codeRIT/hackathon-manager" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Docs</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-heroku">Heroku Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-dokku">Dokku Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-okd">OKD Deployment</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/deployment-environment-variables">Environment Variables</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/customization">Customization</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Maintenance</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/updating-hm">Updating HackathonManager</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/2.0-whats-new">What&#x27;s New in v2.0</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Docs</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/docs-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/questionnaires">Questionnaires</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/messages">Messages</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/hackathon-manager/docs/busses">Bus Lists</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/api-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/api-testing-setup">Testing Setup</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Help</h3><ul class=""><li class="navListItem"><a class="navItem" href="/hackathon-manager/docs/resources">Resources</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/codeRIT/hackathon-manager/edit/master/docs/busses.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Bus Lists</h1></header><article><div><span><p>HackathonManager enables you to facilitate bus sign-ups for attendees during the RSVP process.</p>
+<h2><a class="anchor" aria-hidden="true" id="attendee-sign-ups"></a><a href="#attendee-sign-ups" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Attendee sign-ups</h2>
+<p><strong>Attendees can sign up for any available bus list.</strong> This is presented to them during the RSVP process.</p>
+<p>By signing up, they reserve one spot on the bus. If a bus fills up, no more attendees will be able to sign up for that bus.</p>
+<p><img src="/hackathon-manager/docs/assets/bus-sign-up.png" alt="Screenshot from attendee perspective for signing up for a bus"></p>
+<h2><a class="anchor" aria-hidden="true" id="bus-captains"></a><a href="#bus-captains" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bus Captains</h2>
+<p>Passengers can volunteer to be a captain when signing up for a bus.</p>
+<p>Bus captains:</p>
+<ul>
+<li>Have their name, email, and phone number shared with bus passengers</li>
+<li>Can see the full passenger list for their bus</li>
+<li>Can mark passengers as boarded during boarding (mobile-friendly)</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="promoting-a-passenger-to-captain-status"></a><a href="#promoting-a-passenger-to-captain-status" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Promoting a passenger to captain status</h3>
+<p>Any passenger can be promoted to a captain, even if they didn't volunteer (e.g, you've reached out to them directly).</p>
+<p>You'll see the option to promote a passenger to being a bus captain, as well as a separate section specifically for people that have volunteered to be captains.</p>
+<p><strong>Upon making someone a captain:</strong></p>
+<ul>
+<li>Their name, email, and phone number will be visible to passengers</li>
+<li>The new captain will receive an email notification (<a href="https://github.com/codeRIT/hackathon_manager/blob/master/app/views/mailer/bus_captain_confirmation_email.html.erb">this is the default template</a>)</li>
+</ul>
+<p><img src="/hackathon-manager/docs/assets/promote-bus-captain.png" alt="Screenshot of list of users with link to promote to bus captain status"></p>
+<h3><a class="anchor" aria-hidden="true" id="boarding-flow-for-bus-captains"></a><a href="#boarding-flow-for-bus-captains" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Boarding flow for bus captains</h3>
+<p>The day of your hackathon, bus captains will need to know who is allowed on the bus, and mark those that have boarded.</p>
+<p>Bus captains should open <a href="https://your-hackathon.com/bus_list">https://your-hackathon.com/bus_list</a> and sign in. From there, they can view the entire list of passengers.</p>
+<p>Tapping/clicking on the checkbox next to each name will mark that passenger as boarded/not boarded.</p>
+<p>Example email to a bus captain:</p>
+<pre><code class="hljs">Hey [name],
+
+Thanks again <span class="hljs-keyword">for</span> volunteering <span class="hljs-keyword">to</span> be a <span class="hljs-keyword">bus</span> captain! [HackFoo]<span class="hljs-symbol">'s</span> <span class="hljs-keyword">bus</span> <span class="hljs-keyword">to</span> [location] would <span class="hljs-keyword">not</span> be possible without your help, <span class="hljs-keyword">and</span> we greatly appreciate it.
+
+As a <span class="hljs-keyword">bus</span> captain, you are <span class="hljs-keyword">in</span> charge <span class="hljs-keyword">of</span> who does <span class="hljs-keyword">and</span> does <span class="hljs-keyword">not</span> board the <span class="hljs-keyword">bus</span>. It<span class="hljs-symbol">'s</span> incredibly important that **only people who are <span class="hljs-keyword">on</span> the registered passenger list may board.** <span class="hljs-keyword">Not</span> only could an extra person take someone <span class="hljs-keyword">else</span><span class="hljs-symbol">'s</span> seat, but they may <span class="hljs-keyword">not</span> have been accepted <span class="hljs-keyword">to</span> the hackathon <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> have <span class="hljs-keyword">not</span> <span class="hljs-built_in">signed</span> proper liability waivers.
+
+<span class="hljs-keyword">To</span> help <span class="hljs-keyword">with</span> this, <span class="hljs-keyword">open</span> https://your-hackathon.com/bus_list <span class="hljs-keyword">on</span> your phone. From there, your <span class="hljs-keyword">bus</span><span class="hljs-symbol">'s</span> full passenger list <span class="hljs-keyword">is</span> shown.
+
+As people board, **tap <span class="hljs-keyword">on</span> the checkbox <span class="hljs-keyword">next</span> <span class="hljs-keyword">to</span> their name** (including yourself). This will mark them as boarded, <span class="hljs-keyword">and</span> will update your <span class="hljs-string">"boarded"</span> count <span class="hljs-keyword">for</span> an easy head-count. Once everyone has boarded, do a quick head-count <span class="hljs-keyword">on</span> the <span class="hljs-keyword">bus</span> <span class="hljs-keyword">to</span> make sure these numbers match up.
+
+<span class="hljs-keyword">If</span> you have any questions day-<span class="hljs-keyword">of</span>, don<span class="hljs-symbol">'t</span> hesitate <span class="hljs-keyword">to</span> call <span class="hljs-keyword">or</span> <span class="hljs-literal">text</span> me at [your cell phone number].
+
+Hope <span class="hljs-keyword">to</span> see you soon!
+
+ - [your name]
+[your email]
+[your cell phone number]
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/hackathon-manager/docs/messages"><span class="arrow-prev">← </span><span>Messages</span></a><a class="docs-next button" href="/hackathon-manager/docs/api-overview"><span>Overview</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#attendee-sign-ups">Attendee sign-ups</a></li><li><a href="#bus-captains">Bus Captains</a><ul class="toc-headings"><li><a href="#promoting-a-passenger-to-captain-status">Promoting a passenger to captain status</a></li><li><a href="#boarding-flow-for-bus-captains">Boarding flow for bus captains</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/hackathon-manager/" class="nav-home"><img src="/hackathon-manager/img/coderit-square.svg" alt="HackathonManager" width="66" height="58"/></a><div><h5>Docs</h5><a href="/hackathon-manager/docs/running-a-hackathon.html">Running a hackathon</a><a href="/hackathon-manager/docs/api.html">API Usage</a><a href="/hackathon-manager/docs/deployment.html">Deployment</a></div><div></div><div><h5>More</h5><a href="https://github.com/codeRIT/hackathon-manager" target="_blank">GitHub Repo</a><a class="github-button" href="https://github.com/codeRIT/hackathon-manager" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 codeRIT</section></footer></div></body></html>
