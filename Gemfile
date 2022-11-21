@@ -120,7 +120,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'valid_attribute'
   gem 'factory_bot_rails'
-  gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
+  gem 'codeclimate-test-reporter', '~> 1.0.9', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
   gem 'webmock', '~> 3.12'
   gem 'timecop'
