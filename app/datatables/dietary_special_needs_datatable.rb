@@ -8,6 +8,7 @@ class DietarySpecialNeedsDatatable < ApplicationDatatable
       last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       phone: { source: "Questionnaire.phone" },
+      questionnaire: {},
       checked_in_at: { source: "Questionnaire.checked_in_at", searchable: false },
       dietary_restrictions: { source: "Questionnaire.dietary_restrictions" },
       special_needs: { source: "Questionnaire.special_needs" }

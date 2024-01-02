@@ -6,6 +6,7 @@ class BulkMessageDatatable < ApplicationDatatable
       id: { source: "Message.id" },
       name: { source: "Message.name" },
       subject: { source: "Message.subject" },
+      status: {},
       created_at: { source: "Message.created_at", searchable: false },
       updated_at: { source: "Message.updated_at", searchable: false },
       delivered_at: { source: "Message.delivered_at", searchable: false },

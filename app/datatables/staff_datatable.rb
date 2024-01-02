@@ -4,6 +4,7 @@ class StaffDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       id: { source: "User.id" },
+      link: {},
       first_name: { source: "User.first_name" },
       last_name: { source: "User.last_name" },
       email: { source: "User.email" },

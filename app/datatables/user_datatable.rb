@@ -4,10 +4,12 @@ class UserDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       id: { source: "User.id" },
+      link: {},
       first_name: { source: "User.first_name" },
       last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       role: { source: "User.role", searchable: false },
+      questionnaire: {},
       active: { source: "User.is_active", searchable: false },
       created_at: { source: "User.created_at", searchable: false },
       current_sign_in_at: { source: "User.current_sign_in_at", searchable: false },

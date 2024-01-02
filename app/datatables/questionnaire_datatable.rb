@@ -3,6 +3,8 @@ class QuestionnaireDatatable < ApplicationDatatable
 
   def view_columns
     @view_columns ||= {
+      link: {},
+      note: {},
       id: { source: "Questionnaire.id", cond: :eq },
       first_name: { source: "User.first_name" },
       last_name: { source: "User.last_name" },
@@ -47,7 +49,6 @@ class QuestionnaireDatatable < ApplicationDatatable
   def data
     records.map do |record|
       {
-        bulk: current_user.director? ? "<input type=\"checkbox\" data-bulk-row-edit=\"#{record.id}\">".html_safe : "",
         link: link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(record)),
         note: note(record),
         id: record.id,

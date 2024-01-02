@@ -5,7 +5,9 @@ class CheckinDatatable < ApplicationDatatable
     @view_columns ||= {
       first_name: { source: "User.first_name" },
       last_name: { source: "User.last_name" },
+      about: {},
       checked_in: { source: "Questionnaire.checked_in_at", searchable: false },
+      actions: {},
     }
   end
 

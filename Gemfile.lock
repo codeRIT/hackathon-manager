@@ -53,8 +53,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    ajax-datatables-rails (1.2.0)
-      railties (>= 5.0)
+    ajax-datatables-rails (1.3.1)
       zeitwerk
     ansi (1.5.0)
     arel (9.0.0)
@@ -463,7 +462,7 @@ PLATFORMS
   -darwin-23
 
 DEPENDENCIES
-  ajax-datatables-rails (~> 1.2.0)
+  ajax-datatables-rails (~> 1.3.0)
   audited (~> 5.0)
   aws-sdk-s3
   better_errors

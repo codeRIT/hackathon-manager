@@ -8,6 +8,7 @@ class AltTravelDatatable < ApplicationDatatable
       last_name: { source: "User.last_name" },
       email: { source: "User.email" },
       phone: { source: "Questionnaire.phone" },
+      questionnaire: {},
       travel_location: { source: "Questionnaire.travel_location" },
       acc_status: { source: "Questionnaire.acc_status" }
     }
