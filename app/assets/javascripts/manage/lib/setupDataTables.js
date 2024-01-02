@@ -8,11 +8,11 @@
 
 var setupDataTables = function () {
   $('.datatable.questionnaires').DataTable({
-    order: [0, 'asc'],
+    order: [2, 'asc'],
     columns: [
-      { orderable: true, data: 'id', visible: false },
       { orderable: false, data: 'link' },
       { orderable: false, data: 'note' },
+      { orderable: true, data: 'id', visible: false },
       { orderable: true, data: 'first_name' },
       { orderable: true, data: 'last_name' },
       { orderable: true, data: 'email' },
@@ -23,7 +23,7 @@ var setupDataTables = function () {
       { orderable: true, data: 'checked_in' },
       { orderable: true, data: 'boarded_bus', visible: false },
       { orderable: true, data: 'bus_captain', visible: false },
-      { orderable: true, data: 'school'},
+      { orderable: true, data: 'school' },
       { orderable: true, data: 'created_at', visible: false },
       { orderable: true, data: 'dietary_restrictions', visible: false },
       { orderable: true, data: 'special_needs', visible: false },

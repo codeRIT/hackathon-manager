@@ -147,7 +147,7 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_schools datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      post :datatable, format: :json
       assert_response :success
     end
 
@@ -212,7 +212,7 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_schools datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      post :datatable, format: :json
       assert_response :success
     end
 

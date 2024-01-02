@@ -313,7 +313,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      post :datatable, format: :json
       assert_response :success
     end
 

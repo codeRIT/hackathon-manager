@@ -106,7 +106,7 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
 
   # datatable
   def test_datatable_success
-    post :datatable, format: :json, params: { "columns[0][data]" => "" }
+    post :datatable, format: :json
     assert_response :success
   end
 

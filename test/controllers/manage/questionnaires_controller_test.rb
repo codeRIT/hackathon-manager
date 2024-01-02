@@ -149,7 +149,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_questionnaires datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      post :datatable, format: :json
       assert_response :success
     end
 
@@ -213,7 +213,7 @@ class Manage::QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_questionnaires datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
+      post :datatable, format: :json
       assert_response :success
     end
 
