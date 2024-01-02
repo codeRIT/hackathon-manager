@@ -119,7 +119,7 @@ group :test do
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
   gem 'valid_attribute'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '~> 6.1.0'
   gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
   gem 'webmock', '~> 3.12'
