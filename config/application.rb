@@ -31,5 +31,9 @@ module HackathonManager
       # Only Authorized Applications
       Doorkeeper::AuthorizedApplicationsController.layout "application"
     end
+
+    # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
+    config.active_record.yaml_column_permitted_classes = [Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
+
   end
 end
