@@ -35,7 +35,7 @@ class Manage::MessagesController < Manage::ApplicationController
   end
 
   def update
-    @message.update_attributes(message_params)
+    @message.update(message_params)
     respond_with(:manage, @message)
   end
 
@@ -73,7 +73,7 @@ class Manage::MessagesController < Manage::ApplicationController
 
   def duplicate
     new_message = @message.dup
-    new_message.update_attributes(
+    new_message.update(
       delivered_at: nil,
       started_at: nil,
       queued_at: nil,
@@ -96,7 +96,7 @@ class Manage::MessagesController < Manage::ApplicationController
   def template_update
     message_template = MessageTemplate.uncached_instance
     message_template_params = params.require(:message_template).permit(:html)
-    message_template.update_attributes(message_template_params)
+    message_template.update(message_template_params)
     redirect_to template_manage_messages_path
   end
 

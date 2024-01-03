@@ -47,7 +47,7 @@ class RsvpsController < ApplicationController
     bus = @questionnaire.bus_list_id
     acc_status = @questionnaire.acc_status
 
-    unless @questionnaire.update_attributes(params.require(:questionnaire).permit(:phone))
+    unless @questionnaire.update(params.require(:questionnaire).permit(:phone))
       flash[:alert] = @questionnaire.errors.full_messages.join(", ")
       redirect_to rsvp_path
       return

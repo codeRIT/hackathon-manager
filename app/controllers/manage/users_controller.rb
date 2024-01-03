@@ -32,7 +32,7 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def update
-    @user.update_attributes(user_params)
+    @user.update(user_params)
     respond_with(:manage, @user, location: manage_users_path)
   end
 

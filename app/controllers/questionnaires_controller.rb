@@ -93,7 +93,7 @@ class QuestionnairesController < ApplicationController
 
     @agreements = Agreement.all
     respond_to do |format|
-      if @questionnaire.update_attributes(update_params)
+      if @questionnaire.update(update_params)
         format.html { redirect_to questionnaires_path, notice: 'Application was successfully updated.' }
         format.json { head :no_content }
       else

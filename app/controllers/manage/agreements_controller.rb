@@ -28,7 +28,7 @@ class Manage::AgreementsController < Manage::ApplicationController
 
   # PATCH/PUT /agreements/1
   def update
-    @agreement.update_attributes(agreement_params)
+    @agreement.update(agreement_params)
     flash[:notice] = nil
     redirect_to manage_agreements_path
   end

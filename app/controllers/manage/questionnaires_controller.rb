@@ -55,13 +55,13 @@ class Manage::QuestionnairesController < Manage::ApplicationController
     # Take our nested user object out as a whole
     user_params = params[:questionnaire][:user]
     if user_params
-      @questionnaire.user.update_attributes(first_name: user_params[:first_name])
-      @questionnaire.user.update_attributes(last_name: user_params[:last_name])
+      @questionnaire.user.update(first_name: user_params[:first_name])
+      @questionnaire.user.update(last_name: user_params[:last_name])
     end
-    @questionnaire.user.update_attributes(email: email) if email.present?
+    @questionnaire.user.update(email: email) if email.present?
     update_params = convert_school_name_to_id(update_params)
     update_params = convert_boarded_bus_param(update_params, @questionnaire)
-    @questionnaire.update_attributes(update_params)
+    @questionnaire.update(update_params)
     respond_with(:manage, @questionnaire)
   end
 
@@ -82,8 +82,8 @@ class Manage::QuestionnairesController < Manage::ApplicationController
           if params[:questionnaire]
             q_params = params.require(:questionnaire).permit(:phone, :can_share_info, :email)
             email = q_params.delete(:email)
-            @questionnaire.update_attributes(q_params)
-            @questionnaire.user.update_attributes(email: email)
+            @questionnaire.update(q_params)
+            @questionnaire.user.update(email: email)
           end
           unless @questionnaire.valid?
             flash[:alert] = @questionnaire.errors.full_messages.join(", ")

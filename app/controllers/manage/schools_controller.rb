@@ -30,7 +30,7 @@ class Manage::SchoolsController < Manage::ApplicationController
   end
 
   def update
-    @school.update_attributes(school_params)
+    @school.update(school_params)
     respond_with(:manage, @school, location: manage_schools_path)
   end
 

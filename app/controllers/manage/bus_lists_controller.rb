@@ -27,7 +27,7 @@ class Manage::BusListsController < Manage::ApplicationController
   end
 
   def update
-    @bus_list.update_attributes(bus_list_params)
+    @bus_list.update(bus_list_params)
     respond_with(:manage, @bus_list)
   end
 

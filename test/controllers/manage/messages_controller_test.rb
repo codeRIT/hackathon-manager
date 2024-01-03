@@ -531,7 +531,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       end
 
       should "reset status" do
-        @message.update_attributes(
+        @message.update(
           delivered_at: Time.now,
           started_at: Time.now,
           queued_at: Time.now,
@@ -541,7 +541,7 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       end
 
       should "maintain similar fields" do
-        @message.update_attributes(
+        @message.update(
           name: "My message name",
           subject: "This subject",
           body: "hello world",
