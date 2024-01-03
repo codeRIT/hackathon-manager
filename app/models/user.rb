@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :questionnaire
 
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, case_sensitive: false
   validates_presence_of :first_name, :last_name
 
   after_create :queue_reminder_email

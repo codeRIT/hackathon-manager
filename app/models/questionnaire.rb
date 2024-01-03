@@ -19,7 +19,7 @@ class Questionnaire < ApplicationRecord
   belongs_to :bus_list, optional: true
   has_and_belongs_to_many :agreements
 
-  validates_uniqueness_of :user_id
+  validates_uniqueness_of :user_id, case_sensitive: false
 
   validates_presence_of :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
   validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity, :country
