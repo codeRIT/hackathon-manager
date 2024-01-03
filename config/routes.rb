@@ -10,13 +10,7 @@ Rails.application.routes.draw do
   mount MailPreview => "mail_view" if Rails.env.development?
 
   devise_scope :user do
-    authenticated do
-      root to: "questionnaires#show"
-    end
-
-    unauthenticated do
-      root to: "devise/sessions#new"
-    end
+    root to: "devise/sessions#new"
   end
 
   authenticate :user, ->(u) { u.director? } do
@@ -44,13 +38,13 @@ Rails.application.routes.draw do
 
   namespace :manage do
     authenticate :user, ->(u) { u.director? } do
-      root to: "dashboard#index"
+      root to: "dashboard#index", as: :director_root
     end
     authenticate :user, ->(u) { u.organizer? } do
-      root to: "dashboard#index"
+      root to: "dashboard#index", as: :organizer_root
     end
     authenticate :user, ->(u) { u.volunteer? } do
-      root to: "checkins#index"
+      root to: "checkins#index", as: :volunteer_root
     end
     resources :dashboard do
       get :map_data, on: :collection

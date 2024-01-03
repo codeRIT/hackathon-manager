@@ -27,12 +27,12 @@
 #   'true': 'foo'
 #
 # To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
   devise:
     failure:
-      unauthenticated: "Please sign in or sign up to continue."
+      unauthenticated: 'Please sign in or sign up to continue.'
     registrations:
       user:
         signed_up: Welcome! Your account has been created.
@@ -125,8 +125,8 @@ en:
         thanks_for_rsvp_message: Thanks For RSVP Message
         questionnaires_closed_message: Questionnaires Closed Message
   messages:
-    checked_in: "%{user_full_name} has been checked in."
-    checked_out: "%{user_full_name} is no longer checked in."
+    checked_in: '%{user_full_name} has been checked in.'
+    checked_out: '%{user_full_name} is no longer checked in.'
     missing_check_in: No check-in action provided!
   pages:
     manage:
@@ -171,7 +171,7 @@ en:
       users:
         title: Users & Staff
         users: All Users
-        staff: "%{hackathon_name} Staff"
+        staff: '%{hackathon_name} Staff'
         table:
           id: ID
           email: Email
@@ -186,7 +186,7 @@ en:
           previous_signed_in_ip: Previous signed-in IP
           sign_in_count: Sign-in count
         show:
-          subtitle: "User"
+          subtitle: 'User'
           edit: Edit
           reset_password: Reset Password
           delete: Delete
@@ -215,7 +215,7 @@ en:
           delete: Delete
           reset_password: Reset Password
           confirm_reset_password: "Are you sure? %{full_name}'s password will be reset and %{first_name} will receive a recovery email."
-          reset_password_success: "Successfully reset password and sent recovery instructions to %{full_name}."
+          reset_password_success: 'Successfully reset password and sent recovery instructions to %{full_name}.'
           form:
             active: Active
             inactive: Inactive
@@ -224,7 +224,7 @@ en:
             save: Save
       agreements:
         title: Legal Agreements
-        notice: "These are legal agreements that are required to be reviewed and agreed upon by all applicants of %{hackathon_name}."
+        notice: 'These are legal agreements that are required to be reviewed and agreed upon by all applicants of %{hackathon_name}.'
         name: Name
         agreement: Agreement
         new: New Agreement
