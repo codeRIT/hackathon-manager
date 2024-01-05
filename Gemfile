@@ -40,7 +40,7 @@ gem 'rack-cors'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Authentication
-gem 'devise', '~> 4.7'
+gem 'devise'
 gem 'omniauth-mlh', '~> 0.4.2'
 gem 'doorkeeper', '~> 5.5'
 gem 'devise-doorkeeper'
@@ -51,14 +51,14 @@ gem "aws-sdk-s3", require: false
 gem "file_validators"
 
 # Templating utilities
-gem 'haml-rails', '~> 2.0'
+gem 'haml-rails'
 gem 'simple_form', '~> 5.1.0'
-gem 'ajax-datatables-rails', '~> 1.3.0'
+gem 'ajax-datatables-rails'
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.4'
 gem 'groupdate'
 gem 'font-awesome-rails', '~> 4.7' # needed for icon helpers
-gem 'mustache', '~> 1.0'
+gem 'mustache'
 
 # Assets
 gem 'sprockets'
@@ -76,7 +76,7 @@ gem 'redcarpet'
 # Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
-gem 'audited', '~> 5.0'
+gem 'audited'
 
 # Background job processing
 gem 'sidekiq', '< 6.5'
