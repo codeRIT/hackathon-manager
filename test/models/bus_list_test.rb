@@ -6,7 +6,7 @@ class BusListTest < ActiveSupport::TestCase
 
   should validate_presence_of :name
   should validate_presence_of :capacity
-  should validate_uniqueness_of :name
+  should validate_uniqueness_of(:name).ignoring_case_sensitivity
 
   should have_many :questionnaires
 
