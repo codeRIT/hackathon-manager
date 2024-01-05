@@ -1,6 +1,6 @@
 class StaffMailer < ApplicationMailer
   include Roadie::Rails::Automatic
-  add_template_helper(HackathonManagerHelper)
+  helper HackathonManagerHelper
 
   layout "staff_mailer"
 

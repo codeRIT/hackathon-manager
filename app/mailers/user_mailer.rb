@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
   include Roadie::Rails::Automatic
-  add_template_helper(HackathonManagerHelper)
+  helper HackathonManagerHelper
 
   def bulk_message_email(message_id, user_id, message = nil, use_examples = false)
     @message = message || Message.find_by_id(message_id)
