@@ -110,8 +110,8 @@ class QuestionnairesControllerTest < ActionController::TestCase
           job = enqueued_jobs.last
           args = job[:args]
           job_name_arg = args[1]
-          message_id_arg = args[3]
-          user_id_arg = args[4]
+          message_id_arg = args[3]["args"][0]
+          user_id_arg = args[3]["args"][1]
 
           assert_equal "bulk_message_email", job_name_arg, "expected correct job name in job args"
           assert_equal message.id, message_id_arg, "expected correct message ID in job args"
