@@ -4,40 +4,64 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Use Ruby version defined in .ruby-version
 ruby '>= 3.0.6'
 
+##########################################################################
+# Rails default gems
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.7.6'
-# Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
-# Use Puma as the app server
-gem 'puma'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 6.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
 
-# Use CoffeeScript for .coffee assets and views
-# gem 'coffee-rails', '~> 4.2'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+
+# Use sqlite3 as the database for Active Record
+# gem "sqlite3", "~> 1.4"
+
+# Use the Puma web server [https://github.com/puma/puma]
+gem "puma", ">= 5.0"
+
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# CORS support
-gem 'rack-cors'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem "redis", ">= 4.0.1"
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# gem "kredis"
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem "bootsnap", require: false
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
+
+##########################################################################
+
+# Use mysql2 as the database for Active Record
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 6.0'
+
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5' # EOL, replace with Turbo
+
+# CORS support
+gem 'rack-cors'
 
 # Authentication
 gem 'devise'
