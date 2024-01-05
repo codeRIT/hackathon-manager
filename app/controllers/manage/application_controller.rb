@@ -8,29 +8,14 @@ class Manage::ApplicationController < ApplicationController
     authenticate_user!
   end
 
-  def after_sign_in_path_for(resource)
-    stored_location = stored_location_for(resource)
-    if stored_location
-      stored_location
-    elsif current_user.volunteer?
-      manage_volunteer_root_path
-    elsif current_user.organizer?
-      manage_organizer_root_path
-    elsif current_user.director?
-      manage_director_root_path
-    else
-      super
-    end
-  end
-
   def require_director
-    return redirect_to manage_volunteer_root_path if current_user.volunteer?
-    return redirect_to manage_organizer_root_path if current_user.organizer?
+    return redirect_to manage_root_path if current_user.volunteer?
+    return redirect_to manage_root_path if current_user.organizer?
     return redirect_to root_path unless current_user.try(:director?)
   end
 
   def require_director_or_organizer
-    return redirect_to manage_volunteer_root_path if current_user.volunteer?
+    return redirect_to manage_root_path if current_user.volunteer?
     return redirect_to root_path unless current_user.organizing_staff?
   end
 

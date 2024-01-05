@@ -154,7 +154,7 @@ class QuestionnairesControllerTest < ActionController::TestCase
     end
 
     should "get edit with questionnaire resume" do
-      @questionnaire.resume = sample_file("sample_pdf.pdf")
+      @questionnaire.resume.attach(io: sample_file, filename: "sample_pdf.pdf")
       @questionnaire.save
       get :edit
       assert_response :success

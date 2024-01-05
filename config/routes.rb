@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   namespace :manage do
     authenticate :user, ->(u) { u.director? } do
-      root to: "dashboard#index", as: :director_root
+      root to: "dashboard#index"
     end
     authenticate :user, ->(u) { u.organizer? } do
       root to: "dashboard#index", as: :organizer_root

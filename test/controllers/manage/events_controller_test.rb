@@ -97,13 +97,13 @@ class Manage::EventsControllerTest < ActionController::TestCase
     should "not allow access to manage_events#index" do
       get :index
       assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_events#show" do
       get :show, params: { id: @event }
       assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_events#new" do
@@ -146,7 +146,7 @@ class Manage::EventsControllerTest < ActionController::TestCase
     should "not allow access to manage_events#show" do
       get :show, params: { id: @event }
       assert_response :redirect
-      assert_redirected_to manage_organizer_root_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_events#new" do

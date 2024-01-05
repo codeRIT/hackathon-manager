@@ -127,49 +127,52 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#index" do
       get :index
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to user_datatable" do
       get :user_datatable
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to staff_datatable" do
       get :staff_datatable
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_users users datatables api" do
       post :user_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_users staff datatables api" do
       post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
-    should "allow access to manage_users#show" do
+    /
+    READ ME! The below test cases might seem confusing. If the organizer shouldn't have permission to users why are they
+    beind redirected to index? See application_controller.rb:27. They're redirected to the controller's index and then
+    redirected to manage_root_path on attempt.
+    /
+
+    should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to manage_users#edit" do
       get :edit, params: { id: @user }
-      assert_response :redirect
       assert_redirected_to manage_users_path
     end
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
-      assert_response :redirect
       assert_redirected_to manage_users_path
     end
 
     should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
-      assert_response :redirect
       assert_redirected_to manage_users_path
     end
   end
@@ -206,7 +209,13 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to manage_root_path
     end
 
-    should "allow access to manage_users#show" do
+    /
+    READ ME! The below test cases might seem confusing. If the organizer shouldn't have permission to users why are they
+    beind redirected to index? See application_controller.rb:27. They're redirected to the controller's index and then
+    redirected to manage_root_path on attempt.
+    /
+
+    should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
       assert_redirected_to manage_root_path
     end
@@ -219,13 +228,11 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#update" do
       patch :update, params: { id: @user, user: { email: "test@example.com" } }
-      assert_response :redirect
       assert_redirected_to manage_users_path
     end
 
     should "not allow access to manage_users#destroy" do
       patch :destroy, params: { id: @user }
-      assert_response :redirect
       assert_redirected_to manage_users_path
     end
   end
