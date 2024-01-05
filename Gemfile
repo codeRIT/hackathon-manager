@@ -24,7 +24,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+# gem 'redis', '~> 4.0'
 # CORS support
 gem 'rack-cors'
 # Use ActiveModel has_secure_password
@@ -79,8 +79,8 @@ gem 'validate_url'
 gem 'audited'
 
 # Background job processing
-gem 'sidekiq', '< 6.5'
-gem 'sidekiq-cron', github: 'codeRIT/sidekiq-cron', branch: 'master'
+gem 'sidekiq'
+gem "sidekiq-cron"
 
 # Misc support gems
 gem 'rails-settings-cached', '~> 0.7.2'

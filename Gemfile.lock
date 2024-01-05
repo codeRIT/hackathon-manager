@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/codeRIT/sidekiq-cron.git
-  revision: 571d7d74d2828aea2f55381a83f73ac3450e8819
-  branch: master
-  specs:
-    sidekiq-cron (1.2.0)
-      fugit (~> 1.1)
-      sidekiq (>= 4.2.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -359,7 +350,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.6.0)
-    redis (4.8.1)
+    redis-client (0.19.1)
+      connection_pool
     regexp_parser (2.8.3)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -407,10 +399,15 @@ GEM
     shoulda-context (2.0.0)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
-    sidekiq (6.4.2)
-      connection_pool (>= 2.2.2)
-      rack (~> 2.0)
-      redis (>= 4.2.0)
+    sidekiq (7.2.0)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
+    sidekiq-cron (1.12.0)
+      fugit (~> 1.8)
+      globalid (>= 1.0.1)
+      sidekiq (>= 6)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -519,7 +516,6 @@ DEPENDENCIES
   rails-settings-cached (~> 0.7.2)
   rails_12factor
   redcarpet
-  redis (~> 4.0)
   roadie-rails
   rollbar (~> 3.2)
   rubyzip (>= 1.3.0)
@@ -529,8 +525,8 @@ DEPENDENCIES
   sendgrid-actionmailer
   shoulda (~> 4.0.0)
   shoulda-matchers (~> 4.5.1)
-  sidekiq (< 6.5)
-  sidekiq-cron!
+  sidekiq
+  sidekiq-cron
   simple_form (~> 5.1.0)
   simple_spark
   simplecov
