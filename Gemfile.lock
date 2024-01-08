@@ -551,7 +551,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets
-  sprockets-rails
   stimulus-rails
   strip_attributes
   test-unit (~> 3.4)
