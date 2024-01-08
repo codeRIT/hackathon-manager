@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module HackathonManager
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -34,6 +34,7 @@ module HackathonManager
 
     # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
     config.active_record.yaml_column_permitted_classes = [Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
-
+    config.active_support.disable_to_s_conversion = true
+    config.active_support.cache_format_version = 7.0
   end
 end
