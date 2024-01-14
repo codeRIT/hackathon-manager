@@ -31,4 +31,4 @@ function applicationReady() {
   });
 }
 
-document.addEventListener('turbolinks:load', applicationReady);
+document.addEventListener('turbo:load', applicationReady);

@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbo:load', function() {
   $.fn.validate = function(option) {
     var previous_invalid_inputs = [];
 

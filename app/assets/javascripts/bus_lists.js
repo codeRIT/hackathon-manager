@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbo:load', function() {
   $checkboxes = $('[data-boarded-bus]');
 
   function updateCount() {

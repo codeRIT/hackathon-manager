@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function () {
+document.addEventListener('turbo:load', function () {
   $('.map-button').click(function (){
     var map = $('#map');
     if(map.is(':visible')){

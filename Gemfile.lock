@@ -456,9 +456,10 @@ GEM
     tilt (2.3.0)
     timecop (0.9.8)
     timeout (0.4.1)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (1.5.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     valid_attribute (2.0.0)
@@ -555,7 +556,7 @@ DEPENDENCIES
   strip_attributes
   test-unit (~> 3.4)
   timecop
-  turbolinks (~> 5)
+  turbo-rails
   valid_attribute
   validate_url
   web-console (>= 3.3.0)

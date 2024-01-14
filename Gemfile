@@ -20,7 +20,7 @@ gem "puma", ">= 5.0"
 gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-# gem "turbo-rails"
+gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
@@ -53,9 +53,6 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6.0'
-
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5' # EOL, replace with Turbo
 
 # CORS support
 gem 'rack-cors'

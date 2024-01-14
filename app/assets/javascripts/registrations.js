@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbo:load', function() {
   $('[data-school-picker]').autocomplete({
     source: function(request, response) {
       $(".ui-helper-hidden-accessible").hide();

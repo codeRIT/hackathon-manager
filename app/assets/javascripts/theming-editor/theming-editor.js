@@ -120,5 +120,5 @@
     initColorPickers();
   }
 
-  document.addEventListener('turbolinks:load', init);
+  document.addEventListener('turbo:load', init);
 })();
