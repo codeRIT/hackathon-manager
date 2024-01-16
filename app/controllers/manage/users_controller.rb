@@ -5,11 +5,8 @@ class Manage::UsersController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, User.where(role: [:director, :organizer, :volunteer]))
-  end
-
-  def user_datatable
-    render json: UserDatatable.new(params, view_context: view_context)
+    @user_search = User.ransack(params[:user_search], search_key: :user_search)
+    @user_pagy, @users = pagy(@user_search.result(distinct: true), items: 10)
   end
 
   def staff_datatable
@@ -25,7 +22,6 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def show
-    respond_with(:manage, @user)
   end
 
   def edit

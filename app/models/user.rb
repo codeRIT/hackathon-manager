@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:first_name, :last_name, :email, :role], using: { tsearch: { prefix: true } }
   audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
 
   strip_attributes
@@ -24,6 +26,14 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "current_sign_in_at", "current_sign_in_ip", "email", "first_name", "id", "is_active", "last_name", "last_sign_in_at", "last_sign_in_ip", "provider", "receive_weekly_report", "role", "uid"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["audits", "questionnaire"]
+  end
 
   def set_default_role
     self.role ||= :user
