@@ -40,26 +40,6 @@ var setupDataTables = function () {
     ],
   });
 
-  $('.datatable.staff').DataTable({
-    order: [2, 'asc'],
-    columns: [
-      { orderable: true, data: 'id', visible: false },
-      { orderable: false, data: 'link' },
-      { orderable: true, data: 'first_name' },
-      { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email', visible: false },
-      { orderable: true, data: 'role' },
-      { orderable: true, data: 'active' },
-      { orderable: true, data: 'receive_weekly_report' },
-      { orderable: true, data: 'created_at', visible: false },
-      { orderable: true, data: 'current_sign_in_at', visible: false },
-      { orderable: true, data: 'last_sign_in_at', visible: false },
-      { orderable: true, data: 'current_sign_in_ip', visible: false },
-      { orderable: true, data: 'last_sign_in_ip', visible: false },
-      { orderable: true, data: 'sign_in_count', visible: true },
-    ],
-  });
-
   $('.datatable.bulk-messages').DataTable({
     order: [4, 'desc'],
     columns: [

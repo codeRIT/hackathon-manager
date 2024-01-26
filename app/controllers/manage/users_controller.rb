@@ -6,11 +6,12 @@ class Manage::UsersController < Manage::ApplicationController
 
   def index
     @user_search = User.ransack(params[:user_search], search_key: :user_search)
-    @user_pagy, @users = pagy(@user_search.result(distinct: true), items: 10)
-  end
+    @users = @user_search.result(distinct: true)
+    @user_pagy, @users = pagy(@users, items: 10)
 
-  def staff_datatable
-    render json: StaffDatatable.new(params, view_context: view_context)
+    @staff_search = User.ransack(params[:staff_search], search_key: :staff_search)
+    @staff = @staff_search.result(distinct: true).staff
+    @staff_pagy, @staff = pagy(@staff, items: 10)
   end
 
   def reset_password

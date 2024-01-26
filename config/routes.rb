@@ -99,7 +99,6 @@ Rails.application.routes.draw do
       post :checked_in_datatable, on: :collection
     end
     resources :users do
-      post :staff_datatable, on: :collection
       patch :reset_password, on: :member
     end
     resources :agreements

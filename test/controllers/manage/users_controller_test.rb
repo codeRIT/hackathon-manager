@@ -14,16 +14,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_redirected_to new_user_session_path
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response 401
-    end
-
     should "not allow access to manage_users#show" do
       get :show, params: { id: @user }
       assert_response :redirect
@@ -57,17 +47,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -106,16 +85,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "not allow access to manage_users#index" do
       get :index
-      assert_redirected_to manage_root_path
-    end
-
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_redirected_to manage_root_path
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_redirected_to manage_root_path
     end
 
@@ -158,16 +127,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
       assert_redirected_to manage_root_path
     end
 
-    should "not allow access to staff_datatable" do
-      get :staff_datatable
-      assert_redirected_to manage_root_path
-    end
-
-    should "not allow access to manage_users staff datatables api" do
-      post :staff_datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_redirected_to manage_root_path
-    end
-
     /
     READ ME! The below test cases might seem confusing. If the organizer shouldn't have permission to users why are they
     beind redirected to index? See application_controller.rb:27. They're redirected to the controller's index and then
@@ -205,11 +164,6 @@ class Manage::UsersControllerTest < ActionController::TestCase
 
     should "allow access to manage_users#index" do
       get :index
-      assert_response :success
-    end
-
-    should "allow access to staff_datatable" do
-      get :staff_datatable
       assert_response :success
     end
 
