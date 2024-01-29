@@ -7,11 +7,11 @@ class Manage::UsersController < Manage::ApplicationController
   def index
     @user_search = User.ransack(params[:user_search], search_key: :user_search)
     @users = @user_search.result(distinct: true)
-    @user_pagy, @users = pagy(@users, items: 10)
+    @user_pagy, @users = pagy(@users, page_param: 'user_page', items: 10)
 
     @staff_search = User.ransack(params[:staff_search], search_key: :staff_search)
     @staff = @staff_search.result(distinct: true).staff
-    @staff_pagy, @staff = pagy(@staff, items: 10)
+    @staff_pagy, @staff = pagy(@staff, page_param: 'staff_page', items: 10)
   end
 
   def reset_password
