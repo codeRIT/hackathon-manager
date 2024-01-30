@@ -5,8 +5,9 @@ class Manage::TrackableTagsController < Manage::ApplicationController
 
   # GET /manage/trackable_tags
   def index
-    @trackable_tags = TrackableTag.all.order("name ASC")
-    respond_with(:manage, @trackable_tags)
+    @trackable_tags_search = TrackableTag.ransack(params[:trackable_tags_search], search_key: :trackable_tags_search)
+    @trackable_tags = @trackable_tags_search.result(distinct: true)
+    @trackable_tags_pagy, @trackable_tags = pagy(@trackable_tags, page_param: 'trackable_tag_page', items: 10)
   end
 
   # GET /manage/trackable_tags/1
