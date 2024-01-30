@@ -7,3 +7,11 @@
   )
   user.save!
 end
+
+10.times do
+  bus_list=BusList.new(
+    name: Faker::Educator.unique.university
+  )
+  bus_list.save!
+end
+

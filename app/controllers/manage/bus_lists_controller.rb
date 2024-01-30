@@ -4,8 +4,9 @@ class Manage::BusListsController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    @bus_lists = BusList.all
-    respond_with(:manage, @bus_lists)
+    @bus_list_search = BusList.ransack(params[:bus_list_search], search_key: :bus_list_search)
+    @bus_lists = @bus_list_search.result(distinct: true)
+    @bus_list_pagy, @bus_lists = pagy(@bus_lists, page_param: 'bus_list_page', items: 10)
   end
 
   def show
