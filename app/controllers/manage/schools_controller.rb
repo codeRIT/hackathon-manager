@@ -4,11 +4,9 @@ class Manage::SchoolsController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, School.all)
-  end
-
-  def datatable
-    render json: SchoolDatatable.new(params, view_context: view_context)
+    @schools_search = School.ransack(params[:schools_search], search_key: :schools_search)
+    @schools = @schools_search.result(distinct: true)
+    @schools_pagy, @schools = pagy(@schools, page_param: 'schools_page', items: 10)
   end
 
   def show

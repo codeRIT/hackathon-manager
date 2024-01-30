@@ -53,18 +53,6 @@ var setupDataTables = function () {
     ],
   });
 
-  $('.datatable.schools').DataTable({
-    order: [[5, 'desc'], [4, 'desc']],
-    columns: [
-      { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'name' },
-      { orderable: true, data: 'city' },
-      { orderable: true, data: 'state' },
-      { orderable: true, data: 'questionnaire_count' },
-      { orderable: true, data: 'home_school' },
-    ],
-  });
-
   // MARK: Datatables for the stats
 
   $('.datatable.stats-dietary').DataTable({
