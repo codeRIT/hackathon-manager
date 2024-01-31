@@ -1,37 +1,42 @@
 .div.dataTable
-  .row
-    .col.text-right
-      = search_form_for(@trackable_tags_search, as: :trackable_tags_search, url: manage_trackable_tags_path, data: {turbo_frame: :trackable_tags_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
-        #{f.label :name_cont, "Search"}
-        #{f.search_field(:name_cont, class: "form-control form-control-sm")}
+  - if @trackable_tags.any?
+    .row
+      .col.text-right
+        = search_form_for(@trackable_tags_search, as: :trackable_tags_search, url: manage_trackable_tags_path, data: {turbo_frame: :trackable_tags_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+          #{f.label :name_cont, "Search"}
+          #{f.search_field(:name_cont, class: "form-control form-control-sm")}
 
-  .row
-    .col
-      = turbo_frame_tag :trackable_tags_table do
-        %table.dataTable.table.table-striped.table-hover
-          %thead
-            %tr
-              %th
-              %th Name
-              %th Allow duplicates
-              %th Events
-              %th Last event
-              %th Add event
-          %tbody
-            - @trackable_tags.each do |trackable_tag|
+    .row
+      .col
+        = turbo_frame_tag :trackable_tags_table do
+          %table.dataTable.table.table-striped.table-hover
+            %thead
               %tr
-                %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_trackable_tag_path(trackable_tag), target: "_top")
-                %td
-                  %strong= trackable_tag.name
-                %td
-                  - if trackable_tag.allow_duplicate_band_events
-                    %span Allow
-                  - else
-                    %span.text-danger Block
-                %td= pluralize(trackable_tag.trackable_events.count, "event")
-                %td= trackable_tag.trackable_events.any? ? display_datetime(trackable_tag.sorted_events.first.created_at) : ''
-                %td= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: trackable_tag.id)
+                %th
+                %th Name
+                %th Allow duplicates
+                %th Events
+                %th Last event
+                %th Add event
+            %tbody
+              - @trackable_tags.each do |trackable_tag|
+                %tr
+                  %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_trackable_tag_path(trackable_tag), target: "_top")
+                  %td
+                    %strong= trackable_tag.name
+                  %td
+                    - if trackable_tag.allow_duplicate_band_events
+                      %span Allow
+                    - else
+                      %span.text-danger Block
+                  %td= pluralize(trackable_tag.trackable_events.count, "event")
+                  %td= trackable_tag.trackable_events.any? ? display_datetime(trackable_tag.sorted_events.first.created_at) : ''
+                  %td= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: trackable_tag.id)
 
-        .row
-          .col
-            = pagy_bootstrap_nav(@trackable_tags_pagy).html_safe
+          .row
+            .col
+              = pagy_bootstrap_nav(@trackable_tags_pagy).html_safe
+  - else
+    %div{ style: "display:flex; align-items: center; flex-direction: column;" }
+      %p There aren't any trackable tags yet.
+      = link_to "New Tag", new_manage_trackable_tag_path, class: "btn btn-sm btn-outline-secondary"

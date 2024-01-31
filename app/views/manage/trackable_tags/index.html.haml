@@ -1,4 +1,7 @@
 = render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.trackable-tags') do
-  = link_to "New Tag", new_manage_trackable_tag_path, class: "btn btn-sm btn-outline-secondary"
+  - if @trackable_tags.any?
+    = link_to "New Tag", new_manage_trackable_tag_path, class: "btn btn-sm btn-outline-secondary"
 
 = render "trackable_tags_datatable", trackable_tags: @trackable_tags, trackable_tags_search: @trackable_tags_search, trackable_tags_pagy: @trackable_tags_pagy
+
+%hr
