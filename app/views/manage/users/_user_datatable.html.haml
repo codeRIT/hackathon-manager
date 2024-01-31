@@ -25,7 +25,7 @@
                 %td= user.first_name
                 %td= user.last_name
                 %td= user.role.titleize
-                %td= user.questionnaire.present? ? link_to(bold("View &raquo;".html_safe), manage_questionnaire_path(record.questionnaire.id), target: "_top") : t(:none, scope: 'pages.manage.users.table')
+                %td= user.questionnaire.present? ? link_to(bold("View &raquo;".html_safe), manage_questionnaire_path(user.questionnaire.id), target: "_top") : t(:none, scope: 'pages.manage.users.table')
                 %td= user.is_active? ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe
                 %td= display_datetime(user.created_at)
 

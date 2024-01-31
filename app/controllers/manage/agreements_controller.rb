@@ -6,7 +6,9 @@ class Manage::AgreementsController < Manage::ApplicationController
 
   # GET /agreements
   def index
-    @agreements = Agreement.all
+    @agreements_search = Agreement.ransack(params[:agreements_search], search_key: :agreements_search)
+    @agreements = @agreements_search.result(distinct: true)
+    @agreements_pagy, @agreements = pagy(@agreements, page_param: 'agreements_page', items: 10)
   end
 
   # GET /agreements/new
