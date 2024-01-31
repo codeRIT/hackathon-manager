@@ -1,0 +1,41 @@
+.div.dataTable
+  - if @bulk_messages.any?
+    .row
+      .col.text-right
+        = search_form_for(@bulk_messages_search, as: :bulk_messages_search, url: manage_messages_path, data: {turbo_frame: :bulk_messages_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+          #{f.label :name_cont, "Search"}
+          #{f.search_field(:name_cont, class: "form-control form-control-sm")}
+
+    .row
+      .col
+        = turbo_frame_tag :bulk_messages_table do
+          %table.dataTable.table.table-striped.table-hover
+            %thead
+              %tr
+                %th
+                %th Name
+                %th Subject
+                %th Status
+                %th Created
+                %th Last modified
+                %th Delivered
+            %tbody
+              - @bulk_messages.each do |bulk_message|
+                %tr
+                  %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_message_path(bulk_message), target: "_top")
+                  %td
+                    %strong= bulk_message.name
+                  %td= bulk_message.subject
+                  %td= bulk_message.status == "drafted" ? "<span style=\"color: red;\">#{h(bulk_message.status.titleize)}</span>".html_safe : bulk_message.status.titleize
+                  %td= display_datetime(bulk_message.created_at)
+                  %td= bulk_message.updated_at.present? ? display_datetime(bulk_message.updated_at) : ""
+                  %td= bulk_message.delivered_at.present? ? display_datetime(bulk_message.delivered_at) : ""
+
+          .row
+            .col
+              = pagy_bootstrap_nav(@bulk_messages_pagy).html_safe
+
+  - else
+    %div{ style: "display:flex; align-items: center; flex-direction: column;" }
+      %p There aren't any messages yet.
+      = link_to "New Message", new_manage_message_path, class: "btn btn-sm btn-outline-secondary"

@@ -40,19 +40,6 @@ var setupDataTables = function () {
     ],
   });
 
-  $('.datatable.bulk-messages').DataTable({
-    order: [4, 'desc'],
-    columns: [
-      { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'name' },
-      { orderable: true, data: 'subject' },
-      { orderable: false, data: 'status' },
-      { orderable: true, data: 'created_at' },
-      { orderable: true, data: 'updated_at', visible: false },
-      { orderable: true, data: 'delivered_at' },
-    ],
-  });
-
   // MARK: Datatables for the stats
 
   $('.datatable.stats-dietary').DataTable({

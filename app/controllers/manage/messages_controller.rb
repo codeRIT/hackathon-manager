@@ -7,11 +7,9 @@ class Manage::MessagesController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, Message.all)
-  end
-
-  def datatable
-    render json: BulkMessageDatatable.new(params, view_context: view_context)
+    @bulk_messages_search = Message.ransack(params[:bulk_messages_search], search_key: :bulk_messages_search)
+    @bulk_messages = @bulk_messages_search.result(distinct: true)
+    @bulk_messages_pagy, @bulk_messages = pagy(@bulk_messages, page_param: 'bulk_messages_page', items: 10)
   end
 
   def show

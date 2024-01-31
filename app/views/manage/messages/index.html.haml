@@ -1,18 +1,8 @@
 = render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.messages') do
-  = link_to "New Message", new_manage_message_path, class: "btn btn-sm btn-outline-secondary"
+  - if @bulk_messages.any?
+    = link_to "New Message", new_manage_message_path, class: "btn btn-sm btn-outline-secondary"
 
-.mb-4
-  %table.bulk-messages.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_messages_path(format: :json) }
-    %thead
-      %tr
-        %th ID
-        %th Name
-        %th Subject
-        %th Status
-        %th Created
-        %th Last modified
-        %th Delivered
-    %tbody
+= render "bulk_messages_datatable", bulk_messages: @bulk_messages, bulk_messages_pagy: @bulk_messages_pagy, bulk_messages_search: @bulk_messages_search
 
 .mb-4
   = render 'docs_link', title: 'Message documentation', url: 'https://coderit.org/hackathon-manager/docs/messages'

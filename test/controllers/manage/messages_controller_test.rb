@@ -14,11 +14,6 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response 401
-    end
-
     should "not allow access to manage_messages#new" do
       get :new
       assert_response :redirect
@@ -109,12 +104,6 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "not allow access to manage_messages#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -213,12 +202,6 @@ class Manage::MessagesControllerTest < ActionController::TestCase
       assert_redirected_to manage_root_path
     end
 
-    should "not allow access to manage_messages datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :redirect
-      assert_redirected_to manage_root_path
-    end
-
     should "not allow access to manage_messages#new" do
       get :new
       assert_response :redirect
@@ -309,11 +292,6 @@ class Manage::MessagesControllerTest < ActionController::TestCase
 
     should "allow access to manage_messages#index" do
       get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_messages datatables api" do
-      post :datatable, format: :json
       assert_response :success
     end
 
