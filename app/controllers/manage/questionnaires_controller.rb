@@ -6,11 +6,9 @@ class Manage::QuestionnairesController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, Questionnaire.all)
-  end
-
-  def datatable
-    render json: QuestionnaireDatatable.new(params, view_context: view_context)
+    @questionnaires_search = Questionnaire.ransack(params[:questionnaires_search], search_key: :questionnaires_search)
+    @questionnaires = @questionnaires_search.result.includes(:user, :school, :bus_list)
+    @questionnaires_pagy, @questionnaires = pagy(@questionnaires, page_param: 'questionnaire_page', items: 10)
   end
 
   def show

@@ -10,6 +10,9 @@ class Manage::SchoolsController < Manage::ApplicationController
   end
 
   def show
+    @questionnaires_search = Questionnaire.ransack(params[:questionnaires_search], search_key: :questionnaires_search)
+    @questionnaires = @questionnaires_search.result.includes(:user, :school, :bus_list).where(school_id: @school.id)
+    @questionnaires_pagy, @questionnaires = pagy(@questionnaires, page_param: 'questionnaire_page', items: 10)
     respond_with(:manage, @school)
   end
 

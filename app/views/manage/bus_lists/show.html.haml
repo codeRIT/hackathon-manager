@@ -47,7 +47,9 @@
       Passengers
       %small.text-muted (#{@bus_list.passengers.count} total, #{@bus_list.boarded_passengers.count} boarded, #{@bus_list.checked_in_passengers.count} checked in)
 
-    = render "questionnaire_datatable", scope_params: { bus_list_id: @bus_list.id, acc_status: 'rsvp_confirmed' }, columns: %w(link first_name last_name email phone checked_in boarded_bus bus_captain school), order: '13 desc, 15 desc', bulk_actions: false
+    = render "questionnaires_datatable", questionnaires: @questionnaires, questionnaires_search: @questionnaires_search, questionnaires_pagy: @questionnaires_pagy
+
+    %hr
 
     %h4.mt-4.pb-2 Interested Bus Captains
     %table.table
