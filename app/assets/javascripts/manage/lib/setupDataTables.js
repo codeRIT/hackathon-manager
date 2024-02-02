@@ -19,21 +19,6 @@ var setupDataTables = function () {
 
   // MARK: Datatables for the stats
 
-  $('.datatable.stats-dietary').DataTable({
-    order: [1, 'asc'],
-    columns: [
-      { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'first_name' },
-      { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email' },
-      { orderable: true, data: 'phone', visible: false },
-      { orderable: false, data: 'questionnaire' },
-      { orderable: true, data: 'checked_in_at', visible: false },
-      { orderable: true, data: 'dietary_restrictions' },
-      { orderable: true, data: 'special_needs' }
-    ]
-  });
-
   $('.datatable.stats-notschooltravel').DataTable({
     order: [1, 'asc'],
     columns: [
@@ -57,19 +42,6 @@ var setupDataTables = function () {
       { orderable: true, data: 'school_name' },
       { orderable: true, data: 'vcs_url' },
       { orderable: true, data: 'portfolio_url' }
-    ]
-  });
-
-  $('.datatable.stats-info-applied').DataTable({
-    order: [1, 'asc'],
-    columns: [
-      { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'first_name' },
-      { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email' },
-      { orderable: true, data: 'phone', visible: false },
-      { orderable: true, data: 'school_name' },
-      { orderable: true, data: 'country' },
     ]
   });
 

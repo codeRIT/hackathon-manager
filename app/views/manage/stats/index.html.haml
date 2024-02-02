@@ -3,19 +3,7 @@
 .row
   .col
     %h5.dashboard-container-title= t(:dietary_restrictions_special_needs, scope: 'pages.manage.stats')
-    %table.datatable.stats-dietary.table.table-striped.table-hover{ "data-source" => dietary_restrictions_special_needs_datatable_manage_stats_path(format: :json) }
-      %thead
-        %tr
-          %th= t(:id, scope: 'pages.manage.stats')
-          %th= t(:first_name, scope: 'pages.manage.stats')
-          %th= t(:last_name, scope: 'pages.manage.stats')
-          %th= t(:email, scope: 'pages.manage.stats')
-          %th= t(:phone, scope: 'pages.manage.stats')
-          %th= t(:questionnaire, scope: 'pages.manage.stats')
-          %th= t(:checked_in, scope: 'pages.manage.stats')
-          %th= t(:dietary_restrictions, scope: 'pages.manage.stats')
-          %th= t(:special_needs, scope: 'pages.manage.stats')
-      %tbody
+    = render "dietary_restrictions_special_needs_restrictions_datatable", dietary_restrictions_special_needs_search: @dietary_restrictions_special_needs_search, dietary_restrictions_special_needs: @dietary_restrictions_special_needs, dietary_restrictions_special_needs_pagy: @dietary_restrictions_special_needs_pagy
 
 - if !HackathonConfig['digital_hackathon']
   .row
@@ -52,17 +40,7 @@
 .row
   .col
     %h5.dashboard-container-title= t(:applied_attendees, scope: 'pages.manage.stats')
-    %table.datatable.stats-info-applied.table.table-striped.table-hover{ "data-source" => applied_datatable_manage_stats_path(format: :json) }
-      %thead
-        %tr
-          %th= t(:id, scope: 'pages.manage.stats')
-          %th= t(:first_name, scope: 'pages.manage.stats')
-          %th= t(:last_name, scope: 'pages.manage.stats')
-          %th= t(:email, scope: 'pages.manage.stats')
-          %th= t(:phone, scope: 'pages.manage.stats')
-          %th= t(:school, scope: 'pages.manage.stats')
-          %th= t(:country, scope: 'pages.manage.stats')
-      %tbody
+    = render "applied_datatable", applied_search: @applied_search, applied: @applied, applied_pagy: @applied_pagy
 
 .row
   .col
