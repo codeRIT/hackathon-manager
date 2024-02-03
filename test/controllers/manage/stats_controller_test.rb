@@ -114,6 +114,6 @@ class Manage::StatsControllerTest < ActionController::TestCase
   private
 
   def paths
-    [:checked_in_datatable]
+    []
   end
 end

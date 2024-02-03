@@ -24,14 +24,4 @@
 .row
   .col
     %h5.dashboard-container-title= t(:checked_in_attendees, scope: 'pages.manage.stats')
-    %table.datatable.stats-info-checkedin.table.table-striped.table-hover{ "data-source" => checked_in_datatable_manage_stats_path(format: :json) }
-      %thead
-        %tr
-          %th= t(:id, scope: 'pages.manage.stats')
-          %th= t(:first_name, scope: 'pages.manage.stats')
-          %th= t(:last_name, scope: 'pages.manage.stats')
-          %th= t(:email, scope: 'pages.manage.stats')
-          %th= t(:phone, scope: 'pages.manage.stats')
-          %th= t(:school, scope: 'pages.manage.stats')
-          %th= t(:country, scope: 'pages.manage.stats')
-      %tbody
+    = render "checked_in_datatable", checked_in_applicants_search: @checked_in_applicants_search, checked_in_applicants: @checked_in_applicants, checked_in_applicants_pagy: @checked_in_applicants_pagy

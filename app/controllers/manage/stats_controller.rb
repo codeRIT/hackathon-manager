@@ -24,9 +24,9 @@ class Manage::StatsController < Manage::ApplicationController
     @sponsor_info_attendees_search = Questionnaire.ransack(params[:sponsor_info_attendees_search], search_key: :sponsor_info_attendees_search)
     @sponsor_info_attendees = @sponsor_info_attendees_search.result.includes(:user, :school, :bus_list).where(sponsor_info_attendees_restrictions)
     @sponsor_info_attendees_pagy, @sponsor_info_attendees = pagy(@sponsor_info_attendees, page_param: 'sponsor_info_attendees_page', items: 10)
-  end
 
-  def checked_in_datatable
-    render json: CheckedInDatatable.new(params, view_context: view_context)
+    @checked_in_applicants_search = Questionnaire.ransack(params[:checked_in_applicants_search], search_key: :checked_in_applicants_search)
+    @checked_in_applicants = @checked_in_applicants_search.result.includes(:user, :school, :bus_list).where("checked_in_at > 0")
+    @checked_in_applicants_pagy, @checked_in_applicants = pagy(@checked_in_applicants, page_param: 'checked_in_applicants_page', items: 10)
   end
 end
