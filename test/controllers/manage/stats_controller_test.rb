@@ -114,6 +114,6 @@ class Manage::StatsControllerTest < ActionController::TestCase
   private
 
   def paths
-    [:attendee_sponsor_info_datatable, :alt_travel_datatable, :checked_in_datatable]
+    [:checked_in_datatable]
   end
 end

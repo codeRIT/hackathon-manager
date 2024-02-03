@@ -9,33 +9,12 @@
   .row
     .col
       %h5.dashboard-container-title= t(:attendees_not_traveling_from_their_school, scope: 'pages.manage.stats')
-      %table.datatable.stats-notschooltravel.table.table-striped.table-hover{ "data-source" => alt_travel_datatable_manage_stats_path(format: :json) }
-        %thead
-          %tr
-            %th= t(:id, scope: 'pages.manage.stats')
-            %th= t(:first_name, scope: 'pages.manage.stats')
-            %th= t(:last_name, scope: 'pages.manage.stats')
-            %th= t(:email, scope: 'pages.manage.stats')
-            %th= t(:phone, scope: 'pages.manage.stats')
-            %th= t(:questionnaire, scope: 'pages.manage.stats')
-            %th= t(:traveling_from, scope: 'pages.manage.stats')
-            %th= t(:questionnaire_status, scope: 'pages.manage.stats')
-        %tbody
+      = render "alt_travel_datatable", alt_travel_applicants_search: @alt_travel_applicants_search, alt_travel_applicants: @alt_travel_applicants, alt_travel_applicants_pagy: @alt_travel_applicants_pagy
 
 .row
   .col
     %h5.dashboard-container-title= t(:attendee_info_for_sponsors, scope: 'pages.manage.stats')
-    %table.datatable.stats-attendeeinfo.table.table-striped.table-hover{ "data-source" => attendee_sponsor_info_datatable_manage_stats_path(format: :json) }
-      %thead
-        %tr
-          %th= t(:id, scope: 'pages.manage.stats')
-          %th= t(:first_name, scope: 'pages.manage.stats')
-          %th= t(:last_name, scope: 'pages.manage.stats')
-          %th= t(:email, scope: 'pages.manage.stats')
-          %th= t(:school, scope: 'pages.manage.stats')
-          %th= t(:open_source_link, scope: 'pages.manage.stats')
-          %th= t(:portfolio_link, scope: 'pages.manage.stats')
-      %tbody
+    = render "attendee_sponsor_info_datatable", sponsor_info_attendees_search: @sponsor_info_attendees_search, sponsor_info_attendees: @sponsor_info_attendees, sponsor_info_attendees_pagy: @sponsor_info_attendees_pagy
 
 .row
   .col

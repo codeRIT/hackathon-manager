@@ -19,32 +19,6 @@ var setupDataTables = function () {
 
   // MARK: Datatables for the stats
 
-  $('.datatable.stats-notschooltravel').DataTable({
-    order: [1, 'asc'],
-    columns: [
-      { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'first_name' },
-      { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email' },
-      { orderable: true, data: 'phone', visible: false },
-      { orderable: false, data: 'questionnaire' },
-      { orderable: true, data: 'travel_location' },
-      { orderable: true, data: 'acc_status' }
-    ]
-  });
-
-  $('.datatable.stats-attendeeinfo').DataTable({
-    columns: [
-      { orderable: true, data: 'id', visible: false },
-      { orderable: true, data: 'first_name' },
-      { orderable: true, data: 'last_name' },
-      { orderable: true, data: 'email' },
-      { orderable: true, data: 'school_name' },
-      { orderable: true, data: 'vcs_url' },
-      { orderable: true, data: 'portfolio_url' }
-    ]
-  });
-
   $('.datatable.stats-info-checkedin').DataTable({
     order: [1, 'asc'],
     columns: [

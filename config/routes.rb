@@ -90,8 +90,6 @@ Rails.application.routes.draw do
       patch :perform_merge, on: :member
     end
     resources :stats do
-      post :alt_travel_datatable, on: :collection
-      post :attendee_sponsor_info_datatable, on: :collection
       post :checked_in_datatable, on: :collection
     end
     resources :users do
