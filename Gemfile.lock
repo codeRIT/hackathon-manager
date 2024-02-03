@@ -68,9 +68,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    ajax-datatables-rails (1.4.0)
-      rails (>= 5.2)
-      zeitwerk
     ansi (1.5.0)
     audited (5.4.2)
       activerecord (>= 5.0, < 7.2)
@@ -500,7 +497,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ajax-datatables-rails
   audited
   aws-sdk-s3
   better_errors
