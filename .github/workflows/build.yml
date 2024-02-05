@@ -59,8 +59,10 @@ jobs:
           gem install pkg-config
           bundle config build.nokogiri --use-system-libraries
           bundle install
-      - name: Run migrations
+      - name: Setup database
+        env:
+          RAILS_ENV: test
         run: |
-          bin/rails db:migrate
+          bin/rails db:setup
       - name: Run tests
         run: bundle exec rake
