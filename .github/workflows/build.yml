@@ -63,6 +63,6 @@ jobs:
         env:
           RAILS_ENV: test
         run: |
-          bin/rails db:setup
+          bin/rails db:prepare
       - name: Run tests
         run: bundle exec rake
