@@ -5,7 +5,7 @@
 # This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
 # For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
 
-name: Build - 2.6, 2.5
+name: Build - 3.0
 
 on:
   pull_request:
@@ -20,21 +20,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: [2.6.6, 2.5.8]
+        ruby-version: [3.0.6]
     env:
       DATABASE_URL: mysql2://root@127.0.0.1:3800/myapp_test
     steps:
-    - uses: actions/checkout@v2
-    - name: Start MySQL
-      uses: cbaudouinjr/mysql-action@v1.9
-      with:
-        host port: 3800
-        container port: 3800
-        mysql timezone: America/New_York
-        mysql version: '5.7'
-        mysql database: 'myapp_test'
-    - name: Update and install packages
-      run: |
+      - uses: actions/checkout@v2
+      - name: Start MySQL
+        uses: cbaudouinjr/mysql-action@v1.9
+        with:
+          host port: 3800
+          container port: 3800
+          mysql timezone: America/New_York
+          mysql version: '5.7'
+          mysql database: 'myapp_test'
+      - name: Update and install packages
+        run: |
           sudo apt-get update
           sudo apt-get install -y libtool
           sudo apt-get install -y libyaml-dev
@@ -43,24 +43,24 @@ jobs:
           sudo apt-get install -y libxml2-dev
           sudo apt-get install -y default-libmysqlclient-dev
           sudo apt-get install -y default-mysql-client
-    - name: Set up Ruby
-      env:
-        ImageOS: ubuntu18
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
-    # uses: ruby/setup-ruby@v1
-    # This version tag came with the Ruby build script built by GitHub. @v1 does not work.
-      uses: ruby/setup-ruby@21351ecc0a7c196081abca5dc55b08f085efe09a
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
-    - name: Install gems
-      run: |
+      - name: Set up Ruby
+        env:
+          ImageOS: ubuntu18
+        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+        # change this to (see https://github.com/ruby/setup-ruby#versioning):
+        # uses: ruby/setup-ruby@v1
+        # This version tag came with the Ruby build script built by GitHub. @v1 does not work.
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - name: Install gems
+        run: |
           gem install pkg-config
           bundle config build.nokogiri --use-system-libraries
           bundle install
-    - name: Run migrations
-      run: |
+      - name: Run migrations
+        run: |
           bin/rails db:migrate
-    - name: Run tests
-      run: bundle exec rake
+      - name: Run tests
+        run: bundle exec rake
