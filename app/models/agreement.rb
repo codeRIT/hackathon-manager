@@ -9,7 +9,7 @@ class Agreement < ApplicationRecord
 
   has_and_belongs_to_many :questionnaires
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_)
     ["created_at", "id", "name", "updated_at"]
   end
 

@@ -325,7 +325,7 @@ class Questionnaire < ApplicationRecord
   validates_inclusion_of :shirt_size, in: POSSIBLE_SHIRT_SIZES
   validates_inclusion_of :acc_status, in: POSSIBLE_ACC_STATUS
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_)
     ["created_at", "id", "name", "updated_at"]
   end
 

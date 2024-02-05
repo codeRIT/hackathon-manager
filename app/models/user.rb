@@ -28,11 +28,11 @@ class User < ApplicationRecord
   enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
   scope :staff, -> { where(role: [:volunteer, :organizer, :director]) }
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_)
     ["created_at", "current_sign_in_at", "current_sign_in_ip", "email", "first_name", "id", "is_active", "last_name", "last_sign_in_at", "last_sign_in_ip", "provider", "receive_weekly_report", "role", "uid"]
   end
 
-  def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(_)
     ["audits", "questionnaire"]
   end
 

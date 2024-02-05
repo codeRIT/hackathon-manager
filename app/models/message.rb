@@ -51,7 +51,7 @@ class Message < ApplicationRecord
   validates_inclusion_of :template, in: POSSIBLE_TEMPLATES
   validates_inclusion_of :type, in: POSSIBLE_TYPES
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_)
     ["created_at", "id", "name", "updated_at"]
   end
 

@@ -10,7 +10,7 @@ class BusList < ApplicationRecord
 
   strip_attributes
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_)
     ["created_at", "id", "name", "updated_at"]
   end
 
