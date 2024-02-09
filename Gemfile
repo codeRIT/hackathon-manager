@@ -145,7 +145,7 @@ group :test do
   gem 'factory_bot_rails', '~> 6.1.0'
   gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
-  gem 'webmock', '~> 3.12'
+  gem 'webmock', '~> 3.20'
   gem 'timecop'
 
   # Adds support for Capybara system testing and selenium driver
