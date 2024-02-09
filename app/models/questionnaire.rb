@@ -69,11 +69,15 @@ class Questionnaire < ApplicationRecord
     "Women's - M",
     "Women's - L",
     "Women's - XL",
+    "Women's - 2XL",
+    "Women's - 3XL",
     "Unisex - XS",
     "Unisex - S",
     "Unisex - M",
     "Unisex - L",
-    "Unisex - XL"
+    "Unisex - XL",
+    "Unisex - 2XL",
+    "Unisex - 3XL"
   ].freeze
 
   POSSIBLE_ACC_STATUS = {
