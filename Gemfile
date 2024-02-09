@@ -101,7 +101,7 @@ gem 'sidekiq'
 gem "sidekiq-cron"
 
 # Misc support gems
-gem 'rails-settings-cached', '~> 0.7.2'
+gem 'rails-settings-cached', '~> 2.9.4'
 gem 'blazer'
 gem 'simple_spark'
 gem 'sendgrid-actionmailer'
