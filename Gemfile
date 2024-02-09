@@ -70,7 +70,7 @@ gem "file_validators"
 
 # Templating utilities
 gem 'haml-rails'
-gem 'simple_form', '~> 5.1.0'
+gem 'simple_form', '~> 5.3.0'
 
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.4'
