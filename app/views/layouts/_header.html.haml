@@ -10,8 +10,6 @@
         = btn_link_to "Home", homepage_url
     .header-nav.end
       - if user_signed_in?
-        - if current_user.organizing_staff?
+        - if current_user.staff?
           = btn_link_to "Manage", manage_root_path
-        - elsif current_user.volunteer?
-          = btn_link_to "Manage", manage_checkins_path
         = btn_link_to "Sign Out", destroy_user_session_path, method: :delete

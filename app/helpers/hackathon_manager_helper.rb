@@ -116,4 +116,8 @@ module HackathonManagerHelper
     query = CGI.escape(query)
     "https://www.google.com/maps/search/?api=1&query=#{query}"
   end
+
+  def yes_no_display(value)
+    value ? '<span class="badge badge-success">Yes</span>'.html_safe : '<span class="badge badge-secondary">No</span>'.html_safe
+  end
 end

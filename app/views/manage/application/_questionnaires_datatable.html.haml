@@ -1,0 +1,38 @@
+.div.dataTable
+  .row
+    .col.text-right
+      = search_form_for(@questionnaires_search, as: :questionnaires_search, url: manage_questionnaires_path, data: {turbo_frame: :questionnaires_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+        = f.label :name_cont, "Search"
+        = f.search_field(:name_cont, class: "form-control form-control-sm")
+
+  .row
+    .col
+      = turbo_frame_tag :questionnaires_table do
+        %table.dataTable.table.table-striped.table-hover
+          %thead
+            %tr
+              %th
+              %th
+              %th= t(:first_name, scope: 'pages.manage.questionnaires.table')
+              %th= t(:last_name, scope: 'pages.manage.questionnaires.table')
+              %th= t(:email, scope: 'pages.manage.questionnaires.table')
+              %th Status
+              %th= t(:checked_in, scope: 'pages.manage.questionnaires.table')
+              %th= t(:school, scope: 'pages.manage.questionnaires.table')
+          %tbody
+            - @questionnaires.each do |questionnaire|
+              %tr
+                %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(questionnaire), target: "_top")
+                %td #{questionnaire.flags}
+                %td
+                  %strong= questionnaire.user.first_name
+                %td
+                  %strong= questionnaire.user.last_name
+                %td= questionnaire.user.email
+                %td= "<span class=\"text-#{acc_status_class(questionnaire.acc_status)}\">#{Questionnaire::POSSIBLE_ACC_STATUS[questionnaire.acc_status]}</span>".html_safe
+                %td= yes_no_display(questionnaire.checked_in?)
+                %td= link_to(questionnaire.school.name, manage_school_path(questionnaire.school), target: "_top")
+
+        .row
+          .col
+            = pagy_bootstrap_nav(@questionnaires_pagy).html_safe

@@ -10,7 +10,7 @@ class SchoolTest < ActiveSupport::TestCase
 
   should validate_presence_of :name
 
-  should validate_uniqueness_of :name
+  should validate_uniqueness_of(:name).ignoring_case_sensitivity
 
   context "#full_name" do
     should "include only the name if no city or state" do

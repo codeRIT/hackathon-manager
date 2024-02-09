@@ -27,16 +27,6 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
       should "not show checkin" do
         test_show_failure
       end
-
-      should "not render checkin datatable" do
-        test_datatable_failure
-      end
-    end
-  end
-
-  context "while not authenticated" do
-    should "not render checkin datatable" do
-      test_datatable_failure_401
     end
   end
 
@@ -45,10 +35,6 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
       @user = create(:user)
       @request.env["devise.mapping"] = Devise.mappings[:director]
       sign_in @user
-    end
-
-    should "not render checkin datatable" do
-      test_datatable_failure
     end
   end
 
@@ -72,10 +58,6 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
 
       should "show checkin" do
         test_show_success
-      end
-
-      should "render checking datatable" do
-        test_datatable_success
       end
     end
   end
@@ -101,22 +83,6 @@ class Manage::CheckinsControllerTest < ActionController::TestCase
 
   def test_show_failure
     get :show, params: { id: @questionnaire.id }
-    assert_response :redirect
-  end
-
-  # datatable
-  def test_datatable_success
-    post :datatable, format: :json, params: { "columns[0][data]" => "" }
-    assert_response :success
-  end
-
-  def test_datatable_failure_401
-    post :datatable, format: :json, params: { "columns[0][data]" => "" }
-    assert_response 401
-  end
-
-  def test_datatable_failure
-    post :datatable, format: :json, params: { "columns[0][data]" => "" }
     assert_response :redirect
   end
 end

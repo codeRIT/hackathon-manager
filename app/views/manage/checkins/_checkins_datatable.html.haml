@@ -1,0 +1,30 @@
+.div.dataTable
+  - if @applicants.any?
+    .row
+      .col.text-right
+        = search_form_for(@applicants_search, as: :applicants_search, url: manage_stats_path, data: {turbo_frame: :applicants_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+          #{f.label :name_cont, "Search"}
+          #{f.search_field(:name_cont, class: "form-control form-control-sm")}
+
+    .row
+      .col
+        = turbo_frame_tag :applicants_table do
+          %table.dataTable.table.table-striped.table-hover
+            %thead
+              %tr
+                %th About
+                %th Checked in?
+                %th Actions
+            %tbody
+              - @applicants.each do |questionnaire|
+                %tr
+                  %td= about(questionnaire)
+                  %td= yes_no_display(questionnaire.checked_in?)
+                  %td= "<a class=\"btn btn-primary btn-sm\" href=\"#{manage_checkin_path(questionnaire)}\">View</a>".html_safe
+
+          .row
+            .col
+              = pagy_bootstrap_nav(@applicants_pagy).html_safe
+  - else
+    %div{ style: "display:flex; align-items: center; flex-direction: column;" }
+      %p There aren't any applicants yet.

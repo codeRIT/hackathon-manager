@@ -1,12 +1,18 @@
 class BusList < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:name], using: { tsearch: { prefix: true } }
   audited
 
   validates_presence_of :name, :capacity
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, case_sensitive: false
 
   has_many :questionnaires
 
   strip_attributes
+
+  def self.ransackable_attributes(_)
+    ["created_at", "id", "name", "updated_at"]
+  end
 
   def full?
     passengers.count >= capacity

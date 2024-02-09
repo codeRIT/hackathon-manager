@@ -37,7 +37,7 @@ function clearCalendar() {
   $('#calendar').html('');
 }
 
-document.addEventListener('turbolinks:load', function () {
+document.addEventListener('turbo:load', function () {
   eventCalendar();
 });
-document.addEventListener('turbolinks:before-cache', clearCalendar);
+document.addEventListener('turbo:before-cache', clearCalendar);

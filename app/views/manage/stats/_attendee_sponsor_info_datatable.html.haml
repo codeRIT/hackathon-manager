@@ -1,0 +1,40 @@
+.div.dataTable
+  - if @sponsor_info_attendees.any?
+    .row
+      .col.text-right
+        = search_form_for(@sponsor_info_attendees_search, as: :sponsor_info_attendees_search, url: manage_stats_path, data: {turbo_frame: :sponsor_info_attendees_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+          #{f.label :name_cont, "Search"}
+          #{f.search_field(:name_cont, class: "form-control form-control-sm")}
+
+    .row
+      .col
+        = turbo_frame_tag :sponsor_info_attendees_table do
+          %table.dataTable.table.table-striped.table-hover
+            %thead
+              %tr
+                %th
+                %th= t(:first_name, scope: 'pages.manage.stats')
+                %th= t(:last_name, scope: 'pages.manage.stats')
+                %th= t(:email, scope: 'pages.manage.stats')
+                %th= t(:school, scope: 'pages.manage.stats')
+                %th= t(:open_source_link, scope: 'pages.manage.stats')
+                %th= t(:portfolio_link, scope: 'pages.manage.stats')
+            %tbody
+              - @sponsor_info_attendees.each do |questionnaire|
+                %tr
+                  %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_questionnaire_path(questionnaire), target: "_top")
+                  %td
+                    %strong= questionnaire.user.first_name
+                  %td
+                    %strong= questionnaire.user.last_name
+                  %td= questionnaire.email
+                  %td= questionnaire.phone
+                  %td= questionnaire.vcs_url
+                  %td= questionnaire.portfolio_url
+
+          .row
+            .col
+              = pagy_bootstrap_nav(@sponsor_info_attendees_pagy).html_safe
+  - else
+    %div{ style: "display:flex; align-items: center; flex-direction: column;" }
+      %p There aren't any attendees wishing to share their information with sponsors.

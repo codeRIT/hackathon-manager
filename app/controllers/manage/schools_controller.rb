@@ -4,14 +4,15 @@ class Manage::SchoolsController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, School.all)
-  end
-
-  def datatable
-    render json: SchoolDatatable.new(params, view_context: view_context)
+    @schools_search = School.ransack(params[:schools_search], search_key: :schools_search)
+    @schools = @schools_search.result(distinct: true)
+    @schools_pagy, @schools = pagy(@schools, page_param: 'schools_page', items: 10)
   end
 
   def show
+    @questionnaires_search = Questionnaire.ransack(params[:questionnaires_search], search_key: :questionnaires_search)
+    @questionnaires = @questionnaires_search.result.includes(:user, :school, :bus_list).where(school_id: @school.id)
+    @questionnaires_pagy, @questionnaires = pagy(@questionnaires, page_param: 'questionnaire_page', items: 10)
     respond_with(:manage, @school)
   end
 
@@ -30,7 +31,7 @@ class Manage::SchoolsController < Manage::ApplicationController
   end
 
   def update
-    @school.update_attributes(school_params)
+    @school.update(school_params)
     respond_with(:manage, @school, location: manage_schools_path)
   end
 

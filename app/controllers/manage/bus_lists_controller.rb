@@ -4,11 +4,15 @@ class Manage::BusListsController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    @bus_lists = BusList.all
-    respond_with(:manage, @bus_lists)
+    @bus_list_search = BusList.ransack(params[:bus_list_search], search_key: :bus_list_search)
+    @bus_lists = @bus_list_search.result(distinct: true)
+    @bus_list_pagy, @bus_lists = pagy(@bus_lists, page_param: 'bus_list_page', items: 10)
   end
 
   def show
+    @questionnaires_search = Questionnaire.ransack(params[:questionnaires_search], search_key: :questionnaires_search)
+    @questionnaires = @questionnaires_search.result.includes(:user, :school, :bus_list).where(bus_list_id: @bus_list.id)
+    @questionnaires_pagy, @questionnaires = pagy(@questionnaires, page_param: 'questionnaire_page', items: 10)
     respond_with(:manage, @bus_list)
   end
 
@@ -27,7 +31,7 @@ class Manage::BusListsController < Manage::ApplicationController
   end
 
   def update
-    @bus_list.update_attributes(bus_list_params)
+    @bus_list.update(bus_list_params)
     respond_with(:manage, @bus_list)
   end
 

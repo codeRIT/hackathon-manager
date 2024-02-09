@@ -1,26 +1,7 @@
 = render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.trackable-tags') do
-  = link_to "New Tag", new_manage_trackable_tag_path, class: "btn btn-sm btn-outline-secondary"
+  - if @trackable_tags.any?
+    = link_to "New Tag", new_manage_trackable_tag_path, class: "btn btn-sm btn-outline-secondary"
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th Name
-      %th Allow duplicates
-      %th Events
-      %th Last event
-      %th Add event
+= render "trackable_tags_datatable", trackable_tags: @trackable_tags, trackable_tags_search: @trackable_tags_search, trackable_tags_pagy: @trackable_tags_pagy
 
-  %tbody
-    - @trackable_tags.each do |trackable_tag|
-      %tr
-        %td= link_to trackable_tag.name, manage_trackable_tag_path(trackable_tag)
-        %td
-          - if trackable_tag.allow_duplicate_band_events
-            %span Allow
-          - else
-            %span.text-danger Block
-        %td= pluralize(trackable_tag.trackable_events.count, "event")
-        %td= trackable_tag.trackable_events.any? ? display_datetime(trackable_tag.sorted_events.first.created_at) : ''
-        %td= link_to 'Add event', new_manage_trackable_event_path(trackable_tag_id: trackable_tag.id)
-
-%br
+%hr

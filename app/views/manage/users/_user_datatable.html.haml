@@ -1,0 +1,34 @@
+.div.dataTable
+  .row
+    .col.text-right
+      = search_form_for(@user_search, as: :user_search, url: manage_users_path, data: {turbo_frame: :users_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+        #{f.label :first_name_or_last_name_cont, "Search"}
+        #{f.search_field(:first_name_or_last_name_cont, class: "form-control form-control-sm")}
+
+  .row
+    .col
+      = turbo_frame_tag :users_table do
+        %table.dataTable.table.table-striped.table-hover
+          %thead
+            %tr
+              %th
+              %th= sort_link(@user_search, :first_name, t(:first_name, scope: 'pages.manage.users.table')).html_safe
+              %th= sort_link(@user_search, :last_name, t(:last_name, scope: 'pages.manage.users.table')).html_safe
+              %th= sort_link(@user_search, :role, t(:role, scope: 'pages.manage.users.table')).html_safe
+              %th= t(:questionnaire, scope: 'pages.manage.users.table')
+              %th= sort_link(@user_search, :login_access, t(:login_access, scope: 'pages.manage.users.table')).html_safe
+              %th= sort_link(@user_search, :registered_on, t(:registered_on, scope: 'pages.manage.users.table')).html_safe
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_user_path(user), target: "_top")
+                %td= user.first_name
+                %td= user.last_name
+                %td= user.role.titleize
+                %td= user.questionnaire.present? ? link_to(bold("View &raquo;".html_safe), manage_questionnaire_path(user.questionnaire.id), target: "_top") : t(:none, scope: 'pages.manage.users.table')
+                %td= user.is_active? ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe
+                %td= display_datetime(user.created_at)
+
+        .row
+          .col
+            = pagy_bootstrap_nav(@user_pagy).html_safe

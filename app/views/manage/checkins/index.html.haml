@@ -2,11 +2,4 @@
 
 .mb-4
   %table.checkins.datatable.table.table-striped.table-hover{ "data-source" => datatable_manage_checkins_path(format: :json) }
-    %thead
-      %tr
-        %th First name
-        %th Last name
-        %th About
-        %th Checked in?
-        %th Actions
-    %tbody
+    = render "checkins_datatable", applicants: @applicants, applicants_search: @applicants_search, applicants_pagy: @applicants_pagy

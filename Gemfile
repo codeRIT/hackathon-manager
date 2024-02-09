@@ -2,45 +2,63 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Use Ruby version defined in .ruby-version
-ruby '>= 2.5'
+ruby '>= 3.0.6'
+
+##########################################################################
+# Rails default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.4'
-# Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
-# Use Puma as the app server
-gem 'puma', '~> 5.5'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 6.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
+gem 'rails', '~> 7.0.0'
 
-# Use CoffeeScript for .coffee assets and views
-# gem 'coffee-rails', '~> 4.2'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
+# Use sqlite3 as the database for Active Record
+# gem "sqlite3", "~> 1.4"
+
+# Use the Puma web server [https://github.com/puma/puma]
+gem "puma", ">= 5.0"
+
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
-# CORS support
-gem 'rack-cors'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem "redis", ">= 4.0.1"
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# gem "kredis"
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem "bootsnap", require: false
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
+
+##########################################################################
+
+# Use mysql2 as the database for Active Record
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 6.0'
+
+# CORS support
+gem 'rack-cors'
 
 # Authentication
-gem 'devise', '~> 4.7'
+gem 'devise'
 gem 'omniauth-mlh', '~> 0.4.2'
 gem 'doorkeeper', '~> 5.5'
 gem 'devise-doorkeeper'
@@ -51,14 +69,14 @@ gem "aws-sdk-s3", require: false
 gem "file_validators"
 
 # Templating utilities
-gem 'haml-rails', '~> 2.0'
-gem 'simple_form'
-gem 'ajax-datatables-rails', '~> 1.0'
+gem 'haml-rails'
+gem 'simple_form', '~> 5.1.0'
+
 gem 'roadie-rails'
 gem 'chartkick', '~> 3.4'
 gem 'groupdate'
 gem 'font-awesome-rails', '~> 4.7' # needed for icon helpers
-gem 'mustache', '~> 1.0'
+gem 'mustache'
 
 # Assets
 gem 'sprockets'
@@ -76,11 +94,11 @@ gem 'redcarpet'
 # Model extensions
 gem 'strip_attributes'
 gem 'validate_url'
-gem 'audited', '~> 5.0'
+gem 'audited'
 
 # Background job processing
-gem 'sidekiq', '< 7'
-gem 'sidekiq-cron', github: 'codeRIT/sidekiq-cron', branch: 'master'
+gem 'sidekiq'
+gem "sidekiq-cron"
 
 # Misc support gems
 gem 'rails-settings-cached', '~> 0.7.2'
@@ -91,6 +109,10 @@ gem 'httparty'
 gem 'rollbar', '~> 3.2'
 gem 'rubyzip', '>= 1.3.0'
 gem 'rails_12factor', group: :production
+
+gem 'pagy'
+gem 'pg_search'
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -111,6 +133,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'faker'
 end
 
 group :test do
@@ -119,7 +142,7 @@ group :test do
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
   gem 'valid_attribute'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '~> 6.1.0'
   gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
   gem 'webmock', '~> 3.12'

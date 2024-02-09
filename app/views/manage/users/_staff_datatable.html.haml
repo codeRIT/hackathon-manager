@@ -1,0 +1,31 @@
+.div.dataTable
+  .row
+    .col.text-right
+      = search_form_for(@staff_search, as: :staff_search, url: manage_users_path, data: {turbo_frame: :staff_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+        #{f.label :first_name_or_last_name_cont, "Search"}
+        #{f.search_field(:first_name_or_last_name_cont, class: "form-control form-control-sm")}
+
+  .row
+    .col
+      = turbo_frame_tag :staff_table do
+        %table.dataTable.table.table-striped.table-hover
+          %thead
+            %tr
+              %th
+              %th= sort_link(@staff_search, :first_name, t(:first_name, scope: 'pages.manage.users.table')).html_safe
+              %th= sort_link(@staff_search, :last_name, t(:last_name, scope: 'pages.manage.users.table')).html_safe
+              %th= sort_link(@staff_search, :role, t(:role, scope: 'pages.manage.users.table')).html_safe
+              %th= sort_link(@staff_search, :login_access, t(:login_access, scope: 'pages.manage.users.table')).html_safe
+              %th= sort_link(@staff_search, :weekly_report, t(:weekly_report, scope: 'pages.manage.users.table')).html_safe
+          %tbody
+            - @staff.each do |user|
+              %tr
+                %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_user_path(user), target: "_top")
+                %td= user.first_name
+                %td= user.last_name
+                %td= user.role.titleize
+                %td= user.is_active? ? '<span class="badge badge-secondary">Active</span>'.html_safe : '<span class="badge badge-danger">Inactive<span>'.html_safe
+                %td= yes_no_display(user.receive_weekly_report)
+        .row
+          .col
+            = pagy_bootstrap_nav(@staff_pagy).html_safe

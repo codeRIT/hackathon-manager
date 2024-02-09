@@ -1,0 +1,31 @@
+.div.dataTable
+  .row
+    .col.text-right
+      = search_form_for(@agreements_search, as: :agreements_search, url: manage_agreements_path, data: {turbo_frame: :agreements_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+        #{f.label :name_cont, "Search"}
+        #{f.search_field(:name_cont, class: "form-control form-control-sm")}
+
+  .row
+    .col
+      = turbo_frame_tag :agreements_table do
+        %table.dataTable.table.table-striped.table-hover
+          %thead
+            %tr
+              %th
+              %th
+              %th= t(:name, scope: 'pages.manage.agreements')
+              %th= t(:agreement, scope: 'pages.manage.agreements')
+          %tbody
+            - @agreements.each do |agreement|
+              %tr
+                %td.narrow-icon
+                  = link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_manage_agreement_path(agreement), target: "_top")
+                %td
+                  = link_to '<i class="fa fa-trash"></i>'.html_safe, manage_agreement_path(agreement), method: :delete, data: { confirm: "Are you sure? The agreement will be permanently deleted. This action is irreversible." }
+                %td
+                  %strong= agreement.name
+                %td= markdown(agreement.agreement)
+
+        .row
+          .col
+            = pagy_bootstrap_nav(@agreements_pagy).html_safe

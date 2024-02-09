@@ -8,7 +8,7 @@ class QuestionnaireTest < ActiveSupport::TestCase
   should belong_to(:bus_list).optional
   should have_and_belong_to_many :agreements
 
-  should validate_uniqueness_of :user_id
+  should validate_uniqueness_of(:user_id).ignoring_case_sensitivity
 
   should strip_attribute :acc_status
   should strip_attribute :major

@@ -5,15 +5,13 @@ class Manage::UsersController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with(:manage, User.where(role: [:director, :organizer, :volunteer]))
-  end
+    @user_search = User.ransack(params[:user_search], search_key: :user_search)
+    @users = @user_search.result(distinct: true)
+    @user_pagy, @users = pagy(@users, page_param: 'user_page', items: 10)
 
-  def user_datatable
-    render json: UserDatatable.new(params, view_context: view_context)
-  end
-
-  def staff_datatable
-    render json: StaffDatatable.new(params, view_context: view_context)
+    @staff_search = User.ransack(params[:staff_search], search_key: :staff_search)
+    @staff = @staff_search.result(distinct: true).staff
+    @staff_pagy, @staff = pagy(@staff, page_param: 'staff_page', items: 10)
   end
 
   def reset_password
@@ -25,14 +23,13 @@ class Manage::UsersController < Manage::ApplicationController
   end
 
   def show
-    respond_with(:manage, @user)
   end
 
   def edit
   end
 
   def update
-    @user.update_attributes(user_params)
+    @user.update(user_params)
     respond_with(:manage, @user, location: manage_users_path)
   end
 

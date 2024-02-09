@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbo:load', function() {
   $('[name="questionnaire[travel_not_from_school]"]').on('change', function() {
     var $location = $('[name="questionnaire[travel_location]"]');
     if (this.value === 'true') {

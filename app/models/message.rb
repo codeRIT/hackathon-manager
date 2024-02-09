@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:name], using: { tsearch: { prefix: true } }
   audited
 
   self.inheritance_column = nil # To enable using "type" field
@@ -48,6 +50,10 @@ class Message < ApplicationRecord
 
   validates_inclusion_of :template, in: POSSIBLE_TEMPLATES
   validates_inclusion_of :type, in: POSSIBLE_TYPES
+
+  def self.ransackable_attributes(_)
+    ["created_at", "id", "name", "updated_at"]
+  end
 
   def parsed_body(context, use_examples = false)
     return body if body.blank?

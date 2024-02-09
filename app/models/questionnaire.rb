@@ -1,4 +1,6 @@
 class Questionnaire < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:name], using: { tsearch: { prefix: true } }
   audited
 
   include ActiveModel::Dirty
@@ -19,7 +21,7 @@ class Questionnaire < ApplicationRecord
   belongs_to :bus_list, optional: true
   has_and_belongs_to_many :agreements
 
-  validates_uniqueness_of :user_id
+  validates_uniqueness_of :user_id, case_sensitive: false
 
   validates_presence_of :phone, :date_of_birth, :school_id, :experience, :shirt_size, :interest
   validates_presence_of :gender, :major, :level_of_study, :graduation_year, :race_ethnicity, :country
@@ -323,6 +325,10 @@ class Questionnaire < ApplicationRecord
   validates_inclusion_of :shirt_size, in: POSSIBLE_SHIRT_SIZES
   validates_inclusion_of :acc_status, in: POSSIBLE_ACC_STATUS
 
+  def self.ransackable_attributes(_)
+    ["created_at", "id", "name", "updated_at"]
+  end
+
   def email
     user&.email
   end
@@ -433,6 +439,15 @@ class Questionnaire < ApplicationRecord
     result = super
     result['all_agreements_accepted'] = all_agreements_accepted?
     result
+  end
+
+  def flags
+    output = ""
+    output += '<i class="fa fa-exclamation-triangle"></i> <small>Minor</small>' if minor?
+    output += '<i class="fa fa-bus" title="Riding bus"></i>' if bus_list_id?
+    output += "<small>Captain</small>" if is_bus_captain?
+    output = '<div class="center">' + output + "</div>" if output.present?
+    output.html_safe
   end
 
   private

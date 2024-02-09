@@ -127,16 +127,16 @@ $(document).on('preInit.dt', function(e, settings) {
   }
 });
 
-// init on turbolinks load
-$(document).on('turbolinks:load', function() {
+// init on turbo load
+$(document).on('turbo:load', function() {
   $('table[data-auto-datatable]').autoDatatable();
   if (!$.fn.DataTable.isDataTable('table[id^=dttb-]')) {
     $('table[id^=dttb-]').DataTable();
   }
 });
 
-// turbolinks cache fix
-$(document).on('turbolinks:before-cache', function() {
+// turbo cache fix
+$(document).on('turbo:before-cache', function() {
   var dataTable = $($.fn.dataTable.tables(true)).DataTable();
   if (dataTable !== null) {
     dataTable.clear();

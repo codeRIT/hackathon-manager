@@ -7,9 +7,10 @@
     - if HackathonConfig['favicon_asset'].present?
       %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
 
-    = stylesheet_link_tag "manage", :media => "all", 'data-turbolinks-track': 'reload'
-    = javascript_include_tag "manage/application", 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag "manage", :media => "all", 'data-turbo-track': 'reload'
+    = javascript_include_tag "manage/application", 'data-turbo-track': 'reload'
     = csrf_meta_tags
+    = javascript_importmap_tags
 
   %body
     %nav.navbar.navbar-expand.navbar-dark.fixed-top.bg-dark.flex-nowrap.p-0.shadow
@@ -37,7 +38,7 @@
             - if current_user.organizing_staff?
               %ul.nav.flex-column.mb-2
                 %li.nav-item
-                  = active_link_to manage_root_path, class: "nav-link", active_children: false do
+                  = active_link_to manage_dashboard_index_path, class: "nav-link", active_children: false do
                     .fa.fa-area-chart.fa-fw.icon-space-r-half
                     = t(:title, scope: 'pages.manage.dashboard')
                 %li.nav-item

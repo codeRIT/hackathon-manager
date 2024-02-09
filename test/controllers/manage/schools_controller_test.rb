@@ -12,11 +12,6 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
       assert_redirected_to new_user_session_path
     end
 
-    should "not allow access to manage_schools datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response 401
-    end
-
     should "not allow access to manage_schools#show" do
       get :show, params: { id: @school }
       assert_response :redirect
@@ -75,12 +70,6 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
 
     should "not allow access to manage_schools#index" do
       get :index
-      assert_response :redirect
-      assert_redirected_to root_path
-    end
-
-    should "not allow access to manage_schools datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :redirect
       assert_redirected_to root_path
     end
@@ -146,11 +135,6 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "allow access to manage_schools datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
-      assert_response :success
-    end
-
     should "allow access to manage_schools#show" do
       get :show, params: { id: @school }
       assert_response :success
@@ -208,11 +192,6 @@ class Manage::SchoolsControllerTest < ActionController::TestCase
 
     should "allow access to manage_schools#index" do
       get :index
-      assert_response :success
-    end
-
-    should "allow access to manage_schools datatables api" do
-      post :datatable, format: :json, params: { "columns[0][data]" => "" }
       assert_response :success
     end
 

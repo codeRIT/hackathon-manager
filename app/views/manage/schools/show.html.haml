@@ -87,7 +87,7 @@
       Questionnaires
       %small.text-muted (#{@school.questionnaires.count} total, #{@school.questionnaires.count { |q| q.checked_in? }} checked in)
 
-= render "questionnaire_datatable", scope_params: { school_id: @school.id }, page_length: 25, columns: %w(link note first_name last_name email acc_status checked_in created_at)
+    = render "questionnaires_datatable", questionnaires: @questionnaires, questionnaires_search: @questionnaires_search, questionnaires_pagy: @questionnaires_pagy
 
 .row.mt-4.mb-5
   .col-lg-6

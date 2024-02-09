@@ -49,14 +49,14 @@ class Manage::StatsControllerTest < ActionController::TestCase
     should "not allow access to stats#index" do
       get :index
       assert_response :redirect
-      assert_redirected_to manage_checkins_path
+      assert_redirected_to manage_root_path
     end
 
     should "not allow access to data endpoints" do
       paths.each do |path|
         patch path
         assert_response :redirect
-        assert_redirected_to manage_checkins_path
+        assert_redirected_to manage_root_path
       end
     end
   end
@@ -114,6 +114,6 @@ class Manage::StatsControllerTest < ActionController::TestCase
   private
 
   def paths
-    [:dietary_restrictions_special_needs_datatable, :attendee_sponsor_info_datatable, :alt_travel_datatable, :applied_datatable, :checked_in_datatable]
+    []
   end
 end

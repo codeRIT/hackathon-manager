@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:first_name, :last_name, :email, :role], using: { tsearch: { prefix: true } }
   audited only: [:first_name, :last_name, :email, :role, :is_active, :receive_weekly_report]
 
   strip_attributes
@@ -17,13 +19,22 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :questionnaire
 
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, case_sensitive: false
   validates_presence_of :first_name, :last_name
 
   after_create :queue_reminder_email
   after_initialize :set_default_role, if: :new_record?
 
   enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
+  scope :staff, -> { where(role: [:volunteer, :organizer, :director]) }
+
+  def self.ransackable_attributes(_)
+    ["created_at", "current_sign_in_at", "current_sign_in_ip", "email", "first_name", "id", "is_active", "last_name", "last_sign_in_at", "last_sign_in_ip", "provider", "receive_weekly_report", "role", "uid"]
+  end
+
+  def self.ransackable_associations(_)
+    ["audits", "questionnaire"]
+  end
 
   def set_default_role
     self.role ||= :user

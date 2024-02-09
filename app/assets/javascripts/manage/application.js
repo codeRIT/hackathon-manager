@@ -15,7 +15,6 @@ function applicationReady() {
   $('select[data-bulk-row-edit]').bulkRowEdit();
   $().bulkRowSelect();
   $('body').chartkickAutoReload();
-  setupDataTables();
   setupHighcharts();
   $('[data-toggle="popover"]').popover();
   $('[data-message-live-preview="textarea"]').messageLivePreview();
@@ -31,4 +30,4 @@ function applicationReady() {
   });
 }
 
-document.addEventListener('turbolinks:load', applicationReady);
+document.addEventListener('turbo:load', applicationReady);

@@ -1,0 +1,33 @@
+.div.dataTable
+  .row
+    .col.text-right
+      = search_form_for(@schools_search, as: :schools_search, url: manage_bus_lists_path, data: {turbo_frame: :schools_table, controller: "form", action: "input->form#submit"}, method: :get) do |f|
+        = f.label :name_cont, "Search"
+        = f.search_field(:name_cont, class: "form-control form-control-sm")
+
+  .row
+    .col
+      = turbo_frame_tag :schools_table do
+        %table.dataTable.table.table-striped.table-hover
+          %thead
+            %tr
+              %th
+              %th Name
+              %th City
+              %th State
+              %th Count
+              %th Home?
+          %tbody
+            - @schools.each do |school|
+              %tr
+                %td= link_to('<i class="fa fa-search"></i>'.html_safe, manage_school_path(school), target: "_top")
+                %td
+                  %strong= school.name
+                %td= school.city
+                %td= school.state
+                %td= school.questionnaire_count
+                %td= yes_no_display(school.is_home)
+
+        .row
+          .col
+            = pagy_bootstrap_nav(@schools_pagy).html_safe

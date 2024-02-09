@@ -1,6 +1,6 @@
-# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   require "sidekiq/web"
   require "sidekiq/cron/web"
 
@@ -10,13 +10,7 @@ Rails.application.routes.draw do
   mount MailPreview => "mail_view" if Rails.env.development?
 
   devise_scope :user do
-    authenticated do
-      root to: "questionnaires#show"
-    end
-
-    unauthenticated do
-      root to: "devise/sessions#new"
-    end
+    root to: "devise/sessions#new"
   end
 
   authenticate :user, ->(u) { u.director? } do
@@ -47,10 +41,10 @@ Rails.application.routes.draw do
       root to: "dashboard#index"
     end
     authenticate :user, ->(u) { u.organizer? } do
-      root to: "dashboard#index"
+      root to: "dashboard#index", as: :organizer_root
     end
     authenticate :user, ->(u) { u.volunteer? } do
-      root to: "checkins#index"
+      root to: "checkins#index", as: :volunteer_root
     end
     resources :dashboard do
       get :map_data, on: :collection
@@ -66,7 +60,6 @@ Rails.application.routes.draw do
       get :schools_applied_data, on: :collection
     end
     resources :questionnaires do
-      post :datatable, on: :collection
       patch :check_in, on: :member
       patch :update_acc_status, on: :member
       patch :bulk_apply, on: :collection
@@ -79,7 +72,6 @@ Rails.application.routes.draw do
     resources :messages do
       get :preview, on: :member
       get :live_preview, on: :collection
-      post :datatable, on: :collection
       patch :deliver, on: :member
       patch :duplicate, on: :member
       # Message template
@@ -98,15 +90,9 @@ Rails.application.routes.draw do
       patch :perform_merge, on: :member
     end
     resources :stats do
-      post :dietary_restrictions_special_needs_datatable, on: :collection
-      post :alt_travel_datatable, on: :collection
-      post :attendee_sponsor_info_datatable, on: :collection
-      post :applied_datatable, on: :collection
       post :checked_in_datatable, on: :collection
     end
     resources :users do
-      post :user_datatable, on: :collection
-      post :staff_datatable, on: :collection
       patch :reset_password, on: :member
     end
     resources :agreements

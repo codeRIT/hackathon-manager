@@ -1,10 +1,8 @@
 = render "layouts/manage/page_title", title: t(:title, scope: 'pages.manage.questionnaires') do
   = link_to "New Questionnaire", new_manage_questionnaire_path, class: "btn btn-sm btn-outline-secondary"
 
-= render "questionnaire_datatable"
+= render "questionnaires_datatable", questionnaires: @questionnaires, questionnaires_search: @questionnaires_search, questionnaires_pagy: @questionnaires_pagy
 
 %hr
-
-= render 'triggered_email_summary'
 
 = render 'docs_link', title: 'Questionnaire documentation', url: 'https://coderit.org/hackathon-manager/docs/questionnaires'
