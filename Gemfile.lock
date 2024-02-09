@@ -105,7 +105,7 @@ GEM
       chartkick (>= 3.2)
       railties (>= 5)
       safely_block (>= 0.1.1)
-    bootsnap (1.17.0)
+    bootsnap (1.18.3)
       msgpack (~> 1.2)
     bootstrap (4.6.2)
       autoprefixer-rails (>= 9.1.0)
