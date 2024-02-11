@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: -> { HackathonConfig["email_from"] }
+  default from: -> { HackathonConfig.email_from }
   layout "user_mailer"
 
   def pretty_email(name, email)

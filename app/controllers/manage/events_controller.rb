@@ -4,7 +4,7 @@ class Manage::EventsController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    @start_date = HackathonConfig['event_start_date']
+    @start_date = HackathonConfig.event_start_date
     respond_to do |format|
       format.html
       format.json { render json: Event.all }

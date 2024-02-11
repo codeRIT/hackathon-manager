@@ -5,12 +5,7 @@ class Manage::ConfigsController < Manage::ApplicationController
   respond_to :html, :json
 
   def index
-    @config = HackathonConfig.get_all
-    @basics = ['name', 'event_start_date', 'digital_hackathon'].freeze
-    @questionnaire_settings = ['accepting_questionnaires', 'last_day_to_apply', 'auto_late_waitlist', 'disabled_fields'].freeze
-    @styling = ['default_page_title', 'homepage_url', 'logo_asset', 'email_banner_asset', 'favicon_asset', 'custom_css'].freeze
-    @communications = ['email_from', 'disclaimer_message', 'thanks_for_applying_message', 'thanks_for_rsvp_message', 'questionnaires_closed_message', 'bus_captain_notes']
-    respond_with(HackathonConfig.get_all)
+    @basics = HackathonConfig.where(var: HackathonConfig.basics.keys)
   end
 
   def edit

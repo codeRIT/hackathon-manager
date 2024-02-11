@@ -5,7 +5,7 @@ class StaffMailerTest < ActionMailer::TestCase
     setup do
       @user = create(:user, email: "test@example.com", receive_weekly_report: true)
       # Setup initial data to trigger regular report
-      HackathonConfig["event_start_date"] = Date.today.to_s
+      HackathonConfig.event_start_date = Date.today.to_s
       @questionnaire = create(:questionnaire, created_at: 5.days.ago)
     end
 
@@ -18,7 +18,7 @@ class StaffMailerTest < ActionMailer::TestCase
     end
 
     should "not send when more than 7 days after event started" do
-      HackathonConfig["event_start_date"] = 10.days.ago.to_s
+      HackathonConfig.event_start_date = 10.days.ago.to_s
       email = StaffMailer.weekly_report(@user.id).deliver_now
       assert_nil email
     end

@@ -19,9 +19,9 @@
         - if @questionnaire.did_rsvp?
           - if @questionnaire.acc_status == "rsvp_confirmed"
             %p
-              Congratulations! You're all set to attend #{HackathonConfig['name']}!
-          - if HackathonConfig['thanks_for_rsvp_message'].present?
-            = markdown(HackathonConfig['thanks_for_rsvp_message'])
+              Congratulations! You're all set to attend #{HackathonConfig.hackathon_name}!
+          - if HackathonConfig.thanks_for_rsvp_message.present?
+            = markdown(HackathonConfig.thanks_for_rsvp_message)
           %p.center
             = btn_link_to "Change RSVP", rsvp_path
         - else
@@ -32,9 +32,9 @@
           %p.center
             = btn_link_to "RSVP NOW &raquo;".html_safe, rsvp_path
       - if !@questionnaire.can_rsvp? && @questionnaire.acc_status != "denied"
-        - if HackathonConfig['accepting_questionnaires']
-          - if HackathonConfig['thanks_for_applying_message'].present?
-            = markdown(HackathonConfig['thanks_for_applying_message'])
+        - if HackathonConfig.accepting_questionnaires
+          - if HackathonConfig.thanks_for_applying_message.present?
+            = markdown(HackathonConfig.thanks_for_applying_message)
           - else
             %p Thanks for applying! You will be notified of your acceptance via email.
         - else

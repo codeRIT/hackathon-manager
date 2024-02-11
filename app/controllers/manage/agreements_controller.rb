@@ -1,6 +1,6 @@
 class Manage::AgreementsController < Manage::ApplicationController
   before_action :require_director
-  before_action :set_agreement, only: [:show, :edit, :update, :destroy]
+  before_action :set_agreement, only: [:edit, :update, :destroy]
 
   respond_to :html, :json
 

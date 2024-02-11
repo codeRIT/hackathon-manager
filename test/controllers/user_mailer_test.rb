@@ -46,7 +46,7 @@ class UserMailerTest < ActionMailer::TestCase
     setup do
       @user = create(:user, email: "test@example.com")
       @message = create(:message, subject: "Example Subject", body: "Hello World!")
-      HackathonConfig["email_from"] = "This is a test <test@custom.example.com>"
+      HackathonConfig.email_from = "This is a test <test@custom.example.com>"
     end
 
     should "use customized email_from" do

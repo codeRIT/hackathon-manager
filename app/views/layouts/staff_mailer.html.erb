@@ -256,10 +256,10 @@
 		        <!-- Email Header : BEGIN -->
 	            <tr>
 	                <td style="padding: 25px 0 20px; text-align: center">
-                          <% if HackathonConfig['logo_asset'].present? %>
-                            <%= image_tag HackathonConfig['logo_asset'], height: "100", alt: "#{HackathonConfig['name']} logo", style: "height: 100px; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;" %>
+                          <% if HackathonConfig.logo_asset.present? %>
+                            <%= image_tag HackathonConfig.logo_asset, height: "100", alt: "#{HackathonConfig.hackathon_name} logo", style: "height: 100px; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;" %>
                           <% else %>
-                            <span style="font-size: 24px; color: #fff; font-family: sans-serif; font-weight: bold;"><%= HackathonConfig['name'] %></span>
+                            <span style="font-size: 24px; color: #fff; font-family: sans-serif; font-weight: bold;"><%= HackathonConfig.hackathon_name %></span>
                           <% end %>
 	                </td>
 	            </tr>

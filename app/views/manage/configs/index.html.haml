@@ -9,7 +9,7 @@
         %h6.card-subtitle.mb-2.text-muted
           Core information about your hackathon.
         - @basics.each_entry do |key|
-          - value = HackathonConfig[key]
+          - value = HackathonConfig.send(key)
           %hr
           %p.mb-1
             = link_to edit_manage_config_path(key), class: 'icon-space-r' do

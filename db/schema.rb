@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_08_022129) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_03_190555) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -290,11 +290,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_022129) do
   create_table "settings", charset: "utf8mb3", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
-    t.integer "thing_id"
-    t.string "thing_type", limit: 30
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+    t.index ["var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
   create_table "trackable_events", charset: "utf8mb3", force: :cascade do |t|
