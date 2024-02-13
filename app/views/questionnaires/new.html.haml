@@ -1,9 +1,9 @@
 - title "Application"
-- if HackathonConfig['accepting_questionnaires']
+- if HackathonConfig.accepting_questionnaires
   .form-container
     %h1.section-title
       Apply for
-      %span.emphasized= HackathonConfig['name']
+      %span.emphasized= HackathonConfig.hackathon_name
   = render 'form'
 - else
   .form-container
@@ -11,12 +11,12 @@
       %h1.section-title
         Applications Closed
       %p
-        - if HackathonConfig['questionnaires_closed_message'].present?
-          = markdown(HackathonConfig['questionnaires_closed_message'])
+        - if HackathonConfig.questionnaires_closed_message.present?
+          = markdown(HackathonConfig.questionnaires_closed_message)
         - else
           Sorry, we are no longer accepting new applications to
           %strong
-            #{HackathonConfig['name']}.
+            #{HackathonConfig.hackathon_name}.
           %br
     %p.session-link.right
       Don't need your account? #{link_to "Delete my account", user_registration_path, data: { confirm: "Are you sure? Your account and any related data will be permanently erased." }, method: :delete}

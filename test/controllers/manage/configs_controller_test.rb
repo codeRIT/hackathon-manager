@@ -9,22 +9,22 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
     should "not update config" do
-      HackathonConfig["registration_is_open"] = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig["registration_is_open"]
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
       assert_redirected_to new_user_session_path
     end
 
     should "not update css config" do
-      HackathonConfig["custom_css"] = ""
+      HackathonConfig.custom_css = ""
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
-      assert_equal "", HackathonConfig["custom_css"]
+      assert_equal "", HackathonConfig.custom_css
     end
   end
 
@@ -42,22 +42,22 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
     should "not update config" do
-      HackathonConfig["registration_is_open"] = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig["registration_is_open"]
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
       assert_redirected_to root_path
     end
 
     should "not update css config" do
-      HackathonConfig["custom_css"] = ""
+      HackathonConfig.custom_css = ""
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
-      assert_equal "", HackathonConfig["custom_css"]
+      assert_equal "", HackathonConfig.custom_css
     end
   end
 
@@ -74,20 +74,20 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
     end
 
     should "not update config" do
-      HackathonConfig["registration_is_open"] = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig["registration_is_open"]
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
     end
 
     should "not update css config" do
-      HackathonConfig["custom_css"] = ""
+      HackathonConfig.custom_css = ""
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
-      assert_equal "", HackathonConfig["custom_css"]
+      assert_equal "", HackathonConfig.custom_css
     end
   end
 
@@ -104,20 +104,20 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
     end
 
     should "not update config" do
-      HackathonConfig["registration_is_open"] = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig["registration_is_open"]
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
     end
 
     should "not update css config" do
-      HackathonConfig["custom_css"] = ""
+      HackathonConfig.custom_css = ""
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
-      assert_equal "", HackathonConfig["custom_css"]
+      assert_equal "", HackathonConfig.custom_css
     end
   end
 
@@ -134,40 +134,40 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :success
     end
 
     should "update config" do
-      HackathonConfig["registration_is_open"] = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal true, HackathonConfig["registration_is_open"]
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal true, HackathonConfig.accepting_questionnaires
       assert_redirected_to manage_configs_path
     end
 
     should "update logo_asset with a url" do
-      HackathonConfig["logo_asset"] = ""
+      HackathonConfig.logo_asset = ""
       patch :update, params: { id: "logo_asset", hackathon_config: { logo_asset: "https://picsum.photos/200" } }
-      assert_equal "https://picsum.photos/200", HackathonConfig["logo_asset"]
+      assert_equal "https://picsum.photos/200", HackathonConfig.logo_asset
       assert_redirected_to manage_configs_path
     end
 
     should "update config CSS variables when custom_css is blank" do
-      HackathonConfig["custom_css"] = ""
+      HackathonConfig.custom_css = ""
       patch :update, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
-      assert_equal ":root {\n  --foo: #fff;\n}", HackathonConfig["custom_css"]
+      assert_equal ":root {\n  --foo: #fff;\n}", HackathonConfig.custom_css
     end
 
     should "update config CSS variables when custom_css contains custom css" do
-      HackathonConfig["custom_css"] = ".bar {\n  color: red;\n}"
+      HackathonConfig.custom_css = ".bar {\n  color: red;\n}"
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
-      assert_equal ":root {\n  --foo: #fff;\n}\n\n.bar {\n  color: red;\n}", HackathonConfig["custom_css"]
+      assert_equal ":root {\n  --foo: #fff;\n}\n\n.bar {\n  color: red;\n}", HackathonConfig.custom_css
     end
 
     should "update config CSS variables when custom_css contains custom css and existing variables" do
-      HackathonConfig["custom_css"] = ".foo {\nabc\n}\n\n:root {\n  --foo: #000;\n}\n\n.bar {\n  color: red;\n}"
+      HackathonConfig.custom_css = ".foo {\nabc\n}\n\n:root {\n  --foo: #000;\n}\n\n.bar {\n  color: red;\n}"
       patch :update_only_css_variables, params: { id: "custom_css", hackathon_config: { custom_css: ":root {\n  --foo: #fff;\n}" } }
-      assert_equal ".foo {\nabc\n}\n\n:root {\n  --foo: #fff;\n}\n\n.bar {\n  color: red;\n}", HackathonConfig["custom_css"]
+      assert_equal ".foo {\nabc\n}\n\n:root {\n  --foo: #fff;\n}\n\n.bar {\n  color: red;\n}", HackathonConfig.custom_css
     end
   end
 end

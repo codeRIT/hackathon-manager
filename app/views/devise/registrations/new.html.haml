@@ -5,13 +5,13 @@
     .emphasized.text-overflow-center
       Account
 
-  - if !HackathonConfig['accepting_questionnaires'] || HackathonConfig['disclaimer_message'].present?
+  - if !HackathonConfig.accepting_questionnaires || HackathonConfig.disclaimer_message.present?
     #disclaimer
-      - if !HackathonConfig['accepting_questionnaires']
+      - if !HackathonConfig.accepting_questionnaires
         .center
-          %p= markdown(HackathonConfig['questionnaires_closed_message'])
+          %p= markdown(HackathonConfig.questionnaires_closed_message)
         %br
-      - if HackathonConfig['disclaimer_message'].present?
-        = markdown(HackathonConfig['disclaimer_message'])
+      - if HackathonConfig.disclaimer_message.present?
+        = markdown(HackathonConfig.disclaimer_message)
 
   = render 'form'

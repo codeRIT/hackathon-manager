@@ -25,6 +25,7 @@ class User < ApplicationRecord
   after_create :queue_reminder_email
   after_initialize :set_default_role, if: :new_record?
 
+  attribute :role, :integer, default: 0
   enum role: { user: 0, volunteer: 1, organizer: 2, director: 3 }
   scope :staff, -> { where(role: [:volunteer, :organizer, :director]) }
 

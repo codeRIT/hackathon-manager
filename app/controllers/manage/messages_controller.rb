@@ -1,4 +1,5 @@
 class Manage::MessagesController < Manage::ApplicationController
+  before_action :limit_write_access_to_directors, only: ["edit", "update", "new", "create", "destroy", "deliver", "duplicate", "live_preview"]
   before_action :require_director_or_organizer
   before_action :set_message, only: [:show, :edit, :update, :destroy, :deliver, :preview, :duplicate]
   before_action :check_message_access, only: [:edit, :update, :destroy]

@@ -24,7 +24,7 @@
             = f.input :gender, input_html: { "data-validate" => "presence" }
             = f.input :country, as: :select, collection: Questionnaire::POSSIBLE_COUNTRIES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
 
-        - if !HackathonConfig['digital_hackathon']
+        - if !HackathonConfig.digital_hackathon
           .card.mb-4
             .card-header Travel information
             .card-body
@@ -46,14 +46,14 @@
           .card-header Special notices
           .card-body
             = f.input :shirt_size, as: :select, collection: Questionnaire::POSSIBLE_SHIRT_SIZES, include_blank: "(select one...)", input_html: { "data-validate" => "presence" }
-            - if !HackathonConfig['digital_hackathon']
+            - if !HackathonConfig.digital_hackathon
               = f.input :dietary_restrictions, label: "Dietary restrictions"
             = f.input :special_needs, label: "Special needs"
         .card.mb-4
           .card-header Resume
           .card-body
             - if HackathonManager.field_enabled?(:why_attend)
-              = f.input :why_attend, label: "Why #{HackathonConfig['name']}?", placeholder: "In a sentence or two, why would you like to attend #{HackathonConfig['name']}?", input_html: { rows: 3, maxlength: 280 }
+              = f.input :why_attend, label: "Why #{HackathonConfig.hackathon_name}?", placeholder: "In a sentence or two, why would you like to attend #{HackathonConfig.hackathon_name}?", input_html: { rows: 3, maxlength: 280 }
 
             = f.input :experience, as: :select, collection: Questionnaire::POSSIBLE_EXPERIENCES.invert, include_blank: "(select one...)", label: "Experience", input_html: { "data-validate" => "presence" }
             = f.input :interest, as: :select, collection: Questionnaire::POSSIBLE_INTERESTS.invert, include_blank: "(select one...)", label: "Interest", input_html: { "data-validate" => "presence" }

@@ -31,7 +31,7 @@
   .row
     .col
       %h5.dashboard-container-title Check-in activity
-      - if !HackathonConfig['digital_hackathon']
+      - if !HackathonConfig.digital_hackathon
         .graph-overlay.double-metrics
           %h3= Questionnaire.where('checked_in_at > 0').count
           %p total checked in

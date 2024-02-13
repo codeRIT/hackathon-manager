@@ -1,12 +1,12 @@
 !!! 5
 %html
   %head
-    %title= yield(:title) || HackathonConfig['default_page_title']
+    %title= yield(:title) || HackathonConfig.default_page_title
     %meta{ charset: "utf-8" }
     %meta{ name:"viewport", content: "width=device-width, initial-scale=1" }
 
-    - if HackathonConfig['favicon_asset'].present?
-      %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
+    - if HackathonConfig.favicon_asset.present?
+      %link{ href: image_url(HackathonConfig.favicon_asset), rel: "shortcut icon" }
 
     = csrf_meta_tags
     = csp_meta_tag
@@ -14,9 +14,9 @@
     = stylesheet_link_tag "application", media: "all", 'data-turbo-track': 'reload'
     = javascript_include_tag "application", 'data-turbo-track': 'reload'
     %link{ href:'//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700', rel: 'stylesheet', type: 'text/css' }
-    - if HackathonConfig['custom_css'].present?
+    - if HackathonConfig.custom_css.present?
       %style
-        = HackathonConfig['custom_css']
+        = HackathonConfig.custom_css
 
   %body
     = render "layouts/doorkeeper/header"

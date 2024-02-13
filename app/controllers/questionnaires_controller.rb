@@ -67,7 +67,7 @@ class QuestionnairesController < ApplicationController
     if current_user.reload.questionnaire.present?
       return redirect_to questionnaires_path, notice: 'Application already exists.'
     end
-    return unless HackathonConfig['accepting_questionnaires']
+    return unless HackathonConfig.accepting_questionnaires
 
     @questionnaire = Questionnaire.new(convert_school_name_to_id(questionnaire_params))
     @questionnaire.user_id = current_user.id
@@ -159,7 +159,7 @@ class QuestionnairesController < ApplicationController
   end
 
   def default_acc_status
-    return "late_waitlist" if HackathonConfig['auto_late_waitlist']
+    return "late_waitlist" if HackathonConfig.auto_late_waitlist
     "pending"
   end
 end

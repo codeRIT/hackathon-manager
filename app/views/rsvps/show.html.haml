@@ -19,9 +19,9 @@
           %strong
             %span.fa.fa-check.icon-space-r-half
             YOU ARE ATTENDING!
-          - if HackathonConfig['thanks_for_rsvp_message'].present?
+          - if HackathonConfig.thanks_for_rsvp_message.present?
             %br
-            = markdown(HackathonConfig['thanks_for_rsvp_message'])
+            = markdown(HackathonConfig.thanks_for_rsvp_message)
           - else
             %br
         - else
@@ -34,7 +34,7 @@
           - if @questionnaire.acc_status == "rsvp_denied"
             %p Sorry to hear you won't be with us this year.
           - else
-            %p You've been accepted to #{HackathonConfig['name']}!
+            %p You've been accepted to #{HackathonConfig.hackathon_name}!
             %p Will you be attending?
 
       .form-inputs
@@ -45,7 +45,7 @@
 
       = f.button :submit, value: "Update", disabled: @questionnaire.invalid?
 
-  - if BusList.any? && !HackathonConfig['digital_hackathon']
+  - if BusList.any? && !HackathonConfig.digital_hackathon
     .form-container.hide-if-not-attending{ style: @questionnaire.acc_status == "rsvp_denied" ? "display: none;" : "" }
       #disclaimer
         %h1.section-title

@@ -6,5 +6,5 @@
     %p
       = @pre_auth.error_response.body[:error_description]
     %p
-      = t('doorkeeper.errors.messages.get_help', hackathon_name: HackathonConfig['name'])
+      = t('doorkeeper.errors.messages.get_help', hackathon_name: HackathonConfig.hackathon_name)
 

@@ -6,7 +6,7 @@ class StaffMailer < ApplicationMailer
 
   def weekly_report(user_id)
     # Don't send emails more than 7 days after event starts
-    stop_date = Date.parse(HackathonConfig["event_start_date"]) + 7.days
+    stop_date = Date.parse(HackathonConfig.event_start_date) + 7.days
     return if Date.today > stop_date
 
     @user = User.find_by_id(user_id)
