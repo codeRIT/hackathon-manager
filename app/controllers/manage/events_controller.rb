@@ -1,10 +1,11 @@
 class Manage::EventsController < Manage::ApplicationController
+  before_action :limit_write_access_to_directors, only: ["update", "new", "create", "destroy"]
   before_action :require_director_or_organizer, only: :index
   before_action :require_director, except: :index
   respond_to :html, :json
 
   def index
-    @start_date = HackathonConfig['event_start_date']
+    @start_date = HackathonConfig.event_start_date
     respond_to do |format|
       format.html
       format.json { render json: Event.all }

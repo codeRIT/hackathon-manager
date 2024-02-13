@@ -1,11 +1,11 @@
 !!! 5
 %html
   %head
-    %title= yield(:title).presence || "#{HackathonConfig['name']} Manager"
+    %title= yield(:title).presence || "#{HackathonConfig.hackathon_name} Manager"
     %meta{ content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport" }/
 
-    - if HackathonConfig['favicon_asset'].present?
-      %link{ href: image_url(HackathonConfig['favicon_asset']), rel: "shortcut icon" }
+    - if HackathonConfig.favicon_asset.present?
+      %link{ href: image_url(HackathonConfig.favicon_asset), rel: "shortcut icon" }
 
     = stylesheet_link_tag "manage", :media => "all", 'data-turbo-track': 'reload'
     = javascript_include_tag "manage/application", 'data-turbo-track': 'reload'
@@ -19,7 +19,7 @@
         .fa.fa-bars.m-3.mx-4.text-white.h-auto
 
       / TODO: move acc/signin inside the sidebar
-      %a.navbar-brand.px-3.mr-0.col-xl-2.col-lg-3{href: manage_root_path} #{HackathonConfig['name']} Manager
+      %a.navbar-brand.px-3.mr-0.col-xl-2.col-lg-3{href: manage_root_path} #{HackathonConfig.hackathon_name} Manager
 
       / %input.form-control.form-control-dark.w-100{"aria-label" => "Search", placeholder: "Search", type: "text"}/
       %ul.navbar-nav.ml-auto.px-3
@@ -86,7 +86,7 @@
               %span
                 = t(:travel, scope: 'layouts.manage.navigation')
             %ul.nav.flex-column.mb-2
-              - if !HackathonConfig['digital_hackathon']
+              - if !HackathonConfig.digital_hackathon
                 %li.nav-item
                   = active_link_to manage_bus_lists_path, class: "nav-link" do
                     .fa.fa-bus.fa-fw.icon-space-r-half

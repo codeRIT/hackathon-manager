@@ -1,4 +1,5 @@
 class Manage::BusListsController < Manage::ApplicationController
+  before_action :limit_write_access_to_directors, only: ["edit", "update", "new", "create", "destroy", "toggle_bus_captain", "send_update_email"]
   before_action :set_bus_list, only: [:show, :edit, :update, :destroy, :toggle_bus_captain, :send_update_email]
 
   respond_to :html, :json

@@ -1,4 +1,5 @@
 class Manage::TrackableEventsController < Manage::ApplicationController
+  before_action :limit_write_access_to_directors, only: ["edit", "update", "new", "create", "destroy"]
   before_action :set_trackable_event, only: [:show, :edit, :update, :destroy]
   before_action :scope_organizer_access, only: [:edit, :update, :destroy]
 

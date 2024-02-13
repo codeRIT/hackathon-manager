@@ -1,6 +1,6 @@
 - if HackathonManager.field_enabled?(:why_attend)
   %p
-    %b Why #{HackathonConfig['name']}?
+    %b Why #{HackathonConfig.hackathon_name}?
   %p= @questionnaire.why_attend.presence || "(not provided)"
 %p
   %b Experience:
@@ -14,14 +14,14 @@
 %p
   %b Resume:
   = @questionnaire.resume.attached? ? link_to("Download &raquo;".html_safe, @questionnaire.resume) : 'Not provided'
-- if !HackathonConfig['digital_hackathon']
+- if !HackathonConfig.digital_hackathon
   %p
     %b Traveling from:
     = @questionnaire.travel_not_from_school ? "Somewhere else (#{@questionnaire.travel_location})" : "My school (#{@questionnaire.school.full_name})"
 %p
   %b Shirt size:
   = @questionnaire.shirt_size
-- if !HackathonConfig['digital_hackathon']
+- if !HackathonConfig.digital_hackathon
   %p
     %b Dietary restrictions
     = @questionnaire.dietary_restrictions || "<i>(none)</i>".html_safe

@@ -114,7 +114,7 @@ class RsvpsController < ApplicationController
   end
 
   def rsvp_error_notice
-    hackathon_name = HackathonConfig['name']
+    hackathon_name = HackathonConfig.hackathon_name
     "There was an error submitting your response, please check over your application and try again. Did you accept the #{hackathon_name} Agreement?"
   end
 

@@ -1,4 +1,5 @@
 class Manage::SchoolsController < Manage::ApplicationController
+  before_action :limit_write_access_to_directors, only: ["edit", "update", "new", "create", "destroy", "merge", "perform_merge"]
   before_action :find_school, only: [:show, :edit, :update, :destroy, :merge, :perform_merge]
 
   respond_to :html, :json

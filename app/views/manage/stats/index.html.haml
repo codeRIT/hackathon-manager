@@ -5,7 +5,7 @@
     %h5.dashboard-container-title= t(:dietary_restrictions_special_needs, scope: 'pages.manage.stats')
     = render "dietary_restrictions_special_needs_restrictions_datatable", dietary_restrictions_special_needs_search: @dietary_restrictions_special_needs_search, dietary_restrictions_special_needs: @dietary_restrictions_special_needs, dietary_restrictions_special_needs_pagy: @dietary_restrictions_special_needs_pagy
 
-- if !HackathonConfig['digital_hackathon']
+- if !HackathonConfig.digital_hackathon
   .row
     .col
       %h5.dashboard-container-title= t(:attendees_not_traveling_from_their_school, scope: 'pages.manage.stats')

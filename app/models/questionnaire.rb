@@ -394,7 +394,7 @@ class Questionnaire < ApplicationRecord
   end
 
   def age_at_time_of_event
-    (Date.parse(HackathonConfig['event_start_date']) - date_of_birth).to_i * 1.day
+    (Date.parse(HackathonConfig.event_start_date) - date_of_birth).to_i * 1.day
   end
 
   def minor?
@@ -505,7 +505,7 @@ class Questionnaire < ApplicationRecord
   def queue_triggered_email_rsvp_reminder
     return unless saved_change_to_acc_status? && acc_status == "accepted"
 
-    event_start = Date.parse(HackathonConfig["event_start_date"]).in_time_zone
+    event_start = Date.parse(HackathonConfig.event_start_date).in_time_zone
     days_remaining = event_start.to_date - Time.now.in_time_zone.to_date
     if days_remaining > 14
       deliver_date = 7.days.from_now

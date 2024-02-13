@@ -35,7 +35,7 @@
         .row
           %dt.col-md-4 Shirt size
           %dd.col-md-8= @questionnaire.shirt_size
-          - if !HackathonConfig['digital_hackathon']
+          - if !HackathonConfig.digital_hackathon
             %dt.col-md-4 Dietary restrictions
             %dd.col-md-8
               - if @questionnaire.dietary_restrictions.present?
@@ -50,7 +50,7 @@
               = @questionnaire.special_needs
             - else
               %span.text-muted (none)
-          - if !HackathonConfig['digital_hackathon']
+          - if !HackathonConfig.digital_hackathon
             %dt.col-md-4 Bus list
             %dd.col-md-8
               - if @questionnaire.bus_list_id?
@@ -81,7 +81,7 @@
       .card-body
         .row
           - if HackathonManager.field_enabled?(:why_attend)
-            %dt.col-md-4 Why #{HackathonConfig['name']}?
+            %dt.col-md-4 Why #{HackathonConfig.hackathon_name}?
             %dd.col-md-8
               = @questionnaire.why_attend.presence || not_provided
           %dt.col-md-4 Experience

@@ -1,6 +1,6 @@
 class Manage::QuestionnairesController < Manage::ApplicationController
   include QuestionnairesControllable
-
+  before_action :limit_write_access_to_directors, only: ["edit", "update", "new", "create", "destroy", "update_acc_status"]
   before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :check_in, :update_acc_status]
 
   respond_to :html, :json
