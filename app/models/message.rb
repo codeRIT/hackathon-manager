@@ -46,7 +46,7 @@ class Message < ApplicationRecord
     "bus_list.notes_update" => "Bus List: Updated notes (manually triggered)"
   }.freeze
 
-  serialize :recipients, Array
+  serialize :recipients, coder: JSON, type: Array
 
   validates_inclusion_of :template, in: POSSIBLE_TEMPLATES
   validates_inclusion_of :type, in: POSSIBLE_TYPES
