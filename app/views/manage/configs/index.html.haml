@@ -8,15 +8,15 @@
           The Basics
         %h6.card-subtitle.mb-2.text-muted
           Core information about your hackathon.
-        - @basics.each_entry do |key|
-          - value = HackathonConfig.send(key)
+        - @basics.each_entry do |setting|
+          - value = HackathonConfig.send(setting.key)
           %hr
           %p.mb-1
-            = link_to edit_manage_config_path(key), class: 'icon-space-r' do
+            = link_to edit_manage_config_path(setting.key), class: 'icon-space-r' do
               %span.fa.fa-pencil
             %b
-              = t("simple_form.labels.hackathon_config.#{key}")
-          %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
+              = t("simple_form.labels.hackathon_config.#{setting.key}")
+          %p.text-muted= t("simple_form.hints.hackathon_config.#{setting.key}").html_safe
           - if value.nil? || value == ''
             %p.mb-0
               %span.badge.badge-secondary Not set
@@ -38,19 +38,19 @@
       .card-body
         %h4.card-title.font-weight-bold
           Applying to
-          = HackathonConfig['name']
+          = HackathonConfig.hackathon_name
         %h6.card-subtitle.mb-2.text-muted
           Configuring questionnaires for your hackathon.
-        - @questionnaire_settings.each_entry do |key|
-          - value = HackathonConfig[key]
+        - @questionnaire_settings.each_entry do |setting|
+          - value = HackathonConfig.send(setting.key)
           %hr
           %p.mb-1
-            = link_to edit_manage_config_path(key), class: 'icon-space-r' do
+            = link_to edit_manage_config_path(setting.key), class: 'icon-space-r' do
               %span.fa.fa-pencil
             %b
-              = t("simple_form.labels.hackathon_config.#{key}")
-          %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
-          - if key == 'disabled_fields'
+              = t("simple_form.labels.hackathon_config.#{setting.key}")
+          %p.text-muted= t("simple_form.hints.hackathon_config.#{setting.key}").html_safe
+          - if setting.key == 'disabled_fields'
             - cleaned_value = value
             - cleaned_value = cleaned_value.join(' ') if cleaned_value.is_a?(Array)
             - if cleaned_value.blank?
@@ -79,19 +79,19 @@
       .card-body
         %h4.card-title.font-weight-bold
           Styling for
-          = HackathonConfig['name']
+          = HackathonConfig.hackathon_name
         %h6.card-subtitle.mb-2.text-muted
-          Matching your hackathon's style.
-        - @styling.each_entry do |key|
-          - value = HackathonConfig[key]
+          Make HackathonManager your hackathon.
+        - @styling.each_entry do |setting|
+          - value = HackathonConfig.send(setting.key)
           %hr
           %p.mb-1
-            = link_to edit_manage_config_path(key), class: 'icon-space-r' do
+            = link_to edit_manage_config_path(setting.key), class: 'icon-space-r' do
               %span.fa.fa-pencil
             %b
-              = t("simple_form.labels.hackathon_config.#{key}")
-          %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
-          - if key == 'custom_css'
+              = t("simple_form.labels.hackathon_config.#{setting.key}")
+          %p.text-muted= t("simple_form.hints.hackathon_config.#{setting.key}").html_safe
+          - if setting.key == 'custom_css'
             %p
               = link_to enter_theming_editor_manage_configs_path do
                 %span.fa.fa-paint-brush.icon-space-r-half
@@ -121,15 +121,15 @@
           Communications
         %h6.card-subtitle.mb-2.text-muted
           Get the word out.
-        - @communications.each_entry do |key|
-          - value = HackathonConfig[key]
+        - @communications.each_entry do |setting|
+          - value = HackathonConfig.send(setting.key)
           %hr
           %p.mb-1
-            = link_to edit_manage_config_path(key), class: 'icon-space-r' do
+            = link_to edit_manage_config_path(setting.key), class: 'icon-space-r' do
               %span.fa.fa-pencil
             %b
-              = t("simple_form.labels.hackathon_config.#{key}")
-          %p.text-muted= t("simple_form.hints.hackathon_config.#{key}").html_safe
+              = t("simple_form.labels.hackathon_config.#{setting.key}")
+          %p.text-muted= t("simple_form.hints.hackathon_config.#{setting.key}").html_safe
           - if value.nil? || value == ''
             %p.mb-0
               %span.badge.badge-secondary Not set

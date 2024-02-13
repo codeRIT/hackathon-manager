@@ -9,15 +9,15 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
       assert_redirected_to new_user_session_path
     end
 
     should "not update config" do
-      HackathonConfig.registration_is_open = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig.registration_is_open
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
       assert_redirected_to new_user_session_path
     end
 
@@ -42,15 +42,15 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
       assert_redirected_to root_path
     end
 
     should "not update config" do
-      HackathonConfig.registration_is_open = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig.registration_is_open
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
       assert_redirected_to root_path
     end
 
@@ -74,14 +74,14 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
     end
 
     should "not update config" do
-      HackathonConfig.registration_is_open = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig.registration_is_open
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
     end
 
     should "not update css config" do
@@ -104,14 +104,14 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "not allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :redirect
     end
 
     should "not update config" do
-      HackathonConfig.registration_is_open = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal false, HackathonConfig.registration_is_open
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal false, HackathonConfig.accepting_questionnaires
     end
 
     should "not update css config" do
@@ -134,14 +134,14 @@ class Manage::ConfigsControllerTest < ActionController::TestCase
     end
 
     should "allow access to manage_configs#edit" do
-      get :edit, params: { id: "registration_is_open" }
+      get :edit, params: { id: "accepting_questionnaires" }
       assert_response :success
     end
 
     should "update config" do
-      HackathonConfig.registration_is_open = false
-      patch :update, params: { id: "registration_is_open", hackathon_config: { registration_is_open: "true" } }
-      assert_equal true, HackathonConfig.registration_is_open
+      HackathonConfig.accepting_questionnaires = false
+      patch :update, params: { id: "accepting_questionnaires", hackathon_config: { accepting_questionnaires: "true" } }
+      assert_equal true, HackathonConfig.accepting_questionnaires
       assert_redirected_to manage_configs_path
     end
 

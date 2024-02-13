@@ -21,11 +21,11 @@ class HackathonConfig < RailsSettings::Base
     field :logo_asset, type: :string, default: ""
     field :email_banner_asset, type: :string, default: ""
     field :favicon_asset, type: :string, default: ""
-    field :custom_css, deafult: ""
+    field :custom_css, default: ""
   end
 
   scope :communications do
-    field :email_from, type: :string, defualt: '"HackFoo" <hello@example.com>'
+    field :email_from, type: :string, default: '"HackFoo" <hello@example.com>'
     field :disclaimer_message, default: ""
     field :thanks_for_applying_message, default: ""
     field :thanks_for_rsvp_message, default: ""

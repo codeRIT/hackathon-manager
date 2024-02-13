@@ -1,27 +1,28 @@
 class Manage::ConfigsController < Manage::ApplicationController
+  before_action :limit_write_access_to_directors, only: ["edit", "update"]
   before_action :require_director
   before_action :get_config, only: [:edit, :update, :update_only_css_variables]
 
   respond_to :html, :json
 
   def index
-    @basics = HackathonConfig.where(var: HackathonConfig.basics.keys)
+    @settings = HackathonConfig
+    @basics = HackathonConfig.defined_fields.select { |field| field[:scope] == :basics }
+    @questionnaire_settings = HackathonConfig.defined_fields.select { |field| field[:scope] == :applying }
+    @styling = HackathonConfig.defined_fields.select { |field| field[:scope] == :styling }
+    @communications = HackathonConfig.defined_fields.select { |field| field[:scope] == :communications }
   end
 
   def edit
   end
 
   def update
-    key = @config.var.to_sym
-    value = params[:hackathon_config][key]
+    key = @config[:key]
+    value = params[:hackathon_config][key].strip
     value = true if value == "true"
     value = false if value == "false"
-    if @config.var.start_with?("agreement_") && !value.start_with?('http://', 'https://')
-      flash[:alert] = "Config \"#{key}\" must start with http:// or https://"
-      render :edit
-    elsif @config.value != value
-      @config.value = value
-      @config.save
+    if HackathonConfig.send(key) != value
+      HackathonConfig.send("#{key}=", value)
       redirect_to manage_configs_path, notice: "Config \"#{key}\" has been updated."
     else
       redirect_to manage_configs_path, notice: "Config \"#{key}\" was not changed"
@@ -29,8 +30,8 @@ class Manage::ConfigsController < Manage::ApplicationController
   end
 
   def update_only_css_variables
-    key = @config.var.to_sym
-    old_value = @config.value.strip
+    key = @config[:key]
+    old_value = HackathonConfig.send(key)
     posted_value = params[:hackathon_config][key].strip
     if old_value.include? ':root {'
       # Replace the old CSS variables and keep the extra css
@@ -60,11 +61,7 @@ class Manage::ConfigsController < Manage::ApplicationController
   private
 
   def get_config
-    var = params[:id]
-    @config = HackathonConfig.find_by(var: var)
-    if @config.blank?
-      @config = HackathonConfig.new(var: var)
-      @config.value = HackathonConfig[var]
-    end
+    key = params[:id]
+    @config = HackathonConfig.get_field(key)
   end
 end

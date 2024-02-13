@@ -1,4 +1,5 @@
 class Manage::AgreementsController < Manage::ApplicationController
+  before_action :limit_write_access_to_directors, only: ["edit", "update", "new", "create", "destroy"]
   before_action :require_director
   before_action :set_agreement, only: [:edit, :update, :destroy]
 
