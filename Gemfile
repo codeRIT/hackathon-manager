@@ -73,7 +73,7 @@ gem 'haml-rails'
 gem 'simple_form', '~> 5.3.0'
 
 gem 'roadie-rails'
-gem 'chartkick', '~> 3.4'
+gem 'chartkick', '~> 5.0'
 gem 'groupdate'
 gem 'font-awesome-rails', '~> 4.7' # needed for icon helpers
 gem 'mustache'
