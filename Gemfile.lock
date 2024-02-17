@@ -156,7 +156,7 @@ GEM
       doorkeeper
       rails
     docile (1.1.5)
-    doorkeeper (5.6.8)
+    doorkeeper (5.6.9)
       railties (>= 5)
     dotenv (3.0.2)
     dotenv-rails (3.0.2)
@@ -546,7 +546,7 @@ DEPENDENCIES
   codeclimate-test-reporter (~> 1.0.7)
   devise
   devise-doorkeeper
-  doorkeeper (~> 5.5)
+  doorkeeper (~> 5.6)
   dotenv-rails
   factory_bot_rails (~> 6.4.3)
   faker
