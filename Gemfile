@@ -137,7 +137,7 @@ group :development do
 end
 
 group :test do
-  gem 'test-unit', '~> 3.4'
+  gem 'test-unit', '~> 3.6'
   gem 'shoulda', '~> 4.0.0'
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'minitest-reporters'
