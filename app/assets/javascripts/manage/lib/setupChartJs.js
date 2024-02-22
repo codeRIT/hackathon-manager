@@ -1,4 +1,4 @@
-var setupHighcharts = function() {
+var setupChartJs = function() {
   Highcharts.setOptions({
     global: {
       useUTC: false,
