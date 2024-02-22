@@ -15,7 +15,6 @@ function applicationReady() {
   $('select[data-bulk-row-edit]').bulkRowEdit();
   $().bulkRowSelect();
   $('body').chartkickAutoReload();
-  setupHighcharts();
   $('[data-toggle="popover"]').popover();
   $('[data-message-live-preview="textarea"]').messageLivePreview();
   setupSimpleMde();
