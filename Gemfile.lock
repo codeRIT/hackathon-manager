@@ -417,7 +417,7 @@ GEM
     roadie-rails (3.1.0)
       railties (>= 5.1, < 8.0)
       roadie (~> 5.0)
-    rollbar (3.5.1)
+    rollbar (3.5.2)
     rouge (4.2.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
