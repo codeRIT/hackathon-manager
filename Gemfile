@@ -83,7 +83,6 @@ gem 'sprockets'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'selectize-rails'
-gem 'highcharts-rails', '~> 6.0'
 gem 'bootstrap', '~> 4.6.0'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
@@ -145,7 +144,7 @@ group :test do
   gem 'factory_bot_rails', '~> 6.4.3'
   gem 'codeclimate-test-reporter', '~> 1.0.7', require: nil
   gem 'rails-controller-testing' # Rails 4 fallback
-  gem 'webmock', '~> 3.20'
+  gem 'webmock', '~> 3.22'
   gem 'timecop'
 
   # Adds support for Capybara system testing and selenium driver

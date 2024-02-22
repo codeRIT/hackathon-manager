@@ -14,7 +14,7 @@
 //= require activestorage
 //= require jquery
 //= require jquery-ui/widgets/autocomplete
-//= require highcharts
+//= require Chart.bundle
 //= require chartkick
 //= require ./vendor/debounce
 //= require_directory .
