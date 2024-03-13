@@ -59,7 +59,7 @@ gem 'rack-cors'
 
 # Authentication
 gem 'devise'
-gem 'omniauth-mlh', '~> 0.4.2'
+gem 'omniauth-mlh', '~> 1.0.1'
 gem 'doorkeeper', '~> 5.6'
 gem 'devise-doorkeeper'
 gem 'omniauth-rails_csrf_protection'
